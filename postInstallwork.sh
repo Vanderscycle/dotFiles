@@ -27,7 +27,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Install developer packages'
-sudo apt-get install -y --no-install-recommends git neovim python3-pip
+sudo apt-get install -y --no-install-recommends git neovim python3-pip expect
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -54,14 +54,12 @@ echo -e 'Done.\n'
 echo '=> Installing Conda'
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod +x Miniconda3-latest-Linux-x86_64.sh
-spawn ./Miniconda3-latest-Linux-x86_64.sh
-expect "enter"
-send '\r'
-expect 'yes|no'
-send 'yes'
-interact
-conda create -n base python
-conda install pandas numpy django
+bash Miniconda3-latest-Linux-x86_64.sh -b
+export PATH=~/miniconda3/bin:$PATH
+conda init
+conda create -y -n dev-branch python
+conda activate dev-branch
+conda install -y pandas numpy django
 rm Miniconda3-latest-Linux-x86_64.sh
 echo -e 'Done.\n'
 
@@ -117,18 +115,43 @@ fi
 # -----------------------------------------------------------------------------
 # => Install Terminal Specific
 # -----------------------------------------------------------------------------
+# https://likegeeks.com/expect-command/
 echo -e '\n=> Installing zsh and theme'
 sudo apt-get install -y --no-install-recommends zsh
 # changing the default from bash to zsh
-chsh -s $(which zsh) -y
+chsh -s $(which zsh)
 # installing oh-my-zsh
+
+/usr/bin/expect -c ' 
 spawn  sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-expect "Y/n" {send -- "y\r"}
-interact
-exit
+expect "[Y/n]\r" {send -- "Y\r"}
+'
+# cat >> .zshrc << EOL
+# # >>> conda initialize >>> 
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/root/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/root/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/root/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/root/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
+# EOL
+# power10k theme
+git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+# adding 2 usefull pluging
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+# ZSH_THEME='powerlevel10k/powerlevel10k'
+# POWERLEVEL10K_MODE="nerdfont-complete"
+# plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 echo -e 'Done.\n'
+
 
 # -----------------------------------------------------------------------------
 # => Get dotfiles
@@ -143,7 +166,8 @@ git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config "$dotfil
 cd "$dotfiles_path"
 
 # Copy all dotfiles except .git/ and .gitmodules
-cp -r `ls -d .??* | egrep -v '(.git$|.gitmodules)'` $HOME
+# cp -r "ls -d .??* | egrep -v '(.git$|.gitmodules)'" $HOME
+cp -r ls -d .??* $HOME
 
 echo -e 'Done.\n'
 
