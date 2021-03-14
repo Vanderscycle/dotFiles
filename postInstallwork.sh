@@ -52,11 +52,17 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo '=> Installing Conda'
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-bash Miniconda3-latest-Linux-x86_64.sh
-rm Miniconda3-latest-Linux-x86_64.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+spawn ./Miniconda3-latest-Linux-x86_64.sh
+expect "enter"
+send '\r'
+expect 'yes|no'
+send 'yes'
+interact
 conda create -n base python
 conda install pandas numpy django
+rm Miniconda3-latest-Linux-x86_64.sh
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -88,23 +94,6 @@ sudo chmod 700 ~/.ssh/
 sudo chmod 600 ~/.ssh/*
 echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => Get dotfiles
-# -----------------------------------------------------------------------------
-echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
-
-# Create a tmp folder with random name
-dotfiles_path="`(mktemp -d)`"
-
-# Clone the repository recursively
-git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config "$dotfiles_path"
-cd "$dotfiles_path"
-
-# Copy all dotfiles except .git/ and .gitmodules
-cp -r `ls -d .??* | egrep -v '(.git$|.gitmodules)'` $HOME
-
-echo -e 'Done.\n'
-
 
 # -----------------------------------------------------------------------------
 # => if local machine
@@ -133,7 +122,37 @@ sudo apt-get install -y --no-install-recommends zsh
 # changing the default from bash to zsh
 chsh -s $(which zsh) -y
 # installing oh-my-zsh
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+spawn  sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+expect "Y/n" {send -- "y\r"}
+interact
+exit
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Get dotfiles
+# -----------------------------------------------------------------------------
+echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
+
+# Create a tmp folder with random name
+dotfiles_path="`(mktemp -d)`"
+
+# Clone the repository recursively
+git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config "$dotfiles_path"
+cd "$dotfiles_path"
+
+# Copy all dotfiles except .git/ and .gitmodules
+cp -r `ls -d .??* | egrep -v '(.git$|.gitmodules)'` $HOME
+
+echo -e 'Done.\n'
+
+
+
+# -----------------------------------------------------------------------------
+# => leaving the instance (reboot necessary)
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Installation complete please relog'
+sleep 5
+exit
