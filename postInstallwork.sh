@@ -121,11 +121,8 @@ sudo apt-get install -y --no-install-recommends zsh
 # changing the default from bash to zsh
 chsh -s $(which zsh)
 # installing oh-my-zsh
-
-/usr/bin/expect -c ' 
-spawn  sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-expect "[Y/n]\r" {send -- "Y\r"}
-'
+#https://github.com/ohmyzsh/ohmyzsh/issues/5873#issuecomment-498678076
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 # cat >> .zshrc << EOL
 # # >>> conda initialize >>> 
 # # !! Contents within this block are managed by 'conda init' !!
@@ -147,9 +144,11 @@ git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerl
 # adding 2 usefull pluging
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-# ZSH_THEME='powerlevel10k/powerlevel10k'
-# POWERLEVEL10K_MODE="nerdfont-complete"
-# plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+cat ~/.zshrc
+ZSH_THEME='powerlevel10k/powerlevel10k'
+POWERLEVEL10K_MODE="nerdfont-complete"
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+
 echo -e 'Done.\n'
 
 
@@ -167,7 +166,7 @@ cd "$dotfiles_path"
 
 # Copy all dotfiles except .git/ and .gitmodules
 # cp -r "ls -d .??* | egrep -v '(.git$|.gitmodules)'" $HOME
-cp -r ls -d .??* $HOME
+# cp -r . $HOME
 
 echo -e 'Done.\n'
 
