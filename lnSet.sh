@@ -1,7 +1,8 @@
 #!/bin/bash
 echo $(pwd)
 #https://linuxhint.com/bash_loop_list_strings/
-declare -a StringArray=(".zshrc" ".gitconfig" "vimrc" "conda" "p10k.zsh" "oh-my-zsh" "alias")
+# ".zshrc" ".oh-my-zsh" ".conda"
+declare -a StringArray=( ".gitconfig" ".vimrc" ".p10k.zsh" ".alias")
 for DOTFILE in "${StringArray[@]}"; do
     ln -s ~/$DOTFILE "$(pwd)/"
 done

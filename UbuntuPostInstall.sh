@@ -75,6 +75,7 @@ echo -e '\n=> Installing Postgres'
 sudo apt-get install -y --no-install-recommends postgresql postgresql-contrib
 echo '=> Starting Postgres'
 sudo systemctl enable postgresql
+sudo systemctl start postgresql
 service postgresql start
 echo -e '\n=> Installing MongoDb'
 wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
@@ -121,7 +122,7 @@ fi
 # https://likegeeks.com/expect-command/
 echo -e '\n=> Installing zsh and oh-my-zsh'
 sudo apt-get install -y --no-install-recommends zsh
-# changing the default from bash to zsh
+# changing the default from bash to zsheympNjKxG8ki7fN
 sudo chsh -s $(which zsh)
 # installing oh-my-zsh
 #https://github.com/ohmyzsh/ohmyzsh/issues/5873#issuecomment-498678076
@@ -131,7 +132,7 @@ echo -e '\nCloning relevant github zsh repo: 10k, zplug, autosuggestion and synt
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 # adding 2 usefull pluging
-sudo git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions && \ 
+git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
 echo -e '\ninstalling Nerd Font'
@@ -143,7 +144,7 @@ then
         OLD='ZSH_THEME="robbyrussell"'
         NEW="ZSH_THEME='powerlevel10k/powerlevel10k'"
         APPEND="POWERLEVEL10K_MODE='nerdfont-complete'"
-        sed -i "s%$OLD%$NEW%g" $CONFIG
+        sed -i "0,s%$OLD%$NEW%g" $CONFIG
         echo $APPEND >> $CONFIG
 fi
 
@@ -151,7 +152,7 @@ if grep -Fq "plugins" $CONFIG
 then
         OLD="plugins=(git)"
         NEW="plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
-        sed -i "s%$OLD%$NEW%g" $CONFIG
+        sed -i "0,s%$OLD%$NEW%g" $CONFIG
 fi
 #conda and zplug line
 cat >> $CONFIG << EOF
@@ -161,7 +162,7 @@ fi
 export PATH="$PATH:$HOME/miniconda3/bin"
 
 EOF
-conda update conda
+conda update -y conda
 conda init zsh
 echo -e '\ninstalling enhancd using zplug'
 zplug "b4b4r07/enhancd", use:init.sh
@@ -195,6 +196,7 @@ echo -e 'Done.\n'
 # => leaving the instance (reboot necessary)
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Installation complete please relog'
+echo -e '\n=> Installation complete, rebooting the server this may take a minute'
 sleep 5
-exit
+rm UbuntuPostInstall.sh
+sudo shutdown -r now
