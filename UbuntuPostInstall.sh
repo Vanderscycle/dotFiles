@@ -130,7 +130,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 echo -e '\nCloning relevant github zsh repo: 10k, zplug, autosuggestion and syntax highlight'
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 # adding 2 usefull pluging
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
@@ -144,7 +144,7 @@ then
         OLD='ZSH_THEME="robbyrussell"'
         NEW="ZSH_THEME='powerlevel10k/powerlevel10k'"
         APPEND="POWERLEVEL10K_MODE='nerdfont-complete'"
-        sed -i "0,s%$OLD%$NEW%g" $CONFIG
+        sed -i "s%$OLD%$NEW%g" $CONFIG
         echo $APPEND >> $CONFIG
 fi
 
@@ -152,7 +152,7 @@ if grep -Fq "plugins" $CONFIG
 then
         OLD="plugins=(git)"
         NEW="plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
-        sed -i "0,s%$OLD%$NEW%g" $CONFIG
+        sed -i "s%$OLD%$NEW%g" $CONFIG
 fi
 #conda and zplug line
 cat >> $CONFIG << EOF
@@ -178,15 +178,15 @@ echo -e 'Done.\n'
 echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
 
 # Create a tmp folder with random name
-dotfiles_path="`(mktemp -d)`"
+DOTFILE_PATH="`(mktemp -d)`"
 
 # Clone the repository recursively
-git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config "$dotfiles_path"
-cd "$dotfiles_path"
+git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config "$DOTFILE_PATH"
+cd "$DOTFILE_PATH"
 
 # Copy all dotfiles except .git/ and .gitmodules
 # cp -r "ls -d .??* | egrep -v '(.git$|.gitmodules)'" $HOME
-# cp -r . $HOME
+cp -r . $HOME
 
 echo -e 'Done.\n'
 
