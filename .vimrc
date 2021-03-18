@@ -1,1 +1,3 @@
-/home/henri/.vimrc
+call plug#begin()
+Plug 'preservim/NERDTree'
+call plug#end()
