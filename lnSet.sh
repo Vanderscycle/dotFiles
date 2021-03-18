@@ -17,3 +17,6 @@ for DOTFILE in "${StringArray[@]}"; do
     echo $DOTFILE
     ln -s ~/.config/$DOTFILE "$(pwd)/.config/"
 done
+
+#! should create a weekly upload schedule
+# git add .*

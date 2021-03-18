@@ -1,9 +1,18 @@
 #!/bin/bash
 # example https://gist.github.com/rougeth/8108714
+# about wget https://unix.stackexchange.com/questions/23501/download-using-wget-to-a-different-directory-than-current-directory
+# update_rc.d
+# wget -O /etc/init.d/ https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/UbuntuPostInstall.sh && chmod +x UbuntuPostInstall.sh && bash UbuntuPostInstall.sh
+# local
 # wget https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/UbuntuPostInstall.sh && chmod +x UbuntuPostInstall.sh && bash UbuntuPostInstall.sh
+# f
 # Ubuntu post-install script
+
+function beforeReboot() {
+cd ~
 echo '------------------------------------------------------------------------'
 echo '=> Ubuntu 20.04LTS post-install script'
+echo '=> Before reboot'
 echo '------------------------------------------------------------------------'
 
 
@@ -19,7 +28,8 @@ echo -e 'Done.\n'
 echo -e '\n=> Install system utilities'
 sudo apt-get install -y --no-install-recommends curl wget git lsof gdebi-core \
     zip unzip gzip tar \
-    ssh
+    ssh \
+    apt-transport-https ca-certificates gnupg lsb-release
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -38,6 +48,12 @@ echo -e 'Done.\n'
 echo '=> Removing old docker version (if present) Docker' 
 sudo apt-get remove -y docker docker-engine docker.io containerd runc
 echo -e'\n=> Installing Docker' 
+#1 set-up repo
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# 2 instasll Docker Engine
 sudo apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io
 apt-cache madison docker-ce
 sudo apt-get install docker-ce=5:20.10.5~3-0~ubuntu-bionic docker-ce-cli=5:20.10.5~3-0~ubuntu-bionic containerd.io
@@ -69,10 +85,7 @@ echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Databases
-# -----------------------------------------------------------------------------
-
-echo -e '\n=> Installing Postgres'
-sudo apt-get install -y --no-install-recommends postgresql postgresql-contrib
+# --------------------------------------------/etc/init.d/ postgresql postgresql-contrib
 echo '=> Starting Postgres'
 sudo systemctl enable postgresql
 sudo systemctl start postgresql
@@ -108,7 +121,7 @@ confirmation=$(echo $confirmation | tr '[:lower:]' '[:upper:]')
 if [[ $confirmation == 'YES' || $confirmation == 'Y' ]]; then
 
     sudo apt-get install -y --no-install-recommends vlc code
-    snap install spotify discord mailspring discord
+    snap install spotify discord mailspring discordcd ~
     wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
     sudo dpkg -i gitkraken-amd64.deb
 
@@ -132,8 +145,6 @@ echo -e '\nCloning relevant github zsh repo: 10k, zplug, autosuggestion and synt
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 # adding 2 usefull pluging
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 
 echo -e '\ninstalling Nerd Font'
 wget https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh && chmod +x install.sh && bash install.sh
@@ -180,10 +191,14 @@ echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
 
 # Clone the repository recursively
 git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfiles
-# need to find a more automatic way to do this
-ln -s ~/.doftiles/.p10k.zsh ~/.p10k.zsh
-ln -s ~/.doftiles/.vimrc ~/.vimrc
-ln -s ~/.doftiles/.gitconfig ~/.gitconfig
+#! need to do a find all .
+declare -a StringArray=( ".gitconfig" ".vimrc" ".p10k.zsh" ".alias")
+for DOTFILE in "${StringArray[@]}"; do
+    # can't use symbolic link since we want the file
+    ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
+done
+source .p10k.zsh .zshrc 
+
 echo -e 'Done.\n'
 
 
@@ -193,6 +208,33 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installation complete, rebooting the server this may take a minute'
-sleep 5
+
+
+}
+
+function afterReboot() {
+cd ~
+echo '------------------------------------------------------------------------'
+echo '=> Ubuntu 20.04LTS post-install script'
+echo '=> Post reboot'
+echo '------------------------------------------------------------------------'
+
+#! somehow these plugins must be install after reboot
+git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
+git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 rm UbuntuPostInstall.sh
-sudo shutdown -r now
+}
+
+# https://unix.stackexchange.com/questions/145294/how-to-continue-a-script-after-it-reboots-the-machine
+# https://www.jamescoyle.net/cheat-sheets/791-update-rc-d-cheat-sheet
+f [ -f /var/run/rebooting-for-updates ]; then
+    afterReboot
+    rm /var/run/rebooting-for-updates
+    update-rc.d UbuntuPostInstall remove
+else
+    beforeReboot
+    touch /var/run/rebooting-for-updates
+    update-rc.d UbuntuPostInstall defaults
+    sudo reboot
+fi
+#! Add a before and after reboot 
