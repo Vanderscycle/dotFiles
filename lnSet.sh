@@ -1,10 +1,11 @@
 #!/bin/bash
 echo $(pwd)
 #https://linuxhint.com/bash_loop_list_strings/
-# ".zshrc" ".oh-my-zsh" ".conda"
+# ".zshrc" ".oh-my-zsh" ".conda" 
 declare -a StringArray=( ".gitconfig" ".vimrc" ".p10k.zsh" ".alias")
 for DOTFILE in "${StringArray[@]}"; do
-    ln -s ~/$DOTFILE "$(pwd)/"
+    # can't use symbolic link since we want the file
+    ln  ~/$DOTFILE "$(pwd)/"
 done
 # .config file
 if [ ! -f .config ]

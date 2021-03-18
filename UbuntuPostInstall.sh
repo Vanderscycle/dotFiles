@@ -177,17 +177,13 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
 
-# Create a tmp folder with random name
-DOTFILE_PATH="`(mktemp -d)`"
 
 # Clone the repository recursively
-git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config "$DOTFILE_PATH"
-cd "$DOTFILE_PATH"
-
-# Copy all dotfiles except .git/ and .gitmodules
-# cp -r "ls -d .??* | egrep -v '(.git$|.gitmodules)'" $HOME
-cp -r . $HOME
-
+git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfiles
+# need to find a more automatic way to do this
+ln -s ~/.doftiles/.p10k.zsh ~/.p10k.zsh
+ln -s ~/.doftiles/.vimrc ~/.vimrc
+ln -s ~/.doftiles/.gitconfig ~/.gitconfig
 echo -e 'Done.\n'
 
 
