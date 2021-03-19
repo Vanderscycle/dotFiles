@@ -200,7 +200,8 @@ for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
 done
-
+echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
+source .p10k.zsh .zshrc 
 
 echo -e 'Done.\n'
 
@@ -223,9 +224,9 @@ echo '=> Post reboot'
 echo '------------------------------------------------------------------------'
 
 #! somehow these plugins must be install after reboot
+sudo apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-source .p10k.zsh .zshrc 
 rm UbuntuPostInstall.sh
 }
 
