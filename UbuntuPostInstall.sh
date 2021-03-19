@@ -214,7 +214,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installation complete, rebooting the server this may take a minute'
-
+sleep 5
 
 }
 
