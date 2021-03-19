@@ -1,8 +1,11 @@
 #!/bin/bash
 # example https://gist.github.com/rougeth/8108714
 # about wget https://unix.stackexchange.com/questions/23501/download-using-wget-to-a-different-directory-than-current-directory
+
 # update_rc.d
 # wget -O /etc/init.d/ https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/UbuntuPostInstall.sh && chmod +x UbuntuPostInstall.sh && bash UbuntuPostInstall.sh
+# wget -O /etc/init.d/UbuntuPostInstall.sh https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/UbuntuPostInstall.sh && chmod +x /etc/init.d/UbuntuPostInstall.sh && bash /etc/init.d/UbuntuPostInstall.sh
+
 # local
 # wget https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/UbuntuPostInstall.sh && chmod +x UbuntuPostInstall.sh && bash UbuntuPostInstall.sh
 # f
@@ -44,9 +47,9 @@ echo -e 'Done.\n'
 # => Docker (debian)
 # https://docs.docker.com/engine/install/debian/
 # -----------------------------------------------------------------------------
-
-echo '=> Removing old docker version (if present) Docker' 
-sudo apt-get remove -y docker docker-engine docker.io containerd runc
+#! some problem with docker at the moment
+# echo '=> Removing old docker version (if present) Docker' 
+# sudo apt-get remove -y docker docker-engine docker.io containerd runc
 echo -e'\n=> Installing Docker' 
 #1 set-up repo
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -197,7 +200,7 @@ for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
 done
-source .p10k.zsh .zshrc 
+
 
 echo -e 'Done.\n'
 
@@ -222,12 +225,13 @@ echo '------------------------------------------------------------------------'
 #! somehow these plugins must be install after reboot
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+source .p10k.zsh .zshrc 
 rm UbuntuPostInstall.sh
 }
 
 # https://unix.stackexchange.com/questions/145294/how-to-continue-a-script-after-it-reboots-the-machine
 # https://www.jamescoyle.net/cheat-sheets/791-update-rc-d-cheat-sheet
-f [ -f /var/run/rebooting-for-updates ]; then
+if [ -f /var/run/rebooting-for-updates ]; then
     afterReboot
     rm /var/run/rebooting-for-updates
     update-rc.d UbuntuPostInstall remove
