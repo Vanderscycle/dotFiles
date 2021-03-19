@@ -3,7 +3,6 @@
 # about wget https://unix.stackexchange.com/questions/23501/download-using-wget-to-a-different-directory-than-current-directory
 
 # update_rc.d
-# wget -O /etc/init.d/ https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/UbuntuPostInstall.sh && chmod +x UbuntuPostInstall.sh && bash UbuntuPostInstall.sh
 # wget -O /etc/init.d/UbuntuPostInstall.sh https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/UbuntuPostInstall.sh && chmod +x /etc/init.d/UbuntuPostInstall.sh && bash /etc/init.d/UbuntuPostInstall.sh
 
 # local
@@ -169,7 +168,11 @@ then
         sed -i "s%$OLD%$NEW%g" $CONFIG
 fi
 #conda and zplug line
+echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
 cat >> $CONFIG << EOF
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
@@ -200,8 +203,7 @@ for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
 done
-echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
-source .p10k.zsh .zshrc 
+
 
 echo -e 'Done.\n'
 
@@ -227,7 +229,7 @@ echo '------------------------------------------------------------------------'
 sudo apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
-rm UbuntuPostInstall.sh
+
 }
 
 # https://unix.stackexchange.com/questions/145294/how-to-continue-a-script-after-it-reboots-the-machine
@@ -236,6 +238,8 @@ if [ -f /var/run/rebooting-for-updates ]; then
     afterReboot
     rm /var/run/rebooting-for-updates
     update-rc.d UbuntuPostInstall remove
+    # deleting the file itself
+    rm /etc/init.d/UbuntuPostInstall.sh
 else
     beforeReboot
     touch /var/run/rebooting-for-updates
