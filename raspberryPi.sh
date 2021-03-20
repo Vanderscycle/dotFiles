@@ -66,6 +66,7 @@ sudo pip3 install docker-compose #have to use python 3
 echo '=> Removing docker installation file' 
 rm get-docker.sh
 echo -e 'Done. \n'
+
 # -----------------------------------------------------------------------------
 # => Security
 # -----------------------------------------------------------------------------
@@ -96,7 +97,7 @@ sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/
 echo -e '\ninstalling Fira Mono Nerd Font'
 # wget https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh && chmod +x install.sh && bash install.sh
 mkdir .fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraMono.zip && unzip FiraMono.zip -d .fonts && rm FiraMono.zip && fc-cache -v -f
+wget -o .fonts/FiraMono.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraMono.zip && unzip FiraMono.zip -d .fonts && rm FiraMono.zip && fc-cache -v -f
 #sudo dpkg-reconfigure console-setup
 
 echo -e '\nConfiguring the settings in .zshrc'
@@ -116,16 +117,42 @@ then
         NEW="plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
         sed -i "s%$OLD%$NEW%g" $CONFIG
 fi
+#conda and zplug line
+echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
 cat >> $CONFIG << EOF
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
+export PATH="$PATH:$HOME/miniconda3/bin"
+
 EOF
+conda update -y conda
+conda init zsh
 echo -e '\ninstalling enhancd using zplug'
 zplug "b4b4r07/enhancd", use:init.sh
 
 echo -e 'removing installation file'
 rm install.sh
+
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Get dotfiles
+# -----------------------------------------------------------------------------
+echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
+
+
+# Clone the repository recursively
+git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfiles
+#! need to do a find all .
+declare -a StringArray=( ".gitconfig" ".vimrc" ".p10k.zsh" ".alias")
+for DOTFILE in "${StringArray[@]}"; do
+    # can't use symbolic link since we want the file
+    ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
+done
 
 echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
