@@ -9,17 +9,11 @@ for DOTFILE in "${StringArray[@]}"; do
     ln  ~/$DOTFILE "$DIR"
 done
 # You can't hardlink folders so we copy and replace
-cp -al ~/.config/nvim/ "$DIR"
-# .config file
-if [ ! -f .config ]
-then
-    mkdir .config
-fi
-declare -a StringArray=("Code")
-for DOTFILE in "${StringArray[@]}"; do
-    echo $DOTFILE
-    ln -s ~/.config/$DOTFILE "$(pwd)/.config/"
-done
+# cp -al ~/.config/nvim/ "$DIR"
+# https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
+# of note you can do a dry run using -n
+rsync -av --progress ~/.config/nvim/ "$DIR/nvim" --exclude autoload/plugged/
+
 
 #! should create a weekly upload schedule
 # git add .*

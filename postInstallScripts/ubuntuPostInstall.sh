@@ -36,7 +36,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Install developer packages'
-sudo apt-get install -y --no-install-recommends git neovim python3-pip expect
+sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -182,6 +182,13 @@ rm install.sh
 
 echo -e 'Done.\n'
 
+# -----------------------------------------------------------------------------
+# => Tmux
+# -----------------------------------------------------------------------------
+
+# echo -e '=> Installing Tmux'
+# 
+# echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => Get dotfiles
 # -----------------------------------------------------------------------------

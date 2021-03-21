@@ -62,12 +62,30 @@ Helper (line marker)
 
 Plugins
 
+CommandLine:
+
+To run a commandline command :! somecommand [ENTER]
+
 NERDtree:
+
 o: to open a file 
 gt/gT to alternate between the next and previous tab
 ctrl +ww will switch between the tabs open on screen
 gs opens a file preview side by side
+gi opens a file preview (horizontal)
+shift+i show hidden files
 
-navigating NERDtree
+navigating NERDtree:
+
 u to go to the parent
-CD to change the slected dir to be CWD
+C to change the view of the directory
+cd to change the slected dir to be CWD (Current workiding directory)
+CD to move back to the CWD
+Vim Fugitive (git integration)
+
+:Gstatus (git status command)
+s to stage changes to files
+u to unstage changes
+:Git commit /Gcommit /cc (while in the status window)
+save and close commit window :x
+:Git push / Gpush
