@@ -161,7 +161,7 @@ then
         sed -i "s%$OLD%$NEW%g" $CONFIG
 fi
 #conda and zplug line
-echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >>! ~/.zshrc
+echo 'POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true' >> ~/.zshrc
 cat >> $CONFIG << EOF
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -199,12 +199,16 @@ echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
 git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfiles
 
 # single dotfile
-declare -a StringArray=(.?*) # looks for all dot files 
+declare -a StringArray=(.?*) # looks for all dot files. Have to discriminate between files and folders since ln doesn't support folders
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
-    ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
+    if [ -f $DOTFILE ]
+    then
+        ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
+    fi
 done
 
+echo -e 'Moving NVim files to ~/.config/ \n'
 # folders
 mkdir .config/
 declare -a StringArray=("nvim")
