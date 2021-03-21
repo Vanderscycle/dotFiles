@@ -1,3 +1,1 @@
-call plug#begin()
-Plug 'preservim/NERDTree'
-call plug#end()
+set laststatus=2

@@ -3,10 +3,8 @@
 # about wget https://unix.stackexchange.com/questions/23501/download-using-wget-to-a-different-directory-than-current-directory
 
 # update_rc.d
-# wget -O /etc/init.d/ubuntuPostInstall.sh https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/ubuntuPostInstall.sh && chmod +x /etc/init.d/ubuntuPostInstall.sh && bash /etc/init.d/ubuntuPostInstall.sh
-# local
-# wget https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/UbuntuPostInstall.sh && chmod +x UbuntuPostInstall.sh && bash UbuntuPostInstall.sh
-# f
+# wget -O /etc/init.d/ubuntuPostInstall.sh https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/postInstallScripts/ubuntuPostInstall.sh && chmod +x /etc/init.d/ubuntuPostInstall.sh && bash /etc/init.d/ubuntuPostInstall.sh
+
 # Ubuntu post-install script
 
 function beforeReboot() {
@@ -192,13 +190,28 @@ echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
 
 # Clone the repository recursively
 git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfiles
-#! need to do a find all .
-declare -a StringArray=( ".gitconfig" ".vimrc" ".p10k.zsh" ".alias")
+
+# single dotfile
+declare -a StringArray=(.?*) # looks for all dot files 
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
 done
 
+# folders
+mkdir .config/
+declare -a StringArray=("nvim")
+# Copying all the folders for neovim
+for DOTFOLDER in "${StringArray[@]}"; do
+    cp ~/.dotfiles/$DOTFOLDER ~/.config/
+done
+
+#Excellent references
+# https://www.chrisatmachine.com/Neovim/02-vim-general-settings/
+# https://www.chrisatmachine.com/Neovim/01-vim-plug/
+
+# nvim to install all the plugins
+nvim +'PlugInstall --sync' +qa
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -217,7 +230,6 @@ echo '=> Ubuntu 20.04LTS post-install script'
 echo '=> Post reboot'
 echo '------------------------------------------------------------------------'
 
-#! somehow these plugins and docker are not installed
 sudo apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io
 git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
@@ -238,4 +250,3 @@ else
     sudo update-rc.d UbuntuPostInstall.sh defaults
     sudo reboot
 fi
-#! Add a before and after reboot 

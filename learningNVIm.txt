@@ -1,0 +1,73 @@
+How to exist VIM
+Esc (brings you to normal mode)
+:wq (saves and quit)
+:q! (quits without saving)
+
+Movement (Normal mode) 
+
+HJKL (left down up right) look at your keyboard
+To move between paragraphs use {} Paragraghs need a space for Vim to recoginze them
+gg (move top of the page)
+G (move to the bottom of the page)
+
+0 moves the cursor to the beginning of the line
+$ moves the cursor to the end of the line
+
+w (word) moves the cursor to the right one word at a time
+b (back) moves the cursor to the left one word at a time 
+
+# number jk (moves # lines up or down)
+# number hl (moves # characters left or right)
+# number hl (moves # between paragraphs)
+# number w/b (moves # between words)
+
+Editing 
+o enter edit mode (adds a newline before)
+i enter edit mode (before the cursor)
+a enter edit mode (after the cursor)
+
+u Undo
+ctr-r redo 
+
+Copy paste cut
+yy to copy an entire line (will add a newline)
+y$ to copy an entire line (will not add a newline)
+p to paste bellow the line
+P to paste above the line
+
+dd deletes a line (also cuts it don't forget to use paste)
+
+You can also use numbers 
+# number d to delete # of lines
+# number y to copy # of lines 
+
+Visual
+
+Press V to enter Visual mode
+navigate to the selection using the movement keys
+	d to delete
+	y to (yank)/copy
+	d to cut
+You can adjust both bands of the selection by using o
+
+V-line(shift+v)
+
+Allow for selection for line 
+
+v-block (ctrl+v)
+Helper (line marker)
+:set number
+:set relativenumber
+:set nonumber
+
+Plugins
+
+NERDtree:
+o: to open a file 
+gt/gT to alternate between the next and previous tab
+ctrl +ww will switch between the tabs open on screen
+gs opens a file preview side by side
+
+navigating NERDtree
+u to go to the parent
+CD to change the slected dir to be CWD
