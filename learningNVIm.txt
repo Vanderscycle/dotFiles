@@ -89,3 +89,18 @@ u to unstage changes
 :Git commit /Gcommit /cc (while in the status window)
 save and close commit window :x
 :Git push / Gpush
+
+Tmux:
+
+(I rebinded the keys)
+Creating a new window 
+prefix Ctrl +a 
+prefix + h new horizontal window 
+prefix + v new vertical window
+
+Closing a window
+prefix + x
+
+navigations (between windows)
+same as vim HJKL 
+

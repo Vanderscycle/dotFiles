@@ -33,10 +33,11 @@ echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Install developer packages
+# cmake used to compile a tmux plugin
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Install developer packages'
-sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync
+sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync cmake
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -109,7 +110,7 @@ echo -e 'Done.\n'
 # => if local machine
 # -----------------------------------------------------------------------------
 echo '\n=> Install favorite applications'
-echo '=> spotify discord mailspring vlc vscode gitkraken'
+echo '=> spotify discord mailspring vlc vscode gitkraken Brave(broser)'
 echo -e '=> Are you sure? [Y/n] '
 read confirmation
 confirmation=$(echo $confirmation | tr '[:lower:]' '[:upper:]')
@@ -119,9 +120,26 @@ if [[ $confirmation == 'YES' || $confirmation == 'Y' ]]; then
     snap install spotify discord mailspring discordcd ~
     wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
     sudo dpkg -i gitkraken-amd64.deb
-
-
+    
+    echo -e 'Installing Brave browser.\n'
+    sudo apt install apt-transport-https
+    curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+    echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+    sudo apt install -y --no-install-recommends brave-browser
+    
     echo -e 'Done.\n'
+
+fi
+
+# -----------------------------------------------------------------------------
+# => Tracker/malware and bloatware blocker
+# -----------------------------------------------------------------------------
+echo '\n=> Internet security'
+echo '=> Do you want to append a blocked list to /etc/hosts? [Y/n]'
+read confirmation
+confirmation=$(echo $confirmation | tr '[:lower:]' '[:upper:]')
+if [[ $confirmation == 'YES' || $confirmation == 'Y' ]]; then
+    curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts >> sudo tee -a /etc/hosts
 fi
 
 # -----------------------------------------------------------------------------
@@ -183,13 +201,6 @@ rm install.sh
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => Tmux
-# -----------------------------------------------------------------------------
-
-# echo -e '=> Installing Tmux'
-# 
-# echo -e 'Done.\n'
-# -----------------------------------------------------------------------------
 # => Get dotfiles
 # -----------------------------------------------------------------------------
 echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
@@ -199,7 +210,7 @@ echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
 git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfiles
 
 # single dotfile
-declare -a StringArray=(.?*) # looks for all dot files. Have to discriminate between files and folders since ln doesn't support folders
+declare -a StringArray=( ".gitconfig" ".vimrc" ".p10k.zsh" ".tmux.config")
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     if [ -f $DOTFILE ]
@@ -214,8 +225,15 @@ mkdir .config/
 declare -a StringArray=("nvim")
 # Copying all the folders for neovim
 for DOTFOLDER in "${StringArray[@]}"; do
-    cp ~/.dotfiles/$DOTFOLDER ~/.config/
+    cp -r ~/.dotfiles/$DOTFOLDER ~/.config/ # do not forget -r (recursive for folders)
 done
+
+# Installing vim-gitgutter
+echo -e 'Installing vim-gitgutter(no Vim plug)\n'
+mkdir -p ~/.config/nvim/pack/airblade/start
+cd ~/.config/nvim/pack/airblade/start
+git clone https://github.com/airblade/vim-gitgutter.git
+nvim -u NONE -c "helptags vim-gitgutter/doc" -c q
 
 #Excellent references
 # https://www.chrisatmachine.com/Neovim/02-vim-general-settings/
@@ -225,6 +243,17 @@ done
 nvim +'PlugInstall --sync' +qa
 echo -e 'Done.\n'
 
+# -----------------------------------------------------------------------------
+# => Tmux
+# installation of TPM handled through .tmux.config file
+# need cmake to install load
+# -----------------------------------------------------------------------------
+
+echo -e '=> Installing Tmux'
+cd ~/.tmux/plugins/tmux-mem-cpu-load/
+cmake .
+make
+echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => leaving the instance (reboot necessary)
 # -----------------------------------------------------------------------------
