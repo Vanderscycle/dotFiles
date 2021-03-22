@@ -42,3 +42,7 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
+
+" Luke Smith non soy bindings
+" inoremap <Space><Space> <Esc>/<++><Enter>"_c41
+" autocmd FileType html inoremap ;1 <em></em><Space><++><Esc>FeT>i

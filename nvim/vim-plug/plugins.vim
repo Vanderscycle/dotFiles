@@ -19,30 +19,53 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'mattn/emmet-vim' 
     " icons for NERDtree files
     Plug 'ryanoasis/vim-devicons'
-    " fzf
+    " fzf (need to look a tutorial on how to use it)
     Plug 'junegunn/fzf', { 'do': { -> fzf#instal() } }
     Plug 'junegunn/fzf.vim'
     " git integration
     Plug 'tpope/vim-fugitive'
     Plug 'vim-airline/vim-airline'
+    " Linter
+    Plug 'dense-analysis/ale'
     " theme
     Plug 'joshdick/onedark.vim'
     Plug 'itchyny/lightline.vim'
+    Plug 'dracula/vim', { 'as': 'dracula' }
+    Plug 'drewtempelmeyer/palenight.vim'
+    " Code Runner but for Vim
+    Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+    "
     call plug#end()
 
 " color theme
 syntax on
-colorscheme onedark
+" colorscheme onedark
+" colorscheme dracula
+colorscheme palenight
+
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 " lightline customization
 " lightline theme
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ }
+"let g:lightline = { 'colorscheme': 'onedark' }
+let g:lightline = { 'colorscheme': 'palenight' }
 " Enables it to work
 set laststatus=2
 
-" NERDtree
+" Sniprun (code runner)
+" recommended shortcuts (visual)
+nmap <leader>f <Plug>SnipRun
+vmap f <Plug>SnipRun
+nmap <leader>c :SnipReplMemoryClean<CR>
+"NERDtree
+
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
 
 " Start NERDTree and put the cursor back in the other window.
 autocmd VimEnter * NERDTree | wincmd p
