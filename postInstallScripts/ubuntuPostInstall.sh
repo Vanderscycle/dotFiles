@@ -51,9 +51,9 @@ echo -e'\n=> Installing Docker'
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 docker version
-echo -e'\n=> Removing Sudo requirement Docker' 
+echo -e '\n=> Removing Sudo requirement Docker' 
 sudo usermod -aG docker ${USER}
-echo -e'\n=> Enabling Docker to start upon boot' 
+echo -e '\n=> Enabling Docker to start upon boot' 
 sudo systemctl enable docker
 sudo systemctl start docker
 echo '=> Removing docker installation file' 
@@ -209,7 +209,7 @@ git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfi
 
 # single dotfile
 cd ~/.dotfiles/ # Not sure why it works this way but I am a bit tired
-declare -a StringArray=( ".gitconfig" ".p10k.zsh" ".tmux.config")
+declare -a StringArray=( ".gitconfig" ".p10k.zsh" ".tmux.conf")
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     if [ -f $DOTFILE ]
