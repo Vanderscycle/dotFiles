@@ -139,7 +139,7 @@ echo '=> Do you want to append a blocked list to /etc/hosts? [Y/n]'
 read confirmation
 confirmation=$(echo $confirmation | tr '[:lower:]' '[:upper:]')
 if [[ $confirmation == 'YES' || $confirmation == 'Y' ]]; then
-    curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts >> sudo tee -a /etc/hosts
+    curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts | sudo tee -a /etc/hosts
 fi
 
 # -----------------------------------------------------------------------------
@@ -241,6 +241,20 @@ nvim -u NONE -c "helptags vim-gitgutter/doc" -c q
 
 # nvim to install all the plugins
 nvim +'PlugInstall --sync' +qa
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Installing NerdFonts
+# -----------------------------------------------------------------------------
+echo '=> Fetching and installing nerdfont'
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Installing alacritty
+# -----------------------------------------------------------------------------
+echo '=> Installing alacritty'
+
+echo 'Changing the font of the terminal'
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------

@@ -24,17 +24,21 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf.vim'
     " git integration
     Plug 'tpope/vim-fugitive'
-    Plug 'vim-airline/vim-airline'
     " Linter
     Plug 'dense-analysis/ale'
     " theme
     Plug 'joshdick/onedark.vim'
-    Plug 'itchyny/lightline.vim'
     Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'drewtempelmeyer/palenight.vim'
+    " status line theme
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'vim-airline/vim-airline'
+    "Plug 'itchyny/lightline.vim'
     " Code Runner but for Vim
     Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
-    "
+    " multiple cursors
+    " Plug 'terryma/vim-multiple-cursors' "deprrecated
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     call plug#end()
 
 " color theme
@@ -43,16 +47,23 @@ syntax on
 " colorscheme dracula
 colorscheme palenight
 
+set background=dark
 if (has("termguicolors"))
   set termguicolors
 endif
 
 " lightline customization
 " lightline theme
-"let g:lightline = { 'colorscheme': 'onedark' }
-let g:lightline = { 'colorscheme': 'palenight' }
-" Enables it to work
+" let g:lightline = { 'colorscheme': 'onedark' }
+" let g:lightline = { 'colorscheme': 'palenight' }
+
+" Enables it to work (both powerline and airline)
 set laststatus=2
+" set t_Co=256
+
+" Airline config
+"let g:airline#extensions#tabline#enabled = 1
+"set ttimeoutlen=50
 
 " Sniprun (code runner)
 " recommended shortcuts (visual)
