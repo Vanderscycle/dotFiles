@@ -110,13 +110,13 @@ echo -e 'Done.\n'
 # => if local machine
 # -----------------------------------------------------------------------------
 echo '\n=> Install favorite applications'
-echo '=> spotify discord mailspring vlc vscode gitkraken Brave(broser)'
+echo '=> spotify discord mailspring vlc gitkraken Brave(broser)'
 echo -e '=> Are you sure? [Y/n] '
 read confirmation
 confirmation=$(echo $confirmation | tr '[:lower:]' '[:upper:]')
 if [[ $confirmation == 'YES' || $confirmation == 'Y' ]]; then
 
-    sudo apt-get install -y --no-install-recommends vlc code
+    sudo apt-get install -y --no-install-recommends vlc 
     snap install spotify discord mailspring discordcd ~
     wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
     sudo dpkg -i gitkraken-amd64.deb
@@ -139,7 +139,7 @@ echo '=> Do you want to append a blocked list to /etc/hosts? [Y/n]'
 read confirmation
 confirmation=$(echo $confirmation | tr '[:lower:]' '[:upper:]')
 if [[ $confirmation == 'YES' || $confirmation == 'Y' ]]; then
-    curl -s https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts | sudo tee -a /etc/hosts
+    curl --silent --show-error https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts | sudo tee -a /etc/hosts
 fi
 
 # -----------------------------------------------------------------------------
@@ -159,8 +159,6 @@ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/instal
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 # adding 2 usefull pluging
 
-echo -e '\ninstalling Nerd Font'
-wget https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/install.sh && chmod +x install.sh && bash install.sh
 echo -e '\nConfiguring the settings in .zshrc'
 CONFIG=".zshrc"
 if grep -Fq "ZSH_THEME" $CONFIG
@@ -210,7 +208,8 @@ echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
 git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfiles
 
 # single dotfile
-declare -a StringArray=( ".gitconfig" ".vimrc" ".p10k.zsh" ".tmux.config")
+cd ~/.dotfiles/ # Not sure why it works this way but I am a bit tired
+declare -a StringArray=( ".gitconfig" ".p10k.zsh" ".tmux.config")
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     if [ -f $DOTFILE ]
@@ -218,6 +217,7 @@ for DOTFILE in "${StringArray[@]}"; do
         ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
     fi
 done
+cd ~
 
 echo -e 'Moving NVim files to ~/.config/ \n'
 # folders
@@ -247,6 +247,9 @@ echo -e 'Done.\n'
 # => Installing NerdFonts
 # -----------------------------------------------------------------------------
 echo '=> Fetching and installing nerdfont'
+mkdir -p ~/.local/share/fonts/NerdFonts/Meslo/
+rsync ~/.dotfiles/NerdFonts ~/.local/share/fonts/NerdFonts/Meslo/
+
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
