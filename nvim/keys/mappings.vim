@@ -1,4 +1,4 @@
-" Better nav for omnicomplete
+" Better
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
 
@@ -20,7 +20,6 @@ nnoremap <c-u> viwU<Esc>
 nnoremap <TAB> :bnext<CR>
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
-
 " Alternate way to save
 nnoremap <C-s> :w<CR>
 " Alternate way to quit
@@ -43,6 +42,6 @@ nnoremap <C-l> <C-w>l
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
 
-" Luke Smith non soy bindings
-" inoremap <Space><Space> <Esc>/<++><Enter>"_c41
-" autocmd FileType html inoremap ;1 <em></em><Space><++><Esc>FeT>i
+" closing a buffer windows without losing the key
+" \c or space c
+nmap <leader>c :ene<CR>:bw #<CR>

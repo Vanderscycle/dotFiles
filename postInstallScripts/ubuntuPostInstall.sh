@@ -20,6 +20,7 @@ sudo apt-get update -qq #-qq for quiet
 echo -e '=> Perform system upgrade'
 sudo apt-get dist-upgrade -y
 echo -e 'Done.\n'
+
 # -----------------------------------------------------------------------------
 # => Install system utilities
 # -----------------------------------------------------------------------------
@@ -116,8 +117,8 @@ read confirmation
 confirmation=$(echo $confirmation | tr '[:lower:]' '[:upper:]')
 if [[ $confirmation == 'YES' || $confirmation == 'Y' ]]; then
 
-    sudo apt-get install -y --no-install-recommends vlc 
-    snap install spotify discord mailspring discordcd ~
+    sudo apt-get install -y --no-install-recommends vlc neomutt
+    snap install spotify discord discordcd
     wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
     sudo dpkg -i gitkraken-amd64.deb
     
@@ -235,6 +236,14 @@ cd ~/.config/nvim/pack/airblade/start
 git clone https://github.com/airblade/vim-gitgutter.git
 nvim -u NONE -c "helptags vim-gitgutter/doc" -c q
 
+# Installing Vim Calendar
+mkdir -p ~/.cache/calendar.vim/ && touch ~/.cache/calendar.vim/credentials.vim
+chmod 700 ~/.cache/calendar.vim && chmod 600 ~/.cache/calendar.vim/credentials.vim
+cat >> ~/.cache/calendar.vim/credentials.vim << EOF
+let g:calendar_google_api_key = '...'
+let g:calendar_google_client_id = '....apps.googleusercontent.com'
+let g:calendar_google_client_secret = '...'
+EOF
 #Excellent references
 # https://www.chrisatmachine.com/Neovim/02-vim-general-settings/
 # https://www.chrisatmachine.com/Neovim/01-vim-plug/
@@ -281,15 +290,15 @@ sleep 5
 }
 
 function afterReboot() {
-cd ~
+
 echo '------------------------------------------------------------------------'
 echo '=> Ubuntu 20.04LTS post-install script'
 echo '=> Post reboot'
 echo '------------------------------------------------------------------------'
 
 sudo apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io
-git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions 
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 }
 

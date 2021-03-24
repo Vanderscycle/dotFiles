@@ -39,7 +39,17 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " multiple cursors
     " Plug 'terryma/vim-multiple-cursors' "deprrecated
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+    " Calendar integration and planning tools
+    Plug 'itchyny/calendar.vim'
+    Plug 'vimwiki/vimwiki'
     call plug#end()
+
+" Autosave
+autocmd TextChanged,TextChangedI <buffer> silent write
+
+" Requirements for vimwiki
+set nocompatible
+filetype plugin on
 
 " color theme
 syntax on
@@ -87,7 +97,13 @@ au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Exit Vim if NERDTree is the only window lft.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endife
+    \ quit | endif
+
+" Vim calendar (disabled for now need to follow the git repo) 
+"https://github.com/itchyny/calendar.vimlet g:calendar_google_calendar = 1
+"let g:calendar_google_task = 1
+"source ~/.cache/calendar.vim/credentials.vim
+
 "fxf
 " --column: Show column number
 " --line-number: Show line number
@@ -100,6 +116,8 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)"')"
+
+" Where was that from again?
 if has("gui_running")
 else
   nnoremap <Leader>d :GFiles<Enter>

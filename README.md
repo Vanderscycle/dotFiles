@@ -1,3 +1,6 @@
+# Dotfiles
+
+## Ubuntu
 My .dotfile repo containing all relevant configurations that I use.
 
 To use the post-install script for Ubuntu ssh into the Ubuntu server and type:
@@ -12,3 +15,10 @@ The post install script installs the following programs:
 * Docker
 * Miniconda
 * Oh-my-zsh (p10k theme)
+* tmux
+* nvim with plugins 
+  
+## Raspbian
+```bash
+wget -O /etc/init.d/raspberryPi.sh https://raw.githubusercontent.com/Vanderscycle/ubuntu-dot-config/main/postInstallScripts/raspberryPi.sh && chmod +x /etc/init.d/raspberryPi.sh && bash /etc/init.d/raspberryPi.sh
+```
