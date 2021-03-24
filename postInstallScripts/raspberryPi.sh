@@ -248,12 +248,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/cust
 if [ -f /var/run/rebooting-for-updates ]; then
     afterReboot
     rm /var/run/rebooting-for-updates
-    sudo update-rc.d UbuntuPostInstall.sh remove
+    sudo update-rc.d raspberryPi.sh remove
     # deleting the file itself
     rm /etc/init.d/UbuntuPostInstall.sh
 else
     beforeReboot
     touch /var/run/rebooting-for-updates
-    sudo update-rc.d UbuntuPostInstall.sh defaults
+    sudo update-rc.d raspberryPi.sh defaults
     sudo reboot
 fi
