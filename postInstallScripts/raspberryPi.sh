@@ -12,6 +12,7 @@ echo '------------------------------------------------------------------------'
 echo -e '\n=> User creation'
 #grainting the sudo
 sudo usermod -aG sudo pi
+chsh -s /bin/zsh pi
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -22,7 +23,8 @@ echo -e '\n=> Installing system utilities'
 sudo apt-get install -y --no-install-recommends curl wget git lsof gdebi-core \
     zip unzip gzip tar \
     ssh \
-    apt-transport-https ca-certificates gnupg lsb-release
+    apt-transport-https ca-certificates gnupg lsb-release \
+    libffi-dev libssl-dev
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -32,19 +34,10 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Install developer packages'
 sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync cmake
+pip install --upgrade setuptools
+pip3 install ez_setup
 echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => Install developer packages
-# python 3 not installed by default
-# -----------------------------------------------------------------------------
-
-echo -e '\n=> Install developer packages'
-sudo apt-get install -y --no-install-recommends git neovim \
-    libffi-dev libssl-dev \
-    python3 python3-dev python3-pip \
-    expect
-echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => Miniconda
 # Doesn't support arm processors only Amd and intel 
@@ -66,6 +59,7 @@ docker version
 echo -e'\n=> Removing Sudo requirement Docker' 
 sudo usermod -aG docker ${USER}
 echo -e'\n=> Installing Docker-compose' 
+#! not working!!!
 sudo pip3 install docker-compose #have to use python 3
 echo '=> Removing docker installation file' 
 rm get-docker.sh

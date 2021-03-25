@@ -60,6 +60,8 @@ Helper (line marker)
 :set relativenumber
 :set nonumber
 
+If you ever forget to save you can use the recover system (swap files)
+http://vimdoc.sourceforge.net/htmldoc/recover.html
 Plugins
 
 CommandLine:

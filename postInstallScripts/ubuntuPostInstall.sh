@@ -35,10 +35,14 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => Install developer packages
 # cmake used to compile a tmux plugin
+# install nodejs nvim (plugin)
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Install developer packages'
-sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync cmake
+sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync cmake \
+    nodejs npm
+# required for nvim 
+python3 -m pip install --user --upgrade pynvim
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -76,7 +80,8 @@ export PATH=~/miniconda3/bin:$PATH #.bashrc file
 conda init
 conda create -y -n dev-branch python
 conda activate dev-branch
-conda install -y pandas numpy django
+conda install -y pandas numpy django 
+# conda install -c conda-forge notebook
 rm Miniconda3-latest-Linux-x86_64.sh
 echo -e 'Done.\n'
 
@@ -250,6 +255,7 @@ EOF
 
 # nvim to install all the plugins
 nvim +'PlugInstall --sync' +qa
+nvim +':CocInstall coc-pyright coc-sh coc-html coc-css' --headless +qa
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------

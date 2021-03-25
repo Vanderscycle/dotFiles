@@ -5,7 +5,8 @@ if empty(glob('~/.cnfig/nvim/autoload/plug.vim'))
   "autocmd VimEnter * PlugInstall
   "autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
-
+" comments
+"
 call plug#begin('~/.config/nvim/autoload/plugged')
 
     " Better Syntax Support
@@ -42,8 +43,12 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Calendar integration and planning tools
     Plug 'itchyny/calendar.vim'
     Plug 'vimwiki/vimwiki'
+    " Intellisense
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     call plug#end()
 
+" found using checkhealth
+let g:python3_host_prog = expand('~/miniconda2/bin/python3')
 " Autosave
 autocmd TextChanged,TextChangedI <buffer> silent write
 
@@ -101,8 +106,9 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 
 " Vim calendar (disabled for now need to follow the git repo) 
 "https://github.com/itchyny/calendar.vimlet g:calendar_google_calendar = 1
-"let g:calendar_google_task = 1
-"source ~/.cache/calendar.vim/credentials.vim
+let g:calendar_google_task = 1
+let g:calendar_google_calendar = 1
+source ~/.cache/calendar.vim/credentials.vim
 
 "fxf
 " --column: Show column number
