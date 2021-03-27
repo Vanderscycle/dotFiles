@@ -12,19 +12,36 @@ G (move to the bottom of the page)
 
 0 moves the cursor to the beginning of the line
 $ moves the cursor to the end of the line
+^ moves the cursor to the beginning (non space/tab section of the line)
+		0w (makes the same)
 
-w (word) moves the cursor to the right one word at a time
+w (word) moves the cursor to the right one word at a time (beginning of the word)
+e (end word) moves the cursor to the right to the end of the next word to the right
 b (back) moves the cursor to the left one word at a time 
+W (capital) same as w expect you break at spaces
+B same as b except you break at spaces
 
 # number jk (moves # lines up or down)
 # number hl (moves # characters left or right)
 # number hl (moves # between paragraphs)
-# number w/b (moves # between words)
+# number w/b/e (moves # between words)
+:# (line number brings you to the actual line)
+* bring you to all instances of the word also highlights it(plugin) 
+
+camera:
+z center the page around your cursor
 
 Editing 
+t+(letter or punctuation) moves you before the first instance of the letter
+f+(letter or punctuation) moves you on the first instance of the letter
+% takes you to specific block parenthesis alternates 
+		d% deletes the content between the block (including the block)
+
 o enter edit mode (adds a newline before)
 i enter edit mode (before the cursor)
 a enter edit mode (after the cursor)
+A enter insert mode and place the cursor at the end of the line
+I enters inser mode and place the currsor at the beginning of the line (ignores the spaces)
 
 u Undo
 ctr-r redo 
@@ -35,7 +52,17 @@ y$ to copy an entire line (will not add a newline)
 p to paste bellow the line
 P to paste above the line
 
+x deletes the charater the cursor is on without entering insert mode
+		# + x number of characters to delete
 dd deletes a line (also cuts it don't forget to use paste)
+D deletes all content to the end of the line (on your cursor)
+C deletes everything and brings you into inser mode (on your cursor)
+c+w (change word) gets rid of the word and allows you to change that one instance
+c + t + (letter/punctuation to) removes all content until the specified marker bring you to insert mode
+d + t + (letter/punctuation to) same but deletes everything 
+
+v + t + (letter/punctuation to) works for copy paste
+		Of note it doesn't work with f
 
 You can also use numbers 
 # number d to delete # of lines
