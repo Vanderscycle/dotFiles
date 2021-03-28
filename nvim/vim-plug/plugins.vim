@@ -34,7 +34,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " status line theme
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-airline/vim-airline'
-    "Plug 'itchyny/lightline.vim'
     " Code Runner but for Vim
     Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
     " multiple cursors
@@ -45,32 +44,22 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vimwiki/vimwiki'
     " Intellisense
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+     " On-demand lazy load
+    Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+    " ranger in vim (leader f)
+    Plug 'francoiscabrol/ranger.vim'
+    Plug 'rbgrouleff/bclose.vim'
+    " vimux (tmux + vim)
+    Plug 'jpalardy/vim-slime', { 'for': 'python' }
+    Plug 'hanschen/vim-ipython-cell', { 'for': 'python' } 
     call plug#end()
 
+" vimux specific
+map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
 " found using checkhealth
 let g:python3_host_prog = expand('~/miniconda2/bin/python3')
 " Autosave
 autocmd TextChanged,TextChangedI <buffer> silent write
-
-" Requirements for vimwiki
-set nocompatible
-filetype plugin on
-
-" color theme
-syntax on
-" colorscheme onedark
-" colorscheme dracula
-colorscheme palenight
-
-set background=dark
-if (has("termguicolors"))
-  set termguicolors
-endif
-
-" lightline customization
-" lightline theme
-" let g:lightline = { 'colorscheme': 'onedark' }
-" let g:lightline = { 'colorscheme': 'palenight' }
 
 " Enables it to work (both powerline and airline)
 set laststatus=2
@@ -85,43 +74,6 @@ set laststatus=2
 nmap <leader>f <Plug>SnipRun
 vmap f <Plug>SnipRun
 nmap <leader>c :SnipReplMemoryClean<CR>
-"NERDtree
-
-" enable line numbers
-let NERDTreeShowLineNumbers=1
-
-" make sure relative line numbers are used
-autocmd FileType nerdtree setlocal relativenumber
-
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
-
-" Open a NerdTree if no file is given as CLI argument
-au StdinReadPre * let s:std_in=1
-au VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Exit Vim if NERDTree is the only window lft.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
-
-" Vim calendar (disabled for now need to follow the git repo) 
-"https://github.com/itchyny/calendar.vimlet g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-let g:calendar_google_calendar = 1
-source ~/.cache/calendar.vim/credentials.vim
-
-"fxf
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)"')"
 
 " Where was that from again?
 if has("gui_running")

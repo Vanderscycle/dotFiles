@@ -44,4 +44,4 @@ nnoremap <Leader>O O<Esc>^Da
 
 " closing a buffer windows without losing the key
 " \c or space c
-nmap <leader>c :ene<CR>:bw #<CR>
+" nmap <leader>q :ene<CR>:bw #<CR>
