@@ -43,6 +43,9 @@ sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tm
     nodejs npm
 # required for nvim 
 python3 -m pip install --user --upgrade pynvim
+echo -e '\n=> Installing Node JS for py-right'
+#https://github.com/nvm-sh/nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -193,6 +196,9 @@ if [ -f ${HOME}/.zplug/init.zsh ]; then
 fi
 export PATH="$PATH:$HOME/miniconda3/bin"
 
+# Node js for vim plugin
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 EOF
 conda update -y conda
 conda init zsh
