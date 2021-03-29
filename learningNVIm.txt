@@ -3,6 +3,8 @@ Esc (brings you to normal mode)
 :wq (saves and quit)
 :q! (quits without saving)
 
+This is a small test
+
 Movement (Normal mode) 
 
 HJKL (left down up right) look at your keyboard
