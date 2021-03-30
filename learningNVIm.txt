@@ -23,6 +23,10 @@ b (back) moves the cursor to the left one word at a time
 W (capital) same as w expect you break at spaces
 B same as b except you break at spaces
 
+buffers (subset of windows)
+:vsp (opens a new vertical buffer)
+:sb opens a horizontal buffer
+
 Misc:
 ~ capitalize or lower a character
 The (.) allows you to repeat the last executed command
@@ -38,6 +42,7 @@ The (.) allows you to repeat the last executed command
 * bring you to all instances of the word also highlights it(plugin) 
 # + ~ change capitalize or lower the next # of chars
 # + r replace the next # letters with the one you are about to enter
+
 camera:
 z center the page around your cursor
 
@@ -54,11 +59,13 @@ i enter edit mode (before the cursor)
 a enter edit mode (after the cursor)
 A enter insert mode and place the cursor at the end of the line
 I enters inser mode and place the currsor at the beginning of the line (ignores the spaces)
+alt+e (while in insert mode ) copy paste
 
 Indenting:
 Select the range of code
 >>
 << (with selection)
+
 u Undo
 ctr-r redo 
 
@@ -117,11 +124,34 @@ CommandLine:
 
 To run a commandline command :! somecommand [ENTER]
 
+Navigating FZF/Ripgrep/Blines/preview menus(snips):
+ctrl j/k for up down movement
+tab alllows you to select multiple files items (red chevron)
+
 FZF:
 activate :FZF (command)
 to use type the fuzzy word 
 shift j+k to navigate up and down the selection
 
+Ripgrep:
+call in nvim using :Rg
+look search for a string inside all files
+
+Blines:
+search inside a buffer ( usefull for very large codebase )
+Lines:
+Search accross all open buffers
+
+History:
+:History ( go back to file history )
+:History: (go back to the command history)
+
+Silversearched (similart to :Rg)
+:Ag (uses it)
+More to learn
+
+:Buffers
+(search accross your buffers)
 NERDtree:
 
 o: to open a file 
@@ -146,13 +176,43 @@ u to unstage changes
 save and close commit window :x
 :Git push / Gpush
 
+cocsnippets:
+ctrl+j allows you to move to the next highlighted section of the snip
+you can define your own snips (check Chris video)
+
+mutli cursors:
+ctrl + arrow keys (very basic)
+ctrl + n enables c-n word
+https://github.com/mg979/vim-visual-multi/wiki/Quick-start
+
+auto-pairs:
+
+System Shortcuts:
+    <CR>  : Insert new indented line after return if cursor in blank brackets or quotes.
+    <BS>  : Delete brackets in pair
+    <M-p> : Toggle Autopairs (g:AutoPairsShortcutToggle)
+    <M-e> : Fast Wrap (g:AutoPairsShortcutFastWrap)
+    <M-n> : Jump to next closed pair (g:AutoPairsShortcutJump)
+    <M-b> : BackInsert (g:AutoPairsShortcutBackInsert)
+()
+zsh:
+
+Enabled vi(m) to navigate it pres esc ()
+You can see the modes but its a bit unruly at the moment
+
+ctrl+r (search history)
+ctrl+t search for files
+alt+e search for directory you can cd into
+
 Tmux:
 
 (I rebinded the keys)
 Creating a new window 
-prefix Ctrl +a 
+prefix = Ctrl +a 
+prefix + c creates new window
 prefix + h new horizontal window 
 prefix + v new vertical window
+prefix + number (switches to the window #)
 
 Closing a window
 prefix + x

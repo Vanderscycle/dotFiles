@@ -44,8 +44,11 @@ sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tm
 # required for nvim 
 python3 -m pip install --user --upgrade pynvim
 echo -e '\n=> Installing Node JS for py-right'
-#https://github.com/nvm-sh/nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+# More neovim packages
+# https://www.chrisatmachine.com/Neovim/08-fzf/
+sudo apt-get install -y --no-install-recommends fzf ripgrep universal-ctags silversearcher-ag fd-find
+#https://github.com/neoclide/coc.nvim (node js install)
+curl -sL install-node.now.sh/lts | bash
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -205,6 +208,14 @@ conda init zsh
 echo -e '\ninstalling enhancd using zplug'
 zplug "b4b4r07/enhancd", use:init.sh
 
+echo -e '\n adding fzf completion'
+# source of info https://doronbehar.com/articles/ZSH-FZF-completion/
+mkdir /usr/share/fzf/
+touch /usr/share/fzf/completion.zsh
+wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
+touch /usr/share/fzf/key-bindings.zsh
+wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
+
 echo -e 'removing installation file'
 rm install.sh
 
@@ -261,7 +272,8 @@ EOF
 
 # nvim to install all the plugins
 nvim +'PlugInstall --sync' +qa
-nvim +':CocInstall coc-pyright coc-sh coc-html coc-css' --headless +qa
+# Coc plugins to install required functionalities
+nvim +':CocInstall coc-pyright coc-sh coc-html coc-css coc-snippets' --headless +qa
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------

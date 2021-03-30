@@ -8,4 +8,6 @@ source $HOME/.config/nvim/plug-config/nerdtree.vim
 source $HOME/.config/nvim/plug-config/calendar.vim
 source $HOME/.config/nvim/themes/palenight.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
-source $HOME/.config/nvim/plug-config/slime-Ipython.vim
+" need to raise an issue becuase slime-ipyhon doesn't work well with conda envs
+"source $HOME/.config/nvim/plug-config/slime-ipython.vim
+
