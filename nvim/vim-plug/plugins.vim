@@ -61,6 +61,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'cjrh/vim-conda'
     call plug#end()
 
+" need to find a way y allow for both using an added char
+" "autocmd FileType python let b:dispatch = 'pylint -f parseable %'
+autocmd FileType python let b:dispatch = 'python3 %'
 " ALE (move later)
 let g:ale_fixers = {
       \ 'python': ['pylint', 'autopep8', 'isort'],
@@ -71,9 +74,9 @@ map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " found using checkhealth
 " Python path (we are using Conda to control our environment)
-let g:python_host_prog = expand("~/miniconda2/envs/nvimpy2/bin/python")
+let g:python_host_prog = expand("/home/henri/miniconda2/envs/nvimpy2/bin/python")
 "let g:loaded_python_provider = 0
-let g:python3_host_prog = expand('/home/henri/miniconda2/envs/NNScraper/bin/python3')
+let g:python3_host_prog = expand('/home/henri/miniconda2/bin/python3')
 "let g:python3_host_prog = expand('~/miniconda2/envs/neuralDomains/bin/python')
 
 "let g:python3_host_prog = expand('~/miniconda2/envs/NNScraper/bin/python')
