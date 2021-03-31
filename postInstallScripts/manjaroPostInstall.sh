@@ -23,7 +23,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing system utilities'
-sudo pacman curl wget git lsof gdebi-core \
+sudo pacman -Syu curl wget git lsof gdebi-core \
     zip unzip gzip tar \
     ssh \
     apt-transport-https ca-certificates gnupg lsb-release
@@ -103,11 +103,11 @@ zplug "b4b4r07/enhancd", use:init.sh
 
 echo -e '\n adding fzf completion'
 # source of info https://doronbehar.com/articles/ZSH-FZF-completion/
-mkdir /usr/share/fzf/
-touch /usr/share/fzf/completion.zsh
-wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
-touch /usr/share/fzf/key-bindings.zsh
-wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
+sudo mkdir /usr/share/fzf/
+sudo touch /usr/share/fzf/completion.zsh
+sudo wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
+sudo touch /usr/share/fzf/key-bindings.zsh
+sudo wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
 
 echo -e 'removing installation file'
 rm install.sh
@@ -137,7 +137,7 @@ cd ~
 
 echo -e 'Moving NVim files to ~/.config/ \n'
 # folders
-mkdir .config/
+sudo mkdir .config/
 declare -a StringArray=("nvim")
 # Copying all the folders for neovim
 for DOTFOLDER in "${StringArray[@]}"; do
@@ -205,3 +205,4 @@ echo -e '\n=> Installation complete, rebooting the server this may take a minute
 sleep 5
 
 }
+beforeReboot
