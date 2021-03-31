@@ -42,6 +42,8 @@ echo -e '\n=> Install developer packages'
 sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync cmake \
     nodejs npm
 # required for nvim 
+# it would be better to add it to the conda env
+# Also manybe create a py2 env for nvim pynvim2 --move code
 python3 -m pip install --user --upgrade pynvim
 echo -e '\n=> Installing Node JS for py-right'
 # More neovim packages
