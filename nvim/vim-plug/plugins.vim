@@ -37,7 +37,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-airline/vim-airline'
     " Code Runner but for Vim
-    Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+    " Running the plugins causes alot of issues 
+    " Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
     " multiple cursors
     " Plug 'terryma/vim-multiple-cursors' "deprrecated
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
@@ -51,11 +52,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " ranger in vim (leader f)
     Plug 'francoiscabrol/ranger.vim'
     Plug 'rbgrouleff/bclose.vim'
-    " jupyter like functionalities
-    " Must raise an issue on their git
-    " Plug 'jpalardy/vim-slime', { 'for': 'python' }
-    " Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }"
-    " output in a different windor
+    " output in a different window
     Plug 'tpope/vim-dispatch'
     " because I use conda
     Plug 'cjrh/vim-conda'
@@ -74,9 +71,9 @@ map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " found using checkhealth
 " Python path (we are using Conda to control our environment)
-let g:python_host_prog = expand("/home/henri/miniconda2/envs/nvimpy2/bin/python")
-"let g:loaded_python_provider = 0
-let g:python3_host_prog = expand('/home/henri/miniconda2/bin/python3')
+"let g:python_host_prog = expand("/home/henri/miniconda2/envs/nvimpy2/bin/python")
+let g:loaded_python_provider = 0
+let g:python3_host_prog = expand('/home/henri/miniconda2/bin/python')
 "let g:python3_host_prog = expand('~/miniconda2/envs/neuralDomains/bin/python')
 
 "let g:python3_host_prog = expand('~/miniconda2/envs/NNScraper/bin/python')

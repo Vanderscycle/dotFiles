@@ -104,6 +104,8 @@ function repoInit(){
         git branch -M main 
         read -p 'What is the SSH(prefered)/HTTPS GitHub address?': ADDRESS
         git remote add origin $ADDRESS
+        git config --global user.name "Henri Vandersleyen"
+        git config --global user.email hvandersleyen@gmail.com
         echo 'pushing first commit to main'
         git push -u origin main
         git pull
@@ -114,4 +116,4 @@ function repoInit(){
 
 MLFolders
 gitFiles
-#repoInit
+repoInit
