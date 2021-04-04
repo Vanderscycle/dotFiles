@@ -247,7 +247,7 @@ cd ~
 echo -e 'Moving NVim files to ~/.config/ \n'
 # folders
 mkdir .config/
-declare -a StringArray=("nvim")
+declare -a StringArray=("nvim" "ranger")
 # Copying all the folders for neovim
 for DOTFOLDER in "${StringArray[@]}"; do
     cp -r ~/.dotfiles/$DOTFOLDER ~/.config/ # do not forget -r (recursive for folders)

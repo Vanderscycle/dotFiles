@@ -27,6 +27,8 @@ sudo pacman -Syu curl wget git lsof gdebi-core \
     zip unzip gzip tar \
     ssh \
     apt-transport-https ca-certificates gnupg lsb-release
+    # ranger file preview system
+    yay -S python-ueberzug-git
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -138,7 +140,7 @@ cd ~
 echo -e 'Moving NVim files to ~/.config/ \n'
 # folders
 sudo mkdir .config/
-declare -a StringArray=("nvim")
+declare -a StringArray=("nvim" "ranger")
 # Copying all the folders for neovim
 for DOTFOLDER in "${StringArray[@]}"; do
     cp -r ~/.dotfiles/$DOTFOLDER ~/.config/ # do not forget -r (recursive for folders)

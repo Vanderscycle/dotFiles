@@ -13,7 +13,7 @@ done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
 rsync -auv --progress ~/.config/nvim/ "$DIR/nvim" --exclude autoload/plugged/ --exclude pack/ 
-
+rsync -auv --progress ~/.config/ranger/ "$DIR/ranger"  
 
 #! should create a weekly upload schedule
 # git add .*

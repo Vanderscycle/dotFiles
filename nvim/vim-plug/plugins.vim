@@ -38,9 +38,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'vim-airline/vim-airline'
     " Code Runner but for Vim
     " Running the plugins causes alot of issues 
-    " Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
+    "Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
     " multiple cursors
-    " Plug 'terryma/vim-multiple-cursors' "deprrecated
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}
     " Calendar integration and planning tools
     Plug 'itchyny/calendar.vim'
@@ -50,8 +49,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
      " On-demand lazy load
     Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
     " ranger in vim (leader f)
-    Plug 'francoiscabrol/ranger.vim'
-    Plug 'rbgrouleff/bclose.vim'
+    Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
     " output in a different window
     Plug 'tpope/vim-dispatch'
     " because I use conda
@@ -84,12 +82,6 @@ let g:python3_host_prog = expand('/home/henri/miniconda2/bin/python')
 " Enables it to work (both powerline and airline)
 set laststatus=2
 " set t_Co=256
-
-" Sniprun (code runner)
-" recommended shortcuts (visual)
-nmap <leader>f <Plug>SnipRun
-vmap f <Plug>SnipRun
-nmap <leader>c :SnipReplMemoryClean<CR>
 
 " Where was that from again?
 if has("gui_running")
