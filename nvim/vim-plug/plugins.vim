@@ -30,8 +30,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Linter
     Plug 'dense-analysis/ale'
     " theme
-    Plug 'joshdick/onedark.vim'
-    Plug 'dracula/vim', { 'as': 'dracula' }
+    "Plug 'joshdick/onedark.vim'
+    "Plug 'dracula/vim', { 'as': 'dracula' }
     Plug 'drewtempelmeyer/palenight.vim'
     " status line theme
     Plug 'vim-airline/vim-airline-themes'
@@ -54,6 +54,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-dispatch'
     " because I use conda
     Plug 'cjrh/vim-conda'
+    " shows the indent
+    Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+    
     call plug#end()
 
 " need to find a way y allow for both using an added char

@@ -9,4 +9,5 @@ source $HOME/.config/nvim/plug-config/calendar.vim
 source $HOME/.config/nvim/themes/palenight.vim
 source $HOME/.config/nvim/plug-config/rnvimr.vim
 source $HOME/.config/nvim/plug-config/which-key.vim
+source $HOME/.config/nvim/plug-config/indent-blankline.vim
 
