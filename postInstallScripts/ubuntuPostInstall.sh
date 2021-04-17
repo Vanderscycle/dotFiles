@@ -27,7 +27,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing system utilities'
 sudo apt-get install -y --no-install-recommends curl wget git lsof gdebi-core \
-    zip unzip gzip tar \
+    zip unzip gzip tar htop\
     ssh \
     apt-transport-https ca-certificates gnupg lsb-release
 echo -e 'Done.\n'
@@ -39,7 +39,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Install developer packages'
-sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync cmake \
+sudo apt-get install -y --no-install-recommends git neovim python3-pip expect tmux rsync cmake ufw\
     nodejs npm
 # required for nvim 
 # it would be better to add it to the conda env
@@ -118,6 +118,13 @@ echo '=> Configuring security'
 mkdir -p ~/.ssh
 sudo chmod 700 ~/.ssh/
 sudo chmod 600 ~/.ssh/*
+echo '=> firewall'
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+sudo ufw allow ssh
+sudo ufw allow 8000
+sudo ufw enable
+sudo ufw status
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
