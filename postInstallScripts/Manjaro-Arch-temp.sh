@@ -148,3 +148,11 @@ mv ~/Programs/sxhkd/examples/background_shell/sxhkdrc ~/.config/sxhkd/sxhkdrc
 chmod +x ~/.config/sxhkd/sxhkdrc
 
 echo "allowed_users = anybody" >> sudo /etc/X11/Xwrapper.config
+
+echo -e 'Installing remote working software (zoom/discord)'
+yay -S --noconfirm zoom
+yay -S --noconfirm discord
+
+echo -e 'Installing remote entertainment software (steam/spotify'
+yay -S --noconfirm ncspot #command line client for spotify (may want to move to Ncmpcpp later)
+yay -S --noconfirm vlc
