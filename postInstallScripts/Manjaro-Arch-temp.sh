@@ -153,6 +153,9 @@ echo -e 'Installing remote working software (zoom/discord)'
 yay -S --noconfirm zoom
 yay -S --noconfirm discord
 
-echo -e 'Installing remote entertainment software (steam/spotify'
+echo -e 'Installing entertainment (steam/spotify)'
 yay -S --noconfirm ncspot #command line client for spotify (may want to move to Ncmpcpp later)
 yay -S --noconfirm vlc
+
+echo -e 'Installing web browser'
+yay -S --noconfirm brave
