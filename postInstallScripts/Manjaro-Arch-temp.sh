@@ -27,8 +27,12 @@ echo -e 'Installing AUR helper (yay)'
 # Arch User Repository (AUR) helper helps with the installation of packages from the AUR.
 mkdir ~/Programs/
 git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
-cd ~/Programs/yay/
-makepkg -si --noconfirm --needed
+cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
+
+echo -e 'Installing Nvidia drivers'
+sudo pacman -S nvidia nvidia-utils    # NVIDIA 
+echo -e 'Installing process managers (htop/gotop)'
+yay -S --noconfirm gotop-bin htop
 echo -e 'Done.\n'
 
 
@@ -39,8 +43,9 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing developer packages'
 echo -e 'Installing Text Editior (neovim)'
 git clone https://aur.archlinux.org/neovim-nightly-bin.git ~/Programs/neovim/ 
-cd ~/Programs/neovim/
-makepkg -si --noconfirm --needed
+cd ~/Programs/neovim/ && makepkg -si --noconfirm --needed
+echo -e 'Installing Tmux'
+pacman -S --noconfirm tmux
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -87,6 +92,7 @@ echo -e 'Installing Postgresql'
 yay -S --noconfirm postgresql postgis
 
 echo -e 'Configuring Postgresql'
+# need to pass commands directly investigate
 sudo su postgres -l # or sudo -u postgres -i
 initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
 exit
@@ -94,3 +100,51 @@ exit
 sudo systemctl start postgresql
 sudo systemctl enable postgresql # allows it to start on start
 sudo systemctl status postgresql # visual confirmation
+
+echo -e 'Installing Mongo'
+git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
+cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed
+
+echo -e 'Configuring Mongo'
+sudo systemctl start mongodb
+sudo systemctl enable mongodb # allows it to start on start
+sudo systemctl status mongodb # visual confirmation
+
+# -----------------------------------------------------------------------------
+# => Local application (local machine only)
+# -----------------------------------------------------------------------------
+echo '\n=> Installing local machine applications'
+echo -e 'Installing Torrent client (Transmission)'
+# more investigation required
+git clone https://aur.archlinux.org/transmission-cli-git.git ~/Programs/transmission/
+cd ~/Programs/transmission/ && makepkg -si --noconfirm --needed
+
+echo -e 'Installing Window manager (bspwm)'
+# https://low-orbit.net/arch-linux-how-to-install-bspwm
+sudo pacman -Syu --noconfirm bspwm
+sudo pacman -S --noconfirm xorg xorg-xinit xterm # required for wm
+sudo pacman -S --noconfirm xorg-xeyes xorg-xclock xterm # optional
+
+CONFIG="/etc/X11/xinit/xinitrc"
+if grep -Fq "exec xterm" $CONFIG
+then
+    APPEND="exec bspwm"
+    OLD='exec xterm -geometry 80x66+0+0 -name login"'
+    NEW="#exec xterm -geometry 80x66+0+0 -name login'"
+    sed -i "s%$OLD%$NEW%g" $CONFIG
+    echo $APPEND >> $CONFIG
+fi
+
+git clone https://github.com/baskerville/bspwm.git ~/Programs/bspwm/
+cd ~/Programs/bspwm/ && make & sudo make install
+mkdir ~/.config/bspwm/
+mv ~/Programs/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
+chmod +x ~/.config/bspwm/bspwmrc
+
+git clone https://github.com/baskerville/sxhkd.git ~/Programs/sxhkd/
+cd ~/Programs/sxhkd/ && make & sudo make install
+mkdir ~/.config/sxhkd/
+mv ~/Programs/sxhkd/examples/background_shell/sxhkdrc ~/.config/sxhkd/sxhkdrc
+chmod +x ~/.config/sxhkd/sxhkdrc
+
+echo "allowed_users = anybody" >> sudo /etc/X11/Xwrapper.config
