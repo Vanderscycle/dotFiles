@@ -237,7 +237,7 @@ echo '=> Get dotfiles (https://github.com/Vanderscycle/ubuntu-dot-config)'
 
 
 # Clone the repository recursively
-git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/.dotfiles
+git clone --recursive https://github.com/Vanderscycle/dot-config ~/.dotfiles
 
 # single dotfile
 cd ~/.dotfiles/ # Not sure why it works this way but I am a bit tired
