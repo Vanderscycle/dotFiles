@@ -119,35 +119,36 @@ echo -e 'Installing Torrent client (Transmission)'
 git clone https://aur.archlinux.org/transmission-cli-git.git ~/Programs/transmission/
 cd ~/Programs/transmission/ && makepkg -si --noconfirm --needed
 
-echo -e 'Installing Window manager (bspwm)'
-# https://low-orbit.net/arch-linux-how-to-install-bspwm
-sudo pacman -Syu --noconfirm bspwm
-sudo pacman -S --noconfirm xorg xorg-xinit xterm # required for wm
-sudo pacman -S --noconfirm xorg-xeyes xorg-xclock xterm # optional
+echo -e 'Installing Window manager (bspwm)' # what a pain 
+sudo pacman -S --noconfirm xorg xorg-xinit bspwm sxhkd dmenu nitrogen picom arandr
+#sxhkd for keybindings
+#arandr fo rmultple screens
+mkdir ~/.config/bspwm/
+mkdir ~/.config/sxhkd/
+cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
+cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
 
-CONFIG="/etc/X11/xinit/xinitrc"
-if grep -Fq "exec xterm" $CONFIG
+cat >> ~/.xinitrc << EOF
+sextkbmap ch &
+picom -f &
+exec bspwm
+EOF
+
+CONFIG="/etc/xdg/picom.conf"
+if grep -Fq "vsync = true" $CONFIG
 then
-    APPEND="exec bspwm"
-    OLD='exec xterm -geometry 80x66+0+0 -name login"'
-    NEW="#exec xterm -geometry 80x66+0+0 -name login'"
+    OLD="'vsync = true'"
+    NEW="'#vsync = true'"
     sed -i "s%$OLD%$NEW%g" $CONFIG
-    echo $APPEND >> $CONFIG
 fi
 
-git clone https://github.com/baskerville/bspwm.git ~/Programs/bspwm/
-cd ~/Programs/bspwm/ && make & sudo make install
-mkdir ~/.config/bspwm/
-mv ~/Programs/bspwm/examples/bspwmrc ~/.config/bspwm/bspwmrc
-chmod +x ~/.config/bspwm/bspwmrc
 
-git clone https://github.com/baskerville/sxhkd.git ~/Programs/sxhkd/
-cd ~/Programs/sxhkd/ && make & sudo make install
-mkdir ~/.config/sxhkd/
-mv ~/Programs/sxhkd/examples/background_shell/sxhkdrc ~/.config/sxhkd/sxhkdrc
-chmod +x ~/.config/sxhkd/sxhkdrc
-
-echo "allowed_users = anybody" >> sudo /etc/X11/Xwrapper.config
+sudo touch /etc/X11/Xwrapper.config
+sudo cat >> /etc/X11/Xwrapper.config << EOF
+allowed_users = anybody
+needs_root_rights = no
+EOF
 
 echo -e 'Installing remote working software (zoom/discord)'
 yay -S --noconfirm zoom
