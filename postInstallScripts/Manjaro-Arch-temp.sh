@@ -109,6 +109,18 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 curl -sL --proto-redir -all https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 #git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
+echo -e '\ninstalling enhancd using zplug'
+zplug "b4b4r07/enhancd", use:init.sh
+
+echo -e '\n adding fzf completion'
+# source of info https://doronbehar.com/articles/ZSH-FZF-completion/
+mkdir /usr/share/fzf/
+touch /usr/share/fzf/completion.zsh
+wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
+touch /usr/share/fzf/key-bindings.zsh
+wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
+echo -e 'Done.\n'
+
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 echo -e '\nConfiguring the settings in .zshrc'
@@ -126,21 +138,32 @@ then
         NEW='#ZSH_THEME="robbyrussell"'
         sed -i "s%$OLD%$NEW%g" $CONFIG
 fi
+
 #conda and zplug line
 cat >> $CONFIG << EOF
 # Use powerline
 USE_POWERLINE="true"
-# Source manjaro-zsh-configuration
+
+# Source manjaro-zsh-configuration(theme)
 if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
   source /usr/share/zsh/manjaro-zsh-config
 fi
-# Use manjaro zsh prompt
+
+# Use manjaro zsh prompt(theme)
 if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   source /usr/share/zsh/manjaro-zsh-prompt
 fi
+
+#zplug addition
 if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
+
+# vim keys
+set -o vi
+# to exit terminal in nvim
+alias :q=exit
+
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="$PATH:$HOME/miniconda3/bin"
@@ -182,18 +205,6 @@ echo -e 'Configuring Neovim'
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
 git clone https://github.com/siduck76/neovim-dots.git ~/Documents/neovim-dots
 cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
-
-echo -e '\ninstalling enhancd using zplug'
-zplug "b4b4r07/enhancd", use:init.sh
-
-echo -e '\n adding fzf completion'
-# source of info https://doronbehar.com/articles/ZSH-FZF-completion/
-mkdir /usr/share/fzf/
-touch /usr/share/fzf/completion.zsh
-wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
-touch /usr/share/fzf/key-bindings.zsh
-wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
-echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Dotfiles
