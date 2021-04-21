@@ -77,17 +77,6 @@ echo -e 'Done.\n'
 
 function afterReboot() {
 
-# -----------------------------------------------------------------------------
-# => Font
-# -----------------------------------------------------------------------------
-
-echo -e 'Downloading Nerdfont'
-mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts && curl -fLo "JetBrains Mono Regular Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/NoLigatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf
-curl -fLo "JetBrains Mono Italic Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/NoLigatures/Italic/complete/JetBrains%20Mono%20Italic%20Nerd%20Font%20Complete.ttf
-curl -fLo "JetBrains Mono Bold Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/NoLigatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete.ttf
-curl -fLo "JetBrains Mono Bold Italic Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/NoLigatures/BoldItalic/complete/JetBrains%20Mono%20NL%20Bold%20Italic%20Nerd%20Font%20Complete.ttf
-echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Terminal specific
@@ -128,17 +117,34 @@ CONFIG=".zshrc"
 if grep -Fq "plugins" $CONFIG
 then
         OLD="plugins=(git)"
-        NEW="plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
+        NEW="plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting)"
+        sed -i "s%$OLD%$NEW%g" $CONFIG
+fi
+if grep -Fq "ZSH_THEME" $CONFIG
+then
+        OLD='ZSH_THEME="robbyrussell"'
+        NEW='#ZSH_THEME="robbyrussell"'
         sed -i "s%$OLD%$NEW%g" $CONFIG
 fi
 #conda and zplug line
 cat >> $CONFIG << EOF
+# Use powerline
+USE_POWERLINE="true"
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+  source /usr/share/zsh/manjaro-zsh-prompt
+fi
 if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="$PATH:$HOME/miniconda3/bin"
+
 EOF
 echo -e 'Done.\n'
 
@@ -147,7 +153,11 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e 'Installing Miniconda'
-yay -S --noconfirm miniconda3
+#yay -S --noconfirm miniconda3 # not working?
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b
+export PATH=~/miniconda3/bin:$PATH
 
 echo -e 'Configuring python env with basic package'
 conda init zsh
@@ -155,6 +165,7 @@ conda create -y -n dev-branch python
 conda activate dev-branch
 conda install -y pandas numpy django 
 pip3 install pynvim # required for neovim
+rm Miniconda3-latest-Linux-x86_64.sh # clean the install
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -198,7 +209,20 @@ for DOTFILE in "${StringArray[@]}"; do
         rsync -auv ~/Documents/dotFiles/$DOTFILE ~/$DOTFILE
     fi
 done
+echo -e 'Importing alacritty dotfiles'
 rsync -auv ~/Documents/dotFiles/alacritty.yml ~/.config/alacritty/alacritty.yml 
+
+
+# -----------------------------------------------------------------------------
+# => Font
+# -----------------------------------------------------------------------------
+
+echo -e 'Nerdfont'
+mkdir -p ~/.local/share/fonts/ttf/
+rsync -auv ~/Documents/dotFiles/NerdFonts/JetBrains/ ~/.local/share/fonts/ttf/
+fc-cache -vf
+echo -e 'Done.\n'
+
 # -----------------------------------------------------------------------------
 # => Databases
 # -----------------------------------------------------------------------------
@@ -297,3 +321,8 @@ else
     beforeReboot
     sudo reboot
 fi
+
+# todo
+# xmonad
+# french and chinese language packs
+# slack
