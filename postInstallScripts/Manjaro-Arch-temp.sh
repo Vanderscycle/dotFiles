@@ -15,7 +15,8 @@ echo -e '\n=> Update repository information'
 # --noconfirm
 echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
-sudo echo "timestamp_timeout=300" >> /etc/sudoers
+sudo pacman -S --needed --noconfirm base-devel git
+echo "timestamp_timeout=300" >> sudo /etc/sudoers
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -25,12 +26,13 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing system utilities'
 echo -e 'Installing AUR helper (yay)'
 # Arch User Repository (AUR) helper helps with the installation of packages from the AUR.
+#https://averagelinuxuser.com/which-aur-helper-yay/
 mkdir ~/Programs/
 git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
 cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
 
 echo -e 'Installing Nvidia drivers'
-sudo pacman -S --noconfirm nvidia nvidia-utils    # NVIDIA 
+sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
 echo -e 'Installing process managers (htop/gotop)'
 yay -S --noconfirm gotop-bin htop
 echo -e 'Done.\n'
@@ -51,7 +53,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e 'Installing Docker'
-sudo pacman -S --noconfirm Docker
+sudo pacman -S --noconfirm --needed Docker
 # https://wiki.archlinux.org/index.php/Docker
 # https://docs.docker.com/config/daemon/
 # touch /etc/docker/daemon.json # for specific user config
@@ -85,7 +87,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e 'Installing Alacritty'
-sudo pacman -S alacritty
+sudo pacman -S --noconfirm alacritty
 mkdir -p ~/.config/alacritty
 touch  ~/.config/alacritty/alacritty.yml
 # need to add the relevant files
@@ -174,6 +176,7 @@ wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn
 touch /usr/share/fzf/key-bindings.zsh
 wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
 echo -e 'Done.\n'
+
 # -----------------------------------------------------------------------------
 # => Dotfiles
 # -----------------------------------------------------------------------------
