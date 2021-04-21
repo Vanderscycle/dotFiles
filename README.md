@@ -20,7 +20,7 @@ The post install script installs the following programs:
 * 
 ## Arch/Manjaro
 ```bash
-wget -O /etc/init.d/Manjaro-Arch-temp.sh https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/Manjaro-Arch-temp.sh && chmod +x /etc/init.d/Manjaro-Arch-temp.sh && bash /etc/init.d/Manjaro-Arch-temp.sh
+sudo mkdir /etc/init.d/ && wget -O /etc/init.d/Manjaro-Arch-temp.sh https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/Manjaro-Arch-temp.sh && chmod +x /etc/init.d/Manjaro-Arch-temp.sh && bash /etc/init.d/Manjaro-Arch-temp.sh
 ``` 
 
 ## Raspbian
