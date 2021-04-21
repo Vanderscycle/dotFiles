@@ -169,7 +169,7 @@ echo -e 'Configuring Neovim'
 # fd alternative to find
 # ueberzug allows for image display in terminal
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
-git clone https://github.com/siduck76/neovim-dots.git ~/Documents/
+git clone https://github.com/siduck76/neovim-dots.git ~/Documents/neovim-dots
 cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
 
 echo -e '\ninstalling enhancd using zplug'
@@ -189,16 +189,16 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e 'Importing dotfiles'
-git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/Documents/dotFiles
+git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/Documents/dotFiles/
 cd ~/Documents/dotFiles/ 
 declare -a StringArray=( ".gitconfig" ".tmux.conf")
 for DOTFILE in "${StringArray[@]}"; do
-    # can't use symbolic link since we want the file
     if [ -f $DOTFILE ]
     then
-        ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
+        rsync -auv ~/Documents/dotFiles/$DOTFILE ~/$DOTFILE
     fi
 done
+rsync -auv ~/Documents/dotFiles/alacritty.yml ~/.config/alacritty/alacritty.yml 
 # -----------------------------------------------------------------------------
 # => Databases
 # -----------------------------------------------------------------------------
