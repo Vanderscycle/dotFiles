@@ -17,7 +17,12 @@ The post install script installs the following programs:
 * Oh-my-zsh (p10k theme)
 * tmux
 * nvim with plugins 
-  
+* 
+## Arch/Manjaro
+```bash
+wget -O /etc/init.d/Manjaro-Arch-temp.sh https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/Manjaro-Arch-temp.sh && chmod +x /etc/init.d/Manjaro-Arch-temp.sh && bash /etc/init.d/Manjaro-Arch-temp.sh
+``` 
+
 ## Raspbian
 ```bash
 wget -O /etc/init.d/raspberryPi.sh https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/raspberryPi.sh && chmod +x /etc/init.d/raspberryPi.sh && bash /etc/init.d/raspberryPi.sh
