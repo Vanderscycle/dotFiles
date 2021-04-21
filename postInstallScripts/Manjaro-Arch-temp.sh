@@ -15,6 +15,7 @@ echo -e '\n=> Update repository information'
 # --noconfirm
 echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
+sudo echo "timestamp_timeout=300" >> /etc/sudoers
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
