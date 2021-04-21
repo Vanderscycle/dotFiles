@@ -1,6 +1,7 @@
-
 #!/bin/bash
 # Manjaro post-install script
+
+function beforeReboot() {
 
 cd ~
 echo '------------------------------------------------------------------------'
@@ -16,7 +17,8 @@ echo -e '\n=> Update repository information'
 echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git
-echo "timestamp_timeout=300" >> sudo /etc/sudoers
+# not sure why this format works
+sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -27,9 +29,10 @@ echo -e '\n=> Installing system utilities'
 echo -e 'Installing AUR helper (yay)'
 # Arch User Repository (AUR) helper helps with the installation of packages from the AUR.
 #https://averagelinuxuser.com/which-aur-helper-yay/
-mkdir ~/Programs/
+mkdir -p ~/Programs/yay/
 git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
 cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
+# sudo pacman -S --noconfirm --needed yay
 
 echo -e 'Installing Nvidia drivers'
 sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
@@ -69,6 +72,10 @@ sudo groupadd docker
 sudo gpasswd -a $USER docker
 newgrp docker
 echo -e 'Done.\n'
+
+}
+
+function afterReboot() {
 
 # -----------------------------------------------------------------------------
 # => Font
@@ -269,3 +276,18 @@ yay -S --noconfirm vlc
 
 echo -e 'Installing web browser'
 yay -S --noconfirm brave
+
+}
+
+if [ -f /var/run/rebooting-for-updates ]; then
+    afterReboot
+    rm /var/run/rebooting-for-updates
+    sudo update-rc.d Manjaro-Arch-temp.sh remove
+    # deleting the file itself
+    rm /etc/init.d/Manjaro-Arch-temp.sh
+else
+    beforeReboot
+    touch /var/run/rebooting-for-updates
+    sudo update-rc.d Manjaro-Arch-temp.sh defaults
+    sudo reboot
+fi
