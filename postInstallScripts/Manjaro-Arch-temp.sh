@@ -209,9 +209,9 @@ yay -S --noconfirm postgresql postgis
 
 echo -e 'Configuring Postgresql'
 # need to pass commands directly investigate
-sudo su postgres -l # or sudo -u postgres -i
-initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
-exit
+#sudo su postgres -l # or sudo -u postgres -i
+#"initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'"
+#exit
 
 sudo systemctl start postgresql
 sudo systemctl enable postgresql # allows it to start on start
@@ -267,12 +267,14 @@ echo -e 'Installing Window manager (bspwm)' # what a pain
 #EOF
 
 echo -e 'Installing remote working software (zoom/discord)'
-yay -S --noconfirm zoom
-yay -S --noconfirm discord
+yay -S --noconfirm zoom discord
 
 echo -e 'Installing entertainment (steam/spotify)'
-yay -S --noconfirm ncspot #command line client for spotify (may want to move to Ncmpcpp later)
-yay -S --noconfirm vlc
+yay -S --noconfirm vlc #command line client for spotify (may want to move to Ncmpcpp later)
+# https://wvarner.blogspot.com/2017/10/setting-up-mopidy-ncmpcpp-and-spotify.html (config)
+sudo pacman -S mopidy 
+yay -S ncmpcpp mopidy-mpd mopidy-spotify # mopidy extensions like spotify
+# to access you need to use ncmpcpp in the terminal
 
 echo -e 'Installing web browser'
 yay -S --noconfirm brave
