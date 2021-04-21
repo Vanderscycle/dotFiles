@@ -29,10 +29,10 @@ echo -e '\n=> Installing system utilities'
 echo -e 'Installing AUR helper (yay)'
 # Arch User Repository (AUR) helper helps with the installation of packages from the AUR.
 #https://averagelinuxuser.com/which-aur-helper-yay/
-mkdir -p ~/Programs/yay/
-git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
-cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
-# sudo pacman -S --noconfirm --needed yay
+mkdir -p ~/Programs/
+#git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
+#cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
+sudo pacman -S --noconfirm --needed yay
 
 echo -e 'Installing Nvidia drivers'
 sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
@@ -280,14 +280,18 @@ yay -S --noconfirm brave
 }
 
 if [ -f /var/run/rebooting-for-updates ]; then
-    afterReboot
-    rm /var/run/rebooting-for-updates
+
+    
+    sudo rm /var/run/rebooting-for-updates
     sudo update-rc.d Manjaro-Arch-temp.sh remove
+    afterReboot
     # deleting the file itself
     rm /etc/init.d/Manjaro-Arch-temp.sh
+    
 else
-    beforeReboot
-    touch /var/run/rebooting-for-updates
+    
+    sudo touch /var/run/rebooting-for-updates
     sudo update-rc.d Manjaro-Arch-temp.sh defaults
+    beforeReboot
     sudo reboot
 fi
