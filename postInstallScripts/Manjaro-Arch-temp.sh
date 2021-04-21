@@ -8,7 +8,6 @@ echo '=> Manjaro 20.04LTS post-install script'
 echo '=> Before reboot'
 echo '------------------------------------------------------------------------'
 
-
 echo -e '\n=> Update repository information'
 # -S: synchronize your system's packages with those in the official repo
 # -y: download fresh package databases from the server
@@ -34,7 +33,6 @@ sudo pacman -S --noconfirm nvidia nvidia-utils    # NVIDIA
 echo -e 'Installing process managers (htop/gotop)'
 yay -S --noconfirm gotop-bin htop
 echo -e 'Done.\n'
-
 
 # -----------------------------------------------------------------------------
 # => Install developer packages
@@ -157,7 +155,7 @@ echo -e 'Installing Text Editior (neovim)'
 git clone https://aur.archlinux.org/neovim-nightly-bin.git ~/Programs/neovim/ 
 cd ~/Programs/neovim/ && makepkg -si --noconfirm --needed
 
-echo -e 'n\=> Configuring Neovim'
+echo -e 'Configuring Neovim'
 # fd alternative to find
 # ueberzug allows for image display in terminal
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
@@ -224,39 +222,38 @@ sudo systemctl status mongodb # visual confirmation
 echo '\n=> Installing local machine applications'
 echo -e 'Installing Torrent client (Transmission)'
 # more investigation required
-git clone https://aur.archlinux.org/transmission-cli-git.git ~/Programs/transmission/
-cd ~/Programs/transmission/ && makepkg -si --noconfirm --needed
+#git clone https://aur.archlinux.org/transmission-cli-git.git ~/Programs/transmission/
+#cd ~/Programs/transmission/ && makepkg -si --noconfirm --needed
 
 echo -e 'Installing Window manager (bspwm)' # what a pain 
-sudo pacman -S --noconfirm xorg xorg-xinit bspwm sxhkd dmenu nitrogen picom arandr
+#sudo pacman -S --noconfirm xorg xorg-xinit bspwm sxhkd dmenu nitrogen picom arandr
 #sxhkd for keybindings
 #arandr fo rmultple screens
-mkdir ~/.config/bspwm/
-mkdir ~/.config/sxhkd/
-cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
-cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
-cp /etc/X11/xinit/xinitrc ~/.xinitrc
+#mkdir ~/.config/bspwm/
+#mkdir ~/.config/sxhkd/
+#cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
+#cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
+#cp /etc/X11/xinit/xinitrc ~/.xinitrc
 
-cat >> ~/.xinitrc << EOF
-sextkbmap ch &
-picom -f &
-exec bspwm
-EOF
+#cat >> ~/.xinitrc << EOF
+#sextkbmap ch &
+#picom -f &
+#exec bspwm
+#EOF
 
-CONFIG="/etc/xdg/picom.conf"
-if grep -Fq "vsync = true" $CONFIG
-then
-    OLD="'vsync = true'"
-    NEW="'#vsync = true'"
-    sed -i "s%$OLD%$NEW%g" $CONFIG
-fi
+#CONFIG="/etc/xdg/picom.conf"
+#if grep -Fq "vsync = true" $CONFIG
+#then
+#    OLD="'vsync = true'"
+#    NEW="'#vsync = true'"
+#    sed -i "s%$OLD%$NEW%g" $CONFIG
+#fi
 
-
-sudo touch /etc/X11/Xwrapper.config
-sudo cat >> /etc/X11/Xwrapper.config << EOF
-allowed_users = anybody
-needs_root_rights = no
-EOF
+#sudo touch /etc/X11/Xwrapper.config
+#sudo cat >> /etc/X11/Xwrapper.config << EOF
+#allowed_users = anybody
+#needs_root_rights = no
+#EOF
 
 echo -e 'Installing remote working software (zoom/discord)'
 yay -S --noconfirm zoom
