@@ -30,7 +30,7 @@ git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
 cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
 
 echo -e 'Installing Nvidia drivers'
-sudo pacman -S nvidia nvidia-utils    # NVIDIA 
+sudo pacman -S --noconfirm nvidia nvidia-utils    # NVIDIA 
 echo -e 'Installing process managers (htop/gotop)'
 yay -S --noconfirm gotop-bin htop
 echo -e 'Done.\n'
@@ -41,11 +41,10 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing developer packages'
-echo -e 'Installing Text Editior (neovim)'
-git clone https://aur.archlinux.org/neovim-nightly-bin.git ~/Programs/neovim/ 
-cd ~/Programs/neovim/ && makepkg -si --noconfirm --needed
-echo -e 'Installing Tmux'
-pacman -S --noconfirm tmux
+sudo pacman -S --noconfirm rsync git fzf
+# for zsh alt+c (cd into fzf folders)
+# ctrl+t (?) 
+# ctrl+r(history)
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -68,6 +67,72 @@ echo -e 'Removing Sudo requirements'
 sudo groupadd docker
 sudo gpasswd -a $USER docker
 newgrp docker
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Font
+# -----------------------------------------------------------------------------
+
+echo -e 'Downloading Nerdfont'
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts && curl -fLo "JetBrains Mono Regular Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/NoLigatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf
+curl -fLo "JetBrains Mono Italic Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/NoLigatures/Italic/complete/JetBrains%20Mono%20Italic%20Nerd%20Font%20Complete.ttf
+curl -fLo "JetBrains Mono Bold Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/NoLigatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete.ttf
+curl -fLo "JetBrains Mono Bold Italic Nerd Font Complete.ttf" https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/NoLigatures/BoldItalic/complete/JetBrains%20Mono%20NL%20Bold%20Italic%20Nerd%20Font%20Complete.ttf
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Terminal specific
+# -----------------------------------------------------------------------------
+
+echo -e 'Installing Alacritty'
+sudo pacman -S alacritty
+mkdir -p ~/.config/alacritty
+touch  ~/.config/alacritty/alacritty.yml
+# need to add the relevant files
+# https://www.chrisatmachine.com/Linux/06-alacritty/ 
+echo -e 'Done.\n'
+
+echo -e 'Installing Tmux'
+sudo pacman -S --noconfirm tmux
+echo -e 'Done.\n'
+
+echo -e '> Installing zsh and oh-my-zsh'
+#https://medium.com/tech-notes-and-geek-stuff/install-zsh-on-arch-linux-manjaro-and-make-it-your-default-shell-b0098b756a7a
+sudo pacman -S --noconfirm zsh
+# changing the default from bash to zsh
+sudo usermod -s /bin/zsh ${USER} 
+sudo chsh -s $(which zsh) ${USER} 
+
+# installing oh-my-zsh
+#https://github.com/ohmyzsh/ohmyzsh/issues/5873#issuecomment-498678076
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+#zplug
+curl -sL --proto-redir -all https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+#git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+echo -e '\nConfiguring the settings in .zshrc'
+CONFIG=".zshrc"
+
+if grep -Fq "plugins" $CONFIG
+then
+        OLD="plugins=(git)"
+        NEW="plugins=(git zsh-autosuggestions zsh-syntax-highlighting)"
+        sed -i "s%$OLD%$NEW%g" $CONFIG
+fi
+#conda and zplug line
+cat >> $CONFIG << EOF
+if [ -f ${HOME}/.zplug/init.zsh ]; then
+    source ${HOME}/.zplug/init.zsh
+fi
+export FZF_DEFAULT_COMMAND='fdfind --type f'
+export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
+export PATH="$PATH:$HOME/miniconda3/bin"
+EOF
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Miniconda
@@ -77,15 +142,57 @@ echo -e 'Installing Miniconda'
 yay -S --noconfirm miniconda3
 
 echo -e 'Configuring python env with basic package'
-conda init
+conda init zsh
 conda create -y -n dev-branch python
 conda activate dev-branch
 conda install -y pandas numpy django 
 pip3 install pynvim # required for neovim
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
+# => NeoVim
+# -----------------------------------------------------------------------------
+
+echo -e 'Installing Text Editior (neovim)'
+git clone https://aur.archlinux.org/neovim-nightly-bin.git ~/Programs/neovim/ 
+cd ~/Programs/neovim/ && makepkg -si --noconfirm --needed
+
+echo -e 'n\=> Configuring Neovim'
+# fd alternative to find
+# ueberzug allows for image display in terminal
+yay -S --noconfirm python-ueberzug-git ripgrep-all fd
+git clone https://github.com/siduck76/neovim-dots.git ~/Documents/
+cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
+
+echo -e '\ninstalling enhancd using zplug'
+zplug "b4b4r07/enhancd", use:init.sh
+
+echo -e '\n adding fzf completion'
+# source of info https://doronbehar.com/articles/ZSH-FZF-completion/
+mkdir /usr/share/fzf/
+touch /usr/share/fzf/completion.zsh
+wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
+touch /usr/share/fzf/key-bindings.zsh
+wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
+echo -e 'Done.\n'
+# -----------------------------------------------------------------------------
+# => Dotfiles
+# -----------------------------------------------------------------------------
+
+echo -e 'Importing dotfiles'
+git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/Documents/dotFiles
+cd ~/Documents/dotFiles/ 
+declare -a StringArray=( ".gitconfig" ".tmux.conf")
+for DOTFILE in "${StringArray[@]}"; do
+    # can't use symbolic link since we want the file
+    if [ -f $DOTFILE ]
+    then
+        ln  ~/.dotfiles/$DOTFILE ~/$DOTFILE
+    fi
+done
+# -----------------------------------------------------------------------------
 # => Databases
-# --------------------------------------------/etc/init.d/ postgresql postgresql-contrib
+# -----------------------------------------------------------------------------
 
 echo -e 'Installing Postgresql'
 # https://lobotuerto.com/blog/how-to-install-postgresql-in-manjaro-linux/
@@ -113,6 +220,7 @@ sudo systemctl status mongodb # visual confirmation
 # -----------------------------------------------------------------------------
 # => Local application (local machine only)
 # -----------------------------------------------------------------------------
+
 echo '\n=> Installing local machine applications'
 echo -e 'Installing Torrent client (Transmission)'
 # more investigation required
