@@ -14,7 +14,7 @@ echo -e '\n=> Update repository information'
 # -u: upgrade all installed packages (like rsync)
 # --noconfirm
 echo -e '=> Perform system upgrade'
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
