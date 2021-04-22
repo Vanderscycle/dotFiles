@@ -52,10 +52,33 @@ sudo pacman -S --noconfirm rsync git fzf
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
+# => ZSH
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Installing zsh'
+#https://medium.com/tech-notes-and-geek-stuff/install-zsh-on-arch-linux-manjaro-and-make-it-your-default-shell-b0098b756a7a
+sudo pacman -S --noconfirm zsh
+# changing the default from bash to zsh
+sudo usermod -s /bin/zsh ${USER} 
+sudo chsh -s $(which zsh) ${USER} 
+
+# -----------------------------------------------------------------------------
+# => Miniconda 
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Installing Miniconda'
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b
+export PATH=~/miniconda3/bin:$PATH
+conda init zsh
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
 # => Docker
 # -----------------------------------------------------------------------------
 
-echo -e 'Installing Docker'
+echo -e '\n=> Installing Docker'
 sudo pacman -S --noconfirm --needed Docker
 # https://wiki.archlinux.org/index.php/Docker
 # https://docs.docker.com/config/daemon/
@@ -64,13 +87,12 @@ sudo systemctl start docker
 sudo systemctl enable docker # allows it to start on start
 sudo systemctl status docker # visual confirmation
 
-echo -e 'Installing Docker compose'
+echo -e '\n=> Installing Docker compose'
 sudo pacman -S --noconfirm docker-compose
 
 echo -e 'Removing Sudo requirements'
 sudo groupadd docker
-sudo gpasswd -a $USER docker
-newgrp docker
+sudo usermod -aG docker ${USER}
 echo -e 'Done.\n'
 
 }
@@ -82,7 +104,7 @@ function afterReboot() {
 # => Terminal specific
 # -----------------------------------------------------------------------------
 
-echo -e 'Installing Alacritty'
+echo -e '\n=> Installing Alacritty'
 sudo pacman -S --noconfirm alacritty
 mkdir -p ~/.config/alacritty
 touch  ~/.config/alacritty/alacritty.yml
@@ -90,16 +112,11 @@ touch  ~/.config/alacritty/alacritty.yml
 # https://www.chrisatmachine.com/Linux/06-alacritty/ 
 echo -e 'Done.\n'
 
-echo -e 'Installing Tmux'
+echo -e '\n=> Installing Tmux'
 sudo pacman -S --noconfirm tmux
 echo -e 'Done.\n'
 
-echo -e '> Installing zsh and oh-my-zsh'
-#https://medium.com/tech-notes-and-geek-stuff/install-zsh-on-arch-linux-manjaro-and-make-it-your-default-shell-b0098b756a7a
-sudo pacman -S --noconfirm zsh
-# changing the default from bash to zsh
-sudo usermod -s /bin/zsh ${USER} 
-sudo chsh -s $(which zsh) ${USER} 
+echo -e '\n=> Installing oh-my-zsh'
 
 # installing oh-my-zsh
 #https://github.com/ohmyzsh/ohmyzsh/issues/5873#issuecomment-498678076
@@ -110,15 +127,15 @@ curl -sL --proto-redir -all https://raw.githubusercontent.com/zplug/installer/ma
 #git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 echo -e '\ninstalling enhancd using zplug'
-zplug "b4b4r07/enhancd", use:init.sh
+zplug "b4b4r07/enhancd", use:init.sh #! doesn't work
 
 echo -e '\n adding fzf completion'
 # source of info https://doronbehar.com/articles/ZSH-FZF-completion/
 mkdir /usr/share/fzf/
-touch /usr/share/fzf/completion.zsh
-wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
-touch /usr/share/fzf/key-bindings.zsh
-wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
+sudo touch /usr/share/fzf/completion.zsh
+sudo wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
+sudo touch /usr/share/fzf/key-bindings.zsh
+sudo wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
 echo -e 'Done.\n'
 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -167,23 +184,15 @@ alias :q=exit
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="$PATH:$HOME/miniconda3/bin"
-
 EOF
+
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => Miniconda
+# => Miniconda (env cont)
 # -----------------------------------------------------------------------------
 
-echo -e 'Installing Miniconda'
-#yay -S --noconfirm miniconda3 # not working?
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-chmod +x Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh -b
-export PATH=~/miniconda3/bin:$PATH
-
-echo -e 'Configuring python env with basic package'
-conda init zsh
+echo -e '\n=> Configuring python env with basic package through Conda'
 conda create -y -n dev-branch python
 conda activate dev-branch
 conda install -y pandas numpy django 
@@ -222,7 +231,7 @@ for DOTFILE in "${StringArray[@]}"; do
 done
 echo -e 'Importing alacritty dotfiles'
 rsync -auv ~/Documents/dotFiles/alacritty.yml ~/.config/alacritty/alacritty.yml 
-
+git config --global init.defaultBranch main
 
 # -----------------------------------------------------------------------------
 # => Font
@@ -307,8 +316,8 @@ yay -S --noconfirm zoom discord
 echo -e 'Installing entertainment (steam/spotify)'
 yay -S --noconfirm vlc #command line client for spotify (may want to move to Ncmpcpp later)
 # https://wvarner.blogspot.com/2017/10/setting-up-mopidy-ncmpcpp-and-spotify.html (config)
-sudo pacman -S mopidy 
-yay -S ncmpcpp mopidy-mpd mopidy-spotify # mopidy extensions like spotify
+sudo pacman -S --noconfirm mopidy 
+yay -S --noconfirm ncmpcpp mopidy-mpd mopidy-spotify # mopidy extensions like spotify
 # to access you need to use ncmpcpp in the terminal
 
 echo -e 'Installing web browser'
