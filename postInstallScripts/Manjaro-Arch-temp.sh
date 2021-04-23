@@ -67,11 +67,13 @@ sudo chsh -s $(which zsh) ${USER}
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing Miniconda'
+cd ~
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod +x Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b
 export PATH=~/miniconda3/bin:$PATH
 conda init zsh
+rm Miniconda3-latest-Linux-x86_64.sh # clean the install
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -199,10 +201,16 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Configuring python env with basic package through Conda'
 conda create -y -n dev-branch python
-conda activate dev-branch
+conda activate dev-branch 
 conda install -y pandas numpy django 
-pip3 install pynvim # required for neovim
-rm Miniconda3-latest-Linux-x86_64.sh # clean the install
+pip3 install pynvim # required to work with nvim
+
+
+conda create -y -n machine-learning python pandas numpy 
+conda activate machine-learning
+pip3 install pynvim # required to work with nvim
+conda install -c conda-forge scikit-learn
+#conda install pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge # pytoch ml library
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
