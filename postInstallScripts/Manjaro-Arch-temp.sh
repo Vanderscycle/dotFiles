@@ -99,6 +99,11 @@ echo -e 'Done.\n'
 
 function afterReboot() {
 
+cd ~
+echo '------------------------------------------------------------------------'
+echo '=> Manjaro 20.04LTS post-install script'
+echo '=> After reboot'
+echo '------------------------------------------------------------------------'
 
 # -----------------------------------------------------------------------------
 # => Terminal specific
@@ -254,7 +259,7 @@ yay -S --noconfirm postgresql postgis
 echo -e 'Configuring Postgresql'
 # need to pass commands directly investigate
 #sudo su postgres -l # or sudo -u postgres -i
-#"initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'"
+#initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
 #exit
 
 sudo systemctl start postgresql
@@ -323,6 +328,9 @@ yay -S --noconfirm ncmpcpp mopidy-mpd mopidy-spotify # mopidy extensions like sp
 echo -e 'Installing web browser'
 yay -S --noconfirm brave
 
+echo -e 'Installing emoji for browser support'
+pacman -S --noconfirm noto-fonts-emoji
+
 }
 
 if [ -f /var/run/rebooting-for-updates ]; then
@@ -330,7 +338,8 @@ if [ -f /var/run/rebooting-for-updates ]; then
     
     sudo rm /var/run/rebooting-for-updates
     sudo update-rc.d Manjaro-Arch-temp.sh remove
-    afterReboot
+    touch ~/postInstallLog.txt
+    afterReboot >> ~/postInstallLog.txt
     # deleting the file itself
     rm /etc/init.d/Manjaro-Arch-temp.sh
     
@@ -338,11 +347,12 @@ else
     
     sudo touch /var/run/rebooting-for-updates
     sudo update-rc.d Manjaro-Arch-temp.sh defaults
-    beforeReboot
+    touch ~/preInstallLog.txt
+    beforeReboot >> ~/preInstallLog.txt
     sudo reboot
 fi
 
 # todo
-# xmonad
-# french and chinese language packs
+# xmonad # https://wiki.manjaro.org/index.php/Install_Desktop_Environments#Tiling_Window_Managers
+# french and chinese language/keyboards packs # https://wiki.manjaro.org/index.php?title=Locale
 # slack
