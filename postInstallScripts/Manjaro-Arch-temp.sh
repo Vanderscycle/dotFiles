@@ -128,7 +128,7 @@ echo -e '\n=> Installing oh-my-zsh'
 # installing oh-my-zsh
 #https://github.com/ohmyzsh/ohmyzsh/issues/5873#issuecomment-498678076
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-
+rm ~/.zshrc.pre-oh-my-zsh
 #zplug
 curl -sL --proto-redir -all https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 #git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -227,6 +227,18 @@ echo -e 'Configuring Neovim'
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
 git clone https://github.com/siduck76/neovim-dots.git ~/Documents/neovim-dots
 cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
+
+# -----------------------------------------------------------------------------
+# => Security (ssh)
+# -----------------------------------------------------------------------------
+
+echo -e 'Configuring SSH'
+# https://pandammonium.org/how-to-change-a-git-repository-from-https-to-ssh/
+mkdir ~/.ssh/
+cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f manajaoGit -N ""
+eval $(ssh-agent)
+ssh-add  ~/.ssh/manjaroGit
+# the rest has to be done manually (add the pub file to git)
 
 # -----------------------------------------------------------------------------
 # => Dotfiles
