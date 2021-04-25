@@ -33,6 +33,7 @@ mkdir -p ~/Programs/
 #git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
 #cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
 sudo pacman -S --noconfirm --needed yay
+sudo pacman -S --noconfirm --needed xclip
 
 echo -e 'Installing Nvidia drivers'
 sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
