@@ -339,6 +339,9 @@ echo -e 'Installing Window manager (bspwm)' # what a pain
 echo -e 'Installing remote working software (zoom/discord)'
 yay -S --noconfirm zoom discord
 
+echo -e 'Installing libreOffice'
+pacman -S --noconfirm --needed libreoffice
+
 echo -e 'Installing entertainment (steam/spotify)'
 yay -S --noconfirm vlc #command line client for spotify (may want to move to Ncmpcpp later)
 # https://wvarner.blogspot.com/2017/10/setting-up-mopidy-ncmpcpp-and-spotify.html (config)
