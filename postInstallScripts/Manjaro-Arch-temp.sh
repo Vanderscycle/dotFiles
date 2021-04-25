@@ -343,9 +343,47 @@ echo -e 'Installing entertainment (steam/spotify)'
 yay -S --noconfirm vlc #command line client for spotify (may want to move to Ncmpcpp later)
 # https://wvarner.blogspot.com/2017/10/setting-up-mopidy-ncmpcpp-and-spotify.html (config)
 sudo pacman -S --noconfirm mopidy 
-yay -S --noconfirm ncmpcpp mopidy-mpd mopidy-spotify # mopidy extensions like spotify
+yay -S --noconfirm ncmpcpp mopidy-mpd mopidy-spotify mpd # mopidy extensions like spotify
 # to access you need to use ncmpcpp in the terminal
 
+echo -e 'configuring mpd'
+mkdir -p ~/.config/mpd
+touch ~/.config/mpd/conf
+cat >> ~/.config/mpd/conf <<EOF
+port "6600"
+EOF
+
+echo -e 'configuring ncmpcpp'
+# https://pkgbuild.com/~jelle/ncmpcpp/
+mkdir -p ~/.config/ncmpcpp/
+touch ~/.config/ncmpcpp/conf
+cat >> ~/.config/ncmpcpp/conf <<EOF
+mpd_host = "127.0.0.1"
+mpd_port = 6600
+mpd_music_dir = ~/Music
+EOF
+
+echo -e 'configuring mopidy'
+#https://blog.deepjyoti30.dev/using-spotify-with-ncmpcpp-mopidy-linux
+mkdir -p ~/.config/mopidy
+touch ~/.config/mopidy/mopidy.conf
+cat >> ~/.config/mopidy/mopidy.conf <<EOF
+[core]
+restore_state = true
+
+[mpd]
+enabled = true
+hostname = 127.0.0.1
+port = 6600
+
+[spotify]
+enabled = true
+username = your_username
+password = your_pw
+client_id = your_client_id
+client_secret = your_client_secret
+bitrate = 320
+EOF
 echo -e 'Installing web browser'
 yay -S --noconfirm brave
 
