@@ -268,7 +268,9 @@ for DOTFILE in "${StringArray[@]}"; do
     fi
 done
 echo -e 'Importing alacritty dotfiles'
-rsync -auv ~/Documents/dotFiles/alacritty.yml ~/.config/alacritty/alacritty.yml 
+rsync -auv ~/Documents/dotFiles/alacritty.yml ~/.config/alacritty/alacritty.yml
+rsync -auv ~/Documents/dotFiles/neomutt/ ~/.config/neomutt/ 
+rsync -auv ~/Documents/dotFiles/vimwiki ~/vimwiki 
 git config --global init.defaultBranch main
 
 # -----------------------------------------------------------------------------
@@ -404,6 +406,11 @@ yay -S --noconfirm brave
 
 echo -e 'Installing emoji for browser support'
 pacman -S --noconfirm noto-fonts-emoji
+
+echo -e 'Installing neomutt for terminal email support'
+#https://unix.stackexchange.com/questions/172666/gmail-blocking-mutt
+sudo pacman -S --noconfirm neomutt
+mkdir -p ~/.mutt/cache/bodies
 
 }
 
