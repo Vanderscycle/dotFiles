@@ -241,6 +241,18 @@ eval $(ssh-agent)
 ssh-add  ~/.ssh/manjaroGit
 # the rest has to be done manually (add the pub file to git)
 
+cat >> $CONFIG << EOF
+# ssh
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval "ssh-agent -s"
+  ssh-add ~/.ssh/manjaroGit
+fi
+
+if [ -n "$SSH_AUTH_SOCK" ] ; then
+  eval "/usr/bin/ssh-agent -k"
+fi
+EOF
+
 # -----------------------------------------------------------------------------
 # => Dotfiles
 # -----------------------------------------------------------------------------
