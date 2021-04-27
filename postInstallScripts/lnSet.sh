@@ -2,7 +2,7 @@
 echo $(pwd)
 #https://linuxhint.com/bash_loop_list_strings/
 # ".zshrc" ".oh-my-zsh" ".conda" ".alias"
-declare -a StringArray=( ".gitconfig" ".p10k.zsh" ".tmux.conf")
+declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zshrc")
 DIR=${PWD%/*}
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
@@ -15,6 +15,7 @@ done
 rsync -auv --progress ~/.config/nvim/ "$DIR/nvim" --exclude autoload/plugged/ --exclude pack/ #deprecated
 rsync -auv --progress ~/.config/ranger/ "$DIR/ranger" #deprecated
 rsync -auv --progress ~/.config/nvim/lua/ "/$DIR/lua/"
-
+rsync -auv --progress ~/.config/neomutt/ "/$DIR/neomutt/"
+rsync -auv --progress ~/vimwiki "/$DIR/vimwiki/"
 #! should create a weekly upload schedule
 # git add .*
