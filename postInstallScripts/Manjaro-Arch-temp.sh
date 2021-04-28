@@ -228,6 +228,7 @@ echo -e 'Configuring Neovim'
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
 git clone https://github.com/siduck76/neovim-dots.git ~/Documents/neovim-dots
 cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Security (ssh)
@@ -251,7 +252,24 @@ fi
 if [ -n "$SSH_AUTH_SOCK" ] ; then
   eval "/usr/bin/ssh-agent -k"
 fi
+
+#gpg
+export GPG_TTY=$TTY
 EOF
+
+echo -e 'Installing password manager (pass)'
+sudo pacman -S --needed --noconfirm pass gnupg
+mkdir ~/.gnupg/
+touch ~/.gnupg/gpg.conf
+# https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
+echo 'use-agent' >> ~/.gnupg/gpg.conf
+echo "no-tty" >> ~/.gnupg/gpg.conf
+# https://github.com/tpope/vim-fugitive/issues/782
+# https://github.com/tpope/vim-fugitive/issues/846 #(to enable tpope/dispatch working)
+
+chmod 700 ~/.gnupg
+# need to manually configure the gpg key
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Dotfiles
@@ -410,7 +428,7 @@ pacman -S --noconfirm noto-fonts-emoji
 echo -e 'Installing neomutt for terminal email support'
 #https://unix.stackexchange.com/questions/172666/gmail-blocking-mutt
 sudo pacman -S --noconfirm neomutt
-mkdir -p ~/.mutt/cache/bodies
+mkdir -p ~/.mutt/cache/bodies/
 
 }
 
