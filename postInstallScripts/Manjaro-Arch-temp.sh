@@ -245,20 +245,20 @@ eval $(ssh-agent)
 ssh-add  ~/.ssh/manjaroGit
 # the rest has to be done manually (add the pub file to git)
 
-cat >> $CONFIG << EOF
+#cat >> $CONFIG << EOF
 # ssh
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval "ssh-agent -s"
-  ssh-add ~/.ssh/manjaroGit
-fi
+#if [ -z "$SSH_AUTH_SOCK" ] ; then
+#  eval "ssh-agent -s"
+#  ssh-add ~/.ssh/manjaroGit
+#fi
 
-if [ -n "$SSH_AUTH_SOCK" ] ; then
-  eval "/usr/bin/ssh-agent -k"
-fi
+#if [ -n "$SSH_AUTH_SOCK" ] ; then
+#  eval "/usr/bin/ssh-agent -k"
+#fi
 
 #gpg
-export GPG_TTY=$TTY
-EOF
+#export GPG_TTY=$TTY
+#EOF
 
 echo -e 'Installing password manager (pass)'
 sudo pacman -S --needed --noconfirm pass gnupg
@@ -266,12 +266,17 @@ mkdir ~/.gnupg/
 touch ~/.gnupg/gpg.conf
 # https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
 echo 'use-agent' >> ~/.gnupg/gpg.conf
-echo "no-tty" >> ~/.gnupg/gpg.conf
+echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
 # https://github.com/tpope/vim-fugitive/issues/782
 # https://github.com/tpope/vim-fugitive/issues/846 #(to enable tpope/dispatch working)
 
 chmod 700 ~/.gnupg
 # need to manually configure the gpg key
+#eval $(ssh-agent)
+#ssh-add  ~/.ssh/manjaroGit
+#echo RELOADAGENT | gpg-connect-agent
+#echo "test" | gpg2 --clearsign
+
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
