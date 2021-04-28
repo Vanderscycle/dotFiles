@@ -47,6 +47,9 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing developer packages'
 sudo pacman -S --noconfirm rsync git fzf
+# corrector for bash scripts
+sudo pacman -S --noconfirm shellcheck # maybe bloat?
+#shellcheck (bash file)
 # for zsh alt+c (cd into fzf folders)
 # ctrl+t (?) 
 # ctrl+r(history)

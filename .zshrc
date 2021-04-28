@@ -138,14 +138,16 @@ export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/miniconda3/bin"
 
 # ssh
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
-  ssh-add ~/.ssh/manjaroGit
-fi
+#if [ -z "$SSH_AUTH_SOCK" ] ; then
+#  eval "ssh-agent -s"
+#  ssh-add ~/.ssh/manjaroGit
+  # because we also use gcg to sign our commits combining them is a good idea
+#  echo "test" | gpg2 --clearsign
+#fi
 
 #if [ -n "$SSH_AUTH_SOCK" ] ; then
 #  eval `/usr/bin/ssh-agent -k`
 #fi
 
 # gpg
-export GPG_TTY=$TTY
+#export GPG_TTY=$TTY
