@@ -139,7 +139,7 @@ export PATH="/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/
 
 # ssh
 if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
+  eval "ssh-agent -s"
   ssh-add ~/.ssh/manjaroGit
 fi
 

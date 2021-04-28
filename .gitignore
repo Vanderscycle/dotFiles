@@ -140,3 +140,5 @@ cython_debug/
 newRepo.sh
 # databases
 data/
+# need to figureout passwords
+neomutt/accounts/
