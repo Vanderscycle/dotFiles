@@ -245,28 +245,16 @@ eval $(ssh-agent)
 ssh-add  ~/.ssh/manjaroGit
 # the rest has to be done manually (add the pub file to git)
 
-#cat >> $CONFIG << EOF
-# ssh
-#if [ -z "$SSH_AUTH_SOCK" ] ; then
-#  eval "ssh-agent -s"
-#  ssh-add ~/.ssh/manjaroGit
-#fi
-
-#if [ -n "$SSH_AUTH_SOCK" ] ; then
-#  eval "/usr/bin/ssh-agent -k"
-#fi
-
-#gpg
-#export GPG_TTY=$TTY
-#EOF
-
+#because everytime you open a new terminal you need to create an agent id
 echo -e 'Installing password manager (pass)'
 sudo pacman -S --needed --noconfirm pass gnupg
+# https://www.gnupg.org/documentation/manuals/gnupg/Agent-OPTION.html
 mkdir ~/.gnupg/
 touch ~/.gnupg/gpg.conf
+touch ~/.gnupg/gpg-agent.conf
 # https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
 echo 'use-agent' >> ~/.gnupg/gpg.conf
-echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
+#echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
 # https://github.com/tpope/vim-fugitive/issues/782
 # https://github.com/tpope/vim-fugitive/issues/846 #(to enable tpope/dispatch working)
 
@@ -286,7 +274,7 @@ echo -e 'Done.\n'
 echo -e 'Importing dotfiles'
 git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/Documents/dotFiles/
 cd ~/Documents/dotFiles/ 
-declare -a StringArray=( ".gitconfig" ".tmux.conf")
+declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zprofile" ".zlogout" ".zshenv")
 for DOTFILE in "${StringArray[@]}"; do
     if [ -f $DOTFILE ]
     then
@@ -298,6 +286,9 @@ rsync -auv ~/Documents/dotFiles/alacritty.yml ~/.config/alacritty/alacritty.yml
 rsync -auv ~/Documents/dotFiles/neomutt/ ~/.config/neomutt/ 
 rsync -auv ~/Documents/dotFiles/vimwiki ~/vimwiki 
 git config --global init.defaultBranch main
+
+# because my neovim config is based off someone's else config I need to be able to pull from theirs and then update.
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Font
