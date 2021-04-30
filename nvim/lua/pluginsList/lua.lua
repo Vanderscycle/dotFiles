@@ -42,7 +42,7 @@ return require("packer").startup(
         use "tpope/vim-fugitive"
         use "tpope/vim-dispatch"
         use "vimwiki/vimwiki"
-        use { "AckslD/nvim-whichkey-setup.lua", requires = {"liuchengxu/vim-which-key"}, }
+        use "folke/which-key.nvim"
         use "glepnir/dashboard-nvim"
         use  "michaelb/sniprun"
     end

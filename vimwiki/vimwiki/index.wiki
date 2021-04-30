@@ -1,5 +1,14 @@
 hello world!
 
+== Nvim config ==
+
+* add the key used in which keys
+== Vim Learning ==
+
+* Ben awad
+* Macros
+* how to not use arrow keys
+
 = *legend* =
 
 = Header1 =
