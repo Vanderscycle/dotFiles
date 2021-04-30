@@ -3,7 +3,7 @@ echo $(pwd)
 #https://linuxhint.com/bash_loop_list_strings/
 # ".zshrc" ".oh-my-zsh" ".conda" ".alias"
 # https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where 
-declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv")
+declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin")
 DIR=${PWD%/*}
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
