@@ -140,7 +140,7 @@ curl -sL --proto-redir -all https://raw.githubusercontent.com/zplug/installer/ma
 echo -e '\ninstalling enhancd using zplug'
 zplug "b4b4r07/enhancd", use:init.sh #! doesn't work
 
-echo -e '\n adding fzf completion'
+echo -e '\nadding fzf completion'
 # source of info https://doronbehar.com/articles/ZSH-FZF-completion/
 mkdir /usr/share/fzf/
 sudo touch /usr/share/fzf/completion.zsh
@@ -229,7 +229,7 @@ echo -e 'Configuring Neovim'
 # fd alternative to find
 # ueberzug allows for image display in terminal
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
-git clone https://github.com/siduck76/neovim-dots.git ~/Documents/neovim-dots
+git clone https://github.com/siduck76/chad-nvim.git ~/Documents/neovim-dots
 cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
 echo -e 'Done.\n'
 
@@ -247,7 +247,7 @@ ssh-add  ~/.ssh/manjaroGit
 
 #because everytime you open a new terminal you need to create an agent id
 echo -e 'Installing password manager (pass)'
-sudo pacman -S --needed --noconfirm pass gnupg
+sudo pacman -S --needed --noconfirm pass gnupg keychain
 # https://www.gnupg.org/documentation/manuals/gnupg/Agent-OPTION.html
 mkdir ~/.gnupg/
 touch ~/.gnupg/gpg.conf
@@ -273,8 +273,16 @@ echo -e 'Done.\n'
 
 echo -e 'Importing dotfiles'
 git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/Documents/dotFiles/
+
+chmod +x ~/Documents/dotFiles/stdPatterns/sshkeychain.sh
+chmod +x ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
+# to test usin -d
+rsync -auv ~/Documents/dotFiles/nvim/ ~/.config/nvim/ --exlcude ls -d ~/.config/nvim/lua/*
+#updating nvim from siduck76 with my changes (plugins/mappings etc)
+#bash ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
+
 cd ~/Documents/dotFiles/ 
-declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zprofile" ".zlogout" ".zshenv")
+declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zprofile" ".zlogout" ".zshenv" ".zlogin" )
 for DOTFILE in "${StringArray[@]}"; do
     if [ -f $DOTFILE ]
     then
@@ -313,6 +321,7 @@ echo -e 'Configuring Postgresql'
 #sudo su postgres -l # or sudo -u postgres -i
 #initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
 #exit
+echo -e 'Done.\n'
 
 sudo systemctl start postgresql
 sudo systemctl enable postgresql # allows it to start on start
@@ -326,6 +335,7 @@ echo -e 'Configuring Mongo'
 sudo systemctl start mongodb
 sudo systemctl enable mongodb # allows it to start on start
 sudo systemctl status mongodb # visual confirmation
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Local application (local machine only)
@@ -336,36 +346,6 @@ echo -e 'Installing Torrent client (Transmission)'
 # more investigation required
 #git clone https://aur.archlinux.org/transmission-cli-git.git ~/Programs/transmission/
 #cd ~/Programs/transmission/ && makepkg -si --noconfirm --needed
-
-echo -e 'Installing Window manager (bspwm)' # what a pain 
-#sudo pacman -S --noconfirm xorg xorg-xinit bspwm sxhkd dmenu nitrogen picom arandr
-#sxhkd for keybindings
-#arandr fo rmultple screens
-#mkdir ~/.config/bspwm/
-#mkdir ~/.config/sxhkd/
-#cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
-#cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
-#cp /etc/X11/xinit/xinitrc ~/.xinitrc
-
-#cat >> ~/.xinitrc << EOF
-#sextkbmap ch &
-#picom -f &
-#exec bspwm
-#EOF
-
-#CONFIG="/etc/xdg/picom.conf"
-#if grep -Fq "vsync = true" $CONFIG
-#then
-#    OLD="'vsync = true'"
-#    NEW="'#vsync = true'"
-#    sed -i "s%$OLD%$NEW%g" $CONFIG
-#fi
-
-#sudo touch /etc/X11/Xwrapper.config
-#sudo cat >> /etc/X11/Xwrapper.config << EOF
-#allowed_users = anybody
-#needs_root_rights = no
-#EOF
 
 echo -e 'Installing remote working software (zoom/discord)'
 yay -S --noconfirm zoom discord

@@ -10,12 +10,14 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
+bash ~/Documents/dotFiles/stdPatterns/sshkeychain.sh
 
 #gpg
 
-echo "test" | gpg2 --clearsign
-echo RELOADAGENT | gpg-connect-agent  
-export GPG_TTY=$TTY
+eval "keychain --eval --agents ssh ~/.ssh/manjaroGit"
+#echo "test" | gpg2 --clearsign
+#echo RELOADAGENT | gpg-connect-agent  
+#export GPG_TTY=$TTY
 
 
 # mounting drives

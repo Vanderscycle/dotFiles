@@ -1,6 +1,3 @@
-vim.cmd [[packadd nvim-lspconfig]]
-vim.cmd [[packadd nvim-compe]]
-
 function on_attach(client)
     local function map(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -39,13 +36,11 @@ function on_attach(client)
 end
 
 local lspconf = require "lspconfig"
-local servers = {"html", "cssls", "tsserver", "pyright"}
+local servers = {"html", "cssls", "tsserver", "pyright" , "bashls"}
 
 for k, lang in pairs(servers) do
     lspconf[lang].setup {
-        root_dir = function()
-            return vim.loop.cwd()
-        end
+        root_dir = vim.loop.cwd
     }
 end
 

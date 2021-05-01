@@ -40,7 +40,6 @@ return require("packer").startup(
         use "karb94/neoscroll.nvim"
          -- additions
         use "tpope/vim-fugitive"
-        use "tpope/vim-dispatch"
         use "vimwiki/vimwiki"
         use "folke/which-key.nvim"
         use "glepnir/dashboard-nvim"
