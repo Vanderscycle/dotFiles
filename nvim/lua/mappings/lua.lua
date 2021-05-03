@@ -55,9 +55,20 @@ map("v", ">",">gv", opt)
 
 -- closing buffer
 map("n","<leader>q",":bp<bar>sp<bar>bn<bar>bd<CR>", opt)
+
 -- snipRun
 map("n","<leader>sa","ggVG:SnipRun<CR>", opt)
 map("n","<leader>sr",":SnipRun<CR>", opt) -- single line
 map("v","<leader>sl",":SnipRun<CR>", opt) -- block of code
 map("n","<leader>sc",":SnipClose<CR>", opt) -- clear outputs
 map("n","<leader>sz",":SnipReset<CR>", opt)
+
+--vimspector
+-- https://alpha2phi.medium.com/neovim-debugging-application-70c525754064
+map("n", "<leader>vl", ":call vimspector#Launch()<CR>")
+map("n", "<leader>vr", ":VimspectorReset<CR>")
+map("n", "<leader>ve", ":VimspectorEval")
+map("n", "<leader>vw", ":VimspectorWatch")
+map("n", "<leader>vo", "<Plug>VimspectorBalloonEval")
+map("n", "<leader>vo", ":vimspectorShowOutput")
+

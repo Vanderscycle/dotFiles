@@ -17,7 +17,7 @@ local cmd = vim.cmd
 local g = vim.g
 
 g.mapleader = " "
-g.auto_save = 0
+g.auto_save = 1
 
 -- colorscheme related stuff
 
@@ -93,3 +93,5 @@ require "zenmode.lua"
 -- additions
 require "dashboard.lua"
 require "whichKey.lua"
+--require "hrsh7th/vim-vsnip"
+--require "rafamadriz/friendly-snippets"

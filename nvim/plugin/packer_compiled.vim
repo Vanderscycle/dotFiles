@@ -79,6 +79,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
   },
+  ["emmet-vim"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/emmet-vim"
+  },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/friendly-snippets"
+  },
   ["galaxyline.nvim"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
@@ -180,13 +188,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-devicons"
   },
-  ["vim-dispatch"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-dispatch"
-  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-fugitive"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-vsnip"
+  },
+  vimspector = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vimspector"
   },
   vimwiki = {
     loaded = true,

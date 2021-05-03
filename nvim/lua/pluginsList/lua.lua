@@ -43,6 +43,12 @@ return require("packer").startup(
         use "vimwiki/vimwiki"
         use "folke/which-key.nvim"
         use "glepnir/dashboard-nvim"
-        use  "michaelb/sniprun"
+        use "michaelb/sniprun"
+        use "mattn/emmet-vim"
+        -- snippet support
+        use "hrsh7th/vim-vsnip"
+        use "rafamadriz/friendly-snippets"
+        -- debugging
+        use "puremourning/vimspector" --install file
     end
 )
