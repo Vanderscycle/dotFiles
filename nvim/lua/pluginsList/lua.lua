@@ -10,7 +10,6 @@ return require("packer").startup(
         -- color related stuff
         use "norcalli/nvim-base16.lua"
         use "norcalli/nvim-colorizer.lua"
-
         -- lsp stuff
         use "nvim-treesitter/nvim-treesitter"
         use "neovim/nvim-lspconfig"
@@ -45,10 +44,12 @@ return require("packer").startup(
         use "glepnir/dashboard-nvim"
         use "michaelb/sniprun"
         use "mattn/emmet-vim"
+        use "folke/lsp-colors.nvim"
         -- snippet support
         use "hrsh7th/vim-vsnip"
         use "rafamadriz/friendly-snippets"
         -- debugging
         use "puremourning/vimspector" --install file
+        use "folke/lsp-trouble.nvim"
     end
 )

@@ -254,6 +254,8 @@ touch ~/.gnupg/gpg.conf
 touch ~/.gnupg/gpg-agent.conf
 # https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
 echo 'use-agent' >> ~/.gnupg/gpg.conf
+echo 'pinentry-mode loopback' >> ~/.gnupg/gpg.conf
+
 #echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
 # https://github.com/tpope/vim-fugitive/issues/782
 # https://github.com/tpope/vim-fugitive/issues/846 #(to enable tpope/dispatch working)
@@ -276,8 +278,12 @@ git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/Docume
 
 chmod +x ~/Documents/dotFiles/stdPatterns/sshkeychain.sh
 chmod +x ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
+
 # to test usin -d
-rsync -auv ~/Documents/dotFiles/nvim/ ~/.config/nvim/ --exlcude ls -d ~/.config/nvim/lua/*
+rsync -auvd ~/Documents/dotFiles/nvim/ ~/.config/nvim/ 
+
+echo "Installing vimspector manually"
+git clone https://github.com/puremourning/vimspector ~/.loca/nvim/site/pack/packer/opt/vimspector
 #updating nvim from siduck76 with my changes (plugins/mappings etc)
 #bash ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
 

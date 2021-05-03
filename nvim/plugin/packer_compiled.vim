@@ -99,6 +99,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim"
   },
+  ["lsp-trouble.nvim"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/lsp-trouble.nvim"
+  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/lspkind-nvim"

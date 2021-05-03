@@ -93,5 +93,3 @@ require "zenmode.lua"
 -- additions
 require "dashboard.lua"
 require "whichKey.lua"
---require "hrsh7th/vim-vsnip"
---require "rafamadriz/friendly-snippets"
