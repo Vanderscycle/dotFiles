@@ -21,7 +21,7 @@ map("", "<leader>c", '"+y')
 
 -- OPEN TERMINALS --
 map("n", "<C-l>", [[<Cmd>vnew term://zsh <CR>]], opt) -- open term over right
-map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) -- open term bottom
+map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) -- open term bottom()
 
 -- COPY EVERYTHING --
 map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
@@ -56,6 +56,8 @@ map("v", ">",">gv", opt)
 -- closing buffer
 map("n","<leader>q",":bp<bar>sp<bar>bn<bar>bd<CR>", opt)
 
+-- move into bracket
+map("i","<C-e>","<C-o>A",opt)
 -- snipRun
 map("n","<leader>sa","ggVG:SnipRun<CR>", opt)
 map("n","<leader>sr",":SnipRun<CR>", opt) -- single line

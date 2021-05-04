@@ -38,6 +38,7 @@ sudo pacman -S --noconfirm --needed xclip
 echo -e 'Installing Nvidia drivers'
 sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
 echo -e 'Installing process managers (htop/gotop)'
+sudo pacman -S --noconfirm --needed nodejs
 yay -S --noconfirm gotop-bin htop
 echo -e 'Done.\n'
 
@@ -53,6 +54,12 @@ sudo pacman -S --noconfirm shellcheck # maybe bloat?
 # for zsh alt+c (cd into fzf folders)
 # ctrl+t (?) 
 # ctrl+r(history)
+echo 'Installing npm and lsp(nvim)'
+#typescript (global with language client)
+sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier
+sudo npm install -g pyright
+sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
+sudo npm install -g tldr
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -435,7 +442,6 @@ else
     beforeReboot >> ~/preInstallLog.txt
     sudo reboot
 fi
-
 # todo
 # xmonad # https://wiki.manjaro.org/index.php/Install_Desktop_Environments#Tiling_Window_Managers
 # french and chinese language/keyboards packs # https://wiki.manjaro.org/index.php?title=Locale

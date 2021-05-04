@@ -20,7 +20,8 @@ then
     if /usr/bin/tty 1> /dev/null 2>&1
     then
       # ssh-add 1> /dev/null 2>&1
-      ssh-add ~/.ssh/manjaroGit
+      #ssh-add ~/.ssh/manjaroGit
+      echo 'here'  
     fi
   fi
 fi

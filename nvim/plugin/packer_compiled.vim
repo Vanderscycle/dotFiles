@@ -99,6 +99,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim"
   },
+  ["lsp-colors.nvim"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim"
+  },
   ["lsp-trouble.nvim"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/lsp-trouble.nvim"
@@ -196,9 +200,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
+  ["vim-prettier"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-prettier"
+  },
   ["vim-vsnip"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-vsnip"
+  },
+  ["vim-vsnip-integ"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
   },
   vimspector = {
     loaded = true,

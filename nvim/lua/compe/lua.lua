@@ -17,7 +17,7 @@ require "compe".setup {
         path = true,
         buffer = true,
         calc = true,
-        vsnip = true,
+        vsnip = {kind = "﬌"},
         nvim_lsp = true,
         nvim_lua = true,
         spell = true,
@@ -79,3 +79,4 @@ function _G.completions()
 end
 
 vim.api.nvim_set_keymap("i", "<CR>", "v:lua.completions()", {expr = true})
+

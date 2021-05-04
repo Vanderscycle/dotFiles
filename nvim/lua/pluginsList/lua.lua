@@ -45,8 +45,10 @@ return require("packer").startup(
         use "michaelb/sniprun"
         use "mattn/emmet-vim"
         use "folke/lsp-colors.nvim"
+        use "prettier/vim-prettier"
         -- snippet support
         use "hrsh7th/vim-vsnip"
+        use "hrsh7th/vim-vsnip-integ"
         use "rafamadriz/friendly-snippets"
         -- debugging
         use "puremourning/vimspector" --install file

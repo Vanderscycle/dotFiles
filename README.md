@@ -1,5 +1,10 @@
 # Dotfiles
 
+:TODO
+- update Ubuntu
+- update raspbian
+
+![nvim](./img/whadyathink.png)
 ## Ubuntu
 My .dotfile repo containing all relevant configurations that I use.
 
@@ -17,7 +22,7 @@ The post install script installs the following programs:
 * Oh-my-zsh (p10k theme)
 * tmux
 * nvim with plugins 
-* 
+ 
 ## Arch/Manjaro
 ```bash
 sudo mkdir /etc/init.d/ && sudo wget -O /etc/init.d/Manjaro-Arch-temp.sh https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/Manjaro-Arch-temp.sh && sudo chmod +x /etc/init.d/Manjaro-Arch-temp.sh && bash /etc/init.d/Manjaro-Arch-temp.sh
