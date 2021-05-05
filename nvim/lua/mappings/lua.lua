@@ -20,7 +20,7 @@ map("v", "x", [=[ "_x ]=], opt)
 map("", "<leader>c", '"+y')
 
 -- OPEN TERMINALS --
-map("n", "<C-l>", [[<Cmd>vnew term://zsh <CR>]], opt) -- open term over right
+map("n", "<C-l>", [[<Cmd> vnew term://zsh <CR>]], opt) -- open term over right
 map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) -- open term bottom()
 
 -- COPY EVERYTHING --
@@ -58,12 +58,23 @@ map("n","<leader>q",":bp<bar>sp<bar>bn<bar>bd<CR>", opt)
 
 -- move into bracket
 map("i","<C-e>","<C-o>A",opt)
+
+--plugins mapping
+
 -- snipRun
 map("n","<leader>sa","ggVG:SnipRun<CR>", opt)
 map("n","<leader>sr",":SnipRun<CR>", opt) -- single line
 map("v","<leader>sl",":SnipRun<CR>", opt) -- block of code
 map("n","<leader>sc",":SnipClose<CR>", opt) -- clear outputs
 map("n","<leader>sz",":SnipReset<CR>", opt)
+
+-- nvim workbench
+map("n","<leader>bp",":lua require('workbench').toggle_project_workbench()<CR>",opt)
+map("n","<leader>bb",":lua require('workbench').toggle_branch_workbench()<CR>",opt)
+--map("n","<leader>ba","vim.cmd([[<Plug>WorkbenchAddCheckbox]])",opt)
+--map("n","<leader>bc","vim.cmd([[<Plug>WorkbenchToggleCheckbox]])",opt)
+vim.cmd([[nmap <leader>ba <Plug>WorkbenchAddCheckbox]])
+vim.cmd([[nmap <leader>bc <Plug>WorkbenchToggleCheckbox]])
 
 --vimspector
 -- https://alpha2phi.medium.com/neovim-debugging-application-70c525754064

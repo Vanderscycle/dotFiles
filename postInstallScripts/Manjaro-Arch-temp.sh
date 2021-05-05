@@ -11,9 +11,7 @@ echo '------------------------------------------------------------------------'
 
 echo -e '\n=> Update repository information'
 # -S: synchronize your system's packages with those in the official repo
-# -y: download fresh package databases from the server
-# -u: upgrade all installed packages (like rsync)
-# --noconfirm
+# -y: download fresh package databases from the serverrm
 echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git
@@ -33,7 +31,7 @@ mkdir -p ~/Programs/
 #git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
 #cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
 sudo pacman -S --noconfirm --needed yay
-sudo pacman -S --noconfirm --needed xclip
+sudo pacman -S --noconfirm --needed xclip unzip
 
 echo -e 'Installing Nvidia drivers'
 sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
@@ -130,8 +128,10 @@ touch  ~/.config/alacritty/alacritty.yml
 # https://www.chrisatmachine.com/Linux/06-alacritty/ 
 echo -e 'Done.\n'
 
-echo -e '\n=> Installing Tmux'
+echo -e '\n=> Installing Tmux and tmuxinator'
 sudo pacman -S --noconfirm tmux
+yay -S --noconfirm --needed tmuxinator
+#gem install tmuxinator #(alternate way)
 echo -e 'Done.\n'
 
 echo -e '\n=> Installing oh-my-zsh'
@@ -164,7 +164,11 @@ CONFIG=".zshrc"
 if grep -Fq "plugins" $CONFIG
 then
         OLD="plugins=(git)"
-        NEW="plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting)"
+        read -d '' NEW << EOF
+        plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting tmuxinator)
+        export FZF_BASE=/usr/bin/fzf
+        export FZF_DEFAULT_COMMAND='rg'
+        EOF
         sed -i "s%$OLD%$NEW%g" $CONFIG
 fi
 if grep -Fq "ZSH_THEME" $CONFIG
@@ -238,6 +242,7 @@ echo -e 'Configuring Neovim'
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
 git clone https://github.com/siduck76/chad-nvim.git ~/Documents/neovim-dots
 cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
+export EDITOR='nvim' >> ~/.zshrc
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -295,7 +300,7 @@ git clone https://github.com/puremourning/vimspector ~/.loca/nvim/site/pack/pack
 #bash ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
 
 cd ~/Documents/dotFiles/ 
-declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zprofile" ".zlogout" ".zshenv" ".zlogin" )
+declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zprofile" ".zlogout" ".zshenv" ".zlogin")
 for DOTFILE in "${StringArray[@]}"; do
     if [ -f $DOTFILE ]
     then
@@ -306,6 +311,7 @@ echo -e 'Importing alacritty dotfiles'
 rsync -auv ~/Documents/dotFiles/alacritty.yml ~/.config/alacritty/alacritty.yml
 rsync -auv ~/Documents/dotFiles/neomutt/ ~/.config/neomutt/ 
 rsync -auv ~/Documents/dotFiles/vimwiki ~/vimwiki 
+rsync -auv ~/Documents/dotFiles/tmuxinator/ ~/.config/tmuxinator/ 
 git config --global init.defaultBranch main
 
 # because my neovim config is based off someone's else config I need to be able to pull from theirs and then update.

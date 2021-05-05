@@ -37,21 +37,28 @@ return require("packer").startup(
         use "907th/vim-auto-save"
         use "kdav5758/TrueZen.nvim"
         use "karb94/neoscroll.nvim"
-         -- additions
-        use "tpope/vim-fugitive"
+
+        -- additions
+        -- note taking
         use "vimwiki/vimwiki"
+        use "marcushwz/nvim-workbench"
+
+        use "tpope/vim-fugitive"
         use "folke/which-key.nvim"
         use "glepnir/dashboard-nvim"
-        use "michaelb/sniprun"
         use "mattn/emmet-vim"
         use "folke/lsp-colors.nvim"
         use "prettier/vim-prettier"
+
         -- snippet support
         use "hrsh7th/vim-vsnip"
         use "hrsh7th/vim-vsnip-integ"
         use "rafamadriz/friendly-snippets"
+
         -- debugging
         use "puremourning/vimspector" --install file
         use "folke/lsp-trouble.nvim"
+        use "michaelb/sniprun"
+
     end
 )
