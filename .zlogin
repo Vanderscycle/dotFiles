@@ -18,7 +18,7 @@
 
 #gpg
 
-eval "keychain --agents gpg,ssh --eval ~/.ssh/manjaroGit"
+#eval "keychain --agents gpg,ssh --eval ~/.ssh/manjaroGit"
 #echo "test" | gpg2 --clearsign
 #echo RELOADAGENT | gpg-connect-agent  
 #export GPG_TTY=$TTY
