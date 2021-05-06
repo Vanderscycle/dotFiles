@@ -328,6 +328,30 @@ fc-cache -vf
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
+# => Keyboard Languages (en/cn)
+# -----------------------------------------------------------------------------
+
+#untested
+echo -e 'Adding keyboard languages (cn)'
+#https://classicforum.manjaro.org/index.php?topic=1044.0
+sudo pacman -S ibus-libpinyin opendesktop-fonts
+sudo pacman -Ss chinese
+sudo sh -c "cat >> /etc/environment <<EOF
+GTK_IM_MODULE=ibus
+QT_IM_MODULE=ibus
+XMODIFIERS=@im=ibus
+EOF"
+# https://wiki.archlinux.org/title/IBus
+touch ~/.config/autostart/ibus-daemon.desktop
+cat >> ~/.config/autostart/ibus-daemon.desktop <<EOF
+[Desktop Entry]
+Type=Application
+Name=IBus Daemon
+Exec=ibus-daemon -drx
+EOF
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
 # => Databases
 # -----------------------------------------------------------------------------
 
@@ -450,5 +474,4 @@ else
 fi
 # todo
 # xmonad # https://wiki.manjaro.org/index.php/Install_Desktop_Environments#Tiling_Window_Managers
-# french and chinese language/keyboards packs # https://wiki.manjaro.org/index.php?title=Locale
 # slack
