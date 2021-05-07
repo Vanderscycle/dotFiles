@@ -23,10 +23,20 @@ function tmuxinator-environments(){
 
     if [ -n "$ymlConfigs"]
     then
-        tmuxinator start $ymlConfigs
+        tmuxinator start ${ymlConfigs}
     fi
 }
 
+## cht
+function cht-sh() {
+    local userInput="$@"
+    language=${1}
+    query=( "${@:2}" )
+    curl cht.sh/${language}/${query[*]}\T
+    #bash ~/Documents/cheat.sh/cht.sh $userInput
+    #echo $commands
+}
+#
 #git
 function checkout-branches() {
   local branchesAvailable

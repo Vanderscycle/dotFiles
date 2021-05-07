@@ -1,7 +1,7 @@
 # /home/henri/.config/tmuxinator/TypescriptWorkEnv.yml
 
 name: TypescriptWorkEnv
-root: ~/
+root: ~/Documents/
 
 # Optional tmux socket
 # socket_name: foo
@@ -52,8 +52,8 @@ windows:
       # synchronize: after
       panes:
         - nvim
-        - zsh; clear
-        - zsh; clear
+        - 
+        - 
           #- server: bundle exec rails s
   
           #- logs: tail export EDITOR='nvim'-f log/development.log
@@ -62,5 +62,5 @@ windows:
       layout: main-vertical
       panes:
         - gotop
-        - zsh; clear
+        - 
 
