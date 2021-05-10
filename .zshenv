@@ -21,22 +21,36 @@ function tmuxinator-environments(){
     ymlConfigs=$(tmuxinator list | fzf)
     echo $ymlConfigs
 
-    if [ -n "$ymlConfigs"]
+    if [ -n "$ymlConfigs" ]
     then
         tmuxinator start ${ymlConfigs}
     fi
 }
 
-## cht
+## cheatsheet
 function cht-sh() {
-    local userInput="$@"
     language=${1}
     query=( "${@:2}" )
     curl cht.sh/${language}/${query[*]}\T
-    #bash ~/Documents/cheat.sh/cht.sh $userInput
-    #echo $commands
 }
-#
+
+#postgresql
+# gives the can't change dir error
+function postgreSQL-createDB() {
+    local DBNAME
+    DBNAME=${1}
+    sudo su postgres <<EOF
+psql -c 'CREATE DATABASE ${DBNAME};'
+EOF
+
+}
+
+function postgreSQL-createTable() {
+    sudo su postgres <<EOF
+psql -c 'SELECT datname FROM pg_database
+WHERE datistemplate = false;'
+EOF
+}
 #git
 function checkout-branches() {
   local branchesAvailable
@@ -50,11 +64,37 @@ function checkout-branches() {
 }
 
 function delete-branches() {
-  local branchesToDelete
-  branchesToDelete=$(git branch | fzf --multi | xargs)
-
-  if [ -n "$branchesToDelete" ]; then 
-    git branch --delete --force $branchesToDelete
-  fi
+  
+  git branch |
+    grep --invert-match '\*' |
+    cut -c 3- |
+    fzf --multi --preview='git log {} -- '|
+    xargs --no-run-if-empty git branch --delete --force
 }
 
+function pr-checkout() {
+  local pr_number
+
+  pr_number=$(
+    gh api 'repos/:owner/:repo/pulls' |
+    jq --raw-output '.[] | "#\(.number) \(.title)"' |
+    fzf |
+    sed 's/^#\([0-9]\+\).*/\1/'
+  )
+
+  if [ -n "$pr_number" ]; then
+    gh pr checkout "$pr_number"
+  fi
+}
+#TODO 
+# add the revert from a commit (log -> revert)
+
+# Arch package search
+# pacman
+function pacman-ls () {
+    pacman -Slq | fzf -m --preview 'bat <(pacman -Si {1}) <(pacman -Fl {1} | awk "{print \$2}")' | xargs -ro sudo pacman -S
+}
+# yay
+function yay-ls () {
+    yay -Slq | fzf -m --preview 'bat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")' | xargs -ro  yay -S
+}
