@@ -14,7 +14,7 @@ echo -e '\n=> Update repository information'
 # -y: download fresh package databases from the serverrm
 echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm base-devel git
+sudo pacman -S --needed --noconfirm base-devel git 
 # not sure why this format works
 sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
@@ -45,7 +45,8 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing developer packages'
-sudo pacman -S --noconfirm rsync git fzf
+sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa
+#bat=cat, exa=ls but better
 # corrector for bash scripts
 sudo pacman -S --noconfirm shellcheck # maybe bloat?
 #shellcheck (bash file)
@@ -57,6 +58,7 @@ echo 'Installing npm and lsp(nvim)'
 sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier
 sudo npm install -g pyright
 sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
+sudo npm install -g bash-language-server
 sudo npm install -g tldr
 echo -e 'Done.\n'
 
@@ -90,7 +92,8 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing Docker'
-sudo pacman -S --noconfirm --needed Docker
+# ctop is a vizualization tool for docker
+sudo pacman -S --noconfirm --needed Docker ctop
 # https://wiki.archlinux.org/index.php/Docker
 # https://docs.docker.com/config/daemon/
 # touch /etc/docker/daemon.json # for specific user config
@@ -168,7 +171,9 @@ then
         plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting tmuxinator)
         export FZF_BASE=/usr/bin/fzf
         export FZF_DEFAULT_COMMAND='rg'
-        EOF
+        DISABLE_FZF_KEY_BINDINGS="false"
+        DISABLE_FZF_AUTO_COMPLETION="false"
+EOF
         sed -i "s%$OLD%$NEW%g" $CONFIG
 fi
 if grep -Fq "ZSH_THEME" $CONFIG
@@ -200,12 +205,15 @@ fi
 
 # vim keys
 set -o vi
+
 # to exit terminal in nvim
 alias :q=exit
+alias ls=exa
 
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="$PATH:$HOME/miniconda3/bin"
+export EDITOR='nvim'
 EOF
 
 echo -e 'Done.\n'
@@ -361,9 +369,9 @@ yay -S --noconfirm postgresql postgis
 
 echo -e 'Configuring Postgresql'
 # need to pass commands directly investigate
-#sudo su postgres -l # or sudo -u postgres -i
-#initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
-#exit
+sudo su postgres -l <<EOF # or sudo -u postgres -i
+initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
+EOF
 echo -e 'Done.\n'
 
 sudo systemctl start postgresql
