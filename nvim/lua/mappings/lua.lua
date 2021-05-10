@@ -42,8 +42,8 @@ map("i", "jk", "<Esc>", opt)
 map("i", "kj", "<Esc>", opt)
 
 -- tab to move between buffers
-map("n", "<TAB>", ":bnext<CR>",opt)
-map("n", "<S-TAB>", ":bprevious<CR>",opt)
+--map("n", "<TAB>", ":bnext<CR>",opt)
+--map("n", "<S-TAB>", ":bprevious<CR>",opt)
 
 -- alternate way to save
 map("n","<C-s>",":w<CR>", opt)
@@ -71,8 +71,6 @@ map("n","<leader>sz",":SnipReset<CR>", opt)
 -- nvim workbench
 map("n","<leader>bp",":lua require('workbench').toggle_project_workbench()<CR>",opt)
 map("n","<leader>bb",":lua require('workbench').toggle_branch_workbench()<CR>",opt)
---map("n","<leader>ba","vim.cmd([[<Plug>WorkbenchAddCheckbox]])",opt)
---map("n","<leader>bc","vim.cmd([[<Plug>WorkbenchToggleCheckbox]])",opt)
 vim.cmd([[nmap <leader>ba <Plug>WorkbenchAddCheckbox]])
 vim.cmd([[nmap <leader>bc <Plug>WorkbenchToggleCheckbox]])
 
