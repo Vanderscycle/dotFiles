@@ -1,66 +1,18 @@
 # /home/henri/.config/tmuxinator/TypescriptWorkEnv.yml
 
 name: TypescriptWorkEnv
-root: ~/Documents/
-
-# Optional tmux socket
-# socket_name: foo
-
-# Note that the pre and post options have been deprecated and will be replaced by
-# project hooks.
-
-# Project hooks
-
-# Runs on project start, always
-# on_project_start: command
-
-# Run on project start, the first time
-# on_project_first_start: command
-
-# Run on project start, after the first time
-# on_project_restart: command
-
-# Run on project exit ( detaching from tmux session )
-# on_project_exit: command
-
-# Run on project stop
-# on_project_stop: command
-
-# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-# pre_window: rbenv shell 2.0.0-p247
-
-# Pass command line options to tmux. Useful for specifying a different tmux.conf.
-# tmux_options: -f ~/.tmux.mac.conf
-
-# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
-# tmux_command: byobu
-
-# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
-# startup_window: editor
-
-# Specifies (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
-# startup_pane: 1
-
-# Controls whether the tmux session should be attached to automatically. Defaults to true.
-# attach: false
-
+root: .
+#https://thoughtbot.com/blog/templating-tmux-with-tmuxinator
 windows:
   - editor:
-      layout: 0332,232x53,0,0{150x53,0,0,5,81x53,151,0[81x26,151,0,6,81x26,151,27,7]} #main-vertical
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
+      layout: main  #main-vertical
       panes:
-        - nvim
-        - 
-        - 
-          #- server: bundle exec rails s
-  
-          #- logs: tail export EDITOR='nvim'-f log/development.log
+        - nvim 
 
   - monitor:
-      layout: main-vertical
+      layout: 232x53,0,0[232x27,0,0{115x27,0,0,10,116x27,116,0,12},232x25,0,28,11]
       panes:
-        - gotop
-        - 
+        - npm run watch 
+        - npm run dev
+        - htop
 
