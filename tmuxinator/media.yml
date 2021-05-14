@@ -1,0 +1,11 @@
+# /home/henri/.config/tmuxinator/media.yml
+
+name: media
+root: ~/
+
+windows:
+  - Spotify:
+      layout: main-vertical
+      panes:
+        - ncmpcpp
+        - mopidy -q
