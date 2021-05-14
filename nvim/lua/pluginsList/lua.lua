@@ -41,12 +41,11 @@ return require("packer").startup(
         -- additions
         -- note taking
         use "vimwiki/vimwiki"
-        use "marcushwz/nvim-workbench"
 
         use "tpope/vim-fugitive"
         use "folke/which-key.nvim"
         use "glepnir/dashboard-nvim"
-        use "mattn/emmet-vim"
+        --use "mattn/emmet-vim"
         use "folke/lsp-colors.nvim"
         use "prettier/vim-prettier"
 
@@ -59,6 +58,7 @@ return require("packer").startup(
         use "puremourning/vimspector" --install file
         use "folke/lsp-trouble.nvim"
         use "michaelb/sniprun"
+        use "folke/todo-comments.nvim"
 
     end
 )

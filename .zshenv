@@ -17,8 +17,8 @@ function activate-PYenv() {
 #tmuxinator
 function tmuxinator-environments(){
     local ymlConfigs
-    #ymlConfigs=$(ls ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
-    ymlConfigs=$(tmuxinator list | fzf)
+    ymlConfigs=$(ls ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
+    #ymlConfigs=$(tmuxinator list | fzf --multi)
     echo $ymlConfigs
 
     if [ -n "$ymlConfigs" ]

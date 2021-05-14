@@ -79,10 +79,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
   },
-  ["emmet-vim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/emmet-vim"
-  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/friendly-snippets"
@@ -154,10 +150,6 @@ _G.packer_plugins = {
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
-  },
-  ["nvim-workbench"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-workbench"
   },
   ["packer.nvim"] = {
     loaded = false,

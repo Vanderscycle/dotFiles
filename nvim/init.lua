@@ -93,3 +93,4 @@ require "zenmode.lua"
 -- additions
 require "dashboard.lua"
 require "whichKey.lua"
+require "todo-comments.lua"
