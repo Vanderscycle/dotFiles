@@ -98,3 +98,10 @@ function pacman-ls () {
 function yay-ls () {
     yay -Slq | fzf -m --preview 'bat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")' | xargs -ro  yay -S
 }
+
+# NPM
+function npm-run() {
+  local script
+  script=$(bat package.json | jq -r '.scripts | keys[] ' | sort | fzf) && npm run $(echo "$script")
+}
+

@@ -31,7 +31,7 @@ mkdir -p ~/Programs/
 #git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
 #cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
 sudo pacman -S --noconfirm --needed yay
-sudo pacman -S --noconfirm --needed xclip unzip
+sudo pacman -S --noconfirm --needed xclip unzip zip
 
 echo -e 'Installing Nvidia drivers'
 sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
@@ -54,12 +54,14 @@ sudo pacman -S --noconfirm shellcheck # maybe bloat?
 # ctrl+t (?) 
 # ctrl+r(history)
 echo 'Installing npm and lsp(nvim)'
+# https://stackoverflow.com/questions/50495519/how-can-i-pass-yes-response-when-npm-installing-on-dockerfile
 #typescript (global with language client)
-sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier
-sudo npm install -g pyright
-sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
-sudo npm install -g bash-language-server
-sudo npm install -g tldr
+RUN yes | sudo npm install -g npq # audit packages post install
+RUN yes | sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier
+RUN yes | sudo npm install -g pyright
+RUN yes | sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
+RUN yes | sudo npm install -g bash-language-server
+RUN yes | sudo npm install -g tldr
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -150,7 +152,7 @@ curl -sL --proto-redir -all https://raw.githubusercontent.com/zplug/installer/ma
 echo -e '\ninstalling enhancd using zplug'
 zplug "b4b4r07/enhancd", use:init.sh #! doesn't work
 
-echo -e '\nadding fzf completion'
+echo -e '\adding fzf completion'
 # source of info https://doronbehar.com/articles/ZSH-FZF-completion/
 mkdir /usr/share/fzf/
 sudo touch /usr/share/fzf/completion.zsh
@@ -168,7 +170,7 @@ if grep -Fq "plugins" $CONFIG
 then
         OLD="plugins=(git)"
         read -d '' NEW << EOF
-        plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting tmuxinator)
+        plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting tmuxinator sudo) #sudo esc*2 to prefix sudo
         export FZF_BASE=/usr/bin/fzf
         export FZF_DEFAULT_COMMAND='rg'
         DISABLE_FZF_KEY_BINDINGS="false"
@@ -204,11 +206,12 @@ if [ -f ${HOME}/.zplug/init.zsh ]; then
 fi
 
 # vim keys
-set -o vi
+# set -o vi # disabled because they conflict with fzf
 
 # to exit terminal in nvim
 alias :q=exit
 alias ls=exa
+alias npm="npq-hero"
 
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
@@ -248,7 +251,7 @@ echo -e 'Configuring Neovim'
 # fd alternative to find
 # ueberzug allows for image display in terminal
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
-git clone https://github.com/siduck76/chad-nvim.git ~/Documents/neovim-dots
+git clone https://github.com/siduck76/neonvim-dotfiles.git ~/Documents/neovim-dots/
 cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
 export EDITOR='nvim' >> ~/.zshrc
 echo -e 'Done.\n'
