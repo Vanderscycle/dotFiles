@@ -88,7 +88,7 @@ cmd "hi clear CursorLine"
 cmd "hi cursorlinenr guibg=NONE guifg=#abb2bf"
 
 -- setup for TrueZen.nvim
-require "zenmode.lua"
+require "zen-mode.lua"
 
 -- additions
 require "dashboard.lua"

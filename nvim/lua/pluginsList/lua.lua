@@ -35,7 +35,7 @@ return require("packer").startup(
         -- misc
         use "tweekmonster/startuptime.vim"
         use "907th/vim-auto-save"
-        use "kdav5758/TrueZen.nvim"
+        use "folke/zen-mode.nvim"
         use "karb94/neoscroll.nvim"
 
         -- additions
