@@ -30,7 +30,7 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt)
 
 -- toggle truezen.nvim's ataraxis mode
-map("n", "<leader>z", [[ <Cmd> TZAtaraxis<CR>]], opt)
+map("n", "<leader>z",[[<Cmd>zenMode<CR>]],opt)
 
 -- better window navidation
 map("n","<C-h>", "<C-w>h" , opt)

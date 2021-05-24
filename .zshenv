@@ -4,7 +4,7 @@ export NEOMUTTPASSWORD=$(pass program/neomutt)
 eval `keychain --eval --quiet --agents gpg,ssh ~/.ssh/manjaroGit`
 
 # Python Conda envs
-function activate-PYenv() {
+function conda-ls() {
     local selectedEnv 
     selectedEnv=$(ls ~/miniconda3/envs/ | fzf)
 
@@ -15,7 +15,7 @@ function activate-PYenv() {
 }
 # not working
 #tmuxinator
-function tmuxinator-environments(){
+function tmuxinator-ls(){
     local ymlConfigs
     ymlConfigs=$(ls ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
     #ymlConfigs=$(tmuxinator list | fzf --multi)
@@ -28,6 +28,7 @@ function tmuxinator-environments(){
 }
 
 ## cheatsheet
+## needs rework
 function cht-sh() {
     language=${1}
     query=( "${@:2}" )

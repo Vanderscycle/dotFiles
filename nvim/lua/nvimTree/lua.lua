@@ -55,6 +55,7 @@ vim.api.nvim_set_keymap(
         silent = true
     }
 )
+vim.api.nvim_set_keymap("n","<leader>r", ":NvimTreeRefresh<CR>",{noremap = true,silent=true})
 
 g.nvim_tree_bindings = {
     ["<CR>"] = get_lua_cb("edit"),
