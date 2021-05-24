@@ -9,6 +9,19 @@ hello world!
 * Macros
 * how to not use arrow keys
 
+== fullstack change ==
+
+* node.js (Traversy)
+* typescript [absolute JS beginner in TS and TS] (Traversy)
+* JSON (Traversy)
+* Async JS (TS)
+* npm (Traversy)
+Final project
+Buyer - Seller house 
+
+
+
+
 = *legend* =
 
 = Header1 =
