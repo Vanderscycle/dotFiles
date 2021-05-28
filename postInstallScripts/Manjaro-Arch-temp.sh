@@ -61,7 +61,8 @@ RUN yes | sudo npm install -g typescript typescript-language-server diagnostic-l
 RUN yes | sudo npm install -g pyright
 RUN yes | sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
 RUN yes | sudo npm install -g bash-language-server
-RUN yes | sudo npm install -g tldr
+RUN yes | sudo npm install -g tldr # necessary?
+RUN yes | sudo npm install -g json
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
