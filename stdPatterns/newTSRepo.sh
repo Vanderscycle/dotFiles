@@ -6,7 +6,7 @@ function tsFolders () {
         mkdir -p src/
         touch src/index.ts
         cat >> src/index.ts << EOL
-EOimport express from "express";
+import express from "express";
 
 const app = express();
 const port = 4000;
@@ -39,7 +39,7 @@ EOL
         echo "creating the staic html pages"
         mkdir -p assets/
         touch assets/index.html
-        cat >> src/index.html << EOL
+        cat >> assets/index.html << EOL
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -68,7 +68,6 @@ EOL
   "rulesDirectory": []
 }
 EOL
-    fi
 
     if [ ! -d data ] 
     then
