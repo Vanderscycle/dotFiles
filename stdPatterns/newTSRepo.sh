@@ -2,44 +2,38 @@ function tsFolders () {
     echo "creating the folder structure"
     if [ ! -d src ] 
     then
-        echo "creating the src folder"
+        echo "creating the src folder (TS ONLY)"
         mkdir -p src/
-        touch src/index.ts
-        cat >> src/index.ts << EOL
+        touch src/server.ts
+        cat >> src/server.ts << EOL
 import express from "express";
 
 const app = express();
-const port = 4000;
-app.use(express.static(__dirname + "/../assets/"));
+const PORT: string | number = process.env.PORT || 4000;
+
+app.use(express.static(__dirname + "/../public/"));
+app.use("*/dist",express.static(__dirname + "/../dist/"));
 
 app.get("/", (req, res) => {
     res.sendFile("index.html");
 });
 
-app.listen(port, (err) => {
-    if (err) {
-        return console.error(err);
-    }
-    return console.log();
-});
+app.listen(PORT, () => console.log());
+EOL
+    # index.ts is where your code should go (I think)
+    touch src/index.ts
+    cat >> src/index.ts << EOL
+    console.log("Hello World, don't forget to inspect when debugging")
 EOL
     fi
 
-    if [ ! -d css ] 
-    then
-        echo "creating the stactic css folder"
-    
-        mkdir -p css/
-        touch css/style.css
-    fi
-
-    if [ ! -d assets ] 
+    if [ ! -d public ] 
     then
     # creating and populating a very simple html page
         echo "creating the staic html pages"
-        mkdir -p assets/
-        touch assets/index.html
-        cat >> assets/index.html << EOL
+        mkdir -p public/
+        touch public/index.html
+        cat >> public/index.html << EOL
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -54,6 +48,14 @@ EOL
     </body>
 </html>    
 EOL
+    fi
+    
+    if [ ! -d public/css ] 
+    then
+        echo "creating the stactic css folder"
+    
+        mkdir -p public/css/
+        touch public/css/style.css
     fi
 
     touch tslint.json
