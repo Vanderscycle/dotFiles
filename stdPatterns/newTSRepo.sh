@@ -94,8 +94,8 @@ function npmInit() {
     npx tsconfig.json
     echo 'updating the package.json'
     json -I -f package.json -e "this.scripts.watch=\"tsc -w\""
-    json -I -f package.json -e "this.scripts.dev=\"nodemon dist/index.js\""
-    json -I -f package.json -e "this.scripts.start=\"node dist/index.js\""
+    json -I -f package.json -e "this.scripts.dev=\"nodemon dist/server.js\""
+    json -I -f package.json -e "this.scripts.start=\"node dist/server.js\""
 
 }
 
