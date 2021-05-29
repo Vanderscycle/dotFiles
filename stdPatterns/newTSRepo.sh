@@ -37,6 +37,8 @@ EOL
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- dev only auto reloads the html page -->
+        <script type="text/javascript" src="https://livejs.com/live.js"></script>
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
