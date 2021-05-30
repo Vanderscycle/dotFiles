@@ -1,3 +1,7 @@
+installing a new language:
+go to lspconfig and add the language to local server
+go to treesitter and add to ts config
+
 How to exist VIM
 Esc (brings you to normal mode)
 :wq (saves and quit)
