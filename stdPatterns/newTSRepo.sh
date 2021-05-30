@@ -1,3 +1,7 @@
+#TODO:
+#TODO: embed newML and newTS repo into .zshenv
+#TODO: create choice to use a framework like svelte
+#TODO: create the choice for adding git
 function tsFolders () {
     echo "creating the folder structure"
     if [ ! -d src ] 
@@ -103,7 +107,7 @@ function npmInit() {
 
 function gitFiles(){
     echo -e "\nCreating github CI/CD folders"
-    # -f for file -d for directoy
+    # -f for file -d for directory
     if [ ! -d .github ]
     then
         # -p for parents
@@ -153,6 +157,35 @@ function repoInit(){
     fi
 }
 
+function svelteTS() {
+    # https://daveceddia.com/svelte-typescript-jest/
+    read -p 'Directory name for the svelte project: ' DIRECTORYNAME
+    npx degit 'dceddia/svelte-typescript-jest#main' $DIRECTORYNAME
+    (cd ./$DIRECTORYNAME && npm install && npm test)
+}
+
+function main() {
+    echo "what TS project do you want to init?"
+    read -p 'Vanila TS (VTS)/ Svelte TS (STS)' FRAMEWORK
+    read -p 'Will the project be hosted on Github(y/n)?' GITANSWER
+    case $FRAMEWORK in
+        [vV][tT][sS])
+            tsFolders
+            npmInit
+        ;;
+        [sS][tT][sS])
+            svelteTS
+            ;;
+        *) echo 'please select VTS or STS'
+    esac
+
+    if [ $GITANSWER == 'y' | 'Y']
+    then
+        gitFiles
+        repoInit
+    fi
+
+}
 
 tsFolders
 npmInit
