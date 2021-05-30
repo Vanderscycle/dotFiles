@@ -71,10 +71,6 @@ end
 time("try_loadstring definition", false)
 time("Defining packer_plugins", true)
 _G.packer_plugins = {
-  ["TrueZen.nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/TrueZen.nvim"
-  },
   ["dashboard-nvim"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
@@ -180,6 +176,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
+  ["todo-comments.nvim"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/todo-comments.nvim"
+  },
   ["vim-auto-save"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-auto-save"
@@ -219,6 +219,10 @@ _G.packer_plugins = {
   ["which-key.nvim"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/which-key.nvim"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/zen-mode.nvim"
   }
 }
 
