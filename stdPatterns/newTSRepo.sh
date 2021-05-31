@@ -164,6 +164,14 @@ function svelteTS() {
     npx degit 'dceddia/svelte-typescript-jest#main' $DIRECTORYNAME
     (cd ./$DIRECTORYNAME && npm install && npm test)
     json -I -f package.json -e "this.scripts.start=\"sirv public -p 4000\""
+    curl https://raw.githubusercontent.com/sveltejs/template/master/.gitignore--output ./$DIRECTORYNAME/.gitignore
+        cat >> ./$DIRECTORYNAME/.gitignore << EOL
+# user defined
+# databases
+data/
+EOL
+
+
 
 }
 
