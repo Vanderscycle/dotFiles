@@ -1,3 +1,4 @@
+#!/bin/bash
 #TODO:
 #TODO: embed newML and newTS repo into .zshenv
 #TODO: create choice to use a framework like svelte
@@ -175,11 +176,11 @@ function main() {
         ;;
         [sS][tT][sS])
             svelteTS
-            ;;
+        ;;
         *) echo 'please select VTS or STS'
     esac
 
-    if [ $GITANSWER == 'y' | 'Y']
+    if [ $GITANSWER == 'y' ]
     then
         gitFiles
         repoInit
@@ -187,7 +188,4 @@ function main() {
 
 }
 
-tsFolders
-npmInit
-gitFiles
-#repoInit
+main
