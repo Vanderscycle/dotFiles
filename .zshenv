@@ -3,6 +3,33 @@ export NEOMUTTPASSWORD=$(pass program/neomutt)
 # gpg amd ssh
 eval `keychain --eval --quiet --agents gpg,ssh ~/.ssh/manjaroGit`
 
+# new env scripts
+function newRepo(){
+    ORIGINDIR=~/Documents/dotFiles/stdPatterns/
+    TEMPARRAY=(ML TS)
+    echo 'new ML (machine learning) project or TS (Typescript) project' 
+    TYPEREPO=$(ls $ORIGINDIR | fzf)
+    echo $TYPEREPO
+    case $TYPEREPO in
+        "newMLRepo.sh")
+            FILE="newMLRepo.sh"
+            ORIGINDIR="${ORIGINDIR}${FILE}"
+            rsync -auv $ORIGINDIR .
+            bash $FILE
+            rm $FILE
+        ;;
+        "newTSRepo.sh") 
+            FILE="newTSRepo.sh"
+            ORIGINDIR="${ORIGINDIR}${FILE}"
+            echo $ORIGINDIR
+            rsync -auv $ORIGINDIR .
+            bash $FILE
+            rm $FILE
+        ;;
+        *) echo 'please enter either ML or TS'
+    esac        
+
+}
 # Python Conda envs
 function conda-ls() {
     local selectedEnv 
