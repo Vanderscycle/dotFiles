@@ -163,6 +163,8 @@ function svelteTS() {
     read -p 'Directory name for the svelte project: ' DIRECTORYNAME
     npx degit 'dceddia/svelte-typescript-jest#main' $DIRECTORYNAME
     (cd ./$DIRECTORYNAME && npm install && npm test)
+    json -I -f package.json -e "this.scripts.start=\"sirv public -p 4000\""
+
 }
 
 function main() {
