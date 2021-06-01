@@ -1,8 +1,5 @@
 #!/bin/bash
-#TODO:
-#TODO: embed newML and newTS repo into .zshenv
-#TODO: create choice to use a framework like svelte
-#TODO: create the choice for adding git
+
 function tsFolders () {
     echo "creating the folder structure"
     if [ ! -d src ] 
@@ -190,10 +187,12 @@ function main() {
         *) echo 'please select VTS or STS'
     esac
 
-    if [ $GITANSWER == 'y' ]
+    if [ $GITANSWER == 'y' ] && [ -z $DIRECTORYNAME ]
     then
         gitFiles
         repoInit
+    else 
+        (cd ./$DIRECTORYNAME && gitFiles && repoInit)
     fi
 
 }
