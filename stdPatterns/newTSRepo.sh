@@ -1,6 +1,8 @@
 #!/bin/bash
-
+#TODO: svelte creates a porject while VTS uses the current db
+#TODO: refactor a bit and create a db function
 function tsFolders () {
+
     echo "creating the folder structure"
     if [ ! -d src ] && [[ $1 != 'GQL' ]]
     then
@@ -9,6 +11,7 @@ function tsFolders () {
         touch src/server.ts
         cat >> src/server.ts << EOL
 import express from "express";
+import { __prod__ } from "./constants";
 
 const app = express();
 const PORT: string | number = process.env.PORT || 4000;
@@ -23,7 +26,8 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => console.log());
 EOL
     fi
-    #graphqL
+
+    #graphqL, typeOrm w/ DB
     if [ ! -d src ] && [[ $1 == 'GQL' ]]
     then
         echo "creating the src folder (TS ONLY) no backend"
@@ -34,6 +38,7 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express"
 import { typeDefs } from "./schema/typeDefs"
 import { resolvers } from "./schema/resolvers"
+import { __prod__ } from "./constants";
 
 async function startApolloServer() {
 
@@ -81,20 +86,33 @@ export const typeDefs = gql\`
     hello: String
 }
 \`;
-
 EOL
-    echo "installing apollo graphqL"
+
+
+        read -p "name of db" DBNAME
+        createdb $DBNAME
+        
+    fi
+    echo "installing apollo graphqL (api) and TypeOrm (db interface)"
     npm install apollo-server-express
     fi
-
+    #TODO:checl the logic of the bellow block
     #tring to DRY
     if [ -f src/index.ts ]
     then
-        echo 'index.ts exist. We do not want to overwrite'
-    else
         touch src/index.ts
         cat >> src/index.ts << EOL
         console.log("Hello World, don't forget to inspect when debugging")
+EOL
+    else
+        echo 'index.ts exist. We do not want to overwrite'
+    fi
+    
+    if [ -f src/constants.ts]
+    then
+        echo 'creating constants.ts where you can store all your constants'
+        car >> src/constants.ts << EOL
+export const __prod__ = process.env.NODE_ENV === 'production'
 EOL
     fi
 
@@ -148,18 +166,45 @@ EOL
     then
         mkdir -p data/
         echo 'data folders created'
-
+    else
+        echo 'data folders already present'
     fi
     
     if [ ! -f .env ]
     then
         touch .env
         echo 'Empty .env file created'
+    else
+        echo '.env file detected'
     fi
 
 } 
+function dbCreation() {
+
+    if [[ $1 == 'GQL' ]]
+    then
+
+        echo "installing the required packages for db"
+        npm install typeorm
+        echo "creating postgres/ormconfigfile"
+        touch ormconfig.json
+        cat >> ormconfig.json << EOL
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "database": "graphqldb",
+  "synchronize": true,
+  "logging": true,
+  "entities": ["src/entities/**/*.ts"]
+}
+EOL
+    fi
+
+}
 
 function npmInit() {
+
     npm init -y # accepting everything to the default
     # I am honestly very confused by node so we will be using its simpler brother (express)
     #sudo npm install --save-dev ts-node nodemon @types/node
@@ -173,6 +218,7 @@ function npmInit() {
 }
 
 function gitFiles(){
+    
     echo -e "\nCreating github CI/CD folders"
     # -f for file -d for directory
     if [ ! -d .github ]
@@ -188,6 +234,7 @@ function gitFiles(){
         touch README.md
         echo 'README.md file created'
     fi
+
     if [ ! -f .gitignore ]
     then
         touch .gitignore
@@ -254,6 +301,7 @@ function main() {
         [vV][tT][sS])
             tsFolders $BACKEND
             npmInit
+            dbCreation
         ;;
         [sS][tT][sS])
             svelteTS
