@@ -94,26 +94,25 @@ EOL
     echo "installing apollo graphqL (api) and TypeOrm (db interface)"
     npm install apollo-server-express
 
-    #TODO:checl the logic of the bellow block
     #tring to DRY
     if [ -f src/index.ts ]
     then
+        echo 'index.ts exist. We do not want to overwrite'
+    else
         touch src/index.ts
         cat >> src/index.ts << EOL
         console.log("Hello World, don't forget to inspect when debugging")
 EOL
-    else
-        echo 'index.ts exist. We do not want to overwrite'
     fi
     
-    if [ -f src/constants.ts]
+    if [ -f src/constants.ts ]
     then
+        echo "constants.ts already exists"
+    else
         echo 'creating constants.ts where you can store all your constants'
-        car >> src/constants.ts << EOL
+        cat >> src/constants.ts << EOL
 export const __prod__ = process.env.NODE_ENV === 'production'
 EOL
-    else
-        echo "constants.ts already exists"
     fi
 
     if [ ! -d public ] 
