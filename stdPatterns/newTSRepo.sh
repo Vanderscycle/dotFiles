@@ -89,13 +89,11 @@ export const typeDefs = gql\`
 EOL
 
 
-        read -p "name of db" DBNAME
-        createdb $DBNAME
         
     fi
     echo "installing apollo graphqL (api) and TypeOrm (db interface)"
     npm install apollo-server-express
-    fi
+
     #TODO:checl the logic of the bellow block
     #tring to DRY
     if [ -f src/index.ts ]
@@ -114,6 +112,8 @@ EOL
         car >> src/constants.ts << EOL
 export const __prod__ = process.env.NODE_ENV === 'production'
 EOL
+    else
+        echo "constants.ts already exists"
     fi
 
     if [ ! -d public ] 
@@ -200,7 +200,17 @@ function dbCreation() {
 }
 EOL
     fi
+    
+    echo 'creating the migration folder'
+    mkdir -p src/migration
 
+    read -p "name of db" DBNAME
+    if [[ $DBNAME == '' ]]
+    then
+        echo 'skipping db creation'
+    else
+        createdb $DBNAME
+    fi
 }
 
 function npmInit() {
