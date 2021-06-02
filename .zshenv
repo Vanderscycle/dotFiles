@@ -9,7 +9,7 @@ function newRepo(){
     TEMPARRAY=(ML TS)
     echo 'new ML (machine learning) project or TS (Typescript) project' 
     TYPEREPO=$(ls $ORIGINDIR | fzf)
-    echo $TYPEREPO
+    #echo $TYPEREPO
     case $TYPEREPO in
         "newMLRepo.sh")
             FILE="newMLRepo.sh"
@@ -21,7 +21,7 @@ function newRepo(){
         "newTSRepo.sh") 
             FILE="newTSRepo.sh"
             ORIGINDIR="${ORIGINDIR}${FILE}"
-            echo $ORIGINDIR
+            #echo $ORIGINDIR
             rsync -auv $ORIGINDIR .
             bash $FILE
             rm $FILE
