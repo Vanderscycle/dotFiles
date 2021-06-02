@@ -2,7 +2,7 @@
 
 function tsFolders () {
     echo "creating the folder structure"
-    if [ ! -d src ] && [ $1 != 'GQL']
+    if [ ! -d src ] && [[ $1 != 'GQL' ]]
     then
         echo "creating the src folder (TS ONLY) no backend"
         mkdir -p src/
@@ -24,14 +24,14 @@ app.listen(PORT, () => console.log());
 EOL
     fi
     #graphqL
-    if [ ! -d src ] && [ $1 == 'GQL']
+    if [ ! -d src ] && [[ $1 == 'GQL' ]]
     then
         echo "creating the src folder (TS ONLY) no backend"
         mkdir -p src/
         touch src/server.ts
         cat >> src/server.ts << EOL
 import express from "express";
-import { ApolloServer, gql } from "apollo-server-express"
+import { ApolloServer } from "apollo-server-express"
 import { typeDefs } from "./schema/typeDefs"
 import { resolvers } from "./schema/resolvers"
 
@@ -65,22 +65,22 @@ EOL
     mkdir -p src/schema/
     touch src/schema/resolvers.ts
     cat >> src/schema/resolvers.ts << EOL
-// Provide resolver functions for your schema fields
 export const resolvers = {
   Query: {
     hello: () => 'Hello world!',
   },
 };
-
 EOL
+
     touch src/schema/typeDefs.ts
     cat >> src/schema/typeDefs.ts << EOL
+import { gql } from "apollo-server-express"
 // Construct a schema, using GraphQL schema language
-export const typeDefs = gql`
+export const typeDefs = gql\`
   type Query {
     hello: String
-  }
-`;
+}
+\`;
 
 EOL
     echo "installing apollo graphqL"
@@ -246,7 +246,7 @@ function main() {
     read -p 'backend Choice none (n)/ graphql (GQL)' BACKEND
     read -p 'Will the project be hosted on Github(y/n)?' GITANSWER
     
-    if [ $ BACKEND != 'GQL' ]
+    if [[ $BACKEND != 'GQL' ]]
     then BACKEND=''
     fi
 
@@ -260,13 +260,13 @@ function main() {
         ;;
         *) echo 'please select VTS or STS'
     esac
-
-    if [ $GITANSWER == 'y' ] && [ -z $DIRECTORYNAME ]
+    echo $DIRECTORYNAME
+    if [ $GITANSWER == 'y' ]
     then
         gitFiles
         repoInit
-    else 
-        (cd ./$DIRECTORYNAME && gitFiles && repoInit)
+    #else 
+    #    (cd ./$DIRECTORYNAME && gitFiles && repoInit)
     fi
 
 }
