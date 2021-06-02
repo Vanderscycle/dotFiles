@@ -2,9 +2,9 @@
 
 function tsFolders () {
     echo "creating the folder structure"
-    if [ ! -d src ] 
+    if [ ! -d src ] && [ $1 != 'GQL']
     then
-        echo "creating the src folder (TS ONLY)"
+        echo "creating the src folder (TS ONLY) no backend"
         mkdir -p src/
         touch src/server.ts
         cat >> src/server.ts << EOL
@@ -22,10 +22,79 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => console.log());
 EOL
-    # index.ts is where your code should go (I think)
-    touch src/index.ts
-    cat >> src/index.ts << EOL
-    console.log("Hello World, don't forget to inspect when debugging")
+    fi
+    #graphqL
+    if [ ! -d src ] && [ $1 == 'GQL']
+    then
+        echo "creating the src folder (TS ONLY) no backend"
+        mkdir -p src/
+        touch src/server.ts
+        cat >> src/server.ts << EOL
+import express from "express";
+import { ApolloServer, gql } from "apollo-server-express"
+import { typeDefs } from "./schema/typeDefs"
+import { resolvers } from "./schema/resolvers"
+
+async function startApolloServer() {
+
+
+  const server = new ApolloServer({ typeDefs, resolvers });
+  await server.start();
+
+  const app = express();
+  const PORT: string | number = process.env.PORT || 4000;
+
+  app.use(express.static(__dirname + "/../public/"));
+  app.use("*/dist",express.static(__dirname + "/../dist/"));
+
+  app.get("/", (req, res) => {
+    res.sendFile("index.html");
+  });
+
+
+  server.applyMiddleware({ app });
+
+  await new Promise(resolve => app.listen({ port: PORT }, resolve));
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+  return { server, app };
+}
+
+startApolloServer()
+EOL
+
+    mkdir -p src/schema/
+    touch src/schema/resolvers.ts
+    cat >> src/schema/resolvers.ts << EOL
+// Provide resolver functions for your schema fields
+export const resolvers = {
+  Query: {
+    hello: () => 'Hello world!',
+  },
+};
+
+EOL
+    touch src/schema/typeDefs.ts
+    cat >> src/schema/typeDefs.ts << EOL
+// Construct a schema, using GraphQL schema language
+export const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+EOL
+    echo "installing apollo graphqL"
+    npm install apollo-server-express
+    fi
+
+    #tring to DRY
+    if [ -f src/index.ts ]
+    then
+        echo 'index.ts exist. We do not want to overwrite'
+    else
+        touch src/index.ts
+        cat >> src/index.ts << EOL
+        console.log("Hello World, don't forget to inspect when debugging")
 EOL
     fi
 
@@ -159,8 +228,7 @@ function svelteTS() {
     # https://daveceddia.com/svelte-typescript-jest/
     read -p 'Directory name for the svelte project: ' DIRECTORYNAME
     npx degit 'dceddia/svelte-typescript-jest#main' $DIRECTORYNAME
-    (cd ./$DIRECTORYNAME && npm install && npm test)
-    json -I -f package.json -e "this.scripts.start=\"sirv public -p 4000\""
+    (cd ./$DIRECTORYNAME && npm install && npm test && json -I -f package.json -e "this.scripts.start=\"sirv public -p 4000\"")
     curl https://raw.githubusercontent.com/sveltejs/template/master/.gitignore--output ./$DIRECTORYNAME/.gitignore
         cat >> ./$DIRECTORYNAME/.gitignore << EOL
 # user defined
@@ -175,10 +243,16 @@ EOL
 function main() {
     echo "what TS project do you want to init?"
     read -p 'Vanila TS (VTS)/ Svelte TS (STS)' FRAMEWORK
+    read -p 'backend Choice none (n)/ graphql (GQL)' BACKEND
     read -p 'Will the project be hosted on Github(y/n)?' GITANSWER
+    
+    if [ $ BACKEND != 'GQL' ]
+    then BACKEND=''
+    fi
+
     case $FRAMEWORK in
         [vV][tT][sS])
-            tsFolders
+            tsFolders $BACKEND
             npmInit
         ;;
         [sS][tT][sS])
