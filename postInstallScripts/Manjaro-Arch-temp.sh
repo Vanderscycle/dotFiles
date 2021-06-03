@@ -63,6 +63,7 @@ RUN yes | sudo npm install -g dockerfile-language-server-nodejs #https://github.
 RUN yes | sudo npm install -g bash-language-server
 RUN yes | sudo npm install -g tldr # necessary?
 RUN yes | sudo npm install -g json
+RUN yes | sudo npm isntall -g typeorm ts-node express svelte-language-server graphql @types/nodes
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
