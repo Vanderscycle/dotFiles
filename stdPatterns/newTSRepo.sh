@@ -180,28 +180,83 @@ EOL
 } 
 function dbCreation() {
 
-    if [[ $1 == 'GQL' ]]
-    then
-
-        echo "installing the required packages for db"
-        npm install typeorm
-        echo "creating postgres/ormconfigfile"
-        touch ormconfig.json
-        cat >> ormconfig.json << EOL
+    echo "installing the required packages for db"
+    npm install typeorm pg ts-node
+    echo "creating postgres/ormconfigfile"
+    touch ormconfig.json
+    cat >> ormconfig.json << EOL
 {
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
+  "username": "postgres",
+  "password": "",
   "database": "graphqldb",
   "synchronize": true,
-  "logging": true,
-  "entities": ["src/entities/**/*.ts"]
+  "logging": false,
+  "entities": ["src/entity/**/*.ts"],
+  "migrations": ["src/migration/**/*.ts"],
+  "subscribers": ["src/subscriber/**/*.ts"],
+  "cli": {
+    "entitiesDir": "src/entity",
+    "migrationsDir": "src/migration",
+    "subscribersDir": "src/subscriber"
+  }
 }
 EOL
-    fi
     
     echo 'creating the migration folder'
     mkdir -p src/migration
+    mkdir -p src/entity
+    touch src/entity/user.ts
+    cat >> src/entity/user.ts <<EOL
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
+
+@Entity()
+export class User extends BaseEntity{
+
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    firstName: string;
+
+    @Column()
+    lastName: string;
+
+    @Column()
+    age: number;
+
+}
+EOL
+
+cat >> src/server.ts << EOL
+//placeholder
+import { User } from "./entity/user";
+import "reflect-metadata";
+import {createConnection} from "typeorm";
+
+createConnection().then(async connection => {
+
+    console.log("Inserting a new user into the database...");
+    const user = new User();
+
+    user.firstName = "Timber";
+    user.lastName = "chad@chad";
+    user.age = 56;
+
+    await user.save();
+
+    user.firstName = "Tiasdasmber";
+    user.lastName = "chaadadd@chad";
+    user.age = 526;
+
+    await user.save()
+    console.log("User Created");
+
+}).catch(error => console.log(error));
+
+EOL
 
     read -p "name of db" DBNAME
     if [[ $DBNAME == '' ]]
@@ -210,6 +265,9 @@ EOL
     else
         createdb $DBNAME
     fi
+    echo 'adjusting the package.json'
+    json -I -f package.json -e "this.scripts.start=\"ts-node --transpile-only src/server.ts\""
+
 }
 
 function npmInit() {
@@ -299,7 +357,8 @@ EOL
 function main() {
     echo "what TS project do you want to init?"
     read -p 'Vanila TS (VTS)/ Svelte TS (STS)' FRAMEWORK
-    read -p 'backend Choice none (n)/ graphql (GQL)' BACKEND
+    read -p 'Api choice none (n)/ graphql (GQL)' BACKEND
+    read -p 'Do you need a Postgres DB (y/n)' DBBACKEND
     read -p 'Will the project be hosted on Github(y/n)?' GITANSWER
     
     if [[ $BACKEND != 'GQL' ]]
@@ -310,7 +369,10 @@ function main() {
         [vV][tT][sS])
             tsFolders $BACKEND
             npmInit
-            dbCreation
+            if [[ $DBBACKEND == 'y' ]]
+            then
+                dbCreation
+            fi
         ;;
         [sS][tT][sS])
             svelteTS
