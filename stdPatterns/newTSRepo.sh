@@ -275,12 +275,15 @@ function npmInit() {
     npm init -y # accepting everything to the default
     # I am honestly very confused by node so we will be using its simpler brother (express)
     #sudo npm install --save-dev ts-node nodemon @types/node
-    sudo npm install --save-dev typescript tslint nodemon express @types/express
+    sudo npm install --save-dev eslint nodemon 
+    sudo npm install typescript express @types/express
     npx tsconfig.json
     echo 'updating the package.json'
     json -I -f package.json -e "this.scripts.watch=\"tsc -w\""
     json -I -f package.json -e "this.scripts.dev=\"nodemon dist/server.js\""
     json -I -f package.json -e "this.scripts.start=\"node dist/server.js\""
+    ./node_modules/.bin/eslint --init
+    json -I -f package.json -e "this.scripts.lint=\"eslint ./src\""
 
 }
 
