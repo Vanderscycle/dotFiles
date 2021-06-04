@@ -30,6 +30,7 @@ EOL
     #graphqL, typeOrm w/ DB
     if [ ! -d src ] && [[ $1 == 'GQL' ]]
     then
+        npm install ts-node type/graphqL
         echo "creating the src folder (TS ONLY) no backend"
         mkdir -p src/
         touch src/server.ts
@@ -112,6 +113,7 @@ EOL
         echo 'creating constants.ts where you can store all your constants'
         cat >> src/constants.ts << EOL
 export const __prod__ = process.env.NODE_ENV === 'production'
+export const __port__ = process.env.NODE_ENV === 4000
 EOL
     fi
 
@@ -181,7 +183,7 @@ EOL
 function dbCreation() {
 
     echo "installing the required packages for db"
-    npm install typeorm pg ts-node
+    npm install typeorm pg
     echo "creating postgres/ormconfigfile"
     touch ormconfig.json
     cat >> ormconfig.json << EOL
@@ -193,7 +195,7 @@ function dbCreation() {
   "password": "",
   "database": "graphqldb",
   "synchronize": true,
-  "logging": false,
+  "logging": true,
   "entities": ["src/entity/**/*.ts"],
   "migrations": ["src/migration/**/*.ts"],
   "subscribers": ["src/subscriber/**/*.ts"],
@@ -267,7 +269,8 @@ EOL
     fi
     echo 'adjusting the package.json'
     json -I -f package.json -e "this.scripts.start=\"ts-node --transpile-only src/server.ts\""
-
+    json -I -f package.json -e "this.scripts.lint:watch=\"watch 'npm run lint' .\""
+    json -I -f package.json -e "this.scripts.typeorm:=\"ts-node ./node_modules/typeorm/cli.js\""
 }
 
 function npmInit() {
