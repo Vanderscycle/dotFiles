@@ -9,7 +9,8 @@ ts_config.setup {
         "lua",
         "json",
         "python",
-        "typescript"
+        "typescript",
+        "svelte"
         --  "cpp",
         --   "rust",
     },
