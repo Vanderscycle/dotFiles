@@ -31,38 +31,44 @@ EOL
     if [ ! -d src ] && [[ $1 == 'GQL' ]]
     then
         npm install ts-node type/graphqL
-        echo "creating the src folder (TS ONLY) no backend"
+        echo "creating the src folder (TS ONLY) w/ graphql"
         mkdir -p src/
         touch src/server.ts
         cat >> src/server.ts << EOL
-import express from "express";
-import { ApolloServer } from "apollo-server-express"
-import { typeDefs } from "./schema/typeDefs"
-import { resolvers } from "./schema/resolvers"
-import { __prod__ } from "./constants";
+import 'reflect-metadata'
+import express from 'express'
+import { ApolloServer } from 'apollo-server-express'
+import { buildSchema } from 'type-graphql';
 
-async function startApolloServer() {
+//import { typeDefs } from './schema/typeDefs'
+import { resolvers } from './schema/resolvers'
+import { init_db } from './database'
+import { __prod__,__port__ } from './constants'
 
-
-  const server = new ApolloServer({ typeDefs, resolvers });
-  await server.start();
-
-  const app = express();
-  const PORT: string | number = process.env.PORT || 4000;
-
-  app.use(express.static(__dirname + "/../public/"));
-  app.use("*/dist",express.static(__dirname + "/../dist/"));
-
-  app.get("/", (req, res) => {
-    res.sendFile("index.html");
+async function startApolloServer () {
+  await init_db().catch((error) => console.log(error))
+  console.log('Database created.');
+  //check schema and how t add typeDefs
+  const schema = await buildSchema({
+    resolvers: [ resolvers ],
   });
+  const server = new ApolloServer({ schema })
+  await server.start()
 
+  const app = express()
 
-  server.applyMiddleware({ app });
+  app.use(express.static(__dirname + '/../public/'))
+  app.use('*/dist', express.static(__dirname + '/../dist/'))
 
-  await new Promise(resolve => app.listen({ port: PORT }, resolve));
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
-  return { server, app };
+  app.get('/', (req, res) => {
+    res.sendFile('index.html')
+  })
+
+  server.applyMiddleware({ app })
+
+  await new Promise((resolve) => app.listen({ port: __port__ }, resolve))
+  console.log()
+  return { server, app }
 }
 
 startApolloServer()
@@ -70,14 +76,74 @@ EOL
 
     mkdir -p src/schema/
     touch src/schema/resolvers.ts
-    cat >> src/schema/resolvers.ts << EOL
-export const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-};
-EOL
+    echo "creating TypeOrm and graphql resolvers w/ CRUD"
 
+    cat >> src/schema/resolvers.ts << EOL
+import { Resolver, Query, Mutation, Arg } from "type-graphql";
+import { User } from '../entity/user'
+
+@Resolver()
+export class resolvers  {
+  @Query(() => String)
+  hello() {
+    return "world";
+  }
+  //findall
+  @Query(() => [ User ])
+  async getAllUsers() {
+    return await User.find()
+  }
+  //findone
+  @Query(() => User)
+  user(@Arg("id") id: number) {
+    return User.findOne({ where: { id }});
+  }
+  //CREATE
+  @Mutation(() => User )
+  async createNewUser(
+    @Arg('firstName') firstName:string,
+    @Arg('lastName') lastName:string,
+    @Arg('age') age:number): Promise<User> {
+    const newUser = User.create({firstName, lastName, age})
+    await newUser.save()
+    return newUser
+  }
+  //UPDATE
+  @Mutation(() => User)
+  async updateUser(
+    @Arg("id") id: number,
+    @Arg('firstName', { nullable: true }) firstName:string,
+    @Arg('lastName', { nullable: true }) lastName:string,
+    @Arg('age', { nullable: true }) age:number): Promise<User> {
+    const user = await User.findOne({ where: { id }});
+
+    if (!user) {
+      throw new Error(`The user with id: ${id} does not exist!`);
+    }
+
+    Object.assign(user, {firstName, lastName, age});
+    await user.save();
+
+    return user;
+  }
+  //DELETE
+  @Mutation(() => Boolean)
+  async deleteUser(
+    @Arg("id") id: number,
+  ):Promise<Boolean> {
+  const user = await User.findOne({ where: { id }});
+
+  if (!user) {
+    throw new Error(`The user with id: ${id} does not exist!`);
+  }
+  await user.remove();
+  return true;
+
+  }
+};
+
+EOL
+    #TODO: FIND a GENEATOR
     touch src/schema/typeDefs.ts
     cat >> src/schema/typeDefs.ts << EOL
 import { gql } from "apollo-server-express"
@@ -184,7 +250,7 @@ function dbCreation() {
 
     echo "installing the required packages for db"
     npm install typeorm pg
-    echo "creating postgres/ormconfigfile"
+    echo "creating postgres/ormconfigfile linking to default db"
     touch ormconfig.json
     cat >> ormconfig.json << EOL
 {
@@ -212,52 +278,47 @@ EOL
     mkdir -p src/entity
     touch src/entity/user.ts
     cat >> src/entity/user.ts <<EOL
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
+import { ObjectType, Field, ID } from 'type-graphql'
 
-@Entity()
-export class User extends BaseEntity{
-
-    @PrimaryGeneratedColumn()
+@Entity('users')// typeorm
+@ObjectType()// graphql
+export class User extends BaseEntity {
+    @Field(() => ID)// graphql
+    @PrimaryGeneratedColumn()// typeorm
     id: number;
 
+    @Field(() => String)
     @Column()
     firstName: string;
 
+    @Field(() => String)
     @Column()
     lastName: string;
 
+    @Field(() => Number)
     @Column()
     age: number;
-
 }
 EOL
+    touch src/database.ts
+    cat >> src/database.ts << EOL
+import { createConnection } from 'typeorm';
+import { User } from './entity/user';
 
-cat >> src/server.ts << EOL
-//placeholder
-import { User } from "./entity/user";
-import "reflect-metadata";
-import {createConnection} from "typeorm";
+export const init_db = async() => {
+  const connection = await createConnection();
+  await connection.dropDatabase();
+  await connection.synchronize();
 
-createConnection().then(async connection => {
+  // User
+  const user = new User();
+  user.firstName = 'Timsd1231ber'
+  user.lastName = 'chasdaad@chad'
+  user.age = 56
+  await user.save()
 
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-
-    user.firstName = "Timber";
-    user.lastName = "chad@chad";
-    user.age = 56;
-
-    await user.save();
-
-    user.firstName = "Tiasdasmber";
-    user.lastName = "chaadadd@chad";
-    user.age = 526;
-
-    await user.save()
-    console.log("User Created");
-
-}).catch(error => console.log(error));
-
+  };
 EOL
 
     read -p "name of db" DBNAME
@@ -270,7 +331,8 @@ EOL
     echo 'adjusting the package.json'
     json -I -f package.json -e "this.scripts.start=\"ts-node --transpile-only src/server.ts\""
     json -I -f package.json -e "this.scripts.lint:watch=\"watch 'npm run lint' .\""
-    json -I -f package.json -e "this.scripts.typeorm:=\"ts-node ./node_modules/typeorm/cli.js\""
+    json -I -f package.json -e "this.scripts.dev=\"nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node --transpile-only src/server.ts'\""
+ 
 }
 
 function npmInit() {
