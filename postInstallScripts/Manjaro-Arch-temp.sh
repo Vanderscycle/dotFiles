@@ -57,13 +57,13 @@ echo 'Installing npm and lsp(nvim)'
 # https://stackoverflow.com/questions/50495519/how-can-i-pass-yes-response-when-npm-installing-on-dockerfile
 #typescript (global with language client)
 RUN yes | sudo npm install -g npq # audit packages post install
-RUN yes | sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier
+RUN yes | sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier eslint
 RUN yes | sudo npm install -g pyright
 RUN yes | sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
 RUN yes | sudo npm install -g bash-language-server
 RUN yes | sudo npm install -g tldr # necessary?
 RUN yes | sudo npm install -g json
-RUN yes | sudo npm isntall -g typeorm ts-node express svelte-language-server graphql @types/nodes
+RUN yes | sudo npm isntall -g typeorm ts-node express svelte-language-server graphql @types/nodes pg mongodb
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
