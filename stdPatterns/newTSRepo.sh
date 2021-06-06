@@ -74,92 +74,14 @@ async function startApolloServer () {
 startApolloServer()
 EOL
 
-    mkdir -p src/schema/
-    touch src/schema/resolvers.ts
-    echo "creating TypeOrm and graphql resolvers w/ CRUD"
+    echo 'adjusting the package.json for VTS'
 
-    cat >> src/schema/resolvers.ts << EOL
-import { Resolver, Query, Mutation, Arg } from "type-graphql";
-import { User } from '../entity/user'
-
-@Resolver()
-export class resolvers  {
-  @Query(() => String)
-  hello() {
-    return "world";
-  }
-  //findall
-  @Query(() => [ User ])
-  async getAllUsers() {
-    return await User.find()
-  }
-  //findone
-  @Query(() => User)
-  user(@Arg("id") id: number) {
-    return User.findOne({ where: { id }});
-  }
-  //CREATE
-  @Mutation(() => User )
-  async createNewUser(
-    @Arg('firstName') firstName:string,
-    @Arg('lastName') lastName:string,
-    @Arg('age') age:number): Promise<User> {
-    const newUser = User.create({firstName, lastName, age})
-    await newUser.save()
-    return newUser
-  }
-  //UPDATE
-  @Mutation(() => User)
-  async updateUser(
-    @Arg("id") id: number,
-    @Arg('firstName', { nullable: true }) firstName:string,
-    @Arg('lastName', { nullable: true }) lastName:string,
-    @Arg('age', { nullable: true }) age:number): Promise<User> {
-    const user = await User.findOne({ where: { id }});
-
-    if (!user) {
-      throw new Error(`The user with id: ${id} does not exist!`);
-    }
-
-    Object.assign(user, {firstName, lastName, age});
-    await user.save();
-
-    return user;
-  }
-  //DELETE
-  @Mutation(() => Boolean)
-  async deleteUser(
-    @Arg("id") id: number,
-  ):Promise<Boolean> {
-  const user = await User.findOne({ where: { id }});
-
-  if (!user) {
-    throw new Error(`The user with id: ${id} does not exist!`);
-  }
-  await user.remove();
-  return true;
-
-  }
-};
-
-EOL
-    #TODO: FIND a GENEATOR
-    touch src/schema/typeDefs.ts
-    cat >> src/schema/typeDefs.ts << EOL
-import { gql } from "apollo-server-express"
-// Construct a schema, using GraphQL schema language
-export const typeDefs = gql\`
-  type Query {
-    hello: String
-}
-\`;
-EOL
-
+    json -I -f package.json -e "this.scripts.start=\"ts-node --transpile-only src/server.ts\""
+    json -I -f package.json -e "this.scripts.lint:watch=\"watch 'npm run lint' .\""
+    json -I -f package.json -e "this.scripts.dev=\"nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node --transpile-only src/server.ts'\""
 
         
     fi
-    echo "installing apollo graphqL (api) and TypeOrm (db interface)"
-    npm install apollo-server-express
 
     #tring to DRY
     if [ -f src/index.ts ]
@@ -250,6 +172,8 @@ function dbCreation() {
 
     echo "installing the required packages for db"
     npm install typeorm pg
+    echo "installing apollo graphqL (api) and TypeOrm (db interface)"
+    npm install apollo-server-express type-graphql
     echo "creating postgres/ormconfigfile linking to default db"
     touch ormconfig.json
     cat >> ormconfig.json << EOL
@@ -323,6 +247,86 @@ export const init_db = async() => {
 
   };
 EOL
+    mkdir -p src/schema/
+    touch src/schema/resolvers.ts
+    echo "creating TypeOrm and graphql resolvers w/ CRUD"
+
+    cat >> src/schema/resolvers.ts << EOL
+import { Resolver, Query, Mutation, Arg } from "type-graphql";
+import { User } from '../entity/user'
+
+@Resolver()
+export class resolvers  {
+  @Query(() => String)
+  hello() {
+    return "world";
+  }
+  //findall
+  @Query(() => [ User ])
+  async getAllUsers() {
+    return await User.find()
+  }
+  //findone
+  @Query(() => User)
+  user(@Arg("id") id: number) {
+    return User.findOne({ where: { id }});
+  }
+  //CREATE
+  @Mutation(() => User )
+  async createNewUser(
+    @Arg('firstName') firstName:string,
+    @Arg('lastName') lastName:string,
+    @Arg('age') age:number): Promise<User> {
+    const newUser = User.create({firstName, lastName, age})
+    await newUser.save()
+    return newUser
+  }
+  //UPDATE
+  @Mutation(() => User)
+  async updateUser(
+    @Arg("id") id: number,
+    @Arg('firstName', { nullable: true }) firstName:string,
+    @Arg('lastName', { nullable: true }) lastName:string,
+    @Arg('age', { nullable: true }) age:number): Promise<User> {
+    const user = await User.findOne({ where: { id }});
+
+    if (!user) {
+      throw new Error(`The user with id: ${id} does not exist!`);
+    }
+
+    Object.assign(user, {firstName, lastName, age});
+    await user.save();
+
+    return user;
+  }
+  //DELETE
+  @Mutation(() => Boolean)
+  async deleteUser(
+    @Arg("id") id: number,
+  ):Promise<Boolean> {
+  const user = await User.findOne({ where: { id }});
+
+  if (!user) {
+    throw new Error(`The user with id: ${id} does not exist!`);
+  }
+  await user.remove();
+  return true;
+
+  }
+};
+
+EOL
+    #TODO: FIND a GENEATOR
+    touch src/schema/typeDefs.ts
+    cat >> src/schema/typeDefs.ts << EOL
+import { gql } from "apollo-server-express"
+// Construct a schema, using GraphQL schema language
+export const typeDefs = gql\`
+  type Query {
+    hello: String
+}
+\`;
+EOL
 
     read -p "name of db" DBNAME
     if [[ $DBNAME == '' ]]
@@ -331,10 +335,6 @@ EOL
     else
         createdb $DBNAME
     fi
-    echo 'adjusting the package.json'
-    json -I -f package.json -e "this.scripts.start=\"ts-node --transpile-only src/server.ts\""
-    json -I -f package.json -e "this.scripts.lint:watch=\"watch 'npm run lint' .\""
-    json -I -f package.json -e "this.scripts.dev=\"nodemon --watch 'src/**' --ext 'ts,json' --ignore 'src/**/*.spec.ts' --exec 'ts-node --transpile-only src/server.ts'\""
  
 }
 
@@ -412,16 +412,47 @@ function repoInit(){
 
 function svelteTS() {
     # https://daveceddia.com/svelte-typescript-jest/
-    read -p 'Directory name for the svelte project: ' DIRECTORYNAME
-    npx degit 'dceddia/svelte-typescript-jest#main' $DIRECTORYNAME
-    (cd ./$DIRECTORYNAME && npm install && npm test && json -I -f package.json -e "this.scripts.start=\"sirv public -p 4000\"")
-    curl https://raw.githubusercontent.com/sveltejs/template/master/.gitignore--output ./$DIRECTORYNAME/.gitignore
+    if [[ $1 != 'GQL' ]]
+    then
+        read -p 'Directory name for the svelte project: ' DIRECTORYNAME
+        npx degit 'dceddia/svelte-typescript-jest#main' $DIRECTORYNAME
+        (cd ./$DIRECTORYNAME && npm install && npm test && json -I -f package.json -e "this.scripts.start=\"sirv public -p 4000\"")
+        curl https://raw.githubusercontent.com/sveltejs/template/master/.gitignore--output ./$DIRECTORYNAME/.gitignore
         cat >> ./$DIRECTORYNAME/.gitignore << EOL
 # user defined
 # databases
 data/
 EOL
+    else
+        echo ''
+        npm init svelte@next
+        echo 'installing tailwind and jest(TDD)'
+        npx svelte-add tailwindcss
+        npm install --save-dev jest babel-jest @babel/core @babel/preset-env @babel/preset-typescript
+        touch babel.config.js
+        cat >> babel.config.js <<EOL
+module.exports = {
+  presets: [
+    ['@babel/preset-env', {targets: {node: 'current'}}],
+    '@babel/preset-typescript',
+  ],
+};
+EOL
+        npm install
+        #TODO: add jest and create a simple hello world test package
+        echo 'adjusting the package.json for STS'
+        json -I -f package.json -e "this.scripts.dev=\"svelte-kit dev --port 4000\""
+        json -I -f package.json -e "this.scripts.test=\"jest\""
+        json -I -f tsconfig.json -e "this.experimentalDecorators=\"true\""
+        json -I -f tsconfig.json -e "this.strictNullChecks=\"true\""
+        json -I -f tsconfig.json -e "this.strictFunctionTypes=\"true\""
+        json -I -f tsconfig.json -e "this.removeComments=\"true\""
+        json -I -f tsconfig.json -e "this.noUnusedLocals=\"true\""
+        
 
+
+        dbCreation
+    fi
 
 
 }
@@ -447,7 +478,7 @@ function main() {
             fi
         ;;
         [sS][tT][sS])
-            svelteTS
+            svelteTS $BACKEND
         ;;
         *) echo 'please select VTS or STS'
     esac
