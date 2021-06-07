@@ -60,6 +60,7 @@ return require("packer").startup(
         use "michaelb/sniprun"
         use "folke/todo-comments.nvim"
         use 'kabouzeid/nvim-lspinstall'
+        use "ray-x/lsp_signature.nvim"
 
     end
 )
