@@ -67,7 +67,6 @@ async function startApolloServer () {
   server.applyMiddleware({ app })
 
   await new Promise((resolve) => app.listen({ port: __port__ }, resolve))
-  console.log()
   return { server, app }
 }
 
@@ -91,17 +90,6 @@ EOL
         touch src/index.ts
         cat >> src/index.ts << EOL
         console.log("Hello World, don't forget to inspect when debugging")
-EOL
-    fi
-    
-    if [ -f src/constants.ts ]
-    then
-        echo "constants.ts already exists"
-    else
-        echo 'creating constants.ts where you can store all your constants'
-        cat >> src/constants.ts << EOL
-export const __prod__ = process.env.NODE_ENV === 'production'
-export const __port__ = process.env.NODE_ENV === 4000
 EOL
     fi
 
@@ -316,7 +304,7 @@ export class resolvers  {
 };
 
 EOL
-    #TODO: FIND a GENEATOR
+    #TODO: FIND a GENERATOR
     touch src/schema/typeDefs.ts
     cat >> src/schema/typeDefs.ts << EOL
 import { gql } from "apollo-server-express"
@@ -425,7 +413,9 @@ data/
 EOL
     else
         echo ''
+        # there's lots of goof things in svelte@next like eslint prettier
         npm init svelte@next
+        #npm init @vitejs/app .
         echo 'installing tailwind and jest(TDD)'
         npx svelte-add tailwindcss
         npm install --save-dev jest babel-jest @babel/core @babel/preset-env @babel/preset-typescript
@@ -443,14 +433,15 @@ EOL
         echo 'adjusting the package.json for STS'
         json -I -f package.json -e "this.scripts.dev=\"svelte-kit dev --port 4000\""
         json -I -f package.json -e "this.scripts.test=\"jest\""
-        json -I -f tsconfig.json -e "this.experimentalDecorators=\"true\""
-        json -I -f tsconfig.json -e "this.strictNullChecks=\"true\""
-        json -I -f tsconfig.json -e "this.strictFunctionTypes=\"true\""
-        json -I -f tsconfig.json -e "this.removeComments=\"true\""
-        json -I -f tsconfig.json -e "this.noUnusedLocals=\"true\""
+        #WARN: The svelte tsconfig generates error blocking the following 6 lines of code
+
+        json -I -f tsconfig.json -e "this.compilerOptions.experimentalDecorators=true"
+        json -I -f tsconfig.json -e "this.compilerOptions.emitDecoratorMetadata=true"
+        json -I -f tsconfig.json -e "this.compilerOptions.strictNullChecks=true"
+        json -I -f tsconfig.json -e "this.compilerOptions.strictFunctionTypes=true"
+        json -I -f tsconfig.json -e "this.compilerOptions.removeComments=true"
+        json -I -f tsconfig.json -e "this.compilerOptions.noUnusedLocals=true"
         
-
-
         dbCreation
     fi
 
@@ -494,3 +485,16 @@ function main() {
 }
 
 main
+
+#TODO: refactor. svelte needs it.
+if [ -f src/constants.ts ]
+then
+    echo "constants.ts already exists"
+else
+    echo 'creating constants.ts where you can store all your constants'
+    cat >> src/constants.ts << EOL
+export const __prod__ = process.env.NODE_ENV === 'production'
+export const __port__ = process.env.NODE_ENV === 4000
+EOL
+fi
+
