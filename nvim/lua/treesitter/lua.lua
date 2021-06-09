@@ -10,7 +10,8 @@ ts_config.setup {
         "json",
         "python",
         "typescript",
-        "svelte"
+        "svelte",
+        "vuels"
         --  "cpp",
         --   "rust",
     },
