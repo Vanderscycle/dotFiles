@@ -13,7 +13,7 @@ windows:
     #layout: 232x53,0,0[232x27,0,0{115x27,0,0,10,116x27,116,0,12},232x25,0,28,11] # two square in the top half and one long 
       layout: even-horizontal # so that I may read the errors
       panes:
-        - npm run lint:watch
+        - npm run check:watch
         - npm run dev
   - database: psql -U postgres
   - browser: brave 'http://localhost:4000' 
