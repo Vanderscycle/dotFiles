@@ -448,9 +448,53 @@ EOL
 
 }
 
+
+function vueTS () {
+    # sends it to another folder
+    npm init @vitejs/app . -- --template vue-ts --yes
+    npm install tailwindcss
+
+
+    touch src/index.css
+    cat >> src/index.css << EOL
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+EOL
+
+
+    touch tailwind.config.js
+    cat >> tailwind.config.js <<EOL
+module.exports = {
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
+EOL
+
+
+    touch postcss.config.js
+    cat >> postcss.config.js << EOL
+module.exports = {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+}
+EOL
+
+}
+
+
 function main() {
     echo "what TS project do you want to init?"
-    read -p 'Vanila TS (VTS)/ Svelte TS (STS)' FRAMEWORK
+    read -p 'Vanila TS (VTS)/ Svelte TS (STS)/ Vue TS w/Vite (VTS)' FRAMEWORK
     read -p 'Api choice none (n)/ graphql (GQL)' BACKEND
     read -p 'Do you need a Postgres DB (y/n)' DBBACKEND
     read -p 'Will the project be hosted on Github(y/n)?' GITANSWER
@@ -472,6 +516,8 @@ function main() {
             svelteTS $BACKEND
         ;;
         *) echo 'please select VTS or STS'
+        [vV][tT][sS]
+            vueTS $BACKEND
     esac
     echo $DIRECTORYNAME
     if [ $GITANSWER == 'y' ]
