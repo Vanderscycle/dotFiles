@@ -453,6 +453,19 @@ function vueTS () {
     # sends it to another folder
     npm init @vitejs/app . -- --template vue-ts --yes
     npm install tailwindcss
+    npm install --save-dev eslint watch
+
+    json -I -f .eslintrc.json -e "this.scripts.lint=\"eslint ./src/**/*.{ts,vue}\"",
+    json -I -f .eslintrc.json -e "this.scripts.lint:fix=\"eslint ./src/**/*.{ts,vue} --fix\""
+    json -I -f .eslintrc.json  -e "this.scripts.lint:watch=\"watch 'npm run lint' .\""
+
+    json -I -f tsconfig.json -e "this.compilerOptions.experimentalDecorators=true"
+    json -I -f tsconfig.json -e "this.compilerOptions.emitDecoratorMetadata=true"
+    json -I -f tsconfig.json -e "this.compilerOptions.strictNullChecks=true"
+    json -I -f tsconfig.json -e "this.compilerOptions.strictFunctionTypes=true"
+    json -I -f tsconfig.json -e "this.compilerOptions.removeComments=true"
+    json -I -f tsconfig.json -e "this.compilerOptions.noUnusedLocals=true"
+
 
 
     touch src/index.css
@@ -490,7 +503,48 @@ module.exports = {
 EOL
 
 }
-
+touch .eslintrc.json
+cat >> .eslintrc.json << EOL
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/essential",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "parser": "@typescript-eslint/parser",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "vue",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}
+EOL
 
 function main() {
     echo "what TS project do you want to init?"
