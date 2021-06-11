@@ -417,7 +417,7 @@ EOL
         npm init svelte@next
         #npm init @vitejs/app .
         echo 'installing tailwind and jest(TDD)'
-        npx svelte-add tailwindcss
+        npx svelte-add tailwindcss @tailwindcss/forms
         npm install --save-dev jest babel-jest @babel/core @babel/preset-env @babel/preset-typescript
         touch babel.config.js
         cat >> babel.config.js <<EOL
@@ -473,6 +473,7 @@ function vueTS () {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwindcss/forms;
 EOL
 
 
