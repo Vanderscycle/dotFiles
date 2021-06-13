@@ -46,4 +46,5 @@ vim.cmd([[autocmd Filetype typescript setlocal expandtab tabstop=2 shiftwidth=2 
 vim.cmd([[autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2]])
 vim.cmd([[autocmd Filetype svelte setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2]])
 vim.cmd([[autocmd Filetype json setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2]])
+vim.cmd([[autocmd Filetype vue setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2]])
 return M

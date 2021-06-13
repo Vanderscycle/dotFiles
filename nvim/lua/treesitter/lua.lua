@@ -11,7 +11,7 @@ ts_config.setup {
         "python",
         "typescript",
         "svelte",
-        "vuels"
+        "vue"
         --  "cpp",
         --   "rust",
     },
