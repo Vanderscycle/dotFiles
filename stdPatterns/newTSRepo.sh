@@ -465,6 +465,11 @@ function vueTS () {
     json -I -f tsconfig.json -e "this.compilerOptions.strictFunctionTypes=true"
     json -I -f tsconfig.json -e "this.compilerOptions.removeComments=true"
     json -I -f tsconfig.json -e "this.compilerOptions.noUnusedLocals=true"
+    #TODO: add jest for TDD for each components
+    #TODO: consider installing json-server for api endpoints
+    #    "testBackend": "json-server --watch db.json --port 4001",
+    # apollo-server has a mocked backend https://www.apollographql.com/docs/apollo-server/testing/mocking/
+    # touch db.json
 
 
 
