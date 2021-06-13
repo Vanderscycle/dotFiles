@@ -136,6 +136,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-dap"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
@@ -216,10 +220,6 @@ _G.packer_plugins = {
   ["vim-vsnip-integ"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
-  },
-  vimspector = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vimspector"
   },
   vimwiki = {
     loaded = true,

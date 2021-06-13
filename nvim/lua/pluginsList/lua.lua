@@ -55,7 +55,7 @@ return require("packer").startup(
         use "rafamadriz/friendly-snippets"
 
         -- debugging
-        use "puremourning/vimspector" --install file
+        use "mfussenegger/nvim-dap"
         use "folke/lsp-trouble.nvim"
         use "michaelb/sniprun"
         use "folke/todo-comments.nvim"
