@@ -4,21 +4,21 @@ name: TypescriptWorkEnv
 root: .
 #https://thoughtbot.com/blog/templating-tmux-with-tmuxinator
 windows:
-  - editor:
-      layout: main  #main-vertical
-      panes:
-        - nvim 
-
+  - editor: nvim
   - server:
-    #layout: 232x53,0,0[232x27,0,0{115x27,0,0,10,116x27,116,0,12},232x25,0,28,11] # two square in the top half and one long 
-      layout: even-horizontal # so that I may read the errors
+      layout: da63,232x51,0,0{115x51,0,0,1,116x51,116,0[116x25,116,0,5,116x25,116,26,7]}
       panes:
-        - npm run check:watch
+        - npm run lint:watch
         - npm run dev
+        #not sure why pinentry keeps crashing
+        - pgrep -f pinentry | xargs kill -9 && brave 'http://localhost:4000'
   - database: psql -U postgres
-  - browser: brave 'http://localhost:4000' 
+  - dotconfig:
+      layout: even-horizontal
+      panes:
+        - cd ~/Documents/dotFiles/
+        - cd ~/.config/
   - monitor:
       layout: main
       panes:
-        - htop
-
+        - htop 
