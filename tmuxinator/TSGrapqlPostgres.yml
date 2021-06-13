@@ -22,3 +22,6 @@ windows:
       layout: main
       panes:
         - htop 
+  - vimwiki:
+      layout: main
+      panes: cd ~/vimwiki && nvim
