@@ -563,8 +563,6 @@ EOL
 function main() {
     echo "what TS project do you want to init?"
     read -p 'Vanila TS (VTS)/ Svelte TS (STS)/ Vue TS w/Vite (VUTS)? ' FRAMEWORK
-    read -p 'Api choice none (n)/ graphql (GQL)? ' BACKEND
-    read -p 'Do you need a Postgres DB (y/n)? ' DBBACKEND
     read -p 'Will the project be hosted on Github(y/n)? ' GITANSWER
     
     if [[ $BACKEND != 'GQL' ]]
@@ -573,6 +571,8 @@ function main() {
 
     case $FRAMEWORK in
         [vV][tT][sS])
+            read -p 'Api choice none (n)/ graphql (GQL)? ' BACKEND
+            read -p 'Do you need a Postgres DB (y/n)? ' DBBACKEND
             tsFolders $BACKEND
             npmInit
             if [[ $DBBACKEND == 'y' ]]
@@ -581,6 +581,8 @@ function main() {
             fi
         ;;
         [sS][tT][sS])
+            read -p 'Api choice none (n)/ graphql (GQL)? ' BACKEND
+            read -p 'Do you need a Postgres DB (y/n)? ' DBBACKEND
             svelteTS $BACKEND
         ;;
 
