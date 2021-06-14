@@ -457,9 +457,9 @@ function vueTS () {
     npm install tailwindcss vue-router@next
     npm install --save-dev eslint watch
 
-    json -I -f .eslintrc.json -e "this.scripts.lint=\"eslint ./src/**/*.{ts,vue}\"",
-    json -I -f .eslintrc.json -e "this.scripts.lint:fix=\"eslint ./src/**/*.{ts,vue} --fix\""
-    json -I -f .eslintrc.json  -e "this.scripts.lint:watch=\"watch 'npm run lint' .\""
+    json -I -f package.json -e "this.scripts.lint=\"eslint ./src/**/*.{ts,vue}\"",
+    json -I -f package.json -e "this.scripts.lint:fix=\"eslint ./src/**/*.{ts,vue} --fix\""
+    json -I -f package.json  -e "this.scripts.lint:watch=\"watch 'npm run lint' .\""
 
     json -I -f tsconfig.json -e "this.compilerOptions.experimentalDecorators=true"
     json -I -f tsconfig.json -e "this.compilerOptions.emitDecoratorMetadata=true"
@@ -581,10 +581,14 @@ function main() {
         [sS][tT][sS])
             svelteTS $BACKEND
         ;;
-        *) echo 'please select VTS or STS'
-        [vV][uU][tT][sS]
+
+        [vV][uU][tT][sS])
             read -p 'vite rquires the folder to be empty. What is the dir name' DIRNAME 
             vueTS $DIRNAME
+        ;;
+        *) 
+            echo 'please select VTS or STS' ;;
+
     esac
     echo $DIRECTORYNAME
     if [ $GITANSWER == 'y' ]
