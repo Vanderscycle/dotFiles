@@ -451,8 +451,10 @@ EOL
 
 function vueTS () {
     # sends it to another folder
+    mkdir $1
+    cd $1
     npm init @vitejs/app . -- --template vue-ts --yes
-    npm install tailwindcss
+    npm install tailwindcss vue-router@next
     npm install --save-dev eslint watch
 
     json -I -f .eslintrc.json -e "this.scripts.lint=\"eslint ./src/**/*.{ts,vue}\"",
@@ -472,6 +474,10 @@ function vueTS () {
     # touch db.json
 
 
+    mkdir src/router/
+    touch src/router/index.ts
+    
+    mkdir src/view/
 
     touch src/index.css
     cat >> src/index.css << EOL
@@ -509,8 +515,8 @@ module.exports = {
 EOL
 
 }
-touch .eslintrc.json
-cat >> .eslintrc.json << EOL
+    touch .eslintrc.json
+    cat >> .eslintrc.json << EOL
 {
     "env": {
         "browser": true,
@@ -554,7 +560,7 @@ EOL
 
 function main() {
     echo "what TS project do you want to init?"
-    read -p 'Vanila TS (VTS)/ Svelte TS (STS)/ Vue TS w/Vite (VTS)' FRAMEWORK
+    read -p 'Vanila TS (VTS)/ Svelte TS (STS)/ Vue TS w/Vite (VUTS)' FRAMEWORK
     read -p 'Api choice none (n)/ graphql (GQL)' BACKEND
     read -p 'Do you need a Postgres DB (y/n)' DBBACKEND
     read -p 'Will the project be hosted on Github(y/n)?' GITANSWER
@@ -576,8 +582,9 @@ function main() {
             svelteTS $BACKEND
         ;;
         *) echo 'please select VTS or STS'
-        [vV][tT][sS]
-            vueTS $BACKEND
+        [vV][uU][tT][sS]
+            read -p 'vite rquires the folder to be empty. What is the dir name' DIRNAME 
+            vueTS $DIRNAME
     esac
     echo $DIRECTORYNAME
     if [ $GITANSWER == 'y' ]
