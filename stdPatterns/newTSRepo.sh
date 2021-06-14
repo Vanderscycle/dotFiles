@@ -514,7 +514,8 @@ module.exports = {
 }
 EOL
 
-
+    #required plugins for the eslint config
+    npm install @typescript-eslint/eslint-plugin@latest eslint-plugin-vue@latest --save-dev
     touch .eslintrc.json
     cat >> .eslintrc.json << EOL
 {
