@@ -74,15 +74,6 @@ map("n","<leader>bb",":lua require('workbench').toggle_branch_workbench()<CR>",o
 vim.cmd([[nmap <leader>ba <Plug>WorkbenchAddCheckbox]])
 vim.cmd([[nmap <leader>bc <Plug>WorkbenchToggleCheckbox]])
 
---vimspector
--- https://alpha2phi.medium.com/neovim-debugging-application-70c525754064
-map("n", "<leader>vl", ":call vimspector#Launch()<CR>")
-map("n", "<leader>vr", ":VimspectorReset<CR>")
-map("n", "<leader>ve", ":VimspectorEval")
-map("n", "<leader>vw", ":VimspectorWatch")
-map("n", "<leader>vo", "<Plug>VimspectorBalloonEval")
-map("n", "<leader>vo", ":vimspectorShowOutput")
-
 -- lsp-trouble
 vim.api.nvim_set_keymap("n", "<leader>tx", "<cmd>LspTroubleToggle<cr>",
   {silent = true, noremap = true}
