@@ -457,9 +457,9 @@ function vueTS () {
     npm install tailwindcss vue-router@next
     npm install --save-dev eslint watch
 
-    json -I -f package.json -e "this.scripts.lint=\"eslint ./src/**/*.{ts,vue}\"",
-    json -I -f package.json -e "this.scripts.lint:fix=\"eslint ./src/**/*.{ts,vue} --fix\""
-    json -I -f package.json  -e "this.scripts.lint:watch=\"watch 'npm run lint' .\""
+    json -I -f package.json -e "this.scripts.lint=\"eslint ./src/**/*.{ts,vue}\""
+    json -I -f package.json -e "this.scripts.lint_fix=\"eslint ./src/**/*.{ts,vue} --fix\""
+    json -I -f package.json -e "this.scripts.lint_watch=\"watch 'npm run lint' .\""
 
     json -I -f tsconfig.json -e "this.compilerOptions.experimentalDecorators=true"
     json -I -f tsconfig.json -e "this.compilerOptions.emitDecoratorMetadata=true"
@@ -489,7 +489,7 @@ EOL
 
 
     touch tailwind.config.js
-    cat >> tailwind.config.js <<EOL
+    cat >> tailwind.config.js << EOL
 module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
@@ -514,7 +514,7 @@ module.exports = {
 }
 EOL
 
-}
+
     touch .eslintrc.json
     cat >> .eslintrc.json << EOL
 {
@@ -558,12 +558,14 @@ EOL
 }
 EOL
 
+}
+
 function main() {
     echo "what TS project do you want to init?"
-    read -p 'Vanila TS (VTS)/ Svelte TS (STS)/ Vue TS w/Vite (VUTS)' FRAMEWORK
-    read -p 'Api choice none (n)/ graphql (GQL)' BACKEND
-    read -p 'Do you need a Postgres DB (y/n)' DBBACKEND
-    read -p 'Will the project be hosted on Github(y/n)?' GITANSWER
+    read -p 'Vanila TS (VTS)/ Svelte TS (STS)/ Vue TS w/Vite (VUTS)? ' FRAMEWORK
+    read -p 'Api choice none (n)/ graphql (GQL)? ' BACKEND
+    read -p 'Do you need a Postgres DB (y/n)? ' DBBACKEND
+    read -p 'Will the project be hosted on Github(y/n)? ' GITANSWER
     
     if [[ $BACKEND != 'GQL' ]]
     then BACKEND=''
@@ -583,11 +585,11 @@ function main() {
         ;;
 
         [vV][uU][tT][sS])
-            read -p 'vite rquires the folder to be empty. What is the dir name' DIRNAME 
+            read -p 'vite rquires the folder to be empty. What is the dir name? ' DIRNAME 
             vueTS $DIRNAME
         ;;
         *) 
-            echo 'please select VTS or STS' ;;
+            echo 'please select VTS, STS, VUTS' ;;
 
     esac
     echo $DIRECTORYNAME
