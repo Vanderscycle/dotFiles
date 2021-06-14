@@ -8,7 +8,7 @@ windows:
   - server:
       layout: da63,232x51,0,0{115x51,0,0,1,116x51,116,0[116x25,116,0,5,116x25,116,26,7]}
       panes:
-        - npm run lint:watch
+        - npm run lint_watch
         - npm run dev
         #not sure why pinentry keeps crashing
         - pgrep -f pinentry | xargs kill -9 && brave 'http://localhost:4000'
