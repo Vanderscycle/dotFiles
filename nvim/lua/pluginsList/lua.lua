@@ -45,9 +45,7 @@ return require("packer").startup(
         use "tpope/vim-fugitive"
         use "folke/which-key.nvim"
         use "glepnir/dashboard-nvim"
-        --use "mattn/emmet-vim"
         use "folke/lsp-colors.nvim"
-        use "prettier/vim-prettier"
 
         -- snippet support
         use "hrsh7th/vim-vsnip"
@@ -61,6 +59,7 @@ return require("packer").startup(
         use "folke/todo-comments.nvim"
         use 'kabouzeid/nvim-lspinstall'
         use "ray-x/lsp_signature.nvim"
+        use 'ggandor/lightspeed.nvim'
 
     end
 )

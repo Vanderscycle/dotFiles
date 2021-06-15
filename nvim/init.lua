@@ -94,3 +94,5 @@ require "zen-mode.lua"
 require "dashboard.lua"
 require "whichKey.lua"
 require "todo-comments.lua"
+-- lsps
+require 'emmet.lua'

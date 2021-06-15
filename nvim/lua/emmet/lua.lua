@@ -1,19 +1,19 @@
--- After you have what you want press C-Y and , at the same time
--- autocmd FileType html,css EmmetInstall
--- vim.g.user_emmet_leader_key='<leader>'
-vim.g.user_emmet_mode='inv'
-vim.g.user_emmet_expandabbr_key = '<C-y>,'
-vim.g.user_emmet_expandword_key = '<C-y>;'
-vim.g.user_emmet_update_tag = '<C-y>u'
-vim.g.user_emmet_balancetaginward_key = '<C-y>d'
-vim.g.user_emmet_balancetagoutward_key = '<C-y>D'
-vim.g.user_emmet_next_key = '<C-y>n'
-vim.g.user_emmet_prev_key = '<C-y>N'
-vim.g.user_emmet_imagesize_key = '<C-y>i'
-vim.g.user_emmet_togglecomment_key = '<C-y>/'
-vim.g.user_emmet_splitjointag_key = '<C-y>j'
-vim.g.user_emmet_removetag_key = '<C-y>k'
-vim.g.user_emmet_anchorizeurl_key = '<C-y>a'
-vim.g.user_emmet_anchorizesummary_key = '<C-y>A'
-vim.g.user_emmet_mergelines_key = '<C-y>m'
-vim.g.user_emmet_codepretty_key = '<C-y>c'
+local lspconfig = requirelocal nvim_lsp = require'lspconfig'
+local configs = require'lspconfig/configs'
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+configs.emmet_ls = {
+  default_config = {
+    cmd = {'emmet-ls', '--stdio'};
+    filetypes = {'html', 'css', 'svelte',"vue-html"};
+    root_dir = function()
+      return vim.loop.cwd()
+    end;
+    settings = {};
+  };
+}
+
+nvim_lsp.emmet_ls.setup{
+  -- on_attach = on_attach;
+}

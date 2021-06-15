@@ -71,9 +71,10 @@ map("n","<leader>sz",":SnipReset<CR>", opt)
 -- nvim workbench
 map("n","<leader>bp",":lua require('workbench').toggle_project_workbench()<CR>",opt)
 map("n","<leader>bb",":lua require('workbench').toggle_branch_workbench()<CR>",opt)
-vim.cmd([[nmap <leader>ba <Plug>WorkbenchAddCheckbox]])
-vim.cmd([[nmap <leader>bc <Plug>WorkbenchToggleCheckbox]])
 
+--neoformater (kinda prettier)
+-- https://github.com/sbdchd/neoformat
+map("n","<leader>p",":Neoformat<CR>",opt)
 -- lsp-trouble
 vim.api.nvim_set_keymap("n", "<leader>tx", "<cmd>LspTroubleToggle<cr>",
   {silent = true, noremap = true}
