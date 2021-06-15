@@ -448,13 +448,13 @@ EOL
 
 }
 
-
+#vite, vue, vuex, vue-router
 function vueTS () {
     # sends it to another folder
     mkdir $1
     cd $1
     npm init @vitejs/app . -- --template vue-ts --yes
-    npm install tailwindcss vue-router@next
+    npm install tailwindcss vue-router@next vuex@next
     npm install --save-dev eslint watch
 
     json -I -f package.json -e "this.scripts.lint=\"eslint ./src/**/*.{ts,vue}\""
@@ -473,7 +473,16 @@ function vueTS () {
     # apollo-server has a mocked backend https://www.apollographql.com/docs/apollo-server/testing/mocking/
     # touch db.json
 
+    mkdir src/store
+    touch src/store/index.ts
+    cat >> src/store/index.ts << EOL
+import Vuex from 'vuex'
+import Vue from 'vue'
 
+//https://vueuse.org/
+Vue.use(Vuex);
+
+EOL
     mkdir src/router/
     touch src/router/index.ts
     
