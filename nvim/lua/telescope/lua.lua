@@ -1,3 +1,4 @@
+
 require("telescope").setup {
     defaults = {
         vimgrep_arguments = {
@@ -61,23 +62,21 @@ local opt = {noremap = true, silent = true}
 vim.g.mapleader = " "
 
 -- mappings
-vim.api.nvim_set_keymap("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], opt)
 vim.api.nvim_set_keymap(
     "n",
     "<Leader>fp",
     [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]],
     opt
 )
-
+-- buffer wide
 vim.api.nvim_set_keymap("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], opt)
-vim.api.nvim_set_keymap("n", "<Leader>fh", [[<Cmd>lua require('telescope.builtin').help_tags()<CR>]], opt)
-vim.api.nvim_set_keymap("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)
-vim.api.nvim_set_keymap("n", "<Leader>fg", [[<Cmd>lua require('telescope.builtin').git_commits()<CR>]], opt)
 vim.api.nvim_set_keymap("n", "<Leader>fs", [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], opt)
-vim.api.nvim_set_keymap("n", "<Leader>fm", [[<Cmd> Neoformat<CR>]], opt)
-
--- highlights 
-
+-- file specific
+vim.api.nvim_set_keymap("n", "<Leader>ft", [[<Cmd>lua require('telescope.builtin').file_browser()<CR>]], opt) --system wide
+vim.api.nvim_set_keymap("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], opt) -- directory wide
+--git
+vim.api.nvim_set_keymap("n", "<Leader>fc", [[<Cmd>lua require('telescope.builtin').git_bcommits()<CR>]], opt) --file specific
+-- highlights
 local cmd = vim.cmd
 
 cmd "hi TelescopeBorder   guifg=#2a2e36"
