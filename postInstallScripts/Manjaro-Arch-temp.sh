@@ -1,6 +1,6 @@
 #!/bin/bash
 # Manjaro post-install script
-
+#TODO:install to confirm work
 function beforeReboot() {
 
 cd ~
@@ -46,6 +46,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing developer packages'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa
+sudo pacman -S --noconfirm asciinema # to record
 #bat=cat, exa=ls but better
 # corrector for bash scripts
 sudo pacman -S --noconfirm shellcheck # maybe bloat?
@@ -61,7 +62,7 @@ RUN yes | sudo npm install -g typescript typescript-language-server diagnostic-l
 RUN yes | sudo npm install -g pyright
 RUN yes | sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
 RUN yes | sudo npm install -g bash-language-server
-RUN yes | sudo npm install -g tldr # necessary?
+RUN yes | sudo npm install -g tldr #WARN: necessary?
 RUN yes | sudo npm install -g json
 RUN yes | sudo npm isntall -g typeorm ts-node express svelte-language-server graphql @types/nodes pg mongodb 
 echo -e 'Done.\n'
@@ -230,7 +231,7 @@ echo -e 'Done.\n'
 echo -e '\n=> Configuring python env with basic package through Conda'
 conda create -y -n dev-branch python
 conda activate dev-branch 
-conda install -y pandas numpy django 
+conda install -y pandas numpy 
 pip3 install pynvim # required to work with nvim
 
 
@@ -253,7 +254,7 @@ echo -e 'Configuring Neovim'
 # fd alternative to find
 # ueberzug allows for image display in terminal
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
-git clone https://github.com/siduck76/neonvim-dotfiles.git ~/Documents/neovim-dots/
+git clone https://github.com/siduck76/nvchad.git ~/Documents/neovim-dots/ # hopefully the author will stop changing the repo name
 cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
 export EDITOR='nvim' >> ~/.zshrc
 echo -e 'Done.\n'
@@ -409,7 +410,7 @@ yay -S --noconfirm zoom discord
 echo -e 'Installing libreOffice'
 pacman -S --noconfirm --needed libreoffice
 
-echo -e 'Installing entertainment (steam/spotify)'
+echo -e 'Installing entertainment (spotify)'
 yay -S --noconfirm vlc #command line client for spotify (may want to move to Ncmpcpp later)
 # https://wvarner.blogspot.com/2017/10/setting-up-mopidy-ncmpcpp-and-spotify.html (config)
 sudo pacman -S --noconfirm mopidy 
