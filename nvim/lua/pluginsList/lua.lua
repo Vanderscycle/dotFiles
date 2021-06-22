@@ -39,9 +39,6 @@ return require("packer").startup(
         use "karb94/neoscroll.nvim"
 
         -- additions
-        -- note taking
-        use "vimwiki/vimwiki"
-
         use "tpope/vim-fugitive"
         use "folke/which-key.nvim"
         use "glepnir/dashboard-nvim"
