@@ -18,10 +18,10 @@ windows:
       panes:
         - cd ~/Documents/dotFiles/
         - cd ~/.config/
-  - monitor:
+  - obsidian:
+      layout: main
+      panes: obsidian ~/Documents/dotFiles/obsidian
+  - task Manager:
       layout: main
       panes:
         - htop 
-  - vimwiki:
-      layout: main
-      panes: cd ~/vimwiki && nvim
