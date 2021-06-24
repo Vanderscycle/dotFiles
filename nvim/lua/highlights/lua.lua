@@ -38,24 +38,24 @@ end
 fg("IndentBlanklineChar", line)
 
 -- misc --
-fg("LineNr", grey)
-fg("Comment", grey)
-fg("NvimInternalError", red)
-fg("VertSplit", line)
-fg("EndOfBuffer", black)
+fg("LineNr", "#42464e")
+fg("Comment", "#42464e")
+fg("NvimInternalError", "#bf616a")
+fg("VertSplit", "#2a2e36")
+fg("EndOfBuffer", "#1e222a")
 
 -- Pmenu
-bg("Pmenu", one_bg)
-bg("PmenuSbar", one_bg2)
-bg("PmenuSel", green)
-bg("PmenuThumb", nord_blue)
+bg("Pmenu", "#282c34")
+bg("PmenuSbar", "#434c5e")
+bg("PmenuSel", "#a3be8c")
+bg("PmenuThumb", "#81a1c1")
 
 -- inactive statuslines as thin splitlines
 cmd("hi! StatusLineNC gui=underline guifg=" .. line)
 
 -- line n.o
 cmd "hi clear CursorLine"
-fg("cursorlinenr", white)
+fg("cursorlinenr", "#42464e")
 
 -- git signs ---
 fg_bg("DiffAdd", "#81a1c1", "none")

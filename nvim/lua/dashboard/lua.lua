@@ -56,15 +56,13 @@ vim.g.dashboard_custom_header = {
 vim.g.dashboard_default_executive = 'telescope'
 --vim.g.dashboard_disable_statusline = 1
 vim.g.dashboard_custom_section = {
-    a = {description = {'  Find File          '}, command = 'Telescope find_files'},
+    a = {description = {'  Find File           SPC f f'}, command = 'Telescope find_files'},
     b = {description = {'  Recently Used Files'}, command = 'Telescope oldfiles'},
-    c = {description = {'  Directory Search   '}, command = 'Telescope file_browser'},
-    d = {description = {'  Find Word          '}, command = 'Telescope live_grep'},
+    c = {description = {'  Directory Search    SPC f t'}, command = 'Telescope file_browser'},
+    d = {description = {'  Find Word           SPC f s'}, command = 'Telescope live_grep'},
     e = {description = {'  Settings           '}, command = ':e ~/.config/nvim/init.lua'},
     f = {description = {'  Marks              '}, command = 'Telescope marks'},
-    g = {description = {"  Load Last Session  "}, command = "SessionLoad"}
 }
 
 -- vim.g.dashboard_session_directory = '~/.cache/nvim/session'
 vim.g.dashboard_custom_footer = {'Henri Vandersleyen'}
-

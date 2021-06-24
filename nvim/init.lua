@@ -1,4 +1,5 @@
 -- load all plugins
+-- highlights is first because I do not want it to overide my settings
 require "highlights"
 require "pluginsList.lua"
 require "file-icons.lua"
@@ -48,16 +49,16 @@ require "treesitter.lua"
 require "mappings.lua"
 
 -- highlights --
-cmd "hi LineNr guifg=#42464e guibg=NONE"
-cmd "hi Comment guifg=#42464e"
+--cmd "hi LineNr guifg=#42464e guibg=NONE"
+--cmd "hi Comment guifg=#42464e"
 
-cmd "hi SignColumn guibg=NONE"
-cmd "hi VertSplit guibg=NONE guifg=#2a2e36"
-cmd "hi EndOfBuffer guifg=#1e222a"
-cmd "hi PmenuSel guibg=#98c379"
-cmd "hi Pmenu  guibg=#282c34"
+--cmd "hi SignColumn guibg=NONE"
+--cmd "hi VertSplit guibg=NONE guifg=#2a2e36"
+--cmd "hi EndOfBuffer guifg=#1e222a"
+--cmd "hi PmenuSel guibg=#98c379"
+--cmd "hi Pmenu  guibg=#282c34"
 
-cmd "hi Normal guibg=NONE ctermbg=NONE"
+--cmd "hi Normal guibg=NONE ctermbg=NONE"
 
 require "telescope.lua"
 require "nvimTree.lua"
