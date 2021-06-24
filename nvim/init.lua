@@ -30,35 +30,16 @@ local base16 = require "base16"
 base16(base16.themes["nord"], true)
 --base16(base16.themes["material-palenight"], true)
 
--- blankline
-
---local indent = 2
-
+--indentline
 g.indentLine_enabled = 1
 g.indent_blankline_char = "▏"
-
-cmd "hi IndentBlanklineChar guifg=#2a2e36"
-
-g.indent_blankline_filetype_exclude = {"help", "terminal"}
-g.indent_blankline_buftype_exclude = {"terminal-darker"}
-
+g.indent_blankline_filetype_exclude = {"help", "terminal","dashboard"}
+g.indent_blankline_buftype_exclude = {"terminal","dashboard"}
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
 
 require "treesitter.lua"
 require "mappings.lua"
-
--- highlights --
---cmd "hi LineNr guifg=#42464e guibg=NONE"
---cmd "hi Comment guifg=#42464e"
-
---cmd "hi SignColumn guibg=NONE"
---cmd "hi VertSplit guibg=NONE guifg=#2a2e36"
---cmd "hi EndOfBuffer guifg=#1e222a"
---cmd "hi PmenuSel guibg=#98c379"
---cmd "hi Pmenu  guibg=#282c34"
-
---cmd "hi Normal guibg=NONE ctermbg=NONE"
 
 require "telescope.lua"
 require "nvimTree.lua"

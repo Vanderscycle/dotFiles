@@ -65,4 +65,7 @@ vim.g.dashboard_custom_section = {
 }
 
 -- vim.g.dashboard_session_directory = '~/.cache/nvim/session'
-vim.g.dashboard_custom_footer = {'Henri Vandersleyen'}
+vim.api.nvim_exec([[
+    let g:dashboard_custom_footer = ['LuaJIT loaded '..packages..' packages']
+]], false)
+--vim.g.dashboard_custom_footer = {'Henri Vandersleyen'}

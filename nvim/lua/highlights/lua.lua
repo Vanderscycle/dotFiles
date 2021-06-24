@@ -35,7 +35,7 @@ end
 
 -- blankline
 
-fg("IndentBlanklineChar", line)
+fg("IndentBlanklineChar", "#2a2e36")
 
 -- misc --
 fg("LineNr", "#42464e")
