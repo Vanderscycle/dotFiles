@@ -84,7 +84,7 @@ g.nvim_tree_bindings = {
     ["-"] = get_lua_cb("dir_up"),
     ["q"] = get_lua_cb("close")
 }
-
-cmd "hi NvimTreeFolderIcon guifg = #61afef"
-cmd "hi NvimTreeFolderName guifg = #61afef"
-cmd "hi NvimTreeIndentMarker guifg=#383c44"
+-- TODO: move all highlights to highlights
+cmd "hi NvimTreeFolderIcon guifg = #88C0D0"
+cmd "hi NvimTreeFolderName guifg = #88C0D0"
+cmd "hi NvimTreeIndentMarker guifg=#D8DEE9"

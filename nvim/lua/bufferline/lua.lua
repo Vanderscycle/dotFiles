@@ -4,7 +4,8 @@ local bar_fg = "#565c64"
 local activeBuffer_fg = "#c8ccd4"
 
 require "bufferline".setup {
-    options = {
+      options = {
+        offsets = {{filetype = "NvimTree", text = "", padding = 1}},
         buffer_close_icon = "",
         modified_icon = "",
         close_icon = "",
@@ -12,12 +13,15 @@ require "bufferline".setup {
         right_trunc_marker = "",
         max_name_length = 14,
         max_prefix_length = 13,
-        tab_size = 18,
-        enforce_regular_tabs = true,
+        tab_size = 20,
+        show_tab_indicators = true,
+        enforce_regular_tabs = false,
         view = "multiwindow",
         show_buffer_close_icons = true,
-        separator_style = "thin"
+        separator_style = "thin",
+        mappings = "true"
     },
+    --TODO: move all the scheme to highlights
     highlights = {
         background = {
             guifg = bar_fg,

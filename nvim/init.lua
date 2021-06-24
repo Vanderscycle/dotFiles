@@ -1,7 +1,6 @@
 -- load all plugins
 require "pluginsList.lua"
 require "file-icons.lua"
-
 require "misc-utils.lua"
 require "bufferline.lua"
 require "statusline.lua"
@@ -31,7 +30,7 @@ base16(base16.themes["nord"], true)
 
 -- blankline
 
-local indent = 2
+--local indent = 2
 
 g.indentLine_enabled = 1
 g.indent_blankline_char = "▏"

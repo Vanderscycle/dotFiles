@@ -78,7 +78,7 @@ vim.api.nvim_set_keymap("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap("n", "<Leader>fc", [[<Cmd>lua require('telescope.builtin').git_bcommits()<CR>]], opt) --file specific
 -- highlights
 local cmd = vim.cmd
-
+-- TODO: move all highlights to highlights
 cmd "hi TelescopeBorder   guifg=#2a2e36"
 cmd "hi TelescopePromptBorder   guifg=#2a2e36"
 cmd "hi TelescopeResultsBorder  guifg=#2a2e36"

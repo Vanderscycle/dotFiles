@@ -2,8 +2,7 @@ require'sniprun'.setup({
   selected_interpreters = {"Lua_nvim"},     --" use those instead of the default for the current filetype
   repl_enable = {"Python3_original"},               --" enable REPL-like behavior for the given interpreters
   repl_disable = {},              --" disable REPL-like behavior for the given interpreters
-  vim.g.sniprun.
-  inline_messages = 0             --" inline_message (0/1) is a one-line way to display messages
+  vim.g.sniprun.inline_messages = 0,             --" inline_message (0/1) is a one-line way to display messages
                                   --" to workaround sniprun not being able to display anything
 
   -- " you can combo different display modes as desired
