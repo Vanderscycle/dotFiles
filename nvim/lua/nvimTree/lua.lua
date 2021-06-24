@@ -85,6 +85,6 @@ g.nvim_tree_bindings = {
     ["q"] = get_lua_cb("close")
 }
 -- TODO: move all highlights to highlights
-cmd "hi NvimTreeFolderIcon guifg = #88C0D0"
-cmd "hi NvimTreeFolderName guifg = #88C0D0"
-cmd "hi NvimTreeIndentMarker guifg=#D8DEE9"
+--cmd "hi NvimTreeFolderIcon guifg = #88C0D0"
+--cmd "hi NvimTreeFolderName guifg = #88C0D0"
+--cmd "hi NvimTreeIndentMarker guifg=#D8DEE9"

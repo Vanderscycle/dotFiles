@@ -37,6 +37,7 @@ require "bufferline".setup {
             guibg = "#353b45",
             gui = "bold"
         },
+        --y
         separator_selected = {
             guifg = "#353b45",
             guibg = "#353b45"
@@ -58,6 +59,7 @@ require "bufferline".setup {
             guifg = "#1e222a",
             guibg = "#1e222a"
         },
+        -- y
         modified_selected = {
             guifg = "#d0f5c2",
             guibg = "#353b45"

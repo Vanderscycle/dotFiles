@@ -1,4 +1,5 @@
 -- load all plugins
+require "highlights"
 require "pluginsList.lua"
 require "file-icons.lua"
 require "misc-utils.lua"

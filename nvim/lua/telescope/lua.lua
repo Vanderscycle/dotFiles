@@ -79,7 +79,7 @@ vim.api.nvim_set_keymap("n", "<Leader>fc", [[<Cmd>lua require('telescope.builtin
 -- highlights
 local cmd = vim.cmd
 -- TODO: move all highlights to highlights
-cmd "hi TelescopeBorder   guifg=#2a2e36"
-cmd "hi TelescopePromptBorder   guifg=#2a2e36"
-cmd "hi TelescopeResultsBorder  guifg=#2a2e36"
-cmd "hi TelescopePreviewBorder  guifg=#525865"
+--cmd "hi TelescopeBorder   guifg=#2a2e36"
+--cmd "hi TelescopePromptBorder   guifg=#2a2e36"
+--cmd "hi TelescopeResultsBorder  guifg=#2a2e36"
+--cmd "hi TelescopePreviewBorder  guifg=#525865"
