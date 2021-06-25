@@ -1,4 +1,4 @@
-local cmd = vim.cmd
+local cmd = vim.cmlocal cmd = vim.cmd
 
 local colors = require "themes/onedark"
 
@@ -35,7 +35,7 @@ end
 
 -- blankline
 
-fg("IndentBlanklineChar", "#2a2e36")
+fg("IndentBlanklineChar", line)
 
 -- misc --
 fg("LineNr", "#42464e")
@@ -66,8 +66,8 @@ fg_bg("DiffModified", "#81a1c1", "none")
 fg("NvimTreeFolderIcon", '#88C0D0')
 fg("NvimTreeFolderName", '#88C0D0')
 fg("NvimTreeIndentMarker", "#D8DEE9")
-fg("NvimTreeVertSplit", "#2e3440")
-bg("NvimTreeVertSplit", "#2e3440")
+--fg("NvimTreeVertSplit", "#2e3440")
+--bg("NvimTreeVertSplit", "#2e3440")
 
 fg("NvimTreeRootFolder", "#2e3440")
 bg("NvimTreeNormal", "#2e3440")
@@ -136,4 +136,4 @@ fg("DashboardShortcut", grey_fg)
 fg("DashboardFooter", grey_fg)
 
 -- Default nvim bg
--- cmd "hi Normal guibg=#1e222a"
+-- cmd "hi Normal guibg=#1e222a""
