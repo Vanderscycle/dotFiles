@@ -87,4 +87,5 @@ require "dashboard.lua"
 require "whichKey.lua"
 require "todo-comments.lua"
 -- lsps
-require 'emmet.lua'
+require 'lsp.emmet'
+--require 'lsp.python'

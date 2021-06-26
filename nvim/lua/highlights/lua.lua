@@ -39,11 +39,13 @@ end
 
 -- misc --
 fg_bg("LineNr", "#42464e","none")
-fg("Comment", "#42464e")
+fg("Comment", "#5E81AC") -- original "#42464e"
 fg("NvimInternalError", "#bf616a")
 fg_bg("VertSplit", "#2a2e36","none")
 fg("EndOfBuffer", "#1e222a")
 bg("SignColumn","none")
+cmd "hi Visual guibg=#ebcb8b  ctermbg=NONE" --need to find a way to change the highligh color in visual mode
+
 -- Pmenu
 bg("Pmenu", "#282c34")
 bg("PmenuSbar", "#434c5e")
@@ -74,10 +76,10 @@ fg("NvimTreeRootFolder", "#2e3440")
 fg_bg("NvimTreeStatuslineNc", "#2e3440","#2e3440")
 
 -- telescope
-fg("TelescopeBorder", "#2a2e36")
-fg("TelescopePromptBorder", "#2a2e36")
+fg("TelescopeBorder", "#2E3440")
+fg("TelescopePromptBorder", "#2E3440")
 fg("TelescopeResultsBorder", "#2a2e36")
-fg("TelescopePreviewBorder", "#525865")
+fg("TelescopePreviewBorder", "#4C566A")
 
 -- LspDiagnostics ---
 
@@ -130,10 +132,10 @@ fg_bg("BufferLineCLoseButtonSelected", red, black)
 
 -- dashboard
 
---fg("DashboardHeader", grey_fg)
---fg("DashboardCenter", grey_fg)
---fg("DashboardShortcut", grey_fg)
---fg("DashboardFooter", grey_fg)
+fg("DashboardHeader", "#D8DEE9")
+fg("DashboardCenter", "#88C0D0")
+fg("DashboardShortcut", "#88C0D0")
+fg("DashboardFooter", "#5E81AC")
 
 -- Default nvim bg
 -- cmd "hi Normal guibg=#1e222a""
