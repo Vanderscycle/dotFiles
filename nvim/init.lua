@@ -1,6 +1,5 @@
 -- load all plugins
--- highlights is first because I do not want it to overide my settings
-require "highlights"
+require "highlights.lua"
 require "pluginsList.lua"
 require "file-icons.lua"
 require "misc-utils.lua"
@@ -26,20 +25,31 @@ cmd "syntax enable"
 cmd "syntax on"
 
 local base16 = require "base16"
---base16(base16.themes["onedark"], true)
 base16(base16.themes["nord"], true)
---base16(base16.themes["material-palenight"], true)
 
---indentline
+-- blankline
+
+--local indent = 2
+
 g.indentLine_enabled = 1
 g.indent_blankline_char = "▏"
-g.indent_blankline_filetype_exclude = {"help", "terminal","dashboard"}
-g.indent_blankline_buftype_exclude = {"terminal","dashboard"}
+
+--cmd "hi IndentBlanklineChar guifg=#2a2e36"
+
+g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard"}
+g.indent_blankline_buftype_exclude = {"terminal-darker"}
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
 
 require "treesitter.lua"
 require "mappings.lua"
+
+-- highlights --
+--TODO: integrate into highlights
+cmd "hi LineNr guifg=#42464e guibg=NONE" --required
+cmd "hi SignColumn guibg=NONE" --required
+cmd "hi VertSplit guibg=NONE guifg=#2a2e36" --required
+cmd "hi Normal guibg=NONE ctermbg=NONE"
 
 require "telescope.lua"
 require "nvimTree.lua"

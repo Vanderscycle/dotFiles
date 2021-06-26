@@ -35,19 +35,19 @@ end
 
 -- blankline
 
-fg("IndentBlanklineChar", line)
+--fg("IndentBlanklineChar", "#2a2e36")
 
 -- misc --
-fg("LineNr", "#42464e")
+fg_bg("LineNr", "#42464e","none")
 fg("Comment", "#42464e")
 fg("NvimInternalError", "#bf616a")
-fg("VertSplit", "#2a2e36")
+fg_bg("VertSplit", "#2a2e36","none")
 fg("EndOfBuffer", "#1e222a")
-
+bg("SignColumn","none")
 -- Pmenu
 bg("Pmenu", "#282c34")
 bg("PmenuSbar", "#434c5e")
-bg("PmenuSel", "#a3be8c")
+bg("PmenuSel", "#98c379")
 bg("PmenuThumb", "#81a1c1")
 
 -- inactive statuslines as thin splitlines
@@ -55,7 +55,7 @@ cmd("hi! StatusLineNC gui=underline guifg=" .. line)
 
 -- line n.o
 cmd "hi clear CursorLine"
-fg("cursorlinenr", "#42464e")
+fg_bg("cursorlinenr", "#42464e","none")
 
 -- git signs ---
 fg_bg("DiffAdd", "#81a1c1", "none")
@@ -70,14 +70,14 @@ fg("NvimTreeIndentMarker", "#D8DEE9")
 --bg("NvimTreeVertSplit", "#2e3440")
 
 fg("NvimTreeRootFolder", "#2e3440")
-bg("NvimTreeNormal", "#2e3440")
+--bg("NvimTreeNormal", "#2e3440")
 fg_bg("NvimTreeStatuslineNc", "#2e3440","#2e3440")
 
 -- telescope
 fg("TelescopeBorder", "#2a2e36")
 fg("TelescopePromptBorder", "#2a2e36")
 fg("TelescopeResultsBorder", "#2a2e36")
-fg("TelescopePreviewBorder", :"#525865")
+fg("TelescopePreviewBorder", "#525865")
 
 -- LspDiagnostics ---
 
@@ -130,10 +130,10 @@ fg_bg("BufferLineCLoseButtonSelected", red, black)
 
 -- dashboard
 
-fg("DashboardHeader", grey_fg)
-fg("DashboardCenter", grey_fg)
-fg("DashboardShortcut", grey_fg)
-fg("DashboardFooter", grey_fg)
+--fg("DashboardHeader", grey_fg)
+--fg("DashboardCenter", grey_fg)
+--fg("DashboardShortcut", grey_fg)
+--fg("DashboardFooter", grey_fg)
 
 -- Default nvim bg
 -- cmd "hi Normal guibg=#1e222a""
