@@ -19,7 +19,39 @@ require "bufferline".setup {
         view = "multiwindow",
         show_buffer_close_icons = true,
         separator_style = "thin",
-        mappings = "true"
+        mappings = "true",
+        diagnostics = "nvim_lsp",
+        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+            local icon = level:match("error") and " " or " "
+            return " " .. icon .. count
+        end,
+        custom_areas = {
+            right = function()
+                local result = {}
+                local error = vim.lsp.diagnostic.get_count(0, [[Error]])
+                local warning = vim.lsp.diagnostic.get_count(0, [[Warning]])
+                local info = vim.lsp.diagnostic.get_count(0, [[Information]])
+                local hint = vim.lsp.diagnostic.get_count(0, [[Hint]])
+
+                if error ~= 0 then
+                result[1] = {text = "  " .. error, guifg = "#EC5241"}
+                end
+
+                if warning ~= 0 then
+                result[2] = {text = "  " .. warning, guifg = "#EFB839"}
+                end
+
+                if hint ~= 0 then
+                result[3] = {text = "  " .. hint, guifg = "#A3BA5E"}
+                end
+
+                if info ~= 0 then
+                result[4] = {text = "  " .. info, guifg = "#7EA9A7"}
+            end
+            return result
+        end
+    }
+
     },
     --TODO: move all the scheme to highlights
     highlights = {
@@ -37,7 +69,6 @@ require "bufferline".setup {
             guibg = "#353b45",
             gui = "bold"
         },
-        --y
         separator_selected = {
             guifg = "#353b45",
             guibg = "#353b45"
@@ -59,25 +90,12 @@ require "bufferline".setup {
             guifg = "#1e222a",
             guibg = "#1e222a"
         },
-        -- y
         modified_selected = {
             guifg = "#d0f5c2",
             guibg = "#353b45"
         }
+    },
+
     }
-}
 
-local opt = {silent = true}
 
-local map = vim.api.nvim_set_keymap
-vim.g.mapleader = " "
-
---command that adds new buffer and moves to it
-map("n", "<S-t>", [[<Cmd>tabnew<CR>]], opt)
-
---removing a buffer
-map("n", "<S-x>", [[<Cmd>bdelete<CR>]], opt)
-
--- tabnew and tabprev
-map("n", "<TAB>", [[<Cmd>BufferLineCycleNext<CR>]], opt)
-map("n", "<S-TAB>", [[<Cmd>BufferLineCyclePrev<CR>]], opt)
