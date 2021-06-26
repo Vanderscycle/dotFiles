@@ -3,6 +3,7 @@ local gls = gl.section
 
 gl.short_line_list = {" "} -- keeping this table { } as empty will show inactive statuslines
 
+--TODO: the original configs imports from theme
 local colors = {
     bg = "#1e222a",
     line_bg = "#1e222a",

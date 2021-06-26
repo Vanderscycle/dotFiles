@@ -1,5 +1,5 @@
 local cmd = vim.cmlocal cmd = vim.cmd
-
+--WARN: Requires more work
 local colors = require "themes/onedark"
 
 local white = colors.white
@@ -73,7 +73,7 @@ fg("NvimTreeIndentMarker", "#D8DEE9")
 
 fg("NvimTreeRootFolder", "#2e3440")
 --bg("NvimTreeNormal", "#2e3440")
-fg_bg("NvimTreeStatuslineNc", "#2e3440","#2e3440")
+fg_bg("NvimTreeStatuslineNc", "#2e3440","none")
 
 -- telescope
 fg("TelescopeBorder", "#2E3440")
@@ -99,8 +99,8 @@ fg("LspDiagnosticsVirtualTextHint", "#b48ead")
 
 -- bufferline
 
-fg_bg("BufferLineFill", grey_fg, black2)
-fg_bg("BufferLineBackground", light_grey, black2)
+--fg_bg("BufferLineFill", grey_fg, black2)
+--fg_bg("BufferLineBackground", light_grey, black2)
 
 fg_bg("BufferLineBufferVisible", light_grey, black2)
 fg_bg("BufferLineBufferSelected", white, black)
@@ -111,7 +111,6 @@ cmd "hi BufferLineBufferSelected gui=bold"
 fg_bg("BufferLineTab", light_grey, one_bg3)
 fg_bg("BufferLineTabSelected", black2, nord_blue)
 fg_bg("BufferLineTabClose", red, black)
-
 fg_bg("BufferLineIndicator", black2, black2)
 fg_bg("BufferLineIndicatorSelected", black, black)
 

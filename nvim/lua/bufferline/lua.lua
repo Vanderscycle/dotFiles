@@ -1,8 +1,9 @@
 -- colors
-
-local bar_fg = "#565c64"
-local activeBuffer_fg = "#c8ccd4"
-
+--TODO: debug the highligh colors
+local bar_fg = "#8FBCBB"
+local activeBuffer_fg = "#88C0D0"
+--local bar_fg = "#565c64"
+--local activeBuffer_fg = "#c8ccd4"
 require "bufferline".setup {
       options = {
         offsets = {{filetype = "NvimTree", text = "", padding = 1}},
@@ -21,7 +22,7 @@ require "bufferline".setup {
         separator_style = "thin",
         mappings = "true",
         diagnostics = "nvim_lsp",
-        diagnostics_indicator = function(count, level, diagnostics_dict, context)
+        diagnostics_indicator = function(count, level, diagnostics_dict, context) --TODO:highlight is super ugly
             local icon = level:match("error") and " " or " "
             return " " .. icon .. count
         end,
@@ -50,52 +51,9 @@ require "bufferline".setup {
             end
             return result
         end
-    }
-
-    },
-    --TODO: move all the scheme to highlights
-    highlights = {
-        background = {
-            guifg = bar_fg,
-            guibg = "#1e222a"
-        },
-        fill = {
-            guifg = bar_fg,
-            guibg = "#1e222a"
-        },
-        -- focused window
-        buffer_selected = {
-            guifg = activeBuffer_fg,
-            guibg = "#353b45",
-            gui = "bold"
-        },
-        separator_selected = {
-            guifg = "#353b45",
-            guibg = "#353b45"
-        },
-        -- unfocused opened window
-        buffer_visible = {
-            guifg = "#9298a0",
-            guibg = "#282c34"
-        },
-        separator_visible = {
-            guifg = "#282c34",
-            guibg = "#282c34"
-        },
-        separator = {
-            guifg = "#1e222a",
-            guibg = "#1e222a"
-        },
-        indicator_selected = {
-            guifg = "#1e222a",
-            guibg = "#1e222a"
-        },
-        modified_selected = {
-            guifg = "#d0f5c2",
-            guibg = "#353b45"
         }
-    },
 
-    }
+    },
+}
 
 
