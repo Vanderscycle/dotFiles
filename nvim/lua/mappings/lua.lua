@@ -76,24 +76,12 @@ map("n","<leader>bb",":lua require('workbench').toggle_branch_workbench()<CR>",o
 -- https://github.com/sbdchd/neoformat
 map("n","<leader>p",":Neoformat<CR>",opt)
 -- lsp-trouble
-vim.api.nvim_set_keymap("n", "<leader>tx", "<cmd>LspTroubleToggle<cr>",
-  {silent = true, noremap = true}
-)
-vim.api.nvim_set_keymap("n", "<leader>tw", "<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
-vim.api.nvim_set_keymap("n", "<leader>td", "<cmd>LspTroubleToggle lsp_document_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
-vim.api.nvim_set_keymap("n", "<leader>tl", "<cmd>LspTroubleToggle loclist<cr>",
-  {silent = true, noremap = true}
-)
-vim.api.nvim_set_keymap("n", "<leader>tq", "<cmd>LspTroubleToggle quickfix<cr>",
-  {silent = true, noremap = true}
-)
-vim.api.nvim_set_keymap("n", "gR", "<cmd>LspTrouble lsp_references<cr>",
-  {silent = true, noremap = true}
-)
+map("n", "<leader>tx", "<cmd>lsptrouble<CR>",opt)
+map("n", "<leader>tw", "<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>",opt)
+map("n", "<leader>td", "<cmd>LspTroubleToggle lsp_document_diagnostics<cr>",opt)
+map("n", "<leader>tl", "<cmd>LspTroubleToggle loclist<cr>",opt)
+map("n", "<leader>tq", "<cmd>LspTroubleToggle quickfix<cr>",opt)
+map("n", "<leader>tp", "<cmd>LspTrouble lsp_references<cr>",opt)
 
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
