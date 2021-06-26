@@ -21,7 +21,6 @@ return require("packer").startup(
         use "lewis6991/gitsigns.nvim"
         use "akinsho/nvim-bufferline.lua"
         use "glepnir/galaxyline.nvim"
-        use "windwp/nvim-autopairs"
         use "alvan/vim-closetag"
 
         -- file managing , picker etc
