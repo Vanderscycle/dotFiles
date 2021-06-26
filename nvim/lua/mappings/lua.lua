@@ -30,7 +30,7 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt)
 
 -- toggle truezen.nvim's ataraxis mode
-map("n", "<leader>z",[[<Cmd>zenMode<CR>]],opt)
+map("n", "<leader>z",[[<Cmd>ZenMode<CR>]],opt)
 
 -- better window navidation
 map("n","<C-h>", "<C-w>h" , opt)
@@ -40,10 +40,6 @@ map("n","<C-l>", "<C-w>l" , opt)
 
 map("i", "jk", "<Esc>", opt)
 map("i", "kj", "<Esc>", opt)
-
--- tab to move between buffers
---map("n", "<TAB>", ":bnext<CR>",opt)
---map("n", "<S-TAB>", ":bprevious<CR>",opt)
 
 -- alternate way to save
 map("n","<C-s>",":w<CR>", opt)
@@ -56,6 +52,7 @@ map("v", ">",">gv", opt)
 -- closing buffer
 map("n","<leader>q",":bp<bar>sp<bar>bn<bar>bd<CR>", opt)
 
+--TODO:redo
 -- move into bracket
 map("i","<C-e>","<C-o>A",opt)
 
@@ -68,13 +65,10 @@ map("v","<leader>sl",":SnipRun<CR>", opt) -- block of code
 map("n","<leader>sc",":SnipClose<CR>", opt) -- clear outputs
 map("n","<leader>sz",":SnipReset<CR>", opt)
 
--- nvim workbench
-map("n","<leader>bp",":lua require('workbench').toggle_project_workbench()<CR>",opt)
-map("n","<leader>bb",":lua require('workbench').toggle_branch_workbench()<CR>",opt)
-
 --neoformater (kinda prettier)
 -- https://github.com/sbdchd/neoformat
 map("n","<leader>p",":Neoformat<CR>",opt)
+
 -- lsp-trouble
 map("n", "<leader>tx", "<cmd>lsptrouble<CR>",opt)
 map("n", "<leader>tw", "<cmd>LspTroubleToggle lsp_workspace_diagnostics<cr>",opt)
@@ -82,6 +76,25 @@ map("n", "<leader>td", "<cmd>LspTroubleToggle lsp_document_diagnostics<cr>",opt)
 map("n", "<leader>tl", "<cmd>LspTroubleToggle loclist<cr>",opt)
 map("n", "<leader>tq", "<cmd>LspTroubleToggle quickfix<cr>",opt)
 map("n", "<leader>tp", "<cmd>LspTrouble lsp_references<cr>",opt)
+
+--bufferline
+--command that adds new buffer and moves to it
+map("n", "<S-t>", [[<Cmd>tabnew<CR>]], opt)
+map("n", "<S-x>", [[<Cmd>bdelete<CR>]], opt) --removing a buffer
+-- tabnew and tabprev
+map("n", "<TAB>", [[<Cmd>BufferLineCycleNext<CR>]], opt)
+map("n", "<S-TAB>", [[<Cmd>BufferLineCyclePrev<CR>]], opt)
+
+--telescope
+-- buffer wide
+map("n", "<Leader>fb", [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], opt)
+map("n", "<Leader>fs", [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], opt)
+-- file specific
+map("n", "<Leader>ft", [[<Cmd>lua require('telescope.builtin').file_browser()<CR>]], opt) --system wide
+map("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], opt) -- directory wide
+map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)
+--git
+map("n", "<Leader>fc", [[<Cmd>lua require('telescope.builtin').git_bcommits()<CR>]], opt) 
 
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
