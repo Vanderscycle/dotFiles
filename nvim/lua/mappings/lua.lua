@@ -7,18 +7,12 @@ local function map(mode, lhs, rhs, opts)
 end
 
 local opt = {}
+-- open config files
+map("n","<leader>cm",':e ~/.config/nvim/lua/mappings/lua.lua <CR>',opt)
+map("n","<leader>ch",':e ~/.config/nvim/lua/highlights/lua.lua <CR>',opt)
+map("n","<leader>ci",':e ~/.config/nvim/init.lua <CR>',opt)
 
--- dont copy any deleted text , this is disabled by default so uncomment the below mappings if you want them!
---[[
-
-map("n", "dd", [=[ "_dd ]=], opt)
-map("v", "dd", [=[ "_dd ]=], opt)
-map("v", "x", [=[ "_x ]=], opt)
-
-]]
--- copy any selected text with pressing y
-map("", "<leader>c", '"+y')
-
+map("n","<leader>wA","[[<Cmd> Lspsaga code_action<CR>]]",opt)--BUG: not working
 -- OPEN TERMINALS --
 map("n", "<C-l>", [[<Cmd> vnew term://zsh <CR>]], opt) -- open term over right
 map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) -- open term bottom()

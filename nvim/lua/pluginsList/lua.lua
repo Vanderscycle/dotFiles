@@ -1,6 +1,6 @@
 -- check if packer is installed (~/local/share/nvim/site/pack)
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
-
+--TODO: refactor using lazy loading
 -- using { } when using a different branch of the plugin or loading the plugin with certain commands
 return require("packer").startup(
     function()
@@ -21,6 +21,13 @@ return require("packer").startup(
         use "lewis6991/gitsigns.nvim"
         use "akinsho/nvim-bufferline.lua"
         use "glepnir/galaxyline.nvim"
+        use {
+            "windwp/nvim-autopairs",
+            event = "InsertEnter",
+            config = function()
+                require("nvim-autopairs").setup()
+            end
+        }
         use "alvan/vim-closetag"
 
         -- file managing , picker etc

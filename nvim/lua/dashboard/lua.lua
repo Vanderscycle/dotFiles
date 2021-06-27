@@ -49,21 +49,20 @@ vim.g.dashboard_custom_header = {
     "⣿⣿⣿⣿⣿⣿⣿⣿⡿⠛⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⢐⣿⣿⣿⣿⣿⣿⣿⣿⣿",
     "⣿⣿⣿⣿⠿⠛⠉⠉⠁⠀⢻⣿⡇⠀⠀⠀⠀⠀⠀⢀⠈⣿⣿⡿⠉⠛⠛⠛⠉⠉",
     "⣿⡿⠋⠁⠀⠀⢀⣀⣠⡴⣸⣿⣇⡄⠀⠀⠀⠀⢀⡿⠄⠙⠛⠀⣀⣠⣤⣤⠄",
-    "            CHAD",
-    "           NEOVIM"
+    "            NEOVIM"
 }
 
 vim.g.dashboard_default_executive = 'telescope'
 --vim.g.dashboard_disable_statusline = 1
 vim.g.dashboard_custom_section = {
-    a = {description = {'  Find File          '}, command = 'Telescope find_files'},
-    b = {description = {'  Recently Used Files'}, command = 'Telescope oldfiles'},
-    c = {description = {'  Directory Search   '}, command = 'Telescope file_browser'},
-    d = {description = {'  Find Word          '}, command = 'Telescope live_grep'},
-    e = {description = {'  Settings           '}, command = ':e ~/.config/nvim/init.lua'},
-    f = {description = {'H  Colors             '}, command = ':e ~/.config/nvim/lua/highlights/lua.lua'},
-    g = {description = {'  Marks              '}, command = 'Telescope marks'},
-    h = {description = {"  Load Last Session  "}, command = "SessionLoad"}
+    a = {description = {'  Find File             leader + f f'}, command = 'Telescope find_files'},
+    b = {description = {'  Recently Used Files   leader + f o'}, command = 'Telescope oldfiles'},
+    c = {description = {'  Directory Search      leader + f t'}, command = 'Telescope file_browser'},
+    d = {description = {'  Find Word             leader + f s'}, command = 'Telescope live_grep'},
+    e = {description = {'  init.lua              leader + c i'}, command = ':e ~/.config/nvim/init.lua'},
+    f = {description = {'H  Colors                leader + c h'}, command = ':e ~/.config/nvim/lua/highlights/lua.lua'},
+    f = {description = {'M  Mapping               leader + c m'}, command = ':e ~/.config/nvim/lua/mappings/lua.lua'},
+    g = {description = {'  Marks              '  }, command = 'Telescope marks'},
 }
 
 -- vim.g.dashboard_session_directory = '~/.cache/nvim/session'

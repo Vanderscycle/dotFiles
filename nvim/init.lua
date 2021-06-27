@@ -56,8 +56,8 @@ require "nvimTree.lua"
 
 -- git signs
 require "gitsigns.lua"
-
-require("nvim-autopairs").setup()
+--WARN: check the lazy load requirements
+--require("nvim-autopairs").setup()
 
 require("lspkind").init(
     {
