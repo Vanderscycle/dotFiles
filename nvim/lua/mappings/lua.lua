@@ -12,7 +12,6 @@ map("n","<leader>cm",':e ~/.config/nvim/lua/mappings/lua.lua <CR>',opt)
 map("n","<leader>ch",':e ~/.config/nvim/lua/highlights/lua.lua <CR>',opt)
 map("n","<leader>ci",':e ~/.config/nvim/init.lua <CR>',opt)
 
-map("n","<leader>wA","[[<Cmd> Lspsaga code_action<CR>]]",opt)--BUG: not working
 -- OPEN TERMINALS --
 map("n", "<C-l>", [[<Cmd> vnew term://zsh <CR>]], opt) -- open term over right
 map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) -- open term bottom()
@@ -60,7 +59,6 @@ map("n","<leader>sc",":SnipClose<CR>", opt) -- clear outputs
 map("n","<leader>sz",":SnipReset<CR>", opt)
 
 --neoformater (kinda prettier)
--- https://github.com/sbdchd/neoformat
 map("n","<leader>p",":Neoformat<CR>",opt)
 
 -- lsp-trouble
@@ -89,6 +87,7 @@ map("n", "<Leader>ff", [[<Cmd>lua require('telescope.builtin').find_files()<CR>]
 map("n", "<Leader>fo", [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], opt)
 --git
 map("n", "<Leader>fc", [[<Cmd>lua require('telescope.builtin').git_bcommits()<CR>]], opt) 
+map("n", "<Leader>fs", [[<Cmd>lua require('telescope.builtin').git_status()<CR>]], opt) 
 
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")

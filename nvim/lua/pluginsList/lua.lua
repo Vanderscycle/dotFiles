@@ -9,12 +9,37 @@ return require("packer").startup(
 
         -- color related stuff
         use "norcalli/nvim-base16.lua"
-        use "norcalli/nvim-colorizer.lua"
-        -- lsp stuff
-        use "nvim-treesitter/nvim-treesitter"
-        use "neovim/nvim-lspconfig"
+        use {
+            "norcalli/nvim-colorizer.lua",
+            event = "BufRead",
+            config = function()
+                require("colorizer").setup()
+                vim.cmd("ColorizerReloadAllBuffers")
+            end
+        }
+        -- language related plugins
+        use {
+            "nvim-treesitter/nvim-treesitter",
+            event = "BufRead",
+            config = function()
+                require("treesitter-nvim").config()
+            end
+        }
+        use {
+            "neovim/nvim-lspconfig",
+            event = "BufRead",
+            config = function()
+                require("nvim-lspconfig").config()
+            end
+        }
+        use {
+            "onsails/lspkind-nvim",
+            event = "BufRead",
+            config = function()
+                require("lspkind").init()
+            end
+        }
         use "hrsh7th/nvim-compe"
-        use "onsails/lspkind-nvim"
         use "sbdchd/neoformat"
         use "nvim-lua/plenary.nvim"
 

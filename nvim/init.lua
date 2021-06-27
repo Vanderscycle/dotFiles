@@ -11,8 +11,16 @@ require("neoscroll").setup() -- smooth scroll
 
 -- lsp
 require "lspconfig.lua"
+require "treesitter.lua"
 require "compe.lua"
-
+require("lspkind").init(
+    {
+        with_text = true,
+        symbol_map = {
+            Folder = ""
+        }
+    }
+)
 local cmd = vim.cmd
 local g = vim.g
 
@@ -41,7 +49,6 @@ g.indent_blankline_buftype_exclude = {"terminal-darker"}
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
 
-require "treesitter.lua"
 require "mappings.lua"
 
 -- highlights --
@@ -59,14 +66,7 @@ require "gitsigns.lua"
 --WARN: check the lazy load requirements
 --require("nvim-autopairs").setup()
 
-require("lspkind").init(
-    {
-        with_text = true,
-        symbol_map = {
-            Folder = ""
-        }
-    }
-)
+
 
 -- hide line numbers in terminal windows
 vim.api.nvim_exec([[
@@ -88,4 +88,3 @@ require "whichKey.lua"
 require "todo-comments.lua"
 -- lsps
 require 'lsp.emmet'
---require 'lsp.python'
