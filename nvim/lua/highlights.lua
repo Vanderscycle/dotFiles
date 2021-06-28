@@ -141,3 +141,4 @@ fg("DashboardFooter", grey_fg)
 
 -- Default nvim bg (based on terminal bg)
 -- cmd "hi Normal guibg=#1e222a"
+

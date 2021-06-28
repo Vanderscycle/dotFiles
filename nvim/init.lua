@@ -32,5 +32,4 @@ vim.api.nvim_exec(
 )
 --user added
 require 'lsp_signature'.on_attach()
---TODO: change the colors of folke todo comments.
 --TODO: get emmet-ls working

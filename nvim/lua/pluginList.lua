@@ -189,11 +189,23 @@ return packer.startup(
             "folke/todo-comments.nvim",
             requires = "nvim-lua/plenary.nvim",
             config = function()
-                require("todo-comments").setup {
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-                }
+                require("todo-comments").setup ({
+                    keywords = {
+                        FIX  = { icon = " ", color = "error" , alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }},
+                        TODO = { icon = " ", color = "info" , alt = {"NOTE"}},
+                        HACK = { icon = " ", color = "#EBCB8B" , alt = {"TEMP"}},
+                        WARN = { icon = " ", color = "warning" , alt = { "WARNING", "DANGER" } },
+                        PERF = { icon = " ", color = "default" , alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+                        NOTE = { icon = " ", color = "hint" , alt = { "INFO" } },
+                    },
+                    colors = {
+                        error = { "#BF616A" } ,
+                        warning = { "#D08770"  },
+                        info = { "#5E81AC" },
+                        hint = { "#A3BE8C" },
+                        default = { "#B48EAD" },
+                    },
+                })
             end
         }
         use { --WARN: needs adjustments (and testing)
@@ -209,7 +221,6 @@ return packer.startup(
         }
         use "tpope/vim-fugitive"
         use 'ggandor/lightspeed.nvim' --https://github.com/ggandor/lightspeed.nvim
-        -- WARN: needs to be tested
         use "ray-x/lsp_signature.nvim"
     end,
     {
