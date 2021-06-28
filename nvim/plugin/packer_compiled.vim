@@ -72,9 +72,25 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  LuaSnip = {
+    config = { "\27LJ\2\nA\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\rsnippets\21compe-completion\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/LuaSnip",
+    wants = { "friendly-snippets" }
+  },
+  ["TrueZen.nvim"] = {
+    commands = { "TZAtaraxis", "TZMinimalist" },
+    config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\fzenmode\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/TrueZen.nvim"
+  },
   ["dashboard-nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
+    commands = { "Dashboard", "DashboardNewFile", "DashboardJumpMarks", "SessionLoad", "SessionSave" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/dashboard-nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -85,40 +101,41 @@ _G.packer_plugins = {
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/galaxyline.nvim"
   },
   ["gitsigns.nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+    config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\18gitsigns-nvim\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/gitsigns.nvim"
   },
   ["indent-blankline.nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim"
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim"
   },
   ["lightspeed.nvim"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/lightspeed.nvim"
-  },
-  ["lsp-colors.nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim"
-  },
-  ["lsp-trouble.nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/lsp-trouble.nvim"
   },
   ["lsp_signature.nvim"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim"
   },
   ["lspkind-nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/lspkind-nvim"
+    config = { "\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\tinit\flspkind\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/lspkind-nvim"
   },
   neoformat = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/neoformat"
+    commands = { "Neoformat" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/neoformat"
   },
   ["neoscroll.nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/neoscroll.nvim"
+    config = { "\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\14neoscroll\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/neoscroll.nvim"
   },
   ["nvim-autopairs"] = {
     config = { "\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\19nvim-autopairs\frequire\0" },
@@ -135,41 +152,56 @@ _G.packer_plugins = {
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua"
   },
   ["nvim-colorizer.lua"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
+    config = { "\27LJ\2\ni\0\0\3\0\6\0\n6\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\0016\0\3\0009\0\4\0'\2\5\0B\0\2\1K\0\1\0\30ColorizerReloadAllBuffers\bcmd\bvim\nsetup\14colorizer\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/nvim-colorizer.lua"
+  },
+  ["nvim-comment"] = {
+    commands = { "CommentToggle" },
+    config = { "\27LJ\2\n:\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\17nvim_comment\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/nvim-comment"
   },
   ["nvim-compe"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-compe"
-  },
-  ["nvim-dap"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-dap"
+    after_files = { "/home/henri/.local/share/nvim/site/pack/packer/opt/nvim-compe/after/plugin/compe.vim" },
+    config = { "\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\21compe-completion\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/nvim-compe",
+    wants = { "LuaSnip" }
   },
   ["nvim-lspconfig"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+    config = { "\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\19nvim-lspconfig\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/nvim-lspconfig"
   },
   ["nvim-lspinstall"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
   },
   ["nvim-tree.lua"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
+    commands = { "NvimTreeToggle" },
+    config = { "\27LJ\2\n7\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\rnvimTree\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+    config = { "\27LJ\2\n>\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\20treesitter-nvim\frequire\0" },
+    loaded = false,
+    needs_bufread = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
   ["packer.nvim"] = {
-    loaded = false,
-    needs_bufread = false,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/packer.nvim"
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/packer.nvim"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -179,66 +211,118 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
-  sniprun = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/sniprun"
-  },
   ["startuptime.vim"] = {
+    commands = { "StartupTime" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/startuptime.vim"
+  },
+  ["telescope-fzf-native.nvim"] = {
     loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/startuptime.vim"
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim"
   },
   ["telescope-media-files.nvim"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/telescope-media-files.nvim"
   },
   ["telescope.nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+    commands = { "Telescope" },
+    config = { "\27LJ\2\n=\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\19telescope-nvim\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/telescope.nvim"
   },
   ["todo-comments.nvim"] = {
+    config = { "\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18todo-comments\frequire\0" },
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/todo-comments.nvim"
   },
+  ["trouble.nvim"] = {
+    config = { "\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0" },
+    loaded = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/start/trouble.nvim"
+  },
   ["vim-auto-save"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-auto-save"
-  },
-  ["vim-closetag"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-closetag"
-  },
-  ["vim-devicons"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-devicons"
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/vim-auto-save"
   },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-fugitive"
   },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-vsnip"
-  },
-  ["vim-vsnip-integ"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
+  ["vim-matchup"] = {
+    after_files = { "/home/henri/.local/share/nvim/site/pack/packer/opt/vim-matchup/after/plugin/matchit.vim" },
+    loaded = false,
+    needs_bufread = true,
+    path = "/home/henri/.local/share/nvim/site/pack/packer/opt/vim-matchup"
   },
   ["which-key.nvim"] = {
+    config = { "\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0" },
     loaded = true,
     path = "/home/henri/.local/share/nvim/site/pack/packer/start/which-key.nvim"
-  },
-  ["zen-mode.nvim"] = {
-    loaded = true,
-    path = "/home/henri/.local/share/nvim/site/pack/packer/start/zen-mode.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Setup for: dashboard-nvim
+time([[Setup for dashboard-nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\vconfig\14dashboard\frequire\0", "setup", "dashboard-nvim")
+time([[Setup for dashboard-nvim]], false)
+-- Setup for: indent-blankline.nvim
+time([[Setup for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\14blankline\15misc-utils\frequire\0", "setup", "indent-blankline.nvim")
+time([[Setup for indent-blankline.nvim]], false)
+-- Config for: todo-comments.nvim
+time([[Config for todo-comments.nvim]], true)
+try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18todo-comments\frequire\0", "config", "todo-comments.nvim")
+time([[Config for todo-comments.nvim]], false)
+-- Config for: trouble.nvim
+time([[Config for trouble.nvim]], true)
+try_loadstring("\27LJ\2\n9\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ftrouble\frequire\0", "config", "trouble.nvim")
+time([[Config for trouble.nvim]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
+time([[Config for which-key.nvim]], false)
+-- Conditional loads
+time("Condition for { 'vim-auto-save' }", true)
+if
+try_loadstring("\27LJ\2\n<\0\0\1\0\3\1\t6\0\0\0009\0\1\0009\0\2\0\b\0\0\0X\0\2€+\0\1\0X\1\1€+\0\2\0L\0\2\0\14auto_save\6g\bvim\2\0", "condition", '{ "vim-auto-save" }')
+then
+time("Condition for { 'vim-auto-save' }", false)
+time([[packadd for vim-auto-save]], true)
+		vim.cmd [[packadd vim-auto-save]]
+	time([[packadd for vim-auto-save]], false)
+else
+time("Condition for { 'vim-auto-save' }", false)
+end
+
+-- Command lazy-loads
+time([[Defining lazy-load commands]], true)
+vim.cmd [[command! -nargs=* -range -bang -complete=file TZMinimalist lua require("packer.load")({'TrueZen.nvim'}, { cmd = "TZMinimalist", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file Dashboard lua require("packer.load")({'dashboard-nvim'}, { cmd = "Dashboard", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file DashboardNewFile lua require("packer.load")({'dashboard-nvim'}, { cmd = "DashboardNewFile", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file DashboardJumpMarks lua require("packer.load")({'dashboard-nvim'}, { cmd = "DashboardJumpMarks", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file SessionLoad lua require("packer.load")({'dashboard-nvim'}, { cmd = "SessionLoad", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file Telescope lua require("packer.load")({'telescope.nvim'}, { cmd = "Telescope", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file StartupTime lua require("packer.load")({'startuptime.vim'}, { cmd = "StartupTime", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file Neoformat lua require("packer.load")({'neoformat'}, { cmd = "Neoformat", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file SessionSave lua require("packer.load")({'dashboard-nvim'}, { cmd = "SessionSave", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file NvimTreeToggle lua require("packer.load")({'nvim-tree.lua'}, { cmd = "NvimTreeToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file CommentToggle lua require("packer.load")({'nvim-comment'}, { cmd = "CommentToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+vim.cmd [[command! -nargs=* -range -bang -complete=file TZAtaraxis lua require("packer.load")({'TrueZen.nvim'}, { cmd = "TZAtaraxis", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args> }, _G.packer_plugins)]]
+time([[Defining lazy-load commands]], false)
+
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
-vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-autopairs'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
+vim.cmd [[au CursorMoved * ++once lua require("packer.load")({'vim-matchup'}, { event = "CursorMoved *" }, _G.packer_plugins)]]
+vim.cmd [[au WinScrolled * ++once lua require("packer.load")({'neoscroll.nvim'}, { event = "WinScrolled *" }, _G.packer_plugins)]]
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'indent-blankline.nvim', 'lspkind-nvim', 'nvim-colorizer.lua', 'gitsigns.nvim', 'nvim-lspconfig', 'nvim-treesitter'}, { event = "BufRead *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertCharPre * ++once lua require("packer.load")({'LuaSnip'}, { event = "InsertCharPre *" }, _G.packer_plugins)]]
+vim.cmd [[au InsertEnter * ++once lua require("packer.load")({'nvim-autopairs', 'nvim-compe'}, { event = "InsertEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end

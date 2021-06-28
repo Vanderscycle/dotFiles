@@ -2,7 +2,8 @@
 
 name: media
 root: ~/
-
+  #TODO: asdkq
+  #BUG: dasd 
 windows:
   - Spotify:
       layout: main-vertical
