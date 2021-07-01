@@ -18,9 +18,9 @@ windows:
       panes:
         - cd ~/Documents/dotFiles/
         - cd ~/.config/
-  - obsidian:
+  - Notetaking:
       layout: main
-      panes: obsidian ~/Documents/dotFiles/obsidian
+      panes:  cd ~/Documents/dotFiles/obsidian && nvim --listen 127.0.0.1:9999
   - task Manager:
       layout: main
       panes:
