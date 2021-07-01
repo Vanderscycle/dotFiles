@@ -156,7 +156,7 @@ return packer.startup(
         }
 
         use {
-            "kdav5758/TrueZen.nvim",
+            "Pocco81/TrueZen.nvim",
             cmd = {"TZAtaraxis", "TZMinimalist"},
             config = function()
                 require("zenmode").config()
@@ -220,6 +220,22 @@ return packer.startup(
           end
         }
         use "tpope/vim-fugitive"
+        use {
+            'vimwiki/vimwiki',
+            config = function()
+                vim.g.vimwiki_global_ext = 0
+                vim.g.vimwiki_list = {
+                    {
+                        auto_export =  1,
+                        path_html = '~/Documents/dotFiles/obsidian/',
+                        path = '~/Documents/dotFiles/obsidian/',
+                        syntax = 'markdown',
+                        ext = '.md',
+                    }
+                }
+            end
+        }
+        use {'iamcco/markdown-preview.nvim', config = "vim.call('mkdp#util#install')"}
         use 'ggandor/lightspeed.nvim' --https://github.com/ggandor/lightspeed.nvim
         use "ray-x/lsp_signature.nvim"
     end,

@@ -36,8 +36,8 @@ M.config = function()
         c = {description = {'  Directory Search      leader + f t'}, command = 'Telescope file_browser'},
         d = {description = {'  Find Word             leader + f s'}, command = 'Telescope live_grep'},
         e = {description = {'  init.lua              leader + c i'}, command = ':e ~/.config/nvim/init.lua'},
-        f = {description = {'H  Colors                leader + c h'}, command = ':e ~/.config/nvim/lua/highlights/lua.lua'},
-        f = {description = {'M  Mapping               leader + c m'}, command = ':e ~/.config/nvim/lua/mappings/lua.lua'},
+        f = {description = {'H  Colors                leader + c h'}, command = ':e ~/.config/nvim/lua/highlights.lua'},
+        g = {description = {'M  Mapping               leader + c m'}, command = ':e ~/.config/nvim/lua/mappings.lua'},
     }
 
 
