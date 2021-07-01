@@ -1,29 +1,32 @@
 {
   "main": {
-    "id": "bcc9a729f967a9d0",
+    "id": "83e6bdbbe515440f",
     "type": "split",
     "children": [
       {
-        "id": "6e0dcf9b62cfa0c1",
+        "id": "a2552764eaa3f3e7",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "ajsd.md",
+            "mode": "source"
+          }
         }
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "63eead5814a81b38",
+    "id": "11e13851a68f4a4b",
     "type": "split",
     "children": [
       {
-        "id": "2bfb8bdce3fe72d7",
+        "id": "6950ed380b68e597",
         "type": "tabs",
         "children": [
           {
-            "id": "a5e9cfc6ecc22e0c",
+            "id": "0247e5f80a4b5be9",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -31,7 +34,7 @@
             }
           },
           {
-            "id": "0d25b6cb69557897",
+            "id": "d662f1aabef77e36",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -52,19 +55,20 @@
     "width": 300
   },
   "right": {
-    "id": "0d2b3f579a016263",
+    "id": "e3e424df8b797714",
     "type": "split",
     "children": [
       {
-        "id": "44d91d287e4297a2",
+        "id": "3b10327e7ea910ea",
         "type": "tabs",
         "children": [
           {
-            "id": "c925e4468e78048f",
+            "id": "d7d2da4e082564bb",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "ajsd.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -74,43 +78,21 @@
                 "unlinkedCollapsed": true
               }
             }
-          },
-          {
-            "id": "1f76903da11abe0b",
-            "type": "leaf",
-            "state": {
-              "type": "outgoing-link",
-              "state": {
-                "linksCollapsed": false,
-                "unlinkedCollapsed": true
-              }
-            }
-          },
-          {
-            "id": "8217d8b2fe556c3f",
-            "type": "leaf",
-            "state": {
-              "type": "advanced-tables-toolbar",
-              "state": {}
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
-  "active": "6e0dcf9b62cfa0c1",
+  "active": "a2552764eaa3f3e7",
   "lastOpenFiles": [
-    "Index.md",
-    "Untitled.md",
-    "google.com.md",
-    "adversity Paradox.md",
-    "NeverNote.md",
-    "NoteStar.md",
-    "The Matrix.md",
-    "vicktor Frank.md",
-    "blue/red pill.md"
+    "ajsd.md",
+    "asdakq.md",
+    "asdjakq.md",
+    "jawe.md",
+    "test.md",
+    "theset.md"
   ]
 }
