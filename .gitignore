@@ -142,3 +142,5 @@ newRepo.sh
 data/
 # need to figureout passwords
 neomutt/accounts/
+# obsidian
+.obsidian/

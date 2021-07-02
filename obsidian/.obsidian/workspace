@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "tests.md",
+            "file": "index.md",
             "mode": "source"
           }
         }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "tests.md",
+                "file": "index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,7 +88,8 @@
   },
   "active": "c0466c5a778a820b",
   "lastOpenFiles": [
-    "tests.md",
-    "index.md"
+    "index.md",
+    "templates/majorNodeAssembly.md",
+    "tests.md"
   ]
 }
