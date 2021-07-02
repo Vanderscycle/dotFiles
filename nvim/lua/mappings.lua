@@ -153,3 +153,7 @@ map("i", "kj", "<Esc>", opt)
 --better tabing
 map("v", "<","<gv", opt)
 map("v", ">",">gv", opt)
+
+-- vimwiki/markdown preview
+map("n","<leader>w[",":MarkdownPreview<CR>",opt)
+map("n","<leader>w-",":MarkdownPreviewStop<CR>",opt)
