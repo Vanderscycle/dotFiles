@@ -45,7 +45,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing developer packages'
-sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa
+sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa yarn
 sudo pacman -S --noconfirm asciinema # to record
 #bat=cat, exa=ls but better
 # corrector for bash scripts
@@ -254,8 +254,11 @@ echo -e 'Configuring Neovim'
 # fd alternative to find
 # ueberzug allows for image display in terminal
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
-git clone https://github.com/siduck76/nvchad.git ~/Documents/neovim-dots/ # hopefully the author will stop changing the repo name
-cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
+
+echo -e "Downloading nvchad"
+#git clone https://github.com/siduck76/nvchad.git ~/Documents/neovim-dots/ # hopefully the author will stop changing the repo name
+#cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
+
 export EDITOR='nvim' >> ~/.zshrc
 echo -e 'Done.\n'
 
@@ -306,10 +309,24 @@ chmod +x ~/Documents/dotFiles/stdPatterns/sshkeychain.sh
 chmod +x ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
 
 # to test usin -d
-rsync -auvd ~/Documents/dotFiles/nvim/ ~/.config/nvim/ 
+rsync -auvd ~/Documents/dotFiles/nvim/ ~/.config/nvim/
 
-echo "Installing vimspector manually"
-git clone https://github.com/puremourning/vimspector ~/.loca/nvim/site/pack/packer/opt/vimspector
+if [ -d ~/.local/share/nvim/site/pack/packer ]; then
+  echo "Clearning previous packer installs"
+  rm -rf ~/.local/share/nvim/site/pack
+fi
+
+echo "\n=> Installing packer"
+git clone https://github.com/wbthomason/packer.nvim \
+  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+echo "=> packer installed!"
+
+# install all plugins + compile them
+nvim +PackerSync
+
+#echo "Installing vimspector manually"
+#git clone https://github.com/puremourning/vimspector ~/.loca/nvim/site/pack/packer/opt/vimspector
+
 #updating nvim from siduck76 with my changes (plugins/mappings etc)
 #bash ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
 
