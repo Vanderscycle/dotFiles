@@ -142,5 +142,7 @@ newRepo.sh
 data/
 # need to figureout passwords
 neomutt/accounts/
-# obsidian
+
+# obsidian (plugins)
 .obsidian/
+obsidian # since we are about to include work items we do not want to share.
