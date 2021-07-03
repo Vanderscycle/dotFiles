@@ -29,9 +29,10 @@ map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
 -- toggle numbers
 map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt)
 
--- Truezen.nvim
-map("n", "<leader>z", ":TZAtaraxis<CR>", opt)
-map("n", "<leader>m", ":TZMinimalist<CR>", opt)
+-- Truezen.nvim (leader z)
+map("n", "<leader>za", ":TZAtaraxis<CR>", opt)
+map("n", "<leader>zm", ":TZMinimalist<CR>", opt)
+map("n", "<leader>zf", ":TZFocus<CR>", opt)
 
 map("n", "<C-s>", ":w <CR>", opt)
 -- vim.cmd("inoremap jh <Esc>")
@@ -100,7 +101,7 @@ map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 -- format code
 map("n", "<Leader>p", [[<Cmd> Neoformat<CR>]], opt)
 
--- dashboard stuff
+-- dashboard stuff leader d
 map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
 map("n", "<Leader>dn", [[<Cmd> DashboardNewFile<CR>]], opt)
 map("n", "<Leader>dm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
@@ -110,7 +111,7 @@ map("n", "<Leader>ch", ":e ~/.config/nvim/lua/highlights.lua<CR>", opt)
 -- map("n", "<C-s>l", [[<Cmd> SessionLoad<CR>]], opt)
 -- map("n", "<C-s>s", [[<Cmd> SessionSave<CR>]], opt)
 
---telescope
+--telescope leader f
 -- buffer wide
 map("n", "<Leader>fb", [[<Cmd>Telescope buffers<CR>]], opt)
 map("n", "<Leader>fg", [[<Cmd>Telescope live_grep<CR>]], opt)
@@ -154,6 +155,6 @@ map("i", "kj", "<Esc>", opt)
 map("v", "<","<gv", opt)
 map("v", ">",">gv", opt)
 
--- vimwiki/markdown preview
+-- vimwiki/markdown preview leader w
 map("n","<leader>w[",":MarkdownPreview<CR>",opt)
 map("n","<leader>w-",":MarkdownPreviewStop<CR>",opt)
