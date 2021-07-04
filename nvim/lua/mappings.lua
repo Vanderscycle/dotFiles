@@ -105,9 +105,9 @@ map("n", "<Leader>p", [[<Cmd> Neoformat<CR>]], opt)
 map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
 map("n", "<Leader>dn", [[<Cmd> DashboardNewFile<CR>]], opt)
 map("n", "<Leader>dm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
-map("n", "<Leader>ci", ":e ~/.config/nvim/init.lua<CR>", opt)
-map("n", "<Leader>cm", ":e ~/.config/nvim/lua/mappings.lua<CR>", opt)
-map("n", "<Leader>ch", ":e ~/.config/nvim/lua/highlights.lua<CR>", opt)
+-- map("n", "<Leader>ci", ":e ~/.config/nvim/init.lua<CR>", opt)
+-- map("n", "<Leader>cm", ":e ~/.config/nvim/lua/mappings.lua<CR>", opt)
+-- map("n", "<Leader>ch", ":e ~/.config/nvim/lua/highlights.lua<CR>", opt)
 -- map("n", "<C-s>l", [[<Cmd> SessionLoad<CR>]], opt)
 -- map("n", "<C-s>s", [[<Cmd> SessionSave<CR>]], opt)
 
@@ -115,28 +115,21 @@ map("n", "<Leader>ch", ":e ~/.config/nvim/lua/highlights.lua<CR>", opt)
 -- buffer wide
 map("n", "<Leader>fb", [[<Cmd>Telescope buffers<CR>]], opt)
 map("n", "<Leader>fg", [[<Cmd>Telescope live_grep<CR>]], opt)
-map("n","<leader>fw",[[<Cmd>Telescope lsp_workspace_diagnostics <CR>]])
-map("n","<leader>fd",[[<Cmd>Telescope lsp_document_diagnostics <CR>]])
-map("n","<leader>fn",":TodoTelescope<CR>")
+map("n", "<leader>fw", [[<Cmd>Telescope lsp_workspace_diagnostics <CR>]])
+map("n", "<leader>fd", [[<Cmd>Telescope lsp_document_diagnostics <CR>]])
+map("n", "<leader>fn", ":TodoTelescope<CR>")
 -- file specific
 map("n", "<Leader>ft", [[<Cmd>Telescope file_browser<CR>]], opt) --system wide
 map("n", "<Leader>ff", [[<Cmd>Telescope find_files<CR>]], opt) -- directory wide
 map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], opt)
 -- not being called and idk why
 map("n", "<Leader>fl", [[<Cmd>Telescope search_dootfiles<CR>]], opt) --f lua
-
 --git
 map("n", "<Leader>fc", [[<Cmd>Telescope git_bcommits<CR>]], opt)
 map("n", "<Leader>fs", [[<Cmd>Telescope git_status<CR>]], opt)
 -- misc
 map("n", "<Leader>fh", [[<Cmd>Telescope help_tags<CR>]], opt)
 map("n", "<Leader>fp", [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]], opt)
-
---toruble.nvim
--- map("n", "<leader>xl", "<cmd>Trouble loclist<cr>",opt)
--- map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",opt)
--- map("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>",opt)
-
 
 --https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/navigation.vim
 local localQuickFixList = 0
@@ -147,32 +140,32 @@ local function ToggleQFList(global)
     if global == 1 then
         if globalQuickFixList == 1 then
             globalQuickFixList = 0
-            api.nvim_command("cclose")
+            return api.nvim_command("cclose")
 
         else
             globalQuickFixList = 1
-            api.nvim_command("copen")
+            return api.nvim_command("copen")
         end
     else
          if localQuickFixList == 1 then
             localQuickFixList = 0
-            api.nvim_command("lclose")
+            return api.nvim_command("lclose")
         else
             localQuickFixList = 1
-            api.nvim_command("lopen")
+            return api.nvim_command("lopen")
         end
     end
 end
 
 --quickfix lists
 --local (/ is a local)
-map("n","<leader>k",":lnext<CR>zz")--why zz? (center this line)
-map("n","<leader>j",":lprev<CR>zz")
+map("n","<leader>k",":lnext<CR>zz",opt)--why zz? (center this line)
+map("n","<leader>j",":lprev<CR>zz",opt)
 map("n","<leader>ql",":call ToggleQFList(0)<CR>")
 
 --global (telescope sends it to a global list)
-map("n","<M-k>",":cnext<CR>zz")--why zz?
-map("n","<M-j>",":cprev<CR>zz")
+map("n","<M-k>",":cnext<CR>zz",opt)--why zz?
+map("n","<M-j>",":cprev<CR>zz",opt)
 map("n","<leader>qg",":call ToggleQFList(1)<CR>")
 
 -- bufferline tab stuff
