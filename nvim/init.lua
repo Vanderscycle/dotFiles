@@ -33,3 +33,6 @@ vim.api.nvim_exec(
 --user added
 require 'lsp_signature'.on_attach()
 --TODO: get emmet-ls working
+--TODO: figure out more about global quickfixlist :vimgrep (what) (where) -- you can do **/*.lua for example
+--TODO: figure out more about local quickfixlist :lgrep (what {word under cursor}) (location {this buffer})
+--TODO: figure out about :ldo e.g. :ldo g/function/norm! Ilocal https://neovim.io/doc/user/quickfix.html#:ldo

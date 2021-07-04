@@ -122,17 +122,58 @@ map("n","<leader>fn",":TodoTelescope<CR>")
 map("n", "<Leader>ft", [[<Cmd>Telescope file_browser<CR>]], opt) --system wide
 map("n", "<Leader>ff", [[<Cmd>Telescope find_files<CR>]], opt) -- directory wide
 map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], opt)
+-- not being called and idk why
+map("n", "<Leader>fl", [[<Cmd>Telescope search_dootfiles<CR>]], opt) --f lua
+
 --git
-map("n", "<Leader>fc", [[<Cmd>Telescope git_bcommits<CR>]], opt) 
-map("n", "<Leader>fs", [[<Cmd>Telescope git_status<CR>]], opt) 
+map("n", "<Leader>fc", [[<Cmd>Telescope git_bcommits<CR>]], opt)
+map("n", "<Leader>fs", [[<Cmd>Telescope git_status<CR>]], opt)
 -- misc
 map("n", "<Leader>fh", [[<Cmd>Telescope help_tags<CR>]], opt)
 map("n", "<Leader>fp", [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]], opt)
 
 --toruble.nvim
-map("n", "<leader>xl", "<cmd>Trouble loclist<cr>",opt)
-map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",opt)
-map("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>",opt)
+-- map("n", "<leader>xl", "<cmd>Trouble loclist<cr>",opt)
+-- map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",opt)
+-- map("n", "<leader>xr", "<cmd>Trouble lsp_references<cr>",opt)
+
+
+--https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/navigation.vim
+local localQuickFixList = 0
+local globalQuickFixList = 0
+local api = vim.api
+
+local function ToggleQFList(global)
+    if global == 1 then
+        if globalQuickFixList == 1 then
+            globalQuickFixList = 0
+            api.nvim_command("cclose")
+
+        else
+            globalQuickFixList = 1
+            api.nvim_command("copen")
+        end
+    else
+         if localQuickFixList == 1 then
+            localQuickFixList = 0
+            api.nvim_command("lclose")
+        else
+            localQuickFixList = 1
+            api.nvim_command("lopen")
+        end
+    end
+end
+
+--quickfix lists
+--local (/ is a local)
+map("n","<leader>k",":lnext<CR>zz")--why zz? (center this line)
+map("n","<leader>j",":lprev<CR>zz")
+map("n","<leader>ql",":call ToggleQFList(0)<CR>")
+
+--global (telescope sends it to a global list)
+map("n","<M-k>",":cnext<CR>zz")--why zz?
+map("n","<M-j>",":cprev<CR>zz")
+map("n","<leader>qg",":call ToggleQFList(1)<CR>")
 
 -- bufferline tab stuff
 map("n", "<S-t>", ":tabnew<CR>", opt) -- new tab
@@ -140,6 +181,7 @@ map("n", "<S-x>", ":bd!<CR>", opt) -- close tab
 
 -- move between tabs
 map("n", "<TAB>", [[<Cmd>BufferLineCycleNext<CR>]], opt)
+map("n", "<S-TAB>", [[<Cmd>BufferLineCyclePrev<CR>]], opt)
 map("n", "<S-TAB>", [[<Cmd>BufferLineCyclePrev<CR>]], opt)
 
 -- better window navidation
