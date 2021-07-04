@@ -1,12 +1,15 @@
+
 [[index]]
 
-# {subject}
+# Blockchain tecnology
 
-Major node: {}
+Major node: [[blockchain]]
 
 ## Unorganized raw notes
-  {minor nodes}
-
+  [[verifiable credentials]]
+  [[decentralized identifiers]]
+  [[zero-knowledge proofs]]
+  
 Once information is sufficiently collected we must battle the ideas the have unearthed.
 
 ## Tags

@@ -3,7 +3,7 @@
 
 {major node}
 
-Minor Node
+Minor Node: {}
 
 ## Title
 

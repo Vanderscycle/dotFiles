@@ -8,5 +8,5 @@
 
 ## Phase 1: Assembling phase
   [[Notes taking resources]] 
-
+  [[blockchain]]
 ##### [Henri vandersleyen](https://github.com/Vanderscycle)

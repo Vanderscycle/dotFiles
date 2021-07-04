@@ -133,3 +133,4 @@ function npm-run() {
   script=$(bat package.json | jq -r '.scripts | keys[] ' | sort | fzf) && npm run $(echo "$script")
 }
 
+. "$HOME/.cargo/env"
