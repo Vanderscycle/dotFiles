@@ -40,6 +40,6 @@ require "bufferline".setup {
             end
             return result
         end
-    }
+    },
     }
 }

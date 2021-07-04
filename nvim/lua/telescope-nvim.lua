@@ -1,12 +1,17 @@
 local M = {}
-local trouble = require("trouble.providers.telescope")
-
+local actions = require('telescope.actions')
 M.config = function()
     require("telescope").setup {
         defaults = {
-              mappings = {
-                  i = { ["<c-t>"] = trouble.smart_open_with_trouble },
-                  n = { ["<c-t>"] = trouble.smart_open_with_trouble },
+            mappings = {
+                i = {
+                    ["<C-l>"] = actions.send_to_loclist + actions.open_loclist,
+                    ["<M-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
+                },
+                n = {
+                    ["<C-l>"] = actions.send_to_loclist + actions.open_loclist,
+                    ["<M-l>"] = actions.send_selected_to_loclist + actions.open_loclist,
+                },
             },
             vimgrep_arguments = {
                 "rg",
@@ -71,11 +76,11 @@ M.config = function()
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("media_files")
 end
--- not being called and idk why
-M.search_dootfiles = function()
-    require('telescope.builtin').find_files({
-        search_dirs = {"~/.config/nvim/"}
-    })
+
+function M.search_dootfiles()
+    require('telescope.builtin').find_files {
+        cwd = "~/.config/nvim/",
+    }
 end
 
-return M 
+return M
