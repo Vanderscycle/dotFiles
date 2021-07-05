@@ -20,7 +20,9 @@ M.config = function()
                 "--with-filename",
                 "--line-number",
                 "--column",
-                "--smart-case"
+                "--smart-case",
+                "--hidden",
+                "-u"
             },
             prompt_prefix = "   ",
             selection_caret = "  ",
@@ -43,7 +45,7 @@ M.config = function()
                 preview_cutoff = 120
             },
             file_sorter = require "telescope.sorters".get_fuzzy_file,
-            file_ignore_patterns = {},
+            file_ignore_patterns = {'node_modules', '.git'},
             generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
             shorten_path = true,
             winblend = 0,
@@ -79,8 +81,30 @@ end
 
 function M.search_dootfiles()
     require('telescope.builtin').find_files {
+        prompt_title = "< .config/doots >",
         cwd = "~/.config/nvim/",
     }
 end
+--git
+function M.git_branches()
+    require("telescope.builtin").git_branches {
+        attach_mappings = function (prompt_bufnr, map)
+            map('i','<C-d>',actions.git_delete_branch)
+            map('n','<C-d>',actions.git_delete_branch)
+            return true --
+        end
+    }
+  end
+
+--TODO: expand telescope cpaabilities (remove some .zshenv bash scripts)
+-- function M.obsidian_Templates()
+--      require('telescope.builtin').find_files {
+--         prompt_title = "< obsidian templates >",
+--         cwd = "~/Documents/dotFiles/obsidian/templates",
+--     
+--     local content = actions.select_all(bufnr),
+--     actions.close(prompt_bufnr)
+--     }
+-- end
 
 return M

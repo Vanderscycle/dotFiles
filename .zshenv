@@ -79,26 +79,6 @@ psql -c 'SELECT datname FROM pg_database
 WHERE datistemplate = false;'
 EOF
 }
-#git
-function checkout-branches() {
-  local branchesAvailable
-  branchesAvailable=$(git branch | fzf --multi | xargs)
-
-  if [ -n "$branchesAvailable" ]
-  then 
-    echo $branchesAvailable
-    git checkout $branchesAvailable
-  fi
-}
-
-function delete-branches() {
-  
-  git branch |
-    grep --invert-match '\*' |
-    cut -c 3- |
-    fzf --multi --preview='git log {} -- '|
-    xargs --no-run-if-empty git branch --delete --force
-}
 
 function pr-checkout() {
   local pr_number
