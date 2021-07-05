@@ -1,0 +1,11 @@
+# /home/henri/.config/tmuxinator/aviary.yml
+
+name: aviary
+root: .
+
+windows:
+  - editor: nvim
+  - server: 
+  - database: psql -U postgres
+  - notes: cd ~/Documents/dotFiles/obsidian/ && nvim --listen 127.0.0.1:9999
+  - task Manager: htop
