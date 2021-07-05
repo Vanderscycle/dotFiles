@@ -44,8 +44,8 @@ function conda-ls() {
 #tmuxinator
 function tmuxinator-ls(){
     local ymlConfigs
-    ymlConfigs=$(ls ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
-    #ymlConfigs=$(tmuxinator list | fzf --multi)
+    # because we changed the behavior of ls (alias:ls = exa -al) we can use exa as vanila ls.
+    ymlConfigs=$(exa ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
     echo $ymlConfigs
 
     if [ -n "$ymlConfigs" ]
