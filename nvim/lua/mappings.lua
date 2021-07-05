@@ -135,13 +135,12 @@ map("n", "<Leader>fhb", [[<Cmd>Telescope builtin<CR>]], opt)
 map("n", "<Leader>fp", [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]], opt)
 
 --https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/navigation.vim
-local localQuickFixList = 0
-local globalQuickFixList = 0
+localQuickFixList = 0
+globalQuickFixList = 0
 local api = vim.api
-
-local function ToggleQFList(global)
-    if global == 1 then
-        if globalQuickFixList == 1 then
+function _G.ToggleQFList(global)
+    if (global == 1) then
+        if( globalQuickFixList == 1) then
             globalQuickFixList = 0
             return api.nvim_command("cclose")
 
@@ -150,7 +149,7 @@ local function ToggleQFList(global)
             return api.nvim_command("copen")
         end
     else
-         if localQuickFixList == 1 then
+         if( localQuickFixList == 1) then
             localQuickFixList = 0
             return api.nvim_command("lclose")
         else
@@ -159,17 +158,18 @@ local function ToggleQFList(global)
         end
     end
 end
+--export ToggleQFList
 
 --quickfix lists
 --local (/ is a local) ( <C-l> telescope sends it to a local list)
 map("n","<leader>k",":lnext<CR>zz",opt)--why zz? (center this line)
 map("n","<leader>j",":lprev<CR>zz",opt)
-map("n","<leader>ql",":call ToggleQFList(0)<CR>")
+map("n","<leader>ql",":lua require('mappings').ToggleQFList(0)<CR>")
 
 --global ( <C-q> telescope sends it to a global list)
 map("n","<M-k>",":cnext<CR>zz",opt)--why zz?
 map("n","<M-j>",":cprev<CR>zz",opt)
-map("n","<leader>qg",":call ToggleQFList(1)<CR>")
+map("n","<leader>qg",":lua require('mappings').ToggleQFList(1)<CR>")
 
 -- bufferline tab stuff
 map("n", "<S-t>", ":tabnew<CR>", opt) -- new tab
@@ -196,3 +196,4 @@ map("v", ">",">gv", opt)
 -- vimwiki/markdown preview leader w
 map("n","<leader>w[",":MarkdownPreview<CR>",opt)
 map("n","<leader>w-",":MarkdownPreviewStop<CR>",opt)
+return _G
