@@ -8,8 +8,8 @@ function newRepo(){
     ORIGINDIR=~/Documents/dotFiles/stdPatterns/
     TEMPARRAY=(ML TS)
     echo 'new ML (machine learning) project or TS (Typescript) project' 
-    TYPEREPO=$(ls $ORIGINDIR | fzf)
-    #echo $TYPEREPO
+    TYPEREPO=$(exa $ORIGINDIR | fzf)
+    echo $TYPEREPO
     case $TYPEREPO in
         "newMLRepo.sh")
             FILE="newMLRepo.sh"
