@@ -135,8 +135,9 @@ map("n", "<Leader>fhb", [[<Cmd>Telescope builtin<CR>]], opt)
 map("n", "<Leader>fp", [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]], opt)
 
 --https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/navigation.vim
-localQuickFixList = 0
-globalQuickFixList = 0
+-- of note I need to raise an issue on telescope regarding empty file at the beginning
+local localQuickFixList = 0
+local globalQuickFixList = 0
 local api = vim.api
 function _G.ToggleQFList(global)
     if (global == 1) then
@@ -148,7 +149,7 @@ function _G.ToggleQFList(global)
             globalQuickFixList = 1
             return api.nvim_command("copen")
         end
-    else
+    else --if the local list is empty it returns an error
          if( localQuickFixList == 1) then
             localQuickFixList = 0
             return api.nvim_command("lclose")
@@ -169,7 +170,7 @@ map("n","<leader>ql",":lua require('mappings').ToggleQFList(0)<CR>")
 --global ( <C-q> telescope sends it to a global list)
 map("n","<M-k>",":cnext<CR>zz",opt)--why zz?
 map("n","<M-j>",":cprev<CR>zz",opt)
-map("n","<leader>qg",":lua require('mappings').ToggleQFList(1)<CR>")
+map("n","<leader>ql",":lua require('mappings').ToggleQFList(1)<CR>")
 
 -- bufferline tab stuff
 map("n", "<S-t>", ":tabnew<CR>", opt) -- new tab
@@ -196,4 +197,8 @@ map("v", ">",">gv", opt)
 -- vimwiki/markdown preview leader w
 map("n","<leader>w[",":MarkdownPreview<CR>",opt)
 map("n","<leader>w-",":MarkdownPreviewStop<CR>",opt)
+
+-- floating terminal 
+map('n', '<A-t>', '<CMD>lua require("FTerm").toggle()<CR>', opt)
+map('t', '<A-t>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opt)
 return _G

@@ -13,7 +13,8 @@ M.config = function()
             "json",
             "python",
             "vue",
-            "typescript"
+            "typescript",
+            "svelte"
             -- tailwindcss
             -- "rust",
             -- "go"
@@ -21,8 +22,11 @@ M.config = function()
         highlight = {
             enable = true,
             use_languagetree = true
+        },
+        context_commentstring = {
+          enable = true
         }
-    }
+}
 end
 
 return M

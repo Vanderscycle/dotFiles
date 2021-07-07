@@ -91,7 +91,6 @@ return packer.startup(
             cmd = "Telescope",
             config = function()
                 require("telescope-nvim").config()
-                require("telescope-nvim").search_dootfiles()
             end
         }
 
@@ -107,9 +106,15 @@ return packer.startup(
         -- misc plugins
         use {
             "windwp/nvim-autopairs",
-            event = "InsertEnter",
+            after = "nvim-compe",
             config = function()
                 require("nvim-autopairs").setup()
+                require("nvim-autopairs.completion.compe").setup(
+                    {
+                        map_cr = true,
+                        map_complete = true -- insert () func completion
+                    }
+                )
             end
         }
 
@@ -142,7 +147,7 @@ return packer.startup(
         -- load autosave only if its globally enabled
         use {
             "Pocco81/AutoSave.nvim",
-            config = function()
+           config = function()
                 require("zenmode").autoSave()
             end,
             cond = function()
@@ -161,7 +166,7 @@ return packer.startup(
 
         use {
             "Pocco81/TrueZen.nvim",
-            cmd = {"TZAtaraxis", "TZMinimalist","TZFocus"}, --command not mapped yet
+            cmd = {"TZAtaraxis", "TZMinimalist", "TZFocus"},
             config = function()
                 require("zenmode").config()
             end
@@ -171,13 +176,11 @@ return packer.startup(
 
         use {
             "lukas-reineke/indent-blankline.nvim",
-            branch = "lua",
             event = "BufRead",
             setup = function()
                 require("misc-utils").blankline()
             end
         }
-
         --user added
         use {
             "folke/which-key.nvim",
@@ -243,6 +246,12 @@ return packer.startup(
         use {'iamcco/markdown-preview.nvim', config = "vim.call('mkdp#util#install')"}
         use 'ggandor/lightspeed.nvim' --https://github.com/ggandor/lightspeed.nvim
         use "ray-x/lsp_signature.nvim"
+        use {
+          "numtostr/FTerm.nvim",
+          config = function()
+              require("FTerm").setup()
+        end
+        }
     end,
     {
         display = {

@@ -6,7 +6,7 @@ require "top-bufferline"
 local g = vim.g
 
 g.mapleader = " "
-g.auto_save = false
+g.auto_save = true
 
 -- colorscheme related stuff
 

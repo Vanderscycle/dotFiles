@@ -11,7 +11,7 @@ opt.mouse = "a"
 opt.signcolumn = "yes"
 opt.cmdheight = 1
 opt.updatetime = 250 -- update interval for gitsigns
-opt.timeoutlen = 500 --required for folke which key
+opt.timeoutlen = 250 --required for folke which key
 opt.clipboard = "unnamedplus"
 
 -- Numbers
