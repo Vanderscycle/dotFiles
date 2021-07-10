@@ -34,7 +34,7 @@ return packer.startup(
         -- language related plugins
         use {
             "nvim-treesitter/nvim-treesitter",
-            event = "BufRead",
+            --event = "BufRead",
             config = function()
                 require("treesitter-nvim").config()
             end
@@ -47,10 +47,7 @@ return packer.startup(
                 require("nvim-lspconfig").config()
             end
         }
-        use {
-            "kabouzeid/nvim-lspinstall",
-            event = "VimEnter"
-        }
+        use "kabouzeid/nvim-lspinstall"
 
         use {
             "onsails/lspkind-nvim",
@@ -133,13 +130,6 @@ return packer.startup(
 
         use {"andymass/vim-matchup", event = "CursorMoved"}
 
-        use {
-            "terrortylor/nvim-comment",
-            cmd = "CommentToggle",
-            config = function()
-                require("nvim_comment").setup()
-            end
-        }
 
         use {
             "glepnir/dashboard-nvim",
@@ -205,41 +195,7 @@ return packer.startup(
               }
           end
         }
-        use {
-            "folke/todo-comments.nvim",
-            requires = "nvim-lua/plenary.nvim",
-            config = function()
-                require("todo-comments").setup ({
-                    keywords = {
-                        FIX  = { icon = " ", color = "error" , alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }},
-                        TODO = { icon = " ", color = "info" , alt = {"NOTE"}},
-                        HACK = { icon = " ", color = "#EBCB8B" , alt = {"TEMP"}},
-                        WARN = { icon = " ", color = "warning" , alt = { "WARNING", "DANGER" } },
-                        PERF = { icon = " ", color = "default" , alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-                        NOTE = { icon = " ", color = "hint" , alt = { "INFO" } },
-                    },
-                    colors = {
-                        error = { "#BF616A" } ,
-                        warning = { "#D08770"  },
-                        info = { "#5E81AC" },
-                        hint = { "#A3BE8C" },
-                        default = { "#B48EAD" },
-                    },
-                })
-            end
-        }
-        -- honestly <leader> fw and <C-q> is better
-        -- use { --WARN: not working as well as telescope
-        --     "folke/trouble.nvim",
-        --     requires = "kyazdani42/nvim-web-devicons",
-        --     config = function()
-        --         require("trouble").setup {
-        --       -- your configuration comes here
-        --       -- or leave it empty to use the default settings
-        --       -- refer to the configuration section below
-        --     }
-        --   end
-        -- }
+
         use "tpope/vim-fugitive"
         use {
             'vimwiki/vimwiki',
@@ -264,6 +220,44 @@ return packer.startup(
           config = function()
               require("FTerm").setup()
         end
+        }
+        -- comments
+        use {
+            "folke/todo-comments.nvim",
+            requires = "nvim-lua/plenary.nvim",
+            config = function()
+                require("todo-comments").setup ({
+                    keywords = {
+                        FIX  = { icon = " ", color = "error" , alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }},
+                        TODO = { icon = " ", color = "info" , alt = {"NOTE"}},
+                        HACK = { icon = " ", color = "#EBCB8B" , alt = {"TEMP"}},
+                        WARN = { icon = " ", color = "warning" , alt = { "WARNING", "DANGER" } },
+                        PERF = { icon = " ", color = "default" , alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+                        NOTE = { icon = " ", color = "hint" , alt = { "INFO" } },
+                    },
+                    colors = {
+                        error = { "#BF616A" } ,
+                        warning = { "#D08770"  },
+                        info = { "#5E81AC" },
+                        hint = { "#A3BE8C" },
+                        default = { "#B48EAD" },
+                    },
+                })
+            end
+        }
+        use {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        --opt = true,
+        --run = ":TSUpdate", --needs to load manually
+        wants = 'nvim-treesitter'
+        }
+        use {
+            "terrortylor/nvim-comment",
+            cmd = "CommentToggle",
+            config = function()
+                require("nvim_comment").setup()
+                require('ts_context_commentstring.internal').update_commentstring() --not working
+            end
         }
     end,
     {
