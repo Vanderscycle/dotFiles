@@ -1,6 +1,17 @@
 local packer = require("packer")
 local use = packer.use
 
+packer.init {
+    display = {
+        open_fn = function()
+            return require("packer.util").float {border = "single"}
+        end
+    },
+    git = {
+        clone_timeout = 600 -- Timeout, in seconds, for git clones
+    }
+}
+
 return packer.startup(
     function()
         use "wbthomason/packer.nvim"
@@ -36,8 +47,10 @@ return packer.startup(
                 require("nvim-lspconfig").config()
             end
         }
-
-        use "kabouzeid/nvim-lspinstall"
+        use {
+            "kabouzeid/nvim-lspinstall",
+            event = "VimEnter"
+        }
 
         use {
             "onsails/lspkind-nvim",

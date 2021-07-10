@@ -139,6 +139,12 @@ fg("DashboardCenter", grey_fg)
 fg("DashboardShortcut", grey_fg)
 fg("DashboardFooter", grey_fg)
 
+-- packer's floating window
+
+bg("NormalFloat", black2)
+bg("FloatBorder", black2)
+fg("FloatBorder", black2)
+
 -- Default nvim bg (based on terminal bg)
 -- cmd "hi Normal guibg=#1e222a"
 

@@ -47,7 +47,7 @@ M.config = function()
             file_sorter = require "telescope.sorters".get_fuzzy_file,
             file_ignore_patterns = {'node_modules', '.git'},
             generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
-            shorten_path = true,
+            path_display = shorten,
             winblend = 0,
             border = {},
             borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
@@ -101,7 +101,6 @@ function M.git_branches()
 --      require('telescope.builtin').find_files {
 --         prompt_title = "< obsidian templates >",
 --         cwd = "~/Documents/dotFiles/obsidian/templates",
---     
 --     local content = actions.select_all(bufnr),
 --     actions.close(prompt_bufnr)
 --     }
