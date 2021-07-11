@@ -42,10 +42,13 @@ function M.lspsaga_open_signature_help()
 		require('lspsaga.signaturehelp').signature_help()
 	end
 end
-
+vim.lsp.handlers["textDocument/signatureHelp"] = require'lspsaga'.signature_help
 vim.cmd "augroup Signature"
 vim.cmd "autocmd! * <buffer>"
-vim.cmd "autocmd InsertCharPre * lua require'lspsaga_config'.lspsaga_open_signature_help()"
+-- BUG: not working
+--vim.cmd [[autocmd InsertCharPre * silent! lua require'lspsaga_config'.lspsaga_open_signature_help()]]
+-- lsp signature
+vim.cmd [[autocmd CursorHoldI * silent! lua require('lspsaga.signaturehelp').signature_help()]]
 vim.cmd "augroup end"
 
 return M

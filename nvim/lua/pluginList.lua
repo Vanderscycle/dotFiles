@@ -169,7 +169,11 @@ return packer.startup(
 
         use {
             "Pocco81/TrueZen.nvim",
-            cmd = {"TZAtaraxis", "TZMinimalist", "TZFocus"},
+            cmd = {
+                "TZAtaraxis",
+                "TZMinimalist",
+                "TZFocus"
+            },
             config = function()
                 require("zenmode").config()
             end
@@ -197,7 +201,6 @@ return packer.startup(
           end
         }
 
-        use "tpope/vim-fugitive"
         use {
             'vimwiki/vimwiki',
             config = function()
@@ -213,7 +216,10 @@ return packer.startup(
                 }
             end
         }
-        use {'iamcco/markdown-preview.nvim', config = "vim.call('mkdp#util#install')"}
+        use {
+            'iamcco/markdown-preview.nvim',
+            config = "vim.call('mkdp#util#install')"
+        }
         use 'ggandor/lightspeed.nvim' --https://github.com/ggandor/lightspeed.nvim
 
         -- lsp config additions (needs lazy loading)
@@ -226,6 +232,7 @@ return packer.startup(
         }
         use {
           "ray-x/lsp_signature.nvim",
+          disable = true,
           config = function()
               require"lsp_signature".on_attach()
           end,
@@ -234,12 +241,12 @@ return packer.startup(
               'neovim/nvim-lspconfig'
             }
         }
-        -- TODO: more testing (svelte)
         use { --TODO: define bindings (except the floatterm)
             'glepnir/lspsaga.nvim',
             branch = 'main',
             requires = {
-                'neovim/nvim-lspconfig'
+                'neovim/nvim-lspconfig',
+                "ray-x/lsp_signature.nvim"
             }
         }
         -- floating terminal
@@ -248,6 +255,31 @@ return packer.startup(
           config = function()
               require("FTerm").setup()
         end
+        }
+        -- git
+        use {
+            "tpope/vim-fugitive",
+            cmd = {
+                "G",
+                "Git"
+              }
+          }
+        use {
+            "sindrets/diffview.nvim",
+            module = "diffview",
+            cmd = "DiffviewOpen"
+        }
+        use {
+            'pwntester/octo.nvim',
+            config=function()
+                require"octo".setup()
+            end, --TODO: make bindins
+            requires = {
+                "nvim-telescope/telescope.nvim" --BUG: needs to call telescope
+            },
+            wants = {
+                'nvim-telescope'
+            }
         }
         -- comments
         use {
@@ -274,11 +306,11 @@ return packer.startup(
             end
         }
         use {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        --opt = true,
-        --run = ":TSUpdate", --needs to load manually
-        wants = 'nvim-treesitter'
-        }
+            'JoosepAlviste/nvim-ts-context-commentstring',
+            --opt = true,
+            --run = ":TSUpdate", --needs to load manually
+            wants = 'nvim-treesitter'
+            }
         use {
             "terrortylor/nvim-comment",
             cmd = "CommentToggle",

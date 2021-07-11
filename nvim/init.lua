@@ -21,7 +21,7 @@ require "mappings"
 require "file-icons"
 require "statusline"
 vim.cmd [[autocmd BufReadPost,FileReadPost lua require "lsp_signature".on_attach()]]
-require('lspsaga_config')
+require 'lspsaga_config'
 --user added
 --TODO: get emmet-ls working
 --TODO: figure out more about global quickfixlist :vimgrep (what) (where) -- you can do **/*.lua for example
