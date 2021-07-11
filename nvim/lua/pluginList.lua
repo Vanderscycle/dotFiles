@@ -184,6 +184,7 @@ return packer.startup(
                 require("misc-utils").blankline()
             end
         }
+
         --user added
         use {
             "folke/which-key.nvim",
@@ -214,15 +215,27 @@ return packer.startup(
         }
         use {'iamcco/markdown-preview.nvim', config = "vim.call('mkdp#util#install')"}
         use 'ggandor/lightspeed.nvim' --https://github.com/ggandor/lightspeed.nvim
+
         -- lsp config additions (needs lazy loading)
+        -- TODO: add https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
         use {
-            'kosayoda/nvim-lightbulb',
+            'kosayoda/nvim-lightbulb', -- NOTE: needed?
             requires = {
                 'neovim/nvim-lspconfig'
             }
         }
-        use "ray-x/lsp_signature.nvim" -- working?
         use {
+          "ray-x/lsp_signature.nvim",
+          config = function()
+              require"lsp_signature".on_attach()
+          end,
+          event = "BufRead",
+          requires = {
+              'neovim/nvim-lspconfig'
+            }
+        }
+        -- TODO: more testing (svelte)
+        use { --TODO: define bindings (except the floatterm)
             'glepnir/lspsaga.nvim',
             branch = 'main',
             requires = {
