@@ -65,4 +65,15 @@ M.blankline = function()
     vim.g.indent_blankline_show_first_indent_level = false
 end
 
+-- hide line numbers , statusline in specific buffers!
+vim.api.nvim_exec(
+    [[
+   au BufEnter term://* setlocal nonumber
+   au BufEnter,BufWinEnter,WinEnter,CmdwinEnter * if bufname('%') == "NvimTree" | set laststatus=0 | else | set laststatus=2 | endif
+   au BufEnter term://* set laststatus=0 
+]],
+    false
+)
+-- lightbulb plugin
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb{sign = {enabled = true, priority = 9}}]]
 return M

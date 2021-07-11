@@ -214,7 +214,22 @@ return packer.startup(
         }
         use {'iamcco/markdown-preview.nvim', config = "vim.call('mkdp#util#install')"}
         use 'ggandor/lightspeed.nvim' --https://github.com/ggandor/lightspeed.nvim
-        use "ray-x/lsp_signature.nvim"
+        -- lsp config additions (needs lazy loading)
+        use {
+            'kosayoda/nvim-lightbulb',
+            requires = {
+                'neovim/nvim-lspconfig'
+            }
+        }
+        use "ray-x/lsp_signature.nvim" -- working?
+        use {
+            'glepnir/lspsaga.nvim',
+            branch = 'main',
+            requires = {
+                'neovim/nvim-lspconfig'
+            }
+        }
+        -- floating terminal
         use {
           "numtostr/FTerm.nvim",
           config = function()

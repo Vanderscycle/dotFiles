@@ -147,4 +147,4 @@ fg("FloatBorder", black2)
 
 -- Default nvim bg (based on terminal bg)
 -- cmd "hi Normal guibg=#1e222a"
-
+fg_bg("LspSagaFinderSelection",'','')
