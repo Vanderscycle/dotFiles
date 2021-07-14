@@ -198,7 +198,21 @@ map("v", ">",">gv", opt)
 map("n","<leader>w[",":MarkdownPreview<CR>",opt)
 map("n","<leader>w-",":MarkdownPreviewStop<CR>",opt)
 
--- floating terminal 
+-- floating terminal
 map('n', '<A-t>', '<CMD>lua require("FTerm").toggle()<CR>', opt)
 map('t', '<A-t>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>', opt)
+
+--lspsaga
+map("n","<leader>lf","<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>")
+map("n","<leader>la","<cmd>lua require('lspsaga.codeaction').code_action()<CR>",opt)
+map("n","<leader>ld","<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>",opt)
+-- map("n","<M-k>","<CMD>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>",opt)
+-- map("n","<M-j>","<CMD>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>",opt)
+map("n","<leader>ls","<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>",opt)
+map("n","<leader>lr","<cmd>lua require('lspsaga.rename').rename()<CR>",opt)
+map("n","<leader>lp","<cmd>lua require'lspsaga.provider'.preview_definition()<CR>",opt)
+map("n", "[d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>",opt)
+map("n", "]d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>",opt)
+
+
 return _G

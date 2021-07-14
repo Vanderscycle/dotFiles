@@ -201,8 +201,9 @@ return packer.startup(
           end
         }
 
-        use {
+        use { --TODO: make it lazy loading
             'vimwiki/vimwiki',
+            cmd = "VimwikiIndex",
             config = function()
                 vim.g.vimwiki_global_ext = 0
                 vim.g.vimwiki_list = {
@@ -218,6 +219,7 @@ return packer.startup(
         }
         use {
             'iamcco/markdown-preview.nvim',
+            cmd = "VimwikiIndex",
             config = "vim.call('mkdp#util#install')"
         }
         use 'ggandor/lightspeed.nvim' --https://github.com/ggandor/lightspeed.nvim
@@ -241,7 +243,7 @@ return packer.startup(
               'neovim/nvim-lspconfig'
             }
         }
-        use { --TODO: define bindings (except the floatterm)
+        use {
             'glepnir/lspsaga.nvim',
             branch = 'main',
             requires = {
@@ -269,17 +271,18 @@ return packer.startup(
             module = "diffview",
             cmd = "DiffviewOpen"
         }
-        use {
+        use {--TODO: make it lazy loading
             'pwntester/octo.nvim',
             config=function()
                 require"octo".setup()
-            end, --TODO: make bindins
+            end,
+            cmd = "Telescope",
             requires = {
                 "nvim-telescope/telescope.nvim" --BUG: needs to call telescope
             },
-            wants = {
-                'nvim-telescope'
-            }
+            -- wants = {
+            --     'nvim-telescope'
+            -- }
         }
         -- comments
         use {
