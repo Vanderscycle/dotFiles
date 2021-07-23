@@ -47,6 +47,10 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing developer packages'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa yarn
 sudo pacman -S --noconfirm asciinema # to record
+
+echo 'installing postman for api testing'
+yay -S --noconfirm postman-bin
+
 #bat=cat, exa=ls but better
 # corrector for bash scripts
 sudo pacman -S --noconfirm shellcheck # maybe bloat?

@@ -9,4 +9,5 @@
 ## Phase 1: Assembling phase
   [[Notes taking resources]] 
   [[blockchain]]
+  [[learning chinese]]
 ##### [Henri vandersleyen](https://github.com/Vanderscycle)
