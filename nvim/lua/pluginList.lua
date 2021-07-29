@@ -27,9 +27,9 @@ return packer.startup(
         }
         use {
          "akinsho/nvim-bufferline.lua",
-          after = "nvim-base16.lua",
+          --after = "nvim-base16.lua",
             config = function()
-                require "plugins.bufferline"
+                require "bufferline"
             end
         }
 
@@ -303,9 +303,9 @@ return packer.startup(
             config=function()
                 require"octo".setup()
             end,
-            cmd = "Telescope", --BUG: make it lazy load better
+            cmd = "Telescope", 
             requires = {
-                "nvim-telescope/telescope.nvim" --BUG: needs to call telescope
+                "nvim-telescope/telescope.nvim"
             },
             -- wants = {
             --     'nvim-telescope'

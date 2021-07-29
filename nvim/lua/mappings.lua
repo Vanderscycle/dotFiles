@@ -173,13 +173,13 @@ map("n","<M-j>",":cprev<CR>zz",opt)
 map("n","<leader>qg",":lua require('mappings').ToggleQFList(1)<CR>")
 
 -- bufferline tab stuff
-map("n", "<S-t>", ":tabnew<CR>", opt) -- new tab
+map("n", "<S-t>", ":enew<CR>", opt) -- new buffer
+map("n", "<C-t>b", ":tabnew<CR>", opt) -- new tab
 map("n", "<S-x>", ":bd!<CR>", opt) -- close tab
 
 -- move between tabs
-map("n", "<TAB>", [[<Cmd>BufferLineCycleNext<CR>]], opt)
-map("n", "<S-TAB>", [[<Cmd>BufferLineCyclePrev<CR>]], opt)
-map("n", "<S-TAB>", [[<Cmd>BufferLineCyclePrev<CR>]], opt)
+map("n", "<TAB>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", opt)
 
 -- better window navidation
 map("n","<C-h>", "<C-w>h" , opt)

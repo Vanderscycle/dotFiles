@@ -1,8 +1,8 @@
 -- load all plugins
 require "pluginList"
 require "misc-utils"
---require "bufferline"
-
+require "bufferline"
+require "theme"
 local g = vim.g
 
 g.mapleader = " "
@@ -10,12 +10,9 @@ g.auto_save = true
 
 -- colorscheme related stuff
 --g.nvchad_theme = "onedark"
-local base16 = require "base16"
 --base16(base16.themes["onedark"], true)
-g.nvchad_theme = "onedark"
-base16(base16.themes["tomorrow-night-eighties"], true)
 --github is lit
----- nord
+-- nord
 
 require "highlights"
 require "mappings"
