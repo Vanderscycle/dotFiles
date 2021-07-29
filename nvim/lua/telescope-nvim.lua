@@ -71,12 +71,13 @@ M.config = function()
             media_files = {
                 filetypes = {"png", "webp", "jpg", "jpeg"},
                 find_cmd = "rg" -- find command (defaults to `fd`)
-            }
+            },
         }
     }
 
     require("telescope").load_extension("fzf")
     require("telescope").load_extension("media_files")
+    require('telescope').load_extension('dap')
 end
 
 function M.search_dootfiles()

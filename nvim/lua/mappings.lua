@@ -19,9 +19,9 @@ map("v", "x", [=[ "_x ]=], opt)
 --
 
 -- OPEN TERMINALS --
-map("n", "<C-l>", [[<Cmd>vnew term://zsh <CR>]], opt) -- term over right
-map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) --  term bottom
-map("n", "<C-t>t", [[<Cmd> tabnew | term <CR>]], opt) -- term newtab
+-- map("n", "<C-l>", [[<Cmd>vnew term://zsh <CR>]], opt) -- term over right
+-- map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) --  term bottom
+map("n", "<C-t>t", ":terminal<CR>", opt) -- term newtab
 
 -- copy whole file content
 map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
@@ -132,7 +132,7 @@ map("n", "<Leader>fgb", [[<Cmd>Telescope git_branches<CR>]], opt)
 -- misc
 map("n", "<Leader>fhh", [[<Cmd>Telescope help_tags<CR>]], opt)
 map("n", "<Leader>fhb", [[<Cmd>Telescope builtin<CR>]], opt)
-map("n", "<Leader>fp", [[<Cmd>lua require('telescope').extensions.media_files.media_files()<CR>]], opt)
+map("n", "<Leader>fp", ":Telescope media_files <CR>", opt)
 
 --https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/navigation.vim
 -- of note I need to raise an issue on telescope regarding empty file at the beginning
@@ -170,7 +170,7 @@ map("n","<leader>ql",":lua require('mappings').ToggleQFList(0)<CR>")
 --global ( <C-q> telescope sends it to a global list)
 map("n","<M-k>",":cnext<CR>zz",opt)--why zz?
 map("n","<M-j>",":cprev<CR>zz",opt)
-map("n","<leader>ql",":lua require('mappings').ToggleQFList(1)<CR>")
+map("n","<leader>qg",":lua require('mappings').ToggleQFList(1)<CR>")
 
 -- bufferline tab stuff
 map("n", "<S-t>", ":tabnew<CR>", opt) -- new tab
@@ -214,5 +214,15 @@ map("n","<leader>lp","<cmd>lua require'lspsaga.provider'.preview_definition()<CR
 map("n", "[d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>",opt)
 map("n", "]d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>",opt)
 
+map("n", "<leader>ts", ":TSLspOrganize<CR>")
+map("n", "<leader>tq", ":TSLspFixCurrent<CR>")
+map("n", "<leader>tr", ":TSLspRenameFile<CR>")
+map("n", "<leader>ti", ":TSLspImportAll<CR>")
 
+-- diffview
+--https://github.com/sindrets/diffview.nvim
+
+
+-- gitsigns mapping
+-- https://github.com/lewis6991/gitsigns.nvim
 return _G

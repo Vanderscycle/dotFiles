@@ -15,12 +15,23 @@ packer.init {
 return packer.startup(
     function()
         use "wbthomason/packer.nvim"
-
-        use "akinsho/nvim-bufferline.lua"
         use "glepnir/galaxyline.nvim"
 
         -- color related stuff
-        use "siduck76/nvim-base16.lua"
+        use {
+            "norcalli/nvim-base16.lua",
+            --after = "packer.nvim",
+            --config = function()
+            --    require "theme"
+            --end
+        }
+        use {
+         "akinsho/nvim-bufferline.lua",
+          after = "nvim-base16.lua",
+            config = function()
+                require "plugins.bufferline"
+            end
+        }
 
         use {
             "norcalli/nvim-colorizer.lua",
@@ -96,7 +107,8 @@ return packer.startup(
                 {"nvim-lua/popup.nvim"},
                 {"nvim-lua/plenary.nvim"},
                 {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
-                {"nvim-telescope/telescope-media-files.nvim"}
+                {"nvim-telescope/telescope-media-files.nvim"},
+                {"nvim-telescope/telescope-dap.nvim"}
             },
             cmd = "Telescope",
             config = function()
@@ -145,7 +157,10 @@ return packer.startup(
             end
         }
 
-        use {"tweekmonster/startuptime.vim", cmd = "StartupTime"}
+        use {
+          "dstein64/vim-startuptime",
+          cmd = "StartupTime"
+        }
 
         -- load autosave only if its globally enabled
         use {
@@ -226,11 +241,15 @@ return packer.startup(
 
         -- lsp config additions (needs lazy loading)
         -- TODO: add https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
+        -- WARN: does it even work?
+        -- TODO: disable it and see what happens
         use {
-            'kosayoda/nvim-lightbulb', -- NOTE: needed?
-            requires = {
-                'neovim/nvim-lspconfig'
-            }
+          'jose-elias-alvarez/nvim-lsp-ts-utils',
+          disable=false,
+          requires = {
+              'neovim/nvim-lspconfig',
+              "nvim-lua/plenary.nvim",
+          }
         }
         use {
           "ray-x/lsp_signature.nvim",
@@ -250,6 +269,14 @@ return packer.startup(
                 'neovim/nvim-lspconfig',
                 "ray-x/lsp_signature.nvim"
             }
+        }
+        --debugging
+        -- WARN: both need work to integrate
+        use { --WARN: need to integrate
+            'mfussenegger/nvim-dap'
+        }
+        use { --WARN: mapping required https://github.com/David-Kunz/jester
+            'David-Kunz/jester'
         }
         -- floating terminal
         use {
@@ -271,12 +298,12 @@ return packer.startup(
             module = "diffview",
             cmd = "DiffviewOpen"
         }
-        use {--TODO: make it lazy loading
+        use {
             'pwntester/octo.nvim',
             config=function()
                 require"octo".setup()
             end,
-            cmd = "Telescope",
+            cmd = "Telescope", --BUG: make it lazy load better
             requires = {
                 "nvim-telescope/telescope.nvim" --BUG: needs to call telescope
             },
@@ -309,18 +336,43 @@ return packer.startup(
             end
         }
         use {
-            'JoosepAlviste/nvim-ts-context-commentstring',
+            'JoosepAlviste/nvim-ts-context-commentstring',--BUG: issues with svelte
             --opt = true,
             --run = ":TSUpdate", --needs to load manually
             wants = 'nvim-treesitter'
             }
-        use {
+        use {--INFO: toggle comments <leader>+/
             "terrortylor/nvim-comment",
             cmd = "CommentToggle",
             config = function()
                 require("nvim_comment").setup()
                 require('ts_context_commentstring.internal').update_commentstring() --not working
             end
+        }
+        use {
+          'abecodes/tabout.nvim',
+          config = function()
+            require('tabout').setup {
+            tabkey = '<Tab>', -- key to trigger tabout
+            backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout
+            act_as_tab = true, -- shift content if tab out is not possible
+            act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+            enable_backwards = true, -- well ...
+            completion = true, -- if the tabkey is used in a completion pum
+            tabouts = {
+              {open = "'", close = "'"},
+              {open = '"', close = '"'},
+              {open = '`', close = '`'},
+              {open = '(', close = ')'},
+              {open = '[', close = ']'},
+              {open = '{', close = '}'}
+            },
+            ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+            exclude = {} -- tabout will ignore these filetypes
+        }
+          end,
+                wants = {'nvim-treesitter'}, -- or require if not used so far
+                after = {'nvim-compe'} -- if a completion plugin is using tabs load it before
         }
     end,
     {

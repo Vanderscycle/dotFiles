@@ -74,6 +74,4 @@ vim.api.nvim_exec(
 ]],
     false
 )
--- lightbulb plugin
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb{sign = {enabled = true, priority = 9}}]]
 return M

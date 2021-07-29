@@ -19,6 +19,7 @@ M.config = function()
     g.nvim_tree_hide_dotfiles = 1
     g.nvim_tree_git_hl = 1
     g.nvim_tree_highlight_opened_files = 0
+    --g.nvim_tree_root_folder_modifier = table.concat {":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??"}
     g.nvim_tree_root_folder_modifier = ":t"
     g.nvim_tree_tab_open = 0
     g.nvim_tree_allow_resize = 1
@@ -62,7 +63,7 @@ M.config = function()
 
     g.nvim_tree_bindings = {
         {key = {"<CR>", "o", "<2-LeftMouse>"}, cb = tree_cb("edit")},
-        {key = {"<2-RightMouse>", "<C-}>"}, cb = tree_cb("cd")},
+        {key = {"<2-RightMouse>", "<C-]>"}, cb = tree_cb("cd")},
         {key = "<C-v>", cb = tree_cb("vsplit")},
         {key = "<C-x>", cb = tree_cb("split")},
         {key = "<C-t>", cb = tree_cb("tabnew")},

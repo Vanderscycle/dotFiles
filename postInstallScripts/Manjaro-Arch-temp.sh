@@ -49,7 +49,7 @@ sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa yarn
 sudo pacman -S --noconfirm asciinema # to record
 
 echo 'installing postman for api testing'
-yay -S --noconfirm postman-bin
+yay -S --noconfirm postman-bin mongodb-compass
 
 #bat=cat, exa=ls but better
 # corrector for bash scripts
