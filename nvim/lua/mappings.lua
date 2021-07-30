@@ -178,8 +178,8 @@ map("n", "<C-t>b", ":tabnew<CR>", opt) -- new tab
 map("n", "<S-x>", ":bd!<CR>", opt) -- close tab
 
 -- move between tabs
-map("n", "<TAB>", ":BufferLineCycleNext<CR>", opt)
-map("n", "<S-TAB>", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<Tab>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opt)
 
 -- better window navidation
 map("n","<C-h>", "<C-w>h" , opt)

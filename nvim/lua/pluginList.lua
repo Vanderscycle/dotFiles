@@ -15,7 +15,13 @@ packer.init {
 return packer.startup(
     function()
         use "wbthomason/packer.nvim"
-        use "glepnir/galaxyline.nvim"
+        use {
+            "glepnir/galaxyline.nvim",
+            after = "nvim-base16.lua",
+            config = function()
+                require "statusline"
+            end
+        }
 
         -- color related stuff
         use {
