@@ -18,6 +18,17 @@ map("v", "x", [=[ "_x ]=], opt)
  this line too ]]
 --
 
+-- Don't copy the replaced text after pasting in visual mode
+map("v", "p", '"_dP', opt)
+
+-- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+-- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+-- empty mode is same as using :map
+map("", "j", 'v:count ? "j" : "gj"', {expr = true})
+map("", "k", 'v:count ? "k" : "gk"', {expr = true})
+map("", "<Down>", 'v:count ? "j" : "gj"', {expr = true})
+map("", "<Up>", 'v:count ? "k" : "gk"', {expr = true})
+
 -- OPEN TERMINALS --
 -- map("n", "<C-l>", [[<Cmd>vnew term://zsh <CR>]], opt) -- term over right
 -- map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) --  term bottom
@@ -102,9 +113,10 @@ map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 map("n", "<Leader>p", [[<Cmd> Neoformat<CR>]], opt)
 
 -- dashboard stuff leader d
-map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
-map("n", "<Leader>dn", [[<Cmd> DashboardNewFile<CR>]], opt)
-map("n", "<Leader>dm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
+-- TODO: do I want them as bindings?
+-- map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
+-- map("n", "<Leader>dn", [[<Cmd> DashboardNewFile<CR>]], opt)
+-- map("n", "<Leader>dm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
 -- map("n", "<Leader>ci", ":e ~/.config/nvim/init.lua<CR>", opt)
 -- map("n", "<Leader>cm", ":e ~/.config/nvim/lua/mappings.lua<CR>", opt)
 -- map("n", "<Leader>ch", ":e ~/.config/nvim/lua/highlights.lua<CR>", opt)
@@ -133,6 +145,7 @@ map("n", "<Leader>fgb", [[<Cmd>Telescope git_branches<CR>]], opt)
 map("n", "<Leader>fhh", [[<Cmd>Telescope help_tags<CR>]], opt)
 map("n", "<Leader>fhb", [[<Cmd>Telescope builtin<CR>]], opt)
 map("n", "<Leader>fp", ":Telescope media_files <CR>", opt)
+map("n", "<Leader>fth", ":Telescope themes<CR>", opt)
 
 --https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/navigation.vim
 -- of note I need to raise an issue on telescope regarding empty file at the beginning
@@ -214,11 +227,32 @@ map("n","<leader>lp","<cmd>lua require'lspsaga.provider'.preview_definition()<CR
 map("n", "[d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>",opt)
 map("n", "]d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>",opt)
 
+-- typescript
 map("n", "<leader>ts", ":TSLspOrganize<CR>")
 map("n", "<leader>tq", ":TSLspFixCurrent<CR>")
 map("n", "<leader>tr", ":TSLspRenameFile<CR>")
 map("n", "<leader>ti", ":TSLspImportAll<CR>")
 
+vim.cmd("silent! command PackerCompile lua require 'pluginList' require('packer').compile()")
+vim.cmd("silent! command PackerInstall lua require 'pluginList' require('packer').install()")
+vim.cmd("silent! command PackerStatus lua require 'pluginList' require('packer').status()")
+vim.cmd("silent! command PackerSync lua require 'pluginList' require('packer').sync()")
+vim.cmd("silent! command PackerUpdate lua require 'pluginList' require('packer').update()")
+
+--nvim dap (necessary?)
+map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>')
+map('n', '<leader>dso', '<cmd>lua require"dap".step_over()<CR>')
+map('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>')
+map('n', '<leader>dsx', '<cmd>lua require"dap".step_out()<CR>')
+map('n', '<leader>dbt', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
+map('n', '<leader>dbn', '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>')
+map('n', '<leader>dro', '<cmd>lua require"dap".repl.open()<CR>')
+-- telescope-dap
+map('n', '<leader>dcc', '<cmd>lua require"telescope".extensions.dap.commands{}<CR>')
+map('n', '<leader>dco', '<cmd>lua require"telescope".extensions.dap.configurations{}<CR>')
+map('n', '<leader>dlb', '<cmd>lua require"telescope".extensions.dap.list_breakpoints{}<CR>')
+map('n', '<leader>dv', '<cmd>lua require"telescope".extensions.dap.variables{}<CR>')
+map('n', '<leader>df', '<cmd>lua require"telescope".extensions.dap.frames{}<CR>')
 -- diffview
 --https://github.com/sindrets/diffview.nvim
 
@@ -226,3 +260,4 @@ map("n", "<leader>ti", ":TSLspImportAll<CR>")
 -- gitsigns mapping
 -- https://github.com/lewis6991/gitsigns.nvim
 return _G
+

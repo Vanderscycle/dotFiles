@@ -1,7 +1,12 @@
 g = vim.g
-local base16 = require "base16"
---base16(base16.themes["onedark"], true)
-g.nvchad_theme = "onedark"
--- base16(base16.themes["tomorrow-night-eighties"], true)
-base16(base16.themes["nord"], true)
+g.nvchad_theme = "javacafe"
 
+local present, base16 = pcall(require, "base16")
+
+if present then
+    base16(base16.themes["javacafe"], true)
+    require "highlights"
+    return true
+else
+    return false
+end

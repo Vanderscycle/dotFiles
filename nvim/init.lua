@@ -1,21 +1,17 @@
+local chad_modules = {
+    "options",
+    "mappings",
+    "utils"
+}
+for i = 1, #chad_modules, 1 do
+    pcall(require, chad_modules[i])
+end
+--TODO: investigate if TS imports works *yes
+--TODO: add nvim-dap/dap telescope
+--TODO: add the telescope methods. investigate how to add more pwoerfule ones
+-- TODO: octo?
+--TODO: add wilder
+--TODO: once done have a last look at the old files before pushing.
+-- double check neoformat works for svelte https://github.com/sbdchd/neoformat
+-- TODO: add the required global installs to manjaro install
 
-require "pluginList"
-require "theme"
-require "misc-utils"
-require "bufferline"
-local g = vim.g
-
-g.mapleader = " "
-g.auto_save = true
-
-require "highlights"
-require "mappings"
-require "file-icons"
-require "statusline"
-vim.cmd [[autocmd BufReadPost,FileReadPost lua require "lsp_signature".on_attach()]]
-require 'lspsaga_config'
---user added
---TODO: get emmet-ls working
---TODO: figure out more about global quickfixlist :vimgrep (what) (where) -- you can do **/*.lua for example
---TODO: figure out more about local quickfixlist :lgrep (what {word under cursor}) (location {this buffer})
---TODO: figure out about :ldo e.g. :ldo g/function/norm! Ilocal https://neovim.io/doc/user/quickfix.html#:ldo

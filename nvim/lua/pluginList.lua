@@ -1,41 +1,51 @@
-local packer = require("packer")
-local use = packer.use
+local present, _ = pcall(require, "packerInit")
+local packer
 
-packer.init {
-    display = {
-        open_fn = function()
-            return require("packer.util").float {border = "single"}
-        end
-    },
-    git = {
-        clone_timeout = 600 -- Timeout, in seconds, for git clones
-    }
-}
+if present then
+    packer = require "packer"
+else
+    return false
+end
+
+local use = packer.use
 
 return packer.startup(
     function()
-        use "wbthomason/packer.nvim"
+        use {
+            "wbthomason/packer.nvim",
+            event = "VimEnter"
+        }
+
+        use {
+            "jdhao/better-escape.vim",
+            event = "InsertEnter",
+            config = function()
+                require "plugins.others".escape()
+            end
+        }
+
+        use {
+            "akinsho/nvim-bufferline.lua",
+            after = "nvim-base16.lua",
+            config = function()
+                require "plugins.bufferline"
+            end
+        }
+
         use {
             "glepnir/galaxyline.nvim",
             after = "nvim-base16.lua",
             config = function()
-                require "statusline"
+                require "plugins.statusline"
             end
         }
 
         -- color related stuff
         use {
-            "norcalli/nvim-base16.lua",
-            --after = "packer.nvim",
-            --config = function()
-            --    require "theme"
-            --end
-        }
-        use {
-         "akinsho/nvim-bufferline.lua",
-          --after = "nvim-base16.lua",
+            "siduck76/nvim-base16.lua",
+            after = "packer.nvim",
             config = function()
-                require "bufferline"
+                require "theme"
             end
         }
 
@@ -43,34 +53,37 @@ return packer.startup(
             "norcalli/nvim-colorizer.lua",
             event = "BufRead",
             config = function()
-                require("colorizer").setup()
-                vim.cmd("ColorizerReloadAllBuffers")
+                require("plugins.others").colorizer()
             end
         }
 
         -- language related plugins
         use {
             "nvim-treesitter/nvim-treesitter",
-            --event = "BufRead",
+            event = "BufRead",
             config = function()
-                require("treesitter-nvim").config()
+                require "plugins.treesitter"
             end
         }
 
         use {
+            "kabouzeid/nvim-lspinstall",
+            event = "BufRead"
+        }
+
+        use {
             "neovim/nvim-lspconfig",
-            event = "BufRead",
+            after = "nvim-lspinstall",
             config = function()
-                require("nvim-lspconfig").config()
+                require "plugins.lspconfig"
             end
         }
-        use "kabouzeid/nvim-lspinstall"
 
         use {
             "onsails/lspkind-nvim",
             event = "BufRead",
             config = function()
-                require("lspkind").init()
+                require("plugins.others").lspkind()
             end
         }
 
@@ -79,55 +92,83 @@ return packer.startup(
             "hrsh7th/nvim-compe",
             event = "InsertEnter",
             config = function()
-                require("compe-completion").config()
+                require "plugins.compe"
             end,
-            wants = {"LuaSnip"},
+            wants = "LuaSnip",
             requires = {
                 {
                     "L3MON4D3/LuaSnip",
                     wants = "friendly-snippets",
                     event = "InsertCharPre",
                     config = function()
-                        require("compe-completion").snippets()
+                        require "plugins.luasnip"
                     end
                 },
-                "rafamadriz/friendly-snippets"
+                {
+                    "rafamadriz/friendly-snippets",
+                    event = "InsertCharPre"
+                }
             }
         }
 
-        use {"sbdchd/neoformat", cmd = "Neoformat"}
+        use { --TODO: add the relevant npm -g packages https://github.com/sbdchd/neoformat
+            "sbdchd/neoformat",
+            cmd = "Neoformat"
+        }
 
         -- file managing , picker etc
         use {
             "kyazdani42/nvim-tree.lua",
             cmd = "NvimTreeToggle",
             config = function()
-                require("nvimTree").config()
+                require "plugins.nvimtree"
             end
         }
 
-        use "kyazdani42/nvim-web-devicons"
+        use {
+            "kyazdani42/nvim-web-devicons",
+            after = "nvim-base16.lua",
+            config = function()
+                require "plugins.icons"
+            end
+        }
+
+        use {
+            "nvim-lua/plenary.nvim",
+            event = "BufRead"
+        }
+        use {
+            "nvim-lua/popup.nvim",
+            after = "plenary.nvim"
+        }
+
         use {
             "nvim-telescope/telescope.nvim",
-            requires = {
-                {"nvim-lua/popup.nvim"},
-                {"nvim-lua/plenary.nvim"},
-                {"nvim-telescope/telescope-fzf-native.nvim", run = "make"},
-                {"nvim-telescope/telescope-media-files.nvim"},
-                {"nvim-telescope/telescope-dap.nvim"}
-            },
             cmd = "Telescope",
             config = function()
-                require("telescope-nvim").config()
+                require "plugins.telescope"
             end
         }
 
+        use {
+            "nvim-telescope/telescope-fzf-native.nvim",
+            run = "make",
+            cmd = "Telescope"
+        }
+        use {
+            "nvim-telescope/telescope-media-files.nvim",
+            cmd = "Telescope"
+        }
+        use {
+            "nvim-telescope/telescope-dap.nvim",
+            cmd = "Telescope"
+        }
         -- git stuff
         use {
             "lewis6991/gitsigns.nvim",
-            event = "BufRead",
+            after = "plenary.nvim",
             config = function()
-                require("gitsigns-nvim").config()
+                require "plugins.gitsigns"
             end
         }
 
@@ -136,18 +177,22 @@ return packer.startup(
             "windwp/nvim-autopairs",
             after = "nvim-compe",
             config = function()
-                require("nvim-autopairs").setup()
-                require("nvim-autopairs.completion.compe").setup(
-                    {
-                        map_cr = true,
-                        map_complete = true -- insert () func completion
-                    }
-                )
+                require "plugins.autopairs"
             end
         }
 
-        use {"andymass/vim-matchup", event = "CursorMoved"}
+        use { --TODO: read https://github.com/andymass/vim-matchup
+            "andymass/vim-matchup",
+            event = "CursorMoved"
+        }
 
+        use {
+            "terrortylor/nvim-comment",
+            cmd = "CommentToggle",
+            config = function()
+                require("plugins.others").comment()
+            end
+        }
 
         use {
             "glepnir/dashboard-nvim",
@@ -159,20 +204,20 @@ return packer.startup(
                 "SessionSave"
             },
             setup = function()
-                require("dashboard").config()
+                require "plugins.dashboard"
             end
         }
 
         use {
-          "dstein64/vim-startuptime",
-          cmd = "StartupTime"
+            "dstein64/vim-startuptime",
+            cmd = "StartupTime"
         }
 
-        -- load autosave only if its globally enabled
+        -- load autosave only  its globally enabled
         use {
             "Pocco81/AutoSave.nvim",
-           config = function()
-                require("zenmode").autoSave()
+            config = function()
+                require "plugins.autosave"
             end,
             cond = function()
                 return vim.g.auto_save == true
@@ -184,7 +229,7 @@ return packer.startup(
             "karb94/neoscroll.nvim",
             event = "WinScrolled",
             config = function()
-                require("neoscroll").setup()
+                require("plugins.others").neoscroll()
             end
         }
 
@@ -196,7 +241,7 @@ return packer.startup(
                 "TZFocus"
             },
             config = function()
-                require("zenmode").config()
+                require "plugins.zenmode"
             end
         }
 
@@ -206,10 +251,16 @@ return packer.startup(
             "lukas-reineke/indent-blankline.nvim",
             event = "BufRead",
             setup = function()
-                require("misc-utils").blankline()
+                require("plugins.others").blankline()
             end
         }
 
+        use {
+            "tpope/vim-fugitive",
+            cmd = {
+                "Git","G"
+            }
+        }
         --user added
         use {
             "folke/which-key.nvim",
@@ -221,103 +272,6 @@ return packer.startup(
               }
           end
         }
-
-        use { --TODO: make it lazy loading
-            'vimwiki/vimwiki',
-            cmd = "VimwikiIndex",
-            config = function()
-                vim.g.vimwiki_global_ext = 0
-                vim.g.vimwiki_list = {
-                    {
-                        auto_export =  1,
-                        path_html = '~/Documents/dotFiles/obsidian/',
-                        path = '~/Documents/dotFiles/obsidian/',
-                        syntax = 'markdown',
-                        ext = '.md',
-                    }
-                }
-            end
-        }
-        use {
-            'iamcco/markdown-preview.nvim',
-            cmd = "VimwikiIndex",
-            config = "vim.call('mkdp#util#install')"
-        }
-        use 'ggandor/lightspeed.nvim' --https://github.com/ggandor/lightspeed.nvim
-
-        -- lsp config additions (needs lazy loading)
-        -- TODO: add https://github.com/jose-elias-alvarez/nvim-lsp-ts-utils
-        -- WARN: does it even work?
-        -- TODO: disable it and see what happens
-        use {
-          'jose-elias-alvarez/nvim-lsp-ts-utils',
-          disable=false,
-          requires = {
-              'neovim/nvim-lspconfig',
-              "nvim-lua/plenary.nvim",
-          }
-        }
-        use {
-          "ray-x/lsp_signature.nvim",
-          disable = true,
-          config = function()
-              require"lsp_signature".on_attach()
-          end,
-          event = "BufRead",
-          requires = {
-              'neovim/nvim-lspconfig'
-            }
-        }
-        use {
-            'glepnir/lspsaga.nvim',
-            branch = 'main',
-            requires = {
-                'neovim/nvim-lspconfig',
-                "ray-x/lsp_signature.nvim"
-            }
-        }
-        --debugging
-        -- WARN: both need work to integrate
-        use { --WARN: need to integrate
-            'mfussenegger/nvim-dap'
-        }
-        use { --WARN: mapping required https://github.com/David-Kunz/jester
-            'David-Kunz/jester'
-        }
-        -- floating terminal
-        use {
-          "numtostr/FTerm.nvim",
-          config = function()
-              require("FTerm").setup()
-        end
-        }
-        -- git
-        use {
-            "tpope/vim-fugitive",
-            cmd = {
-                "G",
-                "Git"
-              }
-          }
-        use {
-            "sindrets/diffview.nvim",
-            module = "diffview",
-            cmd = "DiffviewOpen"
-        }
-        use {
-            'pwntester/octo.nvim',
-            config=function()
-                require"octo".setup()
-            end,
-            cmd = "Telescope", 
-            requires = {
-                "nvim-telescope/telescope.nvim"
-            },
-            -- wants = {
-            --     'nvim-telescope'
-            -- }
-        }
-        -- comments
         use {
             "folke/todo-comments.nvim",
             requires = "nvim-lua/plenary.nvim",
@@ -342,48 +296,49 @@ return packer.startup(
             end
         }
         use {
-            'JoosepAlviste/nvim-ts-context-commentstring',--BUG: issues with svelte
-            --opt = true,
-            --run = ":TSUpdate", --needs to load manually
-            wants = 'nvim-treesitter'
-            }
-        use {--INFO: toggle comments <leader>+/
-            "terrortylor/nvim-comment",
-            cmd = "CommentToggle",
-            config = function()
-                require("nvim_comment").setup()
-                require('ts_context_commentstring.internal').update_commentstring() --not working
-            end
+            'glepnir/lspsaga.nvim',
+            branch = 'main',
+            requires = {
+                'neovim/nvim-lspconfig',
+            },
+          config = function()
+              require "plugins.lspsaga_config"
+        end
+        }
+        -- floating terminal
+        use {
+          "numtostr/FTerm.nvim",
+          config = function()
+              require("FTerm").setup()
+        end
         }
         use {
-          'abecodes/tabout.nvim',
-          config = function()
-            require('tabout').setup {
-            tabkey = '<Tab>', -- key to trigger tabout
-            backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout
-            act_as_tab = true, -- shift content if tab out is not possible
-            act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
-            enable_backwards = true, -- well ...
-            completion = true, -- if the tabkey is used in a completion pum
-            tabouts = {
-              {open = "'", close = "'"},
-              {open = '"', close = '"'},
-              {open = '`', close = '`'},
-              {open = '(', close = ')'},
-              {open = '[', close = ']'},
-              {open = '{', close = '}'}
-            },
-            ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
-            exclude = {} -- tabout will ignore these filetypes
+            'vimwiki/vimwiki',
+            cmd = "VimwikiIndex",
+            config = function()
+                vim.g.vimwiki_global_ext = 0
+                vim.g.vimwiki_list = {
+                    {
+                        auto_export =  1,
+                        path_html = '~/Documents/dotFiles/obsidian/',
+                        path = '~/Documents/dotFiles/obsidian/',
+                        syntax = 'markdown',
+                        ext = '.md',
+                    }
+                }
+            end
         }
-          end,
-                wants = {'nvim-treesitter'}, -- or require if not used so far
-                after = {'nvim-compe'} -- if a completion plugin is using tabs load it before
+        use { --WARN: need to integrate
+              --TODO: make it lazy load
+              -- TODO: add bindings
+            'mfussenegger/nvim-dap'
         }
-    end,
-    {
-        display = {
-            border = {"┌", "─", "┐", "│", "┘", "─", "└", "│"}
+        use { --TODO: figure out how to integrate better
+            "sindrets/diffview.nvim",
+            module = "diffview",
+            cmd = "DiffviewOpen"
         }
-    }
+        --todo add gelguy/wilder.nvim
+
+    end
 )
