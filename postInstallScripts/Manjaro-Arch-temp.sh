@@ -60,6 +60,9 @@ sudo pacman -S --noconfirm shellcheck # maybe bloat?
 # for zsh alt+c (cd into fzf folders)
 # ctrl+t (?) 
 # ctrl+r(history)
+echo 'installing c lang'
+pacman -S clang
+pamac install base-devel
 echo 'Installing npm and lsp(nvim)'
 # https://stackoverflow.com/questions/50495519/how-can-i-pass-yes-response-when-npm-installing-on-dockerfile
 #typescript (global with language client)
@@ -70,7 +73,7 @@ sudo npm install -g typescript typescript-language-server diagnostic-languageser
 sudo npm install -g pyright
 sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
 sudo npm install -g bash-language-server
-sudo npm isntall -g ts-node svelte-language-server graphql @types/nodes pg mongodb neovim
+sudo npm install -g ts-node svelte-language-server graphql @types/node pg mongodb neovim
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
