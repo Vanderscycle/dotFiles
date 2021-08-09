@@ -61,14 +61,12 @@ sudo pacman -S --noconfirm shellcheck # maybe bloat?
 echo 'Installing npm and lsp(nvim)'
 # https://stackoverflow.com/questions/50495519/how-can-i-pass-yes-response-when-npm-installing-on-dockerfile
 #typescript (global with language client)
-RUN yes | sudo npm install -g npq # audit packages post install
-RUN yes | sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier eslint
-RUN yes | sudo npm install -g pyright
-RUN yes | sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
-RUN yes | sudo npm install -g bash-language-server
-RUN yes | sudo npm install -g tldr #WARN: necessary?
-RUN yes | sudo npm install -g json
-RUN yes | sudo npm isntall -g ts-node svelte-language-server graphql @types/nodes pg mongodb neovim
+sudo npm install -g npq # audit packages post install
+sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier eslint
+sudo npm install -g pyright
+sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
+sudo npm install -g bash-language-server
+sudo npm isntall -g ts-node svelte-language-server graphql @types/nodes pg mongodb neovim
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -307,7 +305,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e 'Importing dotfiles'
-git clone --recursive https://github.com/Vanderscycle/ubuntu-dot-config ~/Documents/dotFiles/
+git clone --recursive https://github.com/Vanderscycle/dot-config ~/Documents/dotFiles/
 
 chmod +x ~/Documents/dotFiles/stdPatterns/sshkeychain.sh
 chmod +x ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
@@ -344,10 +342,9 @@ for DOTFILE in "${StringArray[@]}"; do
 done
 echo -e 'Importing alacritty dotfiles'
 rsync -auv ~/Documents/dotFiles/alacritty.yml ~/.config/alacritty/alacritty.yml
-rsync -auv ~/Documents/dotFiles/neomutt/ ~/.config/neomutt/ 
-rsync -auv ~/Documents/dotFiles/vimwiki ~/vimwiki 
+#rsync -auv ~/Documents/dotFiles/neomutt/ ~/.config/neomutt/  
 rsync -auv ~/Documents/dotFiles/tmuxinator/ ~/.config/tmuxinator/ 
-git config --global init.defaultBranch main
+git config --global init.defaultBranch main #WARN: What does it even do?
 
 # because my neovim config is based off someone's else config I need to be able to pull from theirs and then update.
 echo -e 'Done.\n'
