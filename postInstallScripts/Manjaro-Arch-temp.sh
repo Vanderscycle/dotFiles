@@ -163,7 +163,7 @@ zplug "b4b4r07/enhancd", use:init.sh #! doesn't work
 
 echo -e '\adding fzf completion'
 # source of info https://doronbehar.com/articles/ZSH-FZF-completion/
-mkdir /usr/share/fzf/
+#mkdir /usr/share/fzf/ # file exists
 sudo touch /usr/share/fzf/completion.zsh
 sudo wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
 sudo touch /usr/share/fzf/key-bindings.zsh
@@ -173,6 +173,8 @@ echo -e 'Done.\n'
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 echo -e '\nConfiguring the settings in .zshrc'
+
+# BUG: run shellcheck on this!
 CONFIG=".zshrc"
 
 if grep -Fq "plugins" $CONFIG
@@ -253,12 +255,12 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e 'Installing Text Editior (neovim)'
-git clone https://aur.archlinux.org/neovim-nightly-bin.git ~/Programs/neovim/ 
-cd ~/Programs/neovim/ && makepkg -si --noconfirm --needed
+sudo pacman -S neovim
 
 echo -e 'Configuring Neovim'
 # fd alternative to find
 # ueberzug allows for image display in terminal
+# BUG: yay is not working
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
 
 echo -e "Downloading nvchad"
@@ -275,7 +277,7 @@ echo -e 'Done.\n'
 echo -e 'Configuring SSH'
 # https://pandammonium.org/how-to-change-a-git-repository-from-https-to-ssh/
 mkdir ~/.ssh/
-cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f manajaoGit -N ""
+cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f manjaroGit -N ""
 eval $(ssh-agent)
 ssh-add  ~/.ssh/manjaroGit
 # the rest has to be done manually (add the pub file to git)
@@ -370,6 +372,7 @@ echo -e 'Done.\n'
 #untested
 echo -e 'Adding keyboard languages (cn)'
 #https://classicforum.manjaro.org/index.php?topic=1044.0
+# TODO: add --no needed 
 sudo pacman -S ibus-libpinyin opendesktop-fonts
 sudo pacman -Ss chinese
 sudo sh -c "cat >> /etc/environment <<EOF
@@ -393,6 +396,7 @@ echo -e 'Done.\n'
 
 echo -e 'Installing Postgresql'
 # https://lobotuerto.com/blog/how-to-install-postgresql-in-manjaro-linux/
+
 yay -S --noconfirm postgresql postgis
 
 echo -e 'Configuring Postgresql'
