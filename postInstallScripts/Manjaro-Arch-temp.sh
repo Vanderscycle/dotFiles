@@ -16,7 +16,8 @@ echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git 
 # not sure why this format works
-sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
+# This is the line that mess it up
+#sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -37,7 +38,8 @@ echo -e 'Installing Nvidia drivers'
 sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
 echo -e 'Installing process managers (htop/gotop)'
 sudo pacman -S --noconfirm --needed nodejs
-yay -S --noconfirm gotop-bin htop
+# BUG: ERROR HERE
+#yay -S --noconfirm gotop-bin htop
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -61,6 +63,8 @@ sudo pacman -S --noconfirm shellcheck # maybe bloat?
 echo 'Installing npm and lsp(nvim)'
 # https://stackoverflow.com/questions/50495519/how-can-i-pass-yes-response-when-npm-installing-on-dockerfile
 #typescript (global with language client)
+# BUG: ERROR HERE (all of the npm calls
+sudo pacman -S npm nodejs
 sudo npm install -g npq # audit packages post install
 sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier eslint
 sudo npm install -g pyright
@@ -100,7 +104,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing Docker'
 # ctop is a vizualization tool for docker
-sudo pacman -S --noconfirm --needed Docker ctop
+sudo pacman -S --noconfirm --needed docker ctop
 # https://wiki.archlinux.org/index.php/Docker
 # https://docs.docker.com/config/daemon/
 # touch /etc/docker/daemon.json # for specific user config
