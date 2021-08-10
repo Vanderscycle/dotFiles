@@ -64,3 +64,4 @@ windows:
       panes:
         - postman
         - mongodb-compass
+        - brave 'http://localhost:3000' 
