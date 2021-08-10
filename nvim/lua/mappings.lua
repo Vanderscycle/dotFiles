@@ -228,6 +228,7 @@ map("n", "[d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<C
 map("n", "]d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>",opt)
 
 -- typescript
+-- TODO: actually install the plugin required
 map("n", "<leader>ts", ":TSLspOrganize<CR>")
 map("n", "<leader>tq", ":TSLspFixCurrent<CR>")
 map("n", "<leader>tr", ":TSLspRenameFile<CR>")

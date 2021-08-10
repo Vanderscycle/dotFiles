@@ -328,10 +328,12 @@ return packer.startup(
                 }
             end
         }
+        --TODO: make it lazy load
+        use "Pocco81/DAPInstall.nvim"
         use { --WARN: need to integrate
               --TODO: make it lazy load
               -- TODO: add bindings
-            'mfussenegger/nvim-dap'
+            'mfussenegger/nvim-dap',
         }
         use { --TODO: figure out how to integrate better
             "sindrets/diffview.nvim",
