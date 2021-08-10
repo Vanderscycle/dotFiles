@@ -146,3 +146,4 @@ neomutt/accounts/
 # obsidian (plugins)
 .obsidian/
 **/obsidian/*.md # since we are about to include work items we do not want to share.
+packer_compiled

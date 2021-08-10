@@ -1,5 +1,3 @@
-export NEOMUTTPASSWORD=$(pass program/neomutt)
-
 function killPort(){
   lsof -i TCP:$1 | grep LISTEN | awk -F " " '{print$2}' | xargs kill -9
 }
@@ -115,5 +113,3 @@ function npm-run() {
   local script
   script=$(bat package.json | jq -r '.scripts | keys[] ' | sort | fzf) && npm run $(echo "$script")
 }
-
-. "$HOME/.cargo/env"

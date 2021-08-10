@@ -36,10 +36,10 @@ sudo pacman -S --noconfirm --needed xclip unzip zip
 
 echo -e 'Installing Nvidia drivers'
 sudo pacman -S --noconfirm --needed nvidia nvidia-utils    # NVIDIA 
+
 echo -e 'Installing process managers (htop/gotop)'
 sudo pacman -S --noconfirm --needed nodejs
-# BUG: ERROR HERE
-#yay -S --noconfirm gotop-bin htop
+yay -S --noconfirm gotop-bin htop
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -66,7 +66,6 @@ pamac install base-devel
 echo 'Installing npm and lsp(nvim)'
 # https://stackoverflow.com/questions/50495519/how-can-i-pass-yes-response-when-npm-installing-on-dockerfile
 #typescript (global with language client)
-# BUG: ERROR HERE (all of the npm calls
 sudo pacman -S npm nodejs
 sudo npm install -g npq # audit packages post install
 sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier eslint
@@ -342,7 +341,7 @@ nvim +PackerSync
 #bash ~/Documents/dotFiles/stdPatterns/baseNvimConfigUpdate.sh
 
 cd ~/Documents/dotFiles/ 
-declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zprofile" ".zlogout" ".zshenv" ".zlogin")
+declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".zshrc")
 for DOTFILE in "${StringArray[@]}"; do
     if [ -f $DOTFILE ]
     then
