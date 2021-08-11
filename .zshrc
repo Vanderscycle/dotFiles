@@ -145,6 +145,8 @@ alias ls="exa -al"
 alias nvimMd="nvim --listen 127.0.0.1:9999"
 alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/manjaroGit`"
 alias poke="pokemon-colorscripts -r"
+alias nvimup='rm -rf ~/.config/nvim/plugin && nvim +PackerInstall +PackerSync +PackerClean +PackerCompile +qa'
+alias nvimGclear='git clearcache | nvim +G'
 poke
 #alias npm='npq-hero'
 #gpg
