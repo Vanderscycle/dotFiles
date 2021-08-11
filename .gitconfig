@@ -11,4 +11,4 @@
 [credential]
   helper = wincred
 [init]
-  defaultBranch = ""
+  defaultBranch = "main"
