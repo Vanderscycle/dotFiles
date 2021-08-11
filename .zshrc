@@ -70,8 +70,12 @@ export ZSH="/home/henri/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting)
-
+plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting tmuxinator sudo)
+plugins+=(zsh-better-npm-completion)
+export FZF_BASE=/usr/bin/fzf
+export FZF_DEFAULT_COMMAND='rg'
+DISABLE_FZF_KEY_BINDINGS="false"
+DISABLE_FZF_AUTO_COMPLETION="false"
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -129,24 +133,30 @@ fi
 if [ -f /home/henri/.zplug/init.zsh ]; then
     source /home/henri/.zplug/init.zsh
 fi
+
 # vim keys
-set -o vi
+#set -o vi
+
 # to exit terminal in nvim
+alias vi=nvim
 alias :q=exit
+alias :qa=exit
+alias ls="exa -al"
+alias nvimMd="nvim --listen 127.0.0.1:9999"
+alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/manjaroGit`"
+alias poke="pokemon-colorscripts -r"
+poke
+#alias npm='npq-hero'
+#gpg
+GPG_TTY=$(tty)
+export GPG_TTY=$(tty)
+
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/miniconda3/bin"
 
-# ssh
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval "ssh-agent -s"
-  ssh-add ~/.ssh/manjaroGit
-fi
->>>>>>> 22f72d9fbcdae606b17782719ea20f23e164f042
+export EDITOR='nvim'
 
-#if [ -n "$SSH_AUTH_SOCK" ] ; then
-#  eval `/usr/bin/ssh-agent -k`
-#fi
+alias luamake=/home/henri/.config/lua-language-server/3rd/luamake/luamake 
 
-# gpg
-#export GPG_TTY=$TTY
+
