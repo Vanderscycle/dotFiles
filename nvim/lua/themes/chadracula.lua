@@ -1,4 +1,3 @@
-
 local colors = {
     white = "#F8F8F2",
     darker_black = "#232531",

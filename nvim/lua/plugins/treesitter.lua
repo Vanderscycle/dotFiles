@@ -5,17 +5,8 @@ end
 
 ts_config.setup {
     ensure_installed = {
-        "javascript",
-        "html",
-        "css",
         "bash",
-        "lua",
-        "json",
-        "python",
-        "vue",
-        "typescript",
-        "svelte",
-        -- "tailwindcss"
+        "lua"
     },
     highlight = {
         enable = true,
