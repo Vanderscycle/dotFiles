@@ -403,6 +403,7 @@ return packer.startup(
             module = "diffview",
             cmd = "DiffviewOpen"
         }
+        use {'ggandor/lightspeed.nvim'}
         --todo add gelguy/wilder.nvim
     end
 )

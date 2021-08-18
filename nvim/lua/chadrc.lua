@@ -61,13 +61,14 @@ local M = {
             open = "<leader>db",
             newfile = "<leader>fn",
             bookmarks = "<leader>bm",
-            sessionload = "<leader>l",
-            sessionsave = "<leader>s"
+            sessionload = "<leader>sl",
+            sessionsave = "<leader>ss"
         },
         telescope = {
             live_grep = "<leader>fsw",
             git_status = "<leader>fgs",
             git_commits = "<leader>fgc",
+            git_bcommits = "<leader>fgbc",
             find_files = "<leader>ff",
             media_files = "<leader>fp",
             buffers = "<leader>fb",
