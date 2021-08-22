@@ -15,9 +15,8 @@ echo -e '\n=> Update repository information'
 echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git 
-# not sure why this format works
-# This is the line that mess it up
-#sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
+
+sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -29,8 +28,10 @@ echo -e 'Installing AUR helper (yay)'
 # Arch User Repository (AUR) helper helps with the installation of packages from the AUR.
 #https://averagelinuxuser.com/which-aur-helper-yay/
 mkdir -p ~/Programs/
-#git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
-#cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
+git clone https://aur.archlinux.org/yay.git ~/Programs/yay/
+#Critical
+sudo pacman -S --noconfirm --needed base-devel
+cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
 sudo pacman -S --noconfirm --needed yay
 sudo pacman -S --noconfirm --needed xclip unzip zip
 
