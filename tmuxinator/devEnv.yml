@@ -58,10 +58,13 @@ windows:
   - docker/db:
       layout: even-vertical
       panes:
-        - docker start mongodb && docker ps -a
+        - docker ps -a
 
   - tools:
       panes:
         - postman
         - mongodb-compass
-        - brave 'http://localhost:3000' 
+        - firefox 'http://localhost:3000'
+  - monitoring:
+      panes:
+        - htop

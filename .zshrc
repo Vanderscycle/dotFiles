@@ -138,6 +138,7 @@ fi
 #set -o vi
 
 # to exit terminal in nvim
+alias nvim=lvim
 alias vi=nvim
 alias :q=exit
 alias :qa=exit
@@ -145,6 +146,7 @@ alias ls="exa -al"
 alias nvimMd="nvim --listen 127.0.0.1:9999"
 alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/manjaroGit`"
 alias poke="pokemon-colorscripts -r"
+alias pokeCute="pokemon-colorscripts -n dewgong"
 poke
 #alias npm='npq-hero'
 #gpg
@@ -155,8 +157,7 @@ export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/miniconda3/bin"
 
-export EDITOR='nvim'
+export EDITOR='lvim'
 
 alias luamake=/home/henri/.config/lua-language-server/3rd/luamake/luamake 
-
 
