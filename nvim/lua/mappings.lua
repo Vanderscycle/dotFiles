@@ -1,3 +1,9 @@
+local user_map = require("chadrc").mappings
+local miscMap = user_map.misc
+
+local M = {}
+local cmd = vim.cmd
+
 local function map(mode, lhs, rhs, opts)
     local options = {noremap = true, silent = true}
     if opts then
@@ -30,150 +36,107 @@ map("", "<Down>", 'v:count ? "j" : "gj"', {expr = true})
 map("", "<Up>", 'v:count ? "k" : "gk"', {expr = true})
 
 -- OPEN TERMINALS --
--- map("n", "<C-l>", [[<Cmd>vnew term://zsh <CR>]], opt) -- term over right
--- map("n", "<C-x>", [[<Cmd> split term://zsh | resize 10 <CR>]], opt) --  term bottom
-map("n", "<C-t>t", ":terminal<CR>", opt) -- term newtab
+map("n", miscMap.openTerm_right, ":vnew +terminal | setlocal nobuflisted <CR>", opt) -- term over right
+map("n", miscMap.openTerm_bottom, ":10new +terminal | setlocal nobuflisted <CR>", opt) --  term bottom
+map("n", miscMap.openTerm_currentBuf, ":terminal <CR>", opt) -- term buffer
 
 -- copy whole file content
-map("n", "<C-a>", [[ <Cmd> %y+<CR>]], opt)
+map("n", miscMap.copywhole_file, ":%y+<CR>", opt)
 
 -- toggle numbers
-map("n", "<leader>n", [[ <Cmd> set nu!<CR>]], opt)
+map("n", miscMap.toggle_linenr, ":set nu!<CR>", opt)
 
--- Truezen.nvim (leader z)
-map("n", "<leader>za", ":TZAtaraxis<CR>", opt)
-map("n", "<leader>zm", ":TZMinimalist<CR>", opt)
-map("n", "<leader>zf", ":TZFocus<CR>", opt)
+M.truezen = function()
+    local m = user_map.truezen
+
+    map("n", m.ataraxisMode, ":TZAtaraxis<CR>", opt)
+    map("n", m.minimalisticmode, ":TZMinimalist<CR>", opt)
+    map("n", m.focusmode, ":TZFocus<CR>", opt)
+end
 
 map("n", "<C-s>", ":w <CR>", opt)
--- vim.cmd("inoremap jh <Esc>")
 
--- Commenter Keybinding
-map("n", "<leader>/", ":CommentToggle<CR>", opt)
-map("v", "<leader>/", ":CommentToggle<CR>", opt)
-
-map("n", "<C-q>", ":bp<bar>sp<bar>bn<bar>bd! <CR>", opt)
-
--- compe stuff
-
-local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+M.comment_nvim = function()
+    local m = user_map.comment_nvim.comment_toggle
+    map("n", m, ":CommentToggle<CR>", opt)
+    map("v", m, ":CommentToggle<CR>", opt)
 end
 
-local check_back_space = function()
-    local col = vim.fn.col(".") - 1
-    if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-        return true
-    else
-        return false
-    end
+M.nvimtree = function()
+    local m = user_map.nvimtree.treetoggle
+
+    map("n", m, ":NvimTreeToggle<CR>", opt)
 end
 
-_G.tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-n>"
-    elseif check_back_space() then
-        return t "<Tab>"
-    else
-        return vim.fn["compe#complete"]()
-    end
+M.neoformat = function()
+    local m = user_map.neoformat.format
+    map("n", m, ":Neoformat<CR>", opt)
 end
 
-_G.s_tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
-    else
-        return t "<S-Tab>"
-    end
+M.dashboard = function()
+    local m = user_map.dashboard
+
+    map("n", m.open, ":Dashboard<CR>", opt)
+    map("n", m.newfile, ":DashboardNewFile<CR>", opt)
+    map("n", m.bookmarks, ":DashboardJumpMarks<CR>", opt)
+    map("n", m.sessionload, ":SessionLoad<CR>", opt)
+    map("n", m.sessionsave, ":SessionSave<CR>", opt)
 end
 
-function _G.completions()
-    local npairs = require("nvim-autopairs")
-    if vim.fn.pumvisible() == 1 then
-        if vim.fn.complete_info()["selected"] ~= -1 then
-            return vim.fn["compe#confirm"]("<CR>")
-        end
-    end
-    return npairs.check_break_line_char()
+M.telescope = function()
+    local m = user_map.telescope
+
+    map("n", m.live_grep, ":Telescope live_grep<CR>", opt)
+    map("n", m.git_status, ":Telescope git_status <CR>", opt)
+    map("n", m.git_commits, ":Telescope git_commits <CR>", opt)
+    map("n", m.git_bcommits, ":Telescope git_commits <CR>", opt)
+    map("n", m.find_files, ":Telescope find_files <CR>", opt)
+    map("n", m.media_files, ":Telescope media_files <CR>", opt)
+    map("n", m.buffers, ":Telescope buffers<CR>", opt)
+    map("n", m.help_tags, ":Telescope help_tags<CR>", opt)
+    map("n", m.oldfiles, ":Telescope oldfiles<CR>", opt)
+    map("n", m.themes, ":Telescope themes<CR>", opt)
+    map("n", m.builtin, ":Telescope builtin<CR>", opt)
+    map("n", m.folke_todo, ":TodoTelescop<CR>", opt)
+    map("n", m.workplace_diag, ":Telescope lsp_workspace_diagnostics<CR>", opt)
+    map("n", m.document_diag, ":Telescope lsp_document_diagnostics<CR>", opt)
 end
 
---  compe mappings
-map("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
-map("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
-map("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-map("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-map("i", "<CR>", "v:lua.completions()", {expr = true})
+M.bufferline = function()
+    local m = user_map.bufferline
 
--- nvimtree
-map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
+    map("n", m.new_buffer, ":enew<CR>", opt) -- new buffer
+    map("n", m.newtab, ":tabnew<CR>", opt) -- new tab
+    map("n", m.close, ":bd!<CR>", opt) -- close  buffer
 
--- format code
-map("n", "<Leader>p", [[<Cmd> Neoformat<CR>]], opt)
+    -- move between tabs
 
--- dashboard stuff leader d
--- TODO: do I want them as bindings?
--- map("n", "<Leader>db", [[<Cmd> Dashboard<CR>]], opt)
--- map("n", "<Leader>dn", [[<Cmd> DashboardNewFile<CR>]], opt)
--- map("n", "<Leader>dm", [[<Cmd> DashboardJumpMarks<CR>]], opt)
--- map("n", "<Leader>ci", ":e ~/.config/nvim/init.lua<CR>", opt)
--- map("n", "<Leader>cm", ":e ~/.config/nvim/lua/mappings.lua<CR>", opt)
--- map("n", "<Leader>ch", ":e ~/.config/nvim/lua/highlights.lua<CR>", opt)
--- map("n", "<C-s>l", [[<Cmd> SessionLoad<CR>]], opt)
--- map("n", "<C-s>s", [[<Cmd> SessionSave<CR>]], opt)
-
---telescope leader f
--- buffer wide
-map("n", "<Leader>fb", [[<Cmd>Telescope buffers<CR>]], opt)
-map("n", "<Leader>fsw", [[<Cmd>Telescope live_grep<CR>]], opt) --workspace
-map("n", "<Leader>fsd", [[<Cmd>Telescope current_buffer_fuzzy_find<CR>]], opt) --document
-map("n", "<leader>fw", [[<Cmd>Telescope lsp_workspace_diagnostics <CR>]])
-map("n", "<leader>fd", [[<Cmd>Telescope lsp_document_diagnostics <CR>]])
-map("n", "<leader>fn", ":TodoTelescope<CR>")
--- file specific
-map("n", "<Leader>ft", [[<Cmd>Telescope file_browser<CR>]], opt) --system wide
-map("n", "<Leader>ff", [[<Cmd>Telescope find_files<CR>]], opt) -- directory wide
-map("n", "<Leader>fo", [[<Cmd>Telescope oldfiles<CR>]], opt)
-map("n", "<Leader>fl", [[<Cmd>Telescope search_dootfiles<CR>]], opt) --f lua
---git
---map("n", "<Leader>fgcd", [[<Cmd>Telescope git_bcommits<CR>]], opt)
-map("n", "<Leader>fgc", [[<Cmd>Telescope git_commits<CR>]], opt) --
-map("n", "<Leader>fgs", [[<Cmd>Telescope git_status<CR>]], opt)
-map("n", "<Leader>fgb", [[<Cmd>Telescope git_branches<CR>]], opt)
--- misc
-map("n", "<Leader>fhh", [[<Cmd>Telescope help_tags<CR>]], opt)
-map("n", "<Leader>fhb", [[<Cmd>Telescope builtin<CR>]], opt)
-map("n", "<Leader>fp", ":Telescope media_files <CR>", opt)
-map("n", "<Leader>fth", ":Telescope themes<CR>", opt)
-
---https://github.com/ThePrimeagen/.dotfiles/blob/master/nvim/.config/nvim/plugin/navigation.vim
--- of note I need to raise an issue on telescope regarding empty file at the beginning
-local localQuickFixList = 0
-local globalQuickFixList = 0
-local api = vim.api
-function _G.ToggleQFList(global)
-    if (global == 1) then
-        if( globalQuickFixList == 1) then
-            globalQuickFixList = 0
-            return api.nvim_command("cclose")
-
-        else
-            globalQuickFixList = 1
-            return api.nvim_command("copen")
-        end
-    else --if the local list is empty it returns an error
-         if( localQuickFixList == 1) then
-            localQuickFixList = 0
-            return api.nvim_command("lclose")
-        else
-            localQuickFixList = 1
-            return api.nvim_command("lopen")
-        end
-    end
+    map("n", m.cycleNext, ":BufferLineCycleNext<CR>", opt)
+    map("n", m.cyclePrev, ":BufferLineCyclePrev<CR>", opt)
 end
---export ToggleQFList
 
+-- use ESC to turn off search highlighting
+map("n", "<Esc>", ":noh<CR>", opt)
+
+-- get out of terminal with jk
+map("t", miscMap.esc_Termmode, "<C-\\><C-n>", opt)
+
+-- Packer commands till because we are not loading it at startup
+cmd("silent! command PackerCompile lua require 'pluginList' require('packer').compile()")
+cmd("silent! command PackerInstall lua require 'pluginList' require('packer').install()")
+cmd("silent! command PackerStatus lua require 'pluginList' require('packer').status()")
+cmd("silent! command PackerSync lua require 'pluginList' require('packer').sync()")
+cmd("silent! command PackerUpdate lua require 'pluginList' require('packer').update()")
+
+M.fugitive = function()
+    local m = user_map.fugitive
+
+    map("n", m.Git, ":Git<CR>", opt)
+    map("n", m.diffget_2, ":diffget //2<CR>", opt)
+    map("n", m.diffget_3, ":diffget //3<CR>", opt)
+    map("n", m.git_blame, ":Git blame<CR>", opt)
+end
+-- unmoved user
 --quickfix lists
 --local (/ is a local) ( <C-l> telescope sends it to a local list)
 map("n","<leader>k",":lnext<CR>zz",opt)--why zz? (center this line)
@@ -185,27 +148,20 @@ map("n","<M-k>",":cnext<CR>zz",opt)--why zz?
 map("n","<M-j>",":cprev<CR>zz",opt)
 map("n","<leader>qg",":lua require('mappings').ToggleQFList(1)<CR>")
 
--- bufferline tab stuff
-map("n", "<S-t>", ":enew<CR>", opt) -- new buffer
-map("n", "<C-t>b", ":tabnew<CR>", opt) -- new tab
-map("n", "<S-x>", ":bd!<CR>", opt) -- close tab
-
--- move between tabs
-map("n", "<Tab>", ":BufferLineCycleNext<CR>", opt)
-map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opt)
-
--- better window navidation
-map("n","<C-h>", "<C-w>h" , opt)
-map("n","<C-j>", "<C-w>j" , opt)
-map("n","<C-k>", "<C-w>k" , opt)
-map("n","<C-l>", "<C-w>l" , opt)
-
-map("i", "jk", "<Esc>", opt)
-map("i", "kj", "<Esc>", opt)
-
---better tabing
-map("v", "<","<gv", opt)
-map("v", ">",">gv", opt)
+--nvim dap (necessary?)
+map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>')
+map('n', '<leader>dso', '<cmd>lua require"dap".step_over()<CR>')
+map('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>')
+map('n', '<leader>dsx', '<cmd>lua require"dap".step_out()<CR>')
+map('n', '<leader>dbt', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
+map('n', '<leader>dbn', '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>')
+map('n', '<leader>dro', '<cmd>lua require"dap".repl.open()<CR>')
+-- telescope-dap
+map('n', '<leader>dcc', '<cmd>lua require"telescope".extensions.dap.commands{}<CR>')
+map('n', '<leader>dco', '<cmd>lua require"telescope".extensions.dap.configurations{}<CR>')
+map('n', '<leader>dlb', '<cmd>lua require"telescope".extensions.dap.list_breakpoints{}<CR>')
+map('n', '<leader>dv', '<cmd>lua require"telescope".extensions.dap.variables{}<CR>')
+map('n', '<leader>df', '<cmd>lua require"telescope".extensions.dap.frames{}<CR>')
 
 -- vimwiki/markdown preview leader w
 map("n","<leader>w[",":MarkdownPreview<CR>",opt)
@@ -227,38 +183,43 @@ map("n","<leader>lp","<cmd>lua require'lspsaga.provider'.preview_definition()<CR
 map("n", "[d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>",opt)
 map("n", "]d","<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>",opt)
 
--- typescript
--- TODO: actually install the plugin required
-map("n", "<leader>ts", ":TSLspOrganize<CR>")
-map("n", "<leader>tq", ":TSLspFixCurrent<CR>")
-map("n", "<leader>tr", ":TSLspRenameFile<CR>")
-map("n", "<leader>ti", ":TSLspImportAll<CR>")
-
-vim.cmd("silent! command PackerCompile lua require 'pluginList' require('packer').compile()")
-vim.cmd("silent! command PackerInstall lua require 'pluginList' require('packer').install()")
-vim.cmd("silent! command PackerStatus lua require 'pluginList' require('packer').status()")
-vim.cmd("silent! command PackerSync lua require 'pluginList' require('packer').sync()")
-vim.cmd("silent! command PackerUpdate lua require 'pluginList' require('packer').update()")
-
---nvim dap (necessary?)
-map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>')
-map('n', '<leader>dso', '<cmd>lua require"dap".step_over()<CR>')
-map('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>')
-map('n', '<leader>dsx', '<cmd>lua require"dap".step_out()<CR>')
-map('n', '<leader>dbt', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
-map('n', '<leader>dbn', '<cmd>lua require"dap".set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>')
-map('n', '<leader>dro', '<cmd>lua require"dap".repl.open()<CR>')
--- telescope-dap
-map('n', '<leader>dcc', '<cmd>lua require"telescope".extensions.dap.commands{}<CR>')
-map('n', '<leader>dco', '<cmd>lua require"telescope".extensions.dap.configurations{}<CR>')
-map('n', '<leader>dlb', '<cmd>lua require"telescope".extensions.dap.list_breakpoints{}<CR>')
-map('n', '<leader>dv', '<cmd>lua require"telescope".extensions.dap.variables{}<CR>')
-map('n', '<leader>df', '<cmd>lua require"telescope".extensions.dap.frames{}<CR>')
--- diffview
---https://github.com/sindrets/diffview.nvim
+--close the current buffer
+map("n", "<C-q>", ":bp<bar>sp<bar>bn<bar>bd! <CR>", opt)
+-- better window navidation
+map("n","<C-h>", "<C-w>h" , opt)
+map("n","<C-j>", "<C-w>j" , opt)
+map("n","<C-k>", "<C-w>k" , opt)
+map("n","<C-l>", "<C-w>l" , opt)
 
 
--- gitsigns mapping
--- https://github.com/lewis6991/gitsigns.nvim
-return _G
+map("i", "jk", "<Esc>", opt)
+map("i", "kj", "<Esc>", opt)
 
+--better tabing
+map("v", "<","<gv", opt)
+map("v", ">",">gv", opt)
+
+local localQuickFixList = 0
+local globalQuickFixList = 0
+local api = vim.api
+function M.ToggleQFList(global)
+    if (global == 1) then
+        if( globalQuickFixList == 1) then
+            globalQuickFixList = 0
+            return api.nvim_command("cclose")
+
+        else
+            globalQuickFixList = 1
+            return api.nvim_command("copen")
+        end
+    else --if the local list is empty it returns an error
+         if( localQuickFixList == 1) then
+            localQuickFixList = 0
+            return api.nvim_command("lclose")
+        else
+            localQuickFixList = 1
+            return api.nvim_command("lopen")
+        end
+    end
+  end
+return M

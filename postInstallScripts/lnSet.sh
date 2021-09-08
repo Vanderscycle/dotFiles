@@ -7,7 +7,7 @@ declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zshrc" ".zprofile" ".zlogou
 DIR=${PWD%/*}
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
-    ln  ~/$DOTFILE "$DIR"
+    rsync -auv  ~/$DOTFILE "$DIR"
 done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
@@ -18,4 +18,3 @@ rsync -auv --progress ~/.config/tmuxinator/ "/$DIR/tmuxinator/"
 rsync -auv --progress ~/.config/alacritty/ "/$DIR/alacritty/"
 #rsync -auv --progress ~/vimwiki/ "/$DIR/vimwiki/"
 #! should create a weekly upload schedule
-# git add .

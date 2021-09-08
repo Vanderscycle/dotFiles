@@ -1,19 +1,21 @@
+local options = require("chadrc").options
 local opt = vim.opt
 local g = vim.g
 
-opt.ruler = false
-opt.hidden = true
-opt.ignorecase = true
+opt.undofile = options.permanent_undo
+opt.ruler = options.ruler
+opt.hidden = options.hidden
+opt.ignorecase = options.ignorecase
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
 opt.cul = true
-opt.mouse = "a"
+opt.mouse = options.mouse
 opt.signcolumn = "yes"
-opt.cmdheight = 1
-opt.updatetime = 250 -- update interval for gitsigns
-opt.timeoutlen = 400
-opt.clipboard = "unnamedplus"
+opt.cmdheight = options.cmdheight
+opt.updatetime = options.updatetime -- update interval for gitsigns
+opt.timeoutlen = options.timeoutlen
+opt.clipboard = options.clipboard
 
 -- disable nvim intro
 opt.shortmess:append("sI")
@@ -22,21 +24,21 @@ opt.shortmess:append("sI")
 opt.fillchars = {eob = " "}
 
 -- Numbers
-opt.number = true
-opt.numberwidth = 2
-opt.relativenumber = true
+opt.number = options.number
+opt.numberwidth = options.numberwidth
+opt.relativenumber = options.relativenumber
 
 -- Indenline
-opt.expandtab = true
-opt.shiftwidth = 2
-opt.smartindent = true
+opt.expandtab = options.expandtab
+opt.shiftwidth = options.shiftwidth
+opt.smartindent = options.smartindent
 
 -- go to previous/next line with h,l,left arrow and right arrow
 -- when cursor reaches end/beginning of line
 opt.whichwrap:append("<>hl")
 
-g.mapleader = " "
-g.auto_save = true
+g.mapleader = options.mapleader
+g.auto_save = options.autosave
 
 -- disable builtin vim plugins
 local disabled_built_ins = {
@@ -61,13 +63,14 @@ local disabled_built_ins = {
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-    vim.g["loaded_" .. plugin] = 1
+    g["loaded_" .. plugin] = 1
 end
 
 -- Don't show status line on vim terminals
 vim.cmd [[ au TermOpen term://* setlocal nonumber laststatus=0 ]]
+vim.cmd [[ au TermClose term://* setlocal number laststatus=2 ]]
 
 -- Open a file from its last left off position
 -- vim.cmd [[ au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]]
 -- File extension specific tabbing
-vim.cmd [[ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 ]]
+-- vim.cmd [[ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 ]]

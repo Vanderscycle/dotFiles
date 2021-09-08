@@ -115,7 +115,7 @@ M.theme_switcher = function(opts)
                     else
                         local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
                         vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
-                   end
+                    end
                     reload_theme(entry.value)
                 end
             }

@@ -15,9 +15,8 @@ echo -e '\n=> Update repository information'
 echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git 
-# not sure why this format works
-# This is the line that mess it up
-#sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
+
+sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -29,8 +28,10 @@ echo -e 'Installing AUR helper (yay)'
 # Arch User Repository (AUR) helper helps with the installation of packages from the AUR.
 #https://averagelinuxuser.com/which-aur-helper-yay/
 mkdir -p ~/Programs/
-#git clone https://aur.archlinux.org/yay.git ~/Programs/yay/ #Aur helper
-#cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
+git clone https://aur.archlinux.org/yay.git ~/Programs/yay/
+#Critical
+sudo pacman -S --noconfirm --needed base-devel
+cd ~/Programs/yay/ && makepkg -si --noconfirm --needed
 sudo pacman -S --noconfirm --needed yay
 sudo pacman -S --noconfirm --needed xclip unzip zip
 
@@ -157,7 +158,8 @@ echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 rm ~/.zshrc.pre-oh-my-zsh
 #zplug
-curl -sL --proto-redir -all https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
 #git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 echo -e '\ninstalling enhancd using zplug'
@@ -174,6 +176,8 @@ echo -e 'Done.\n'
 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/lukechilds/zsh-better-npm-completion ~/.oh-my-zsh/custom/plugins/zsh-better-npm-completion
+
 echo -e '\nConfiguring the settings in .zshrc'
 
 # BUG: run shellcheck on this!

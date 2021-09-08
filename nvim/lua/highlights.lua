@@ -46,6 +46,7 @@ fg("Comment", grey_fg)
 fg("NvimInternalError", red)
 fg("VertSplit", line)
 fg("EndOfBuffer", black)
+--fg_bg("Visual",light_grey, colors.lightbg)
 
 -- Pmenu
 bg("Pmenu", one_bg)
@@ -68,6 +69,7 @@ fg_bg("DiffModified", nord_blue, "none")
 -- NvimTree
 fg("NvimTreeFolderIcon", blue)
 fg("NvimTreeFolderName", blue)
+fg("NvimTreeGitDirty", red)
 fg("NvimTreeOpenedFolderName", blue)
 fg("NvimTreeEmptyFolderName", blue)
 fg("NvimTreeIndentMarker", one_bg2)
@@ -75,16 +77,16 @@ fg("NvimTreeVertSplit", darker_black)
 bg("NvimTreeVertSplit", darker_black)
 fg("NvimTreeEndOfBuffer", darker_black)
 
-vim.cmd("hi NvimTreeRootFolder gui=underline guifg=" .. purple)
+cmd("hi NvimTreeRootFolder gui=underline guifg=" .. purple)
 bg("NvimTreeNormal", darker_black)
 fg_bg("NvimTreeStatuslineNc", darker_black, darker_black)
 fg_bg("NvimTreeWindowPicker", red, black2)
 
 -- telescope
-fg("TelescopeBorder", red)
-fg("TelescopePromptBorder", red)
-fg("TelescopeResultsBorder", red)
-fg("TelescopePreviewBorder", white)
+fg("TelescopeBorder", line)
+fg("TelescopePromptBorder", line)
+fg("TelescopeResultsBorder", line)
+fg("TelescopePreviewBorder", grey)
 
 -- LspDiagnostics ---
 
@@ -111,9 +113,8 @@ fg("DashboardFooter", grey_fg)
 
 -- packer's floating window
 
-bg("NormalFloat", black2)
-bg("FloatBorder", black2)
-fg("FloatBorder", black2)
+bg("NormalFloat", "NONE")
+fg("FloatBorder", blue)
 
 -- set bg color for nvim
 -- bg("Normal", black)
