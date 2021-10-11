@@ -46,6 +46,9 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 echo -e 'Done.\n'
 
+
+#image
+# https://github.com/factoriotools/factorio-docker
 echo -e'\n=> Pulling the Docker image'
 sudo mkdir -p /opt/factorio
 sudo chown 845:845 /opt/factorio
@@ -84,7 +87,7 @@ echo -e 'Done.\n'
 
 
 #move the save from your machine to the server 
-#rsync -auv ~/Downloads/bruuu2 root@192.46.223.140:/opt/factorio/saves/  
+#rsync -auv ~/Downloads/bruuu2.zip root@192.46.223.140:/opt/factorio/saves/  #saves has to be in a zip format
 
 #factorio connection 
 #192.46.223.140:34197
