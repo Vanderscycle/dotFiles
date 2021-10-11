@@ -60,31 +60,34 @@ echo -e 'Done.\n'
 
 #sudo vi /etc/systemd/system/factorio.service
 echo -e'\n=>Configurating systemd'
-cat >> /etc/systemd/system/factorio.service << EOF
-[Unit]
-Description=Factorio Headless Server
-
-[Service]
-Type=simple
-User=factorio
-ExecStart=/opt/factorio/bin/x64/factorio --start-server-load-latest --server-settings /opt/factorio/data/server-settings.json
-EOF
-systemctl daemon-reload
-
+#cat >> /etc/systemd/system/factorio.service << EOF
+#[Unit]
+#Description=Factorio Headless Server
+#
+#[Service]
+#Type=simple
+#User=factorio
+#ExecStart=/opt/factorio/bin/x64/factorio --start-server-load-latest --server-settings /opt/factorio/data/server-settings.json
+#EOF
+#systemctl daemon-reload
 echo -e 'Done.\n'
+
 echo -e'\n=>Creating the user'
 cd /opt/factorio
 sudo adduser --disabled-login --no-create-home --gecos factorio factorio
 sudo chown -R factorio:factorio /opt/factorio
+cd /opt/factorio/config/
+# ask the user what the password is (use input)
 su factorio
 echo -e 'Done.\n'
 
 
 
 #move the save from your machine to the server 
-#rsync -auv ~/Downloads/bruuu2 root@192.46.223.140:/opt/factorio/saves/   
+#rsync -auv ~/Downloads/bruuu2 root@192.46.223.140:/opt/factorio/saves/  
+
+#factorio connection 
+#192.46.223.140:34197
 
 # access the logs inside
 #docker exec -it factorio bash
-sudo adduser gamemaster
-#sudo passwd factorioBro
