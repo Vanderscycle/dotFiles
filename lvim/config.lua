@@ -1,5 +1,4 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
-
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
@@ -101,10 +100,12 @@ lvim.plugins = {
     {"folke/tokyonight.nvim"},
     -- language parentheses signature
     {
-      "ray-x/lsp_signature.nvim",
-      config = function() require"lsp_signature".on_attach() end,
-      event = "InsertEnter"
-    },
+  "ray-x/lsp_signature.nvim",
+  event = "BufRead",
+  config = function()
+    require "lsp_signature".setup()
+  end
+},
     -- movement
     {
       "ggandor/lightspeed.nvim",
