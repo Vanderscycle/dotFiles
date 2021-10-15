@@ -94,3 +94,6 @@ echo -e 'Done.\n'
 
 # access the logs inside
 #docker exec -it factorio bash
+
+#need to add an update script
+# also need to add a modded version (different port??)
