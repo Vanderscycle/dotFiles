@@ -1,8 +1,11 @@
 #!/bin/bash
 
 echo '------------------------------------------------------------------------'
-echo '=> Ubuntu 20.04LTS Factorio Headless Server'
+echo '=> Ubuntu 20.04LTS Factorio Headless Server unmodded'
 echo '------------------------------------------------------------------------'
+# -----------------------------------------------------------------------------
+# => Server set-up w/ ufw
+# -----------------------------------------------------------------------------
 
 # TODO: make it so that it asks you the location and name of the save file.
 sudo adduser --disabled-login --no-create-home --gecos factorio factorio
@@ -27,7 +30,7 @@ ufw enable
 ufw status verbose
 
 # -----------------------------------------------------------------------------
-# => Docker (debian)
+# => Docker (debian) Docker-compose
 # https://docs.docker.com/engine/install/debian/
 # -----------------------------------------------------------------------------
 echo -e '=> Removing old docker version (if present) Docker' 
@@ -48,6 +51,10 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 echo -e 'Done.\n'
 
+# -----------------------------------------------------------------------------
+# => Factorio specific (unmodded)
+#https://hub.docker.com/r/dtandersen/factorio/
+# -----------------------------------------------------------------------------
 
 #image
 # https://github.com/factoriotools/factorio-docker
