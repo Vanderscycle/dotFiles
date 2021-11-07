@@ -2,16 +2,14 @@
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
--- lvim.colorscheme = "onedarker"
 lvim.colorscheme = "tokyonight"
-
 vim.opt.relativenumber = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
--- unmap a default keymapping
+-- unmap a default keymappinig
 -- lvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
@@ -46,6 +44,29 @@ lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Project
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+
+-- json
+lvim.lang.json.formatters = { { exe = 'prettier' } }
+--go
+lvim.lang.go.formatters = {{ exe = "goimports" }}
+--python
+lvim.lang.python.formatters = { { exe = "black" } }
+lvim.lang.python.linters = { { exe = "flake8" } }
+
+--JS
+lvim.lang.javascript.formatters = { { exe = "prettier" } }
+lvim.lang.javascript.linters = { { exe = "eslint" } }
+-- TS
+lvim.lang.typescript.formatters = { { exe = "prettier" } }
+lvim.lang.typescript.linters = { { exe = "eslint" } }
+
+--lua
+lvim.lang.lua.formatters = {  {exe = "stylua"} }
+lvim.lang.lua.linters = {  {exe = "luacheck"} }
+
+lvim.builtin.notify.active = true
+lvim.builtin.cmp.completion.keyword_length = 2
+lvim.lsp.automatic_servers_installation = false
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.side = "left"
@@ -53,7 +74,7 @@ lvim.builtin.nvimtree.show_icons.git = 0
 lvim.builtin.autopairs.active = true
 lvim.builtin.terminal.active = true
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {}
+lvim.builtin.treesitter.ensure_installed = {"python","lua","bash","css","dockerfile","html","javascript","json","svelte","typescript","yaml"}
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 -- generic LSP settings
@@ -92,7 +113,8 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- set an additional linter
 -- lvim.lang.python.linters = {
 --   {
---     exe = "flake",
+
+--     exe = "flake8,
 --     args = {}
 --   }
 -- }
@@ -101,7 +123,8 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.plugins = {
     -- theme
     {"folke/tokyonight.nvim"},
-    -- language parentheses signature
+        {"LunarVim/ColorSchemes"},
+    -- lsp
     {
   "ray-x/lsp_signature.nvim",
   event = "BufRead",
@@ -109,11 +132,25 @@ lvim.plugins = {
     require "lsp_signature".setup()
   end
 },
+{
+  "simrat39/symbols-outline.nvim",
+  cmd = "SymbolsOutline",
+},
+
     -- movement
     {
-      "ggandor/lightspeed.nvim",
-      event = "BufRead",
-    },
+  "phaazon/hop.nvim",
+  event = "BufRead",
+  config = function()
+    require("hop").setup()
+    vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
+    vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
+  end,
+},
+{
+  "tpope/vim-surround",
+  keys = {"c", "d", "y"}
+},
     {
       "andymass/vim-matchup",
       event = "CursorMoved",
@@ -141,7 +178,7 @@ lvim.plugins = {
       },
       ft = {"fugitive"}
     },
-    -- quickfix windows
+    -- windows
     {
       "kevinhwang91/nvim-bqf",
       event = { "BufRead", "BufNew" },
@@ -168,28 +205,69 @@ lvim.plugins = {
         })
       end,
     },
-    -- proper comment context
     {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      event = "BufRead",
-    },
+  "rmagatti/goto-preview",
+  config = function()
+  require('goto-preview').setup {
+        width = 120; -- Width of the floating window
+        height = 25; -- Height of the floating window
+        default_mappings = true; -- Bind default mappings
+        debug = false; -- Print debug information
+        opacity = nil; -- 0-100 opacity level of the floating window where 100 is fully transparent.
+        post_open_hook = nil -- A function taking two arguments, a buffer and a window to be ran as a hook.
+        -- You can use "default_mappings = true" setup option
+        -- Or explicitly set keybindings
+        -- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+        -- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+        -- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+    }
+  end
+  },
+  -- proper comment context
+  --{
+  --  "JoosepAlviste/nvim-ts-context-commentstring",
+  --  require('kommentary.config').configure_language('svelte', {
+  --    single_line_comment_string = 'auto',
+  --    multi_line_comment_strings = 'auto',
+  --    hook_function = function()
+  --      require('ts_context_commentstring.internal').update_commentstring()
+  --    end
+  --}),
+  --  event = "BufRead",
+  --},
+  --    {
+  --      'b3nj5m1n/kommentary',
+  --},
     -- better comment flags
-    {
-      "folke/todo-comments.nvim",
-      event = "BufRead",
-    },
-
+  {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
     -- telescope plugins
     {
-      "nvim-telescope/telescope-fzy-native.nvim",
-      run = "make",
-      event = "BufRead",
-    },
+  "nvim-telescope/telescope-fzy-native.nvim",
+  run = "make",
+  event = "BufRead",
+},
+-- You must install glow globally
+-- https://github.com/charmbracelet/glow
+-- yay -S glow
+{
+  "npxbr/glow.nvim",
+  ft = {"markdown"}
+  -- run = "yay -S glow"
+},
+
+
+
     -- autoSave
     {
       "Pocco81/AutoSave.nvim",
       config = function()
-        require("autosave").setup()
+        require("autosave").setup{debounce_delay = 500}
       end,
     },
     {
@@ -203,8 +281,7 @@ lvim.plugins = {
         vim.g.indent_blankline_show_trailing_blankline_indent = false
         vim.g.indent_blankline_show_first_indent_level = false
       end
-    },
-    {"LunarVim/ColorSchemes"}
+    }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)

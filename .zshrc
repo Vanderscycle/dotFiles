@@ -139,15 +139,14 @@ fi
 
 # to exit terminal in nvim
 alias nvim=lvim
-alias vi=nvim
+alias vi=lvim
 alias :q=exit
 alias :qa=exit
 alias ls="exa -al"
 alias nvimMd="nvim --listen 127.0.0.1:9999"
-alias gitSsh="eval $(keychain --eval --agents gpg,ssh ~/.ssh/manjaroGit)"
+alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/manjaroGit`"
 alias poke="pokemon-colorscripts -r"
 alias pokeCute="pokemon-colorscripts -n dewgong"
-alias nvimGclear='git clearcache | nvim +G'
 poke
 #alias npm='npq-hero'
 #gpg
