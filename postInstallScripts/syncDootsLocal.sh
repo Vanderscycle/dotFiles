@@ -8,10 +8,13 @@ for DOTFILE in "${StringArray[@]}"; do
 done
 
 rsync -auv --progress "$DIR/nvim/" ~/.config/nvim/
-rsync -auv --progress "$DIR/nvim/" ~/.config/lvim/
+rsync -auv --progress "$DIR/lvim/" ~/.config/lvim/
 rsync -auv --progress "/$DIR/lunarvim/" ~/.local/share/lunarvim
 #rsync -auv --progress "/$DIR/neomutt/" ~/.config/neomutt/ 
 rsync -auv --progress "/$DIR/tmuxinator/" ~/.config/tmuxinator/ 
 rsync -auv --progress "/$DIR/alacritty/" ~/.config/alacritty/ 
+
+lvim +LvimUpdate +q
+lvim +PackerUpdate
 
 # maybe combine both bash files into a single on
