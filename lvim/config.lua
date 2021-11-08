@@ -4,6 +4,7 @@ lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "tokyonight"
 vim.opt.relativenumber = true
+--lvim.log.level = "debug"
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -42,31 +43,12 @@ lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Project
 --   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
 -- }
 
--- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 
--- json
-lvim.lang.json.formatters = { { exe = 'prettier' } }
---go
-lvim.lang.go.formatters = {{ exe = "goimports" }}
---python
-lvim.lang.python.formatters = { { exe = "black" } }
-lvim.lang.python.linters = { { exe = "flake8" } }
-
---JS
-lvim.lang.javascript.formatters = { { exe = "prettier" } }
-lvim.lang.javascript.linters = { { exe = "eslint" } }
--- TS
-lvim.lang.typescript.formatters = { { exe = "prettier" } }
-lvim.lang.typescript.linters = { { exe = "eslint" } }
-
---lua
-lvim.lang.lua.formatters = {  {exe = "stylua"} }
-lvim.lang.lua.linters = {  {exe = "luacheck"} }
 
 lvim.builtin.notify.active = true
 lvim.builtin.cmp.completion.keyword_length = 2
-lvim.lsp.automatic_servers_installation = false
+lvim.lsp.automatic_servers_installation = true
 lvim.builtin.dashboard.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.side = "left"
@@ -113,7 +95,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 -- set an additional linter
 -- lvim.lang.python.linters = {
 --   {
-
 --     exe = "flake8,
 --     args = {}
 --   }
@@ -224,20 +205,20 @@ lvim.plugins = {
   end
   },
   -- proper comment context
-  --{
-  --  "JoosepAlviste/nvim-ts-context-commentstring",
-  --  require('kommentary.config').configure_language('svelte', {
-  --    single_line_comment_string = 'auto',
-  --    multi_line_comment_strings = 'auto',
-  --    hook_function = function()
-  --      require('ts_context_commentstring.internal').update_commentstring()
-  --    end
-  --}),
-  --  event = "BufRead",
-  --},
-  --    {
-  --      'b3nj5m1n/kommentary',
-  --},
+{
+  "JoosepAlviste/nvim-ts-context-commentstring",
+          enable = true,
+        config = {
+             -- Languages that have a single comment style
+            typescript = '// %s',
+            css = '/* %s */',
+            scss = '/* %s */',
+            html = '<!-- %s -->',
+            svelte = '<!-- %s -->',
+            vue = '<!-- %s -->',
+        },
+  event = "BufRead",
+},
     -- better comment flags
   {
     "folke/todo-comments.nvim",
@@ -281,7 +262,21 @@ lvim.plugins = {
         vim.g.indent_blankline_show_trailing_blankline_indent = false
         vim.g.indent_blankline_show_first_indent_level = false
       end
-    }
+    },
+      {
+    "tzachar/cmp-tabnine",
+    config = function()
+      local tabnine = require "cmp_tabnine.config"
+      tabnine:setup {
+        max_lines = 1000,
+        max_num_results = 20,
+        sort = true,
+      }
+    end,
+
+    run = "./install.sh",
+    requires = "hrsh7th/nvim-cmp",
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
