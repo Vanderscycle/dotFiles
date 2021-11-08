@@ -69,11 +69,15 @@ echo 'Installing npm and lsp(nvim)'
 #typescript (global with language client)
 sudo pacman -S npm nodejs
 sudo npm install -g npq # audit packages post install
-sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier eslint
+sudo npm install -g typescript typescript-language-server diagnostic-languageserver eslint_d prettier eslint @tailwindcss/language-server
 sudo npm install -g pyright
 sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
 sudo npm install -g bash-language-server
-sudo npm install -g ts-node svelte-language-server graphql @types/node pg mongodb neovim
+sudo npm install -g ts-node svelte-language-server graphql @types/node pg mongodb neovim 
+echo 'Rust and cargo'
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install --branch main --git https://github.com/Kampfkarren/selene selene
+cargo install stylua  
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
