@@ -59,6 +59,9 @@ lvim.builtin.terminal.active = true
 lvim.builtin.treesitter.ensure_installed = {"python","lua","bash","css","dockerfile","html","javascript","json","svelte","typescript","yaml"}
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
+
+
+
 -- generic LSP settings
 -- you can set a custom on_attach function that will be used for all the language servers
 -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
@@ -105,6 +108,8 @@ lvim.plugins = {
     -- theme
     {"folke/tokyonight.nvim"},
         {"LunarVim/ColorSchemes"},
+        --extra languages'
+  {"ChristianChiarulli/vim-solidity"},
     -- lsp
     {
   "ray-x/lsp_signature.nvim",

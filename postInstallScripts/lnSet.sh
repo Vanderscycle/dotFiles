@@ -16,5 +16,6 @@ rsync -auv --progress ~/.config/lvim/ "$DIR/lvim/"
 rsync -auv --progress ~/.config/neomutt/ "/$DIR/neomutt/"
 rsync -auv --progress ~/.config/tmuxinator/ "/$DIR/tmuxinator/"
 rsync -auv --progress ~/.config/alacritty/ "/$DIR/alacritty/"
+rsync -auv --progress ~/.local/share/lunarvim "/$DIR/lunarvim/"
 #rsync -auv --progress ~/vimwiki/ "/$DIR/vimwiki/"
 #! should create a weekly upload schedule
