@@ -1,4 +1,8 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
+
+--LSP
+require("lsp-config.tailwindcss")
+
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
@@ -30,7 +34,6 @@ lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
    },
  }
 
-
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- lvim.builtin.which_key.mappings["t"] = {
@@ -59,7 +62,7 @@ lvim.builtin.terminal.active = true
 lvim.builtin.treesitter.ensure_installed = {"python","lua","bash","css","dockerfile","html","javascript","json","svelte","typescript","yaml"}
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
-
+  lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 
 
 -- generic LSP settings
@@ -110,6 +113,8 @@ lvim.plugins = {
         {"LunarVim/ColorSchemes"},
         --extra languages'
   {"ChristianChiarulli/vim-solidity"},
+  -- floatin terminal
+  {'numtostr/FTerm.nvim'},
     -- lsp
     {
   "ray-x/lsp_signature.nvim",
@@ -210,20 +215,20 @@ lvim.plugins = {
   end
   },
   -- proper comment context
-{
-  "JoosepAlviste/nvim-ts-context-commentstring",
-          enable = true,
-        config = {
-             -- Languages that have a single comment style
-            typescript = '// %s',
-            css = '/* %s */',
-            scss = '/* %s */',
-            html = '<!-- %s -->',
-            svelte = '<!-- %s -->',
-            vue = '<!-- %s -->',
-        },
-  event = "BufRead",
-},
+-- {
+--   "JoosepAlviste/nvim-ts-context-commentstring",
+--           enable = true,
+--         config = {
+--              -- Languages that have a single comment style
+--             typescript = '// %s',
+--             css = '/* %s */',
+--             scss = '/* %s */',
+--             html = '<!-- %s -->',
+--             svelte = '<!-- %s -->',
+--             vue = '<!-- %s -->',
+--         },
+--   event = "BufRead",
+-- },
     -- better comment flags
   {
     "folke/todo-comments.nvim",
