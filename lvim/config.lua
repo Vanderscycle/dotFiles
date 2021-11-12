@@ -1,5 +1,7 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
+-- TODO: learn vim surround, vim-matchup
+
 --LSP
 require("lsp-config.tailwindcss")
 require("specialFunc.quickFix")
@@ -12,10 +14,11 @@ vim.opt.relativenumber = true
 --lvim.log.level = "debug"
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
--- add your own keymapping
+-- add your own keymappin
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
-lvim.keys.normal_mode["<leader>sq"] = ""
+lvim.keys.normal_mode["q"] = ""
+
 -- unmap a default keymappinig
 -- lvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
@@ -49,8 +52,10 @@ lvim.builtin.telescope.defaults.mappings = {
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 -- Use which-key to add extra bindings with the leader-key prefix
 -- BUG: known bug that when exiting the trouble quickfix window release to the wrong window
-
+-- renbinded q
+ lvim.builtin.which_key.mappings["q"] = {q = { ":xa",'save and quit'}}
  lvim.builtin.which_key.mappings["t"] = {
+
    name = "+Trouble",
    r = { "<cmd>Trouble lsp_references<cr>", "References" },
    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
@@ -152,16 +157,13 @@ lvim.plugins = {
 		cmd = "SymbolsOutline",
 	},
 
+
 	-- movement
-	{
-		"phaazon/hop.nvim",
-		event = "BufRead",
-		config = function()
-			require("hop").setup()
-			vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-			vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
-		end,
-	},
+  {
+  "ggandor/lightspeed.nvim",
+  event = "BufRead",
+},
+
 	{
 		"tpope/vim-surround",
 		keys = { "c", "d", "y" },
@@ -272,9 +274,6 @@ lvim.plugins = {
 		run = "make",
 		event = "BufRead",
 	},
-    {'nvim-telescope/telescope-hop.nvim',		run = "make",
-		event = "BufRead",
-},
 
 	-- You must install glow globally
 	-- https://github.com/charmbracelet/glow
