@@ -1,0 +1,24 @@
+# ================  IMAP ====================
+set imap_user = hvandersleyen@gmail.com
+set imap_pass = nlwzfwtnncuhzznt
+set spoolfile = imaps://imap.gmail.com/INBOX
+set folder = imaps://imap.gmail.com/
+set record="imaps://imap.gmail.com/[Gmail]/Sent Mail"
+set postponed="imaps://imap.gmail.com/[Gmail]/Drafts"
+set mbox="imaps://imap.gmail.com/[Gmail]/All Mail"
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+# ================  SMTP  ====================
+set smtp_url = "smtp://hvandersleyen@smtp.gmail.com:587/"
+set smtp_pass = "nlwzfwtnncuhzznt"
+set ssl_force_tls = yes # Require encrypted connection
+# ================  Composition  ====================
+set editor = "nvim"      # Set your favourite editor.
+set edit_headers = yes  # See the headers when editing
+set charset = UTF-8     # value of $LANG; also fallback for send_charset
+# Sender, email address, and sign-off line must match
+unset use_domain        # because joe@localhost is just embarrassing
+set realname = "Henri Vandersleyen"
+set from = "hvandersleyen@gmail.com"
+set use_from = yes

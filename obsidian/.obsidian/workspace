@@ -1,0 +1,95 @@
+{
+  "main": {
+    "id": "6b6a3e84b97a2380",
+    "type": "split",
+    "children": [
+      {
+        "id": "c0466c5a778a820b",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "index.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "34c74f0b535ecff7",
+    "type": "split",
+    "children": [
+      {
+        "id": "70438eb868097c63",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "255da4dca4182d05",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "16257e40959364e8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "3e33746c2a391140",
+    "type": "split",
+    "children": [
+      {
+        "id": "5b2bf8dde93c97b6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a854055d3b6171fb",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "index.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "c0466c5a778a820b",
+  "lastOpenFiles": [
+    "index.md",
+    "templates/majorNodeAssembly.md",
+    "tests.md"
+  ]
+}
