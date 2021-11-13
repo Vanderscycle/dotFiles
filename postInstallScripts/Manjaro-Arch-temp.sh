@@ -54,6 +54,8 @@ sudo pacman -S --noconfirm asciinema # to record
 echo 'installing postman for api testing'
 yay -S --noconfirm postman-bin mongodb-compass
 
+echo -e "=> Installing some tui"
+yay -s browsh ueberzug
 #bat=cat, exa=ls but better
 # corrector for bash scripts
 sudo pacman -S --noconfirm shellcheck # maybe bloat?
@@ -74,6 +76,7 @@ sudo npm install -g pyright
 sudo npm install -g dockerfile-language-server-nodejs #https://github.com/rcjsuen/dockerfile-language-server-nodejs#installation-instructions
 sudo npm install -g bash-language-server
 sudo npm install -g ts-node svelte-language-server graphql @types/node pg mongodb neovim 
+
 echo 'Rust and cargo'
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install --branch main --git https://github.com/Kampfkarren/selene selene
@@ -141,10 +144,8 @@ echo '------------------------------------------------------------------------'
 # => Terminal specific
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Installing Alacritty'
-sudo pacman -S --noconfirm alacritty
-mkdir -p ~/.config/alacritty
-touch  ~/.config/alacritty/alacritty.yml
+echo -e '\n=> Installing Kitty'
+sudo pacman -S --noconfirm kitty
 # need to add the relevant files
 # https://www.chrisatmachine.com/Linux/06-alacritty/ 
 echo -e 'Done.\n'
@@ -268,14 +269,11 @@ echo -e 'Installing Text Editior (neovim)'
 sudo pacman -S neovim
 
 echo -e 'Configuring Neovim'
+# TODO: add lunarvim and sync doots
 # fd alternative to find
 # ueberzug allows for image display in terminal
-# BUG: yay is not working
 yay -S --noconfirm python-ueberzug-git ripgrep-all fd
 
-echo -e "Downloading nvchad"
-#git clone https://github.com/siduck76/nvchad.git ~/Documents/neovim-dots/ # hopefully the author will stop changing the repo name
-#cd ~/Documents/neovim-dots && chmod +x install.sh && bash install.sh 
 
 export EDITOR='nvim' >> ~/.zshrc
 echo -e 'Done.\n'
