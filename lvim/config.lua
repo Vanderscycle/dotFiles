@@ -49,18 +49,15 @@ lvim.builtin.telescope.defaults.mappings = {
 --WARN: new command! You can use <A-j><A-k> to move line up and down!
 -- INFO: usage trouble for its reference and all the bugs
 
-lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["s"] = {T={ "<cmd>Telescope current_buffer_fuzzy_find<CR>", "current Buffer" }}
 -- Use which-key to add extra bindings with the leader-key prefix
 -- BUG: known bug that when exiting the trouble quickfix window release to the wrong window
 -- renbinded q
  lvim.builtin.which_key.mappings["q"] = {q = { ":xa",'save and quit'}}
  lvim.builtin.which_key.mappings["t"] = {
-
    name = "+Trouble",
    r = { "<cmd>Trouble lsp_references<cr>", "References" },
    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnosticss" },
-   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnosticss" },
  }
 
 --  lvim.builtin.which_key.mappings["s"]={
@@ -146,19 +143,23 @@ lvim.plugins = {
 	{ "ChristianChiarulli/vim-solidity" },
 	-- lsp
 	{
-		"ray-x/lsp_signature.nvim",
-		event = "BufRead",
-		config = function()
-			require("lsp_signature").setup()
-		end,
-	},
-	{
 		"simrat39/symbols-outline.nvim",
 		cmd = "SymbolsOutline",
 	},
-
-
-	-- movement
+  {'ray-x/navigator.lua', 
+    requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
+    config = function()
+      vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
+vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
+    end
+  },
+  {
+  "ray-x/lsp_signature.nvim",
+  event = "BufRead",
+  config = function()
+    require "lsp_signature".setup()
+  end
+},	-- movement
   {
   "ggandor/lightspeed.nvim",
   event = "BufRead",
@@ -317,6 +318,20 @@ lvim.plugins = {
 		run = "./install.sh",
 		requires = "hrsh7th/nvim-cmp",
 	},
+--   {
+--   'chipsenkbeil/distant.nvim',
+--   event = "DistantLaunch",
+--   config = function()
+--     require('distant').setup {
+--       -- Applies Chip's personal settings to every machine you connect to
+--       --
+--       -- 1. Ensures that distant servers terminate with no connections
+--       -- 2. Provides navigation bindings for remote directories
+--       -- 3. Provides keybinding to jump into a remote file's parent directory
+--       ['*'] = require('distant.settings').chip_default()
+--     }
+--   end
+-- }
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
