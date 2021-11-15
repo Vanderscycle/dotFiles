@@ -439,7 +439,12 @@ echo -e 'Installing Torrent client (Transmission)'
 #cd ~/Programs/transmission/ && makepkg -si --noconfirm --needed
 
 echo -e 'Installing remote working software (zoom/discord)'
-yay -S --noconfirm zoom discord
+cd ~/Programs
+git clone git clone https://github.com/ayntgl/discordo
+make build
+mv ./discordo /usr/local/bin
+cd ~/
+yay -S --noconfirm zoom 
 
 echo -e 'Installing libreOffice'
 pacman -S --noconfirm --needed libreoffice
