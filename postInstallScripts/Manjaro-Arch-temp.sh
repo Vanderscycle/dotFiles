@@ -83,6 +83,9 @@ cargo install --branch main --git https://github.com/Kampfkarren/selene selene
 cargo install stylua  
 echo -e 'Done.\n'
 
+echo ' =>Installing vms'
+pacman -S --noconfirm libvirt-1 qemu
+echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => ZSH
 # -----------------------------------------------------------------------------
@@ -369,6 +372,8 @@ echo -e 'Done.\n'
 
 echo -e 'Nerdfont'
 mkdir -p ~/.local/share/fonts/ttf/
+#TODO: use this address to download the font
+#https://www.jetbrains.com/lp/mono/
 rsync -auv ~/Documents/dotFiles/NerdFonts/JetBrains/ ~/.local/share/fonts/ttf/
 fc-cache -vf
 echo -e 'Done.\n'
