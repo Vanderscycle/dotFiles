@@ -3,6 +3,7 @@
 #TODO:install to confirm work
 function beforeReboot() {
 
+#TODO: tests lvim working, vms working,zsh, tmux and dotfiles are moved. (new vm
 cd ~
 echo '------------------------------------------------------------------------'
 echo '=> Manjaro 20.04LTS post-install script'
@@ -84,7 +85,10 @@ cargo install stylua
 echo -e 'Done.\n'
 
 echo ' =>Installing vms'
-pacman -S --noconfirm libvirt-1 qemu
+#TODO: probably missing a few things
+pacman -S --noconfirm libvirt-1 qemu virt-manager
+sudo pacman -Syu ebtables dnsmasq
+sudo systemctl restart libvirtd
 echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => ZSH
