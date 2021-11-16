@@ -86,8 +86,9 @@ echo -e 'Done.\n'
 
 echo ' =>Installing vms'
 #TODO: probably missing a few things
-pacman -S --noconfirm libvirt-1 qemu virt-manager
-sudo pacman -Syu ebtables dnsmasq
+pacman -S --noconfirm libvirt-1 qemu virt-manager spice-vdagent
+sudo pacman -Syu --noconfirm ebtables dnsmasq 
+sudo systemctl enable libvirtd
 sudo systemctl restart libvirtd
 echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
