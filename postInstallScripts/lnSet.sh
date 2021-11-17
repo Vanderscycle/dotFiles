@@ -12,7 +12,7 @@ done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
 rsync -auv --progress ~/.config/lvim/ "$DIR/lvim/"
-rsync -auv --progress ~/.config/neomutt/ "/$DIR/neomutt/"
+# rsync -auv --progress ~/.config/neomutt/ "/$DIR/neomutt/"
 rsync -auv --progress ~/.config/tmuxinator/ "/$DIR/tmuxinator/"
 rsync -auv --progress ~/.config/kitty/ "/$DIR/kitty/"
 rsync -auv --progress ~/.local/share/lunarvim "/$DIR/lunarvim/"

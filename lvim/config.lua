@@ -3,7 +3,6 @@
 
 --LSP
 require("lsp-config.tailwindcss")
-require("specialFunc.quickFix")
 
 -- general
 lvim.format_on_save = true
@@ -102,7 +101,7 @@ lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
--- lvim.lsp.null_ls.setup = {
+-- lvim.lsp.nul_ls.setup = {
 --   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
 -- }
 -- or if you need something more advanced
