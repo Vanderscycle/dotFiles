@@ -7,12 +7,9 @@ for DOTFILE in "${StringArray[@]}"; do
     rsync -auv  "$DIR" ~/$DOTFILE
 done
 
-rsync -auv --progress "$DIR/nvim/" ~/.config/nvim/
 rsync -auv --progress "$DIR/lvim/" ~/.config/lvim/
 rsync -auv --progress "/$DIR/lunarvim/" ~/.local/share/lunarvim
-#rsync -auv --progress "/$DIR/neomutt/" ~/.config/neomutt/ 
 rsync -auv --progress "/$DIR/tmuxinator/" ~/.config/tmuxinator/ 
-#rsync -auv --progress "/$DIR/alacritty/" ~/.config/alacritty/ 
 rsync -auv --progress "/$DIR/kitty/" ~/.config/kitty/
 
 lvim +LvimUpdate +q
