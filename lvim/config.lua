@@ -1,5 +1,4 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
-
 -- TODO: learn vim surround, vim-matchup
 
 --LSP
@@ -18,11 +17,17 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
 lvim.keys.normal_mode["q"] = ""
+--TODO: move the keys to which_key plugin
+ lvim.keys.normal_mode = {
+   -- empowered searches
+   ['<leader>sT'] = ":Telescope current_buffer_fuzzy_find<cr>",
+['<leader>sF'] = ':lua require("telescope.builtin").find_files({hidden=true, no_ignore=true, find_command=rg})<cr>',
+   ['<leader>si'] = ":Telescope media_files<cr>",
 
+}
 -- unmap a default keymappinig
 -- lvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 local actions = require("telescope.actions")
@@ -49,17 +54,10 @@ lvim.builtin.telescope.defaults.mappings = {
 --WARN: new command! You can use <A-j><A-k> to move line up and down!
 -- INFO: usage trouble for its reference and all the bugs
 
-lvim.builtin.which_key.mappings["s"] = {T={ "<cmd>Telescope current_buffer_fuzzy_find<CR>", "current Buffer" }}
 -- Use which-key to add extra bindings with the leader-key prefix
 -- BUG: known bug that when exiting the trouble quickfix window release to the wrong window
 -- renbinded q
- lvim.builtin.which_key.mappings["q"] = {q = { ":xa",'save and quit'}}
- lvim.builtin.which_key.mappings["t"] = {
-   name = "+Trouble",
-   r = { "<cmd>Trouble lsp_references<cr>", "References" },
-   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
- }
-
+ lvim.builtin.which_key.mappings["q"] = {name="+dangerous",q = { ":xa",'save and quit'},c = {":G checkout .","reset workspace"}}
 --  lvim.builtin.which_key.mappings["s"]={
 --   T = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Trouble.nvim" },
 -- }
@@ -138,6 +136,7 @@ lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 lvim.plugins = {
 	-- theme
 	{ "folke/tokyonight.nvim" },
+  {"catppuccin/nvim"},
 	{ "LunarVim/ColorSchemes" },
 	--extra languages'
 	{ "ChristianChiarulli/vim-solidity" },
@@ -223,11 +222,6 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 			})
 		end,
 	},
-  {
-  "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-},
-
 	{
 		"rmagatti/goto-preview",
 		config = function()
@@ -246,21 +240,6 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 			})
 		end,
 	},
-	-- proper comment context
-	-- {
-	--   "JoosepAlviste/nvim-ts-context-commentstring",
-	--           enable = true,
-	--         config = {
-	--              -- Languages that have a single comment style
-	--             typescript = '// %s',
-	--             css = '/* %s */',
-	--             scss = '/* %s */',
-	--             html = '<!-- %s -->',
-	--             svelte = '<!-- %s -->',
-	--             vue = '<!-- %s -->',
-	--         },
-	--   event = "BufRead",
-	-- },
 	-- better comment flags
 	{
 		"folke/todo-comments.nvim",
@@ -275,7 +254,7 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 		run = "make",
 		event = "BufRead",
 	},
-
+  {'nvim-telescope/telescope-media-files.nvim'},
 	-- You must install glow globally
 	-- https://github.com/charmbracelet/glow
 	-- yay -S glow
