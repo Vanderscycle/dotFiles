@@ -144,7 +144,7 @@ lvim.plugins = {
 		"simrat39/symbols-outline.nvim",
 		cmd = "SymbolsOutline",
 	},
-  {'ray-x/navigator.lua', 
+  {'ray-x/navigator.lua',
     requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
     config = function()
       vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
@@ -175,6 +175,11 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 		end,
 	},
 	-- git
+  {
+  "pwntester/octo.nvim",
+  event = "BufRead",
+},
+
 	{
 		"tpope/vim-fugitive",
 		cmd = {
@@ -194,7 +199,7 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 		},
 		ft = { "fugitive" },
 	},
-	-- windows
+	-- windows (qickFix and peaking buffer)
 	{
 		"kevinhwang91/nvim-bqf",
 		event = { "BufRead", "BufNew" },
@@ -254,6 +259,7 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 		event = "BufRead",
 	},
   {'nvim-telescope/telescope-media-files.nvim'},
+  --markdown
 	-- You must install glow globally
 	-- https://github.com/charmbracelet/glow
 	-- yay -S glow
@@ -296,6 +302,17 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 		run = "./install.sh",
 		requires = "hrsh7th/nvim-cmp",
 	},
+  -- misc
+  -- refactoring plugin
+  {
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+        {"nvim-lua/plenary.nvim"},
+        {"nvim-treesitter/nvim-treesitter"}
+    }
+}
+--WARN: still in active development plugin
+-- ssh into anything while using your local tools
 --   {
 --   'chipsenkbeil/distant.nvim',
 --   event = "DistantLaunch",
@@ -312,7 +329,3 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 -- }
 }
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
