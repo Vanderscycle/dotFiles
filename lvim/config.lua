@@ -3,6 +3,9 @@
 
 --LSP
 require("lsp-config.tailwindcss")
+require("lsp-config.lua")
+require("lsp-config.typescript")
+require("lsp-config.javascript")
 
 -- general
 lvim.format_on_save = true
@@ -17,12 +20,11 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
 lvim.keys.normal_mode["q"] = ""
 --TODO: move the keys to which_key plugin
- lvim.keys.normal_mode = {
-   -- empowered searches
-   ['<leader>sT'] = ":Telescope current_buffer_fuzzy_find<cr>",
-['<leader>sF'] = ':lua require("telescope.builtin").find_files({hidden=true, no_ignore=true, find_command=rg})<cr>',
-   ['<leader>si'] = ":Telescope media_files<cr>",
-
+lvim.keys.normal_mode = {
+	-- empowered searches
+	["<leader>sT"] = ":Telescope current_buffer_fuzzy_find<cr>",
+	["<leader>sF"] = ':lua require("telescope.builtin").find_files({hidden=true, no_ignore=true, find_command=rg})<cr>',
+	["<leader>si"] = ":Telescope media_files<cr>",
 }
 -- unmap a default keymappinig
 -- lvim.keys.normal_mode["<C-Up>"] = ""
@@ -56,7 +58,11 @@ lvim.builtin.telescope.defaults.mappings = {
 -- Use which-key to add extra bindings with the leader-key prefix
 -- BUG: known bug that when exiting the trouble quickfix window release to the wrong window
 -- renbinded q
- lvim.builtin.which_key.mappings["q"] = {name="+dangerous",q = { ":xa",'save and quit'},c = {":G checkout .","reset workspace"}}
+lvim.builtin.which_key.mappings["q"] = {
+	name = "+dangerous",
+	q = { ":xa", "save and quit" },
+	c = { ":G checkout .", "reset workspace" },
+}
 --  lvim.builtin.which_key.mappings["s"]={
 --   T = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Trouble.nvim" },
 -- }
@@ -102,7 +108,7 @@ lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 -- end
 -- you can overwrite the null_ls setup table (useful for setting the root_dir function)
 -- lvim.lsp.nul_ls.setup = {
---   root_dir = require("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
+--   root_dir = rquire("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
 -- }
 -- or if you need something more advanced
 -- lvim.lsp.null_ls.setup.root_dir = function(fname)
@@ -135,7 +141,7 @@ lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 lvim.plugins = {
 	-- theme
 	{ "folke/tokyonight.nvim" },
-  {"catppuccin/nvim"},
+	{ "catppuccin/nvim" },
 	{ "LunarVim/ColorSchemes" },
 	--extra languages'
 	{ "ChristianChiarulli/vim-solidity" },
@@ -144,24 +150,25 @@ lvim.plugins = {
 		"simrat39/symbols-outline.nvim",
 		cmd = "SymbolsOutline",
 	},
-  {'ray-x/navigator.lua',
-    requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'},
-    config = function()
-      vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
-vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
-    end
-  },
-  {
-  "ray-x/lsp_signature.nvim",
-  event = "BufRead",
-  config = function()
-    require "lsp_signature".setup()
-  end
-},	-- movement
-  {
-  "ggandor/lightspeed.nvim",
-  event = "BufRead",
-},
+	{
+		"ray-x/navigator.lua",
+		requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+		config = function()
+			vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
+			vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
+		end,
+	},
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "BufRead",
+		config = function()
+			require("lsp_signature").setup()
+		end,
+	}, -- movement
+	{
+		"ggandor/lightspeed.nvim",
+		event = "BufRead",
+	},
 
 	{
 		"tpope/vim-surround",
@@ -175,10 +182,10 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 		end,
 	},
 	-- git
-  {
-  "pwntester/octo.nvim",
-  event = "BufRead",
-},
+	{
+		"pwntester/octo.nvim",
+		event = "BufRead",
+	},
 
 	{
 		"tpope/vim-fugitive",
@@ -258,8 +265,8 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 		run = "make",
 		event = "BufRead",
 	},
-  {'nvim-telescope/telescope-media-files.nvim'},
-  --markdown
+	{ "nvim-telescope/telescope-media-files.nvim" },
+	--markdown
 	-- You must install glow globally
 	-- https://github.com/charmbracelet/glow
 	-- yay -S glow
@@ -302,50 +309,49 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 		run = "./install.sh",
 		requires = "hrsh7th/nvim-cmp",
 	},
-  -- misc
-  -- refactoring plugin
-  {
-    "ThePrimeagen/refactoring.nvim",
-    requires = {
-        {"nvim-lua/plenary.nvim"},
-        {"nvim-treesitter/nvim-treesitter"}
-    }
-    },
---WARN: still in active development plugin
--- ssh into anything while using your local tools
---   {
---   'chipsenkbeil/distant.nvim',
---   event = "DistantLaunch",
---   config = function()
---     require('distant').setup {
---       -- Applies Chip's personal settings to every machine you connect to
---       --
---       -- 1. Ensures that distant servers terminate with no connections
---       -- 2. Provides navigation bindings for remote directories
---       -- 3. Provides keybinding to jump into a remote file's parent directory
---       ['*'] = require('distant.settings').chip_default()
---     }
---   end
--- }
-{
-    "nvim-neorg/neorg",
-    config = function()
-        require('neorg').setup {
-            -- Tell Neorg what modules to load
-            load = {
-                ["core.defaults"] = {}, -- Load all the default modules
-                ["core.norg.concealer"] = {}, -- Allows for use of icons
-                ["core.norg.dirman"] = { -- Manage your directories with Neorg
-                    config = {
-                        workspaces = {
-                            my_workspace = "~/neorg"
-                        }
-                    }
-                }
-            },
-        }
-    end,
-    requires = "nvim-lua/plenary.nvim"
+	-- misc
+	-- refactoring plugin
+	{
+		"ThePrimeagen/refactoring.nvim",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	},
+	--WARN: still in active development plugin
+	-- ssh into anything while using your local tools
+	--   {
+	--   'chipsenkbeil/distant.nvim',
+	--   event = "DistantLaunch",
+	--   config = function()
+	--     require('distant').setup {
+	--       -- Applies Chip's personal settings to every machine you connect to
+	--       --
+	--       -- 1. Ensures that distant servers terminate with no connections
+	--       -- 2. Provides navigation bindings for remote directories
+	--       -- 3. Provides keybinding to jump into a remote file's parent directory
+	--       ['*'] = require('distant.settings').chip_default()
+	--     }
+	--   end
+	-- }
+	{
+		"nvim-neorg/neorg",
+		config = function()
+			require("neorg").setup({
+				-- Tell Neorg what modules to load
+				load = {
+					["core.defaults"] = {}, -- Load all the default modules
+					["core.norg.concealer"] = {}, -- Allows for use of icons
+					["core.norg.dirman"] = { -- Manage your directories with Neorg
+						config = {
+							workspaces = {
+								my_workspace = "~/neorg",
+							},
+						},
+					},
+				},
+			})
+		end,
+		requires = "nvim-lua/plenary.nvim",
+	},
 }
-}
-
