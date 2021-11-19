@@ -310,7 +310,7 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
         {"nvim-lua/plenary.nvim"},
         {"nvim-treesitter/nvim-treesitter"}
     }
-}
+    },
 --WARN: still in active development plugin
 -- ssh into anything while using your local tools
 --   {
@@ -327,5 +327,25 @@ vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled 
 --     }
 --   end
 -- }
+{
+    "nvim-neorg/neorg",
+    config = function()
+        require('neorg').setup {
+            -- Tell Neorg what modules to load
+            load = {
+                ["core.defaults"] = {}, -- Load all the default modules
+                ["core.norg.concealer"] = {}, -- Allows for use of icons
+                ["core.norg.dirman"] = { -- Manage your directories with Neorg
+                    config = {
+                        workspaces = {
+                            my_workspace = "~/neorg"
+                        }
+                    }
+                }
+            },
+        }
+    end,
+    requires = "nvim-lua/plenary.nvim"
+}
 }
 
