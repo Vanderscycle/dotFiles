@@ -101,6 +101,15 @@ sudo pacman -S --noconfirm zsh
 # changing the default from bash to zsh
 sudo usermod -s /bin/zsh ${USER} 
 sudo chsh -s $(which zsh) ${USER} 
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Tui 
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Installing usefull tui'
+yay -S --noconfirm --needed sysz
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Miniconda 
