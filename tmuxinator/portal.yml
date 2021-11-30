@@ -52,12 +52,12 @@ windows:
       layout:
       panes:
         - nvim
-        - cd ./trieDataStructure && npm run watch 
-        - cd ./trieDataStructure && npm run dev 
+        # - cd ./trieDataStructure && npm run watch 
+        - cd ./trieDataStructure && npm run dev
   - server:
       layout: even-horizontal
       panes: 
-        - npm i && npm run dev
+        - npm ci && npm run dev
 
   - docker/db:
       layout: even-vertical
@@ -66,8 +66,8 @@ windows:
 
   - tools:
       panes:
-        - postman
-        - mongodb-compass
+        # - postman
+        # - mongodb-compass
         - firefox 'http://localhost:3000'
   - monitoring:
       panes:
