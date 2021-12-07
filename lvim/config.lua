@@ -1,5 +1,5 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
--- TODO: learn vim surround, vim-matchup
+-- TODO: learn vim surround, vim-matchup, lazy-git and much more
 
 --LSP
 require("lsp-config.tailwindcss")
@@ -185,25 +185,6 @@ lvim.plugins = {
 	},
 	-- git
   {'kdheepak/lazygit.nvim'},
-	{
-		"tpope/vim-fugitive",
-		cmd = {
-			"G",
-			"Git",
-			"Gdiffsplit",
-			"Gread",
-			"Gwrite",
-			"Ggrep",
-			"GMove",
-			"GDelete",
-			"GBrowse",
-			"GRemove",
-			"GRename",
-			"Glgrep",
-			"Gedit",
-		},
-		ft = { "fugitive" },
-	},
 	-- windows (qickFix and peaking buffer)
 	{
 		"kevinhwang91/nvim-bqf",
