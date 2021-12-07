@@ -49,7 +49,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing developer packages'
-sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa yarn ripgrep
+sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa yarn ripgrep lazygit
 sudo pacman -S --noconfirm asciinema # to record
 
 echo 'installing postman for api testing'

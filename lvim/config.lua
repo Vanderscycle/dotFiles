@@ -3,7 +3,8 @@
 
 --LSP
 require("lsp-config.tailwindcss")
-require("lsp-config.lua")
+--TODO: fix selene stylua not beign found
+-- require("lsp-config.lua")
 require("lsp-config.typescript")
 require("lsp-config.javascript")
 
@@ -70,6 +71,7 @@ lvim.builtin.which_key.mappings["q"] = {
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 
 lvim.builtin.notify.active = true
+lvim.builtin.notify.opts.background_colour = 'normal'
 lvim.builtin.cmp.completion.keyword_length = 2
 lvim.lsp.automatic_servers_installation = true
 lvim.builtin.dashboard.active = true
@@ -106,7 +108,7 @@ lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 --   --Enable completion triggered by <c-x><c-o>
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
--- you can overwrite the null_ls setup table (useful for setting the root_dir function)
+-- you can overwrite the null_ls seup table (useful for setting the root_dir function)
 -- lvim.lsp.nul_ls.setup = {
 --   root_dir = rquire("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
 -- }
@@ -182,11 +184,7 @@ lvim.plugins = {
 		end,
 	},
 	-- git
-	{
-		"pwntester/octo.nvim",
-		event = "BufRead",
-	},
-
+  {'kdheepak/lazygit.nvim'},
 	{
 		"tpope/vim-fugitive",
 		cmd = {
