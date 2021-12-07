@@ -6,6 +6,7 @@
 - [ ] unfuck, yet again, review and expand my lvim config.
 - [ ] purge kvm and instead use oracle vm, purge docker and use [podman](https://podman.io/)
 - [ ] vim bindings in the browser (use the vimium extension) and figure out what binding are usefull (tab navigation etc.)
+- [ ] review my syncDoot.sh and lnset.sh dotfiles syncing script.
 
 ## Long term: 
 - [ ] move to a declarative configuration using home manager (nix)
