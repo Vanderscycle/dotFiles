@@ -3,7 +3,7 @@ formatters.setup({
 	{
 		exe = "prettier",
 		filetypes = { "typescript" },
-		args = { "--no-semi", "--double-quote" },
+		args = { "--double-quote" },
 	},
 })
 local linters = require("lvim.lsp.null-ls.linters")
