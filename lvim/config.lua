@@ -59,11 +59,15 @@ lvim.builtin.telescope.defaults.mappings = {
 -- Use which-key to add extra bindings with the leader-key prefix
 -- BUG: known bug that when exiting the trouble quickfix window release to the wrong window
 -- renbinded q
-lvim.builtin.which_key.mappings["q"] = {
+lvim.builtin.which_key.mappings["n"] = {
 	name = "+dangerous",
-	q = { ":xa", "save and quit" },
-	c = { ":G checkout .", "reset workspace" },
+	s = { ":lua require('package-info').show()<cr>", "show outdated packages" },
+	d = { ":lua require('package-info').delete()<cr>", "delete package" },
+  p = {":lua require('package-info').change_version()<cr>", "change package version"},
+  i = {":lua require('package-info').install()<cr>","install new package"},
+  r = {":lua require('package-info').reinstall()<cr>", "reinstall package"}
 }
+
 --  lvim.builtin.which_key.mappings["s"]={
 --   T = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Trouble.nvim" },
 -- }
@@ -238,6 +242,12 @@ lvim.plugins = {
 			require("todo-comments").setup()
 		end,
 	},
+  --language specific
+  --node
+  {
+    "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
+},
 	-- telescope plugins
 	{
 		"nvim-telescope/telescope-fzy-native.nvim",
