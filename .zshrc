@@ -139,7 +139,6 @@ fi
 
 # to exit terminal in nvim
 alias nvim=lvim
-alias vi=lvim
 alias :q=exit
 alias :qa=exit
 alias ls="exa -al"

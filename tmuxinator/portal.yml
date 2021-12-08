@@ -48,22 +48,19 @@ windows:
   - editor:
       panes:
         - nvim
-  - Trie:
-      layout:
-      panes:
-        - nvim
-        # - cd ./trieDataStructure && npm run watch 
-        - cd ./trieDataStructure && npm run dev
+  # - Trie:
+  #     layout:
+  #     panes:
+  #       - nvim
+  #       - cd ./trieDataStructure && npm run dev
   - server:
       layout: even-horizontal
       panes: 
-        - npm ci && npm run dev
-
-  - docker/db:
-      layout: even-vertical
-      panes:
-        - docker ps -a
-
+        - npm i && npm run dev
+  # - docker/db:
+  #     layout: even-vertical
+  #     panes:
+  #       - docker ps -a
   - tools:
       panes:
         # - postman
