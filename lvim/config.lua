@@ -3,10 +3,12 @@
 
 --LSP
 require("lsp-config.tailwindcss")
+
 --TODO: fix selene stylua not beign found
 -- require("lsp-config.lua")
 require("lsp-config.typescript")
 require("lsp-config.javascript")
+require('lsp-config.svelte')
 
 -- general
 lvim.format_on_save = true
@@ -152,10 +154,6 @@ lvim.plugins = {
 	--extra languages'
 	{ "ChristianChiarulli/vim-solidity" },
 	-- lsp
-  {
-  'weilbith/nvim-code-action-menu',
-  cmd = 'CodeActionMenu',
-},
 	{
 		"simrat39/symbols-outline.nvim",
 		cmd = "SymbolsOutline",
