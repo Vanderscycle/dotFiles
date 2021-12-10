@@ -152,6 +152,10 @@ lvim.plugins = {
 	--extra languages'
 	{ "ChristianChiarulli/vim-solidity" },
 	-- lsp
+  {
+  'weilbith/nvim-code-action-menu',
+  cmd = 'CodeActionMenu',
+},
 	{
 		"simrat39/symbols-outline.nvim",
 		cmd = "SymbolsOutline",
