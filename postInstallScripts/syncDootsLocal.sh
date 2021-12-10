@@ -12,7 +12,8 @@ rsync -av --progress "$DIR/lvim/" ~/.config/lvim/
 rsync -auv --progress "/$DIR/tmuxinator/" ~/.config/tmuxinator/ 
 rsync -auv --progress "/$DIR/kitty/" ~/.config/kitty/
 
-lvim +PackerSync +q
-lvim +LvimUpdate +q
-
+lvim +PackerSync +qall
+lvim +LvimUpdate +qall
+lvim +LspInstall svelte tsserver tailwindcss +qall
+# lvim 
 # maybe combine both bash files into a single on
