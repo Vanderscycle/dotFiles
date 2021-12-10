@@ -4,7 +4,7 @@ declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zshrc" ".zprofile" ".zlogou
 DIR=${PWD%/*}
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
-    rsync -av  "$DIR" ~/$DOTFILE
+    rsync -av --progress "$DIR" ~/$DOTFILE
 done
 # u does not overide (update)
 rsync -av --progress "$DIR/lvim/" ~/.config/lvim/
