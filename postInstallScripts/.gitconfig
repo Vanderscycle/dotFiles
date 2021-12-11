@@ -1,8 +1,0 @@
-[user]
-	# email = h52706578+Vanderscycle@users.noreply.github.com
-	email = hvandersleyen@gmail.com	
-	name = Henri Vandersleyen
-[credential]
-	helper = wincred
-[init]
-	defaultBranch = ""
