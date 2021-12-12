@@ -9,8 +9,8 @@ done
 # u does not overide (update)
 rsync -av --progress "$DIR/lvim/" ~/.config/lvim/
 # rsync -auv --progress "/$DIR/lunarvim/" ~/.local/share/lunarvim
-rsync -auv --progress "/$DIR/tmuxinator/" ~/.config/tmuxinator/ 
-rsync -auv --progress "/$DIR/kitty/" ~/.config/kitty/
+rsync -av --progress "/$DIR/tmuxinator/" ~/.config/tmuxinator/ 
+rsync -av --progress "/$DIR/kitty/" ~/.config/kitty/
 
 lvim +PackerSync +qall
 lvim +LvimUpdate +qall

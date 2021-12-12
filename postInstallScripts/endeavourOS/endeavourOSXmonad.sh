@@ -35,13 +35,30 @@ echo -e 'Installing AUR helper (yay)'
 sudo pacman -S --noconfirm --needed yay
 
 echo '=>Rust and cargo'
+# TODO: find a way to skip install (pass a 1)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 cargo install --branch main --git https://github.com/Kampfkarren/selene selene
 cargo install stylua  
 echo -e 'Done.\n'
 
+echo 'installing c lang'
+pacman -S clang
+echo -e 'Done.\n'
+
+#Python
+echo -e '\n=> Installing Miniconda'
+cd ~
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b
+export PATH=~/miniconda3/bin:$PATH
+conda init zsh
+rm Miniconda3-latest-Linux-x86_64.sh # clean the install
+echo -e 'Done.\n'
+
+#JS/TS
 echo -e 'Installing nodeJs'
-sudo pacman -S --noconfirm --needed nodejs
+sudo pacman -S --noconfirm --needed nodejs npm
 yay -S --noconfirm  htop
 echo -e 'Done.\n'
 
@@ -86,9 +103,13 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => syncing files
 # -----------------------------------------------------------------------------
-echo -e '\n=> syncing doots and installing lvim'
-chmod +x ~/Documents/dotFiles/stdPatterns/postInstallScripts/*.sh
-bash ~/Documents/dotFiles/postInstallScripts/reinstalLvim.sh
+echo -e '\n=> installing neovim'
+sudo npm install -g neovim tree-sitter-cli
+sudo pacman -S --noconfirm --needed neovim
+echo -e '\n=> syncing doots'
+
+chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
+(cd ~/Documents/dotFiles/postInstallScripts/ && bash ~/Documents/dotFiles/postInstallScripts/reinstalLvim.sh)
 # -----------------------------------------------------------------------------
 # => Font
 # -----------------------------------------------------------------------------
@@ -97,8 +118,9 @@ echo -e '\n=>Nerdfont'
 mkdir -p ~/.local/share/fonts/ttf/
 #TODO: use this address to download the font
 #https://www.jetbrains.com/lp/mono/
-mkdir -p ~/.local/share/fonts/ttf/
-unzip ~/Documents/dotFiles/JetBrainsMono-2.242.zip ~/.local/share/
+rsync -auv ~/Documents/dotFiles/JetBrainsMono-2.242.zip ~/.local/share/
+(cd ~/.local/share/ && unzip ./JetBrainsMono-2.242.zip )
+rm ~/.local/share/AUTHORS.txt ~/.local/share/OFL.txt ~/.local/shareJetBrainsMono-2.242.zip
 fc-cache -vf
 echo -e 'Done.\n'
 

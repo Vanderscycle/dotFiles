@@ -8,5 +8,5 @@ LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/luna
 # neovim bins
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 # syncing my doots
-bash syncDootsLocal.sh
+bash ~/Documents/dotFiles/postInstallScripts/syncDootsLocal.sh
 
