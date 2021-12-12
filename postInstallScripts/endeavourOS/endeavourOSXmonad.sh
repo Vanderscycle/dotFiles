@@ -22,7 +22,7 @@ echo -e 'Done.\n'
 
 #INFO: configure ssh before using ssh
 echo -e '\n=> importing our doots'
-git clone https://github.com/Vanderscycle/dot-config.git ~/Documents/
+git clone https://github.com/Vanderscycle/dot-config.git ~/Documents/dotFiles/
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -62,7 +62,7 @@ sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit h
 
 echo -e '\n=> Installing zsh'
 yay -S --noconfirm --needed zsh
-chsh -s /usr/bin/zsh
+sudo chsh -s /usr/bin/zsh
 
 echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
