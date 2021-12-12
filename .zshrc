@@ -70,7 +70,7 @@ export ZSH="/home/henri/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting tmuxinator sudo)
+plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting sudo k enhancd)
 plugins+=(zsh-better-npm-completion)
 export FZF_BASE=/usr/bin/fzf
 export FZF_DEFAULT_COMMAND='rg'
@@ -151,11 +151,10 @@ poke
 #gpg
 GPG_TTY=$(tty)
 export GPG_TTY=$(tty)
-
+export ENHANCD_FILTER="fzf --preview 'tree -d -C {} | head -100'"
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/miniconda3/bin:/home/henri/.cargo/bin:/home/henri/.local/bin"
 export EDITOR='lvim'
 
 alias luamake=/home/henri/.config/lua-language-server/3rd/luamake/luamake 
-

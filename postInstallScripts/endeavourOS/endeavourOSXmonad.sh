@@ -1,6 +1,6 @@
 # !/bin/bash
 
-# sudo pacman -S --needed --noconfirm httpie && http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+# sudo pacman -S --needed --noconfirm httpie wget && http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
 cd ~
 echo '------------------------------------------------------------------------'
 echo '=> EndavorOs post-install script'
@@ -78,17 +78,27 @@ echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip
 
 echo -e '\n=> Installing zsh'
-yay -S --noconfirm --needed zsh
-sudo chsh -s /usr/bin/zsh
+yay -Syu --noconfirm --needed zsh
 
 #BUG: oh my zsh not working
 echo -e '\n=> Installing oh-my-zsh'
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-rm ~/.zshrc.pre-oh-my-zsh
-#zplug
-curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
+
+echo -e '\n=> Installing zsh/oh-my-zsh plugins'
+sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
+#enhancd
+mkdir -p ~/Programs/
+git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
+ echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
+source ~/.zshrc
+chsh -s  $(which zsh)
 
 #BUG: zplug not working at install
+# echo -e '\n=> zplug'
+# curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 # echo -e '\ninstalling enhancd using zplug'
 # zplug "b4b4r07/enhancd", use:init.sh #! doesn't work
 
@@ -104,6 +114,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => syncing files
 # -----------------------------------------------------------------------------
+
 echo -e '\n=> installing neovim'
 sudo npm install -g neovim tree-sitter-cli
 sudo pacman -S --noconfirm --needed neovim
@@ -111,6 +122,7 @@ echo -e '\n=> syncing doots'
 
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 (cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
+
 # -----------------------------------------------------------------------------
 # => Font
 # -----------------------------------------------------------------------------
@@ -154,7 +166,7 @@ echo -e 'Done.\n'
 # => Databases
 # -----------------------------------------------------------------------------
 
-echo -e 'Installing Postgresql'
+echo -e '\n=>Installing Postgresql'
 # https://lobotuerto.com/blog/how-to-install-postgresql-in-manjaro-linux/
 
 yay -S --noconfirm postgresql postgis
@@ -164,13 +176,12 @@ echo -e 'Configuring Postgresql'
 sudo su postgres -l <<EOF # or sudo -u postgres -i
 initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
 EOF
-echo -e 'Done.\n'
-
 sudo systemctl start postgresql
 sudo systemctl enable postgresql # allows it to start on start
 # sudo systemctl status postgresql # visual confirmation
+echo -e 'Done.\n'
 
-echo -e 'Installing Mongo'
+echo -e '\n=>Installing Mongo'
 git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
 cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed
 
