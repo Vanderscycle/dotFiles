@@ -33,8 +33,6 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing system utilities'
 echo -e 'Installing AUR helper (yay)'
 sudo pacman -S --noconfirm --needed yay
-echo -e '\n=> Installing zsh'
-
 
 echo '=>Rust and cargo'
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -62,12 +60,40 @@ yay -S --noconfirm --needed sysz
 echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip
 
+echo -e '\n=> Installing zsh'
+yay -S --noconfirm --needed zsh
+chsh -s /usr/bin/zsh
 
+echo -e '\n=> Installing oh-my-zsh'
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+rm ~/.zshrc.pre-oh-my-zsh
+#zplug
+curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+#BUG: zplug not working at install
+# echo -e '\ninstalling enhancd using zplug'
+# zplug "b4b4r07/enhancd", use:init.sh #! doesn't work
+
+echo -e '\adding fzf completion'
+# source of info https://doronbehar.com/articles/ZSH-FZF-completion/
+#mkdir /usr/share/fzf/ # file exists
+sudo touch /usr/share/fzf/completion.zsh
+sudo wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
+sudo touch /usr/share/fzf/key-bindings.zsh
+sudo wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => syncing files
+# -----------------------------------------------------------------------------
+echo -e '\n=> syncing doots and installing lvim'
+chmod +x ~/Documents/dotFiles/stdPatterns/postInstallScripts/*.sh
+bash ~/Documents/dotFiles/postInstallScripts/reinstalLvim.sh
 # -----------------------------------------------------------------------------
 # => Font
 # -----------------------------------------------------------------------------
 
-echo -e 'Nerdfont'
+echo -e '\n=>Nerdfont'
 mkdir -p ~/.local/share/fonts/ttf/
 #TODO: use this address to download the font
 #https://www.jetbrains.com/lp/mono/
@@ -84,8 +110,8 @@ echo -e 'Done.\n'
 echo -e 'Adding keyboard languages (cn)'
 #https://classicforum.manjaro.org/index.php?topic=1044.0
 # TODO: add --no needed 
-sudo pacman -S ibus-libpinyin opendesktop-fonts
-sudo pacman -Ss chinese
+sudo pacman -S --noconfirm --needed ibus-libpinyin opendesktop-fonts
+sudo pacman -Ss --noconfirm --needed chinese
 sudo sh -c "cat >> /etc/environment <<EOF
 GTK_IM_MODULE=ibus
 QT_IM_MODULE=ibus
@@ -119,7 +145,7 @@ echo -e 'Done.\n'
 
 sudo systemctl start postgresql
 sudo systemctl enable postgresql # allows it to start on start
-sudo systemctl status postgresql # visual confirmation
+# sudo systemctl status postgresql # visual confirmation
 
 echo -e 'Installing Mongo'
 git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
@@ -128,7 +154,7 @@ cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed
 echo -e 'Configuring Mongo'
 sudo systemctl start mongodb
 sudo systemctl enable mongodb # allows it to start on start
-sudo systemctl status mongodb # visual confirmation
+# sudo systemctl status mongodb # visual confirmation
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
