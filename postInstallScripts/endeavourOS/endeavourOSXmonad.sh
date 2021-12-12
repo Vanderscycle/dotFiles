@@ -52,8 +52,10 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod +x Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b
 export PATH=~/miniconda3/bin:$PATH
-conda init zsh
+# conda init zsh
 rm Miniconda3-latest-Linux-x86_64.sh # clean the install
+conda  install -cy python pandas numpy
+conda install -c conda-forge pynvim
 echo -e 'Done.\n'
 
 #JS/TS
@@ -80,7 +82,6 @@ sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit h
 echo -e '\n=> Installing zsh'
 yay -Syu --noconfirm --needed zsh
 
-#BUG: oh my zsh not working
 echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
 
@@ -89,6 +90,7 @@ sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestion
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
+git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
 #enhancd
 mkdir -p ~/Programs/
 git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
@@ -112,19 +114,47 @@ sudo wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/j
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => syncing files
+# => Security (ssh)
+# -----------------------------------------------------------------------------
+
+echo -e 'Configuring SSH'
+# https://pandammonium.org/how-to-change-a-git-repository-from-https-to-ssh/
+mkdir ~/.ssh/
+cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f endavourGit -N ""
+eval $(ssh-agent)
+ssh-add  ~/.ssh/endavourGit
+# the rest has to be done manually (add the pub file to git)
+
+#because everytime you open a new terminal you need to create an agent id
+echo -e 'Installing password manager (pass)'
+sudo pacman -S --needed --noconfirm pass gnupg keychain
+# https://www.gnupg.org/documentation/manuals/gnupg/Agent-OPTION.html
+mkdir ~/.gnupg/
+touch ~/.gnupg/gpg.conf
+touch ~/.gnupg/gpg-agent.conf
+# https://gist.github.com/troyfontaine/18c9146295168ee9ca2b30c00bd1b41e
+echo 'use-agent' >> ~/.gnupg/gpg.conf
+echo 'pinentry-mode loopback' >> ~/.gnupg/gpg.conf
+chmod 700 ~/.gnupg
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => syncing files and installing Neovim
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> installing neovim'
-sudo npm install -g neovim tree-sitter-cli
+sudo npm install -g neovim 
 sudo pacman -S --noconfirm --needed neovim
-echo -e '\n=> syncing doots'
 
+echo -e '\n=> installing LunarVim'
+LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+
+echo -e '\n=> syncing doots'
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 (cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
 
 # -----------------------------------------------------------------------------
-# => Font
+# => Font && colors
 # -----------------------------------------------------------------------------
 
 echo -e '\n=>Nerdfont'
@@ -137,6 +167,9 @@ rm ~/.local/share/AUTHORS.txt ~/.local/share/OFL.txt ~/.local/shareJetBrainsMono
 fc-cache -vf
 echo -e 'Done.\n'
 
+echo -e '\n=>Colors in terminal'
+yay -S --noconfirm shell-color-scripts pokemon-colorscripts-git
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Keyboard Languages (en/cn)

@@ -267,7 +267,7 @@ echo -e 'Done.\n'
 echo -e '\n=> Configuring python env with basic package through Conda'
 conda create -y -n dev-branch python
 conda activate dev-branch 
-conda install -y pandas numpy 
+conda install -y pandas numpy python pynvim 
 pip3 install pynvim # required to work with nvim
 
 
