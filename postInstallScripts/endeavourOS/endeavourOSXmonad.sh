@@ -81,6 +81,7 @@ echo -e '\n=> Installing zsh'
 yay -S --noconfirm --needed zsh
 sudo chsh -s /usr/bin/zsh
 
+#BUG: oh my zsh not working
 echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 rm ~/.zshrc.pre-oh-my-zsh
@@ -109,7 +110,7 @@ sudo pacman -S --noconfirm --needed neovim
 echo -e '\n=> syncing doots'
 
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
-(cd ~/Documents/dotFiles/postInstallScripts/ && bash ~/Documents/dotFiles/postInstallScripts/reinstalLvim.sh)
+(cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
 # -----------------------------------------------------------------------------
 # => Font
 # -----------------------------------------------------------------------------
