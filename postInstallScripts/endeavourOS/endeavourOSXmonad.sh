@@ -242,13 +242,19 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => Window manager
 # -----------------------------------------------------------------------------
+# INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
-echo -e '\n=> install the window manager'
-#TODO: install a better terminal than xterm(kitty)
-sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu
+echo -e '\n=> install the window manager and bar'
 mkdir -p ~/.xmonad/
-echo "downloading"
+sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu 
+sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and else
+sudo pacman -S --needed xmobar #more to polybar later
 http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs > ~/.xmonad/xmonad.hs
+# xrandr 
+mkdir -p ~/.config/xmobar/
+
+http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc> ~/.config/xmobar/xmobarrc
+
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------

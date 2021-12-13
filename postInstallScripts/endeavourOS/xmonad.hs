@@ -1,7 +1,23 @@
+--INFO: keybindings
+-- super + j/k focus amongst windows
+-- super + shift + j/k focus swap neighboring windows
+-- super + space re-arrange windows (default 3)
+-- super + h/l make current window smaller/larger
+
+-- super + shift + c close a window
+-- super + shift + t opens a terminal\
+
+-- super + # switches workspace
+-- super + shift + # moves the window to the # workspace
+-- super + q refresh config file
+-- super + p command palette 
 -- IMPORTS
 import XMonad
 import Data.Monoid
 import System.Exit
+import XMonad.Hooks.ManageDocks
+import XMonad.util.SpawnOnce
+import XMonad.util.Run
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -24,7 +40,7 @@ myBorderWidth   = 2
 -- ("right alt"), which does not conflict with emacs keybindings. The
 -- "windows key" is usually mod4Mask.
 --
--- INFO: super key
+-- INFO: super key (windows key)
 myModMask       = mod4Mask
 
 -- NOTE: from 0.9.1 on numlock mask is set automatically. The numlockMask
@@ -198,7 +214,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled   = Tall nmaster delta ratio
@@ -275,14 +291,19 @@ myLogHook = return ()
 -- It will add initialization of EWMH support to your custom startup
 -- hook by combining it with ewmhDesktopsStartup.
 --
-myStartupHook = return ()
+myStartupHook = do
+  spawnOnce "nitrogen --restore &"
+  spawnOnce "picom &"
+
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
+main = do
+  xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
+  xmonad $ docks defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
