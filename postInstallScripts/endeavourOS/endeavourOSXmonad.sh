@@ -29,7 +29,6 @@ echo -e 'Done.\n'
 # => Install system utilities
 # -----------------------------------------------------------------------------
 
-
 echo -e '\n=> Installing system utilities'
 echo -e 'Installing AUR helper (yay)'
 sudo pacman -S --noconfirm --needed yay
@@ -61,7 +60,7 @@ echo -e 'Done.\n'
 #JS/TS
 echo -e 'Installing nodeJs'
 sudo pacman -S --noconfirm --needed nodejs npm
-yay -S --noconfirm  htop
+sudo npm i -g prettier eslint
 echo -e 'Done.\n'
 
 echo -e '\n=> Installing Kitty'
@@ -75,9 +74,6 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing systemctl moditor (fzf)'
 yay -S --noconfirm --needed sysz
-
-echo -e '\n=> Installing developer packages and useful tui alternatives'
-sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip
 
 echo -e '\n=> Installing zsh'
 yay -Syu --noconfirm --needed zsh
@@ -114,6 +110,15 @@ sudo wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/j
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
+# => Develloper tools
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Installing developer packages and useful tui alternatives'
+sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip
+#md file reader
+yay -S glow
+
+# -----------------------------------------------------------------------------
 # => Security (ssh)
 # -----------------------------------------------------------------------------
 
@@ -144,8 +149,6 @@ echo -e 'Done.\n'
 echo -e '\n=> installing neovim'
 
 sudo rm -rf /usr/bin/tree-sitter
-
-echo -e '\n=> installing neovim'
 sudo npm install -g neovim tree-sitter-cli
 sudo pacman -S --noconfirm --needed neovim
 
@@ -246,5 +249,35 @@ sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu
 mkdir -p ~/.xmonad/
 echo "downloading"
 http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs > ~/.xmonad/xmonad.hs
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Virtual Machines (level 2)
+# -----------------------------------------------------------------------------
+
+echo '\n=>Installing vm'
+#TODO: probably missing a few things
+pacman -S --noconfirm virtualbox
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Local application (amazing tui)
+# -----------------------------------------------------------------------------
+
+echo '\n=>Installing amazing tui'
+echo 'Installing bpytop (bashtop)'
+conda install psutil
+pacman -S --noconfirm bpytop
+
+echo 'tui file navigator'
+pacman -S --noconfirm nnn
+echo -e 'Done.\n'
+
+
+# -----------------------------------------------------------------------------
+# => Local application (local machine only)
+# -----------------------------------------------------------------------------
+echo '\n=> Installing local machine applications'
+  yay -S --noconfirm zoom 
 echo -e 'Done.\n'
 
