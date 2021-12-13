@@ -152,7 +152,9 @@ lvim.plugins = {
 	{ "catppuccin/nvim" },
 	{ "LunarVim/ColorSchemes" },
 	--extra languages'
-	{ "ChristianChiarulli/vim-solidity" },
+  -- WARN: install binaries
+  --https://www.youtube.com/watch?v=MOaws1ozqNw
+	-- { "ChristianChiarulli/vim-solidity" },
 	-- lsp
 	{
 		"simrat39/symbols-outline.nvim",
@@ -286,20 +288,20 @@ lvim.plugins = {
 			vim.g.indent_blankline_show_first_indent_level = false
 		end,
 	},
-	{
-		"tzachar/cmp-tabnine",
-		config = function()
-			local tabnine = require("cmp_tabnine.config")
-			tabnine:setup({
-				max_lines = 1000,
-				max_num_results = 20,
-				sort = true,
-			})
-		end,
+	-- {
+	-- 	"tzachar/cmp-tabnine",
+	-- 	config = function()
+	-- 		local tabnine = require("cmp_tabnine.config")
+	-- 		tabnine:setup({
+	-- 			max_lines = 1000,
+	-- 			max_num_results = 20,
+	-- 			sort = true,
+	-- 		})
+	-- 	end,
 
-		run = "./install.sh",
-		requires = "hrsh7th/nvim-cmp",
-	},
+	-- 	run = "./install.sh",
+	-- 	requires = "hrsh7th/nvim-cmp",
+	-- },
 	-- misc
 	-- refactoring plugin
 	{

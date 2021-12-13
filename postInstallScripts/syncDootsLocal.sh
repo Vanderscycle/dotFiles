@@ -13,8 +13,7 @@ rsync -av --progress  ~/Documents/dotFiles/lvim/ ~/.config/lvim/
 rsync -av --progress  ~/Documents/dotFiles/tmuxinator/ ~/.config/tmuxinator/ 
 rsync -av --progress ~/Documents/dotFiles/kitty/ ~/.config/kitty/
 
-# lvim +PackerSync +qall
-# lvim +LvimUpdate +qall
-# lvim +LspInstall svelte tsserver tailwindcss +qall
+lvim +PackerSync +qall
+lvim +LspInstall svelte tsserver tailwindcss +qall
 # lvim 
 # maybe combine both bash files into a single on
