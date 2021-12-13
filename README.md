@@ -9,8 +9,14 @@ At the moment, I am using lunar vim instead of my deprecated nvim
 - update Ubuntu
 - update raspbian
 
+# Latest version
+- ArchBased 
+```bash
+sudo pacman -S --needed --noconfirm httpie wget && http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+```
 ![nvim](./img/whadyathink.png)
-## Ubuntu
+## Ubuntu  (outdated)
+
 My .dotfile repo containing all relevant configurations that I use.
 
 To use the post-install script for Ubuntu ssh into the Ubuntu server and type:
@@ -28,12 +34,13 @@ The post install script installs the following programs:
 * tmux
 * nvim with plugins 
  
-## Arch/Manjaro
+## Arch/Manjaro (outdated)
 ```bash
 sudo mkdir /etc/init.d/ && sudo wget -O /etc/init.d/Manjaro-Arch-temp.sh https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/Manjaro-Arch-temp.sh && sudo chmod +x /etc/init.d/Manjaro-Arch-temp.sh && bash /etc/init.d/Manjaro-Arch-temp.sh
 ``` 
 
-## Raspbian
+## Raspbian  (outdated)
+
 ```bash
 wget -O /etc/init.d/raspberryPi.sh https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/raspberryPi.sh && chmod +x /etc/init.d/raspberryPi.sh && bash /etc/init.d/raspberryPi.sh
 ```

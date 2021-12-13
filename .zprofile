@@ -1,2 +1,2 @@
 #.zlogin and .zprofile only difference is the execution
-source ~/enhancd/init.sh
+source ~/Programs/enhancd/init.sh

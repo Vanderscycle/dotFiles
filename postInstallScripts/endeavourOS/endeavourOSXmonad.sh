@@ -55,7 +55,7 @@ export PATH=~/miniconda3/bin:$PATH
 # conda init zsh
 rm Miniconda3-latest-Linux-x86_64.sh # clean the install
 conda  install -cy python pandas numpy
-conda install -c conda-forge pynvim
+conda install -cy conda-forge pynvim
 echo -e 'Done.\n'
 
 #JS/TS
@@ -94,7 +94,7 @@ git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-
 #enhancd
 mkdir -p ~/Programs/
 git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
- echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
+echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
 source ~/.zshrc
 chsh -s  $(which zsh)
 
@@ -141,9 +141,12 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => syncing files and installing Neovim
 # -----------------------------------------------------------------------------
+echo -e '\n=> installing neovim'
+
+sudo rm -rf /usr/bin/tree-sitter
 
 echo -e '\n=> installing neovim'
-sudo npm install -g neovim 
+sudo npm install -g neovim tree-sitter-cli
 sudo pacman -S --noconfirm --needed neovim
 
 echo -e '\n=> installing LunarVim'
@@ -193,6 +196,15 @@ Type=Application
 Name=IBus Daemon
 Exec=ibus-daemon -drx
 EOF
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Containers (Docker)
+# -----------------------------------------------------------------------------
+
+
+echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
+sudo pacman -S --noconfirm --needed podman buildah
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
