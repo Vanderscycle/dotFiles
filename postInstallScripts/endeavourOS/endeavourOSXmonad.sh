@@ -2,6 +2,9 @@
 
 # sudo pacman -S --needed --noconfirm httpie &&
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+before_reboot(){
+    # Do stuff
+
 cd ~
 echo '------------------------------------------------------------------------'
 echo '=> EndavorOs post-install script'
@@ -236,7 +239,7 @@ echo -e '\n=> install the window manager and bar'
 mkdir -p ~/.xmonad/
 sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu 
 sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and else
-sudo pacman -S --needed xmobar #more to polybar later
+sudo pacman -S --needed --noconfim xmobar #more to polybar later
 http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs > ~/.xmonad/xmonad.hs
 # xrandr 
 mkdir -p ~/.config/xmobar/
@@ -245,6 +248,15 @@ http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/
 
 echo -e 'Done.\n'
 
+# -----------------------------------------------------------------------------
+# => Last step
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Rebooting'
+reboot
+}
+
+after_reboot(){
 # -----------------------------------------------------------------------------
 # => Virtual Machines (level 2)
 # -----------------------------------------------------------------------------
@@ -261,10 +273,10 @@ echo -e 'Done.\n'
 echo '\n=>Installing amazing tui'
 echo 'Installing bpytop (bashtop)'
 conda -cy install psutil
-pacman -S --noconfirm bpytop
+pacman -S --noconfirm --needed bpytop
 
 echo 'tui file navigator'
-pacman -S --noconfirm nnn
+pacman -S --noconfirm --needed nnn
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -294,11 +306,16 @@ LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/luna
 echo -e '\n=> syncing doots'
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 (cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
+}
 
-# -----------------------------------------------------------------------------
-# => Last step
-# -----------------------------------------------------------------------------
-
-echo -e '\n=> Rebooting'
-reboot
+if [ -f /var/run/rebooting-for-updates ]; then
+    after_reboot
+    rm /var/run/rebooting-for-updates
+    update-rc.d myupdate remove
+else
+    before_reboot
+    touch /var/run/rebooting-for-updates
+    update-rc.d myupdate defaults
+    sudo reboot
+fi
 
