@@ -5,7 +5,6 @@
 before_reboot(){
     # Do stuff
 
-cd ~
 echo '------------------------------------------------------------------------'
 echo '=> EndavorOs post-install script'
 echo '=> pre reboot'
@@ -36,7 +35,6 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing zsh'
 yay -S --noconfirm --needed zsh
-zsh
 echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
 
