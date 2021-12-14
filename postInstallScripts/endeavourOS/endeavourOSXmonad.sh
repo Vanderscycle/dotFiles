@@ -1,7 +1,7 @@
 # !/bin/bash
 
 # sudo pacman -S --needed --noconfirm httpie &&
-#    sudo touch /var/run/rebooting-for-updates && wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+# wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
 before_reboot(){
     # Do stuff
 
@@ -16,7 +16,7 @@ echo '------------------------------------------------------------------------'
 # -----------------------------------------------------------------------------
 # => Critical programs that installs bug out later
 # -----------------------------------------------------------------------------
-
+sudo touch /var/run/rebooting-for-updates 
 echo -e '\n=> installing neovim'
 sudo pacman -S --noconfirm --needed neovim
 
@@ -50,8 +50,6 @@ echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
 source ~/.zshrc
 chsh -s  $(which zsh)
 
-
-
 echo -e '\n=> Update repository information'
 # -S: synchronize your system's packages with those in the official repo
 # -y: download fresh package databases from the serverrm
@@ -77,8 +75,6 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing system utilities'
 echo -e 'Installing AUR helper (yay)'
 sudo pacman -S --noconfirm --needed yay
-
-
 
 echo 'installing c lang'
 pacman -S clang
@@ -115,8 +111,6 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing systemctl moditor (fzf)'
 yay -S --noconfirm --needed sysz
 
-
-
 #BUG: zplug not working at install
 # echo -e '\n=> zplug'
 # curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
@@ -137,7 +131,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing developer packages and useful tui alternatives'
-sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip
+sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip xclip
 #md file reader
 yay -S --needed --noconfirm glow
 
@@ -252,14 +246,14 @@ echo -e 'Done.\n'
 # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
 echo -e '\n=> install the window manager and bar'
-mkdir -p ~/.xmonad/
-sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu 
+sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
 sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and else
 sudo pacman -S --needed --noconfim xmobar #more to polybar later
+
+mkdir -p ~/.xmonad/
 http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs > ~/.xmonad/xmonad.hs
 # xrandr 
 mkdir -p ~/.config/xmobar/
-
 http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc> ~/.config/xmobar/xmobarrc
 
 echo -e 'Done.\n'
@@ -320,13 +314,14 @@ echo -e 'Done.\n'
 # => syncing files and installing Neovim
 # -----------------------------------------------------------------------------
 
-
-
 echo -e '\n=> installing neovim npm plugins'
 sudo npm install -g neovim tree-sitter-cli
 
 echo -e '\n=> installing LunarVim'
-LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+LV_BRANCH=rolling 
+wget https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh
+bash install.sh --no-install-dependencies
+rm install.sh
 
 echo -e '\n=> syncing doots'
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
