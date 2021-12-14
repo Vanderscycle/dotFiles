@@ -1,6 +1,7 @@
 # !/bin/bash
 
-# sudo pacman -S --needed --noconfirm httpie && wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
+# sudo pacman -S --needed --noconfirm httpie && 
+# wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
 before_reboot(){
     # Do stuff
 
@@ -253,7 +254,7 @@ mkdir -p ~/.xmonad/
 wget -O   ~/.xmonad/xmonad.hs https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs 
 
 mkdir -p ~/.config/xmobar/
-http  ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc> 
+http  ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc
 
 echo -e 'Done.\n'
 
