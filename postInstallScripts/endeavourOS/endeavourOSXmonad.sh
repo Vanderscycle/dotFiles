@@ -337,10 +337,8 @@ if [ -f /var/run/rebooting-for-updates ]; then
     rm /var/run/rebooting-for-updates
     update-rc.d myupdate remove
 else
+    sudo touch /var/run/rebooting-for-updates
     before_reboot
     update-rc.d myupdate defaults
-    echo -e '\n=> Rebooting First time'
-
-    sudo reboot
 fi
 
