@@ -1,6 +1,7 @@
 # !/bin/bash
 
-# sudo pacman -S --needed --noconfirm httpie && http --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+# sudo pacman -S --needed --noconfirm httpie &&
+# wget  https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
 cd ~
 echo '------------------------------------------------------------------------'
 echo '=> EndavorOs post-install script'
@@ -291,4 +292,10 @@ echo -e '\n=> syncing doots'
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 (cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
 
+# -----------------------------------------------------------------------------
+# => Last step
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Rebooting'
+reboot
 
