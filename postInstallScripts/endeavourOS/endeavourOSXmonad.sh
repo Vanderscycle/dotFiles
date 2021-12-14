@@ -16,7 +16,8 @@ echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git 
 echo 'cli download programs'
-sudo pacman -S --needed --noconfirm httpie curl wget
+#BUG: httpie doesn't work
+sudo pacman -S --needed --noconfirm curl wget
 
 sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
