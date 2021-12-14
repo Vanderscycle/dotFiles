@@ -1,7 +1,7 @@
 # !/bin/bash
 
 # sudo pacman -S --needed --noconfirm httpie &&
-# wget  https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+# wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
 cd ~
 echo '------------------------------------------------------------------------'
 echo '=> EndavorOs post-install script'
@@ -41,6 +41,25 @@ cargo install --branch main --git https://github.com/Kampfkarren/selene selene
 cargo install stylua  
 echo -e 'Done.\n'
 
+echo -e '\n=> Installing zsh'
+yay -Syu --noconfirm --needed zsh
+
+echo -e '\n=> Installing oh-my-zsh'
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
+
+echo -e '\n=> Installing zsh/oh-my-zsh plugins'
+sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
+git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
+#enhancd
+mkdir -p ~/Programs/
+git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
+echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
+source ~/.zshrc
+chsh -s  $(which zsh)
+
 echo 'installing c lang'
 pacman -S clang
 echo -e 'Done.\n'
@@ -76,24 +95,7 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing systemctl moditor (fzf)'
 yay -S --noconfirm --needed sysz
 
-echo -e '\n=> Installing zsh'
-yay -Syu --noconfirm --needed zsh
 
-echo -e '\n=> Installing oh-my-zsh'
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
-
-echo -e '\n=> Installing zsh/oh-my-zsh plugins'
-sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
-git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
-#enhancd
-mkdir -p ~/Programs/
-git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
-echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
-source ~/.zshrc
-chsh -s  $(which zsh)
 
 #BUG: zplug not working at install
 # echo -e '\n=> zplug'
@@ -117,7 +119,7 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip
 #md file reader
-yay -S glow
+yay -S --needed --noconfirm glow
 
 # -----------------------------------------------------------------------------
 # => Security (ssh)
@@ -257,7 +259,7 @@ echo -e 'Done.\n'
 
 echo '\n=>Installing amazing tui'
 echo 'Installing bpytop (bashtop)'
-conda install psutil
+conda -cy install psutil
 pacman -S --noconfirm bpytop
 
 echo 'tui file navigator'

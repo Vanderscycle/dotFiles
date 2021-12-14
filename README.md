@@ -12,7 +12,7 @@ At the moment, I am using lunar vim instead of my deprecated nvim
 # Latest version
 - ArchBased 
 ```bash
-sudo pacman -S --needed --noconfirm httpie wget && http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
 ```
 ![nvim](./img/whadyathink.png)
 ## Ubuntu  (outdated)
