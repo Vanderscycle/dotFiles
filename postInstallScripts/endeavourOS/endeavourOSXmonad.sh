@@ -1,7 +1,6 @@
 # !/bin/bash
 
-# sudo pacman -S --needed --noconfirm httpie &&
-# wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+# sudo pacman -S --needed --noconfirm httpie && wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
 before_reboot(){
     # Do stuff
 
@@ -251,10 +250,10 @@ sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and el
 sudo pacman -S --needed --noconfim xmobar #more to polybar later
 
 mkdir -p ~/.xmonad/
-http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs > ~/.xmonad/xmonad.hs
-# xrandr 
+wget -O   ~/.xmonad/xmonad.hs https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs 
+
 mkdir -p ~/.config/xmobar/
-http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc> ~/.config/xmobar/xmobarrc
+http  ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc> 
 
 echo -e 'Done.\n'
 
