@@ -1,6 +1,7 @@
 function killPort(){
   lsof -i TCP:$1 | grep LISTEN | awk -F " " '{print$2}' | xargs kill -9
 }
+
 # gpg amd ssh
 eval `keychain --eval --quiet --agents gpg,ssh ~/.ssh/endavourGit`
 

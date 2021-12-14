@@ -144,22 +144,6 @@ chmod 700 ~/.gnupg
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => syncing files and installing Neovim
-# -----------------------------------------------------------------------------
-echo -e '\n=> installing neovim'
-
-sudo rm -rf /usr/bin/tree-sitter
-sudo npm install -g neovim tree-sitter-cli
-sudo pacman -S --noconfirm --needed neovim
-
-echo -e '\n=> installing LunarVim'
-LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
-
-echo -e '\n=> syncing doots'
-chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
-(cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
-
-# -----------------------------------------------------------------------------
 # => Font && colors
 # -----------------------------------------------------------------------------
 
@@ -279,11 +263,32 @@ echo 'tui file navigator'
 pacman -S --noconfirm nnn
 echo -e 'Done.\n'
 
-
 # -----------------------------------------------------------------------------
-# => Local application (local machine only)
+# => Local application (gui)
 # -----------------------------------------------------------------------------
 echo '\n=> Installing local machine applications'
   yay -S --noconfirm zoom 
 echo -e 'Done.\n'
+
+#BUG: must be postinstall script
+
+# -----------------------------------------------------------------------------
+# => syncing files and installing Neovim
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> installing neovim'
+
+sudo rm -rf /usr/bin/tree-sitter
+
+echo -e '\n=> installing neovim'
+sudo npm install -g neovim tree-sitter-cli
+sudo pacman -S --noconfirm --needed neovim
+
+echo -e '\n=> installing LunarVim'
+LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+
+echo -e '\n=> syncing doots'
+chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
+(cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
+
 
