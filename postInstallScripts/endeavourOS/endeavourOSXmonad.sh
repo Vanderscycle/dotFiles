@@ -24,15 +24,9 @@ sudo pacman -S --noconfirm --needed neovim
 # => Annoying programs that requires user permission
 # -----------------------------------------------------------------------------
 
-echo '=>Rust and cargo'
-# TODO: find a way to skip install (pass a 1)
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cargo install --branch main --git https://github.com/Kampfkarren/selene selene
-cargo install stylua  
-echo -e 'Done.\n'
 
 echo -e '\n=> Installing zsh'
-yay -Syu --noconfirm --needed zsh
+yay -S --noconfim --needed zsh
 
 echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
@@ -60,7 +54,8 @@ echo 'cli download programs'
 #BUG: httpie doesn't work
 sudo pacman -S --needed --noconfirm curl wget
 
-sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
+#WARN: not working need to grep and replace
+# sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
 
 #INFO: configure ssh before using ssh
@@ -251,7 +246,7 @@ sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and el
 sudo pacman -S --needed --noconfim xmobar #more to polybar later
 
 mkdir -p ~/.xmonad/
-wget -O   ~/.xmonad/xmonad.hs https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs 
+wget -O ~/.xmonad/xmonad.hs https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs 
 
 mkdir -p ~/.config/xmobar/
 wget -O ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc
@@ -317,10 +312,18 @@ echo -e 'Done.\n'
 echo -e '\n=> installing neovim npm plugins'
 sudo npm install -g neovim tree-sitter-cli
 
+echo '=>Rust and cargo'
+# TODO: find a way to skip install (pass a 1)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install --branch main --git https://github.com/Kampfkarren/selene selene
+cargo install stylua  
+echo -e 'Done.\n'
+
 echo -e '\n=> installing LunarVim'
+sudo rm -rf /usr/bin/tree-sitter
 export LV_BRANCH=rolling 
 wget https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh
-bash install.sh --install-dependencies
+sudo bash install.sh --install-dependencies
 rm install.sh
 
 echo -e '\n=> syncing doots'
