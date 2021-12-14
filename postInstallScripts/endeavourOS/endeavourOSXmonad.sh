@@ -77,7 +77,7 @@ echo -e 'Installing AUR helper (yay)'
 sudo pacman -S --noconfirm --needed yay
 
 echo 'installing c lang'
-pacman -S clang
+sudo pacman -S --noconfim --needed  clang
 echo -e 'Done.\n'
 
 #Python
