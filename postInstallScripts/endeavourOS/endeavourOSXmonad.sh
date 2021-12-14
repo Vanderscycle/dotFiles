@@ -320,7 +320,7 @@ sudo npm install -g neovim tree-sitter-cli
 echo -e '\n=> installing LunarVim'
 LV_BRANCH=rolling 
 wget https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh
-bash install.sh --no-install-dependencies
+bash install.sh --install-dependencies
 rm install.sh
 
 echo -e '\n=> syncing doots'
