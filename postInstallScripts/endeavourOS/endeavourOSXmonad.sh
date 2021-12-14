@@ -26,7 +26,7 @@ sudo pacman -S --noconfirm --needed neovim
 
 
 echo -e '\n=> Installing zsh'
-yay -S --noconfim --needed zsh
+yay -S --noconfirm --needed zsh
 
 echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
@@ -46,8 +46,9 @@ chsh -s  $(which zsh)
 
 echo -e '\n=> Update repository information'
 # -S: synchronize your system's packages with those in the official repo
-# -y: download fresh package databases from the serverrm
-echo -e '=> Perform system upgrade'
+# -y: download fresh package databases from the server
+
+echo -e '=> Perform system update'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git 
 echo 'cli download programs'
@@ -103,9 +104,6 @@ sudo pacman -S --noconfirm tmux
 yay -S --noconfirm --needed tmuxinator
 echo -e 'Done.\n'
 
-echo -e '\n=> Installing systemctl moditor (fzf)'
-yay -S --noconfirm --needed sysz
-
 #BUG: zplug not working at install
 # echo -e '\n=> zplug'
 # curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
@@ -128,7 +126,7 @@ echo -e 'Done.\n'
 echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip xclip
 #md file reader
-yay -S --needed --noconfirm glow
+yay -S --needed --noconfirm glow sysz
 
 # -----------------------------------------------------------------------------
 # => Security (ssh)
@@ -227,7 +225,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=>Installing Mongo'
 git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
-cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed
+(cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed)
 
 echo -e 'Configuring Mongo'
 sudo systemctl start mongodb
@@ -340,5 +338,6 @@ else
     sudo touch /var/run/rebooting-for-updates
     before_reboot
     update-rc.d myupdate defaults
+    reboot -h
 fi
 
