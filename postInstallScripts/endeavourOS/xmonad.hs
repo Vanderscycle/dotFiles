@@ -14,6 +14,9 @@
 -- IMPORTS
 import XMonad
 import Data.Monoid
+import Data.Word
+import Graphics.X11.Xlib
+import Graphics.X11.Xlib.Extras
 import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.util.SpawnOnce
@@ -249,6 +252,20 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
+
+------------------------------------------------------------------------
+-- Transparency 
+
+setTransparentHook :: Event -> X All
+setTransparentHook ConfigureEvent{ev_event_type = createNotify, ev_window = id} = do
+  setOpacity id opacity
+  return (All True) where
+    opacityFloat = 0.9
+    opacity = floor $ fromIntegral (maxBound :: Word32) * opacityFloat
+    setOpacity id op = spawn $ "xprop -id " ++ show id ++ " -f _NET_WM_WINDOW_OPACITY 32c -set _NET_WM_WINDOW_OPACITY " ++ show op
+setTransparentHook _ = return (All True)
+
+
 
 ------------------------------------------------------------------------
 -- Event handling

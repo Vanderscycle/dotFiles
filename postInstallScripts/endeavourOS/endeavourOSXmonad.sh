@@ -252,7 +252,7 @@ echo -e 'Done.\n'
 # => Last step
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Rebooting'
+echo -e '\n=> Rebooting First time'
 reboot
 }
 
@@ -286,8 +286,6 @@ echo '\n=> Installing local machine applications'
   yay -S --noconfirm zoom 
 echo -e 'Done.\n'
 
-#BUG: must be postinstall script
-
 # -----------------------------------------------------------------------------
 # => syncing files and installing Neovim
 # -----------------------------------------------------------------------------
@@ -306,6 +304,13 @@ LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/luna
 echo -e '\n=> syncing doots'
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 (cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
+
+# -----------------------------------------------------------------------------
+# => Last step
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Rebooting First time'
+r
 }
 
 if [ -f /var/run/rebooting-for-updates ]; then
