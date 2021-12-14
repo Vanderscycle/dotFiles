@@ -83,9 +83,9 @@ echo -e 'Done.\n'
 #Python
 echo -e '\n=> Installing Miniconda'
 cd ~
-http --download https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-chmod +x Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh -b
+wget -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+sudo chmod +x Miniconda3-latest-Linux-x86_64.sh
+sudo bash Miniconda3-latest-Linux-x86_64.sh -b
 export PATH=~/miniconda3/bin:$PATH
 # conda init zsh
 rm Miniconda3-latest-Linux-x86_64.sh # clean the install
