@@ -16,10 +16,19 @@ echo '------------------------------------------------------------------------'
 # -----------------------------------------------------------------------------
 # => Critical programs that installs bug out later
 # -----------------------------------------------------------------------------
+
 sudo touch /var/run/rebooting-for-updates 
 echo -e '\n=> installing neovim'
 sudo pacman -S --noconfirm --needed neovim
 
+echo -e '\n=> importing our doots'
+git clone https://github.com/Vanderscycle/dot-config.git ~/Documents/dotFiles/
+mkdir -p ~/.xmonad/
+wget -O ~/.xmonad/xmonad.hs https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs 
+
+mkdir -p ~/.config/xmobar/
+wget -O ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc
+echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => Annoying programs that requires user permission
 # -----------------------------------------------------------------------------
@@ -27,7 +36,7 @@ sudo pacman -S --noconfirm --needed neovim
 
 echo -e '\n=> Installing zsh'
 yay -S --noconfirm --needed zsh
-
+zsh
 echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
 
@@ -59,10 +68,7 @@ sudo pacman -S --needed --noconfirm curl wget
 # sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
 
-#INFO: configure ssh before using ssh
-echo -e '\n=> importing our doots'
-git clone https://github.com/Vanderscycle/dot-config.git ~/Documents/dotFiles/
-echo -e 'Done.\n'
+
 
 # -----------------------------------------------------------------------------
 # => Install system utilities
@@ -73,7 +79,7 @@ echo -e 'Installing AUR helper (yay)'
 sudo pacman -S --noconfirm --needed yay
 
 echo 'installing c lang'
-sudo pacman -S --noconfim --needed  clang
+sudo pacman -S --noconfirm --needed  clang
 echo -e 'Done.\n'
 
 #Python
@@ -241,19 +247,8 @@ echo -e 'Done.\n'
 echo -e '\n=> install the window manager and bar'
 sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
 sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and else
-sudo pacman -S --needed --noconfim xmobar #more to polybar later
-
-mkdir -p ~/.xmonad/
-wget -O ~/.xmonad/xmonad.hs https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs 
-
-mkdir -p ~/.config/xmobar/
-wget -O ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc
-
+sudo pacman -S --needed --noconfirm xmobar #more to polybar later
 echo -e 'Done.\n'
-
-# -----------------------------------------------------------------------------
-# => Last step
-# -----------------------------------------------------------------------------
 
 }
 
@@ -271,7 +266,7 @@ echo '------------------------------------------------------------------------'
 # -----------------------------------------------------------------------------
 
 echo '\n=>Installing vm'
-sudo pacman -Syu --noconfim
+sudo pacman -Syu --noconfirm
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -338,6 +333,5 @@ else
     sudo touch /var/run/rebooting-for-updates
     before_reboot
     update-rc.d myupdate defaults
-    reboot -h
 fi
 

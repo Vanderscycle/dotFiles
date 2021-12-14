@@ -19,8 +19,8 @@ import Graphics.X11.Xlib
 import Graphics.X11.Xlib.Extras
 import System.Exit
 import XMonad.Hooks.ManageDocks
-import XMonad.util.SpawnOnce
-import XMonad.util.Run
+import XMonad.Util.SpawnOnce
+import XMonad.Util.Run
 import XMonad.Layout.Spacing
 
 import qualified XMonad.StackSet as W
