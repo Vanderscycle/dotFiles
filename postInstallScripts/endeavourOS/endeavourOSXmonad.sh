@@ -1,4 +1,4 @@
-# !/bin/bash
+#!/bin/bash
 
 # sudo pacman -S --needed --noconfirm httpie && 
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
@@ -318,7 +318,7 @@ echo -e '\n=> installing neovim npm plugins'
 sudo npm install -g neovim tree-sitter-cli
 
 echo -e '\n=> installing LunarVim'
-LV_BRANCH=rolling 
+export LV_BRANCH=rolling 
 wget https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh
 bash install.sh --install-dependencies
 rm install.sh
