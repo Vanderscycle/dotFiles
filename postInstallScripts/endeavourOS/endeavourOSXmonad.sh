@@ -257,13 +257,22 @@ reboot
 }
 
 after_reboot(){
+
+# -----------------------------------------------------------------------------
+# => Post reboot updates
+# -----------------------------------------------------------------------------
+
+echo '\n=>Installing vm'
+sudo pacman -Syu --noconfim
+  echo -e 'Done.\n'
+
 # -----------------------------------------------------------------------------
 # => Virtual Machines (level 2)
 # -----------------------------------------------------------------------------
 
 echo '\n=>Installing vm'
 #TODO: probably missing a few things
-pacman -S --noconfirm virtualbox
+sudo pacman -S --noconfirm virtualbox
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -273,17 +282,17 @@ echo -e 'Done.\n'
 echo '\n=>Installing amazing tui'
 echo 'Installing bpytop (bashtop)'
 conda -cy install psutil
-pacman -S --noconfirm --needed bpytop
+sudo pacman -S --noconfirm --needed bpytop
 
 echo 'tui file navigator'
-pacman -S --noconfirm --needed nnn
+sudo pacman -S --noconfirm --needed nnn
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Local application (gui)
 # -----------------------------------------------------------------------------
 echo '\n=> Installing local machine applications'
-  yay -S --noconfirm zoom 
+yay -S --noconfirm zoom 
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
