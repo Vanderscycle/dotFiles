@@ -252,8 +252,6 @@ echo -e 'Done.\n'
 # => Last step
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Rebooting First time'
-reboot
 }
 
 after_reboot(){
@@ -314,12 +312,6 @@ echo -e '\n=> syncing doots'
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 (cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
 
-# -----------------------------------------------------------------------------
-# => Last step
-# -----------------------------------------------------------------------------
-
-echo -e '\n=> Rebooting First time'
-r
 }
 
 if [ -f /var/run/rebooting-for-updates ]; then
@@ -328,8 +320,10 @@ if [ -f /var/run/rebooting-for-updates ]; then
     update-rc.d myupdate remove
 else
     before_reboot
-    touch /var/run/rebooting-for-updates
+    sudo touch /var/run/rebooting-for-updates
     update-rc.d myupdate defaults
+    echo -e '\n=> Rebooting First time'
+
     sudo reboot
 fi
 
