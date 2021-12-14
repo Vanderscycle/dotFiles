@@ -1,7 +1,7 @@
 # !/bin/bash
 
 # sudo pacman -S --needed --noconfirm httpie &&
-# wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+#    sudo touch /var/run/rebooting-for-updates && wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
 before_reboot(){
     # Do stuff
 
@@ -14,10 +14,15 @@ echo 'wm: Xmonad w/ Xmobar'
 echo '------------------------------------------------------------------------'
 
 # -----------------------------------------------------------------------------
-# => Annoying programs that requires user permission
+# => Critical programs that installs bug out later
 # -----------------------------------------------------------------------------
 
+echo -e '\n=> installing neovim'
+sudo pacman -S --noconfirm --needed neovim
 
+# -----------------------------------------------------------------------------
+# => Annoying programs that requires user permission
+# -----------------------------------------------------------------------------
 
 echo '=>Rust and cargo'
 # TODO: find a way to skip install (pass a 1)
@@ -315,13 +320,10 @@ echo -e 'Done.\n'
 # => syncing files and installing Neovim
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> installing neovim'
 
-sudo rm -rf /usr/bin/tree-sitter
 
-echo -e '\n=> installing neovim'
+echo -e '\n=> installing neovim npm plugins'
 sudo npm install -g neovim tree-sitter-cli
-sudo pacman -S --noconfirm --needed neovim
 
 echo -e '\n=> installing LunarVim'
 LV_BRANCH=rolling bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
@@ -338,7 +340,6 @@ if [ -f /var/run/rebooting-for-updates ]; then
     update-rc.d myupdate remove
 else
     before_reboot
-    sudo touch /var/run/rebooting-for-updates
     update-rc.d myupdate defaults
     echo -e '\n=> Rebooting First time'
 
