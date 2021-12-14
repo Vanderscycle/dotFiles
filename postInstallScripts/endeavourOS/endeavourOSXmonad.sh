@@ -8,9 +8,44 @@ before_reboot(){
 cd ~
 echo '------------------------------------------------------------------------'
 echo '=> EndavorOs post-install script'
+echo '=> pre reboot'
 echo 'Current os version: Atantis'
 echo 'wm: Xmonad w/ Xmobar'
 echo '------------------------------------------------------------------------'
+
+# -----------------------------------------------------------------------------
+# => Annoying programs that requires user permission
+# -----------------------------------------------------------------------------
+
+
+
+echo '=>Rust and cargo'
+# TODO: find a way to skip install (pass a 1)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+cargo install --branch main --git https://github.com/Kampfkarren/selene selene
+cargo install stylua  
+echo -e 'Done.\n'
+
+echo -e '\n=> Installing zsh'
+yay -Syu --noconfirm --needed zsh
+
+echo -e '\n=> Installing oh-my-zsh'
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
+
+echo -e '\n=> Installing zsh/oh-my-zsh plugins'
+sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
+git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
+#enhancd
+mkdir -p ~/Programs/
+git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
+echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
+source ~/.zshrc
+chsh -s  $(which zsh)
+
+
 
 echo -e '\n=> Update repository information'
 # -S: synchronize your system's packages with those in the official repo
@@ -38,31 +73,7 @@ echo -e '\n=> Installing system utilities'
 echo -e 'Installing AUR helper (yay)'
 sudo pacman -S --noconfirm --needed yay
 
-echo '=>Rust and cargo'
-# TODO: find a way to skip install (pass a 1)
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cargo install --branch main --git https://github.com/Kampfkarren/selene selene
-cargo install stylua  
-echo -e 'Done.\n'
 
-echo -e '\n=> Installing zsh'
-yay -Syu --noconfirm --needed zsh
-
-echo -e '\n=> Installing oh-my-zsh'
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
-
-echo -e '\n=> Installing zsh/oh-my-zsh plugins'
-sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
-git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
-#enhancd
-mkdir -p ~/Programs/
-git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
-echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
-source ~/.zshrc
-chsh -s  $(which zsh)
 
 echo 'installing c lang'
 pacman -S clang
@@ -256,13 +267,20 @@ echo -e 'Done.\n'
 
 after_reboot(){
 
+cd ~
+echo '------------------------------------------------------------------------'
+echo '=> EndavorOs post-install script'
+echo '=> post reboot'
+echo 'Current os version: Atantis'
+echo 'wm: Xmonad w/ Xmobar'
+echo '------------------------------------------------------------------------'
 # -----------------------------------------------------------------------------
 # => Post reboot updates
 # -----------------------------------------------------------------------------
 
 echo '\n=>Installing vm'
 sudo pacman -Syu --noconfim
-  echo -e 'Done.\n'
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Virtual Machines (level 2)
