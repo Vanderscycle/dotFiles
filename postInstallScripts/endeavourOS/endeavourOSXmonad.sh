@@ -1,6 +1,6 @@
 # !/bin/bash
 
-# sudo pacman -S --needed --noconfirm httpie wget && http  --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+# sudo pacman -S --needed --noconfirm httpie && http --download https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
 cd ~
 echo '------------------------------------------------------------------------'
 echo '=> EndavorOs post-install script'
@@ -15,7 +15,7 @@ echo -e '=> Perform system upgrade'
 sudo pacman -Syu --noconfirm
 sudo pacman -S --needed --noconfirm base-devel git 
 echo 'cli download programs'
-sudo pacman -S --needed --noconfirm httpie curl
+sudo pacman -S --needed --noconfirm httpie curl wget
 
 sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
 echo -e 'Done.\n'
@@ -47,7 +47,7 @@ echo -e 'Done.\n'
 #Python
 echo -e '\n=> Installing Miniconda'
 cd ~
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+http --download https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 chmod +x Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b
 export PATH=~/miniconda3/bin:$PATH
