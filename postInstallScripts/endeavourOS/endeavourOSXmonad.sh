@@ -44,6 +44,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
 git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 #enhancd
 mkdir -p ~/Programs/
 git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
@@ -287,13 +288,35 @@ sudo pacman -S --noconfirm --needed bpytop
 
 echo 'tui file navigator'
 sudo pacman -S --noconfirm --needed nnn
+
+#WARN: test the following 
+# pass (init)
 echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => enhancing gnome
+# -----------------------------------------------------------------------------
+echo '\n=> Gnome tweaks'
+Sudo pacman -R --noconfirm gnome-tweaks
+echo -e 'done'
+
 
 # -----------------------------------------------------------------------------
 # => Local application (gui)
 # -----------------------------------------------------------------------------
+
 echo '\n=> Installing local machine applications'
-yay -S --noconfirm zoom 
+curl -O https://raw.githubusercontent.com/bb010g/betterdiscordctl/master/betterdiscordctl
+chmod +x betterdiscordctl
+sudo mv betterdiscordctl /usr/local/bin
+betterdiscordctl install
+
+yay -S --noconfirm zoom steam discord vlc
+yay -S --noconfirm postman-bin
+
+#WARN: test the following
+#TODO: add the betterDiscord folder to the sync and better10k
+yay -S --noconfirm zoom transmission-qt
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
