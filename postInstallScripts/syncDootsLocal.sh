@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a StringArray=( ".gitconfig" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent")
+declare -a StringArray=( ".gitconfig" ".tmux.conf" ".p10k.zsh" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent")
 DIR=${PWD%/*}
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file

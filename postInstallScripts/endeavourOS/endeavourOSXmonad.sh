@@ -164,6 +164,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=>Nerdfont'
 mkdir -p ~/.local/share/fonts/NerdFonts/JetBrains
+# https://github.com/ronniedroid/getnf
 #TODO: use this address to download the font
 #https://www.jetbrains.com/lp/mono/
 rsync -auv ~/Documents/dotFiles/JetBrainsMono.zip ~/.local/share/fonts/NerdFonts/JetBrains/
@@ -247,6 +248,7 @@ echo -e '\n=> install the window manager and bar'
 sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
 sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and else
 sudo pacman -S --needed --noconfirm xmobar #more to polybar later
+yay -S --noconfirm dunst #notification system
 echo -e 'Done.\n'
 
 }
@@ -310,6 +312,8 @@ curl -O https://raw.githubusercontent.com/bb010g/betterdiscordctl/master/betterd
 chmod +x betterdiscordctl
 sudo mv betterdiscordctl /usr/local/bin
 betterdiscordctl install
+
+yay -S firefox firefox-developer-edition
 
 sudo pacman -S libreoffice-fresh
 
