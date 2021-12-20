@@ -13,6 +13,8 @@ rsync -av --progress  ~/Documents/dotFiles/postInstallScripts/endeavourOS/xmonad
 # rsync -auv --progress "/$DIR/lunarvim/" ~/.local/share/lunarvim
 rsync -av --progress  ~/Documents/dotFiles/tmuxinator/ ~/.config/tmuxinator/ 
 rsync -av --progress ~/Documents/dotFiles/kitty/ ~/.config/kitty/
+rsync -av --progress ~/Documents/dotFiles/.xmonad/ ~/.xmonad
+rsync -av --progress ~/Documents/dotFiles/xmobar/ ~/.config/xmobar
 
 lvim +PackerSync +qall
 lvim +LspInstall svelte tsserver tailwindcss +qall
