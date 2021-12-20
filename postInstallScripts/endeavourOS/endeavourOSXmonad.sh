@@ -337,7 +337,7 @@ spicetify backup apply enable-devtool
 # launch config keeb
 #BUG: cargo may not work tho :/
 git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-keebs/ 
-(cd ~/Programs/Launch-keebs && cargo run --release)
+(cd ~/Programs/Launch-keebs && sudo cargo run --release)
 
 #WARN: test the following
 #TODO: add the betterDiscord folder to the sync and better10k
