@@ -325,6 +325,15 @@ yay -S --noconfirm postman-bin
 sudo chmod a+wr /opt/spotify
 sudo chmod a+wr /opt/spotify/Apps -R
 
+#Configuring spotify themes
+spicetify
+spicetify backup apply enable-devtool
+(cd ~/.config/spicetify/Themes/
+&& git clone https://github.com/NYRI4/Comfy-spicetify 
+&& spicetify config current_theme Comfy-spicetify
+&& spicetify config inject_css 1 replace_colors 1 overwrite_assets 1
+&& spicetify apply)
+
 # launch config keeb
 #BUG: cargo may not work tho :/
 git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-keebs/ 
