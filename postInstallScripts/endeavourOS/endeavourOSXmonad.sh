@@ -163,13 +163,13 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=>Nerdfont'
-mkdir -p ~/.local/share/fonts/ttf/
+mkdir -p ~/.local/share/fonts/NerdFonts/JetBrains
 #TODO: use this address to download the font
 #https://www.jetbrains.com/lp/mono/
-rsync -auv ~/Documents/dotFiles/JetBrainsMono-2.242.zip ~/.local/share/
-(cd ~/.local/share/ && unzip ./JetBrainsMono-2.242.zip )
-rm ~/.local/share/AUTHORS.txt ~/.local/share/OFL.txt ~/.local/shareJetBrainsMono-2.242.zip
-fc-cache -vf
+rsync -auv ~/Documents/dotFiles/JetBrainsMono.zip ~/.local/share/fonts/NerdFonts/JetBrains/
+(cd ~/.local/share/fonts/NerdFonts/JetBrains && unzip ./JetBrainsMono.zip && rm ./JetBrainsMono )
+# rm  ~/.local/share/fonts/NerdFonts/JetBrainsMono.zip
+fc-cache -v -f
 echo -e 'Done.\n'
 
 echo -e '\n=>Colors in terminal'
@@ -311,8 +311,20 @@ chmod +x betterdiscordctl
 sudo mv betterdiscordctl /usr/local/bin
 betterdiscordctl install
 
-yay -S --noconfirm zoom steam discord vlc
+sudo pacman -S libreoffice-fresh
+
+yay -S --noconfirm zoom steam discord vlc spotify spicetify-cli
 yay -S --noconfirm postman-bin
+
+#adjusting spotify permission
+#INFO: https://github.com/khanhas/spicetify-cli/wiki/Installation#spotify-installed-from-aur
+sudo chmod a+wr /opt/spotify
+sudo chmod a+wr /opt/spotify/Apps -R
+
+# launch config keeb
+#BUG: cargo may not work tho :/
+git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-keebs/ 
+(cd ~/Programs/Launch-keebs && cargo run --release)
 
 #WARN: test the following
 #TODO: add the betterDiscord folder to the sync and better10k
