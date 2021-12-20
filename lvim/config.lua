@@ -28,6 +28,7 @@ lvim.keys.normal_mode = {
 	["<leader>sT"] = ":Telescope current_buffer_fuzzy_find<cr>",
 	["<leader>sF"] = ':lua require("telescope.builtin").find_files({hidden=true, no_ignore=true, find_command=rg})<cr>',
 	["<leader>si"] = ":Telescope media_files<cr>",
+  ["<leader>B"] = ":lua require 'telescope'.extensions.file_browser.file_browser()<CR>"
 }
 -- unmap a default keymappinig
 -- lvim.keys.normal_mode["<C-Up>"] = ""
@@ -62,7 +63,7 @@ lvim.builtin.telescope.defaults.mappings = {
 -- BUG: known bug that when exiting the trouble quickfix window release to the wrong window
 -- renbinded q
 lvim.builtin.which_key.mappings["n"] = {
-	name = "+dangerous",
+	name = "+package.json",
 	s = { ":lua require('package-info').show()<cr>", "show outdated packages" },
 	d = { ":lua require('package-info').delete()<cr>", "delete package" },
   p = {":lua require('package-info').change_version()<cr>", "change package version"},
@@ -259,6 +260,7 @@ lvim.plugins = {
 		event = "BufRead",
 	},
 	{ "nvim-telescope/telescope-media-files.nvim" },
+{ "nvim-telescope/telescope-file-browser.nvim" },
 	--markdown
 	-- You must install glow globally
 	-- https://github.com/charmbracelet/glow

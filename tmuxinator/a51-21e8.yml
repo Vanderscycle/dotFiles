@@ -27,5 +27,4 @@ windows:
         - firefox 'http://localhost:3100'
   - monitoring:
       panes:
-        - htop
-
+        - bpytop
