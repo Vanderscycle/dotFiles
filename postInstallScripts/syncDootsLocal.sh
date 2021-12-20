@@ -15,6 +15,8 @@ rsync -av --progress  ~/Documents/dotFiles/tmuxinator/ ~/.config/tmuxinator/
 rsync -av --progress ~/Documents/dotFiles/kitty/ ~/.config/kitty/
 rsync -av --progress ~/Documents/dotFiles/.xmonad/ ~/.xmonad
 rsync -av --progress ~/Documents/dotFiles/xmobar/ ~/.config/xmobar
+rsync -av --progress ~/Documents/dotfiles/dunst/ ~/.config/dunst 
+
 
 lvim +PackerSync +qall
 lvim +LspInstall svelte tsserver tailwindcss +qall

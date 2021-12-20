@@ -11,12 +11,13 @@ for DOTFILE in "${StringArray[@]}"; do
 done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
-rsync -auv --progress ~/.config/lvim/ "$DIR/lvim/"
+rsync -av --progress ~/.config/lvim/ ~/Documents/dotfiles/lvim
 # rsync -auv --progress ~/.config/neomutt/ "/$DIR/neomutt/"
-rsync -auv --progress ~/.config/tmuxinator/ "/$DIR/tmuxinator/"
-rsync -auv --progress ~/.config/kitty/ "/$DIR/kitty/"
-rsync -av --progress  ~/.xmonad "/$DIR/.xmonad/"
-rsync -av --progress ~/.config/xmobar "/$DIR/xmobar/"
+rsync -av --progress ~/.config/tmuxinator/ ~/Documents/dotfiles/tmuxinator/
+rsync -av --progress ~/.config/kitty/ ~/Documents/dotfiles/kitty/
+rsync -av --progress  ~/.xmonad ~/Documents/dotfiles/.xmonad/
+rsync -av --progress ~/.config/xmobar ~/Documents/dotfiles/xmobar/
+rsync -av --progress ~/.config/dunst ~/Documents/dotfiles/dunst/
 
 # rsync -auv --progress ~/.local/share/lunarvim "/$DIR/lunarvim/"
 
