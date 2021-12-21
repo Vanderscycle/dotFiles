@@ -78,7 +78,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting sudo k enhancd)
+plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting sudo k)
 plugins+=(zsh-better-npm-completion)
 export FZF_BASE=/usr/bin/fzf
 export FZF_DEFAULT_COMMAND='rg'
@@ -149,6 +149,7 @@ fi
 alias nvim=lvim
 alias :q=exit
 alias :qa=exit
+alias htop=bpytop
 alias ls="exa -al"
 alias nvimMd="nvim --listen 127.0.0.1:9999"
 alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/manjaroGit`"
@@ -170,3 +171,9 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+ibus restart
