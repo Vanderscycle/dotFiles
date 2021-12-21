@@ -7,17 +7,17 @@ declare -a StringArray=( ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofi
 DIR=${PWD%/*}
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
-    rsync -auv  ~/$DOTFILE "$DIR"
+    rsync -auv  ~/$DOTFILE "~/Documents/dotFiles/$DIR"
 done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
-rsync -av --progress ~/.config/lvim/ ~/Documents/dotfiles/lvim
+rsync -av --progress ~/.config/lvim/ ~/Documents/dotFiles/lvim
 # rsync -auv --progress ~/.config/neomutt/ "/$DIR/neomutt/"
-rsync -av --progress ~/.config/tmuxinator/ ~/Documents/dotfiles/tmuxinator/
-rsync -av --progress ~/.config/kitty/ ~/Documents/dotfiles/kitty/
-rsync -av --progress  ~/.xmonad ~/Documents/dotfiles/.xmonad/
-rsync -av --progress ~/.config/xmobar ~/Documents/dotfiles/xmobar/
-rsync -av --progress ~/.config/dunst ~/Documents/dotfiles/dunst/
+rsync -av --progress ~/.config/tmuxinator/ ~/Documents/dotFiles/tmuxinator/
+rsync -av --progress ~/.config/kitty/ ~/Documents/dotFiles/kitty/
+rsync -av --progress  ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
+rsync -av --progress ~/.config/xmobar/ ~/Documents/dotFiles/xmobar/
+rsync -av --progress ~/.config/dunst/ ~/Documents/dotFiles/dunst/
 
 # rsync -auv --progress ~/.local/share/lunarvim "/$DIR/lunarvim/"
 
