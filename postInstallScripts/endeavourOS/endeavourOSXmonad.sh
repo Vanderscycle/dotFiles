@@ -173,6 +173,12 @@ rsync -auv ~/Documents/dotFiles/JetBrainsMono.zip ~/.local/share/fonts/NerdFonts
 fc-cache -v -f
 echo -e 'Done.\n'
 
+echo -e '\n=> Adding emoji support'
+yay ttf-twemoji
+mkdir ~/.config/fontconfig/
+rsync -av ~/Documents/dotFiles/fonts.conf ~/.config/fontconfig/
+echo -e 'Done.\n'
+
 echo -e '\n=>Colors in terminal'
 yay -S --noconfirm shell-color-scripts pokemon-colorscripts-git
 echo -e 'Done.\n'
