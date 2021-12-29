@@ -18,6 +18,9 @@ rsync -av --progress ~/.config/kitty/ ~/Documents/dotFiles/kitty/
 rsync -av --progress  ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 rsync -av --progress ~/.config/xmobar/ ~/Documents/dotFiles/xmobar/
 rsync -av --progress ~/.config/dunst/ ~/Documents/dotFiles/dunst/
+rsync -av --progress ~/.config/dunst/ ~/Documents/dotFiles/dunst/
+rsync -av --progress ~/.config/fontconfig/ ~/Documents/dotFiles/fontconfig/ # fonts.conf
+
 
 # rsync -auv --progress ~/.local/share/lunarvim "/$DIR/lunarvim/"
 

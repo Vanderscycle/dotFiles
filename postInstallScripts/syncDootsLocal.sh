@@ -16,6 +16,7 @@ rsync -av --progress ~/Documents/dotFiles/kitty/ ~/.config/kitty/
 rsync -av --progress ~/Documents/dotFiles/.xmonad/ ~/.xmonad
 rsync -av --progress ~/Documents/dotFiles/xmobar/ ~/.config/xmobar
 rsync -av --progress ~/Documents/dotfiles/dunst/ ~/.config/dunst 
+rsync -av --progress  ~/Documents/dotFiles/fontconfig/ ~/.config/fontconfig/
 
 
 lvim +PackerSync +qall
