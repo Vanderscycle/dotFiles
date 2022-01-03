@@ -2,7 +2,7 @@
 -- TODO: learn vim surround, vim-matchup, lazy-git and much more
 
 --LSP
-require("lsp-config.tailwindcss")
+-- require("lsp-config.tailwindcss")
 
 --TODO: fix selene stylua not beign found
 -- require("lsp-config.lua")
@@ -156,6 +156,7 @@ lvim.plugins = {
   -- WARN: install binaries
   --https://www.youtube.com/watch?v=MOaws1ozqNw
 	-- { "ChristianChiarulli/vim-solidity" },
+  -- {'lervag/vimtex'},
 	-- lsp
 	{
 		"simrat39/symbols-outline.nvim",

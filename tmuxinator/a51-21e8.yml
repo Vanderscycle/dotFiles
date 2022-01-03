@@ -16,6 +16,7 @@ windows:
       layout: even-horizontal
       panes: 
         - npm i && npm run start:dev
+        - cd documentation && npm i && npm run dev
   # - docker/db:
   #     layout: even-vertical
   #     panes:
