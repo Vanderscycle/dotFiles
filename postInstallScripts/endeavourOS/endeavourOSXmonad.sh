@@ -130,6 +130,8 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip xclip
+# installing pnpm
+curl -fsSL https://get.pnpm.io/install.sh | sh -
 #md file reader
 yay -S --needed --noconfirm glow sysz
 
