@@ -20,6 +20,8 @@ rsync -av --progress  ~/Documents/dotFiles/fontconfig/ ~/.config/fontconfig/
 
 
 lvim +PackerSync +qall
-lvim +LspInstall svelte tsserver tailwindcss +qall
+# lvim +LspInstall svelte tsserver tailwindcss +qall
+sudo pacman -Syu
+xmonad --recompile
 # lvim 
 # maybe combine both bash files into a single on

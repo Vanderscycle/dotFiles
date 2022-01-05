@@ -14,6 +14,7 @@
 -- IMPORTS
 import XMonad
 import Data.Monoid
+import Data.Default
 import Data.Word
 import Graphics.X11.Xlib
 import Graphics.X11.Xlib.Extras
@@ -161,6 +162,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    
+    -- printscreen
+    , ((modm .|. shiftMask, xK_s     ), spawn "scrot -s '$HOME/Pictures/shot-%Y-%m-%dT%H%M%S.png'")
     ]
     ++
 
@@ -223,7 +227,9 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
     -- default tiling algorithm partitions the screen into two panes
-    tiled   = smartSpacing 5 $ Tall nmaster delta ratio
+    tiled   = Tall nmaster delta ratio
+    -- spacingRaw False (Border 0 5 0 5) True (Border 5 0 5 0) True
+    -- spacingRaw 5 $ Tall nmaster delta ratio
 
     -- The default number of windows in the master pane
     nmaster = 1
@@ -333,7 +339,7 @@ main = do
 --
 -- No need to modify this.
 --
-defaults = defaultConfig {
+defaults = def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -350,7 +356,7 @@ defaults = defaultConfig {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
+        layoutHook         = spacingWithEdge 10 $ myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,

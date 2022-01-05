@@ -1,15 +1,8 @@
 
-xmonad.hs:226:15: warning: [-Wdeprecations]
-    In the use of ‘smartSpacing’ (imported from XMonad.Layout.Spacing):
+xmonad.hs:359:30: warning: [-Wdeprecations]
+    In the use of ‘spacingWithEdge’
+    (imported from XMonad.Layout.Spacing):
     Deprecated: "Use spacingRaw instead."
     |
-226 |     tiled   = smartSpacing 5 $ Tall nmaster delta ratio
-    |               ^^^^^^^^^^^^
-
-xmonad.hs:336:12: warning: [-Wdeprecations]
-    In the use of ‘defaultConfig’
-    (imported from XMonad, but defined in XMonad.Config):
-    Deprecated: "Use def (from Data.Default, and re-exported by XMonad and XMonad.Config) instead."
-    |
-336 | defaults = defaultConfig {
-    |            ^^^^^^^^^^^^^
+359 |         layoutHook         = spacingWithEdge 10 $ myLayout,
+    |                              ^^^^^^^^^^^^^^^

@@ -9,6 +9,7 @@
 require("lsp-config.typescript")
 require("lsp-config.javascript")
 require('lsp-config.svelte')
+require('lsp-config.markdown')
 
 -- general
 lvim.format_on_save = true
@@ -170,13 +171,13 @@ lvim.plugins = {
 			vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
 		end,
 	},
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "BufRead",
-		config = function()
-			require("lsp_signature").setup()
-		end,
-	}, -- movement
+	-- {
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	event = "BufRead",
+	-- 	config = function()
+	-- 		require("lsp_signature").setup()
+	-- 	end,
+	-- }, -- movement
 	{
 		"ggandor/lightspeed.nvim",
 		event = "BufRead",
