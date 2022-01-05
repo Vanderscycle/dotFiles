@@ -294,20 +294,23 @@ echo -e 'Done.\n'
 echo '\n=>Installing amazing tui'
 echo 'Installing bpytop (bashtop)'
 conda -cy install psutil
-sudo pacman -S --noconfirm --needed bpytop
+sudo pacman -S --noconfirm --needed bpytop 
 
 echo 'tui file navigator'
+sudo pacman -S --noconfirm --needed mediainfo
 sudo pacman -S --noconfirm --needed nnn
-
-#WARN: test the following 
-# pass (init)
+git clone https://github.com/jarun/nnn.git ~/Programs/
+(cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
+# installing the plugins
+(cd ~/Programs/nnn/ && curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh)
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => enhancing gnome
 # -----------------------------------------------------------------------------
 echo '\n=> npm packages for lsp and neovim'
-sudo npm install -g @nestjs/cli
+sudo npm install -g @nestjs/cli write-good 
+# write-good is a linter for markdown 
 
 
 
