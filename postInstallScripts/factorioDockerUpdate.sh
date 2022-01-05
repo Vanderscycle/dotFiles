@@ -1,4 +1,4 @@
-#!/bin/bash
+q#!/bin/bash
 # unmodded factorio server
 echo -e'\n=> Stopping and removing the container'
 docker rm -f factorio

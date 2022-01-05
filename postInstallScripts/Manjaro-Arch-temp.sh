@@ -1,4 +1,4 @@
-#!/bin/bash
+l#!/bin/bash
 # Manjaro post-install script
 #TODO:install to confirm work
 function beforeReboot() {

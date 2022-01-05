@@ -298,7 +298,8 @@ sudo pacman -S --noconfirm --needed bpytop
 
 echo 'tui file navigator'
 sudo pacman -S --noconfirm --needed mediainfo
-sudo pacman -S --noconfirm --needed nnn
+sudo pacman -S --noconfirm --needed nnn sxiv
+pip install ueberzug --required for file preview
 git clone https://github.com/jarun/nnn.git ~/Programs/
 (cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
 # installing the plugins

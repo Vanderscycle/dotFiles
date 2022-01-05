@@ -1,4 +1,4 @@
-#!/bin/bash
+k#!/bin/bash
 
 echo '------------------------------------------------------------------------'
 echo '=> Ubuntu 20.04LTS Factorio Headless Server modded'
