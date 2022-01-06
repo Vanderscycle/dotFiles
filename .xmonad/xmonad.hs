@@ -28,10 +28,13 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.Fullscreen
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+import Data.Maybe (fromJust)
+import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
+import Colors.TomorrowNight
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
---
+
 myTerminal      = "kitty"
 
 -- Whether focus follows the mouse pointer.
@@ -82,7 +85,18 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+-- myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
+
+
+windowCount :: X (Maybe String)
+windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
+
+myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
+myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] -- (,) == \x y -> (x,y)
+
+clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
+    where i = fromJust $ M.lookup ws myWorkspaceIndices
+
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -303,7 +317,7 @@ myEventHook =  ewmhDesktopsEventHook
 -- It will add EWMH logHook actions to your custom log hook by
 -- combining it with ewmhDesktopsLogHook.
 --
-myLogHook = return ()
+-- myLogHook = return ()
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -359,6 +373,30 @@ defaults = def {
         layoutHook         = spacingWithEdge 10 $ myLayout,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
-        logHook            = myLogHook,
-        startupHook        = myStartupHook
+        startupHook        = myStartupHook,
+        logHook = dynamicLogWithPP  $ xmobarPP
+              -- XMOBAR SETTINGS
+              {
+                -- Current workspace
+              ppCurrent = xmobarColor color06 "" . wrap
+                            ("<box type=Bottom width=2 mb=2 color=" ++ color06 ++ ">") "</box>"
+                -- Visible but not current workspace
+              , ppVisible = xmobarColor color06 "" . clickable
+                -- Hidden workspace
+              , ppHidden = xmobarColor color05 "" . wrap
+                           ("<box type=Top width=2 mt=2 color=" ++ color05 ++ ">") "</box>" . clickable
+                -- Hidden workspaces (no windows)
+              , ppHiddenNoWindows = xmobarColor color05 ""  . clickable
+                -- Title of active window
+              , ppTitle = xmobarColor color16 "" . shorten 60
+                -- Separator character
+              , ppSep =  "<fc=" ++ color09 ++ "> <fn=1>|</fn> </fc>"
+                -- Urgent workspace
+              , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
+                -- Adding # of windows on current workspace to the bar
+              , ppExtras  = [windowCount]
+                -- order of things in xmobar
+              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+              }
+
     } 
