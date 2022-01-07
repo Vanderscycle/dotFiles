@@ -9,7 +9,6 @@ for DOTFILE in "${StringArray[@]}"; do
 done
 # u does not overide (update)
 rsync -av --progress  ~/Documents/dotFiles/lvim/ ~/.config/lvim/
-rsync -av --progress  ~/Documents/dotFiles/postInstallScripts/endeavourOS/xmonad.hs ~/.xmomnad/
 # rsync -auv --progress "/$DIR/lunarvim/" ~/.local/share/lunarvim
 rsync -av --progress  ~/Documents/dotFiles/tmuxinator/ ~/.config/tmuxinator/ 
 rsync -av --progress ~/Documents/dotFiles/kitty/ ~/.config/kitty/

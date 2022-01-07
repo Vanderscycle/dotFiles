@@ -317,7 +317,7 @@ myEventHook =  ewmhDesktopsEventHook
 -- It will add EWMH logHook actions to your custom log hook by
 -- combining it with ewmhDesktopsLogHook.
 --
--- myLogHook = return ()
+myLogHook = return ()
 
 ------------------------------------------------------------------------
 -- Startup hook
@@ -374,29 +374,5 @@ defaults = def {
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         startupHook        = myStartupHook,
-        logHook = dynamicLogWithPP  $ xmobarPP
-              -- XMOBAR SETTINGS
-              {
-                -- Current workspace
-              ppCurrent = xmobarColor color06 "" . wrap
-                            ("<box type=Bottom width=2 mb=2 color=" ++ color06 ++ ">") "</box>"
-                -- Visible but not current workspace
-              , ppVisible = xmobarColor color06 "" . clickable
-                -- Hidden workspace
-              , ppHidden = xmobarColor color05 "" . wrap
-                           ("<box type=Top width=2 mt=2 color=" ++ color05 ++ ">") "</box>" . clickable
-                -- Hidden workspaces (no windows)
-              , ppHiddenNoWindows = xmobarColor color05 ""  . clickable
-                -- Title of active window
-              , ppTitle = xmobarColor color16 "" . shorten 60
-                -- Separator character
-              , ppSep =  "<fc=" ++ color09 ++ "> <fn=1>|</fn> </fc>"
-                -- Urgent workspace
-              , ppUrgent = xmobarColor color02 "" . wrap "!" "!"
-                -- Adding # of windows on current workspace to the bar
-              , ppExtras  = [windowCount]
-                -- order of things in xmobar
-              , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
-              }
-
+        logHook            = myLogHook
     } 
