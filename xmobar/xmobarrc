@@ -3,7 +3,7 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"
                            ]
-       , borderColor = "black"
+       , borderColor = "#c0caf5"
        , borderWidth = 2
        , border = BottomB
        , bgColor = "#24283b"
@@ -19,7 +19,7 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
        , iconRoot     = "/home/henri/.xmonad/xpm/" 
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run WeatherX "LEBL"
+       , commands = [ Run WeatherX "CYWH"
                                          [ ("clear", "🌣")
                                          , ("sunny", "🌣")
                                          , ("mostly clear", "🌤")
@@ -35,6 +35,11 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
                                          , "-L","10", "-H", "25", "--normal", "black"
                                          , "--high", "lightgoldenrod4", "--low", "darkseagreen4"]
                                          18000
+                    , Run Volume "default" "Master" ["-L","10", "-H", "25", "--normal", "black"
+                                         , "--high", "lightgoldenrod4", "--low", "darkseagreen4"] 10
+                    , Run DiskU [("/", "<used>/<free>/<size>"), ("/dev/nvme0n1", "<free>")]
+                                ["-L", "25", "-H", "75", "-m", "1", "-p", "3"]
+                                20
                     , Run MultiCoreTemp ["-t", "Temp: <avg>°C | <avgpc>%",
                                          "-L", "60", "-H", "80",
                                          "-l", "green", "-n", "yellow", "-h", "red",
@@ -42,14 +47,18 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
                     , Run Memory ["-t","Mem: <used>/<total>"] 10
                     , Run Com "uname" ["-s","-r"] "" 36000
                     , Run Date "%a %b %_d %Y %H:%M" "date" 10
+                    , Run DynNetwork ["-t", "Up <tx> | Dn <rx> kB/s"] 10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = " <icon=haskell_20.xpm/>
-       <box type=Bottom width=2 mb=2 color=#7aa2f7>%multicoretemp%</box> 
-       <box type=Bottom width=2 mb=2 color=#bb9af7>%memory%</box>
-       <box type=Bottom width=2 mb=2 color=#2ac3de>%LEBL%</box>
+       <box type=Bottom width=2 mb=4 color=#7aa2f7>%multicoretemp%</box> 
+       <box type=Bottom width=2 mb=4 color=#bb9af7>%memory%</box>
+       <box type=Bottom width=2 mb=4 color=#c0caf5>%disku%</box>
+       <box type=Bottom width=2 mb=4 color=#b4f9f8>%dynnetwork%</box>
        }{
-       <box type=Bottom width=2 mb=2 color=#7dcfff>%date%</box>
-       <box type=Bottom width=2 mb=2 color=#73daca><fc=#e0af68>%uname%</fc></box>"
+       <box type=Bottom width=2 mb=4 color=#2ac3de>%CYWH%</box>
+       <box type=Bottom width=2 mb=4 color=#7dcfff>%default:Master%</box>
+       <box type=Bottom width=2 mb=4 color=#7dcfff>%date%</box>
+       <box type=Bottom width=2 mb=4 color=#73daca><fc=#e0af68>%uname%</fc></box>"
        }

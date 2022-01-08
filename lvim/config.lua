@@ -6,12 +6,13 @@
 
 --TODO: fix selene stylua not beign found
 -- require("lsp-config.lua")
-require("lsp-config.typescript")
-require("lsp-config.javascript")
+-- require("lsp-config.typescript")
+-- require("lsp-config.javascript")
 require('lsp-config.svelte')
 require('lsp-config.markdown')
 
 -- general
+-- lvim.autosave = true
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "tokyonight"
