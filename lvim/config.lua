@@ -172,13 +172,7 @@ lvim.plugins = {
 			vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
 		end,
 	},
-	-- {
-	-- 	"ray-x/lsp_signature.nvim",
-	-- 	event = "BufRead",
-	-- 	config = function()
-	-- 		require("lsp_signature").setup()
-	-- 	end,
-	-- }, -- movement
+-- movement
 	{
 		"ggandor/lightspeed.nvim",
 		event = "BufRead",
@@ -197,6 +191,8 @@ lvim.plugins = {
 	},
 	-- git
   {'kdheepak/lazygit.nvim'},
+  -- search
+  {'mhinz/vim-grepper'},
 	-- windows (qickFix and peaking buffer)
 	{
 		"kevinhwang91/nvim-bqf",
