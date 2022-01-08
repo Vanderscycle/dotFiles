@@ -179,6 +179,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     
     -- printscreen
     , ((modm .|. shiftMask, xK_s     ), spawn "scrot -s '$HOME/Pictures/shot-%Y-%m-%dT%H%M%S.png'")
+
+    , ((modm              , xK_Escape), spawn "$HOME/Documents/dotFiles/postInstallScripts/keebsLayout.sh")
     ]
     ++
 
