@@ -178,7 +178,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     
     -- printscreen
-    , ((modm .|. shiftMask, xK_s     ), spawn "scrot -s '$HOME/Pictures/shot-%Y-%m-%dT%H%M%S.png'")
+    , ((modm .|. shiftMask, xK_s     ), spawn "maim -s ~/Pictures/$(date +%s).png")
+
+    , ((modm .|. shiftMask, xK_x     ), spawn "maim -s | xclip -selection clipboard -t image/png")
 
     , ((modm              , xK_Escape), spawn "$HOME/Documents/dotFiles/postInstallScripts/keebsLayout.sh")
     ]
@@ -274,7 +276,7 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
-    , className =? "Steam"          --> doFloat
+    -- , className =? "Steam"          --> doFloat
     , className =? "steam"          --> doFullFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]

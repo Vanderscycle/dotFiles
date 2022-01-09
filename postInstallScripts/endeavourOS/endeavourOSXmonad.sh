@@ -307,7 +307,7 @@ git clone https://github.com/jarun/nnn.git ~/Programs/
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => enhancing gnome
+# => lsp
 # -----------------------------------------------------------------------------
 echo '\n=> npm packages for lsp and neovim'
 sudo npm install -g @nestjs/cli write-good 
