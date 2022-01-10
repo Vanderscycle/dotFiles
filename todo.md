@@ -9,6 +9,8 @@
  - [ ] lvim doesn't install and is generally a pain in the but to first get started
  - [ ] Rust still asks for prompts
  - [ ] shorten the before reboot install
+ - [ ] add gpg
+ - [ ] add the duntsrcc to the doots
 
 ## Short term
 - [x] OS: move from Manjaro to endavourOs
@@ -29,5 +31,6 @@
 ## Long term: 
 - [ ] move to a declarative configuration using home manager (nix)
 - [ ] configure and try NixOs
-- [ ] learn go
+- [ ] learn go / haskell (just for the fun of learning pure functional)
+- [ ] rust? Big maybe for this year
 

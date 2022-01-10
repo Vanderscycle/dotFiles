@@ -248,7 +248,7 @@ sudo systemctl enable mongodb # allows it to start on start
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => Window manager
+# => Window manager (Xmonad)
 # -----------------------------------------------------------------------------
 # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
@@ -257,6 +257,7 @@ sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
 sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and else
 sudo pacman -S --needed --noconfirm xmobar #more to polybar later
 yay -S --noconfirm dunst #notification system
+yay -S --noconfirm maim #screen capture
 echo -e 'Done.\n'
 
 }
