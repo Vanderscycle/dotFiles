@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a StringArray=(".xprofile" ".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent")
+declare -a StringArray=( ".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent")
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     # echo "~/Documents/dotFiles/$DOTFILE" ~/$DOTFILE

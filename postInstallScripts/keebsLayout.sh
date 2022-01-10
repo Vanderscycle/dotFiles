@@ -9,10 +9,7 @@ if [[ -n "$1" ]]; then
 else
     layout=$(setxkbmap -query | awk 'END{print $2}')
     case $layout in
-        us)
-                sudo setxkbmap cn
-            ;;
-        it)
+        fr)
                 sudo setxkbmap fr
             ;;
         *)
