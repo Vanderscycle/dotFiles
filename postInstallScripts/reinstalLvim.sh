@@ -1,6 +1,5 @@
 #!/bin/bash
-rm -rf ~/.config/lvim ~/.config/lvim.bak
-rm -rf ~/.local/share/lunarvim
+rm -rf ~/.config/lvim ~/.config/lvim.bak ~/.local/share/lunarvim
 
 # from the official website
 bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/uninstall.sh)

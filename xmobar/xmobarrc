@@ -56,7 +56,7 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
        \  <box type=Bottom width=2 mb=4 color=#bb9af7>%memory%</box>\
        \  <box type=Bottom width=2 mb=4 color=#c0caf5>%disku%</box>\
        \  <box type=Bottom width=2 mb=4 color=#b4f9f8>%dynnetwork%</box> \
-       \  }{\
+       \  }{ \
        \  <box type=Bottom width=2 mb=4 color=#2ac3de>%CYWH%</box>\
        \  <box type=Bottom width=2 mb=4 color=#7dcfff>%default:Master%</box>\
        \  <box type=Bottom width=2 mb=4 color=#7dcfff>%date%</box>\

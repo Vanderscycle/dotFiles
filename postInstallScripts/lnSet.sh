@@ -3,11 +3,10 @@ echo $(pwd)
 #https://linuxhint.com/bash_loop_list_strings/
 # ".zshrc" ".oh-my-zsh" ".conda" ".alias"
 # https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where 
-declare -a StringArray=( ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent")
-DIR=${PWD%/*}
+declare -a StringArray=(".xprofile" ".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent")
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
-    rsync -auv  ~/$DOTFILE "~/Documents/dotFiles/$DIR"
+    rsync -auv --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
 done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
