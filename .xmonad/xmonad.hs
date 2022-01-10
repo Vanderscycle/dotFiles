@@ -30,7 +30,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import Data.Maybe (fromJust)
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
-import Colors.TomorrowNight
+
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
