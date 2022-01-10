@@ -1,3 +1,15 @@
+# Todo && ToBecome
+
+## last install tasks
+ - [ ] twitter-emoji asks for prompts
+ - [ ] oh-my-zsh needs zsh to start so post reboot
+ - [ ] line 401 (update rc.d ) doesn't work
+ - [ ] post install still contains user prompts
+ - [ ] p10k issues: change workflow so that it clone the repo in ~/Programs
+ - [ ] lvim doesn't install and is generally a pain in the but to first get started
+ - [ ] Rust still asks for prompts
+ - [ ] shorten the before reboot install
+
 ## Short term
 - [x] OS: move from Manjaro to endavourOs
 - [x] style the os according to [tokyo night](https://old.reddit.com/r/unixporn/comments/ra8dpp/gnome_tried_customizing_gnome_a_bit_with_the_epic/)
