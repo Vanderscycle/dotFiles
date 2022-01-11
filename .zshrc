@@ -11,7 +11,7 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="/home/henri/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
-source ~/Programs/powerlevel10k/powerlevel10k.zsh-theme
+
 
 # zsh plugins
 plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting sudo k)
@@ -79,6 +79,7 @@ alias luamake=/home/henri/.config/lua-language-server/3rd/luamake/luamake
 
 # powerlevel10k
 POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+source ~/Programs/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
