@@ -192,7 +192,7 @@ echo -e 'Done.\n'
 echo -e 'Adding keyboard languages (cn)'
 #https://classicforum.manjaro.org/index.php?topic=1044.0
 # TODO: add --no needed 
-sudo pacman -S --noconfirm --needed fcitx5 fcitx5-config-qt fcitx5-chinese-addons
+sudo pacman -S --noconfirm --needed fcitx fcitx-googlepinyin #TODO: double check the right dependence
 # sudo pacman -Ss --noconfirm --needed chinese
 sudo sh -c "cat >> /etc/environment <<EOF
 GTK_IM_MODULE=fcitx5

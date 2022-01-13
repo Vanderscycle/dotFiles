@@ -5,6 +5,16 @@ function killPort(){
 # gpg amd ssh
 eval `keychain --eval --quiet --agents gpg,ssh ~/.ssh/endavourGit`
 
+# doots related
+function save(){
+  bash ~/Documents/dotFiles/postInstallScripts/lnSet.sh
+}
+
+function sync(){
+    bash ~/Documents/dotFiles/postInstallScripts/syncDootsLocal.sh
+
+}
+
 # new env scripts
 function newRepo(){
     ORIGINDIR=~/Documents/dotFiles/stdPatterns/
