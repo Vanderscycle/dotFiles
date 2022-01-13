@@ -340,12 +340,12 @@ myLogHook = return ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
-  spawnOnce "fcitx -d &"
-  spawnOnce "xmobar &"
   spawnOnce "spotify &"
   spawnOnce "firefox &"
   spawnOnce "discord &"
   spawnOnce "kitty &"
+  spawnOnce "fcitx -d &"
+  spawnOnce "xmobar &"
 
 
 ------------------------------------------------------------------------

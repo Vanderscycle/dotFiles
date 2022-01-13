@@ -10,7 +10,8 @@
  - [ ] Rust still asks for prompts
  - [ ] shorten the before reboot install
  - [ ] add gpg
- - [ ] add the duntsrcc to the doots
+ - [x] add the duntsrcc to the doots
+ - [ ] add lua as a [wordprocesor](https://www.reddit.com/r/neovim/comments/rz4yxj/using_neovim_and_lua_as_a_wordprocessor/)
 
 ## Short term
 - [x] OS: move from Manjaro to endavourOs

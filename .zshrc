@@ -94,3 +94,4 @@ export NNN_OPTS='H'
 export NNN_BMS="h:~;d:~/Downloads;D:~/Documents"
 export LC_COLLATE="C" # hidden files on top
 
+# fcitx

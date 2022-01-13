@@ -5,12 +5,11 @@
 -- require("lsp-config.tailwindcss")
 
 --TODO: fix selene stylua not beign found
--- require("lsp-config.lua")
+require("lsp-config.lua")
 -- require("lsp-config.typescript")
 -- require("lsp-config.javascript")
 require('lsp-config.svelte')
 require('lsp-config.markdown')
-
 -- general
 -- lvim.autosave = true
 lvim.format_on_save = true
@@ -73,10 +72,6 @@ lvim.builtin.which_key.mappings["n"] = {
   r = {":lua require('package-info').reinstall()<cr>", "reinstall package"}
 }
 
---  lvim.builtin.which_key.mappings["s"]={
---   T = { "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "Trouble.nvim" },
--- }
-
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 
 lvim.builtin.notify.active = true
@@ -108,46 +103,6 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 
 -- generic LSP settings
--- you can set a custom on_attach function that will be used for all the language servers
--- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
--- lvim.lsp.on_attach_callback = function(client, bufnr)
---   local function buf_set_option(...)
---     vim.api.nvim_buf_set_option(bufnr, ...)
---   end
---   --Enable completion triggered by <c-x><c-o>
---   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
--- end
--- you can overwrite the null_ls seup table (useful for setting the root_dir function)
--- lvim.lsp.nul_ls.setup = {
---   root_dir = rquire("lspconfig").util.root_pattern("Makefile", ".git", "node_modules"),
--- }
--- or if you need something more advanced
--- lvim.lsp.null_ls.setup.root_dir = function(fname)
---   if vim.bo.filetype == "javascript" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "node_modules")(fname)
---       or require("lspconfig/util").path.dirname(fname)
---   elseif vim.bo.filetype == "php" then
---     return require("lspconfig/util").root_pattern("Makefile", ".git", "composer.json")(fname) or vim.fn.getcwd()
---   else
---     return require("lspconfig/util").root_pattern("Makefile", ".git")(fname) or require("lspconfig/util").path.dirname(fname)
---   end
--- end
-
--- set a formatter if you want to override the default lsp one (if it exists)
--- lvim.lang.python.formatters = {
---   {
---     exe = "black",
---     args = {}
---   }
--- }
--- set an additional linter
--- lvim.lang.python.linters = {
---   {
---     exe = "flake8,
---     args = {}
---   }
--- }
-
 -- Additional Plugins
 lvim.plugins = {
 	-- theme
@@ -155,6 +110,7 @@ lvim.plugins = {
 	{ "catppuccin/nvim" },
 	{ "LunarVim/ColorSchemes" },
 	--extra languages'
+  {'h-hg/fcitx.nvim'}, --chinese input
   -- WARN: install binaries
   --https://www.youtube.com/watch?v=MOaws1ozqNw
 	-- { "ChristianChiarulli/vim-solidity" },
@@ -289,16 +245,16 @@ lvim.plugins = {
 			vim.g.indent_blankline_show_first_indent_level = false
 		end,
 	},
-	-- {
-	-- 	"tzachar/cmp-tabnine",
-	-- 	config = function()
-	-- 		local tabnine = require("cmp_tabnine.config")
-	-- 		tabnine:setup({
-	-- 			max_lines = 1000,
-	-- 			max_num_results = 20,
-	-- 			sort = true,
-	-- 		})
-	-- 	end,
+	{
+		"tzachar/cmp-tabnine",
+		config = function()
+			local tabnine = require("cmp_tabnine.config")
+			tabnine:setup({
+				max_lines = 1000,
+				max_num_results = 20,
+				sort = true,
+			})
+		end,
 
 	-- 	run = "./install.sh",
 	-- 	requires = "hrsh7th/nvim-cmp",
@@ -348,4 +304,13 @@ lvim.plugins = {
 		end,
 		requires = "nvim-lua/plenary.nvim",
 	},
+  --  {
+  --   'chaitanyabspripc/present.nvim',
+  --   config = function()
+  --     require('present').setup{
+  --       -- ... your config here
+  --     }
+  --   end
+  -- }
+}
 }

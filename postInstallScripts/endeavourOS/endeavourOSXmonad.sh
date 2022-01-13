@@ -192,25 +192,32 @@ echo -e 'Done.\n'
 echo -e 'Adding keyboard languages (cn)'
 #https://classicforum.manjaro.org/index.php?topic=1044.0
 # TODO: add --no needed 
-sudo pacman -S --noconfirm --needed ibus-libpinyin opendesktop-fonts
-sudo pacman -Ss --noconfirm --needed chinese
+sudo pacman -S --noconfirm --needed fcitx5 fcitx5-config-qt fcitx5-chinese-addons
+# sudo pacman -Ss --noconfirm --needed chinese
 sudo sh -c "cat >> /etc/environment <<EOF
-GTK_IM_MODULE=ibus
-QT_IM_MODULE=ibus
-XMODIFIERS=@im=ibus
+GTK_IM_MODULE=fcitx5
+QT_IM_MODULE=fcitx5
+XMODIFIERS='@im=fcitx5'
 EOF"
+conda install -c conda-forge dbus-python 
+(cd ~/Programs/ &&
+git clone https://github.com/tonyfettes/fcitx5-nord.git &&
+mkdir -p ~/.local/share/fcitx5/themes/ && 
+cd fcitx5-nord &&
+cp -r Nord-Dark/ Nord-Light/ ~/.local/share/fcitx5/themes/ )
+
 # https://wiki.archlinux.org/title/IBus
-touch ~/.config/autostart/ibus-daemon.desktop
-cat >> ~/.config/autostart/ibus-daemon.desktop <<EOF
-[Desktop Entry]
-Type=Application
-Name=IBus Daemon
-Exec=ibus-daemon -drx
-EOF
-echo -e 'Done.\n'
+# touch ~/.config/autostart/ibus-daemon.desktop
+# cat >> ~/.config/autostart/ibus-daemon.desktop <<EOF
+# [Desktop Entry]
+# Type=Application
+# Name=IBus Daemon
+# Exec=ibus-daemon -drx
+# EOF
+# echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => Containers (Docker)
+# => Containers (Podman/buildah)
 # -----------------------------------------------------------------------------
 
 
