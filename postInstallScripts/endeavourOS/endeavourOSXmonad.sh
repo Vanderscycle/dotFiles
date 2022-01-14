@@ -396,15 +396,15 @@ echo '=>Rust and cargo'
 # TODO: find a way to skip install (pass a 1)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 cargo install --branch main --git https://github.com/Kampfkarren/selene selene
-cargo install stylua  
+cargo install stylua fd-find 
 echo -e 'Done.\n'
 
 echo -e '\n=> installing LunarVim'
 sudo rm -rf /usr/bin/tree-sitter
-export LV_BRANCH=rolling 
-wget https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh
-sudo bash install.sh --install-dependencies
+LV_BRANCH=rolling bash <(curl -O https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
+sudo bash install.sh --noinstall-dependencies
 rm install.sh
+bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 
 echo -e '\n=> syncing doots'
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
