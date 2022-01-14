@@ -215,7 +215,7 @@ echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)
 sudo pacman -S --noconfirm --needed podman buildah
 sudo touch /etc/subuid 
 sudo touch /etc/subgid 
-sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 johndoe
+sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
