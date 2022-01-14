@@ -35,20 +35,13 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing zsh'
 yay -S --noconfirm --needed zsh
-echo -e '\n=> Installing oh-my-zsh'
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
 
-echo -e '\n=> Installing zsh/oh-my-zsh plugins'
-sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
-git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 #enhancd
+echo -e '\n=> Installing enhancd'
 mkdir -p ~/Programs/
 git clone https://github.com/b4b4r07/enhancd ~/Programs/enhancd
-echo "source ~/Programs/enhancd/init.sh"  >> ~/.zprofile
+
+
 source ~/.zshrc
 chsh -s  $(which zsh)
 
@@ -97,7 +90,7 @@ echo -e 'Done.\n'
 #JS/TS
 echo -e 'Installing nodeJs'
 sudo pacman -S --noconfirm --needed nodejs npm
-sudo npm i -g prettier eslint
+sudo npm i -g prettier eslint neovim tree-sitter-cli
 echo -e 'Done.\n'
 
 echo -e '\n=> Installing Kitty'
@@ -130,8 +123,10 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip xclip
+
 # installing pnpm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
+
 #md file reader
 yay -S --needed --noconfirm glow sysz
 
@@ -176,7 +171,7 @@ fc-cache -v -f
 echo -e 'Done.\n'
 
 echo -e '\n=> Adding emoji support'
-yay ttf-twemoji
+yay -S --noconfirm ttf-twemoji noto-fonts-extra
 mkdir ~/.config/fontconfig/
 rsync -av ~/Documents/dotFiles/fonts.conf ~/.config/fontconfig/
 echo -e 'Done.\n'
@@ -195,16 +190,11 @@ echo -e 'Adding keyboard languages (cn)'
 sudo pacman -S --noconfirm --needed fcitx fcitx-googlepinyin #TODO: double check the right dependence
 # sudo pacman -Ss --noconfirm --needed chinese
 sudo sh -c "cat >> /etc/environment <<EOF
-GTK_IM_MODULE=fcitx5
-QT_IM_MODULE=fcitx5
-XMODIFIERS='@im=fcitx5'
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS='@im=fcitx'
 EOF"
-conda install -c conda-forge dbus-python 
-(cd ~/Programs/ &&
-git clone https://github.com/tonyfettes/fcitx5-nord.git &&
-mkdir -p ~/.local/share/fcitx5/themes/ && 
-cd fcitx5-nord &&
-cp -r Nord-Dark/ Nord-Light/ ~/.local/share/fcitx5/themes/ )
+
 
 # https://wiki.archlinux.org/title/IBus
 # touch ~/.config/autostart/ibus-daemon.desktop
@@ -281,6 +271,7 @@ echo '=> post reboot'
 echo 'Current os version: Atantis'
 echo 'wm: Xmonad w/ Xmobar'
 echo '------------------------------------------------------------------------'
+
 # -----------------------------------------------------------------------------
 # => Post reboot updates
 # -----------------------------------------------------------------------------
@@ -290,12 +281,28 @@ sudo pacman -Syu --noconfirm
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
+# => Fish but in zsh (through on-my-zsh)
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Installing oh-my-zsh'
+sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
+
+echo -e '\n=> Installing zsh/oh-my-zsh plugins'
+sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
+git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+
+# -----------------------------------------------------------------------------
 # => Virtual Machines (level 2)
 # -----------------------------------------------------------------------------
 
 echo '\n=>Installing vm'
 #TODO: probably missing a few things
-sudo pacman -S --noconfirm virtualbox
+sudo pacman -S --noconfirm --needed virtualbox
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -310,7 +317,7 @@ sudo pacman -S --noconfirm --needed bpytop
 echo 'tui file navigator'
 sudo pacman -S --noconfirm --needed mediainfo
 sudo pacman -S --noconfirm --needed nnn sxiv
-pip install ueberzug --required for file preview
+pip install ueberzug #--required for file preview
 git clone https://github.com/jarun/nnn.git ~/Programs/
 (cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
 # installing the plugins
@@ -330,7 +337,7 @@ sudo npm install -g @nestjs/cli write-good
 # => enhancing gnome
 # -----------------------------------------------------------------------------
 echo '\n=> Gnome tweaks'
-Sudo pacman -R --noconfirm gnome-tweaks
+Sudo pacman -S --noconfirm --needed gnome-tweaks
 echo -e 'done'
 
 
@@ -344,9 +351,10 @@ chmod +x betterdiscordctl
 sudo mv betterdiscordctl /usr/local/bin
 betterdiscordctl install
 
-yay -S firefox firefox-developer-edition
+yay -S --noconfirm firefox firefox-developer-edition
 
-sudo pacman -S libreoffice-fresh
+# I actually rely on vim more than libreoffice
+#sudo pacman -S libreoffice-fresh
 
 yay -S --noconfirm zoom steam discord vlc spotify spicetify-cli
 yay -S --noconfirm postman-bin
@@ -384,7 +392,7 @@ sudo npm install -g neovim tree-sitter-cli
 
 echo '=>Rust and cargo'
 # TODO: find a way to skip install (pass a 1)
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 cargo install --branch main --git https://github.com/Kampfkarren/selene selene
 cargo install stylua  
 echo -e 'Done.\n'
