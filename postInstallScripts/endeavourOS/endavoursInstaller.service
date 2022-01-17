@@ -3,7 +3,7 @@ Description=Post reboot installer
 
 [Service]
 Type=oneshot
-ExecStart=~/test.sh
+ExecStart=bash ~/endeabourOSXmonad.sh
 
 [Install]
 WantedBy=multi-user.target

@@ -427,6 +427,7 @@ if [ -f ~/rebooting-for-updates ]; then
 
 else
   touch ~/rebooting-for-updates # flag
+  sudo ln ~/endeavourOSXmonad.sh /usr/bin/
   sudo curl -o /etc/systemd/system/endavoursInstaller.service https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endavoursInstaller.service
   systemctl enable endavoursInstaller.service
   before_reboot
