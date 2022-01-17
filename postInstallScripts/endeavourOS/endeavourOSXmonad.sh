@@ -420,10 +420,15 @@ chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 }
 
 if [ -f ~/rebooting-for-updates ]; then
-    after_reboot
-    rm ~/rebooting-for-updates ~/endeavourOSXmonad.sh ~/etc/systemd/endavoursInstaller
+  after_reboot
+  rm ~/rebooting-for-updates ~/endeavourOSXmonad.sh 
+  sudo rm /etc/systemd/system/endavoursInstaller.service
+  systemctl disable endavoursInstaller.service
+
 else
-  curl -o https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endavoursInstaller.service /etc/systemd/endavoursInstaller.service 
-    before_reboot
+  touch ~/rebooting-for-updates # flag
+  sudo curl -o /etc/systemd/system/endavoursInstaller.service https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endavoursInstaller.service
+  systemctl enable endavoursInstaller.service
+  before_reboot
 fi
 

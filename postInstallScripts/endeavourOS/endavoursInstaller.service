@@ -5,3 +5,5 @@ Description=Post reboot installer
 Type=oneshot
 ExecStart=~/test.sh
 
+[Install]
+WantedBy=multi-user.target
