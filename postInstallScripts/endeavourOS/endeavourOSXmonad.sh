@@ -218,9 +218,11 @@ EOF"
 
 echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
 sudo pacman -S --noconfirm --needed podman buildah
-sudo touch /etc/subuid 
+sudo touch /etc/subuid
 sudo touch /etc/subgid 
 sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
+
+sudo mkdir -p /root/buildah
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -417,13 +419,11 @@ chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 
 }
 
-if [ -f /var/run/rebooting-for-updates ]; then
+if [ -f ~/rebooting-for-updates ]; then
     after_reboot
-    rm /var/run/rebooting-for-updates
-    update-rc.d myupdate remove
+    rm ~/rebooting-for-updates ~/endeavourOSXmonad.sh ~/etc/systemd/endavoursInstaller
 else
-    sudo touch /var/run/rebooting-for-updates
+  curl -o https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endavoursInstaller.service /etc/systemd/endavoursInstaller.service 
     before_reboot
-    update-rc.d myupdate defaults
 fi
 
