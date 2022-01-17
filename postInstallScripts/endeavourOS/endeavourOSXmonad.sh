@@ -70,9 +70,13 @@ echo -e '\n=> Installing system utilities'
 echo -e 'Installing AUR helper (yay)'
 sudo pacman -S --noconfirm --needed yay
 
+# c
 echo 'installing c lang'
 sudo pacman -S --noconfirm --needed  clang
 echo -e 'Done.\n'
+
+#bash
+yay -S --noconfirm --needed shellcheck-bin
 
 #Python
 echo -e '\n=> Installing Miniconda'

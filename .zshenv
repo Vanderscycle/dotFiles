@@ -7,11 +7,17 @@ eval `keychain --eval --quiet --agents gpg,ssh ~/.ssh/endavourGit`
 
 # doots related
 function save(){
-  bash ~/Documents/dotFiles/postInstallScripts/lnSet.sh
+  # TODO: add a message 
+  ( cd ~/Documents/dotFiles/postInstallScripts/ &&
+  bash ./lnSet.sh &&
+  git commit -am 'quick_save' &&
+  git push)
 }
 
 function sync(){
-    bash ~/Documents/dotFiles/postInstallScripts/syncDootsLocal.sh
+    (cd ~/Documents/dotFiles/postInstallScripts/ &&
+      git pull &&
+      bash ./syncDootsLocal.sh)
 
 }
 
