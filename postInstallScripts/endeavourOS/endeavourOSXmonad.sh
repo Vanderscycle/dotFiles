@@ -354,8 +354,14 @@ echo -e 'done'
 # => bluetooth
 # -----------------------------------------------------------------------------
 #BUG: warn bug in progress
-sudo pacman -S --needed bluez bluez-utils
+sudo pacman -S --needed --noconfirm bluez bluez-utils
 sudo systemctl enable --now bluetooth
+
+# volume control
+# https://gist.github.com/iamcaleberic/5d1b5663f57185410964449c5417b996
+pacman -S --needed --noconfirm pulseaudio-equalizer pavucontrol
+pactl load-module module-equalizer-sink
+pactl load-module module-dbus-protocol
 # -----------------------------------------------------------------------------
 # => Local application (gui)
 # -----------------------------------------------------------------------------
