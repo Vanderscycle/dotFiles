@@ -10,7 +10,7 @@ eval `keychain --eval --quiet --agents gpg,ssh ~/.ssh/endavourGit`
 function save(){
   ( cd ~/Documents/dotFiles/postInstallScripts/ &&
   bash ./lnSet.sh &&
-  git commit -am $message &&
+  git commit -am "quicksave" &&
   git push)
 }
 
