@@ -1,3 +1,4 @@
+#! /bin/bash
 function killPort(){
   lsof -i TCP:$1 | grep LISTEN | awk -F " " '{print$2}' | xargs kill -9
 }
@@ -7,32 +8,6 @@ eval `keychain --eval --quiet --agents gpg,ssh ~/.ssh/endavourGit`
 
 # doots related
 function save(){
-  
-message=''
-verbose='false'
-
-printHelp() {
-  printf "-f: {merssage} message"
-  printf "-h this message"
-  printf "-v verbose"
-}
-
-while getopts 'abf:v' flag; do
-  case "${flag}" in
-    f) message="${OPTARG}" ;;
-    v) verbose='true' ;;
-    h) printHelp 
-       exit 1 ;;
-  esac
-done
-
-# ternary operator to see if there's a message
-case "$b" in
- 5) a=$c ;;
- *) a=$d ;;
-esac
-[[ -z "$message" ]] && message="quick_save" || echo "commit msg: ${messsage}"
-
   ( cd ~/Documents/dotFiles/postInstallScripts/ &&
   bash ./lnSet.sh &&
   git commit -am $message &&
