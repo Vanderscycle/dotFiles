@@ -77,13 +77,8 @@ echo -e 'Done.\n'
 #Python
 echo -e '\n=> Installing Miniconda'
 cd ~
-wget -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-sudo chmod +x Miniconda3-latest-Linux-x86_64.sh
-sudo bash Miniconda3-latest-Linux-x86_64.sh -b
-export PATH=~/miniconda3/bin:$PATH
-# conda init zsh
-rm Miniconda3-latest-Linux-x86_64.sh # clean the install
-conda  install -cy python pandas numpy
+yay -S -needed --noconfirm miniconda3
+sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 conda install -cy conda-forge pynvim
 echo -e 'Done.\n'
 
@@ -123,7 +118,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip xclip
-
+sudo yay -S --noconfirm openshift-client-bin # redhat openshift
 # installing pnpm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 
@@ -295,7 +290,7 @@ echo -e '\n=> Installing oh-my-zsh'
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
 
 echo -e '\n=> Installing zsh/oh-my-zsh plugins'
-sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
+# sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k

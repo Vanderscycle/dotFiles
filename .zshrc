@@ -9,43 +9,23 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
+plugins=(git fzf zsh-better-npm-completion zsh-autosuggestions zsh-syntax-highlighting sudo k)
 export ZSH="/home/henri/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
 
-# zsh plugins
-plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting sudo k)
-plugins+=(zsh-better-npm-completion)
+#fzf
 export FZF_BASE=/usr/bin/fzf
 export FZF_DEFAULT_COMMAND='rg'
 DISABLE_FZF_KEY_BINDINGS="false"
 DISABLE_FZF_AUTO_COMPLETION="false"
-source $ZSH/oh-my-zsh.sh
 
 
-__conda_setup="$('/home/henri/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/henri/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/henri/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/henri/miniconda3/bin:$PATH"
-    fi
-fi
 unset __conda_setup
 # <<< conda initialize <<<
-
+source /etc/profile.d/conda.sh    
 # Use powerline
 USE_POWERLINE="true"
-# Source manjaro-zsh-configuration(theme)
-if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
-  source /usr/share/zsh/manjaro-zsh-config
-fi
-# Use manjaro zsh prompt(theme)
-if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
-  source /usr/share/zsh/manjaro-zsh-prompt
-fi
 #zplug addition
 if [ -f /home/henri/.zplug/init.zsh ]; then
     source /home/henri/.zplug/init.zsh
@@ -94,3 +74,6 @@ export NNN_OPTS='H'
 export NNN_BMS="h:~;d:~/Downloads;D:~/Documents"
 export LC_COLLATE="C" # hidden files on top
 
+
+export PNPM_HOME="/home/henri/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"

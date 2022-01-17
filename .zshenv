@@ -15,6 +15,12 @@ function sync(){
 
 }
 
+# temp
+function zx(){
+  source ~/.zshrc
+  source ~/.zshenv
+}
+
 # new env scripts
 function newRepo(){
     ORIGINDIR=~/Documents/dotFiles/stdPatterns/
