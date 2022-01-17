@@ -153,6 +153,12 @@ touch ~/.gnupg/gpg-agent.conf
 echo 'use-agent' >> ~/.gnupg/gpg.conf
 echo 'pinentry-mode loopback' >> ~/.gnupg/gpg.conf
 chmod 700 ~/.gnupg
+
+echo -e 'Adding hosts'
+curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts --output ~/hosts
+sudo cp ~/hosts /etc/hosts
+rm ~/hosts
+
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
