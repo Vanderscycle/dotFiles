@@ -28,6 +28,7 @@ wget -O ~/.xmonad/xmonad.hs https://raw.githubusercontent.com/Vanderscycle/dot-c
 mkdir -p ~/.config/xmobar/
 wget -O ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc
 echo -e 'Done.\n'
+
 # -----------------------------------------------------------------------------
 # => Annoying programs that requires user permission
 # -----------------------------------------------------------------------------
@@ -349,7 +350,12 @@ echo '\n=> Gnome tweaks'
 Sudo pacman -S --noconfirm --needed gnome-tweaks
 echo -e 'done'
 
-
+# -----------------------------------------------------------------------------
+# => bluetooth
+# -----------------------------------------------------------------------------
+#BUG: warn bug in progress
+sudo pacman -S --needed bluez bluez-utils
+sudo systemctl enable --now bluetooth
 # -----------------------------------------------------------------------------
 # => Local application (gui)
 # -----------------------------------------------------------------------------
