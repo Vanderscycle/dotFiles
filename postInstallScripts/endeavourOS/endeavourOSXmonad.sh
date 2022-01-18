@@ -356,6 +356,9 @@ echo -e 'done'
 #BUG: warn bug in progress
 sudo pacman -S --needed --noconfirm bluez bluez-utils
 sudo systemctl enable --now bluetooth
+# https://discovery.endeavouros.com/bluetooth/how-to-enable-disable-bluetooth-at-startup/2022/01/
+#TODO: SED this into the config
+#sudo nano /etc/bluetooth/main.conf
 
 # volume control
 # https://gist.github.com/iamcaleberic/5d1b5663f57185410964449c5417b996
