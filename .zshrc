@@ -69,10 +69,15 @@ BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING=
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 export NNN_FIFO='/tmp/nnn.fifo'
 export NNN_PLUG='f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
+export NNN_BMS='d:~/Documents;u:~;D:~/Downloads/;c:~/Documents/dotFiles/postInstallScripts/'
+#INFO: b => {key} to reach bookamarks
+export NNN_OPTS='He'
 export SPLIT='v' # to split Kitty vertically
-export NNN_OPTS='H'
 export NNN_BMS="h:~;d:~/Downloads;D:~/Documents"
 export LC_COLLATE="C" # hidden files on top
+
+#kitty
+export KITTY_LISTEN_ON=unix:/tmp/kitty
 
 # pnpm
 alias npm=pnpm
