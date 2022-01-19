@@ -17,7 +17,7 @@ function save(){
 function sync(){
     (cd ~/Documents/dotFiles/postInstallScripts/ &&
       git pull &&
-      bash ./syncdootslocal.sh)
+      bash ./syncDootsLocal.sh)
 }
 
 function reinstall(){
