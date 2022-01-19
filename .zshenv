@@ -13,6 +13,8 @@ function save(){
   git commit -am "quicksave" &&
   git push)
 }
+# add a zellijator
+# zellij --layout-path ~/.config/zellij/workspaces/example.yaml options --simplified-ui true
 
 function sync(){
     (cd ~/Documents/dotFiles/postInstallScripts/ &&
