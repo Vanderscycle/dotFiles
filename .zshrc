@@ -20,16 +20,14 @@ export FZF_DEFAULT_COMMAND='rg'
 DISABLE_FZF_KEY_BINDINGS="false"
 DISABLE_FZF_AUTO_COMPLETION="false"
 
-
-unset __conda_setup
-# <<< conda initialize <<<
-source /etc/profile.d/conda.sh    
+export TERMINAL=kitty
 # Use powerline
 USE_POWERLINE="true"
-#zplug addition
-if [ -f /home/henri/.zplug/init.zsh ]; then
-    source /home/henri/.zplug/init.zsh
-fi
+#BUG: do we even use zplug?
+# #zplug addition
+# if [ -f /home/henri/.zplug/init.zsh ]; then
+#     source /home/henri/.zplug/init.zsh
+# fi
 
 # vim keys
 #set -o vi
@@ -67,9 +65,9 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # nnn config
 BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-export NNN_FIFO='/tmp/nnn.fifo'
+export NNN_FIFO='/tmp/nnn.fifo nnn'
 export NNN_PLUG='f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
-export NNN_BMS='d:~/Documents;u:~;D:~/Downloads/;c:~/Documents/dotFiles/postInstallScripts/'
+export NNN_BMS='d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config'
 #INFO: b => {key} to reach bookamarks
 export NNN_OPTS='He'
 export SPLIT='v' # to split Kitty vertically

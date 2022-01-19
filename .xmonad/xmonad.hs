@@ -114,6 +114,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       ((modm, xK_p), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\""),
       -- launch gmrun
       ((modm .|. shiftMask, xK_p), spawn "gmrun"),
+      -- dedicated nnn finder with tmux preview window
+      ((modm, xK_f), spawn "kitty -e ~/.xmonad/nnnfm.sh"),
       -- close focused window
       ((modm .|. shiftMask, xK_c), kill),
       -- Rotate through the available layout algorithms
