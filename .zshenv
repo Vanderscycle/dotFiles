@@ -20,6 +20,10 @@ function sync(){
       bash ./syncDootsLocal.sh)
 }
 
+function hck(){
+  bash ~/Documents/dotFiles/postInstallScripts/tmux-cht.sh
+}
+
 function reinstall(){
     (cd ~/Documents/dotFiles/postInstallScripts/ &&
       bash ./reinstalLvim.sh)
