@@ -15,13 +15,13 @@ function save(){
 }
 
 function sync(){
-    (cd ~/documents/dotfiles/postinstallscripts/ &&
+    (cd ~/Documents/dotFiles/postInstallScripts/ &&
       git pull &&
       bash ./syncdootslocal.sh)
 }
 
 function reinstall(){
-    (cd ~/documents/dotfiles/postinstallscripts/ &&
+    (cd ~/Documents/dotFiles/postInstallScripts/ &&
       bash ./reinstalLvim.sh)
 }
 
