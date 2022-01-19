@@ -1,0 +1,28 @@
+
+# zellij --layout-path ~/.config/zellij/workspaces/basic.yaml
+# https://zellij.dev/documentation/layouts.html
+variables:
+- name: workspacePath
+  value: ~/Documents/a51
+
+tabs:
+  - direction: Vertical
+    parts:
+      - direction: Horizontal
+        parts:
+          - direction: Vertical
+            run:
+              command: {cmd: "cd ${{ variables.workspacePath }}}" }
+          - direction: Vertical
+            run:
+              command: {cmd: htop} # {cmd: htop, args: ["-C"]}
+            session:
+              name: "zellij" # a string, that names the session
+              attach: true # default `true`. If session exists, re-attach.
+      - direction: Horizontal
+
+  - direction: Vertical
+    session:
+      name: "second tab"
+      attach: true
+
