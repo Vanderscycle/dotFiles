@@ -102,6 +102,10 @@ sudo pacman -S --noconfirm tmux
 yay -S --noconfirm --needed tmuxinator
 echo -e 'Done.\n'
 
+echo -e '\n=> Installing Zellig'
+sudo pacman -S --noconfirm --needed zellij
+echo -e 'Done.\n'
+
 #BUG: zplug not working at install
 # echo -e '\n=> zplug'
 # curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
