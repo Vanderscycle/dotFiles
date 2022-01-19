@@ -10,11 +10,12 @@ done
 rsync -av --progress  ~/Documents/dotFiles/lvim/ ~/.config/lvim/
 # rsync -auv --progress "/$DIR/lunarvim/" ~/.local/share/lunarvim
 rsync -av --progress  ~/Documents/dotFiles/tmuxinator/ ~/.config/tmuxinator/ 
-rsync -av --progress  ~/Documents/dotFiles/zellij/ ~/.config/zellij
-rsync -av --progress ~/Documents/dotFiles/kitty/ ~/.config/kitty/
-rsync -av --progress ~/Documents/dotFiles/.xmonad/ ~/.xmonad
-rsync -av --progress ~/Documents/dotFiles/xmobar/ ~/.config/xmobar
-rsync -av --progress ~/Documents/dotfiles/dunst/ ~/.config/dunst 
+rsync -av --progress  ~/Documents/dotFiles/zellij/ ~/.config/zellij/
+rsync -av --progress  ~/Documents/dotFiles/tmux/ ~/.config/tmux/
+sync -av --progress ~/Documents/dotFiles/kitty/ ~/.config/kitty/
+rsync -av --progress ~/Documents/dotFiles/.xmonad/ ~/.xmonad/
+rsync -av --progress ~/Documents/dotFiles/xmobar/ ~/.config/xmobar/
+rsync -av --progress ~/Documents/dotfiles/dunst/ ~/.config/dunst/ 
 rsync -av --progress  ~/Documents/dotFiles/fontconfig/ ~/.config/fontconfig/
 
 

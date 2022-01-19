@@ -14,6 +14,7 @@ rsync -av --progress ~/.config/lvim/ ~/Documents/dotFiles/lvim
 # rsync -auv --progress ~/.config/neomutt/ "/$DIR/neomutt/"
 rsync -av --progress ~/.config/tmuxinator/ ~/Documents/dotFiles/tmuxinator/
 rsync -av --progress ~/.config/zellij ~/Documents/dotFiles/zellij/
+rsync -av --progress ~/.config/tmux ~/Documents/dotFiles/tmux/
 rsync -av --progress ~/.config/kitty/ ~/Documents/dotFiles/kitty/
 rsync -av --progress  ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 rsync -av --progress ~/.config/xmobar/ ~/Documents/dotFiles/xmobar/
