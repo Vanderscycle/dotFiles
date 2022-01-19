@@ -1,10 +1,29 @@
 
 # zellij --layout-path ~/.config/zellij/workspaces/basic.yaml
 # https://zellij.dev/documentation/layouts.html
-variables:
-- name: workspacePath
-  value: ~/Documents/a51
-
+# variables:
+# - name: workspacePath
+#   value: ~/Documents/a51
+---
+template:
+  direction: Horizontal
+  parts:
+    - direction: Vertical  # part 1
+      borderless: true
+      split_size:
+        Fixed: 1
+      run:
+        plugin:
+          location: "zellij:tab-bar"
+    - direction: Vertical # part 2
+      body: true
+    - direction: Vertical # part 3
+      borderless: true
+      split_size:
+        Fixed: 2
+      run:
+        plugin:
+          location: "zellij:status-bar"
 tabs:
   - direction: Vertical
     parts:
@@ -12,7 +31,7 @@ tabs:
         parts:
           - direction: Vertical
             run:
-              command: {cmd: "cd ${{ variables.workspacePath }}}" }
+              command: {cmd: nnn }
           - direction: Vertical
             run:
               command: {cmd: htop} # {cmd: htop, args: ["-C"]}
@@ -25,4 +44,5 @@ tabs:
     session:
       name: "second tab"
       attach: true
+
 
