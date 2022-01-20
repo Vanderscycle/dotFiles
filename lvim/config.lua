@@ -11,6 +11,7 @@ require("lsp-config.lua")
 -- require('lsp-config.svelte')
 require('lsp-config.markdown')
 require('lsp-config.tailwindcss')
+
 -- general
 -- lvim.autosave = true
 lvim.format_on_save = true
