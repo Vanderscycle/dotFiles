@@ -51,7 +51,7 @@ export ENHANCD_FILTER="fzf --preview 'tree -d -C {} | head -100'"
 export FZF_DEFAULT_COMMAND='fdfind --type f'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export PATH="/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin"
-export EDITOR='lvim'
+export EDITOR=lvim
 
 alias luamake=/home/henri/.config/lua-language-server/3rd/luamake/luamake 
 
@@ -81,3 +81,5 @@ export KITTY_LISTEN_ON=unix:/tmp/kitty
 alias npm=pnpm
 export PNPM_HOME="/home/henri/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
+
+source /home/henri/.config/broot/launcher/bash/br
