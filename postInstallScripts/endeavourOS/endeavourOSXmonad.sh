@@ -1,6 +1,6 @@
 #!/bin/bash
-
 # sudo pacman -S --needed --noconfirm httpie && 
+
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
 before_reboot(){
     # Do stuff
@@ -126,7 +126,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing developer packages and useful tui alternatives'
-sudo pacman -S --noconfirm --needed rsync git fzf jq github-cli bat exa ripgrep lazygit htop unzip xclip 
+sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip 
 sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher
 sudo yay -S --noconfirm openshift-client-bin # redhat openshift
 # installing pnpm
@@ -360,10 +360,10 @@ echo -e 'done'
 # -----------------------------------------------------------------------------
 #BUG: warn bug in progress
 sudo pacman -S --needed --noconfirm bluez bluez-utils
+sudo sd "#AutoEnable=false" "AutoEnable=true" /etc/bluetooth/main.conf
+sudo modprobe btusb
 sudo systemctl enable --now bluetooth
 # https://discovery.endeavouros.com/bluetooth/how-to-enable-disable-bluetooth-at-startup/2022/01/
-#TODO: SED this into the config
-#sudo nano /etc/bluetooth/main.conf
 
 # volume control
 # https://gist.github.com/iamcaleberic/5d1b5663f57185410964449c5417b996
@@ -424,6 +424,7 @@ echo '=>Rust and cargo'
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 cargo install --branch main --git https://github.com/Kampfkarren/selene selene
 cargo install stylua fd-find 
+source $HOME/.cargo/env/
 echo -e 'Done.\n'
 
 echo -e '\n=> installing LunarVim'
