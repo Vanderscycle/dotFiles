@@ -14,6 +14,8 @@
  - [ ] add lua as a [wordprocesor](https://www.reddit.com/r/neovim/comments/rz4yxj/using_neovim_and_lua_as_a_wordprocessor/)
 
 ## Short term
+- [ ] create a user preference where the user can choose what to save and sync
+- [ ] 
 - [x] OS: move from Manjaro to endavourOs
 - [x] style the os according to [tokyo night](https://old.reddit.com/r/unixporn/comments/ra8dpp/gnome_tried_customizing_gnome_a_bit_with_the_epic/)
 - [x] install, configure, xmonad/xmobar [start here](https://beginners-guide-to-xmonad.readthedocs.io/configure_xmobar.html) (thx dt) and here for more in-depth [config](https://archcheatsheet.com/environment/xmonad-configuration.html#program-launcher)

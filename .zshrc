@@ -82,5 +82,5 @@ alias npm=pnpm
 export PNPM_HOME="/home/henri/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# doots
+# doots (sync var)
 export DOOTS_USER_NAME="henri"

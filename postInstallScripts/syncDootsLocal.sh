@@ -6,6 +6,10 @@ for DOTFILE in "${StringArray[@]}"; do
     # echo "~/Documents/dotFiles/$DOTFILE" ~/$DOTFILE
     rsync -av  --progress ~/Documents/dotFiles/$DOTFILE ~/$DOTFILE
 done
+
+rg --passthru 'henri' -r $DOOTS_USER_NAME ~/.zshrc > ~/.temp.txt && mv ~/.temp.txt ~/.zshrc.sh
+
+#TODO: refactor into a loop and array
 # u does not overide (update)
 rsync -av --progress  ~/Documents/dotFiles/lvim/ ~/.config/lvim/
 rsync -av --progress  ~/Documents/dotFiles/broot/ ~/.config/broot/

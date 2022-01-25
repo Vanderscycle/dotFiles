@@ -91,7 +91,7 @@ lvim.builtin.treesitter.ensure_installed = {
 	"python",
 	"lua",
 	"bash",
-	"css",
+	Next("css"),
 	"dockerfile",
 	"html",
 	"javascript",
@@ -222,6 +222,14 @@ lvim.plugins = {
 	},
 	{ "nvim-telescope/telescope-media-files.nvim" },
 	{ "nvim-telescope/telescope-file-browser.nvim" },
+	-- {
+	-- 	"dhruvmanila/telescope-bookmarks.nvim",
+	-- 	--https://github.com/dhruvmanila/telescope-bookmarks.nvim/issues/5
+	-- 	commit = "eef8e53885525a6f2ddf98bff6b9fe17c263db6e",
+	-- 	requires = {
+	-- 		"tami5/sqlite.lua",
+	-- 	},
+	-- },
 	--markdown
 	-- You must install glow globally
 	-- https://github.com/charmbracelet/glow
