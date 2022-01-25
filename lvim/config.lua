@@ -31,8 +31,10 @@ lvim.keys.normal_mode = {
 	["<leader>sT"] = ":Telescope current_buffer_fuzzy_find<cr>",
 	["<leader>sF"] = ':lua require("telescope.builtin").find_files({hidden=true, no_ignore=true, find_command=rg})<cr>',
 	["<leader>si"] = ":Telescope media_files<cr>",
-	["<leader>B"] = ":lua require 'telescope'.extensions.file_browser.file_browser()<CR>",
+	["<leader>sn"] = ":lua require 'telescope'.extensions.file_browser.file_browser()<CR>", --nnn nexttime?
+	["<leader>bt"] = ":Telescope buffers<CR>",
 }
+
 -- unmap a default keymappinig
 -- lvim.keys.normal_mode["<C-Up>"] = ""
 -- edit a default keymapping
@@ -91,7 +93,6 @@ lvim.builtin.treesitter.ensure_installed = {
 	"python",
 	"lua",
 	"bash",
-	Next("css"),
 	"dockerfile",
 	"html",
 	"javascript",
@@ -100,6 +101,7 @@ lvim.builtin.treesitter.ensure_installed = {
 	"typescript",
 	"yaml",
 }
+
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
