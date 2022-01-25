@@ -10,7 +10,7 @@ require("lsp-config.lua")
 -- require("lsp-config.javascript")
 -- require('lsp-config.svelte')
 require('lsp-config.markdown')
-require('lsp-config.tailwindcss')
+-- require('lsp-config.tailwindcss')
 
 -- general
 -- lvim.autosave = true

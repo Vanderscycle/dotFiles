@@ -3,6 +3,11 @@ function killPort(){
   lsof -i TCP:$1 | grep LISTEN | awk -F " " '{print$2}' | xargs kill -9
 }
 
+#TODO: use ripgrep
+function agr() { #file search replace
+ag -0 -l $1 | xargs -0 sed -ri.bak -e "s/$1/$2/g"
+}
+
 # gpg amd ssh
 eval `keychain --eval --quiet --agents gpg,ssh ~/.ssh/endavourGit`
 
