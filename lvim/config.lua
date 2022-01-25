@@ -3,14 +3,14 @@
 
 --LSP
 -- require("lsp-config.tailwindcss")
-
 --TODO: fix selene stylua not beign found
 require("lsp-config.lua")
+-- require("plugins.wilder")
 -- require("lsp-config.typescript")
 -- require("lsp-config.javascript")
 -- require('lsp-config.svelte')
-require('lsp-config.markdown')
--- require('lsp-config.tailwindcss')
+require("lsp-config.markdown")
+require("lsp-config.tailwindcss")
 
 -- general
 -- lvim.autosave = true
@@ -31,7 +31,7 @@ lvim.keys.normal_mode = {
 	["<leader>sT"] = ":Telescope current_buffer_fuzzy_find<cr>",
 	["<leader>sF"] = ':lua require("telescope.builtin").find_files({hidden=true, no_ignore=true, find_command=rg})<cr>',
 	["<leader>si"] = ":Telescope media_files<cr>",
-  ["<leader>B"] = ":lua require 'telescope'.extensions.file_browser.file_browser()<CR>"
+	["<leader>B"] = ":lua require 'telescope'.extensions.file_browser.file_browser()<CR>",
 }
 -- unmap a default keymappinig
 -- lvim.keys.normal_mode["<C-Up>"] = ""
@@ -69,15 +69,15 @@ lvim.builtin.which_key.mappings["n"] = {
 	name = "+package.json",
 	s = { ":lua require('package-info').show()<cr>", "show outdated packages" },
 	d = { ":lua require('package-info').delete()<cr>", "delete package" },
-  p = {":lua require('package-info').change_version()<cr>", "change package version"},
-  i = {":lua require('package-info').install()<cr>","install new package"},
-  r = {":lua require('package-info').reinstall()<cr>", "reinstall package"}
+	p = { ":lua require('package-info').change_version()<cr>", "change package version" },
+	i = { ":lua require('package-info').install()<cr>", "install new package" },
+	r = { ":lua require('package-info').reinstall()<cr>", "reinstall package" },
 }
 
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 
 lvim.builtin.notify.active = true
-lvim.builtin.notify.opts.background_colour = 'normal'
+lvim.builtin.notify.opts.background_colour = "normal"
 lvim.builtin.cmp.completion.keyword_length = 2
 lvim.lsp.automatic_servers_installation = true
 lvim.builtin.dashboard.active = true
@@ -107,16 +107,16 @@ lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 -- generic LSP settings
 -- Additional Plugins
 lvim.plugins = {
-	-- theme
+	-- themes
 	{ "folke/tokyonight.nvim" },
 	{ "catppuccin/nvim" },
 	{ "LunarVim/ColorSchemes" },
 	--extra languages'
-  {'h-hg/fcitx.nvim'}, --chinese input
-  -- WARN: install binaries
-  --https://www.youtube.com/watch?v=MOaws1ozqNw
+	-- { "h-hg/fcitx.nvim" }, --chinese input
+	-- WARN: install binaries
+	--https://www.youtube.com/watch?v=MOaws1ozqNw
 	-- { "ChristianChiarulli/vim-solidity" },
-  -- {'lervag/vimtex'},
+	-- {'lervag/vimtex'},
 	-- lsp
 	{
 		"simrat39/symbols-outline.nvim",
@@ -130,7 +130,7 @@ lvim.plugins = {
 			vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
 		end,
 	},
--- movement
+	-- movement
 	{
 		"ggandor/lightspeed.nvim",
 		event = "BufRead",
@@ -148,9 +148,9 @@ lvim.plugins = {
 		end,
 	},
 	-- git
-  {'kdheepak/lazygit.nvim'},
-  -- search
-  {'mhinz/vim-grepper'},
+	{ "kdheepak/lazygit.nvim" },
+	-- search
+	{ "mhinz/vim-grepper" },
 	-- windows (qickFix and peaking buffer)
 	{
 		"kevinhwang91/nvim-bqf",
@@ -188,12 +188,16 @@ lvim.plugins = {
 				debug = false, -- Print debug information
 				opacity = nil, -- 0-100 opacity level of the floating window where 100 is fully transparent.
 				post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
+				dismiss_on_move = true,
 				-- You can use "default_mappings = true" setup option
 				-- Or explicitly set keybindings
-				-- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-				-- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
-				-- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+				vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>"),
+				vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>"),
+				vim.cmd("nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>"),
+				vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>"),
 			})
+			--gd gpd gD gpR leader + l + d/r/i
+			--TODO: remove the extra bindings
 		end,
 	},
 	-- better comment flags
@@ -204,20 +208,20 @@ lvim.plugins = {
 			require("todo-comments").setup()
 		end,
 	},
-  --language specific
-  --node
-  {
-    "vuki656/package-info.nvim",
-    requires = "MunifTanjim/nui.nvim",
-},
+	--language specific
+	--node
+	{
+		"vuki656/package-info.nvim",
+		requires = "MunifTanjim/nui.nvim",
+	},
 	-- telescope plugins
 	{
 		"nvim-telescope/telescope-fzy-native.nvim",
 		run = "make",
-		event = "BufRead"
+		event = "BufRead",
 	},
 	{ "nvim-telescope/telescope-media-files.nvim" },
-{ "nvim-telescope/telescope-file-browser.nvim" },
+	{ "nvim-telescope/telescope-file-browser.nvim" },
 	--markdown
 	-- You must install glow globally
 	-- https://github.com/charmbracelet/glow
@@ -247,22 +251,9 @@ lvim.plugins = {
 			vim.g.indent_blankline_show_first_indent_level = false
 		end,
 	},
-	{
-		"tzachar/cmp-tabnine",
-		config = function()
-			local tabnine = require("cmp_tabnine.config")
-			tabnine:setup({
-				max_lines = 1000,
-				max_num_results = 20,
-				sort = true,
-			})
-		end,
-
-	-- 	run = "./install.sh",
-	-- 	requires = "hrsh7th/nvim-cmp",
-	-- },
+	{ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" },
 	-- misc
-	-- refactoring plugin
+	--WARN: still in active development plugin
 	{
 		"ThePrimeagen/refactoring.nvim",
 		requires = {
@@ -270,7 +261,6 @@ lvim.plugins = {
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
 	},
-	--WARN: still in active development plugin
 	-- ssh into anything while using your local tools
 	--   {
 	--   'chipsenkbeil/distant.nvim',
@@ -306,19 +296,22 @@ lvim.plugins = {
 		end,
 		requires = "nvim-lua/plenary.nvim",
 	},
-  {
-  'David-Kunz/cmp-npm',
-  requires = {
-    'nvim-lua/plenary.nvim'
-  }
-}
-  --  {
-  --   'chaitanyabspripc/present.nvim',
-  --   config = function()
-  --     require('present').setup{
-  --       -- ... your config here
-  --     }
-  --   end
-  -- }
-}
+	{
+		"David-Kunz/cmp-npm",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
+	-- INFO: reexplore when it goes full lua
+	-- 	"gelguy/wilder.nvim",
+	-- 	event = { "CmdlineEnter", "CursorHold" },
+	-- },
+	--  {
+	--   'chaitanyabspripc/present.nvim',
+	--   config = function()
+	--     require('present').setup{
+	--       -- ... your config here
+	--     }
+	--   end
+	-- }
 }

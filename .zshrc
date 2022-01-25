@@ -34,13 +34,12 @@ USE_POWERLINE="true"
 
 # to exit terminal in nvim
 alias nvim=lvim
-alias vi=lvim
 alias :q=exit
 alias :qa=exit
 alias htop=bpytop
 alias ls="exa -al"
 alias nvimMd="nvim --listen 127.0.0.1:9999"
-alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/endavourGit`"
+alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/manjaroGit`"
 alias poke="pokemon-colorscripts -r"
 alias pokeCute="pokemon-colorscripts -n dewgong"
 poke
@@ -83,4 +82,5 @@ alias npm=pnpm
 export PNPM_HOME="/home/henri/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# source /home/henri/.config/broot/launcher/bash/br
+# doots
+export DOOTS_USER_NAME="henri"
