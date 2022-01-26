@@ -221,7 +221,6 @@ EOF"
 # => Containers (Podman/buildah)
 # -----------------------------------------------------------------------------
 
-
 echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
 sudo pacman -S --noconfirm --needed podman buildah
 sudo touch /etc/subuid
@@ -380,7 +379,7 @@ chmod +x betterdiscordctl
 sudo mv betterdiscordctl /usr/local/bin
 betterdiscordctl install
 
-yay -S --noconfirm firefox firefox-developer-edition
+yay -S --noconfirm firefox firefox-developer-edition qimgv-light
 
 # I actually rely on vim more than libreoffice
 #sudo pacman -S libreoffice-fresh

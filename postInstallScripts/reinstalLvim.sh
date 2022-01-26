@@ -13,4 +13,6 @@ sudo bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/
 # syncing my doots
 echo -e "=> syncing doots"
 bash ~/Documents/dotFiles/postInstallScripts/syncDootsLocal.sh
+echo -e "=> refreshing dunst"
+bash ~/Documents/dotFiles/dunst/reloadDunst.sh
 
