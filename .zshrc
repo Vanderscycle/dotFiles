@@ -39,7 +39,7 @@ alias :qa=exit
 alias htop=bpytop
 alias ls="exa -al"
 alias nvimMd="nvim --listen 127.0.0.1:9999"
-alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/manjaroGit`"
+alias gitSsh="eval `keychain --eval --agents gpg,ssh ~/.ssh/endavourGit`"
 alias poke="pokemon-colorscripts -r"
 alias pokeCute="pokemon-colorscripts -n dewgong"
 poke
@@ -77,6 +77,11 @@ export LC_COLLATE="C" # hidden files on top
 #kitty
 export KITTY_LISTEN_ON=unix:/tmp/kitty
 
+# qv
+# alias iv="qimgv"
+
+# # zellij
+alias zel="zellij options --theme tokyonightDark"
 # pnpm
 alias npm=pnpm
 export PNPM_HOME="/home/henri/.local/share/pnpm"
