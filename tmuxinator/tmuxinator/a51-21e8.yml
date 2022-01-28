@@ -1,0 +1,31 @@
+# /home/henri/.config/tmuxinator/devEnv.yml
+
+name: devEnv
+root: .
+
+windows:
+  - editor:
+      panes:
+        - lvim
+  # - Trie:
+  #     layout:
+  #     panes:
+  #       - nvim
+  #       - cd ./trieDataStructure && npm run dev
+  - NestJs(server):
+      layout: even-horizontal
+      panes: 
+        - npm i && npm run start:dev
+        - cd documentation && npm i && npm run dev
+  # - docker/db:
+  #     layout: even-vertical
+  #     panes:
+  #       - docker ps -
+  - tools:
+      panes:
+        - postman
+        # - mongodb-compass
+        - firefox 'http://localhost:3100'
+  - monitoring:
+      panes:
+        - bpytop

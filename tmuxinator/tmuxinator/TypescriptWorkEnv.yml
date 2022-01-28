@@ -1,0 +1,23 @@
+# /home/henri/.config/tmuxinator/TypescriptWorkEnv.yml
+
+name: TypescriptWorkEnv
+root: .
+#https://thoughtbot.com/blog/templating-tmux-with-tmuxinator
+windows:
+  - editor:
+      layout: main  #main-vertical
+      panes:
+        - nvim 
+
+  - server:
+    #layout: 232x53,0,0[232x27,0,0{115x27,0,0,10,116x27,116,0,12},232x25,0,28,11] # two square in the top half and one long 
+      layout: even-horizontal # so that I may read the errors
+      panes:
+        - npm run watch 
+        - npm run dev
+  - browser: brave 'http://localhost:4000' 
+  - monitor:
+      layout: main
+      panes:
+        - htop
+
