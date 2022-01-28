@@ -10,7 +10,7 @@ for DOTFILE in "${StringArray[@]}"; do
 done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
-declare -a ConfArray=("lvim","fish","broot","tmuxinator","zellij","tmux", "kitty", "xmobar", "dunst","fontconfig")
+declare -a ConfArray=("lvim" "fish" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::local -> doots"    
   rsync -auv --progress  ~/.config/$CONF ~/Documents/dotFiles/$CONF
