@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 function killPort(){
   lsof -i TCP:$1 | grep LISTEN | awk -F " " '{print$2}' | xargs kill -9
 }
@@ -22,9 +22,14 @@ function save(){
 # zellij --layout-path ~/.config/zellij/workspaces/example.yaml options --simplified-ui true
 
 function sync(){
-    (cd ~/Documents/dotFiles/postInstallScripts/ &&
-      git pull &&
-      bash ./syncDootsLocal.sh)
+
+  (cd ~/Documents/dotFiles/postInstallScripts/ &&
+    git pull &&
+    bash ./syncDootsLocal.sh)
+  if [ "$1" != "-u" ]; then # update
+    sudo pacman -Syu
+    xmonad --recompile
+  fi
 }
 
 function hck(){
