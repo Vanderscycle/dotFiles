@@ -26,10 +26,11 @@ function sync(){
   (cd ~/Documents/dotFiles/postInstallScripts/ &&
     git pull &&
     bash ./syncDootsLocal.sh)
-  if [ "$1" != "-u" ]; then # update
-    sudo pacman -Syu
+}
+
+function updateOs(){
+      sudo pacman -Syu
     xmonad --recompile
-  fi
 }
 
 function hck(){
