@@ -12,6 +12,7 @@
  - [ ] add gpg
  - [x] add the duntsrcc to the doots
  - [ ] add lua as a [wordprocesor](https://www.reddit.com/r/neovim/comments/rz4yxj/using_neovim_and_lua_as_a_wordprocessor/)
+ - [ ] discord/spicetify are not installing the themes proprely 
 
 ## Short term
 - [ ] create a user preference where the user can choose what to save and sync

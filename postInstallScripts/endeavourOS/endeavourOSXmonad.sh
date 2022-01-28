@@ -411,10 +411,11 @@ sudo chmod a+wr /opt/spotify/Apps -R
 #Configuring spotify themes
 spicetify
 spicetify backup apply enable-devtool
-(cd ~/.config/spicetify/Themes/ \
-&& git clone https://github.com/NYRI4/Comfy-spicetify \
-&& spicetify config current_theme Comfy-spicetify \
-&& spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 \
+# BUG: something isn't right with spicetify
+(cd ~/.config/spicetify/Themes/ 
+&& git clone https://github.com/NYRI4/Comfy-spicetify 
+&& spicetify config current_theme Comfy-spicetify 
+&& spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 
 && spicetify apply)
 
 # launch config keeb
@@ -422,7 +423,6 @@ spicetify backup apply enable-devtool
 git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-keebs/ 
 (cd ~/Programs/Launch-keebs && sudo cargo run --release)
 
-#WARN: test the following
 #TODO: add the betterDiscord folder to the sync and better10k
 yay -S --noconfirm zoom transmission-qt
 echo -e 'Done.\n'
