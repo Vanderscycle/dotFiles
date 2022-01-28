@@ -11,6 +11,7 @@ done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
 rsync -av --progress ~/.config/lvim/ ~/Documents/dotFiles/lvim/
+rsync -av --progress  ~/.config/fish/ ~/Documents/dotFiles/fish/
 rsync -av --progress ~/.config/broot/ ~/Documents/dotFiles/broot
 rsync -av --progress ~/.config/tmuxinator/ ~/Documents/dotFiles/tmuxinator/
 rsync -av --progress ~/.config/zellij/ ~/Documents/dotFiles/zellij/

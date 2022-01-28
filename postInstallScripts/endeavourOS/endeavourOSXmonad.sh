@@ -77,12 +77,12 @@ sudo pacman -S --noconfirm --needed  clang
 echo -e 'Done.\n'
 
 #bash
-yay -S --noconfirm --needed shellcheck-bin
+sudo yay -S --noconfirm --needed shellcheck-bin
 
 #Python
 echo -e '\n=> Installing Miniconda'
 cd ~
-yay -S -needed --noconfirm miniconda3
+yay -S --needed --noconfirm miniconda3
 sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 conda install -cy conda-forge pynvim
 echo -e 'Done.\n'
@@ -99,7 +99,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing Tmux and tmuxinator'
 sudo pacman -S --noconfirm tmux
-yay -S --noconfirm --needed tmuxinator
+sudo yay -S --noconfirm --needed tmuxinator
 echo -e 'Done.\n'
 
 echo -e '\n=> Installing Zellig'
@@ -294,6 +294,20 @@ sudo pacman -Syu --noconfirm
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
+# => Let's actually move to fish
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Installing oh-my-zsh'
+sudo pacman -S --noconfirm --needed fish
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher # like zplug
+fisher install ilancosman/tide #use that or starship
+fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
+fisher install jorgebucaran/autopair.fish #same as tpope autopair 
+fisher install PatrickF1/fzf.fish #fzf but fish
+echo -e 'Done. \n'
+
+
+# -----------------------------------------------------------------------------
 # => Fish but in zsh (through on-my-zsh)
 # -----------------------------------------------------------------------------
 
@@ -325,7 +339,7 @@ echo -e 'Done.\n'
 
 echo '\n=>Installing amazing tui'
 echo 'Installing bpytop (bashtop)'
-conda -cy install psutil
+conda install -cy psutil
 sudo pacman -S --noconfirm --needed bpytop 
 
 echo 'tui file navigator'
@@ -350,6 +364,7 @@ sudo npm install -g @nestjs/cli write-good
 # -----------------------------------------------------------------------------
 # => enhancing gnome
 # -----------------------------------------------------------------------------
+
 echo '\n=> Gnome tweaks'
 Sudo pacman -S --noconfirm --needed gnome-tweaks
 echo -e 'done'
@@ -357,8 +372,8 @@ echo -e 'done'
 # -----------------------------------------------------------------------------
 # => bluetooth
 # -----------------------------------------------------------------------------
-#BUG: warn bug in progress
-sudo pacman -S --needed --noconfirm bluez bluez-utils
+
+sudo pacman -S --needed --noconfirm bluez bluez-utils blueman
 sudo sd "#AutoEnable=false" "AutoEnable=true" /etc/bluetooth/main.conf
 sudo modprobe btusb
 sudo systemctl enable --now bluetooth
@@ -369,6 +384,7 @@ sudo systemctl enable --now bluetooth
 pacman -S --needed --noconfirm pulseaudio-equalizer pavucontrol
 pactl load-module module-equalizer-sink
 pactl load-module module-dbus-protocol
+
 # -----------------------------------------------------------------------------
 # => Local application (gui)
 # -----------------------------------------------------------------------------
@@ -384,8 +400,8 @@ yay -S --noconfirm firefox firefox-developer-edition qimgv-light
 # I actually rely on vim more than libreoffice
 #sudo pacman -S libreoffice-fresh
 
-yay -S --noconfirm zoom steam discord vlc spotify spicetify-cli
-yay -S --noconfirm postman-bin
+yay -S --needed --noconfirm zoom steam discord vlc spotify spicetify-cli
+yay -S --needed --noconfirm postman-bin
 
 #adjusting spotify permission
 #INFO: https://github.com/khanhas/spicetify-cli/wiki/Installation#spotify-installed-from-aur
@@ -418,9 +434,16 @@ echo -e 'Done.\n'
 echo -e '\n=> installing neovim npm plugins'
 sudo npm install -g neovim tree-sitter-cli
 
+echo -e '\n=> syncing doots'
+chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
+(cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
+}
+source ~/.zshrc
+source ~/.zshenv
+
 echo '=>Rust and cargo'
-# TODO: find a way to skip install (pass a 1)
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+zx
 cargo install --branch main --git https://github.com/Kampfkarren/selene selene
 cargo install stylua fd-find 
 source $HOME/.cargo/env/
@@ -433,11 +456,7 @@ sudo bash install.sh --noinstall-dependencies
 rm install.sh
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 
-echo -e '\n=> syncing doots'
-chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
-(cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
 
-}
 
 if [ -f /usr/bin/endeavourOSXmonad.sh ]; then
   after_reboot
