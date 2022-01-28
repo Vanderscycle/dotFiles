@@ -10,17 +10,23 @@ for DOTFILE in "${StringArray[@]}"; do
 done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
-rsync -av --progress ~/.config/lvim/ ~/Documents/dotFiles/lvim/
-rsync -av --progress  ~/.config/fish/ ~/Documents/dotFiles/fish/
-rsync -av --progress ~/.config/broot/ ~/Documents/dotFiles/broot
-rsync -av --progress ~/.config/tmuxinator/ ~/Documents/dotFiles/tmuxinator/
-rsync -av --progress ~/.config/zellij/ ~/Documents/dotFiles/zellij/
-rsync -av --progress ~/.config/tmux/ ~/Documents/dotFiles/tmux/
-rsync -av --progress ~/.config/kitty/ ~/Documents/dotFiles/kitty/
+declare -a ConfArray=("lvim","fish","broot","tmuxinator","zellij","tmux", "kitty", "xmobar", "dunst","fontconfig")
+for CONF in "${ConfArray[@]}"; do
+  echo -e "\n=>${CONF}::local -> doots"    
+  rsync -auv --progress  ~/.config/$CONF ~/Documents/dotFiles/$CONF
+done
 rsync -av --progress  ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
-rsync -av --progress ~/.config/xmobar/ ~/Documents/dotFiles/xmobar/
-rsync -av --progress ~/.config/dunst/ ~/Documents/dotFiles/dunst/
-rsync -av --progress ~/.config/fontconfig/ ~/Documents/dotFiles/fontconfig/ # fonts.conf
+
+# rsync -av --progress ~/.config/lvim/ ~/Documents/dotFiles/lvim/
+# rsync -av --progress  ~/.config/fish/ ~/Documents/dotFiles/fish/
+# rsync -av --progress ~/.config/broot/ ~/Documents/dotFiles/broot
+# rsync -av --progress ~/.config/tmuxinator/ ~/Documents/dotFiles/tmuxinator/
+# rsync -av --progress ~/.config/zellij/ ~/Documents/dotFiles/zellij/
+# rsync -av --progress ~/.config/tmux/ ~/Documents/dotFiles/tmux/
+# rsync -av --progress ~/.config/kitty/ ~/Documents/dotFiles/kitty/
+# rsync -av --progress ~/.config/xmobar/ ~/Documents/dotFiles/xmobar/
+# rsync -av --progress ~/.config/dunst/ ~/Documents/dotFiles/dunst/
+# rsync -av --progress ~/.config/fontconfig/ ~/Documents/dotFiles/fontconfig/ # fonts.conf
 
 
 # rsync -auv --progress ~/.local/share/lunarvim "/$DIR/lunarvim/"

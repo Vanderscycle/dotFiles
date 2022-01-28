@@ -142,7 +142,7 @@ yay -S --needed --noconfirm glow sysz
 echo -e 'Configuring SSH'
 # https://pandammonium.org/how-to-change-a-git-repository-from-https-to-ssh/
 mkdir ~/.ssh/
-cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f endavourGit -N ""
+(cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f endavourGit -N "")
 eval $(ssh-agent)
 ssh-add  ~/.ssh/endavourGit
 # the rest has to be done manually (add the pub file to git)
@@ -400,8 +400,8 @@ yay -S --noconfirm firefox firefox-developer-edition qimgv-light
 # I actually rely on vim more than libreoffice
 #sudo pacman -S libreoffice-fresh
 
-yay -S --needed --noconfirm zoom steam discord vlc spotify spicetify-cli
-yay -S --needed --noconfirm postman-bin
+yay -S --needed --noconfirm zoom steam discord vlc spotify spicetify-cli 
+yay -S --needed --noconfirm postman-bin slack-desktop
 
 #adjusting spotify permission
 #INFO: https://github.com/khanhas/spicetify-cli/wiki/Installation#spotify-installed-from-aur
@@ -412,11 +412,11 @@ sudo chmod a+wr /opt/spotify/Apps -R
 spicetify
 spicetify backup apply enable-devtool
 # BUG: something isn't right with spicetify
-(cd ~/.config/spicetify/Themes/ 
-&& git clone https://github.com/NYRI4/Comfy-spicetify 
-&& spicetify config current_theme Comfy-spicetify 
-&& spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 
-&& spicetify apply)
+(cd ~/.config/spicetify/Themes/ &&
+git clone https://github.com/NYRI4/Comfy-spicetify &&
+spicetify config current_theme Comfy-spicetify &&
+spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 &&
+spicetify apply)
 
 # launch config keeb
 #BUG: cargo may not work tho :/
