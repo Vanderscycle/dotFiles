@@ -1,7 +1,6 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- TODO: learn vim surround, vim-matchup, lazy-git and much more
 
-require("colorizer").setup(nil, { css = true })
 --LSP
 -- require("lsp-config.tailwindcss")
 --TODO: fix selene stylua not beign found
@@ -133,7 +132,6 @@ lvim.plugins = {
 			vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
 		end,
 	},
-	{ "norcalli/nvim-colorizer.lua" },
 	-- movement
 	{
 		"ggandor/lightspeed.nvim",
