@@ -8,6 +8,7 @@ for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
     rsync -auv --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
 done
+
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
 declare -a ConfArray=("lvim" "fish" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig")

@@ -1,0 +1,15 @@
+# /home/henri/.config/tmuxinator/aviary.yml
+
+name: aviary
+root: .
+
+windows:
+  - editor: nvim
+  - server:
+      layout: even-vertical
+      panes:
+        - yarn dev #svelte
+        - cd ~/Documents/aviaryTech/av1-web && yarn serve #vue
+  - database: psql -U postgres
+  - notes: cd ~/Documents/dotFiles/obsidian/ && nvim --listen 127.0.0.1:9999
+  - task Manager: htop

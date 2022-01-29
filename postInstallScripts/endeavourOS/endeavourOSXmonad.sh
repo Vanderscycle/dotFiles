@@ -305,7 +305,8 @@ fisher install franciscolourenco/done # notify when any process taking longer th
 fisher install jorgebucaran/autopair.fish #same as tpope autopair 
 fisher install PatrickF1/fzf.fish #fzf but fish
 fisher install edc/bass # allows bash in fish
-
+fisher install jorgebucaran/nvm.fish
+fisher install jethrokuan/z
 echo -e 'Done. \n'
 
 
