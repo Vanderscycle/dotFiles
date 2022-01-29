@@ -6,30 +6,19 @@ echo $(pwd)
 declare -a StringArray=(".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent" ".ripgreprc")
 for DOTFILE in "${StringArray[@]}"; do
     # can't use symbolic link since we want the file
-    rsync -auv --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
+    rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
 done
+    rsync -av --progress  ~/.config/fish/config.fish ~/Documents/dotFiles/config.fish
+
 
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
-declare -a ConfArray=("lvim" "fish" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig")
+
+declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "rg")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::local -> doots"    
-  rsync -auv --progress  ~/.config/$CONF ~/Documents/dotFiles/$CONF
+  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/$CONF
 done
 rsync -av --progress  ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 
-# rsync -av --progress ~/.config/lvim/ ~/Documents/dotFiles/lvim/
-# rsync -av --progress  ~/.config/fish/ ~/Documents/dotFiles/fish/
-# rsync -av --progress ~/.config/broot/ ~/Documents/dotFiles/broot
-# rsync -av --progress ~/.config/tmuxinator/ ~/Documents/dotFiles/tmuxinator/
-# rsync -av --progress ~/.config/zellij/ ~/Documents/dotFiles/zellij/
-# rsync -av --progress ~/.config/tmux/ ~/Documents/dotFiles/tmux/
-# rsync -av --progress ~/.config/kitty/ ~/Documents/dotFiles/kitty/
-# rsync -av --progress ~/.config/xmobar/ ~/Documents/dotFiles/xmobar/
-# rsync -av --progress ~/.config/dunst/ ~/Documents/dotFiles/dunst/
-# rsync -av --progress ~/.config/fontconfig/ ~/Documents/dotFiles/fontconfig/ # fonts.conf
-
-
-# rsync -auv --progress ~/.local/share/lunarvim "/$DIR/lunarvim/"
-
-#! should create a weekly upload schedule
+#TOOD add ag , wgetrc, curlrc? 

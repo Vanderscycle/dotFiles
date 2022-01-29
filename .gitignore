@@ -151,5 +151,5 @@ lunarvim/lunarvim/site/pack/*
 
 #TODO: clean out this old af gitingore like what the hell
 # https://stackoverflow.com/questions/41264102/how-to-ignore-all-subfolders-in-a-folder-with-gitignore
-!fish
-fish/*
+# !fish
+# fish/*
