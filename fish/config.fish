@@ -1,3 +1,3 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+  # Need to learn how to export/ source and how to create a function
 end

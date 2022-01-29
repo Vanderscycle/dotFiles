@@ -304,6 +304,8 @@ fisher install ilancosman/tide #use that or starship
 fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
 fisher install jorgebucaran/autopair.fish #same as tpope autopair 
 fisher install PatrickF1/fzf.fish #fzf but fish
+fisher install edc/bass # allows bash in fish
+
 echo -e 'Done. \n'
 
 

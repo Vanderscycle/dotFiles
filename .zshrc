@@ -13,21 +13,16 @@ plugins=(git fzf zsh-better-npm-completion zsh-autosuggestions zsh-syntax-highli
 export ZSH="/home/henri/.oh-my-zsh"
 source $ZSH/oh-my-zsh.sh
 
-
 #fzf
 export FZF_BASE=/usr/bin/fzf
-export FZF_DEFAULT_COMMAND='rg'
-DISABLE_FZF_KEY_BINDINGS="false"
-DISABLE_FZF_AUTO_COMPLETION="false"
-
+export DISABLE_FZF_KEY_BINDINGS="false"
+export DISABLE_FZF_AUTO_COMPLETION="false"
+export FZF_DEFAULT_COMMAND='fdfind --type f'
+export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
 export TERMINAL=kitty
+
 # Use powerline
 USE_POWERLINE="true"
-#BUG: do we even use zplug?
-# #zplug addition
-# if [ -f /home/henri/.zplug/init.zsh ]; then
-#     source /home/henri/.zplug/init.zsh
-# fi
 
 # vim keys
 #set -o vi
@@ -48,9 +43,7 @@ poke
 GPG_TTY=$(tty)
 export GPG_TTY=$(tty)
 export ENHANCD_FILTER="fzf --preview 'tree -d -C {} | head -100'"
-export FZF_DEFAULT_COMMAND='fdfind --type f'
-export FZF_DEFAULT_OPTS="--layout=reverse --inline-info --height=80%"
-export PATH="/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin"
+export PATH="/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri.config/broot"
 export EDITOR=lvim
 
 alias luamake=/home/henri/.config/lua-language-server/3rd/luamake/luamake 
