@@ -5,7 +5,7 @@ echo $(pwd)
 # https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where 
 declare -a StringArray=(".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent" ".ripgreprc")
 for DOTFILE in "${StringArray[@]}"; do
-    # can't use symbolic link since we want the file
+      echo -e "\n=>${CONF}::local -> doots"    
     rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
 done
     rsync -av --progress  ~/.config/fish/config.fish ~/Documents/dotFiles/config.fish
@@ -17,8 +17,8 @@ done
 declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "rg")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::local -> doots"    
-  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/
+  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/$CONF
 done
-rsync -av --progress  ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
+rsync -av --progress ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 
 #TOOD add ag , wgetrc, curlrc? 
