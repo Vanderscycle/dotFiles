@@ -5,7 +5,7 @@ echo $(pwd)
 # https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where 
 declare -a StringArray=(".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent" ".ripgreprc")
 for DOTFILE in "${StringArray[@]}"; do
-      echo -e "\n=>${CONF}::local -> doots"    
+      echo -e "\n=>${DOTFILE}::local -> doots"    
     rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
 done
     rsync -av --progress  ~/.config/fish/config.fish ~/Documents/dotFiles/config.fish
@@ -17,7 +17,7 @@ done
 declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "rg")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::local -> doots"    
-  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/$CONF
+  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/
 done
 rsync -av --progress ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 

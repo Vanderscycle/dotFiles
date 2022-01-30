@@ -2,6 +2,8 @@
 
 declare -a StringArray=( ".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent")
 for DOTFILE in "${StringArray[@]}"; do
+    echo -e "\n=>${DOTFILE}::doots --> local"    
+
     rsync -av  --progress ~/Documents/dotFiles/$DOTFILE ~/$DOTFILE
 done
     rsync -av --progress   ~/Documents/dotFiles/config.fish ~/.config/fish/config.fish
