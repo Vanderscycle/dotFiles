@@ -2,12 +2,14 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 # https://fishshell.com/docs/current/tutorial.html
 # set -x MyVariable SomeValue === export
-  pokemon-colorscripts -r
   set -xg EDITOR lvim
   set -xg SHELL fish
   set -xg TERMINAL kitty
   set -xg LV_BRANCH rolling  
+  keychain --eval --agents gpg,ssh ~/.ssh/endavourGit
+  pokemon-colorscripts -r
 end
+
 
 #aliases
 function npm
