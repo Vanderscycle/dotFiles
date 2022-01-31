@@ -3,9 +3,23 @@ if status is-interactive
 # https://fishshell.com/docs/current/tutorial.html
 # set -x MyVariable SomeValue === export
   pokemon-colorscripts -r
-  set -x EDITOR lvim
-  set -x SHELL fish
-  set -x TERMINAL kitty
+  set -xg EDITOR lvim
+  set -xg SHELL fish
+  set -xg TERMINAL kitty
+  set -xg LV_BRANCH rolling  
+end
+
+#aliases
+function npm
+	pnpm
+end
+
+function lvim
+ bash /home/henri/.local/bin/lvim
+end
+
+function nvim
+	lvim
 end
 
 function zx
