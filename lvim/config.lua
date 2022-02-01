@@ -14,6 +14,7 @@ require("lsp-config.tailwindcss")
 
 -- general
 -- lvim.autosave = true
+vim.opt.wrap = true
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "tokyonight"
@@ -25,6 +26,8 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
 lvim.keys.normal_mode["q"] = ""
+lvim.keys.normal_mode["<leader>o"] = ""
+lvim.keys.normal_mode["<leader>O"] = "0<>o"
 --TODO: move the keys to which_key plugin
 lvim.keys.normal_mode = {
 	-- empowered searches

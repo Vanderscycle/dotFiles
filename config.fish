@@ -7,6 +7,7 @@ if status is-interactive
   set -xg TERMINAL kitty
   set -xg LV_BRANCH rolling  
   keychain --eval --agents gpg,ssh ~/.ssh/endavourGit
+  ssh-add ~/.ssh/endavourGit
   pokemon-colorscripts -r
 end
 
@@ -33,17 +34,16 @@ function save
   set currentLocation echo $PWD
   cd ~/Documents/dotFiles/postInstallScripts/
   bash ./lnSet.sh
-
   for option in $argv
-      switch "$option"
-          case -m --message
-                git commit
-          case \*
-                git commit -m "$argv"
+    switch "$option"
+      case -m --message
+        git commit
+      case \*
+        git commit -m "$argv"
       end
-  end
-    git push
-  cd $currentLocation
+    end
+  git push
+  cd $currentLocation # not working
 end
 
 function sync
