@@ -9,16 +9,34 @@ if status is-interactive
   keychain --eval --agents gpg,ssh ~/.ssh/endavourGit
   ssh-add ~/.ssh/endavourGit
   pokemon-colorscripts -r
+
+  # nnn config
+# BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
+set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+set -xg NNN_FIFO '/tmp/nnn.fifo nnn'
+set -xg NNN_PLUG 'f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
+set -xg NNN_BMS 'd:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config'
+set -xg NNN_OPTS 'He'
+set -xg SPLIT 'v' # to split Kitty vertically
+set -xg LC_COLLATE 'C' # hidden files on top
 end
 
 
 #aliases
-function npm
-	pnpm
+function gsps
+  exec ssh-agent fish
 end
 
-function lvim
- bash /home/henri/.local/bin/lvim
+function npm 
+	pnpm $argv
+end
+
+function ls
+  exa -al $argv
+end
+
+function lvim $argv
+ bash /home/henri/.local/bin/lvim $argv
 end
 
 function nvim
