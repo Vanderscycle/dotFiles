@@ -35,6 +35,9 @@ if status is-interactive
 
   #kitty
   set -xg KITTY_LISTEN_ON unix:/tmp/kitty
+
+  #gpg
+  set -gx GPG_TTY (tty)
   
   # path -> Cargo, Conda 
   set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri.config/broot"
