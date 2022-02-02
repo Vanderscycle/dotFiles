@@ -1,0 +1,15 @@
+name: northernBlock
+root: .
+
+windows:
+  - editor:
+      panes:
+        - lvim
+  - tools:
+      panes:
+        - slack
+        - firefox 'https://www.office.com/'
+  - monitoring:
+      panes:
+        - bpytop
+
