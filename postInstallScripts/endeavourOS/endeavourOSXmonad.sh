@@ -4,7 +4,7 @@
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
 before_reboot(){
     # Do stuff
-
+#TODO: add the usb mounting https://www.youtube.com/watch?v=LkwZZIsY9uE
 echo '------------------------------------------------------------------------'
 echo '=> EndavorOs post-install script'
 echo '=> pre reboot'
@@ -403,8 +403,9 @@ yay -S --noconfirm firefox firefox-developer-edition qimgv-light
 # I actually rely on vim more than libreoffice
 #sudo pacman -S libreoffice-fresh
 
-yay -S --needed --noconfirm zoom steam discord vlc spotify spicetify-cli 
+yay -S --needed --noconfirm discord vlc spotify spicetify-cli 
 yay -S --needed --noconfirm postman-bin slack-desktop
+
 
 #adjusting spotify permission
 #INFO: https://github.com/khanhas/spicetify-cli/wiki/Installation#spotify-installed-from-aur
@@ -429,6 +430,15 @@ git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-
 #TODO: add the betterDiscord folder to the sync and better10k
 yay -S --noconfirm zoom transmission-qt
 echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Linux Gaming
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Gaming Monitah'
+yay -S --needed --noconfirm steam PathOfBuildingCommunity ytfzf lutris
+echo -e 'Done.\n'
+
 
 # -----------------------------------------------------------------------------
 # => syncing files and installing Neovim

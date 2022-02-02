@@ -1,7 +1,6 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-# https://fishshell.com/docs/current/tutorial.html
-# set -x MyVariable SomeValue === export
+  # Commands to run in interactive sessions can go here
+  # https://fishshell.com/docs/current/tutorial.html
   set -xg EDITOR lvim
   set -xg SHELL fish
   set -xg TERMINAL kitty
@@ -11,18 +10,44 @@ if status is-interactive
   pokemon-colorscripts -r
 
   # nnn config
-# BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
-set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-set -xg NNN_FIFO '/tmp/nnn.fifo nnn'
-set -xg NNN_PLUG 'f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
-set -xg NNN_BMS 'd:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config'
-set -xg NNN_OPTS He
-set -xg SPLIT 'v' # to split Kitty vertically
-set -xg LC_COLLATE 'C' # hidden files on top
+  # nnnTheme
+  set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+  set -xg NNN_FIFO '/tmp/nnn.fifo nnn'
+  set -xg NNN_PLUG 'f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
+  set -xg NNN_BMS 'd:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config'
+  set -xg NNN_OPTS He
+  set -xg SPLIT 'v' # to split Kitty vertically
+  set -xg LC_COLLATE 'C' # hidden files on top
+
+  #kitty
+  set -xg KITTY_LISTEN_ON unix:/tmp/kitty
+  
+  # path -> Cargo, Conda 
+  set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri.config/broot"
+end
+
+function nnnTheme
+  set -xg BLK "04"
+  set -xg CHR "04"
+  set -xg DIR "04"
+  set -xg EXE "00"
+  set -xg REG "00"
+  set -xg SYMLINK "06"
+  set -xg ORPHAN "01"
+  set -xg FIFO "0F"
+  set -xg SOCK "0F"
+  set -xg OTHER="02"
 end
 
 
 #aliases
+
+# zellij
+
+function zel
+  zellij options --theme tokyonightDark
+end
+
 function gsps
   exec ssh-agent fish
 end
@@ -95,4 +120,10 @@ function yay-ls ()
 end
 
 
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /home/henri/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
 
