@@ -165,6 +165,15 @@ sudo cp ~/hosts /etc/hosts
 rm ~/hosts
 
 echo -e 'Done.\n'
+echo -e 'Configuring GPG'
+gpg --full-gen-key
+git config --global gpg.program (which gpg)
+git config --global commit.gpgsign true
+gpg-connect-agent reloadagent /bye
+echo -e 'Done.\n'
+
+
+https://dev.to/mage1k99/how-to-sign-commits-in-git-for-fish-shell-4o5i
 
 # -----------------------------------------------------------------------------
 # => Font && colors

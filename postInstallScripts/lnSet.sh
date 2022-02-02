@@ -9,6 +9,7 @@ for DOTFILE in "${StringArray[@]}"; do
     rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
 done
     rsync -av --progress  ~/.config/fish/config.fish ~/Documents/dotFiles/config.fish
+    rsync -av --progress  ~/.gnupg/ ~/Documents/.gnupg
 
 
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
