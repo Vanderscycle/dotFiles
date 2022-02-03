@@ -6,7 +6,7 @@ before_reboot(){
     # Do stuff
 #TODO: add the usb mounting https://www.youtube.com/watch?v=LkwZZIsY9uE
 echo '------------------------------------------------------------------------'
-echo '=> EndavorOs post-install script'
+echo '=> EndavourOs post-install script'
 echo '=> pre reboot'
 echo 'Current os version: Atantis'
 echo 'wm: Xmonad w/ Xmobar'
@@ -32,7 +32,6 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => Annoying programs that requires user permission
 # -----------------------------------------------------------------------------
-
 
 echo -e '\n=> Installing zsh'
 yay -S --noconfirm --needed zsh
@@ -139,18 +138,28 @@ yay -S --needed --noconfirm glow sysz
 # => Security (ssh)
 # -----------------------------------------------------------------------------
 
-echo -e 'Configuring SSH'
+echo -e '\n=> Configuring SSH'
 # https://pandammonium.org/how-to-change-a-git-repository-from-https-to-ssh/
 mkdir ~/.ssh/
 (cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f endavourGit -N "")
 eval $(ssh-agent)
 ssh-add  ~/.ssh/endavourGit
-# the rest has to be done manually (add the pub file to git)
+echo -e 'Done.\n'
+
 
 #because everytime you open a new terminal you need to create an agent id
-echo -e 'Installing password manager (pass)'
+echo -e '\n=> Installing password manager (pass)'
 sudo pacman -S --needed --noconfirm pass gnupg keychain
 # https://www.gnupg.org/documentation/manuals/gnupg/Agent-OPTION.html
+echo -e 'Done.\n'
+
+echo -e '\n=> Adding hosts'
+curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts --output ~/hosts
+sudo cp ~/hosts /etc/hosts
+rm ~/hosts
+echo -e 'Done.\n'
+
+echo -e '\n=>Configuring GPG'
 mkdir ~/.gnupg/
 touch ~/.gnupg/gpg.conf
 touch ~/.gnupg/gpg-agent.conf
@@ -159,21 +168,15 @@ echo 'use-agent' >> ~/.gnupg/gpg.conf
 echo 'pinentry-mode loopback' >> ~/.gnupg/gpg.conf
 chmod 700 ~/.gnupg
 
-echo -e 'Adding hosts'
-curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn/hosts --output ~/hosts
-sudo cp ~/hosts /etc/hosts
-rm ~/hosts
-
-echo -e 'Done.\n'
-echo -e 'Configuring GPG'
+# https://dev.to/mage1k99/how-to-sign-commits-in-git-for-fish-shell-4o5i
 gpg --full-gen-key
 git config --global gpg.program (which gpg)
 git config --global commit.gpgsign true
 gpg-connect-agent reloadagent /bye
 echo -e 'Done.\n'
+#INFO: the rest has to be done manually (add the pub file to git for both ssh and gpg)
 
 
-https://dev.to/mage1k99/how-to-sign-commits-in-git-for-fish-shell-4o5i
 
 # -----------------------------------------------------------------------------
 # => Font && colors
@@ -367,11 +370,20 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => lsp
 # -----------------------------------------------------------------------------
+
 echo '\n=> npm packages for lsp and neovim'
 sudo npm install -g @nestjs/cli write-good 
+
 # write-good is a linter for markdown 
 
+# -----------------------------------------------------------------------------
+# =>  Android dev (so much pain)
+# -----------------------------------------------------------------------------
 
+#INFO: FOR MONDAY INSTALL
+echo '\n=> Android tools for maximum pain'
+# Sudo yay -S --noconfirm --needed android-studio java-openjfx android-tools
+echo -e 'done'
 
 # -----------------------------------------------------------------------------
 # => enhancing gnome
