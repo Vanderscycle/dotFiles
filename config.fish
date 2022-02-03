@@ -121,10 +121,20 @@ function pacman-ls
 end
 
 #yay
-function yay-ls () 
+function yay-ls
     yay -Slq | fzf -m --preview 'bat (yay -Si {1} | psub) (yay -Fl {1} | awk "{print \$2}" | psub)' | xargs -ro  yay -S
 end
 
+function tmuxinator-ls 
+    local ymlConfigs
+    # because we changed the behavior of ls (alias:ls = exa -al) we can use exa as vanila ls.
+    set -xg ymlConfigs (exa ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
+    echo $ymlConfigs
+
+    if [ -n "$ymlConfigs" ]
+        tmuxinator start $ymlConfigs
+    end
+end
 
 
 
