@@ -26,8 +26,9 @@ lvim.leader = "space"
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
 lvim.keys.normal_mode["q"] = ""
-lvim.keys.normal_mode["<leader>o"] = ""
-lvim.keys.normal_mode["<leader>O"] = "0<>o"
+lvim.keys.normal_mode["<leader>o"] = "o<Esc>" -- FIX THIS BINDING
+lvim.keys.normal_mode["<leader>O"] = "0<Esc>"
+
 --TODO: move the keys to which_key plugin
 lvim.keys.normal_mode = {
 	-- empowered searches
@@ -122,7 +123,12 @@ lvim.plugins = {
 	--https://www.youtube.com/watch?v=MOaws1ozqNw
 	-- { "ChristianChiarulli/vim-solidity" },
 	-- {'lervag/vimtex'},
-	-- lsp
+	-- {
+	-- 	"simrat39/rust-tools.nvim",
+	-- 	config = function()
+	-- 		require("rust-tools").setup({})
+	-- 	end,
+	-- },
 	{
 		"simrat39/symbols-outline.nvim",
 		cmd = "SymbolsOutline",

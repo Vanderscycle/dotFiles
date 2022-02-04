@@ -8,6 +8,9 @@ windows:
   - tools:
       panes:
         - android-studio
+        - appium
+        # - cd ~/Programs/ && ./Appium-Server-GUI-linux-1.22.0.AppImage  
+        - cd ~/Programs/ && ./Appium-Inspector-linux-2021.12.2.AppImage   
         - slack
         - firefox 'https://www.office.com/'
   - monitoring:
