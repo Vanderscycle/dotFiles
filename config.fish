@@ -131,7 +131,6 @@ function yay-ls
 end
 
 function tmuxinator-ls 
-    local ymlConfigs
     # because we changed the behavior of ls (alias:ls = exa -al) we can use exa as vanila ls.
     set -xg ymlConfigs (exa ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
     echo $ymlConfigs
