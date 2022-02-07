@@ -383,7 +383,8 @@ sudo npm install -g @nestjs/cli write-good
 
 #INFO: FOR MONDAY INSTALL
 echo '\n=> Android tools for maximum pain'
-# Sudo yay -S --noconfirm --needed android-studio java-openjfx android-tools
+# sudo yay -S --noconfirm --needed android-studio java-openjfx android-tools
+# npm install -g appium
 echo -e 'done'
 
 # -----------------------------------------------------------------------------
@@ -391,7 +392,7 @@ echo -e 'done'
 # -----------------------------------------------------------------------------
 
 echo '\n=> Gnome tweaks'
-Sudo pacman -S --noconfirm --needed gnome-tweaks
+sudo pacman -S --noconfirm --needed gnome-tweaks
 echo -e 'done'
 
 # -----------------------------------------------------------------------------
