@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 # sudo pacman -S --needed --noconfirm httpie && 
 
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
@@ -170,6 +170,7 @@ chmod 700 ~/.gnupg
 
 # https://dev.to/mage1k99/how-to-sign-commits-in-git-for-fish-shell-4o5i
 gpg --full-gen-key
+gpg --list-secret-keys --keyid-format
 git config --global gpg.program (which gpg)
 git config --global commit.gpgsign true
 gpg-connect-agent reloadagent /bye
