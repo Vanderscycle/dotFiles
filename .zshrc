@@ -82,3 +82,6 @@ export PATH="$PNPM_HOME:$PATH"
 
 # doots (sync var)
 export DOOTS_USER_NAME="henri"
+
+#gpg
+export GPG_TTY=$(tty)

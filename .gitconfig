@@ -2,7 +2,7 @@
 	# email = h52706578+Vanderscycle@users.noreply.github.com
   email = hvandersleyen@duck.com	
   name = Henri Vandersleyen
-	signingkey = 06C766643AF0B81F
+	signingkey = D9F43ED2A92852B0
 [alias]
   clearcache = !"git rm -r --cached ."
 # https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
