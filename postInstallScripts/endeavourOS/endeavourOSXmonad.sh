@@ -385,6 +385,9 @@ sudo npm install -g @nestjs/cli write-good
 echo '\n=> Android tools for maximum pain'
 # sudo yay -S --noconfirm --needed android-studio java-openjfx android-tools
 # npm install -g appium
+# download the appImage and rsync that garbage from Downloads -> Programs 
+# https://github.com/appium/appium-inspector/releases/tag/v2021.12.2
+# chmod +x *.AppImage
 echo -e 'done'
 
 # -----------------------------------------------------------------------------
