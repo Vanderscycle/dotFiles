@@ -83,7 +83,10 @@ echo -e '\n=> Installing Miniconda'
 cd ~
 yay -S --needed --noconfirm miniconda3
 sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+conda install -cy python=3.9
 conda install -cy conda-forge pynvim
+conda install -cy conda-forge flake8
+conda install -cy conda-forge black
 echo -e 'Done.\n'
 
 #JS/TS

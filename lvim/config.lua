@@ -1,19 +1,27 @@
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 -- TODO: learn vim surround, vim-matchup, lazy-git and much more
 
+lvim.autosave = true
 --LSP
 -- require("lsp-config.tailwindcss")
 --TODO: fix selene stylua not beign found
 require("lsp-config.lua")
+require("lsp-config.bash")
 -- require("plugins.wilder")
 -- require("lsp-config.typescript")
 -- require("lsp-config.javascript")
 -- require('lsp-config.svelte')
+require("lsp-config.python")
 require("lsp-config.markdown")
 require("lsp-config.tailwindcss")
 
+lvim.autocommands.custom_groups = {
+	-- On entering insert mode in any file, scroll the window so the cursor line is centered
+	{ "InsertEnter", "*", ":normal zz" },
+	-- {"","*", ":<Esc>" }
+}
+
 -- general
--- lvim.autosave = true
 vim.opt.wrap = true
 lvim.format_on_save = true
 lvim.lint_on_save = true

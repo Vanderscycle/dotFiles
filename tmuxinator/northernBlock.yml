@@ -4,7 +4,7 @@ root: .
 windows:
   - editor:
       panes:
-        - lvim
+        - conda activate northernBlock && gsps && lvim
   - tools:
       panes:
         - android-studio
