@@ -80,13 +80,14 @@ sudo yay -S --noconfirm --needed shellcheck-bin
 
 #Python
 echo -e '\n=> Installing Miniconda'
+export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
 cd ~
 yay -S --needed --noconfirm miniconda3
 sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
-conda install -cy python=3.9
-conda install -cy conda-forge pynvim
-conda install -cy conda-forge flake8
-conda install -cy conda-forge black
+conda install -c python=3.9
+conda install -c conda-forge pynvim
+conda install -c conda-forge flake8
+conda install -c conda-forge black
 echo -e 'Done.\n'
 
 #JS/TS
