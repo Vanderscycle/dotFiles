@@ -85,3 +85,10 @@ export DOOTS_USER_NAME="henri"
 
 #gpg
 export GPG_TTY=$(tty)
+
+#app dev (Android) I guess Java too
+export JAVA_HOME="/usr/bin/java"
+export PATH=$JAVA_HOME/bin:$PATH
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/tools
