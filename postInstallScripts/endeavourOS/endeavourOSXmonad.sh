@@ -139,7 +139,7 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 yay -S --needed --noconfirm glow sysz
 
 # -----------------------------------------------------------------------------
-# => Security (ssh)
+# => Security (ssh/gpg/password manager)
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Configuring SSH'
@@ -174,11 +174,18 @@ chmod 700 ~/.gnupg
 
 # https://dev.to/mage1k99/how-to-sign-commits-in-git-for-fish-shell-4o5i
 gpg --full-gen-key
-gpg --list-secret-keys --keyid-format
+gpg --list-secret-keys --keyid-format=long
 git config --global gpg.program (which gpg)
 git config --global commit.gpgsign true
 gpg-connect-agent reloadagent /bye
 echo -e 'Done.\n'
+
+echo -e '\n=>Installing the password manager'
+sudo pacman -S --noconfirm --needed bitwarden
+
+echo -e 'Done.\n'
+
+#TODO: since I have 2 gpg k
 #INFO: the rest has to be done manually (add the pub file to git for both ssh and gpg)
 
 
@@ -357,12 +364,12 @@ echo -e 'Done.\n'
 # => Local application (amazing tui)
 # -----------------------------------------------------------------------------
 
-echo '\n=>Installing amazing tui'
-echo 'Installing bpytop (bashtop)'
+echo -e '\n=>Installing amazing tui'
+echo -e 'Installing bpytop (bashtop)'
 conda install -cy psutil
 sudo pacman -S --noconfirm --needed bpytop 
 
-echo 'tui file navigator'
+echo -e 'tui file navigator'
 sudo pacman -S --noconfirm --needed mediainfo
 sudo pacman -S --noconfirm --needed nnn sxiv
 pip install ueberzug #--required for file preview
@@ -370,6 +377,8 @@ git clone https://github.com/jarun/nnn.git ~/Programs/
 (cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
 # installing the plugins
 (cd ~/Programs/nnn/ && curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh)
+echo -e "radically different browser with pivacy in mind"
+sudo pacman -S --noconfirm --needed qutebrowser #TODO: learn the bindings and reconfig them to make sense
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
