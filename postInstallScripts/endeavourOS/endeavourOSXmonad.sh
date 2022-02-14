@@ -387,7 +387,8 @@ echo -e 'Done.\n'
 
 echo '\n=> npm packages for lsp and neovim'
 sudo npm install -g @nestjs/cli write-good 
-
+sudo npm install -g @tailwindcss/language-server
+sudo npm install -g  svelte-language-server @typescript-eslint/eslint-plugin
 # write-good is a linter for markdown 
 
 # -----------------------------------------------------------------------------
@@ -397,6 +398,7 @@ sudo npm install -g @nestjs/cli write-good
 #INFO: FOR MONDAY INSTALL
 echo '\n=> Android tools for maximum pain'
 # sudo yay -S --noconfirm --needed android-studio java-openjfx android-tools
+ 
 # npm install -g appium
 # download the appImage and rsync that garbage from Downloads -> Programs 
 # https://github.com/appium/appium-inspector/releases/tag/v2021.12.2

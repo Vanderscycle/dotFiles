@@ -1,0 +1,18 @@
+name: fullstack Rust backend svelteKit frontend
+root: .
+
+windows:
+  - editor:
+      panes:
+        - gsps && nvim
+  - server:
+    panes:
+      - npm i && npm run dev
+
+  - tools:
+    panes:
+      - firefox "http://localhost:3000"
+  
+  - monitoring:
+    panes:
+      - htop
