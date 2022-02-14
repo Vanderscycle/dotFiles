@@ -12,8 +12,9 @@ windows:
         # - cd ~/Programs/ && ./Appium-Server-GUI-linux-1.22.0.AppImage  
         - cd ~/Programs/ && ./Appium-Inspector-linux-2021.12.2.AppImage   
         - slack
-        - firefox 'https://www.office.com/'
-        - firefox 'https://www.figma.com/file/RTONMlz3yhmsvljg9R1agL/Digital-ID-ODS-%2B-CGI%2FNB?node-id=1032%3A33678'
+        - firefox 'https://www.office.com/' # northernBlock email
+        - firefox 'https://www.figma.com/file/RTONMlz3yhmsvljg9R1agL/Digital-ID-ODS-%2B-CGI%2FNB?node-id=1032%3A33678' # the ap workflow
+        - firefox "https://start.atlassian.com/" #Jira
   - monitoring:
       panes:
         - bpytop
