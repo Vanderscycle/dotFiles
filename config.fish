@@ -122,7 +122,7 @@ function sync
   set currentLocation echo $PWD
   cd ~/Documents/dotFiles/postInstallScripts/
   git pull --all
-  bash ./syncDootsLocal
+  bash ./syncDootsLocal.sh
   cd $currentLocation
 end
 
