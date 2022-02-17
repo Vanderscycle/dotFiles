@@ -9,7 +9,7 @@ echo -e "=> Purging previous files"
 sudo bash ~/uninstall.sh
 rm ~/uninstall.sh
 
-eccho -e "=> Installing nvim latest bins"
+echo -e "=> Installing nvim latest bins"
 sudo bash ~/binstall.sh
 rm ~/binstall.sh
 
