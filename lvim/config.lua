@@ -14,6 +14,8 @@ require("lsp-config.svelte")
 require("lsp-config.python")
 require("lsp-config.markdown")
 require("lsp-config.tailwindcss")
+require("plugins.luaSnip")
+require("snippets.svelte")
 
 lvim.autocommands.custom_groups = {
 	-- On entering insert mode in any file, scroll the window so the cursor line is centered
@@ -123,7 +125,6 @@ lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 lvim.plugins = {
 	-- themes
 	{ "folke/tokyonight.nvim" },
-	{ "catppuccin/nvim" },
 	{ "LunarVim/ColorSchemes" },
 	--extra languages'
 	-- { "h-hg/fcitx.nvim" }, --chinese input
