@@ -87,6 +87,30 @@ function zx
   source ~/.config/fish/config.fish
 end
 
+function docker-crmAll
+    echo -e "Removing all containers"
+	docker stop (docker ps -q)
+	docker rm (docker ps -a -q)
+end
+
+function docker-irmAll
+	docker-crmAll
+  echo -e "Removing all images"
+	docker rmi (docker images -f "dangling=true" -q)
+end
+
+function docker-vrmAll
+  docker-irmAll
+  echo -e "removing all volumes"
+	docker volume rm (docker volume ls -qf dangling=true)
+	echo "done m8"
+end
+
+function docker-prmAll
+echo -e "pruning everything"
+	docker builder prune -af
+end
+
 # ~/.zshenv helper func
 # TODO: FIX ME!!!!
 function rga-fzf 
