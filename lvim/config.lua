@@ -11,7 +11,6 @@ require("lsp-config.markdown")
 -- require("lsp-config.tailwindcss")
 require("plugins.luaSnip")
 require("snippets.svelte")
-require("lspconfig").tailwindcss.setup({})
 lvim.autocommands.custom_groups = {
 	-- On entering insert mode in any file, scroll the window so the cursor line is centered
 	{ "InsertEnter", "*", ":normal zz" },
@@ -22,6 +21,8 @@ lvim.autocommands.custom_groups = {
 lvim.autosave = true
 lvim.format_on_save = true
 lvim.lint_on_save = true
+
+
 lvim.colorscheme = "tokyonight"
 vim.opt.relativenumber = true
 vim.opt.wrap = true
@@ -238,12 +239,12 @@ lvim.plugins = {
 	},
 
 	-- autoSave
-	{
-		"Pocco81/AutoSave.nvim",
-		config = function()
-			require("autosave").setup({ debounce_delay = 500 })
-		end,
-	},
+	-- {
+	-- 	"Pocco81/AutoSave.nvim",
+	-- 	config = function()
+	-- 		require("autosave").setup({ debounce_delay = 500 })
+	-- 	end,
+	-- },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufRead",

@@ -14,6 +14,7 @@ linters.setup({
 		filetypes = { "svelte" },
 	},
 })
+require("lspconfig").tailwindcss.setup({})
 
 -- local tailwindcss = require("lsp-config.tailwindcss")
 
