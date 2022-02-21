@@ -11,7 +11,7 @@ require("lsp-config.markdown")
 -- require("lsp-config.tailwindcss")
 require("plugins.luaSnip")
 require("snippets.svelte")
-
+require("lspconfig").tailwindcss.setup({})
 lvim.autocommands.custom_groups = {
 	-- On entering insert mode in any file, scroll the window so the cursor line is centered
 	{ "InsertEnter", "*", ":normal zz" },

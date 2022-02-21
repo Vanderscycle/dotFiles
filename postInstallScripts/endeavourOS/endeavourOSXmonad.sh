@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 # sudo pacman -S --needed --noconfirm httpie && 
 
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
