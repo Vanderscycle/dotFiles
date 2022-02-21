@@ -1,8 +1,3 @@
--- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
--- TODO: learn vim surround, vim-matchup, lazy-git and much more
-
-lvim.autosave = true
---LSP
 -- require("lsp-config.tailwindcss")
 --TODO: fix selene stylua not beign found
 require("lsp-config.lua")
@@ -13,7 +8,7 @@ require("lsp-config.bash")
 require("lsp-config.svelte")
 require("lsp-config.python")
 require("lsp-config.markdown")
-require("lsp-config.tailwindcss")
+-- require("lsp-config.tailwindcss")
 require("plugins.luaSnip")
 require("snippets.svelte")
 
@@ -24,15 +19,15 @@ lvim.autocommands.custom_groups = {
 }
 
 -- general
-vim.opt.wrap = true
+lvim.autosave = true
 lvim.format_on_save = true
 lvim.lint_on_save = true
 lvim.colorscheme = "tokyonight"
 vim.opt.relativenumber = true
+vim.opt.wrap = true
 --lvim.log.level = "debug"
--- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
--- add your own keymappin
+-- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
 lvim.keys.normal_mode["q"] = ""
@@ -49,10 +44,6 @@ lvim.keys.normal_mode = {
 	["<leader>bt"] = ":Telescope buffers<CR>",
 }
 
--- unmap a default keymappinig
--- lvim.keys.normal_mode["<C-Up>"] = ""
--- edit a default keymapping
-
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 local actions = require("telescope.actions")
 lvim.builtin.telescope.defaults.mappings = {
@@ -67,20 +58,6 @@ lvim.builtin.telescope.defaults.mappings = {
 		["<C-k>"] = actions.move_selection_previous,
 	},
 }
---INFO: telescope with nvim-bqf cool interaction with quickFix Lists
--- Search for text by calling <leader>st
--- you can then navigate between elementa using <C-J><C-K> and can start a selection by using <C-i>
--- if wanting all the fzf filtered results <C-q> (while in the telescope window) to send all to a quickFix list
--- if a selection was done previously then use <A-q> (while in the telescope window) to only send the items to a quickFix List
--- INFO: to toggle thet quickFix list use <A-q> while in normal mode to toggle the quickfixwind.
--- lsp integration can be had with folke/troule <Leader>td
-
---WARN: new command! You can use <A-j><A-k> to move line up and down!
--- INFO: usage trouble for its reference and all the bugs
-
--- Use which-key to add extra bindings with the leader-key prefix
--- BUG: known bug that when exiting the trouble quickfix window release to the wrong window
--- renbinded q
 lvim.builtin.which_key.mappings["n"] = {
 	name = "+package.json",
 	s = { ":lua require('package-info').show()<cr>", "show outdated packages" },
