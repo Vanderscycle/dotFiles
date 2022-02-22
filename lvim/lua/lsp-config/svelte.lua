@@ -3,6 +3,7 @@ formatters.setup({
 	{
 		exe = "prettier",
 		filetypes = { "svelte" },
+		command = "./node_modules/.bin/prettier",
 		args = { "--double-quote" },
 	},
 })
@@ -14,12 +15,3 @@ linters.setup({
 		filetypes = { "svelte" },
 	},
 })
-require("lspconfig").tailwindcss.setup({})
-
--- local tailwindcss = require("lsp-config.tailwindcss")
-
--- if tailwindcss.project_has_tailwindcss_dependency() == true then
--- 	require("lvim.lsp.manager").setup("tailwindcss")
--- else
--- 	vim.list_extend(lvim.lsp.override, { "tailwindcss", "svelte" })
--- end
