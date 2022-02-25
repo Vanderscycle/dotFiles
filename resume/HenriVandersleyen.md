@@ -1,9 +1,3 @@
-
----
-layout: cv
-title: Henri Vandersleyen
---- 
-
 # Henri Vandersleyen
 
 Victoria, BC 
@@ -17,7 +11,6 @@ https://github.com/Vanderscyclen
 2012 - Electrical Engineering B. eng: Royal Military College Canada
 
 ## Employment
-    --
 
 2021 Fullstack Software Developer Aviary Tech
   - Created a fullstack blockchain miner using the [Command and Query Responsibility Segregation (CQRS)](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) pattern, paired with a svelte frontend.
@@ -26,7 +19,7 @@ https://github.com/Vanderscyclen
   - Mastered VIM and Linux scripting for automation
   - Kept superior informed on issues and blockages
     
-2007 -> 2020 Royal Canadian Navy
+2007 Royal Canadian Navy
   - Retired as a fully qualified [Marine System Engineering Officer](https://forces.ca/en/career/marine-systems-engineering-officer/) where I informed, advised, and recommend technical courses of action to non-technical superiors during normal, wartime, emergency operations, and maintence periods.
   - Earned the admiration of my peers and superiors to my grit and can-do attitude in the face of great adversity.
   - Led multiple projects, small and large, varying from ceremonial duties to time and cost sensitive projects
@@ -34,22 +27,36 @@ https://github.com/Vanderscyclen
 
 ## Software Projects
 
-  Professional website
-    - My personal professional website used to showcase my competences
-    - Stack: NestJs backend, SvelteKi frontend, tailwindcss
-  EndavourOS installer
-    - open source Post-instal program to configure my Linux environement proprely and effortlessly
-    - Bash, modern unix tools, 
+Professional website
+  - My personal professional website used to showcase my competences and projects
+  - Stack: NestJs, SvelteKit, tailwindcss, Jest, cypress
+
+EndavourOS installer
+  - open source Post-instal program to configure my Linux environement proprely and effortlessly
+  - Bash, modern unix tools, 
 
 ## Open source contribution
   
-  A non exhaustive list of open source projects that I contributed:
-    - [Zellig](https://github.com/zellij-org/zellij) 
-    - [highlight.js](https://github.com/highlightjs/highlight.js)
-    - [prism-themes](https://github.com/PrismJS/prism-themes)
-    - [lunarVim](https://github.com/LunarVim/LunarVimCommunity)
+A non exhaustive list of open source projects that I contributed:
+  - [Zellig](https://github.com/zellij-org/zellij); 
+  - [highlight.js](https://github.com/highlightjs/highlight.js);
+  - [prism-themes](https://github.com/PrismJS/prism-themes);
+  - [lunarVim](https://github.com/LunarVim/LunarVimCommunity);
 
-
+## Skills
+| Languages/Framework  | Competence   | 
+|-------------- | -------------- | 
+| Bash/fish    | Expert     | 
+| Javascript    | Advanced     | 
+| Typescript    | Advanced     | 
+| Docker     | Advanced    | 
+| Python     | Advanced    | 
+| Numpy/Pandas     | Advanced    | 
+| Svelte    | Advanced     | 
+| NestJs    | Advanced     | 
+| Rust    | Intermediate     | 
+| Go    | Basic     | 
+| Lua/xmonad    | Basic    | 
 
 
 
