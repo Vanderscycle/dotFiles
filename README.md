@@ -1,5 +1,8 @@
 # Dotfiles
 
+I use this repo to hold my dotfiles in one place, and feel free to submit a pr.
+There's a backlog list of old issues found in the [todo.md](./todo.md) that I will go through when time and priority permits
+
 ## EndavourOS
 
 Install script is after a clean install and can be used on any arch-based distro.
@@ -8,10 +11,12 @@ wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallS
 ```
 # Screenshots
 
-WM: Xmonad
-Colorscheme: tokyonightDark
-IDE: Neovim(LunarVim)
-TMUX: Tmux/Zellij
+* WM: Xmonad
+* Colorscheme: tokyonightDark
+* IDE: Neovim(LunarVim)
+* TMUX: Tmux/Zellij
+* Terminal: kitty
+* Shell: Fish(zsh config available)
 
 ![Desktop layout img 1](./img/README/1645798633.png)
 ![Desktop layout img 2](./img/README/1645798767.png)
