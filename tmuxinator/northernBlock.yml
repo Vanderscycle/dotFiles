@@ -7,7 +7,6 @@ windows:
         - conda activate northernBlock
   - tools:
       panes:
-        - cd ~/Programs/ && ./Appium-Inspector-linux-2021.12.2.AppImage   
         - slack
         - firefox 'https://www.office.com/' &&  firefox 'https://www.figma.com/file/RTONMlz3yhmsvljg9R1agL/Digital-ID-ODS-%2B-CGI%2FNB?node-id=1032%3A33678' && firefox "https://start.atlassian.com/" 
   - monitoring:
@@ -15,5 +14,5 @@ windows:
         - bpytop
   - gui:
       panes:
-        - android-studio
+        - cd ~/Programs/ && ./Appium-Inspector-linux-2022.2.1.AppImage   
         - appium

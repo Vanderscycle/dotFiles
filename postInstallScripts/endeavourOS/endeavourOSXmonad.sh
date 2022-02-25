@@ -130,7 +130,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip 
-sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all
+sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr
 sudo yay -S --noconfirm openshift-client-bin # redhat openshift
 # installing pnpm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
