@@ -12,11 +12,10 @@ Victoria, BC<br>
 ## Employment
 
 2021 Fullstack Software Developer Aviary Tech
-  - Created a fullstack blockchain miner using the [Command and Query Responsibility Segregation (CQRS)](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) pattern, paired with a svelte frontend.
-  - Created DevOps pipeline, workflow automation, applied [The Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development)
+  - Created a fullstack blockchain miner using the [Command and Query Responsibility Segregation (CQRS)](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) pattern, paired with a svelte frontend
+  - Created DevOps pipeline, workflow automation, applied [Test Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) using Jest and cypress
   - Mentored and taught non-developers how to use javascript and the Svelte frontend framework
   - Mastered VIM and Linux scripting for automation
-  - Kept superior informed on issues and blockages
     
 2007 Royal Canadian Navy
   - Retired as a fully qualified [Marine System Engineering Officer](https://forces.ca/en/career/marine-systems-engineering-officer/) where I informed, advised, and recommend technical courses of action to non-technical superiors during normal, wartime, emergency operations, and maintence periods.
@@ -27,12 +26,12 @@ Victoria, BC<br>
 ## Software Projects
 
 Professional website
-  - My personal professional website used to showcase my competences and projects
-  - Stack: NestJs, SvelteKit, tailwindcss, Jest, cypress
+  My personal professional website used to showcase my competences and projects
+  Stack: NestJs, SvelteKit, tailwindcss, Jest, cypress
 
 EndavourOS installer
-  - open source Post-instal program to configure my Linux environment properly and effortlessly. My work is successful enough that my superior is using 
-  - Stack: Bash, modern unix tools 
+  open source Post-instal program to configure my Linux environment properly and effortlessly. My work is successful enough that my superior is using 
+  Stack: Bash, modern unix tools 
 
 ## Open source contribution
   
@@ -42,6 +41,8 @@ A non exhaustive list of open source projects that I contributed:
   - [prism-themes](https://github.com/PrismJS/prism-themes);
   - [lunarVim](https://github.com/LunarVim/LunarVimCommunity);
 
+<table border="0">
+ <tr>
 ## Programming Skills
 
 | Languages/Framework  | Competence level   | 
@@ -57,11 +58,13 @@ A non exhaustive list of open source projects that I contributed:
 | Rust    | Intermediate     | 
 | Go    | Basic     | 
 | Lua/xmonad    | Basic    | 
-
+</tr>
+<tr>
 ## Life Skills
 | what | Competence level  | 
 |-------------- | -------------- | 
 | English    | Fluent    | 
 | French   | Fluent    | 
 | 中文   | 中间    | 
-
+</tr>
+</table>
