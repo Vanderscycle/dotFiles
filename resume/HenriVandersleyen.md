@@ -42,10 +42,7 @@ A non exhaustive list of open source projects that I contributed:
   - [lunarVim](https://github.com/LunarVim/LunarVimCommunity);
 
 ## Programming Skills
-<table border="0">
- <tr>
-
-| Languages/Framework  | Competence level   | 
+| Language/Framework  | Competence level   | 
 |-------------- | -------------- | 
 | Bash/fish    | Expert     | 
 | Javascript    | Advanced     | 
@@ -58,16 +55,12 @@ A non exhaustive list of open source projects that I contributed:
 | Rust    | Intermediate     | 
 | Go    | Basic     | 
 | Lua/xmonad    | Basic    | 
-</tr>
-</table>
 
 ## Language skills
-<table border="0">
- <tr>
-| what | Competence level  | 
+
+| Language | Competence level  | 
 |-------------- | -------------- | 
 | English    | Fluent    | 
 | French   | Fluent    | 
 | 中文   | 中间    | 
-</tr>
-</table>
+

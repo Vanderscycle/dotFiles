@@ -361,7 +361,7 @@ sudo pacman -S --noconfirm --needed virtualbox
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => Local application (amazing tui)
+# => Local applications (amazing tui)
 # -----------------------------------------------------------------------------
 
 echo -e '\n=>Installing amazing tui'
@@ -392,11 +392,11 @@ sudo npm install -g  svelte-language-server @typescript-eslint/eslint-plugin
 # write-good is a linter for markdown 
 
 # -----------------------------------------------------------------------------
-# =>  Android dev (so much pain)
+# =>  Android dev (so much pain) lul
 # -----------------------------------------------------------------------------
 
 #INFO: FOR MONDAY INSTALL
-echo '\n=> Android tools for maximum pain'
+echo '\n=> Android tools for maximum pain, jk'
 # sudo yay -S --noconfirm --needed android-studio java-openjfx android-tools
  
 # npm install -g appium
@@ -439,7 +439,7 @@ chmod +x betterdiscordctl
 sudo mv betterdiscordctl /usr/local/bin
 betterdiscordctl install
 
-yay -S --noconfirm firefox firefox-developer-edition qimgv-light
+yay -S --noconfirm firefox firefox-developer-edition qimgv-light signal-desktop
 
 # I actually rely on vim more than libreoffice
 #sudo pacman -S libreoffice-fresh
