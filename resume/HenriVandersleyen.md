@@ -41,9 +41,9 @@ A non exhaustive list of open source projects that I contributed:
   - [prism-themes](https://github.com/PrismJS/prism-themes);
   - [lunarVim](https://github.com/LunarVim/LunarVimCommunity);
 
+## Programming Skills
 <table border="0">
  <tr>
-## Programming Skills
 
 | Languages/Framework  | Competence level   | 
 |-------------- | -------------- | 
@@ -59,8 +59,11 @@ A non exhaustive list of open source projects that I contributed:
 | Go    | Basic     | 
 | Lua/xmonad    | Basic    | 
 </tr>
-<tr>
-## Life Skills
+</table>
+
+## Language skills
+<table border="0">
+ <tr>
 | what | Competence level  | 
 |-------------- | -------------- | 
 | English    | Fluent    | 
