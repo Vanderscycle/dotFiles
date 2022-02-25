@@ -87,6 +87,10 @@ function zx
   source ~/.config/fish/config.fish
 end
 
+function glowAll
+  exa -a | entr -c  glow  "$argv"
+end
+
 function docker-crmAll
     echo -e "Removing all containers"
 	docker stop (docker ps -q)

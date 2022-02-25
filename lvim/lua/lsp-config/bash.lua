@@ -3,5 +3,6 @@ linters.setup({
 	{
 		exe = "shellcheck",
 		args = { "--severity", "warning" },
+		filetypes = { "bash" },
 	},
 })

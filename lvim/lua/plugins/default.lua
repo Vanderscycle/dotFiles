@@ -127,12 +127,12 @@ lvim.plugins = {
 	},
 
 	-- autoSave
-	-- {
-	-- 	"Pocco81/AutoSave.nvim",
-	-- 	config = function()
-	-- 		require("autosave").setup({ debounce_delay = 500 })
-	-- 	end,
-	-- },
+	{
+		"Pocco81/AutoSave.nvim",
+		config = function()
+			require("autosave").setup({ debounce_delay = 500 })
+		end,
+	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufRead",

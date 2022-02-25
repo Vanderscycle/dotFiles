@@ -386,7 +386,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo '\n=> npm packages for lsp and neovim'
-sudo npm install -g @nestjs/cli write-good 
+sudo npm install -g @nestjs/cli write-good markdown-pdf
 sudo npm install -g @tailwindcss/language-server
 sudo npm install -g  svelte-language-server @typescript-eslint/eslint-plugin
 # write-good is a linter for markdown 
