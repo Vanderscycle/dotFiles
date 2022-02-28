@@ -28,6 +28,6 @@ jobs:
           VALIDATE_BASH: true
           OUTPUT_FOLDER: super-linter.report
           OUTPUT_DETAILS: detailed
-          DEFAULT_BRANCH: master
+          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
