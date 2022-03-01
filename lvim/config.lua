@@ -4,12 +4,13 @@ require("plugins.default")
 require("lsp-config.lua")
 require("lsp-config.bash")
 -- require("plugins.wilder")
+-- require("ftplugin.typescript")
 require("lsp-config.typescript")
 require("lsp-config.javascript")
 -- require("lsp-config.svelte")
 require("lsp-config.python")
 require("lsp-config.markdown")
-require("lsp-config.tailwindcss")
+-- require("lsp-config.tailwindcss")
 -- require("lspconfig").tailwindcss.setup({})
 
 lvim.autocommands.custom_groups = {
@@ -92,6 +93,7 @@ lvim.builtin.treesitter.ensure_installed = {
 	"svelte",
 	"typescript",
 	"yaml",
+	"fish",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }

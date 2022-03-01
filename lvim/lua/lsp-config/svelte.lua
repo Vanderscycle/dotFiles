@@ -3,7 +3,7 @@ formatters.setup({
 	{
 		exe = "prettier",
 		filetypes = { "svelte" },
-		command = "./node_modules/.bin/prettier",
+		-- command = "./node_modules/.bin/prettier",
 		args = { "--double-quote" },
 	},
 })
