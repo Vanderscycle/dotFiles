@@ -1,0 +1,14 @@
+name: Rust app
+root: .
+
+windows:
+  - editor:
+      panes:
+        - gsps && nvim
+  - server:
+      panes:
+        - cargo watch 
+  - monitoring:
+      panes:
+        - htop
+

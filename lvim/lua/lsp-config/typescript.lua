@@ -1,7 +1,7 @@
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
 	{
-		exe = "null_ls",
+		exe = "prettier",
 		filetypes = { "typescript" },
 		args = { "--double-quote" },
 	},

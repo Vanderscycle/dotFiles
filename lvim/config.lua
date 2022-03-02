@@ -3,6 +3,7 @@
 require("plugins.default")
 require("lsp-config.lua")
 require("lsp-config.bash")
+require("lsp-config.rust")
 -- require("plugins.wilder")
 -- require("ftplugin.typescript")
 require("lsp-config.typescript")
@@ -22,7 +23,7 @@ lvim.autocommands.custom_groups = {
 
 -- lvim.autosave = true
 lvim.format_on_save = true
--- lvim.lint_on_save = true
+lvim.lint_on_save = true
 
 lvim.colorscheme = "tokyonight"
 vim.opt.relativenumber = true

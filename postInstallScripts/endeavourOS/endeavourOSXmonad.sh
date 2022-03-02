@@ -498,8 +498,10 @@ source ~/.zshenv
 echo '=>Rust and cargo'
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source $HOME/.cargo/env/
+cargo install ripgrep fd-find
 cargo install --branch main --git https://github.com/Kampfkarren/selene selene
 cargo install stylua fd-find 
+ cargo install cargo-watch
 echo -e 'Done.\n'
 
 echo -e '\n=> installing LunarVim'

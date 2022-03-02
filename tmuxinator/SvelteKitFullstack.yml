@@ -1,0 +1,19 @@
+name: web Dev
+root: .
+
+windows:
+  - editor:
+      panes:
+        - gsps && nvim
+  - server:
+      layout: even-horizontal
+      panes:
+        - npm i && npm run dev
+
+  - tools:
+      panes:
+        - firefox "http://localhost:3000"
+  
+  - monitoring:
+      panes:
+        - htop
