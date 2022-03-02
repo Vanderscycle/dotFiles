@@ -1,18 +1,15 @@
--- require("lsp-config.tailwindcss")
---TODO: fix selene stylua not beign found
+-- Imports
+-- =========================================
 require("plugins.default")
 require("lsp-config.lua")
 require("lsp-config.bash")
 require("lsp-config.rust")
--- require("plugins.wilder")
--- require("ftplugin.typescript")
 require("lsp-config.typescript")
 require("lsp-config.javascript")
--- require("lsp-config.svelte")
 require("lsp-config.python")
 require("lsp-config.markdown")
--- require("lsp-config.tailwindcss")
--- require("lspconfig").tailwindcss.setup({})
+-- Customization
+-- =========================================
 
 lvim.autocommands.custom_groups = {
 	-- On entering insert mode in any file, scroll the window so the cursor line is centered
@@ -100,3 +97,11 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
+
+-- Language Specific
+-- =========================================
+vim.list_extend(lvim.lsp.override, {
+	"rust_analyzer",
+})
+
+require("user.todoComments")

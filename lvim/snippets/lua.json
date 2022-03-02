@@ -1,0 +1,8 @@
+{
+  "apifun": {
+    "prefix": "api.",
+    "body": [
+      "vim.api.nvim_${1:buf}_${2:get}_${3:name}"
+    ]
+  }
+}
