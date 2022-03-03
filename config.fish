@@ -161,6 +161,10 @@ function update
   xmonad --recompile
 end
 
+function prun
+  sudo paccache -r
+end
+
 # function tx-ls
 
 #pacman

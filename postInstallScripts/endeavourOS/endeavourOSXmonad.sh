@@ -279,8 +279,17 @@ git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
 
 echo -e 'Configuring Mongo'
 sudo systemctl start mongodb
-sudo systemctl enable mongodb # allows it to start on start
+sudo systemctl enable mongodb 
+# allows it to start on start
 # sudo systemctl status mongodb # visual confirmation
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Enabling weekly system maintenance
+# -----------------------------------------------------------------------------
+echo -e '\n=> Enabling weekly system maintenance'
+
+sudo systemctl enable --now paccache.timer
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
