@@ -1,14 +1,13 @@
-name: Svelte/NestJs
+name: Svelte/Rust
 root: .
 
 windows:
   - editor:
       panes:
-        - gsps && nvim
+        - nvim
   - server:
-      layout: even-horizontal
       panes:
-        - npm i && npm run dev
+        - cd rust-backend && cargo run
 
   - tools:
       panes:
@@ -17,3 +16,4 @@ windows:
   - monitoring:
       panes:
         - htop
+

@@ -60,7 +60,9 @@ function zel
 end
 
 function gsps
-  exec ssh-agent fish
+  # eval run 
+  # exec runs a new shell
+  eval ssh-agent -s
 end
 
 function htop
@@ -174,6 +176,7 @@ end
 
 function tmuxinator-ls 
     # because we changed the behavior of ls (alias:ls = exa -al) we can use exa as vanila ls.
+    gsps
     set -xg ymlConfigs (exa ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
     echo $ymlConfigs
 
