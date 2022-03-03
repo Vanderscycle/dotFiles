@@ -268,9 +268,11 @@ echo -e 'Configuring Postgresql'
 sudo su postgres -l <<EOF # or sudo -u postgres -i
 initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
 EOF
-sudo systemctl start postgresql
-sudo systemctl enable postgresql # allows it to start on start
-# sudo systemctl status postgresql # visual confirmation
+# sudo systemctl start postgresql
+# sudo systemctl enable postgresql 
+sudo systemctl enable --now postgresql
+# allows it to start on start
+sudo systemctl status postgresql # visual confirmation
 echo -e 'Done.\n'
 
 echo -e '\n=>Installing Mongo'
@@ -278,10 +280,10 @@ git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
 (cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed)
 
 echo -e 'Configuring Mongo'
-sudo systemctl start mongodb
-sudo systemctl enable mongodb 
-# allows it to start on start
-# sudo systemctl status mongodb # visual confirmation
+# sudo systemctl start mongodb
+# sudo systemctl enable mongodb 
+susdo systemctl enable --now mongodb
+sudo systemctl status mongodb # visual confirmation
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
