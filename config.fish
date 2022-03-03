@@ -62,7 +62,11 @@ end
 function gsps
   # eval run 
   # exec runs a new shell
-  eval ssh-agent -s
+  if [ "$argv" = '-r' ]
+    exec ssh-agent fish
+  else 
+    eval ssh-agent -s
+  end
 end
 
 function htop
