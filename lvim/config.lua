@@ -4,7 +4,7 @@ require("user.additionalPlugins").config()
 
 -- LSP
 -- =========================================
-require("lsp-config.general").config()
+-- require("lsp-config.general").config()
 
 -- Customization
 -- =========================================
@@ -21,8 +21,8 @@ require("user.general").config()
 -- require("lsp-config.lua")
 -- require("lsp-config.bash")
 -- require("lsp-config.rust")
--- require("lsp-config.svelte")
--- require("lsp-config.typescript")
+require("lsp-config.svelte").config()
+require("lsp-config.typescript").config()
 -- require("lsp-config.javascript")
 -- require("lsp-config.python")
 -- require("lsp-config.markdown")
