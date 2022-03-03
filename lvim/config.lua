@@ -4,7 +4,7 @@ require("user.additionalPlugins").config()
 
 -- LSP
 -- =========================================
--- require("lsp-config.general")
+require("lsp-config.general").config()
 
 -- Customization
 -- =========================================
@@ -12,9 +12,9 @@ require("user.additionalPlugins").config()
 
 -- user specific
 -- =========================================
--- require("user.keybindings")
+require("user.keybindings").config()
 -- require("user.todoComments")
--- require("user.general")
+require("user.general").config()
 
 -- Linter/Formatters
 -- =========================================
