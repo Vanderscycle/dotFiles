@@ -7,8 +7,8 @@ windows:
         - nvim
   - server:
       panes:
-        - cd rust-backend && cargo run
-
+        - cd ../rust-backend && cargo run
+        - cd ../ && npm run dev 
   - tools:
       panes:
         - firefox "http://localhost:8000"
