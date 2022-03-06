@@ -41,6 +41,9 @@ A non exhaustive list of open source projects that I contributed:
   - [prism-themes](https://github.com/PrismJS/prism-themes);
   - [lunarVim](https://github.com/LunarVim/LunarVimCommunity);
 
+## Professional Qualifications
+P.eng, Engineers and Geoscientists BC (non-practicing)
+
 ## Programming Skills
 | Language/Framework  | Competence level   | 
 |-------------- | -------------- | 
@@ -52,7 +55,7 @@ A non exhaustive list of open source projects that I contributed:
 | Numpy/Pandas     | Advanced    | 
 | Svelte    | Advanced     | 
 | NestJs    | Advanced     | 
-| Rust    | Intermediate     | 
+| Rust    | Basic-Intermediate     | 
 | Go    | Basic     | 
 | Lua/xmonad    | Basic    | 
 
