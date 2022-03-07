@@ -11,7 +11,7 @@ windows:
         - cd ../ && npm run dev 
   - tools:
       panes:
-        - firefox "http://localhost:8000"
+        - firefox "http://localhost:3000" && firefox "http://localhost:8000"
   
   - monitoring:
       panes:

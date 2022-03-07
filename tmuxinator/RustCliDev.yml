@@ -11,4 +11,6 @@ windows:
   - monitoring:
       panes:
         - htop
-
+  - references:
+      panes:
+        - cd ~/Documents/tutorials-papers/learningRust/

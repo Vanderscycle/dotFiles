@@ -247,6 +247,11 @@ EOF"
 
 echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
 sudo pacman -S --noconfirm --needed podman buildah
+sudo yay -S --noconfirm --needed podman-compose
+
+echo -e '\n=>Configuring podman/buildah'
+sudo touch /etc/containers/registries.conf.d/docker.conf 
+echo `unqualified-search-registries=["docker.io"]` > /etc/containers/registries.conf.d/docker.conf
 sudo touch /etc/subuid
 sudo touch /etc/subgid 
 sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
