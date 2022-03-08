@@ -97,6 +97,22 @@ function glowAll
   exa -a | entr -c  glow  "$argv"
 end
 
+#Podman
+function podman-crmAll
+  echo -e "Removing all containers"
+  podman rm --all --force
+  echo "done"
+ 
+end
+function podman-prmAll
+  echo -e "pruging everything"
+  podman-compose stop
+  podman-crmAll
+  podman system prune --all --force && podman rmi --all --force
+  echo "done"
+end
+
+# Docker
 function docker-crmAll
     echo -e "Removing all containers"
 	docker stop (docker ps -q)
@@ -107,18 +123,21 @@ function docker-irmAll
 	docker-crmAll
   echo -e "Removing all images"
 	docker rmi (docker images -f "dangling=true" -q)
+  	echo "done"
 end
 
 function docker-vrmAll
   docker-irmAll
   echo -e "removing all volumes"
 	docker volume rm (docker volume ls -qf dangling=true)
-	echo "done m8"
+	echo "done"
 end
 
 function docker-prmAll
-echo -e "pruning everything"
+echo -e "purging everything"
+  docker-vrmAll
 	docker builder prune -af
+  echo "done"
 end
 
 # ~/.zshenv helper func
