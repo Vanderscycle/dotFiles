@@ -43,9 +43,12 @@ if status is-interactive
   set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri.config/broot"
 
   # java && android 
-  set -xg JAVA_HOME "/usr/bin/java"
-  set -xg ANDROID_HOME "/home/henri/Android/Sdk"
+  # set -xg JAVA_HOME "/usr/bin/java"
+  # set -xg ANDROID_HOME "/home/henri/Android/Sdk"
 
+  # golang
+  set -x GOPATH $HOME/go
+  set -x PATH $PATH $GOPATH/bin
 end
 
 

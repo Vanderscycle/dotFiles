@@ -1,6 +1,6 @@
 #!/bin/bash
 # sudo pacman -S --needed --noconfirm httpie && 
-
+# WARN: due for a reboot and time in vr for bug testing
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
 before_reboot(){
     # Do stuff
@@ -481,8 +481,7 @@ spicetify apply)
 
 # launch config keeb
 #BUG: cargo may not work tho :/
-git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-keebs/ 
-(cd ~/Programs/Launch-keebs && sudo cargo run --release)
+
 
 #TODO: add the betterDiscord folder to the sync and better10k
 yay -S --noconfirm zoom transmission-qt
@@ -508,16 +507,29 @@ echo -e '\n=> syncing doots'
 chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 (cd ~/Documents/dotFiles/postInstallScripts/ && bash syncDootsLocal.sh)
 }
-source ~/.zshrc
-source ~/.zshenv
+# -- fish
+source ~/.config/fish/config.fish
+zx
+# -- zsh
+# source ~/.zshrc
+# source ~/.zshenv
 
 echo '=>Rust and cargo'
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-source $HOME/.cargo/env/
+zx
 cargo install ripgrep fd-find
 cargo install --branch main --git https://github.com/Kampfkarren/selene selene
 cargo install stylua fd-find 
- cargo install cargo-watch
+cargo install cargo-watch
+git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-keebs/ 
+(cd ~/Programs/Launch-keebs && sudo cargo run --release)
+echo -e 'Done.\n'
+
+echo '=>Go'
+pacman -S --needed --noconfirm go
+zx
+# installing GolangCi
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.44.2
 echo -e 'Done.\n'
 
 echo -e '\n=> installing LunarVim'
