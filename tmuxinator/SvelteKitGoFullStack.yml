@@ -1,0 +1,23 @@
+name: SKit-Go
+root: .
+
+windows:
+  - editor:
+      panes:
+        - gsps && lvim
+  - server:
+      layout: even-horizontal
+      panes:
+        - npm i && npm run dev
+        - cd ./backend/ && go run main.go
+
+  - tools:
+      panes:
+        - firefox "http://localhost:3000" && postman
+        - cd ./backend && podman-compose up -d
+        - podman container list
+  
+  - monitoring:
+      panes:
+        - htop
+

@@ -107,6 +107,7 @@ function podman-crmAll
   echo "done"
  
 end
+
 function podman-prmAll
   echo -e "pruging everything"
   podman-compose stop
@@ -114,6 +115,8 @@ function podman-prmAll
   podman system prune --all --force && podman rmi --all --force
   echo "done"
 end
+
+
 
 # Docker
 function docker-crmAll
