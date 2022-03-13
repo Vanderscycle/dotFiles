@@ -7,7 +7,7 @@ M.config = function()
 		return
 	end
 
-	local icons = require("plugins.lspKind").todo_comments
+	local icons = require("user.lsp_kind").todo_comments
 	todo.setup({
 		keywords = {
 			FIX = { icon = icons.FIX },

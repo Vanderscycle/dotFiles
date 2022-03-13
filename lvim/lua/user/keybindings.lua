@@ -2,11 +2,8 @@ local M = {}
 M.config = function ()
   lvim.leader = "space"
   -- add your own keymapping
-  lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
-  lvim.keys.normal_mode["<A-t>"] = ":ToggleTerm<cr>"
-  lvim.keys.normal_mode["q"] = ""
   lvim.keys.normal_mode["<leader>o"] = "o<Esc>" -- FIX THIS BINDING
-  lvim.keys.normal_mode["<leader>O"] = "0<Esc>"
+  lvim.keys.normal_mode["<leader>O"] = "0<Esc>" 
   lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 
   lvim.keys.normal_mode = {
@@ -53,5 +50,7 @@ nmap <expr> t reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_t" : "
 nmap <expr> T reg_recording() . reg_executing() == "" ? "<Plug>Lightspeed_T" : "T"
   ]]
 end
+
+
 
 return M

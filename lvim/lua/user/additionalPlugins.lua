@@ -27,6 +27,18 @@ M.config = function()
       end,
       disable = lvim.builtin.motion_provider ~= "lightspeed",
     },
+    -- visual aid
+        {
+      "kosayoda/nvim-lightbulb",
+      config = function()
+        vim.fn.sign_define(
+          "LightBulbSign",
+          { text = require("user.lsp_kind").icons.code_action, texthl = "DiagnosticInfo" }
+        )
+      end,
+      event = "BufRead",
+      ft = { "rust", "go", "typescript", "typescriptreact" },
+    },
 
     {
       "tpope/vim-surround",

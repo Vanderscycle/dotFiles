@@ -19,6 +19,7 @@ M.config = function ()
   lvim.builtin.autopairs.active = true
   lvim.builtin.treesitter.highlight.enabled = true
   lvim.builtin.terminal.active = true
+  lvim.lsp.code_lens_refresh = true
   lvim.builtin.treesitter.ensure_installed = {
     "python",
     "go",
@@ -34,6 +35,26 @@ M.config = function ()
     "yaml",
     "fish",
   }
+  
+  -- Terminal
+  -- =========================================
+  lvim.builtin.terminal.active = true
+  lvim.builtin.terminal.open_mapping = [[<c-\>]]
+
+  -- WhichKey
+  -- =========================================
+  lvim.builtin.which_key.setup.window.winblend = 10
+  lvim.builtin.which_key.setup.ignore_missing = true
+    lvim.builtin.which_key.on_config_done = function(wk)
+    local keys = {
+      ["ga"] = { "<cmd>lua require('user.telescope').code_actions()<CR>", "Code Action" },
+      ["gR"] = { "<cmd>Trouble lsp_references<CR>", "Goto References" },
+      ["gI"] = { "<cmd>lua require('user.telescope').lsp_implementations()<CR>", "Goto Implementation" },
+      ["gA"] = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
+      ["gt"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
+    }
+    wk.register(keys, { mode = "n" })
+  end
 end
 
 return M
