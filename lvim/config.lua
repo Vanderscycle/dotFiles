@@ -31,3 +31,4 @@ require("lsp-config.go").config()
 -- require("lsp-config.python")
 -- require("lsp-config.markdown")
 -- require("lsp-config.tailwindcss")
+
