@@ -1,6 +1,9 @@
 -- Extra plugins
 -- =========================================
 require("user.additionalPlugins").config()
+-- enabling plugins
+-- =========================================
+lvim.builtin.motion_provider = "lightspeed"
 
 -- LSP
 -- =========================================
@@ -9,10 +12,10 @@ require("user.additionalPlugins").config()
 -- Customization
 -- =========================================
 -- require("user.autocommands")
+require("user.keybindings").config()
 
 -- user specific
 -- =========================================
-require("user.keybindings").config()
 -- require("user.todoComments")
 require("user.general").config()
 

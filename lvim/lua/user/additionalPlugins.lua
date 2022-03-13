@@ -22,6 +22,10 @@ M.config = function()
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
+      config = function()
+        require("user.lightspeed").config()
+      end,
+      disable = lvim.builtin.motion_provider ~= "lightspeed",
     },
 
     {
@@ -92,8 +96,9 @@ M.config = function()
     {
       "folke/todo-comments.nvim",
       event = "BufRead",
+      requires = "nvim-lua/plenary.nvim",
       config = function()
-        require("todo-comments").setup()
+        require("user.todo_comments").config()
       end,
     },
     --language specific
