@@ -4,6 +4,7 @@ require("user.additionalPlugins").config()
 -- enabling plugins
 -- =========================================
 lvim.builtin.motion_provider = "lightspeed"
+-- lvim.builtin.sidebar = { active = true } -- enable/disable sidebar
 
 -- LSP
 -- =========================================
@@ -31,4 +32,8 @@ require("lsp-config.go").config()
 -- require("lsp-config.python")
 -- require("lsp-config.markdown")
 -- require("lsp-config.tailwindcss")
+
+--TODO:
+-- Another pass at plugins that I use
+-- A refinement of the plugins keybindings
 

@@ -27,8 +27,16 @@ M.config = function()
       end,
       disable = lvim.builtin.motion_provider ~= "lightspeed",
     },
-    -- visual aid
+        -- visual aid
         {
+      "sidebar-nvim/sidebar.nvim",
+      config = function()
+        require("plugins.sidebar").config()
+      end,
+      event = "BufRead",
+      -- disable = not lvim.builtin.sidebar.active, -- TODO: activation
+    },
+    {
       "kosayoda/nvim-lightbulb",
       config = function()
         vim.fn.sign_define(
@@ -54,35 +62,17 @@ M.config = function()
     -- git
     { "kdheepak/lazygit.nvim" },
     -- search
+    -- TODO: replace greeper with something better
     { "mhinz/vim-grepper" },
     -- windows (qickFix and peaking buffer)
-    {
+        {
       "kevinhwang91/nvim-bqf",
-      event = { "BufRead", "BufNew" },
       config = function()
-        require("bqf").setup({
-          auto_enable = true,
-          preview = {
-            win_height = 12,
-            win_vheight = 12,
-            delay_syntax = 80,
-            border_chars = { "┃", "┃", "━", "━", "┏", "┓", "┗", "┛", "█" },
-          },
-          func_map = {
-            vsplit = "",
-            ptogglemode = "z,",
-            stoggleup = "",
-          },
-          filter = {
-            fzf = {
-              action_for = { ["ctrl-s"] = "split" },
-              extra_opts = { "--bind", "ctrl-o:toggle-all", "--prompt", "> " },
-            },
-          },
-        })
+        require("plugins.bqf").config()
       end,
+      event = "BufRead",
     },
-    {
+  {
       "rmagatti/goto-preview",
       config = function()
         require("goto-preview").setup({
