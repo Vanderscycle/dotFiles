@@ -28,13 +28,13 @@ M.config = function()
       disable = lvim.builtin.motion_provider ~= "lightspeed",
     },
         -- visual aid
-        {
+    { -- NEED BINGINDS
       "sidebar-nvim/sidebar.nvim",
       config = function()
         require("plugins.sidebar").config()
       end,
       event = "BufRead",
-      -- disable = not lvim.builtin.sidebar.active, -- TODO: activation
+      disable = not lvim.builtin.sidebar.active, -- TODO: activation
     },
     {
       "kosayoda/nvim-lightbulb",
@@ -63,9 +63,7 @@ M.config = function()
     { "kdheepak/lazygit.nvim" },
     -- search
     -- TODO: replace greeper with something better
-    { "mhinz/vim-grepper" },
-    -- windows (qickFix and peaking buffer)
-        {
+    {
       "kevinhwang91/nvim-bqf",
       config = function()
         require("plugins.bqf").config()
@@ -103,12 +101,6 @@ M.config = function()
         require("plugins.todoComments").config()
       end,
     },
-    --language specific
-    --node
-    {
-      "vuki656/package-info.nvim",
-      requires = "MunifTanjim/nui.nvim",
-    },
     -- telescope plugins
     {
       "nvim-telescope/telescope-fzy-native.nvim",
@@ -117,17 +109,6 @@ M.config = function()
     },
     { "nvim-telescope/telescope-media-files.nvim" },
     { "nvim-telescope/telescope-file-browser.nvim" },
-
-    --markdown
-    -- You must install glow globally
-    -- https://github.com/charmbracelet/glow
-    -- yay -S glow
-    {
-      "npxbr/glow.nvim",
-      ft = { "markdown" },
-      -- run = "yay -S glow"
-    },
-
     -- autoSave
     {
       "Pocco81/AutoSave.nvim",
@@ -137,27 +118,38 @@ M.config = function()
     },
     {
       "lukas-reineke/indent-blankline.nvim",
-      event = "BufRead",
       setup = function()
-        vim.g.indentLine_enabled = 1
         vim.g.indent_blankline_char = "▏"
-        vim.g.indent_blankline_filetype_exclude = { "help", "terminal", "dashboard" }
-        vim.g.indent_blankline_buftype_exclude = { "terminal" }
-        vim.g.indent_blankline_show_trailing_blankline_indent = false
-        vim.g.indent_blankline_show_first_indent_level = false
       end,
+      config = function()
+        require("plugins.indent_blankline").config()
+      end,
+      event = "BufRead",
     },
-    { "tzachar/cmp-tabnine", run = "./install.sh", requres = "hrsh7th/nvim-cmp" },
-    -- misc
-    --WARN: still in active development plugin
-    {
-      "ThePrimeagen/refactoring.nvim",
-      requires = {
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-treesitter/nvim-treesitter" },
-      },
+        {
+      "kevinhwang91/nvim-hlslens",
+      config = function()
+        require("plugins.hlslens").config()
+      end,
+      event = "BufReadPost",
+      -- disable = not lvim.builtin.hlslens.active,
     },
-
+        {
+      "tzachar/cmp-tabnine",
+      run = "./install.sh",
+      requires = "hrsh7th/nvim-cmp",
+      config = function()
+        local tabnine = require "cmp_tabnine.config"
+        tabnine:setup {
+          max_lines = 1000,
+          max_num_results = 10,
+          sort = true,
+        }
+      end,
+      opt = true,
+      event = "InsertEnter",
+      -- disable = not lvim.builtin.tabnine.active,
+    },
     {
       "David-Kunz/cmp-npm",
       requires = {
@@ -208,3 +200,12 @@ return M
 	-- },
 	--extra languages'
 	-- { "h-hg/fcitx.nvim" }, --chinese input
+--       -- misc
+    --WARN: still in active development plugin
+    -- {
+    --   "ThePrimeagen/refactoring.nvim",
+    --   requires = {
+    --     { "nvim-lua/plenary.nvim" },
+    --     { "nvim-treesitter/nvim-treesitter" },
+    --   },
+    -- },

@@ -7,6 +7,8 @@ M.config = function()
   end
 
   sidebar.setup {
+    disable_default_keybindings = 0,
+    -- bindings = nil,
     open = false,
     initial_width = 30,
     enable_profile = false,
@@ -24,6 +26,8 @@ M.config = function()
       initially_closed = false, -- whether the groups should be initially closed on start. You can manually open/close groups later.
     },
   }
+    require("user.keybindings").set_sidebar_keymaps()
+
 end
 
 return M

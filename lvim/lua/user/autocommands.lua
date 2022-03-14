@@ -3,3 +3,6 @@ lvim.autocommands.custom_groups = {
 	{ "InsertEnter", "*", ":normal zz" },
 	-- {"","*", ":<Esc>" }
 }
+vim.cmd [[
+:autocmd BufWinEnter * setlocal modifiable
+]]
