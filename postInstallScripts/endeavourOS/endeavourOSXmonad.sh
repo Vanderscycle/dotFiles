@@ -458,7 +458,8 @@ betterdiscordctl install
 yay -S --noconfirm firefox firefox-developer-edition qimgv-light signal-desktop
 
 # I actually rely on vim more than libreoffice
-#sudo pacman -S libreoffice-fresh
+#sudo pacman -S --needed --noconfirm libreoffice-fresh
+sudo yay -S --needed --noconfirm onlyoffice-bin 
 
 yay -S --needed --noconfirm discord vlc spotify spicetify-cli 
 yay -S --needed --noconfirm postman-bin slack-desktop
@@ -528,8 +529,8 @@ echo -e 'Done.\n'
 echo '=>Go'
 pacman -S --needed --noconfirm go
 zx
-# installing GolangCi
-curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.44.2
+# installing GolangCi-lint
+sudo yay -S --needed --noconfirm golangci-lint
 # go mon
 echo -e 'Done.\n'
 
