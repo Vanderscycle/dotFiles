@@ -455,7 +455,9 @@ chmod +x betterdiscordctl
 sudo mv betterdiscordctl /usr/local/bin
 betterdiscordctl install
 
-yay -S --noconfirm firefox firefox-developer-edition qimgv-light signal-desktop
+yay -S --noconfirm --needed qimgv-light signal-desktop
+#INFO: removing the develope edition
+pacman -R --noconfirm firefox-developer-edition
 
 # I actually rely on vim more than libreoffice
 #sudo pacman -S --needed --noconfirm libreoffice-fresh
