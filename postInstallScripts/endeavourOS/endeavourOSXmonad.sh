@@ -276,7 +276,6 @@ EOF
 # sudo systemctl start postgresql
 # sudo systemctl enable postgresql 
 sudo systemctl enable --now postgresql
-# allows it to start on start
 sudo systemctl status postgresql # visual confirmation
 echo -e 'Done.\n'
 
@@ -337,7 +336,7 @@ echo -e 'Done.\n'
 # => Let's actually move to fish
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Installing oh-my-zsh'
+echo -e '\n=> Installing Fish'
 sudo pacman -S --noconfirm --needed fish
 curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher # like zplug
 fisher install ilancosman/tide #use that or starship
@@ -354,17 +353,17 @@ echo -e 'Done. \n'
 # => Fish but in zsh (through on-my-zsh)
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Installing oh-my-zsh'
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
+# echo -e '\n=> Installing oh-my-zsh'
+# sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
 
-echo -e '\n=> Installing zsh/oh-my-zsh plugins'
-# sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
-git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
+# echo -e '\n=> Installing zsh/oh-my-zsh plugins'
+# # sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
+# git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
 
-(cd ~/Programs && git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git)
+# (cd ~/Programs && git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git)
 
 
 # -----------------------------------------------------------------------------
@@ -377,13 +376,13 @@ sudo pacman -S --noconfirm --needed virtualbox
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => Local applications (amazing tui)
+# => Local applications (amazing TUI)
 # -----------------------------------------------------------------------------
 
 echo -e '\n=>Installing amazing tui'
 echo -e 'Installing bpytop (bashtop)'
 conda install -cy psutil
-sudo pacman -S --noconfirm --needed bpytop 
+sudo pacman -S --noconfirm --needed bpytop asciinema
 
 echo -e 'tui file navigator'
 sudo pacman -S --noconfirm --needed mediainfo

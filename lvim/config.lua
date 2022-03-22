@@ -25,6 +25,7 @@ require("user.keybindings").config()
 -- =========================================
 -- require("user.todoComments")
 require("user.general").config()
+require("user.autocommands").config()
 
 -- Linter/Formatters
 -- =========================================
