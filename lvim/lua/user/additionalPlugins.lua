@@ -62,7 +62,12 @@ M.config = function()
     -- git
     { "kdheepak/lazygit.nvim" },
     -- search
-    -- TODO: replace greeper with something better
+  {'nacro90/numb.nvim',
+          config = function()
+        require("plugins.numb").config()
+      end,
+      event = "BufRead",
+    },
     {
       "kevinhwang91/nvim-bqf",
       config = function()

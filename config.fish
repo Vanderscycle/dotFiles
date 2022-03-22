@@ -161,6 +161,11 @@ function rga-fzf
 	xdg-open "$file"
 end
 
+function rgr 
+  set -l DOOTFILE_LOC ~/Documents/dotFiles/
+  bash "$DOOTFILE_LOC"/rgr.sh "$argv"
+end
+
 function save
   set currentLocation echo $PWD
   cd ~/Documents/dotFiles/postInstallScripts/
