@@ -527,8 +527,15 @@ git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-
 (cd ~/Programs/Launch-keebs && sudo cargo run --release)
 echo -e 'Done.\n'
 
+echo '=>Terracform'
+pacman -S --needed --noconfirm terraform
+echo -e 'Done.\n'
+
+
 echo '=>Go'
 pacman -S --needed --noconfirm go
+echo -e 'Done.\n'
+
 zx
 # installing GolangCi-lint
 sudo yay -S --needed --noconfirm golangci-lint
