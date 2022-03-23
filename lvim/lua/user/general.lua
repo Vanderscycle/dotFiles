@@ -1,10 +1,11 @@
 local M = {}
+
 M.config = function ()
 
   lvim.autosave = true
   lvim.format_on_save = true
   lvim.lint_on_save = true
-
+  lvim.lsp.diagnostics.virtual_text = true
   lvim.colorscheme = "tokyonight"
   vim.opt.relativenumber = true
   vim.opt.wrap = true
@@ -12,7 +13,7 @@ M.config = function ()
   lvim.builtin.notify.opts.background_colour = "normal"
   lvim.builtin.cmp.completion.keyword_length = 2
   lvim.lsp.automatic_servers_installation = true
-  lvim.builtin.alpha.active = true
+  lvim.builtin.alpha.active = true --dashboard replacement
   lvim.builtin.terminal.active = true
   lvim.builtin.nvimtree.side = "left"
   lvim.builtin.nvimtree.show_icons.git = 0
@@ -35,7 +36,7 @@ M.config = function ()
     "yaml",
     "fish",
   }
-  
+
   -- Terminal
   -- =========================================
   lvim.builtin.terminal.active = true

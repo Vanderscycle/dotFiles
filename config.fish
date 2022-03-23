@@ -23,13 +23,17 @@ if status is-interactive
   ssh-add ~/.ssh/endavourGit
   pokemon-colorscripts -r
 
+  # dotfiles
+  set -xg DOOTFILE_LOC ~/Documents/dotFiles/
+
+
   # nnn config
   # nnnTheme
   set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
   set -xg NNN_FIFO '/tmp/nnn.fifo nnn'
   set -xg NNN_PLUG 'f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
   set -xg NNN_BMS 'd:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/'
-  set -xg NNN_OPTS He
+  set -xg NNN_OPTS HE
   set -xg SPLIT 'v' # to split Kitty vertically
   set -xg LC_COLLATE 'C' # hidden files on top
 
@@ -51,6 +55,13 @@ if status is-interactive
   set -x PATH $PATH $GOPATH/bin
 end
 
+
+
+# go
+
+function goGet 
+  go get -u ./...
+end
 
 #aliases
 
@@ -162,32 +173,26 @@ function rga-fzf
 end
 
 function rgr 
-  set -l DOOTFILE_LOC ~/Documents/dotFiles/
+  # set -l DOOTFILE_LOC ~/Documents/dotFiles/
   bash "$DOOTFILE_LOC"/rgr.sh "$argv"
 end
 
 function save
-  set currentLocation echo $PWD
+  set -l CURRENTLOCATION pwd
   cd ~/Documents/dotFiles/postInstallScripts/
   bash ./lnSet.sh
-  for option in $argv
-    switch "$option"
-      case -m --message
-        git commit
-      case \*
-        git commit -m "$argv"
-      end
-    end
+  git add *
+  git commit -am "Everything that is not saved will be lost"
   git push
   cd $currentLocation # not working
 end
 
 function sync
-  set currentLocation echo $PWD
+  set -l CURRENTLOCATION pwd
   cd ~/Documents/dotFiles/postInstallScripts/
   git pull --all
   bash ./syncDootsLocal.sh
-  cd $currentLocation
+  cd $CURRENTLOCATION
 end
 
 function update
@@ -195,11 +200,10 @@ function update
   xmonad --recompile
 end
 
-function prun
+function pruneCache
   sudo paccache -r
 end
 
-# function tx-ls
 
 #pacman
 # explanation https://stackoverflow.com/questions/48855508/fish-error-while-trying-to-run-command-on-mac/48855746

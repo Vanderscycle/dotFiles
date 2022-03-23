@@ -31,7 +31,7 @@ require("user.autocommands").config()
 -- =========================================
 require("linter_formatter.typescript").config()
 require("linter_formatter.go").config()
-require("linter_formatter.tailwindcss").config()
+-- require("linter_formatter.tailwindcss").config()
 -- require("linter_formatter.bash").config()
 
 -- require('user.null_ls').config()
