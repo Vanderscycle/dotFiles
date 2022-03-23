@@ -178,21 +178,21 @@ function rgr
 end
 
 function save
-  set -l CURRENTLOCATION pwd
-  cd ~/Documents/dotFiles/postInstallScripts/
-  bash ./lnSet.sh
-  git add *
-  git commit -am "Everything that is not saved will be lost"
-  git push
-  cd $CURRENTLOCATION # not working
+  set -l CURRENTLOCATION ($PWD)                                                     
+  bash  "$DOOTFILE_LOC"/postInstallScripts/lnSet.sh
+  # git add *
+  # git commit -am "Everything that is not saved will be lost"
+  # git push
+  # cd "$CURRENTLOCATION" 
 end
 
 function sync
-  set -l CURRENTLOCATION pwd
-  cd ~/Documents/dotFiles/postInstallScripts/
-  git pull --all
-  bash ./syncDootsLocal.sh
-  cd $CURRENTLOCATION
+  set -l CURRENTLOCATION ($PWD)                                                     
+  # bash  "$DOOTFILE_LOC"/postInstallScripts/syncDootsLocal.sh
+  # cd ~/Documents/dotFiles/postInstallScripts/
+  # git pull --all
+  # bash ./syncDootsLocal.sh
+  # cd $CURRENTLOCATION
 end
 
 function update
