@@ -178,16 +178,14 @@ function rgr
 end
 
 function save
-  set -l CURRENTLOCATION ($PWD)                                                     
+  set -l CURRENTLOCATION $PWD
   bash  "$DOOTFILE_LOC"/postInstallScripts/lnSet.sh
-  # git add *
-  # git commit -am "Everything that is not saved will be lost"
-  # git push
-  # cd "$CURRENTLOCATION" 
+  git cmp "Everything that is not saved will be lost"
+  cd "$CURRENTLOCATION"
 end
 
 function sync
-  set -l CURRENTLOCATION ($PWD)                                                     
+  set -l CURRENTLOCATION $PWD
   # bash  "$DOOTFILE_LOC"/postInstallScripts/syncDootsLocal.sh
   # cd ~/Documents/dotFiles/postInstallScripts/
   # git pull --all
