@@ -184,7 +184,7 @@ function save
   git add *
   git commit -am "Everything that is not saved will be lost"
   git push
-  cd $currentLocation # not working
+  cd $CURRENTLOCATION # not working
 end
 
 function sync
