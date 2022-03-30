@@ -454,7 +454,8 @@ chmod +x betterdiscordctl
 sudo mv betterdiscordctl /usr/local/bin
 betterdiscordctl install
 
-yay -S --noconfirm --needed qimgv-light signal-desktop
+yay -S --noconfirm --needed qimgv-light signal-desktop 
+pacman -S --noconfirm --needed gimp nomacs #image viewwer/editor
 #INFO: removing the develope edition
 pacman -R --noconfirm firefox-developer-edition
 

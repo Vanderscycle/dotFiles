@@ -4,17 +4,17 @@ root: .
 windows:
   - editor:
       panes:
-        - gsps && lvim
+        - cd ./frontend && lvim
   - server:
       layout: even-horizontal
       panes:
         - cd ./frontend && npm i && npm run dev
-        - cd ./backend && go run main.go
+        - cd ./backend && go run main.go # get the db 
 
   - tools:
       panes:
         - firefox "http://localhost:3000" && postman
-        - cd ./backend && podman-compose up -d
+        - podman-compose up -d
         - podman container list
   
   - monitoring:
