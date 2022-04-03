@@ -79,7 +79,8 @@ function gsps
   if [ "$argv" = '-r' ]
     exec ssh-agent fish
   else 
-    eval ssh-agent fish
+    ssh-agent /usr/bin/fish
+    # eval ssh-agent fish
   end
 end
 
