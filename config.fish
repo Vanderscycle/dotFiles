@@ -79,7 +79,7 @@ function gsps
   if [ "$argv" = '-r' ]
     exec ssh-agent fish
   else 
-    eval ssh-agent -s
+    eval ssh-agent fish
   end
 end
 
@@ -119,11 +119,17 @@ function podman-crmAll
  
 end
 
+function podman-irmAll
+    echo -e "Removing all images"
+  podman rmi --all --force
+  echo "done"
+end
+
 function podman-prmAll
   echo -e "pruging everything"
   podman-compose stop
   podman-crmAll
-  podman system prune --all --force && podman rmi --all --force
+  podman system prune --all --force && 
   echo "done"
 end
 
