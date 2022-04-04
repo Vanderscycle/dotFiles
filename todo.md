@@ -23,4 +23,5 @@ Important: Run a vm and test the endavourOs config to see its current state
 - [ ] finish figuring out deployment with tar/docker on a linode server and retroactively apply the changes to professional website/ball of noods (different ports too, one server for one application is expensive)
 - [ ] create a very light vimrc that has the same bindings and plugins than my lunarvim or explore distant.nvim
 - [ ] continue working on goNotes.
-
+- [ ] cahnge browser to qutebrowser ```xdg-settings get default-web-browser``` -> ```xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop```
+solved by ```set BROWSER ""``` and then running the xdg command
