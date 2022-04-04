@@ -21,6 +21,7 @@ if status is-interactive
   set -xg LV_BRANCH rolling  
   keychain --eval --agents gpg,ssh ~/.ssh/endavourGit
   ssh-add ~/.ssh/endavourGit
+  #ssh-agent /usr/bin/fish
   pokemon-colorscripts -r
 
   # dotfiles
@@ -53,6 +54,8 @@ if status is-interactive
   # golang
   set -x GOPATH $HOME/go
   set -x PATH $PATH $GOPATH/bin
+
+
 end
 
 
