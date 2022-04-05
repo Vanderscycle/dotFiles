@@ -397,6 +397,7 @@ git clone https://github.com/jarun/nnn.git ~/Programs/
 echo -e "radically different browser with pivacy in mind"
 sudo pacman -S --noconfirm --needed qutebrowser #TODO: learn the bindings and reconfig them to make sense
 sudo pacman -S python-adblock
+# :set content.blocking.method both
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
