@@ -12,12 +12,13 @@ import (
 )
 
 func OsCheck(distro string) error {
+
 	if runtime.GOOS == "windows" {
-		log.Fatal("Detected: %v\n; Program not implemented for windows machines", runtime.GOOS)
+		log.Fatalf("Detected: %v\n; Program not implemented for windows machines", runtime.GOOS)
 		return errors.New("windows detected")
+
 	} else {
 		// log.Print doesn't format the string
-		log.Printf("Detected: %v\n", runtime.GOOS)
 		detectedDistro := checkLinuxVersion()
 
 		if detectedDistro != distro {
