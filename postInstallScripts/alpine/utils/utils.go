@@ -2,23 +2,23 @@ package utils
 
 import (
 	"encoding/json"
-	// "fmt"
-	"github.com/zcalusic/sysinfo"
 	"log"
-	// "os/user"
+
+	"github.com/tidwall/gjson"
+	"github.com/zcalusic/sysinfo"
 	"runtime"
 )
 
 func OsCheck() {
 	if runtime.GOOS == "windows" {
-		log.Print("Detected: %s; Program not implemented for windows machines", runtime.GOOS)
+		log.Printf("Detected: %v\n; Program not implemented for windows machines", runtime.GOOS)
 	} else {
-		log.Print("Detected: %s", runtime.GOOS)
+		log.Printf("Detected: %v\n", runtime.GOOS) // log.Print doesn't format the string
 		checkLinuxVersion()
 	}
 }
 
-func checkLinuxVersion() {
+func checkLinuxVersion() string {
 
 	var si sysinfo.SysInfo
 
@@ -28,6 +28,8 @@ func checkLinuxVersion() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	value := gjson.GetBytes(data, "os.vendor").Str //because data is type []byte
 
-	log.Print(string(data))
+	log.Print(value)
+	return value
 }
