@@ -2,13 +2,13 @@ package main
 
 import (
 	"alpine/utils"
-	"log"
+	// "log"
 )
 
 func main() {
-	distro := "endeavouros"
+	distro := "endeavouross"
 	e := utils.OsCheck(distro)
 	if e != nil {
-		log.Fatalf("Expected %s but detected other distro", distro)
+		panic("error detected")
 	}
 }

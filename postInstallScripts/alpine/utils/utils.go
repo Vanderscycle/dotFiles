@@ -13,10 +13,13 @@ import (
 
 func OsCheck(distro string) error {
 	if runtime.GOOS == "windows" {
-		log.Printf("Detected: %v\n; Program not implemented for windows machines", runtime.GOOS)
+		log.Fatal("Detected: %v\n; Program not implemented for windows machines", runtime.GOOS)
+		return errors.New("windows detected")
 	} else {
-		log.Printf("Detected: %v\n", runtime.GOOS) // log.Print doesn't format the string
+		// log.Print doesn't format the string
+		log.Printf("Detected: %v\n", runtime.GOOS)
 		detectedDistro := checkLinuxVersion()
+
 		if detectedDistro != distro {
 			log.Fatalf("Expected %s but detected %s", distro, detectedDistro)
 			return errors.New("wrong Linux distro detected")
@@ -36,7 +39,6 @@ func checkLinuxVersion() string {
 		log.Fatal(err)
 	}
 	value := gjson.GetBytes(data, "os.vendor").Str //because data is type []byte
-
-	log.Print(value)
+	// log.Print(value)
 	return value
 }
