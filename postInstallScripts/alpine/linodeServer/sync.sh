@@ -23,5 +23,5 @@ fi
 
  cd ../ && go build -o alpineConfig
 rsync -arv ./alpineConfig "$USER"@"$LINODE_IP":"$DIR"
-ssh "$USER"@"$LINODE_IP" 'cd "/home/root/" && alpineConfig'
+ssh "$USER"@"$LINODE_IP" 'cd "/home/root/" && ./alpineConfig'
 
