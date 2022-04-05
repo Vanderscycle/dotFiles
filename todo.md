@@ -25,7 +25,7 @@ Important: Run a vm and test the endavourOs config to see its current state
 - [ ] continue working on goNotes.
 - [x] change browser to qutebrowser ```xdg-settings get default-web-browser``` -> ```xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop```
 solved by ```set BROWSER ""``` and then running the xdg command
-
+- [ ] add ssh key to my linode servers
 # To Become
 - [ ] learn [ lua ](https://www.reddit.com/r/lua/comments/9gotqd/beginner_projet_ideas_in_lua/)
 - [ ] learn lua to expand teh capabilities of [ neovim ](https://github.com/nanotee/nvim-lua-guide)
