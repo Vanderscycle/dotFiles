@@ -1,4 +1,4 @@
-# Todo && ToBecome
+# Todo
 
 Important: Run a vm and test the endavourOs config to see its current state
 
@@ -23,5 +23,10 @@ Important: Run a vm and test the endavourOs config to see its current state
 - [ ] finish figuring out deployment with tar/docker on a linode server and retroactively apply the changes to professional website/ball of noods (different ports too, one server for one application is expensive)
 - [ ] create a very light vimrc that has the same bindings and plugins than my lunarvim or explore distant.nvim
 - [ ] continue working on goNotes.
-- [ ] cahnge browser to qutebrowser ```xdg-settings get default-web-browser``` -> ```xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop```
+- [x] change browser to qutebrowser ```xdg-settings get default-web-browser``` -> ```xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop```
 solved by ```set BROWSER ""``` and then running the xdg command
+
+# To Become
+- [ ] learn [ lua ](https://www.reddit.com/r/lua/comments/9gotqd/beginner_projet_ideas_in_lua/)
+- [ ] learn lua to expand teh capabilities of [ neovim ](https://github.com/nanotee/nvim-lua-guide)
+- [ ] deepen go understanding
