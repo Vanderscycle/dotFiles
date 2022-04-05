@@ -9,27 +9,19 @@ else
     exit 125
 fi
 
-DIR='/home/$USER/maas'
-LOCAL_DIR="/home/henri/Documents/maas-landing-page"
+DIR='/home/root/'
+LOCAL_DIR=$PWD
+echo $DIR $LOCAL_DIR
 
-# rsync -av ./set-up.sh "$USER"@"$LINODE_IP":/home/"$USER"/ #TODO: rsync won't work until you actually update the server
-# chmod +x *.sh
+if [ ! -n $SET_UP]
+then
+  rsync -av ./set-up.sh "$USER"@"$LINODE_IP":/home/"$USER"/
+  ssh "$USER"@"$LINODE_IP" 'bash -s' < "$PWD"/set-up.sh
+fi
 
-(cd "$LOCAL_DIR" && git archive --format=tar.gz -o "$LOCAL_DIR"/maas-latest.tar.gz HEAD) #  --prefix=maas/
+( cd ../"$LOCAL_DIR" && go build alpineConfig)
+rsync -arv ../"$LOCAL_DIR"/alpineConfig "$USER"@"$LINODE_IP":"$DIR"
 
-#configure the env (arch but can be debian)
-# https://stackoverflow.com/questions/305035/how-to-use-ssh-to-run-a-local-shell-script-on-a-remote-machine
-
-# ssh "$USER"@"$LINODE_IP" 'bash -s' < ~/Documents/maas-landing-page/linode-server/set-up.sh
-
-declare -a StringArray=("backend" "frontend")
-for SECRET in "${StringArray[@]}"; do
-  rsync -arv "$LOCAL_DIR"/"$SECRET"/.env "$USER"@"$LINODE_IP":"$DIR"/"$SECRET"
-done
-
-rsync -arv "$LOCAL_DIR"/maas-latest.tar.gz "$USER"@"$LINODE_IP":"$DIR"
-
-ssh "$USER"@"$LINODE_IP" 'cd "/home/root/maas/" && tar -xvf maas-latest.tar.gz && podman-compose up -d'
-#BUG: podman-compose has this piece of shit error that I can't fucking fix/ so I am using docker for now
+ssh "$USER"@"$LINODE_IP" 'cd "/home/root/" && alpineConfig'
 
 
