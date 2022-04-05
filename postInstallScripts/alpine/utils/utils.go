@@ -2,20 +2,27 @@ package utils
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
+
+	"runtime"
 
 	"github.com/tidwall/gjson"
 	"github.com/zcalusic/sysinfo"
-	"runtime"
 )
 
-func OsCheck() {
+func OsCheck(distro string) error {
 	if runtime.GOOS == "windows" {
 		log.Printf("Detected: %v\n; Program not implemented for windows machines", runtime.GOOS)
 	} else {
 		log.Printf("Detected: %v\n", runtime.GOOS) // log.Print doesn't format the string
-		checkLinuxVersion()
+		detectedDistro := checkLinuxVersion()
+		if detectedDistro != distro {
+			log.Fatalf("Expected %s but detected %s", distro, detectedDistro)
+			return errors.New("wrong Linux distro detected")
+		}
 	}
+	return nil
 }
 
 func checkLinuxVersion() string {
