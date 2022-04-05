@@ -384,6 +384,7 @@ echo -e 'Installing bpytop (bashtop)'
 conda install -cy psutil
 sudo pacman -S --noconfirm --needed bpytop asciinema
 
+#TODO: revesit nnn
 echo -e 'tui file navigator'
 sudo pacman -S --noconfirm --needed mediainfo
 sudo pacman -S --noconfirm --needed nnn sxiv
@@ -392,8 +393,10 @@ git clone https://github.com/jarun/nnn.git ~/Programs/
 (cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
 # installing the plugins
 (cd ~/Programs/nnn/ && curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh)
+
 echo -e "radically different browser with pivacy in mind"
 sudo pacman -S --noconfirm --needed qutebrowser #TODO: learn the bindings and reconfig them to make sense
+sudo pacman -S python-adblock
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
