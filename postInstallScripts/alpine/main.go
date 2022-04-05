@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	distro := "endeavouros"
+	distro := "alpine"
 	e := utils.OsCheck(distro)
 	if e != nil {
 		panic("error detected")

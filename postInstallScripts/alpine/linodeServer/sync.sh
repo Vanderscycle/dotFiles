@@ -21,8 +21,7 @@ then
   echo "SET_UP=true" >> .env
 fi
 
-( cd .."$LOCAL_DIR" && go build alpineConfig)
-rsync -arv ../"$LOCAL_DIR"/alpineConfig "$USER"@"$LINODE_IP":"$DIR"
-
+ cd ../ && go build -o alpineConfig
+rsync -arv ./alpineConfig "$USER"@"$LINODE_IP":"$DIR"
 ssh "$USER"@"$LINODE_IP" 'cd "/home/root/" && alpineConfig'
 
