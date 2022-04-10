@@ -161,6 +161,12 @@ M.config = function()
         "nvim-lua/plenary.nvim",
       },
     },
+    {
+  'chipsenkbeil/distant.nvim',
+  config = function()
+    require('plugins.distant').config()
+    end
+}
   }
 
 end

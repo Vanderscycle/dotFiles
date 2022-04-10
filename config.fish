@@ -16,6 +16,7 @@ if status is-interactive
   # Commands to run in interactive sessions can go here
   # https://fishshell.com/docs/current/tutorial.html
   set -xg EDITOR lvim
+  set -xq BROWSER qutebrowser
   set -xg SHELL fish
   set -xg TERMINAL kitty
   set -xg LV_BRANCH rolling  
