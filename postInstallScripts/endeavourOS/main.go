@@ -1,5 +1,5 @@
 package main
 
-import ()
+import "endavourOs/install"
 
-func main() {}
+func main() { s := install.EssentialPackages; install.Installer(s...) }
