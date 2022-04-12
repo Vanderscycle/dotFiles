@@ -2,4 +2,6 @@ package main
 
 import "endavourOs/install"
 
-func main() { s := install.EssentialPackages; install.Installer(s...) }
+func main() {
+	install.Installer([]string{"sed"}...)
+}
