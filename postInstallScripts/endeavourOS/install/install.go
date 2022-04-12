@@ -1,6 +1,7 @@
 package install
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -21,13 +22,15 @@ var EverPresentArgs = []string{"-S", "--needed", "--noconfirm"}
 // func (p *PkgManagers) Init(pkgsMgr ...string) (PkgManagers, error) { t := PkgManagers{pkgsMgr...};return t, nil }
 
 // func (p *PkgManagers) P() (string, error) { return p.Pacman, nil }
-func Installer(pkgs ...string) {
+func Installer(pkgs ...string) error {
 
 	// pkgManagers := new(PkgManagers).Init()
 	//WIP:testing for pacman only
 	binary, lookErr := exec.LookPath(PkgManagers[0])
+	//TODO: need better catch as I get fatal errors
 	if lookErr != nil {
-		panic(lookErr)
+		myError := errors.New(fmt.Sprintf("%s not installed-> Error:%s", PkgManagers[0], lookErr))
+		return myError
 	}
 
 	env := os.Environ()
@@ -47,7 +50,9 @@ func Installer(pkgs ...string) {
 	//INFO: you can call sudo like "/bin/sh"
 	execErr := syscall.Exec(binary, v, env)
 	if execErr != nil {
-		panic(execErr)
-	}
+		myError := errors.New(fmt.Sprintf("[COMMAND]%s Error:%s", v, lookErr))
 
+		return myError
+	}
+	return nil
 }

@@ -1,7 +1,14 @@
 package main
 
-import "endavourOs/install"
+import (
+	"endavourOs/install"
+	"log"
+)
 
 func main() {
-	install.Installer([]string{"sed"}...)
+	err := install.Installer([]string{"sedx"}...)
+	if err != nil {
+		log.Println("error format")
+		panic(err)
+	}
 }
