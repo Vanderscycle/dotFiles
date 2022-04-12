@@ -3,15 +3,15 @@ package install
 import (
 	"fmt"
 	"log"
-	// "os"
+	"os"
 	"os/exec"
 	"strings"
-	// "syscall"
+	"syscall"
 )
 
 //INFO: https://stackoverflow.com/questions/17555857/go-unpacking-array-as-arguments
 var EssentialPackages = []string{"neofetch", "sed"}
-var PkgManagers = [2]string{"pacman", "yay"}
+var PkgManagers = []string{"sudo", "pacman"}
 var EverPresentArgs = []string{"-S", "--needed", "--noconfirm"}
 
 // type PkgManagers struct {
@@ -25,26 +25,26 @@ func Installer(pkgs ...string) {
 
 	// pkgManagers := new(PkgManagers).Init()
 	//WIP:testing for pacman only
-	_, lookErr := exec.LookPath(pkgs[0])
+	binary, lookErr := exec.LookPath(pkgs[0])
 	if lookErr != nil {
 		panic(lookErr)
 	}
 
-	// env := os.Environ()
+	env := os.Environ()
 
 	//slices -> string (concatenation)
 	flags := strings.Join(EverPresentArgs, " ")
 	pkgStr := strings.Join(pkgs, " ")
-	args := fmt.Sprintf("%s %s %s", pkgs[0], flags, pkgStr)
+	args := fmt.Sprintf("%s %s %s", PkgManagers[0], flags, pkgStr)
 	log.Println(args)
-
+	//appending to string
 	v := append([]string{PkgManagers[0]}, EverPresentArgs...)
 	v = append(v, pkgs...)
 	log.Print(v)
 
-	// execErr := syscall.Exec(binary, "", env)
-	// if execErr != nil {
-	// 	panic(execErr)
-	// }
+	execErr := syscall.Exec(binary, v, env)
+	if execErr != nil {
+		panic(execErr)
+	}
 
 }
