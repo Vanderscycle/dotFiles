@@ -332,9 +332,10 @@ myLogHook = return ()
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
-  spawnOnce "spotify &"
-  spawnOnce "firefox &"
-  spawnOnce "discord &"
+  spawnOnOnce "workspace3" "spotify &" --spawnOnOnce :: WorkspaceId -> String -> X ()Source -- https://hackage.haskell.org/package/xmonad-contrib-0.14/docs/XMonad-Util-SpawnOnce.html
+  spawnOnOnce "workspace2" "qutebrowser &"
+  spawnOnOnce "workspace3" "discord &"
+  spawnOnOnce "workspace3" "slack &"
   spawnOnce "kitty &"
   spawnOnce "fcitx -d &"
   spawnOnce "xmobar &"
