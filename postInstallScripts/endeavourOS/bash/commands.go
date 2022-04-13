@@ -76,7 +76,7 @@ func General(prg string, flags []string, cmds []string, debug bool) error {
 	}
 	err := Bash(prg, s)
 	if err != nil {
-		err := fmt.Errorf("[ERR] => yay failed: %s", s)
+		err := fmt.Errorf("[ERR] => %s failed: %s", prg, s)
 		return err
 	}
 	return nil
@@ -94,6 +94,21 @@ func Root(prg string, flags []string, cmds []string, debug bool) error {
 		log.Printf("[INFO] => %s", strings.Join(s, " "))
 	}
 	err := Bash(prg, s)
+	if err != nil {
+		err := fmt.Errorf("[ERR] => %s failed: %s", prg, s)
+		return err
+	}
+	return nil
+
+}
+
+//updates the packages
+func Update(mgr string, debug bool) error {
+	s := []string{"sudo", mgr, "-Syu"}
+	if debug {
+		log.Printf("[INFO] => %s", strings.Join(s, " "))
+	}
+	err := Bash("pacman", s)
 	if err != nil {
 		err := fmt.Errorf("[ERR] => yay failed: %s", s)
 		return err

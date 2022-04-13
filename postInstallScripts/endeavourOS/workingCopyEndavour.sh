@@ -18,7 +18,6 @@ echo '------------------------------------------------------------------------'
 
 sudo touch /var/run/rebooting-for-updates 
 echo -e '\n=> installing neovim'
-sudo pacman -S --noconfirm --needed neovim
 
 echo -e '\n=> importing our doots'
 git clone https://github.com/Vanderscycle/dot-config.git ~/Documents/dotFiles/
@@ -33,9 +32,6 @@ echo -e 'Done.\n'
 # => Annoying programs that requires user permission
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Installing zsh'
-yay -S --noconfirm --needed zsh
-echo -e '\n=> Update repository information'
 # -S: synchronize your system's packages with those in the official repo
 # -y: download fresh package databases from the server
 
@@ -109,7 +105,7 @@ echo -e 'Done.\n'
 # source of info https://doronbehar.com/articles/ZSH-FZF-completion/
 #mkdir /usr/share/fzf/ # file exists
 # sudo touch /usr/share/fzf/completion.zsh
-# sudo wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
+# sudo wet -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
 # sudo touch /usr/share/fzf/key-bindings.zsh
 # sudo wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
 # echo -e 'Done.\n'
