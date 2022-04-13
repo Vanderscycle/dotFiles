@@ -2,7 +2,10 @@ package main
 
 import (
 	"endavourOs/install"
+	"errors"
+	"fmt"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -12,28 +15,74 @@ var ArgsInstall = []string{"-S", "--needed", "--noconfirm"}
 var amazingTUI = []string{}
 
 func main() {
-	// we could go function install several packages: e.g. cli,tui,gui,etc...
-	//Installing tui
-	// command := append([]string{"sudo"}, PkgManagers[0]) // in this example it requires sudo
-	// command = append(command, ArgsInstall...)
-	// command = append(command, EssentialPackages...)
-	// log.Printf("[INFO]%s", strings.Join(command, " "))
-	command := sudo(PkgManagers[0], ArgsInstall, EssentialPackages, false)
-
-	err := install.Bash(PkgManagers[0], command)
+	err := General("ls", []string{"-l"}, nil, true)
 	if err != nil {
-		log.Println("error format")
-		panic(err)
+		log.Fatal(err)
+		os.Exit(2)
 	}
 }
 
-func sudo(prg string, flags []string, cmds []string, debug bool) []string {
-	s := append([]string{"sudo"}, []string{prg}...)
-	s = append(s, flags...)
+func Pacman(flags []string, cmds []string, debug bool) error {
+	//flags being associated with the prg/"yay" .e.g -S/-R
+	//Cmds should be related to the install prog
+	s := append([]string{"sudo", "pacman"}, flags...)
 	s = append(s, cmds...)
 	if debug {
-		log.Printf("[INFO]%s", strings.Join(s, " "))
-
+		log.Printf("[INFO] => %s", strings.Join(s, " "))
 	}
-	return s
+	err := install.Bash("pacman", s)
+	if err != nil {
+		return errors.New(fmt.Sprintf("[ERR] => pacman failed: %s", s))
+	}
+	return nil
+}
+
+func Yay(flags []string, cmds []string, debug bool) error {
+	//flags being associated with the prg/"yay" .e.g -S/-R
+	//Cmds should be related to the install prog
+	s := append([]string{"sudo", "yay"}, flags...)
+	s = append(s, cmds...)
+	if debug {
+		log.Printf("[INFO] => %s", strings.Join(s, " "))
+	}
+	err := install.Bash("yay", s)
+	if err != nil {
+		err := errors.New(fmt.Sprintf("[ERR] => yay failed: %s", s))
+		return err
+		// log.Fatalf("[ERR] => %s", err)
+	}
+	return nil
+}
+
+func General(prg string, flags []string, cmds []string, debug bool) error {
+	//in general we sometimes do not need both flags and cmds so
+	s := append([]string{prg}, flags...)
+	s = append(s, cmds...)
+	if debug {
+		log.Printf("[INFO] => %s", strings.Join(s, " "))
+	}
+	err := install.Bash(prg, s)
+	if err != nil {
+		err := fmt.Errorf("[ERR] => yay failed: %s", s)
+		return err
+		// log.Fatalf("[ERR] => %s", err)
+	}
+	return nil
+
+}
+
+func Root(prg string, flags []string, cmds []string, debug bool) error {
+	//in general we sometimes do not need both flags and cmds so
+	s := append([]string{"sudo", prg}, flags...)
+	s = append(s, cmds...)
+	if debug {
+		log.Printf("[INFO] => %s", strings.Join(s, " "))
+	}
+	err := install.Bash(prg, s)
+	if err != nil {
+		err := fmt.Errorf("[ERR] => yay failed: %s", s)
+		return err
+	}
+	return nil
+
 }

@@ -1,7 +1,6 @@
 package install
 
 import (
-	"errors"
 	"fmt"
 	// "log"
 	"os"
@@ -13,13 +12,15 @@ import (
 //INFO: https://stackoverflow.com/questions/17555857/go-unpacking-array-as-arguments
 
 func Bash(shellProgram string, pkgs []string) error {
+	//shellProgram to check for the binanries
+	//pkgs being the full ...string array of the bash arguments
 
 	// pkgManagers := new(PkgManagers).Init()
 	//WIP:testing for pacman only
 	binary, lookErr := exec.LookPath(shellProgram)
 	//TODO: need better catch as I get fatal errors
 	if lookErr != nil {
-		myError := errors.New(fmt.Sprintf("[404]%s not installed-> Error:%s", shellProgram, lookErr))
+		myError := fmt.Errorf("[404]%s not installed-> Error:%s", shellProgram, lookErr)
 		return myError
 	}
 
@@ -37,8 +38,7 @@ func Bash(shellProgram string, pkgs []string) error {
 	//INFO: you can call sudo like "/bin/sh"
 	execErr := syscall.Exec(binary, pkgs, env)
 	if execErr != nil {
-		myError := errors.New(fmt.Sprintf("[COMMAND]%s Error:%s", pkgs, lookErr))
-
+		myError := fmt.Errorf("[COMMAND]%s Error:%s", pkgs, lookErr)
 		return myError
 	}
 	return nil
