@@ -35,34 +35,13 @@ echo -e 'Done.\n'
 # -S: synchronize your system's packages with those in the official repo
 # -y: download fresh package databases from the server
 
-echo -e '=> Perform system update'
-sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm base-devel git 
-echo 'cli download programs'
-#BUG: httpie doesn't work
-sudo pacman -S --needed --noconfirm curl wget
-
-#WARN: not working need to grep and replace
-# sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
-echo -e 'Done.\n'
-
 
 
 # -----------------------------------------------------------------------------
 # => Install system utilities
 # -----------------------------------------------------------------------------
-
-echo -e '\n=> Installing system utilities'
-echo -e 'Installing AUR helper (yay)'
-sudo pacman -S --noconfirm --needed yay
-
 # c
-echo 'installing c lang'
-sudo pacman -S --noconfirm --needed  clang
-echo -e 'Done.\n'
 
-#bash
-sudo yay -S --noconfirm --needed shellcheck-bin
 
 #Python
 echo -e '\n=> Installing Miniconda'
@@ -78,9 +57,6 @@ echo -e 'Done.\n'
 
 #JS/TS
 echo -e 'Installing nodeJs'
-sudo pacman -S --noconfirm --needed nodejs npm
-sudo npm i -g prettier eslint neovim tree-sitter-cli
-echo -e 'Done.\n'
 
 echo -e '\n=> Installing Kitty'
 sudo pacman -S --noconfirm kitty
