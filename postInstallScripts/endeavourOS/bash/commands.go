@@ -12,9 +12,8 @@ import (
 
 //INFO: https://stackoverflow.com/questions/17555857/go-unpacking-array-as-arguments
 
+//check for the binaries of the program and execute them in shell
 func Bash(shellProgram string, pkgs []string) error {
-	//shellProgram to check for the binanries
-	//pkgs being the full ...string array of the bash arguments
 
 	binary, lookErr := exec.LookPath(shellProgram)
 	//TODO: need better catch as I get fatal errors
@@ -33,9 +32,9 @@ func Bash(shellProgram string, pkgs []string) error {
 	return nil
 }
 
+//flags being associated with the prg e.g."yay" -S/-R as []string{}
+//cmds should be related to the install prog as []string{}
 func Pacman(flags []string, cmds []string, debug bool) error {
-	//flags being associated with the prg/"yay" .e.g -S/-R
-	//Cmds should be related to the install prog
 	s := append([]string{"sudo", "pacman"}, flags...)
 	s = append(s, cmds...)
 	if debug {
@@ -49,9 +48,9 @@ func Pacman(flags []string, cmds []string, debug bool) error {
 	return nil
 }
 
+//flags being associated with the prg e.g."yay" -S/-R as []string{}
+//cmds should be related to the install prog as []string{}
 func Yay(flags []string, cmds []string, debug bool) error {
-	//flags being associated with the prg/"yay" .e.g -S/-R
-	//Cmds should be related to the install prog
 	s := append([]string{"sudo", "yay"}, flags...)
 	s = append(s, cmds...)
 	if debug {
@@ -65,8 +64,11 @@ func Yay(flags []string, cmds []string, debug bool) error {
 	return nil
 }
 
+//flags being associated with the prg/"yay" .e.g -S/-R
+//Cmds should be related to the install prog
+//in general we sometimes do not need both flags and cmds so
+//e.g. General("ls", []string{"-l", "-a"}, nil, true)
 func General(prg string, flags []string, cmds []string, debug bool) error {
-	//in general we sometimes do not need both flags and cmds so
 	s := append([]string{prg}, flags...)
 	s = append(s, cmds...)
 	if debug {
@@ -81,8 +83,11 @@ func General(prg string, flags []string, cmds []string, debug bool) error {
 
 }
 
+//flags being associated with the prg/"yay" .e.g -S/-R
+//Cmds should be related to the install prog
+//in general we sometimes do not need both flags and cmds so
+//e.g. Root("ls", []string{"-l", "-a"}, nil, true)
 func Root(prg string, flags []string, cmds []string, debug bool) error {
-	//in general we sometimes do not need both flags and cmds so
 	s := append([]string{"sudo", prg}, flags...)
 	s = append(s, cmds...)
 	if debug {

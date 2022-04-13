@@ -12,7 +12,7 @@ var ArgsInstall = []string{"-S", "--needed", "--noconfirm"}
 var amazingTUI = []string{}
 
 func main() {
-	err := bash.General("ls", []string{"-l"}, nil, true)
+	err := bash.General("ls", []string{"-l", "-a"}, nil, true)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)
