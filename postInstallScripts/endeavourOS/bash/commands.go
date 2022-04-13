@@ -16,8 +16,6 @@ func Bash(shellProgram string, pkgs []string) error {
 	//shellProgram to check for the binanries
 	//pkgs being the full ...string array of the bash arguments
 
-	// pkgManagers := new(PkgManagers).Init()
-	//WIP:testing for pacman only
 	binary, lookErr := exec.LookPath(shellProgram)
 	//TODO: need better catch as I get fatal errors
 	if lookErr != nil {
@@ -26,16 +24,6 @@ func Bash(shellProgram string, pkgs []string) error {
 	}
 
 	env := os.Environ()
-
-	//slices -> string (concatenation)
-	// flags := strings.Join(EverPresentArgs, " ")
-	// pkgStr := strings.Join(pkgs, " ")
-	// args := fmt.Sprintf("sudo %s %s %s", shellProgram, flags, pkgStr)
-	// log.Println(args)
-	// //appending to string
-	// v = append(v, EverPresentArgs...)
-
-	//really confused with the sudo
 	//INFO: you can call sudo like "/bin/sh"
 	execErr := syscall.Exec(binary, pkgs, env)
 	if execErr != nil {
@@ -51,6 +39,7 @@ func Pacman(flags []string, cmds []string, debug bool) error {
 	s := append([]string{"sudo", "pacman"}, flags...)
 	s = append(s, cmds...)
 	if debug {
+		//slices -> string (concatenation)
 		log.Printf("[INFO] => %s", strings.Join(s, " "))
 	}
 	err := Bash("pacman", s)
@@ -72,7 +61,6 @@ func Yay(flags []string, cmds []string, debug bool) error {
 	if err != nil {
 		err := fmt.Errorf("[ERR] => yay failed: %s", s)
 		return err
-		// log.Fatalf("[ERR] => %s", err)
 	}
 	return nil
 }
@@ -88,7 +76,6 @@ func General(prg string, flags []string, cmds []string, debug bool) error {
 	if err != nil {
 		err := fmt.Errorf("[ERR] => yay failed: %s", s)
 		return err
-		// log.Fatalf("[ERR] => %s", err)
 	}
 	return nil
 
