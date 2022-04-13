@@ -15,21 +15,14 @@ var EssentialPackages = []string{"neofetch", "sed"}
 var PkgManagers = []string{"pacman", "yay"}
 var EverPresentArgs = []string{"-S", "--needed", "--noconfirm"}
 
-// type PkgManagers struct {
-// 	Pacman string
-// 	Yay    string
-// }                                                 //[]string = []string{"pacman", "yay"}
-// func (p *PkgManagers) Init(pkgsMgr ...string) (PkgManagers, error) { t := PkgManagers{pkgsMgr...};return t, nil }
-
-// func (p *PkgManagers) P() (string, error) { return p.Pacman, nil }
-func Installer(pkgs ...string) error {
+func Bash(shellProgram string, pkgs ...string) error {
 
 	// pkgManagers := new(PkgManagers).Init()
 	//WIP:testing for pacman only
-	binary, lookErr := exec.LookPath(PkgManagers[0])
+	binary, lookErr := exec.LookPath(shellProgram)
 	//TODO: need better catch as I get fatal errors
 	if lookErr != nil {
-		myError := errors.New(fmt.Sprintf("%s not installed-> Error:%s", PkgManagers[0], lookErr))
+		myError := errors.New(fmt.Sprintf("[404]%s not installed-> Error:%s", shellProgram, lookErr))
 		return myError
 	}
 
