@@ -2,15 +2,19 @@ package main
 
 import (
 	"endavourOs/bash"
+	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/tidwall/gjson"
 )
 
-type error struct{}
+type Error struct{}
 
-type pkg struct {
-	Installer string
-	Program   string
+type Pkg struct {
+	Installer string `json:"installer"`
+	Program   string `json:"program"`
 }
 
 var PkgManagers = []string{"pacman", "yay"}
@@ -23,9 +27,11 @@ var bareMetal = []string{"curl", "wget", "git", "base-devel", "clang"}
 var languages = []string{"go", "clang", "node", "npm"}
 var lintersFormatters = []string{"shellcheck-bin"}
 var lintersFormattersYay = []string{"shellcheck-bin"}
-var terminal = []Pkg{{Installer: PkgManagers[1], Program: "tmuxinator"}, {Installer: PkgManagers[0], Program: "kitty"}, {Installer: PkgManagers[0], Program: "zellij"}}
+
+// var terminal = []pkg{{Installer: PkgManagers[1], Program: "tmuxinator"}, {Installer: PkgManagers[0], Program: "kitty"}, {Installer: PkgManagers[0], Program: "zellij"}}
 
 func main() {
+
 	//syncing doots
 	// URL: "https://github.com/Vanderscycle/dot-config.git ",
 
@@ -34,7 +40,9 @@ func main() {
 	// 	log.Fatal(err)
 	// 	os.Exit(2)
 	// }
-	var err = bash.Pacman(ArgsInstall, bareMetal, false)
+	_ = LoadJson()
+
+	err := bash.Pacman(ArgsInstall, bareMetal, false)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)
@@ -51,4 +59,17 @@ func main() {
 		log.Fatal(err)
 		os.Exit(2)
 	}
+}
+
+func LoadJson() error {
+	// var terminal []Pkg
+	p := "programs.json"
+	file, err := ioutil.ReadFile(p)
+	if err != nil {
+		return fmt.Errorf("[404] => missing %s failed %s", p, err)
+	}
+	//gjson go is amazing https://github.com/tidwall/gjson
+	value := gjson.Get(string([]byte(file)), "terminal")
+	log.Print(value)
+	return nil
 }
