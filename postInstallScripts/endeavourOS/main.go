@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"os"
 
 	"github.com/tidwall/gjson"
 )
@@ -45,19 +44,16 @@ func main() {
 	err := bash.Pacman(ArgsInstall, bareMetal, false)
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(2)
 	}
 
 	err = bash.Root("npm", []string{"i", "-g"}, []string{"prettier", "eslint", "neovim", "tree-sitter-cli"}, true)
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(2)
 	}
 
 	err = bash.General("ls", []string{"-l", "-a"}, nil, true)
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(2)
 	}
 }
 
