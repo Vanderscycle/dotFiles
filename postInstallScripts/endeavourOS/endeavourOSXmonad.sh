@@ -120,7 +120,7 @@ echo -e 'Done.\n'
 
 echo -e '\n=> Installing developer packages and useful tui alternatives'
 sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task
-sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr
+sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr ytfzf #entr is for file cahnges
 sudo yay -S --noconfirm openshift-client-bin # redhat openshift
 # installing pnpm
 curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -498,8 +498,19 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Gaming Monitah'
-yay -S --needed --noconfirm steam PathOfBuildingCommunity ytfzf lutris
+yay -S --needed --noconfirm steam  lutris
 echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => Kubernetes k8s 
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Gaming Monitah'
+sudo pacman -S --needed --noconfirm kubectl minikube
+# since we have virtualBox installed it will detect virtual box as the hypervisor of choice.
+# otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
+echo -e 'Done.\n'
+
 
 
 # -----------------------------------------------------------------------------
