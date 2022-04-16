@@ -34,8 +34,8 @@ if status is-interactive
   set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
   set -xg NNN_FIFO '/tmp/nnn.fifo nnn'
   set -xg NNN_PLUG 'f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
-  set -xg NNN_BMS 'd:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/'
-  set -xg NNN_OPTS HE
+  set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/'
+  set -xg NNN_OPTS HEd
   set -xg SPLIT 'v' # to split Kitty vertically
   set -xg LC_COLLATE 'C' # hidden files on top
 
