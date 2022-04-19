@@ -60,6 +60,12 @@ end
 function fishy
   lvim ~/.config/fish/config.fish
 end
+
+#conda/python
+function condaUpdate
+  conda update --all -y
+end
+
 # go
 function goGet 
   go get -u ./...
