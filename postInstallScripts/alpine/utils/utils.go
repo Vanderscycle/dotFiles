@@ -34,8 +34,9 @@ func checkLinuxVersion() string {
 	var si sysinfo.SysInfo
 
 	si.GetSysInfo()
-
-	data, err := json.MarshalIndent(&si, "", "  ")
+	//func Marshal(v interface{}) ([]byte, error)
+	//tldr: like serialization
+	data, err := json.MarshalIndent(&si, "", "  ") //https://en.wikipedia.org/wiki/Marshalling_(computer_science)
 	if err != nil {
 		log.Fatal(err)
 	}
