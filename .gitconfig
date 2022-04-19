@@ -1,15 +1,7 @@
-
 # https://markentier.tech/posts/2021/02/github-with-multiple-profiles-gpg-ssh-keys/
 # Home
 [user]
   name = Henri Vandersleyen 
-  email = hvandersleyen@duck.com	
-  signingkey = 06C766643AF0B81F
-# work
-; [user]
-;   name = Henri Vandersleyen
-;   email = hvandersleyen@duck.com	
-;   signingkey = D9F43ED2A92852B0
 
 [alias]
   clearcache = !"git rm -r --cached ."
@@ -27,5 +19,8 @@
 [commit]
   gpgsign = true
 
-[includeIf "gitdir:**/aviary/**/.git"]
-  path = config.aviary
+[include]
+  path = ~/.gitconfig.personal
+
+[includeIf "gitdir:**/houseAtreides/**/.git"]
+  path = ~/.gitconfig.atreides

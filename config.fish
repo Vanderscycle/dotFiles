@@ -20,7 +20,7 @@ if status is-interactive
   set -xg SHELL fish
   set -xg TERMINAL kitty
   set -xg LV_BRANCH rolling  
-  keychain --eval --agents gpg,ssh ~/.ssh/endavourGit
+  keychain --eval --agents gpg,ssh ~/.ssh/endavourGit ~/.ssh/atreidesGit
   ssh-add ~/.ssh/endavourGit
   #ssh-agent /usr/bin/fish
   pokemon-colorscripts -r
