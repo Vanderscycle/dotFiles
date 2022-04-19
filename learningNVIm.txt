@@ -1,4 +1,3 @@
-another test (gpg key)
 installing a new language:
 go to lspconfig and add the language to local server
 go to treesitter and add to ts config
