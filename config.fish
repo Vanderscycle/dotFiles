@@ -55,23 +55,25 @@ if status is-interactive
   # golang
   set -x GOPATH $HOME/go
   set -x PATH $PATH $GOPATH/bin
-
-
 end
 
-
-
+function fishy
+  lvim ~/.config/fish/config.fish
+end
 # go
-
 function goGet 
   go get -u ./...
 end
 
 #aliases
-
 function :q
   exit
 end
+
+function :qa
+  exit
+end
+
 # zellij
 function zel
   zellij options --theme tokyonightDark $argv
@@ -115,6 +117,8 @@ end
 function glowAll
   exa -a | entr -c  glow  "$argv"
 end
+#TODO: add kubectl get/apply describe/ etc 
+#k8s
 
 #Podman
 function podman-crmAll
@@ -137,8 +141,6 @@ function podman-prmAll
   podman system prune --all --force && 
   echo "done"
 end
-
-
 
 # Docker
 function docker-crmAll
