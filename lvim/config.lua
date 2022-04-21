@@ -25,12 +25,13 @@ require("user.keybindings").config()
 -- =========================================
 -- require("user.todoComments")
 require("user.general").config()
-require("user.autocommands").config()
+-- require("user.autocommands").config()
 
 -- Linter/Formatters
 -- =========================================
 require("linter_formatter.typescript").config()
 require("linter_formatter.go").config()
+-- require("linter_formatter.python").config()
 -- require("linter_formatter.tailwindcss").config()
 -- require("linter_formatter.bash").config()
 

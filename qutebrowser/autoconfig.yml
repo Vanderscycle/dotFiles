@@ -10,10 +10,17 @@ settings:
     global: both
   content.geolocation:
     https://talltreehealthjamesbay.janeapp.com: false
+  content.media.audio_capture:
+    https://meet.google.com: true
+  content.media.audio_video_capture:
+    https://meet.google.com: true
+  content.media.video_capture:
+    https://meet.google.com: true
   content.notifications.enabled:
     https://app.slack.com: true
     https://calendar.protonmail.com: true
     https://codingshiksha.com: false
+    https://meet.google.com: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
     https://mail.protonmail.com#mailto=%25s: true
