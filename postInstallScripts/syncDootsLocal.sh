@@ -7,6 +7,8 @@ for DOTFILE in "${StringArray[@]}"; do
     rsync -av  --progress ~/Documents/dotFiles/$DOTFILE ~/$DOTFILE
 done
     rsync -av --progress   ~/Documents/dotFiles/config.fish ~/.config/fish/config.fish
+    rsync -av --progress  ~/Documents/dotFiles/.gnupg ~/.gnupg/ 
+    rsync -av --progress  ~/Documents/dotFiles/ssh/ ~/.ssh/config 
 
 
 rg --passthru 'henri' -r $DOOTS_USER_NAME ~/.zshrc > ~/.temp.txt && mv ~/.temp.txt ~/.zshrc.sh
