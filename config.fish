@@ -19,9 +19,12 @@ if status is-interactive
   set -xq BROWSER qutebrowser
   set -xg SHELL fish
   set -xg TERMINAL kitty
-  set -xg LV_BRANCH rolling  
+  set -xg LV_BRANCH rolling 
+  # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
+  eval (ssh-agent -c)
   keychain --eval --agents gpg,ssh ~/.ssh/endavourGit ~/.ssh/atreidesGit
   ssh-add ~/.ssh/endavourGit
+  ssh-add ~/.ssh/atreidesGit
   #ssh-agent /usr/bin/fish
   pokemon-colorscripts -r
 
@@ -88,10 +91,15 @@ end
 function gsps
   # eval run 
   # exec runs a new shell
+  if [ "$argv" = '-a' ]
+    #TODO: find all the keys and add them
+    ssh-add ~/.ssh/atreidesGit
+    ssh-add ~/.ssh/endavourGit
+  end
   if [ "$argv" = '-r' ]
     exec ssh-agent fish
-  else 
-    ssh-agent /usr/bin/fish
+  # else 
+  #   ssh-agent /usr/bin/fish
     # eval ssh-agent fish
   end
 end

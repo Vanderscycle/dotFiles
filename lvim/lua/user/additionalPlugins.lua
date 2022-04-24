@@ -10,15 +10,22 @@ M.config = function()
       "simrat39/symbols-outline.nvim",
       cmd = "SymbolsOutline",
     },
-    {
-      "ray-x/navigator.lua",
-      requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
-      config = function()
-        vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
-        vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
-      end,
-    },
+    -- {
+    --   "ray-x/navigator.lua",
+    --   requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
+    --   config = function()
+    --     vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
+    --     vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
+    --   end,
+    -- },
     -- movement
+        {
+      "ray-x/lsp_signature.nvim",
+      config = function()
+        require("plugins.signature").config()
+      end,
+      event = { "BufRead", "BufNew" },
+    },
     {
       "ggandor/lightspeed.nvim",
       event = "BufRead",
@@ -28,14 +35,14 @@ M.config = function()
       disable = lvim.builtin.motion_provider ~= "lightspeed",
     },
         -- visual aid
-    { -- NEED BINGINDS
-      "sidebar-nvim/sidebar.nvim",
-      config = function()
-        require("plugins.sidebar").config()
-      end,
-      event = "BufRead",
-      disable = not lvim.builtin.sidebar.active, -- TODO: activation
-    },
+    -- { -- NEED BINGINDS
+    --   "sidebar-nvim/sidebar.nvim",
+    --   config = function()
+    --     require("plugins.sidebar").config()
+    --   end,
+    --   event = "BufRead",
+    --   disable = not lvim.builtin.sidebar.active, -- TODO: activation
+    -- },
     {
       "kosayoda/nvim-lightbulb",
       config = function()
