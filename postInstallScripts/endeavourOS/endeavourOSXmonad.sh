@@ -514,7 +514,7 @@ echo -e 'Done.\n'
 
 
 # -----------------------------------------------------------------------------
-# => syncing files and installing Neovim
+# => syncing files 
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> installing neovim npm plugins'
@@ -542,7 +542,7 @@ git clone https://github.com/pop-os/keyboard-configurator     ~/Programs/Launch-
 (cd ~/Programs/Launch-keebs && sudo cargo run --release)
 echo -e 'Done.\n'
 
-echo '=>Terracform'
+echo '=>Terraform'
 pacman -S --needed --noconfirm terraform
 echo -e 'Done.\n'
 
@@ -557,12 +557,30 @@ sudo yay -S --needed --noconfirm golangci-lint
 # go mon
 echo -e 'Done.\n'
 
+# -----------------------------------------------------------------------------
+# => Lunarvim
+# -----------------------------------------------------------------------------
+
+
+# BUG: honestly its not working
 echo -e '\n=> installing LunarVim'
 sudo rm -rf /usr/bin/tree-sitter
 LV_BRANCH=rolling bash <(curl -O https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
 sudo bash install.sh --noinstall-dependencies
 rm install.sh
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
+echo -e 'Done.\n'
+
+
+# -----------------------------------------------------------------------------
+# => emacs (doom emacs)
+# -----------------------------------------------------------------------------
+echo -e '\n=> installing Emacs'
+pacman -S --needed --noconfirm emacs
+echo -e '\n=> installing Doom emacs'
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+echo -e 'Done.\n'
 
 
 
