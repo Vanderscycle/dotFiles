@@ -14,8 +14,14 @@ M.config = function ()
     ["<leader>si"] = ":Telescope media_files<cr>",
     ["<leader>sn"] = ":lua require 'telescope'.extensions.file_browser.file_browser()<CR>", --nnn nexttime?
     ["<leader>bt"] = ":Telescope buffers<CR>",
+    ["<leader>bk"] = ":! black .",
   }
-
+  lvim.builtin.which_key.mappings["E"] = {
+    "<cmd>SidebarNvimToggle<CR>", "Sidebar"
+  }
+  lvim.builtin.which_key.mappings["G"] = {
+    "<cmd>Glow<CR>", "Sidebar"
+  }
   -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
   local actions = require("telescope.actions")
   lvim.builtin.telescope.defaults.mappings = {
@@ -66,11 +72,6 @@ M.set_hlslens_keymaps = function()
   vim.api.nvim_set_keymap("n", "g#", "g#<Cmd>lua require('hlslens').start()<CR>", opts)
 end
 
-M.set_sidebar_keymaps = function()
-  if lvim.builtin.sidebar.active then
-    lvim.keys.normal_mode["<leader>E"] = ":SidebarNvimToggle<CR>"
-  end
-end
 
 M.set_lightspeed_keymaps = function()
   vim.cmd [[

@@ -12,13 +12,14 @@ lvim.builtin.lightspeed = { active = true }
 vim.list_extend(lvim.lsp.override, {
   "gopls"
 })
+-- vim.g.glow_binary_path = vim.env.HOME .. "/bin"
 -- Extra plugin
 -- =========================================
 require("user.additionalPlugins").config()
 
 -- Customization
 -- =========================================
--- require("user.autocommands")
+require("user.autocommands")
 require("user.keybindings").config()
 
 -- user specific

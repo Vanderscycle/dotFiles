@@ -20,12 +20,14 @@ if status is-interactive
   set -xg SHELL fish
   set -xg TERMINAL kitty
   set -xg LV_BRANCH rolling 
+  # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
   eval (ssh-agent -c)
   keychain --eval --agents gpg,ssh ~/.ssh/endavourGit ~/.ssh/atreidesGit
+  fish_ssh_agent
   ssh-add ~/.ssh/endavourGit
   ssh-add ~/.ssh/atreidesGit
-  #ssh-agent /usr/bin/fish
+
   pokemon-colorscripts -r
 
   # dotfiles
@@ -49,7 +51,7 @@ if status is-interactive
   set -gx GPG_TTY (tty)
   
   # path -> Cargo, Conda 
-  set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri.config/broot"
+  set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri/.config/broot:/home/henri/.emacs.d/bin"
 
   # java && android 
   # set -xg JAVA_HOME "/usr/bin/java"

@@ -20,5 +20,6 @@ linters.setup({
 	{
 		exe = "flake8",
 		filetypes = { "python" },
+    args = { "--max-line-length", "120" }
 	},
 })

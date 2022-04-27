@@ -20,6 +20,7 @@ settings:
     https://app.slack.com: true
     https://calendar.protonmail.com: true
     https://codingshiksha.com: false
+    https://gitlab.atreidesaccount.io: true
     https://meet.google.com: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true

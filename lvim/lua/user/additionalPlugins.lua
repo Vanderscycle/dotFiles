@@ -35,14 +35,14 @@ M.config = function()
       disable = lvim.builtin.motion_provider ~= "lightspeed",
     },
         -- visual aid
-    -- { -- NEED BINGINDS
-    --   "sidebar-nvim/sidebar.nvim",
-    --   config = function()
-    --     require("plugins.sidebar").config()
-    --   end,
-    --   event = "BufRead",
-    --   disable = not lvim.builtin.sidebar.active, -- TODO: activation
-    -- },
+    {
+      "sidebar-nvim/sidebar.nvim",
+      config = function()
+        require("plugins.sidebar").config()
+      end,
+      event = "BufRead",
+      -- disable = not lvim.builtin.sidebar.active, -- TODO: activation
+    },
     {
       "kosayoda/nvim-lightbulb",
       config = function()
@@ -54,12 +54,19 @@ M.config = function()
       event = "BufRead",
       ft = { "rust", "go", "typescript", "typescriptreact" },
     },
-
+    {
+      "npxbr/glow.nvim",
+      ft = {"markdown"},
+      config = function()
+        require("plugins.glow").config()
+      end,
+      -- run = "yay -S glow"
+    },
     {
       "tpope/vim-surround",
       keys = { "c", "d", "y" },
     },
-    {
+    { -- WARN: better alterntive?
       "andymass/vim-matchup",
       event = "CursorMoved",
       config = function()

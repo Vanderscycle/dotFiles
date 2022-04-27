@@ -1,3 +1,12 @@
+
+#TODO:
+- [ ] batch renaming with quickfix list
+- [ ] snippets (custom)
+- [ ] :! black %
+- [ ] refactor of the keybinding e.g. leader - l 
+- [ ] codelens action (how does it even work)?
+
+
 --INFO: telescope with nvim-bqf cool interaction with quickFix Lists
 -- Search for text by calling <leader>st
 -- you can then navigate between elementa using <C-J><C-K> and can start a selection by using <C-i>
