@@ -2,6 +2,7 @@
 # sudo pacman -S --needed --noconfirm httpie && 
 # WARN: due for a reboot and time in vr for bug testing
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
+
 before_reboot(){
     # Do stuff
 #TODO: add the usb mounting https://www.youtube.com/watch?v=LkwZZIsY9uE
