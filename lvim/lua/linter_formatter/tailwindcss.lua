@@ -25,23 +25,23 @@ end
 
 local M = {}
 
-M.config = function ()
---
--- Does current project contain tailwindcss configuration?
---
-local project_has_tailwindcss_dependency = function()
-	return (vim.fn.glob("tailwind*") ~= "" or is_in_package_json("tailwindcss"))
-end
+M.config = function()
+	--
+	-- Does current project contain tailwindcss configuration?
+	--
+	local project_has_tailwindcss_dependency = function()
+		return (vim.fn.glob("tailwind*") ~= "" or is_in_package_json("tailwindcss"))
+	end
 
---- Setup tailwindcss LSP if project has tailwindcss configuration
-  if project_has_tailwindcss_dependency() == true then
-    local lsp_installer_servers = require("nvim-lsp-installer.servers")
-    local _, requested_server = lsp_installer_servers.get_server("tailwindcss")
-    local opts = {
-      cmd = requested_server._default_options.cmd,
-    }
+	--- Setup tailwindcss LSP if project has tailwindcss configuration
+	if project_has_tailwindcss_dependency() == true then
+		local lsp_installer_servers = require("nvim-lsp-installer.servers")
+		local _, requested_server = lsp_installer_servers.get_server("tailwindcss")
+		local opts = {
+			cmd = requested_server._default_options.cmd,
+		}
 
-    require("lvim.lsp.manager").setup("tailwindcss", opts)
-  end
+		require("lvim.lsp.manager").setup("tailwindcss", opts)
+	end
 end
 return M

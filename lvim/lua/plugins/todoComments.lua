@@ -2,7 +2,7 @@ local M = {}
 
 M.config = function()
 	local status_ok, todo = pcall(require, "todo-comments")
-  -- NOTE: have to ensure the plugin name is correct (not the file)
+	-- NOTE: have to ensure the plugin name is correct (not the file)
 	if not status_ok then
 		return
 	end

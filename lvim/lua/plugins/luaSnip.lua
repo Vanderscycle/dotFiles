@@ -1,6 +1,18 @@
-local ls = require("luasnip")
-ls.config.set_config({
-	history = true,
-	updateevents = "TextChanged,TextChangedI",
-	enable_autosnippets = true,
-})
+local M = {}
+
+M.config = function()
+	local status_ok, luasnip = pcall(require, "luasnip")
+	if not status_ok then
+		return
+	end
+
+	local types = require("luasnip.util.types")
+	luasnip.setup({
+		show_numbers = true, -- Enable 'number' for the window while peeking
+		show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+		number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+		centered_peeking = true, -- Peeked line will be centered relative to window
+	})
+end
+
+return M

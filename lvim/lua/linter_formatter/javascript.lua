@@ -3,7 +3,7 @@ formatters.setup({
 	{
 		exe = "prettier",
 		filetypes = { "javascript" },
-		args = {  "--double-quote" },
+		args = { "--double-quote" },
 	},
 })
 

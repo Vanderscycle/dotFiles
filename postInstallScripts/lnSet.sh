@@ -9,7 +9,7 @@ for DOTFILE in "${StringArray[@]}"; do
     rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
 done
     rsync -av --progress  ~/.config/fish/config.fish ~/Documents/dotFiles/config.fish
-    rsync -av --progress  ~/.gnupg/ ~/Documents/dotFiles/.gnupg
+    rsync -av --progress  ~/.gnupg/ ~/Documents/dotFiles/.gnupg/*.conf
     rsync -av --progress  ~/.ssh/config ~/Documents/dotFiles/ssh/
 
 

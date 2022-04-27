@@ -563,6 +563,10 @@ echo -e 'Done.\n'
 
 
 # BUG: honestly its not working
+echo -e '\n=> installing lua'
+pacman --needed --noconfirm luarocks
+sudo luarocks install luacheck # linter
+cargo install stylua # formatter
 echo -e '\n=> installing LunarVim'
 sudo rm -rf /usr/bin/tree-sitter
 LV_BRANCH=rolling bash <(curl -O https://raw.githubusercontent.com/lunarvim/lunarvim/rolling/utils/installer/install.sh)
