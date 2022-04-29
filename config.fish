@@ -12,6 +12,7 @@ function nnnTheme
   set -xg OTHER="02"
 end
 
+
 if status is-interactive
   # Commands to run in interactive sessions can go here
   # https://fishshell.com/docs/current/tutorial.html
@@ -22,11 +23,12 @@ if status is-interactive
   set -xg LV_BRANCH rolling 
   # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
-  eval (ssh-agent -c)
-  keychain --eval --agents gpg,ssh ~/.ssh/endavourGit ~/.ssh/atreidesGit
   fish_ssh_agent
   ssh-add ~/.ssh/endavourGit
   ssh-add ~/.ssh/atreidesGit
+  # eval (ssh-agent -c)
+  # https://www.funtoo.org/Funtoo:Keychain (currently not working for fish shell T_T)
+  keychain --eval --agents gpg,ssh ~/.ssh/endavourGit ~/.ssh/atreidesGit
 
   pokemon-colorscripts -r
 
@@ -36,8 +38,12 @@ if status is-interactive
 
   # nnn config
   # nnnTheme
+  set -u NNN_TMPFILE "/tmp/nnn"
+  export NNN_TMPFILE
+
   set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
-  set -xg NNN_FIFO '/tmp/nnn.fifo nnn'
+  set -xg NNN_FIFO '/tmp/nnn.fifo'
+  export NNN_FIFO
   set -xg NNN_PLUG 'f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
   set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/'
   set -xg NNN_OPTS HEd
@@ -60,6 +66,26 @@ if status is-interactive
   # golang
   set -x GOPATH $HOME/go
   set -x PATH $PATH $GOPATH/bin
+end
+  
+# aliases/func
+
+# nnn
+function n
+  nnn "$argv"
+  if test -e $NNN_TMPFILE
+    source $NNN_TMPFILE
+    rm -rf $NNN_TMPFILE
+  end
+end
+# git
+function gsquash 
+    git reset (git merge-base "$argv" (git branch --show-current))
+
+end
+
+function img
+  nomacs "$argv"
 end
 
 function fishy
@@ -93,6 +119,8 @@ end
 function gsps
   # eval run 
   # exec runs a new shell
+
+
   if [ "$argv" = '-a' ]
     #TODO: find all the keys and add them
     ssh-add ~/.ssh/atreidesGit
@@ -110,9 +138,9 @@ function htop
   bpytop
 end
 
-function npm 
-	pnpm $argv
-end
+# function npm 
+# 	pnpm $argv
+# end
 
 function ls
   exa -al $argv

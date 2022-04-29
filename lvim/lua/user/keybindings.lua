@@ -3,7 +3,7 @@ local M = {}
 M.config = function()
   lvim.leader = "space"
   -- add your own keymapping
-  lvim.keys.normal_mode["<leader>o"] = "o<Esc>" -- BUG: FIX THESE 2 BINDINGS
+  lvim.keys.normal_mode["<leader>o"] = "o<Esc>"
   lvim.keys.normal_mode["<leader>O"] = "0<Esc>"
   lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 
@@ -17,11 +17,11 @@ M.config = function()
     ["<leader>bk"] = ":! black .",
   }
   lvim.builtin.which_key.mappings["E"] = {
-    "<cmd>SidebarNvimToggle<CR>",
+    "<Cmd>SidebarNvimToggle<CR>",
     "Sidebar",
   }
   lvim.builtin.which_key.mappings["gg"] = {
-    ":lazygit",
+    "<Cmd>LazyGit<CR>",
     "lazyGit",
   }
   lvim.builtin.which_key.mappings["o"] = {
