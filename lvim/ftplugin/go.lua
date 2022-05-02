@@ -36,5 +36,20 @@ local server_available, requested_server = servers.get_server("gopls")
 if server_available then
 	opts.cmd_env = requested_server:get_default_options().cmd_env
 end
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+	{
+		exe = "gofmt",
+		filetypes = { "go" },
+		-- args = { "--double-quote" },
+	},
+})
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+	{
+		exe = "golangci_lint",
+		filetypes = { "go" },
+	},
+})
 
 require("lvim.lsp.manager").setup("gopls", opts)

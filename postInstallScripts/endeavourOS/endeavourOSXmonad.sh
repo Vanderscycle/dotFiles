@@ -68,7 +68,7 @@ echo -e 'Done.\n'
 
 #bash
 sudo yay -S --noconfirm --needed shellcheck-bin
-
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
 #Python
 echo -e '\n=> Installing Miniconda'
 export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
@@ -550,6 +550,8 @@ echo -e 'Done.\n'
 
 echo '=>Go'
 pacman -S --needed --noconfirm go
+go install golang.org/x/tools/gopls@latest
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 echo -e 'Done.\n'
 
 zx

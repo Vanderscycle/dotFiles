@@ -1,0 +1,21 @@
+{
+  "describe": {
+    "prefix": "describe",
+    "body": ["describe('${1:Title}', function()", "\t${2}", "end)"]
+  },
+  "doc": {
+    "prefix": "docStr",
+    "body": [
+      "\"\"\"",
+      "${0:docstr}",
+      "Args",
+      "\t{1:param}: {2:param}",
+      "\t{3:param}: {4:param}\n",
+      "Return",
+      "\t{5:desc}",
+      "Raises",
+      "\t{6:exce}",
+      "\"\"\""
+    ]
+  }
+}

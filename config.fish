@@ -64,8 +64,8 @@ if status is-interactive
   # set -xg ANDROID_HOME "/home/henri/Android/Sdk"
 
   # golang
-  set -x GOPATH $HOME/go
-  set -x PATH $PATH $GOPATH/bin
+  set -xg GOPATH $HOME/go
+  set -xg PATH $PATH $GOPATH/bin
 end
   
 # aliases/func
