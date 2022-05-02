@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # sudo pacman -S --needed --noconfirm httpie && 
 # WARN: due for a reboot and time in vr for bug testing
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
@@ -532,6 +532,10 @@ zx
 # source ~/.zshrc
 # source ~/.zshenv
 
+# -----------------------------------------------------------------------------
+# => languages
+# -----------------------------------------------------------------------------
+
 echo '=>Rust and cargo'
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 zx
@@ -547,7 +551,6 @@ echo '=>Terraform'
 pacman -S --needed --noconfirm terraform
 echo -e 'Done.\n'
 
-
 echo '=>Go'
 pacman -S --needed --noconfirm go
 go install golang.org/x/tools/gopls@latest
@@ -558,6 +561,20 @@ zx
 # installing GolangCi-lint
 sudo yay -S --needed --noconfirm golangci-lint
 # go mon
+echo -e 'Done.\n'
+
+echo -e '\n=> installing lua'
+pacman --needed --noconfirm luarocks
+sudo luarocks install luacheck # linter
+cargo install stylua # formatter
+echo -e 'Done.\n'
+
+echo -e '\n=> installing yaml(lint)'
+pacman --needed --noconfirm yamllint
+echo -e 'Done.\n'
+
+echo -e '\n=> installing md'
+yay --needed --noconfirm write-good
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -572,12 +589,6 @@ echo -e 'Done.\n'
 # => Lunarvim
 # -----------------------------------------------------------------------------
 
-
-echo -e '\n=> installing lua'
-pacman --needed --noconfirm luarocks
-sudo luarocks install luacheck # linter
-cargo install stylua # formatter
-echo -e 'Done.\n'
 
 # BUG: honestly its not working
 echo -e '\n=> installing LunarVim'
