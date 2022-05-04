@@ -24,5 +24,19 @@ local opts = {
 		},
 	},
 }
-
 require("lvim.lsp.manager").setup("yamlls", opts)
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+	{
+		exe = "prettier",
+		filetypes = { "yaml" },
+	},
+})
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+	{
+		exe = "yamllint",
+		filetypes = { "yaml" },
+		args = { "{extends: default, rules: {line-length: disable}}" },
+	},
+})

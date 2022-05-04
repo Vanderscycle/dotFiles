@@ -34,5 +34,6 @@ linters.setup({
 			"vue",
 			"svelte",
 		},
+		args = { "--double-quote" },
 	},
 })

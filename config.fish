@@ -69,7 +69,11 @@ if status is-interactive
 end
   
 # aliases/func
-
+#fish
+function fish_greeting
+    echo Hello friend!
+    echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
+end
 # nnn
 function n
   nnn "$argv"
@@ -79,9 +83,16 @@ function n
   end
 end
 # git
-function gsquash 
+function gSquash 
     git reset (git merge-base "$argv" (git branch --show-current))
 
+end
+
+function gTestTags 
+  git tag -l | xargs -n 1 git push --delete origin
+  git tag -l | xargs git tag -d                   
+  git tag -a v0.0.2"$argv"-pre -m 'delete me later'     
+  git push origin --tags
 end
 
 function img
@@ -194,14 +205,12 @@ function docker-crmAll
 end
 
 function docker-irmAll
-	docker-crmAll
   echo -e "Removing all images"
 	docker rmi (docker images -f "dangling=true" -q)
   	echo "done"
 end
 
 function docker-vrmAll
-  docker-irmAll
   echo -e "removing all volumes"
 	docker volume rm (docker volume ls -qf dangling=true)
 	echo "done"
@@ -209,6 +218,8 @@ end
 
 function docker-prmAll
 echo -e "purging everything"
+ 	docker-crmAll
+  docker-irmAll
   docker-vrmAll
 	docker builder prune -af
   echo "done"

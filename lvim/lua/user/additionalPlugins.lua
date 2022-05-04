@@ -10,6 +10,7 @@ M.config = function()
 			"simrat39/symbols-outline.nvim",
 			cmd = "SymbolsOutline",
 		},
+		{ "dpelle/vim-LanguageTool" },
 		-- {
 		--   "ray-x/navigator.lua",
 		--   requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
