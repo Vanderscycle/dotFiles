@@ -582,7 +582,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> installing AWS-cli'
-pacman --needed --noconfirm aws-cli
+pacman --needed --noconfirm aws-cli-v2-bin
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------

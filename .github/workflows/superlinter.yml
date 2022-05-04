@@ -1,7 +1,7 @@
 name: Lint Code Base
 on:
   push:
-    # branches-ignore: [ ]
+    branches-ignore: ["main"]
     # Remove the line above to run when pushing to master
     # branches: []
   pull_request:
@@ -31,4 +31,3 @@ jobs:
           OUTPUT_DETAILS: detailed
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
