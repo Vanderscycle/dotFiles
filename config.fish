@@ -21,6 +21,9 @@ if status is-interactive
   set -xg SHELL fish
   set -xg TERMINAL kitty
   set -xg LV_BRANCH rolling 
+  # fish
+  set -xg fzf_preview_dir_cmd exa --all --color=always
+  set -xg fzf_preview_file_cmd bat
   # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
   fish_ssh_agent
@@ -35,6 +38,9 @@ if status is-interactive
   # dotfiles
   set -xg DOOTFILE_LOC ~/Documents/dotFiles/
 
+  # zoxide
+  set -x _ZO_ECHO '1'
+   zoxide init fish | source
 
   # nnn config
   # nnnTheme
@@ -74,6 +80,7 @@ function fish_greeting
     echo Hello friend!
     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
 end
+
 # nnn
 function n
   nnn "$argv"
@@ -82,6 +89,7 @@ function n
     rm -rf $NNN_TMPFILE
   end
 end
+
 # git
 function gSquash 
     git reset (git merge-base "$argv" (git branch --show-current))
@@ -95,12 +103,14 @@ function gTestTags
   git push origin --tags
 end
 
-function img
-  nomacs "$argv"
+
+# sshe/servers
+function pihole 
+  ssh pi@192.168.1.154
 end
 
-function fishy
-  lvim ~/.config/fish/config.fish
+function linode
+  ssh
 end
 
 #conda/python
@@ -113,6 +123,26 @@ function goGet
   go get -u ./...
 end
 
+#npm/pnpm
+function p-lock
+  npm i --package-lock-only
+end
+
+function npm
+	pnpm $argv
+end
+
+#dns/dog
+function dig
+  dog "$argv"
+end
+
+# zellij
+function zel
+  zellij options --theme tokyonightDark $argv
+end
+
+
 #aliases
 function :q
   exit
@@ -120,11 +150,6 @@ end
 
 function :qa
   exit
-end
-
-# zellij
-function zel
-  zellij options --theme tokyonightDark $argv
 end
 
 function gsps
@@ -145,13 +170,19 @@ function gsps
   end
 end
 
+function img
+  nomacs "$argv"
+end
+
+function fishy
+  lvim ~/.config/fish/config.fish
+end
+
+
 function htop
   bpytop
 end
 
-# function npm 
-# 	pnpm $argv
-# end
 
 function ls
   exa -al $argv
@@ -299,4 +330,5 @@ end
 # !! Contents within this block are managed by 'conda init' !!
 eval /home/henri/miniconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
+
 

@@ -116,11 +116,11 @@ echo -e 'Done.\n'
 # echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => Develloper tools
+# => Develloper tools (Modern Unix)
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Installing developer packages and useful tui alternatives'
-sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task
+sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task zoxide
 sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr ytfzf #entr is for file cahnges
 sudo yay -S --noconfirm openshift-client-bin # redhat openshift
 # installing pnpm
@@ -312,6 +312,8 @@ yay -S --noconfirm dunst #notification system
 yay -S --noconfirm maim #screen capture
 echo -e 'Done.\n'
 
+sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
+
 }
 
 after_reboot(){
@@ -345,7 +347,8 @@ fisher install jorgebucaran/autopair.fish #same as tpope autopair
 fisher install PatrickF1/fzf.fish #fzf but fish
 fisher install edc/bass # allows bash in fish
 fisher install jorgebucaran/nvm.fish
-fisher install jethrokuan/z
+fisher install jethrokuan/z #zoxide?
+
 echo -e 'Done. \n'
 
 
@@ -533,7 +536,7 @@ zx
 # source ~/.zshenv
 
 # -----------------------------------------------------------------------------
-# => languages
+# => languages /linter/formatter
 # -----------------------------------------------------------------------------
 
 echo '=>Rust and cargo'
@@ -571,11 +574,17 @@ echo -e 'Done.\n'
 
 echo -e '\n=> installing yaml(lint)'
 pacman --needed --noconfirm yamllint
+yay --needed --noconfirm actionlint-bin
 echo -e 'Done.\n'
 
 echo -e '\n=> installing md'
 yay --needed --noconfirm write-good
 echo -e 'Done.\n'
+
+echo -e '\n=> installing dockerfile linter'
+yay --needed --noconfirm hadolint-bin
+echo -e 'Done.\n'
+
 
 # -----------------------------------------------------------------------------
 # => AWS

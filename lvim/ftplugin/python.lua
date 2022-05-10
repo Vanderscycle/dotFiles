@@ -37,3 +37,19 @@ if server_available then
 end
 
 require("lvim.lsp.manager").setup("pyright", opts)
+
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+	{
+		exe = "black",
+		filetypes = { "python" },
+	},
+})
+
+local linters = require("lvim.lsp.null-ls.linters")
+linters.setup({
+	{
+		exe = "flake8",
+		filetypes = { "python" },
+	},
+})
