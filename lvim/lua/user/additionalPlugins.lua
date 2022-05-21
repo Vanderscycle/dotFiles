@@ -2,24 +2,14 @@ local M = {}
 
 M.config = function()
 	lvim.plugins = {
+		{ "rafcamlet/nvim-whid" }, -- TEST remnove later
 		-- themes
 		{ "folke/tokyonight.nvim" },
 		{ "LunarVim/ColorSchemes" },
-
 		{
 			"simrat39/symbols-outline.nvim",
 			cmd = "SymbolsOutline",
 		},
-		{ "dpelle/vim-LanguageTool" },
-		-- {
-		--   "ray-x/navigator.lua",
-		--   requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" },
-		--   config = function()
-		--     vim.cmd("autocmd FileType guihua lua require('cmp').setup.buffer { enabled = false }")
-		--     vim.cmd("autocmd FileType guihua_rust lua require('cmp').setup.buffer { enabled = false }")
-		--   end,
-		-- },
-		-- movement
 		{
 			"ray-x/lsp_signature.nvim",
 			config = function()
@@ -44,13 +34,14 @@ M.config = function()
 			event = "BufRead",
 			-- disable = not lvim.builtin.sidebar.active, -- TODO: activation
 		},
-		{
+		{ --INFO: used?
 			"kosayoda/nvim-lightbulb",
 			config = function()
-				vim.fn.sign_define(
-					"LightBulbSign",
-					{ text = require("user.lsp_kind").icons.code_action, texthl = "DiagnosticInfo" }
-				)
+				require("plugins.lightbulb").config()
+				-- vim.fn.sign_define(
+				-- 	"LightBulbSign",
+				-- 	{ text = require("user.lsp_kind").icons.code_action, texthl = "DiagnosticInfo" }
+				-- )
 			end,
 			event = "BufRead",
 			ft = { "rust", "go", "typescript", "typescriptreact" },
@@ -64,7 +55,12 @@ M.config = function()
 			-- run = "yay -S glow"
 		},
 		-- utility
-
+		{
+			"luukvbaal/nnn.nvim",
+			config = function()
+				require("nnn").setup()
+			end,
+		},
 		{
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },
@@ -93,6 +89,12 @@ M.config = function()
 			end,
 			event = "BufRead",
 		},
+		{
+			"junegunn/fzf",
+			run = function()
+				vim.fn["fzf#install"]()
+			end,
+		},
 		{ --WIP: what is the point of this over hlslens?
 			"rmagatti/goto-preview",
 			config = function()
@@ -111,12 +113,13 @@ M.config = function()
 			end,
 		},
 		-- telescope plugins
+		-- TODO: how to add them to the telescope
 		{
 			"nvim-telescope/telescope-fzy-native.nvim",
 			run = "make",
 			event = "BufRead",
 		},
-		{ "nvim-telescope/telescope-media-files.nvim" },
+		-- { "nvim-telescope/telescope-media-files.nvim" }, --WARN: not working
 		{ "nvim-telescope/telescope-file-browser.nvim" },
 		-- autoSave
 		{
@@ -148,14 +151,8 @@ M.config = function()
 			run = "./install.sh",
 			requires = "hrsh7th/nvim-cmp",
 			config = function()
-				local tabnine = require("cmp_tabnine.config")
-				tabnine:setup({
-					max_lines = 1000,
-					max_num_results = 10,
-					sort = true,
-				})
+				require("plugins.tabnine").config()
 			end,
-			opt = true,
 			event = "InsertEnter",
 			-- disable = not lvim.builtin.tabnine.active,
 		},
@@ -192,27 +189,7 @@ return M
 --     }
 --   end
 -- }
--- {
--- 	"nvim-neorg/neorg",
--- 	config = function()
--- 		require("neorg").setup({
--- 			-- Tell Neorg what modules to load
--- 			load = {
--- 				["core.defaults"] = {}, -- Load all the default modules
--- 				["core.norg.concealer"] = {}, -- Allows for use of icons
--- 				["core.norg.dirman"] = { -- Manage your directories with Neorg
--- 					config = {
--- 						workspaces = {
--- 							my_workspace = "~/neorg",
--- 						},
--- 					},
--- 				},
--- 			},
--- 		})
--- 	end,
--- 	requires = "nvim-lua/plenary.nvim",
--- },
---extra languages'
+---extra languages'
 -- { "h-hg/fcitx.nvim" }, --chinese input
 --       -- misc
 --WARN: still in active development plugin

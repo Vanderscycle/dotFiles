@@ -10,10 +10,9 @@ done
     rsync -av --progress  ~/Documents/dotFiles/.gnupg ~/.gnupg/ 
     rsync -av --progress  ~/Documents/dotFiles/ssh/ ~/.ssh/config 
 
-
 rg --passthru 'henri' -r $DOOTS_USER_NAME ~/.zshrc > ~/.temp.txt && mv ~/.temp.txt ~/.zshrc.sh
 
-declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "ag" "qutebrowser")
+declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "ag" "qutebrowser" "mimeapps.list")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::doots --> local"    
   rsync -av --progress ~/Documents/dotFiles/$CONF  ~/.config/

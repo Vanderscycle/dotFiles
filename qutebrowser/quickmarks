@@ -10,3 +10,4 @@ miro https://miro.com/app/dashboard/
 pihole http://192.168.1.154/admin/
 router http://192.168.1.1/ui/1.0.99.187766/dynamic/login.html
 dev-atreides https://auth.dev.atreidesaccount.io/auth/realms/atreides/protocol/openid-connect/auth?client_id=caseri-web&redirect_uri=https%3A%2F%2Fcaseri.dev.atreidesaccount.io%2Fissues%2F4f333553-3f47-47b7-b757-e5a4d7b155e4&state=c42ad912-3864-40b4-9b43-83f337d4f67a&response_mode=fragment&response_type=code&scope=openid&nonce=8cd7ecd0-efca-49e9-b068-d068cdf3cf70&code_challenge=A1LsxhYD_4Pd_D2w0FBa4cE4C99L6KZpYEFo101CucM&code_challenge_method=S256
+linksys http://192.168.1.1/ui/1.0.99.187766/dynamic/login.html

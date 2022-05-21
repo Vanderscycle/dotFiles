@@ -50,7 +50,7 @@ if status is-interactive
   set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
   set -xg NNN_FIFO '/tmp/nnn.fifo'
   export NNN_FIFO
-  set -xg NNN_PLUG 'f:finder;o:fzopen;[:preview-tui;]:preview-tabbed;d:diffs;t:nmount;v:imgview'
+  set -xg NNN_PLUG 'f:finder;o:fzopen;v:imgview'
   set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/'
   set -xg NNN_OPTS HEd
   set -xg SPLIT 'v' # to split Kitty vertically
@@ -104,7 +104,7 @@ function gTestTags
 end
 
 
-# sshe/servers
+# ssh/servers
 function pihole 
   ssh pi@192.168.1.154
 end
@@ -113,6 +113,19 @@ function linode
   ssh
 end
 
+#fish
+function fzf_complete
+    set -l cmdline (commandline)
+    # HACK: Color descriptions manually.
+    complete -C | string replace -r \t'(.*)$' \t(set_color $fish_pager_color_description)'$1'(set_color normal) \
+    | fzf -d \t -1 -0 --ansi --header="$cmdline" --height="80%" --tabstop=4 \
+    | read -l token
+    # Remove description
+    set token (string replace -r \t'.*' '' -- $token)
+    commandline -rt "$token"
+end
+
+bind \t 'fzf_complete; commandline -f repaint'
 #conda/python
 function condaUpdate
   conda update --all -y
@@ -128,9 +141,9 @@ function p-lock
   npm i --package-lock-only
 end
 
-function npm
-	pnpm $argv
-end
+# function npm
+# 	pnpm $argv
+# end
 
 #dns/dog
 function dig
@@ -231,7 +244,7 @@ end
 # Docker
 function docker-crmAll
     echo -e "Removing all containers"
-	docker stop (docker ps -q)
+	# docker stop (docker ps -q)
 	docker rm (docker ps -a -q)
 end
 

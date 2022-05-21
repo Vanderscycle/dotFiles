@@ -16,7 +16,6 @@ echo '------------------------------------------------------------------------'
 # -----------------------------------------------------------------------------
 # => Critical programs that installs bug out later
 # -----------------------------------------------------------------------------
-
 sudo touch /var/run/rebooting-for-updates 
 echo -e '\n=> installing neovim'
 sudo pacman -S --noconfirm --needed neovim
@@ -396,6 +395,8 @@ git clone https://github.com/jarun/nnn.git ~/Programs/
 (cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
 # installing the plugins
 (cd ~/Programs/nnn/ && curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh)
+# https://www.reddit.com/r/linux4noobs/comments/jc7vcx/nnn_how_to_open_file_directly/
+# xdg programs use xdg-open by default
 
 echo -e "radically different browser with pivacy in mind"
 sudo pacman -S --noconfirm --needed qutebrowser #TODO: learn the bindings and reconfig them to make sense
@@ -498,11 +499,24 @@ yay -S --noconfirm zoom transmission-qt
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
+# => Quad9 dns
+# -----------------------------------------------------------------------------
+
+cat >> /etc/resolv.conf << EOF
+nameserver 9.9.9.9
+nameserver 2620:fe::fe
+domain dnsknowledge.com
+options rotate
+EOF
+echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
 # => Linux Gaming
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Gaming Monitah'
-yay -S --needed --noconfirm steam  lutris
+yay -S --needed --noconfirm steam lutris
+pacman -S --needed --noconfirm dwarffortress
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
@@ -593,6 +607,12 @@ echo -e 'Done.\n'
 echo -e '\n=> installing AWS-cli'
 pacman --needed --noconfirm aws-cli-v2-bin
 echo -e 'Done.\n'
+
+# -----------------------------------------------------------------------------
+# => pihole 
+# -----------------------------------------------------------------------------
+
+# https://discourse.pi-hole.net/t/how-do-i-configure-my-devices-to-use-pi-hole-as-their-dns-server/245
 
 # -----------------------------------------------------------------------------
 # => Lunarvim

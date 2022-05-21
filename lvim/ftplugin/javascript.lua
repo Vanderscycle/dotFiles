@@ -1,7 +1,7 @@
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
   {
-    exe = "prettier",
+    exe = "eslint_d", --prettier
     filetypes = {
       "javascript",
       "javascriptreact",

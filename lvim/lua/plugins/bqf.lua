@@ -9,9 +9,9 @@ M.config = function()
 	bqf.setup({
 		auto_resize_height = true,
 		func_map = {
-			tab = "st",
-			split = "sv",
-			vsplit = "sg",
+			tab = "C-t",
+			split = "<C-x>",
+			vsplit = "<C-v>",
 
 			stoggleup = "K",
 			stoggledown = "J",
@@ -21,8 +21,8 @@ M.config = function()
 			ptoggleauto = "P",
 			ptogglemode = "zp",
 
-			pscrollup = "<C-b>",
-			pscrolldown = "<C-f>",
+			pscrollup = "<C-[>",
+			pscrolldown = "<C-]>",
 
 			prevfile = "gk",
 			nextfile = "gj",

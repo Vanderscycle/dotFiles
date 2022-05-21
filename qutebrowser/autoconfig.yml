@@ -8,16 +8,22 @@ config_version: 2
 settings:
   content.blocking.method:
     global: both
+  content.desktop_capture:
+    https://meet.google.com: true
   content.geolocation:
     https://talltreehealthjamesbay.janeapp.com: false
   content.media.audio_capture:
     https://meet.google.com: true
+    https://teams.microsoft.com: true
   content.media.audio_video_capture:
     https://meet.google.com: true
+    https://teams.microsoft.com: true
   content.media.video_capture:
     https://meet.google.com: true
+    https://teams.microsoft.com: true
   content.notifications.enabled:
     https://app.slack.com: true
+    https://calendar.google.com: true
     https://calendar.protonmail.com: true
     https://codingshiksha.com: false
     https://gitlab.atreidesaccount.io: true

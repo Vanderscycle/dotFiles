@@ -1,10 +1,11 @@
 package main
 
 import (
-	"endavourOs/bash"
 	"fmt"
 	"io/ioutil"
 	"log"
+
+	"endavourOs/bash"
 
 	"github.com/tidwall/gjson"
 )
@@ -16,22 +17,26 @@ type Pkg struct {
 	Program   string `json:"program"`
 }
 
-var PkgManagers = []string{"pacman", "yay"}
-var ArgsInstall = []string{"-S", "--needed", "--noconfirm"}
-var amazingTUI = []string{"curl wget"}
-var lvimPkgs = []string{"neovim"}
+var (
+	PkgManagers = []string{"pacman", "yay"}
+	ArgsInstall = []string{"-S", "--needed", "--noconfirm"}
+	amazingTUI  = []string{"curl wget"}
+	lvimPkgs    = []string{"neovim"}
+)
 
-//TODO: create a struct method to combine the pkgmanager with program in one line
+// TODO: create a struct method to combine the pkgmanager with program in one line
 var bareMetal = []string{"curl", "wget", "git", "base-devel", "clang"}
-var languages = []string{"go", "clang", "node", "npm"}
-var lintersFormatters = []string{"shellcheck-bin"}
-var lintersFormattersYay = []string{"shellcheck-bin"}
+
+var (
+	languages            = []string{"go", "clang", "node", "npm"}
+	lintersFormatters    = []string{"shellcheck-bin"}
+	lintersFormattersYay = []string{"shellcheck-bin"}
+)
 
 // var terminal = []pkg{{Installer: PkgManagers[1], Program: "tmuxinator"}, {Installer: PkgManagers[0], Program: "kitty"}, {Installer: PkgManagers[0], Program: "zellij"}}
 
 func main() {
-
-	//syncing doots
+	// syncing doots
 	// URL: "https://github.com/Vanderscycle/dot-config.git ",
 
 	// err := bash.Update(PkgManagers[1], true)
@@ -64,7 +69,7 @@ func LoadJson() error {
 	if err != nil {
 		return fmt.Errorf("[404] => missing %s failed %s", p, err)
 	}
-	//gjson go is amazing https://github.com/tidwall/gjson
+	// gjson go is amazing https://github.com/tidwall/gjson
 	value := gjson.Get(string([]byte(file)), "terminal")
 	log.Print(value)
 	return nil

@@ -8,9 +8,10 @@ lvim.builtin.sidebar = { active = true } -- enable/disable sidebar
 lvim.builtin.hlslens = { active = true } -- enable/disable hlslens
 lvim.builtin.tabnine = { active = true }
 lvim.builtin.lightspeed = { active = true }
-vim.list_extend(lvim.lsp.override, {
-	"gopls",
-})
+-- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers({
+-- 	"gopls",
+-- }))
+
 -- vim.g.glow_binary_path = vim.env.HOME .. "/bin"
 -- Extra plugin
 -- =========================================
@@ -29,17 +30,12 @@ require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
 	paths = { "~/.config/lvim/snippets" },
 })
--- Linter/Formatters
--- =========================================
--- require("linter_formatter.typescript").config()
--- require("linter_formatter.go").config()
--- require("linter_formatter.python").config()
--- require("linter_formatter.javascript").config()
--- require("linter_formatter.tailwindcss").config()
--- require("linter_formatter.bash").config()
--- require("linter_formatter.lua").config()
 
--- require('user.null_ls').config()
---TODO:
--- Another pass at plugins that I use
--- A refinement of the plugins keybindings
+-- WIP:
+-- =========================================
+-- TODO: lightbulb/codelens auto action
+-- TODO: fix  the keybindings and assign leader t for telescope
+-- unfuck section l (lsp)
+-- go section by section (e.g. buffer)
+--         d = { "<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>", "Buffer Diagnostics" },
+--
