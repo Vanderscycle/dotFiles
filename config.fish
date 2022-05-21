@@ -24,6 +24,8 @@ if status is-interactive
   # fish
   set -xg fzf_preview_dir_cmd exa --all --color=always
   set -xg fzf_preview_file_cmd bat
+  # fish
+  set -xg FZF_DEFAULT_OPTS '--multi --no-height --extended --bind "alt-a:select-all,alt-d:deselect-all"'
   # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
   fish_ssh_agent

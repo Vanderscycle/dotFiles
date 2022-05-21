@@ -8,6 +8,8 @@ M.config = function()
 
 	bqf.setup({
 		auto_resize_height = true,
+		-- C-o select all in zf (fzf) mode; C-q to quit fzf
+		-- https://github.com/kevinhwang91/nvim-bqf#function-table
 		func_map = {
 			tab = "C-t",
 			split = "<C-x>",
@@ -21,8 +23,8 @@ M.config = function()
 			ptoggleauto = "P",
 			ptogglemode = "zp",
 
-			pscrollup = "<C-[>",
-			pscrolldown = "<C-]>",
+			pscrollup = "<[d>",
+			pscrolldown = "<]d>",
 
 			prevfile = "gk",
 			nextfile = "gj",

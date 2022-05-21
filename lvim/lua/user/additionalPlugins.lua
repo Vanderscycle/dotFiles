@@ -1,5 +1,4 @@
 local M = {}
-
 M.config = function()
 	lvim.plugins = {
 		{ "rafcamlet/nvim-whid" }, -- TEST remnove later
@@ -84,6 +83,7 @@ M.config = function()
 		},
 		{
 			"kevinhwang91/nvim-bqf",
+			requires = "junegunn/fzf",
 			config = function()
 				require("plugins.bqf").config()
 			end,
@@ -94,14 +94,6 @@ M.config = function()
 			run = function()
 				vim.fn["fzf#install"]()
 			end,
-		},
-		{ --WIP: what is the point of this over hlslens?
-			"rmagatti/goto-preview",
-			config = function()
-				require("plugins.goto_preview").config()
-			end,
-			--gd gpd gD gpR leader + l + d/r/i
-			--TODO: remove the extra bindings
 		},
 		-- better comment flags
 		{

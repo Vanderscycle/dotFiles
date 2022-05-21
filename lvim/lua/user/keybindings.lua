@@ -35,7 +35,7 @@ M.config = function()
 		S = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
 			"Workspace Symbols",
-		},e
+		},
 		e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
 	}
 	lvim.builtin.which_key.mappings["s"] = {
@@ -55,7 +55,7 @@ M.config = function()
 			"<cmd>lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
 			"Colorscheme with Preview",
 		},
-		T = { ":Telescope current_buffer_fuzzy_find<cr>", "Current Buffer Word Find" },
+		T = { ":Telescope current_buffer_fuzzy_find bufnr=0 theme=get_ivy<cr>", "Current Buffer Word Find" },
 		F = {
 			':lua require("telescope.builtin").find_files({hidden=true, no_ignore=true, find_command=rg})<cr>',
 			"Find File *Ignore",
@@ -116,11 +116,12 @@ M.config = function()
 		"O<Esc>",
 		"insert ln abv",
 	}
+	-- https://github.com/rmagatti/goto-preview
 	M.set_goto_preview_keybindings = function()
-		vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
-		vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
-		vim.cmd("nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>")
-		vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
+		-- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
+		-- vim.cmd("nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>")
+		-- vim.cmd("nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>")
+		-- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
 	end
 	M.set_luasnip_keymaps = function()
 		vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
