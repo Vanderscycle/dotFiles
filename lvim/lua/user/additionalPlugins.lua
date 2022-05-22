@@ -26,6 +26,13 @@ M.config = function()
 		},
 		-- visual aid
 		{
+			"mvllow/modes.nvim",
+			config = function()
+				require("plugins.modes").config()
+			end,
+			event = "BufRead",
+		},
+		{
 			"sidebar-nvim/sidebar.nvim",
 			config = function()
 				require("plugins.sidebar").config()

@@ -30,10 +30,11 @@ require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
 	paths = { "~/.config/lvim/snippets" },
 })
-
 -- WIP:
 -- =========================================
 -- TODO: lightbulb/codelens auto action
 -- TODO: fix  the keybindings and assign leader t for telescope
 -- unfuck section g (no leader)
 -- figure out folds z
+-- vim.api.nvim_create_autocmd
+-- https://chrisarcand.com/vims-new-cdo-command/ cdo/cfdo for bqf batch renaming

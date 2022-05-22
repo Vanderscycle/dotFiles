@@ -6,6 +6,11 @@ M.config = function()
 	lvim.keys.normal_mode["<leader>o"] = "o<Esc>"
 	lvim.keys.normal_mode["<leader>O"] = "0<Esc>"
 	lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
+	lvim.builtin.which_key.mappings["P"] = {
+		name = "Plugin",
+		r = { "<cmd>luafile %<cr>", "Reload Current File" },
+	}
+	-- lsp
 	lvim.builtin.which_key.mappings["l"] = {
 		name = "LSP",
 		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
@@ -38,6 +43,7 @@ M.config = function()
 		},
 		e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
 	}
+	-- search
 	lvim.builtin.which_key.mappings["s"] = {
 		name = "Search",
 		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
