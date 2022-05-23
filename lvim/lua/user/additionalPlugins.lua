@@ -61,12 +61,12 @@ M.config = function()
 			-- run = "yay -S glow"
 		},
 		-- utility
-		{
-			"luukvbaal/nnn.nvim",
-			config = function()
-				require("nnn").setup()
-			end,
-		},
+		-- {
+		-- 	"luukvbaal/nnn.nvim",
+		-- 	config = function()
+		-- 		require("nnn").setup()
+		-- 	end,
+		-- },
 		{
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },

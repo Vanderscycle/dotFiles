@@ -293,7 +293,8 @@ end
 
 function save
   set -l CURRENTLOCATION $PWD
-  bash  "$DOOTFILE_LOC"/postInstallScripts/lnSet.sh
+  cd "$DOOTFILE_LOC"
+  bash "$DOOTFILE_LOC"/postInstallScripts/lnSet.sh
   git cmp "Everything that is not saved will be lost"
   cd "$CURRENTLOCATION"
 end
