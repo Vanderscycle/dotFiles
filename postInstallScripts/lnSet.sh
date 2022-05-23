@@ -18,7 +18,7 @@ done
 declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "rg" "qutebrowser" "mimeapps.list" "bat" "rg")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::local -> doots"    
-  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/.config.
+  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/.config
 done
 rsync -av --progress ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 
