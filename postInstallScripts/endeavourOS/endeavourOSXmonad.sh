@@ -33,9 +33,6 @@ echo -e 'Done.\n'
 # => Annoying programs that requires user permission
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Installing zsh'
-yay -S --noconfirm --needed zsh
-echo -e '\n=> Update repository information'
 # -S: synchronize your system's packages with those in the official repo
 # -y: download fresh package databases from the server
 
@@ -99,20 +96,6 @@ echo -e '\n=> Installing Zellig'
 sudo pacman -S --noconfirm --needed zellij
 echo -e 'Done.\n'
 
-#BUG: zplug not working at install
-# echo -e '\n=> zplug'
-# curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-# echo -e '\ninstalling enhancd using zplug'
-# zplug "b4b4r07/enhancd", use:init.sh #! doesn't work
-
-# echo -e '\adding fzf completion'
-# source of info https://doronbehar.com/articles/ZSH-FZF-completion/
-#mkdir /usr/share/fzf/ # file exists
-# sudo touch /usr/share/fzf/completion.zsh
-# sudo wget -O /usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
-# sudo touch /usr/share/fzf/key-bindings.zsh
-# sudo wget -O /usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/d4ed955aee08a1c2ceb64e562ab4a88bdc9af8f0/shell/key-bindings.zsh
-# echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Develloper tools (Modern Unix)
@@ -350,24 +333,6 @@ fisher install jethrokuan/z #zoxide?
 
 echo -e 'Done. \n'
 
-
-# -----------------------------------------------------------------------------
-# => Fish but in zsh (through on-my-zsh)
-# -----------------------------------------------------------------------------
-
-# echo -e '\n=> Installing oh-my-zsh'
-# sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" "" --unattended
-
-# echo -e '\n=> Installing zsh/oh-my-zsh plugins'
-# # sudo pacman -S  --noconfirm --needed zsh-syntax-highlighting  zsh-autosuggestions  
-# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-# git clone https://github.com/supercrabtree/k ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/k
-# git clone https://github.com/lukechilds/zsh-better-npm-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-better-npm-completion
-
-# (cd ~/Programs && git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git)
-
-
 # -----------------------------------------------------------------------------
 # => Virtual Machines (level 2)
 # -----------------------------------------------------------------------------
@@ -545,9 +510,6 @@ chmod +x ~/Documents/dotFiles/postInstallScripts/*.sh
 # -- fish
 source ~/.config/fish/config.fish
 zx
-# -- zsh
-# source ~/.zshrc
-# source ~/.zshenv
 
 # -----------------------------------------------------------------------------
 # => languages /linter/formatter
