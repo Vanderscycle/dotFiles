@@ -14,6 +14,8 @@ end
 
 
 if status is-interactive
+  # weather 
+  curl -s 'wttr.in/?format=3'
   # Commands to run in interactive sessions can go here
   # https://fishshell.com/docs/current/tutorial.html
   set -xg EDITOR lvim
@@ -24,8 +26,10 @@ if status is-interactive
   # fish
   set -xg fzf_preview_dir_cmd exa --all --color=always
   set -xg fzf_preview_file_cmd bat
+  
   # fish
   set -xg FZF_DEFAULT_OPTS '--multi --no-height --extended --bind "alt-a:select-all,alt-d:deselect-all"'
+fish_config theme choose "fish default"
   # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
   fish_ssh_agent
@@ -35,7 +39,6 @@ if status is-interactive
   # https://www.funtoo.org/Funtoo:Keychain (currently not working for fish shell T_T)
   keychain --eval --agents gpg,ssh ~/.ssh/endavourGit ~/.ssh/atreidesGit
 
-  pokemon-colorscripts -r
 
   # dotfiles
   set -xg DOOTFILE_LOC ~/Documents/dotFiles/
@@ -69,20 +72,20 @@ if status is-interactive
   # path -> Cargo, Conda 
   set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri/.config/broot:/home/henri/.emacs.d/bin"
 
-  # java && android 
-  # set -xg JAVA_HOME "/usr/bin/java"
-  # set -xg ANDROID_HOME "/home/henri/Android/Sdk"
-
   # golang
   set -xg GOPATH $HOME/go
   set -xg PATH $PATH $GOPATH/bin
+
 end
   
 # aliases/func
 #fish
 function fish_greeting
-    echo Hello friend!
+    echo Hello "$USER"!
     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
+    # pokemon-colorscripts -r
+   curl v2d.wttr.in/
+
 end
 
 # nnn
@@ -202,7 +205,7 @@ end
 
 
 function ls
-  exa -al "$argv"
+  exa -al 
 end
 
 function lvim $argv
