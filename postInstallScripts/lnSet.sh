@@ -6,7 +6,7 @@ echo $(pwd)
 declare -a StringArray=(".xinitrc"  ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent" ".ripgreprc")
 for DOTFILE in "${StringArray[@]}"; do
       echo -e "\n=>${DOTFILE}::local -> doots"    
-    rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/.config/$DOTFILE
+    rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/.config/
 done
     rsync -av --progress  ~/.config/fish/config.fish ~/Documents/dotFiles/config.fish
     rsync -av --progress  ~/.gnupg/ ~/Documents/dotFiles/.gnupg/*.conf
