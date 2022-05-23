@@ -39,6 +39,8 @@ if status is-interactive
 
   # dotfiles
   set -xg DOOTFILE_LOC ~/Documents/dotFiles/
+  # ripgrep
+  set RIPGREP_CONFIG_PATH -xg ~/.config/rg/
 
   # zoxide
   set -x _ZO_ECHO '1'
@@ -195,12 +197,12 @@ end
 
 
 function htop
-  bpytop
+  bpytop "$argv"
 end
 
 
 function ls
-  exa -al $argv
+  exa -al "$argv"
 end
 
 function lvim $argv
@@ -239,7 +241,7 @@ function podman-prmAll
   echo -e "pruging everything"
   podman-compose stop
   podman-crmAll
-  podman system prune --all --force && 
+  podman system prune --all --force 
   echo "done"
 end
 
@@ -271,62 +273,54 @@ echo -e "purging everything"
   echo "done"
 end
 
-# ~/.zshenv helper func
-# TODO: FIX ME!!!!
 function rga-fzf 
-	set RG_PREFIX "rga --files-with-matches"
-	set file "(
-		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
-			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
-				--phony -q "$1" \
-				--bind "change:reload:$RG_PREFIX {q}" \
-				--preview-window="70%:wrap"
-	)" &&
-	echo "opening $file" &&
-	xdg-open "$file"
+  bash "$DOOTFILE_LOC"/rga-fzf.sh "$argv"
 end
 
 function rgr 
-  # set -l DOOTFILE_LOC ~/Documents/dotFiles/
   bash "$DOOTFILE_LOC"/rgr.sh "$argv"
 end
 
 function save
+  # save our current location 
   set -l CURRENTLOCATION $PWD
+  # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
   bash "$DOOTFILE_LOC"/postInstallScripts/lnSet.sh
   git cmp "Everything that is not saved will be lost"
+  # return to where we were
   cd "$CURRENTLOCATION"
 end
 
 function sync
+  # save our current location 
   set -l CURRENTLOCATION $PWD
-  # bash  "$DOOTFILE_LOC"/postInstallScripts/syncDootsLocal.sh
-  # cd ~/Documents/dotFiles/postInstallScripts/
-  # git pull --all
-  # bash ./syncDootsLocal.sh
-  # cd $CURRENTLOCATION
+  # cd into the dotfile folder for git
+  cd "$DOOTFILE_LOC"
+  git pull --all
+  bash  "$DOOTFILE_LOC"/postInstallScripts/syncDootsLocal.sh
+  # return to where we were
+  cd $CURRENTLOCATION
 end
 
+#pacman
 function update
   sudo pacman -Syu
   xmonad --recompile
 end
 
-function pruneCache
+function pacPruneCache
   sudo paccache -r
 end
 
-
-#pacman
 # explanation https://stackoverflow.com/questions/48855508/fish-error-while-trying-to-run-command-on-mac/48855746
 function pacman-ls
-    pacman -Slq | fzf -m --preview 'bat (pacman -Si {1} | psub) (pacman -Fl {1} | awk "{print \$2}" | psub)' | xargs -ro sudo pacman -S
+    pacman -Slq | fzf -m --preview 'bat (pacman -Si {1} | psub) (pacman -Fl {1} | awk "{print \$2}" | psub) --color=always -n' | xargs -ro sudo pacman -S
 end
 
 #yay
 function yay-ls
-    yay -Slq | fzf -m --preview 'bat (yay -Si {1} | psub) (yay -Fl {1} | awk "{print \$2}" | psub)' | xargs -ro  yay -S
+    yay -Slq | fzf -m --preview 'bat (yay -Si {1} | psub) (yay -Fl {1} | awk "{print \$2}" | psub) --color=always -n' | xargs -ro  yay -S
 end
 
 function tmuxinator-ls 
