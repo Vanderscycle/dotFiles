@@ -1,0 +1,16 @@
+name: pathOfExileGaming
+root: ~
+
+windows:
+  - Gaming:
+      panes:
+        - steam
+  - tools:
+      panes:
+        - PathOfBuildingCommunity
+        - firefox 'shorturl.at/jwCPZ'
+  - monitoring:
+      panes:
+        - bpytop
+
+

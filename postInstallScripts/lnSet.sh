@@ -6,7 +6,7 @@ echo $(pwd)
 declare -a StringArray=(".xinitrc"  ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshrc" ".zprofile" ".zlogout" ".zshenv" ".zlogin" ".gpg/gpg-agent" ".ripgreprc")
 for DOTFILE in "${StringArray[@]}"; do
       echo -e "\n=>${DOTFILE}::local -> doots"    
-    rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/$DOTFILE
+    rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/.config/$DOTFILE
 done
     rsync -av --progress  ~/.config/fish/config.fish ~/Documents/dotFiles/config.fish
     rsync -av --progress  ~/.gnupg/ ~/Documents/dotFiles/.gnupg/*.conf
@@ -18,7 +18,7 @@ done
 declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "rg" "qutebrowser" "mimeapps.list" "bat" "rg")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::local -> doots"    
-  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/
+  rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/.config.
 done
 rsync -av --progress ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 

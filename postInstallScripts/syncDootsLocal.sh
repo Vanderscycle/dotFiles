@@ -4,7 +4,7 @@ declare -a StringArray=( ".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf" ".zshr
 for DOTFILE in "${StringArray[@]}"; do
     echo -e "\n=>${DOTFILE}::doots --> local"    
 
-    rsync -av  --progress ~/Documents/dotFiles/$DOTFILE ~/$DOTFILE
+    rsync -av  --progress ~/Documents/dotFiles/.config/$DOTFILE ~/$DOTFILE
 done
     rsync -av --progress   ~/Documents/dotFiles/config.fish ~/.config/fish/config.fish
     rsync -av --progress  ~/Documents/dotFiles/.gnupg ~/.gnupg/ 
@@ -15,7 +15,7 @@ rg --passthru 'henri' -r $DOOTS_USER_NAME ~/.zshrc > ~/.temp.txt && mv ~/.temp.t
 declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "ag" "qutebrowser" "mimeapps.list" "bat" "rg")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::doots --> local"    
-  rsync -av --progress ~/Documents/dotFiles/$CONF  ~/.config/
+  rsync -av --progress ~/Documents/dotFiles/.config/$CONF  ~/.config/
 done
 rsync -av --progress ~/Documents/dotFiles/.xmonad/ ~/.xmonad/
 
