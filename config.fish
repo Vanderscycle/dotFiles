@@ -274,11 +274,11 @@ echo -e "purging everything"
 end
 
 function rga-fzf 
-  bash "$DOOTFILE_LOC"/rga-fzf.sh "$argv"
+  bash "$DOOTFILE_LOC"/scripts/rga-fzf.sh "$argv"
 end
 
 function rgr 
-  bash "$DOOTFILE_LOC"/rgr.sh "$argv"
+  bash "$DOOTFILE_LOC"/scripts/rgr.sh "$argv"
 end
 
 function save
