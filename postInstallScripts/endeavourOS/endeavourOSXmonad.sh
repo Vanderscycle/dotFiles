@@ -158,11 +158,6 @@ sudo pacman -S --noconfirm --needed bitwarden
 
 echo -e 'Done.\n'
 
-#TODO: since I have 2 gpg k
-#INFO: the rest has to be done manually (add the pub file to git for both ssh and gpg)
-
-
-
 # -----------------------------------------------------------------------------
 # => Font && colors
 # -----------------------------------------------------------------------------
@@ -172,7 +167,7 @@ mkdir -p ~/.local/share/fonts/NerdFonts/JetBrains
 # https://github.com/ronniedroid/getnf
 #TODO: use this address to download the font
 #https://www.jetbrains.com/lp/mono/
-rsync -auv ~/Documents/dotFiles/JetBrainsMono.zip ~/.local/share/fonts/NerdFonts/JetBrains/
+rsync -auv ~/Documents/dotFiles/theme/JetBrainsMono.zip ~/.local/share/fonts/NerdFonts/JetBrains/
 (cd ~/.local/share/fonts/NerdFonts/JetBrains && unzip ./JetBrainsMono.zip && rm ./JetBrainsMono )
 # rm  ~/.local/share/fonts/NerdFonts/JetBrainsMono.zip
 fc-cache -v -f
