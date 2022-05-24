@@ -28,7 +28,7 @@ require("user.keybindings").config()
 require("user.general").config()
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
-  paths = { "~/.config/lvim/snippets" },
+	paths = { "~/.config/lvim/snippets" },
 })
 -- WIP:
 -- =========================================
@@ -39,3 +39,4 @@ require("luasnip/loaders/from_vscode").load({
 -- vim.api.nvim_create_autocmd
 -- https://chrisarcand.com/vims-new-cdo-command/ cdo/cfdo for bqf batch renaming
 -- TODO: coda actions requires telescope drop down menu
+--TODO: add a telescopr config and plugins

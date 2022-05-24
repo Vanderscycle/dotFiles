@@ -14,22 +14,26 @@ end
 
 
 if status is-interactive
+  # https://fishshell.com/docs/current/tutorial.html
+
   # weather 
   curl -s 'wttr.in/?format=3'
-  # Commands to run in interactive sessions can go here
-  # https://fishshell.com/docs/current/tutorial.html
+
+  # General variables
   set -xg EDITOR lvim
   set -xq BROWSER qutebrowser
   set -xg SHELL fish
   set -xg TERMINAL kitty
   set -xg LV_BRANCH rolling 
-  # fish
+
+  # fzf
   set -xg fzf_preview_dir_cmd exa --all --color=always
   set -xg fzf_preview_file_cmd bat
+  set -xg FZF_DEFAULT_OPTS '--multi --no-height --extended --bind "alt-a:select-all,alt-d:deselect-all"'
   
   # fish
-  set -xg FZF_DEFAULT_OPTS '--multi --no-height --extended --bind "alt-a:select-all,alt-d:deselect-all"'
-fish_config theme choose "fish default"
+  fish_config theme choose "fish default"
+
   # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
   fish_ssh_agent
@@ -42,6 +46,7 @@ fish_config theme choose "fish default"
 
   # dotfiles
   set -xg DOOTFILE_LOC ~/Documents/dotFiles/
+
   # ripgrep
   set RIPGREP_CONFIG_PATH -xg ~/.config/rg/
 
@@ -53,7 +58,6 @@ fish_config theme choose "fish default"
   # nnnTheme
   set -u NNN_TMPFILE "/tmp/nnn"
   export NNN_TMPFILE
-
   set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
   set -xg NNN_FIFO '/tmp/nnn.fifo'
   export NNN_FIFO
