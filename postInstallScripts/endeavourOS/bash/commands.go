@@ -41,6 +41,7 @@ func Pacman(flags []string, cmds []string, debug bool) error {
 	}
 	err := Bash("pacman", s)
 	if err != nil {
+		log.Print("error? y")
 		return fmt.Errorf("[ERR] => pacman failed: %s", s)
 	}
 	return nil

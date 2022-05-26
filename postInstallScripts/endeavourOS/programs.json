@@ -12,5 +12,9 @@
       "installer": "yay",
       "program": "tmuxinator"
     }
-  ]
+  ],
+  "args": {
+    "arch": "-S --needed --noconfirm",
+    "npm": "i -g"
+  }
 }

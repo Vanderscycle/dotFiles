@@ -46,17 +46,22 @@ func main() {
 	// }
 	_ = LoadJson()
 
-	err := bash.Pacman(ArgsInstall, bareMetal, false)
+	// err := bash.Pacman(ArgsInstall, bareMetal, false)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	// err := bash.Root("npm", []string{"i", "-g"}, []string{"prettier", "eslint", "neovim", "tree-sitter-cli"}, true)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// TODO: somehow it crashes after executing one bash program?
+	log.Print("hello")
+	err := bash.General("ls", []string{"-l", "-a"}, nil, true)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	err = bash.Root("npm", []string{"i", "-g"}, []string{"prettier", "eslint", "neovim", "tree-sitter-cli"}, true)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	err = bash.General("ls", []string{"-l", "-a"}, nil, true)
+	err = bash.General("exa", []string{"-l", "-a"}, nil, true)
 	if err != nil {
 		log.Fatal(err)
 	}
