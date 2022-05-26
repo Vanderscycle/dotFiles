@@ -2,7 +2,7 @@ module endavourOs
 
 go 1.18
 
-require github.com/tidwall/gjson v1.14.0
+require github.com/tidwall/gjson v1.14.1
 
 require (
 	github.com/BurntSushi/toml v1.0.0 // indirect

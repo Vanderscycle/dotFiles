@@ -375,20 +375,6 @@ sudo npm install -g  svelte-language-server @typescript-eslint/eslint-plugin
 # write-good is a linter for markdown 
 
 # -----------------------------------------------------------------------------
-# =>  Android dev (so much pain) lul
-# -----------------------------------------------------------------------------
-
-#INFO: FOR MONDAY INSTALL
-echo '\n=> Android tools for maximum pain, jk'
-# sudo yay -S --noconfirm --needed android-studio java-openjfx android-tools
- 
-# npm install -g appium
-# download the appImage and rsync that garbage from Downloads -> Programs 
-# https://github.com/appium/appium-inspector/releases/tag/v2021.12.2
-# chmod +x *.AppImage
-echo -e 'done'
-
-# -----------------------------------------------------------------------------
 # => enhancing gnome
 # -----------------------------------------------------------------------------
 
