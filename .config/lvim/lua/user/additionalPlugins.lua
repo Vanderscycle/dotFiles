@@ -24,6 +24,7 @@ M.config = function()
 			end,
 			disable = lvim.builtin.motion_provider ~= "lightspeed",
 		},
+
 		-- visual aid
 		{
 			"mvllow/modes.nvim",
@@ -68,8 +69,17 @@ M.config = function()
 		-- 	end,
 		-- },
 		{
+			"smjonas/inc-rename.nvim",
+			config = function()
+				require("inc_rename").setup()
+				-- require("plugins.inc_rename").config()
+			end,
+			event = "BufRead",
+		},
+		{
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },
+			event = "BufRead",
 		},
 		{
 			"andymass/vim-matchup",

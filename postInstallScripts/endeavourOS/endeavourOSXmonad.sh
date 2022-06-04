@@ -228,15 +228,6 @@ sudo mkdir -p /root/buildah
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
-# => Containers (Podman/buildah)
-# -----------------------------------------------------------------------------
-echo -e '\n=>Installing Container orchestration'
-
-
-echo -e 'Done.\n'
-
-
-# -----------------------------------------------------------------------------
 # => Databases
 # -----------------------------------------------------------------------------
 
@@ -270,6 +261,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 # => Enabling weekly system maintenance
 # -----------------------------------------------------------------------------
+
 echo -e '\n=> Enabling weekly system maintenance'
 
 sudo systemctl enable --now paccache.timer
@@ -289,6 +281,8 @@ yay -S --noconfirm dunst #notification system
 yay -S --noconfirm maim #screen capture
 echo -e 'Done.\n'
 
+sudo pacman -S --noconfirm playerctl # for audio controls
+sudo pacman -S --noconfirm zsa-wally 
 sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
 
 }

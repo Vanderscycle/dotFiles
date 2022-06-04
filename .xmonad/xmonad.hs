@@ -31,6 +31,7 @@ import XMonad.Layout.Spacing
 import qualified XMonad.StackSet as W
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+import Graphics.X11.ExtraTypes.XF86
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -148,6 +149,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       ((modm, xK_comma), sendMessage (IncMasterN 1)),
       -- Deincrement the number of windows in the master area
       ((modm, xK_period), sendMessage (IncMasterN (-1))),
+      -- media keys
+      ((0, xF86XK_AudioLowerVolume   ), spawn "pactl set-sink-volume 0 +1.5%"),
+      ((0, xF86XK_AudioRaiseVolume   ), spawn "pactl set-sink-volume 0 -1.5%"),
+      ((0, xF86XK_AudioPlay          ), spawn "playerctl play-pause"),
+      ((0, xF86XK_AudioMute          ), spawn "pactl set-sink-mute 0 toggle"),
+      ((0, xF86XK_AudioNext          ), spawn "playerctl next"),
+      ((0, xF86XK_AudioPrev          ), spawn "playerctl previous"),
       -- Toggle the status bar gap
       -- Use this binding with avoidStruts from Hooks.ManageDocks.
       -- See also the statusBar function from Hooks.DynamicLog.

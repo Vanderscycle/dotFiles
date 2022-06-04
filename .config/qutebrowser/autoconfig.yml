@@ -29,5 +29,6 @@ settings:
     https://gitlab.atreidesaccount.io: true
     https://meet.google.com: true
   content.register_protocol_handler:
+    https://calendar.google.com?cid=%25s: true
     https://mail.google.com?extsrc=mailto&url=%25s: true
     https://mail.protonmail.com#mailto=%25s: true

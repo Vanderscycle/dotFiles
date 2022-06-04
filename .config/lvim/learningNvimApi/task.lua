@@ -22,11 +22,11 @@ local opts = {
 	previewer = previewers.new_termopen_previewer({
 		get_command = function(entry)
 			local tmp_table = vim.split(entry.value, "\t")
-			-- vim.notify(tmp_table)
+			print(tmp_table)
 			if vim.tbl_isempty(tmp_table) then
 				return { "echo", "" }
 			end
-			return { "echo", pickers.get_index() }
+			return { "task", tmp_table[1] }
 		end,
 	}),
 }

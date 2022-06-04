@@ -5,7 +5,6 @@ M.config = function()
 	-- add your own keymapping
 	lvim.keys.normal_mode["<leader>o"] = "o<Esc>"
 	lvim.keys.normal_mode["<leader>O"] = "0<Esc>"
-	lvim.keys.normal_mode["<S-x>"] = ":lua require('FTerm').toggle()<CR>"
 	lvim.builtin.which_key.mappings["P"] = {
 		name = "Plugin",
 		r = { "<cmd>luafile %<cr>", "Reload Current File" },
@@ -35,7 +34,13 @@ M.config = function()
 			i = { "<cmd>lua require('lvim.lsp.peek').Peek('implementation')<cr>", "Implementation" },
 		},
 		q = { vim.diagnostic.setloclist, "Quickfix" },
-		r = { vim.lsp.buf.rename, "Rename" },
+		-- r = { vim.lsp.buf.rename, "Rename" },
+		r = {
+			function()
+				return ":IncRename " .. vim.fn.expand("<cword>")
+			end,
+			"Rename",
+		},
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
 		S = {
 			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
@@ -90,6 +95,11 @@ M.config = function()
 		L = {
 			"<cmd>BufferLineSortByExtension<cr>",
 			"Sort by language",
+		},
+		t = {
+			name = "+Term",
+			b = { "<cmd>ToggleTerm size=20 direction=horizontal<cr>", "Bottom Term" },
+			f = { "<cmd>ToggleTerm<cr>", "Floating Term" },
 		},
 	}
 	lvim.builtin.which_key.mappings["b1"] = { "<Cmd>BufferLineGoToBuffer 1<CR>", "Buffer1" }

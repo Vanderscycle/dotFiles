@@ -30,6 +30,7 @@ require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
 	paths = { "~/.config/lvim/snippets" },
 })
+
 -- WIP:
 -- =========================================
 -- TODO: lightbulb/codelens auto action

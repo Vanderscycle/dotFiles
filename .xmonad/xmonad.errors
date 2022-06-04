@@ -1,8 +1,8 @@
 
-xmonad.hs:376:20: warning: [-Wdeprecations]
+xmonad.hs:383:20: warning: [-Wdeprecations]
     In the use of ‘spacingWithEdge’
     (imported from XMonad.Layout.Spacing):
     Deprecated: "Use spacingRaw instead."
     |
-376 |       layoutHook = spacingWithEdge 10 $ myLayout,
+383 |       layoutHook = spacingWithEdge 10 $ myLayout,
     |                    ^^^^^^^^^^^^^^^
