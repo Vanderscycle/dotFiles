@@ -1,6 +1,5 @@
 -- TODO:
 -- WIP: learn surround,hlslens and lightspeed plugins
-
 -- enabling plugins
 -- =========================================
 lvim.builtin.motion_provider = "lightspeed"

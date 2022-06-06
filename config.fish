@@ -88,8 +88,10 @@ function fish_greeting
     echo Hello "$USER"!
     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
     # pokemon-colorscripts -r
-   curl v2d.wttr.in/
-
+    if not test -f '/tmp/weather_report'
+      set -l TMP_FILE  mktemp weather_report
+      curl v2d.wttr.in/ | tee $TMP_FILE
+    end
 end
 
 # nnn

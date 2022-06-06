@@ -71,8 +71,8 @@ M.config = function()
 		{
 			"smjonas/inc-rename.nvim",
 			config = function()
-				require("inc_rename").setup()
-				-- require("plugins.inc_rename").config()
+				-- require("inc_rename").setup()
+				require("plugins.inc_rename").config()
 			end,
 			event = "BufRead",
 		},

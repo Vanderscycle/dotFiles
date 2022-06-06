@@ -150,8 +150,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       -- Deincrement the number of windows in the master area
       ((modm, xK_period), sendMessage (IncMasterN (-1))),
       -- media keys
-      ((0, xF86XK_AudioLowerVolume   ), spawn "pactl set-sink-volume 0 +1.5%"),
-      ((0, xF86XK_AudioRaiseVolume   ), spawn "pactl set-sink-volume 0 -1.5%"),
+      ((0, xF86XK_AudioLowerVolume   ), spawn "pactl set-sink-volume 0 -1.5%"),
+      ((0, xF86XK_AudioRaiseVolume   ), spawn "pactl set-sink-volume 0 +1.5%"),
       ((0, xF86XK_AudioPlay          ), spawn "playerctl play-pause"),
       ((0, xF86XK_AudioMute          ), spawn "pactl set-sink-mute 0 toggle"),
       ((0, xF86XK_AudioNext          ), spawn "playerctl next"),
@@ -162,7 +162,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       --
       -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
-      -- Quit xmonad
+  -- Quit xmonad
       ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess)),
       -- Restart xmonad
       ((modm, xK_q), spawn "xmonad --recompile; xmonad --restart"),
