@@ -12,7 +12,7 @@ done
 
 rg --passthru 'henri' -r $DOOTS_USER_NAME ~/.zshrc > ~/.temp.txt && mv ~/.temp.txt ~/.zshrc.sh
 
-declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "ag" "qutebrowser" "mimeapps.list" "bat" "rg")
+declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "ag" "qutebrowser" "mimeapps.list" "bat" "rg" "neofetch")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::doots --> local"    
   rsync -av --progress ~/Documents/dotFiles/.config/$CONF  ~/.config/
