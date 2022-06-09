@@ -89,7 +89,8 @@ function fish_greeting
     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
     # pokemon-colorscripts -r
     if not test -f '/tmp/weather_report'
-      set -l TMP_FILE  mktemp weather_report
+      touch /tmp/weather_report
+      set -l TMP_FILE  /tmp/weather_report
       curl v2d.wttr.in/ | tee $TMP_FILE
     end
 end
@@ -151,12 +152,13 @@ end
 
 #npm/pnpm
 function p-lock
-  npm i --package-lock-only
+  npm i --package-lock-only "$argv"
+
 end
 
-# function npm
-# 	pnpm $argv
-# end
+function p 
+	pnpm $argv
+end
 
 #dns/dog
 function dig
@@ -211,10 +213,10 @@ end
 
 
 function ls
-  exa -al 
+  exa -al"$argv"
 end
 
-function lvim $argv
+function lvim 
  bash /home/henri/.local/bin/lvim $argv
 end
 
