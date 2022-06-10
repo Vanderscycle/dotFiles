@@ -17,7 +17,7 @@ if status is-interactive
   # https://fishshell.com/docs/current/tutorial.html
 
   # weather 
-  curl -s 'wttr.in/?format=3'
+  # curl -s 'wttr.in/?format=3'
 
   # General variables
   set -xg EDITOR lvim
@@ -145,6 +145,10 @@ function condaUpdate
   conda update --all -y
 end
 
+# kill port
+function kill-port
+  kill -9 $(lsof -t -i:"$argv")
+end
 # go
 function goGet 
   go get -u ./...
@@ -208,7 +212,7 @@ end
 
 
 function htop
-  bpytop "$argv"
+  bpytop #"$argv"
 end
 
 
@@ -260,7 +264,7 @@ end
 function docker-crmAll
     echo -e "Removing all containers"
 	# docker stop (docker ps -q)
-	docker rm (docker ps -a -q)
+	docker rm -f (docker ps -a -q)
 end
 
 function docker-irmAll
