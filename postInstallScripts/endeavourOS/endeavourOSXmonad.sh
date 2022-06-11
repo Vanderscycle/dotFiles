@@ -263,7 +263,6 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Enabling weekly system maintenance'
-
 sudo systemctl enable --now paccache.timer
 echo -e 'Done.\n'
 
@@ -358,15 +357,7 @@ sudo pacman -S python-adblock
 # :set content.blocking.method both
 echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => lsp
-# -----------------------------------------------------------------------------
 
-echo '\n=> npm packages for lsp and neovim'
-sudo npm install -g @nestjs/cli write-good markdown-pdf
-sudo npm install -g @tailwindcss/language-server
-sudo npm install -g  svelte-language-server @typescript-eslint/eslint-plugin
-# write-good is a linter for markdown 
 
 # -----------------------------------------------------------------------------
 # => enhancing gnome
@@ -487,9 +478,15 @@ source ~/.config/fish/config.fish
 zx
 
 # -----------------------------------------------------------------------------
-# => languages /linter/formatter
+# => languages /linter/formatter (lsp)
 # -----------------------------------------------------------------------------
 
+echo '\n=> npm packages for lsp and neovim'
+sudo npm install -g @nestjs/cli write-good markdown-pdf
+sudo npm install -g @tailwindcss/language-server
+sudo npm install -g  svelte-language-server @typescript-eslint/eslint-plugin
+
+# write-good is a linter for markdown 
 echo '=>Rust and cargo'
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 zx
@@ -536,6 +533,10 @@ echo -e '\n=> installing dockerfile linter'
 yay --needed --noconfirm hadolint-bin
 echo -e 'Done.\n'
 
+
+echo -e '\n=> haskell'
+yay --needed --noconfirm ghcup-hs-bin 
+echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => AWS
