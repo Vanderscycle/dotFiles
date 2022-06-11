@@ -48,10 +48,13 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
                     , Run Com "uname" ["-s","-r"] "" 36000
                     , Run Date "%a %b %_d %Y %H:%M" "date" 10
                     , Run DynNetwork ["-t", "Up <tx> | Dn <rx> kB/s"] 10
+                        -- Current keyboard layout
+                    , Run ComX "xkb-switch" [] "en" "lang" 1
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "<icon=haskell_20.xpm/> \
+       \  <box type=Bottom width=2 mb=4 color=#7aa2f7>%lang%</box> \
        \  <box type=Bottom width=2 mb=4 color=#7aa2f7>%multicoretemp%</box> \
        \  <box type=Bottom width=2 mb=4 color=#bb9af7>%memory%</box>\
        \  <box type=Bottom width=2 mb=4 color=#c0caf5>%disku%</box>\
@@ -60,5 +63,6 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
        \  <box type=Bottom width=2 mb=4 color=#2ac3de>%CYWH%</box>\
        \  <box type=Bottom width=2 mb=4 color=#7dcfff>%default:Master%</box>\
        \  <box type=Bottom width=2 mb=4 color=#7dcfff>%date%</box>\
-       \  <box type=Bottom width=2 mb=4 color=#73daca><fc=#e0af68>%uname%</fc></box>"
+       \  <box type=Bottom width=2 mb=4 color=#73daca><fc=#e0af68>%uname%</fc></box>\
+       \   "
        }

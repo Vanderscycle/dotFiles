@@ -15,9 +15,13 @@
 
 import Data.Default
 import qualified Data.Map as M
+import qualified XMonad.StackSet as W
+
 import Data.Maybe (fromJust)
 import Data.Monoid
 import Data.Word
+import Data.List (sortBy)
+
 import Graphics.X11.Xlib
 import Graphics.X11.Xlib.Extras
 import System.Exit
@@ -26,13 +30,19 @@ import XMonad.Hooks.DynamicLog (PP (..), dynamicLogWithPP, shorten, wrap, xmobar
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.Spacing
-import qualified XMonad.StackSet as W
+import XMonad.Layout.Spiral
+import XMonad.Layout.Gaps
+
+import Control.Monad (join)
+
+import XMonad.Util.NamedWindows (getName)
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+-- import for media keys
 import Graphics.X11.ExtraTypes.XF86
-
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 
@@ -45,53 +55,15 @@ myFocusFollowsMouse = False
 -- Width of the window border in pixels.
 --
 myBorderWidth = 2
+myGaps              = [(U, 30), (D, 10), (L, 10), (R, 10)]
+mySpacing           = 3
 
--- modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
---
--- INFO: super key (windows key)
 myModMask = mod4Mask
-
--- NOTE: from 0.9.1 on numlock mask is set automatically. The numlockMask
--- setting should be removed from configs.
---
--- You can safely remove this even on earlier xmonad versions unless you
--- need to set it to something other than the default mod2Mask, (e.g. OSX).
---
--- The mask for the numlock key. Numlock status is "masked" from the
--- current modifier status, so the keybindings will work with numlock on or
--- off. You may need to change this on some systems.
---
--- You can find the numlock modifier by running "xmodmap" and looking for a
--- modifier with Num_Lock bound to it:
---
--- > $ xmodmap | grep Num
--- > mod2        Num_Lock (0x4d)
---
--- Set numlockMask = 0 if you don't have a numlock key, or want to treat
--- numlock status separately.
---
--- myNumlockMask   = mod2Mask -- deprecated in xmonad-0.9.1
-------------------------------------------------------------
-
--- The default number of workspaces (virtual screens) and their names.
--- By default we use numeric strings, but any string may be used as a
--- workspace name. The number of workspaces is determined by the length
--- of this list.
---
--- A tagging example:
---
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
---
 myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
+-- myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
 
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
-
--- myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
-
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1 ..] -- (,) == \x y -> (x,y)
 
 clickable ws = "<action=xdotool key super+" ++ show i ++ ">" ++ ws ++ "</action>"
@@ -99,9 +71,7 @@ clickable ws = "<action=xdotool key super+" ++ show i ++ ">" ++ ws ++ "</action>
     i = fromJust $ M.lookup ws myWorkspaceIndices
 
 -- Border colors for unfocused and focused windows, respectively.
---
 myNormalBorderColor = "#24283b"
-
 myFocusedBorderColor = "#74BBFB"
 
 ------------------------------------------------------------------------
@@ -219,53 +189,23 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 ------------------------------------------------------------------------
 -- Layouts:
 
--- You can specify and transform your layouts by modifying these values.
--- If you change layout bindings be sure to use 'mod-shift-space' after
--- restarting (with 'mod-q') to reset your layout state to the new
--- defaults, as xmonad preserves your old layout settings by default.
---
-
--- * NOTE: XMonad.Hooks.EwmhDesktops users must remove the obsolete
-
--- ewmhDesktopsLayout modifier from layoutHook. It no longer exists.
--- Instead use the 'ewmh' function from that module to modify your
--- defaultConfig as a whole. (See also logHook, handleEventHook, and
--- startupHook ewmh notes.)
---
--- The available layouts.  Note that each layout is separated by |||,
--- which denotes layout choice.
---
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full -- ||| spiral (6/7) &
+               -- gaps myGaps &
+               -- smartSpacing mySpacing
+               )
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall nmaster delta ratio
-    -- spacingRaw False (Border 0 5 0 5) True (Border 5 0 5 0) True
-    -- spacingRaw 5 $ Tall nmaster delta ratio
-
     -- The default number of windows in the master pane
     nmaster = 1
-
     -- Default proportion of screen occupied by master pane
     ratio = 1 / 2
-
     -- Percent of screen to increment by when resizing panes
     delta = 3 / 100
 
 ------------------------------------------------------------------------
 -- Window rules:
 
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
---
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
 myManageHook =
   composeAll
     [ className =? "MPlayer" --> doFloat,
@@ -292,51 +232,17 @@ setTransparentHook _ = return (All True)
 ------------------------------------------------------------------------
 -- Event handling
 
--- Defines a custom handler function for X Events. The function should
--- return (All True) if the default handler is to be run afterwards. To
--- combine event hooks use mappend or mconcat from Data.Monoid.
---
-
--- * NOTE: EwmhDesktops users should use the 'ewmh' function from
-
--- XMonad.Hooks.EwmhDesktops to modify their defaultConfig as a whole.
--- It will add EWMH event handling to your custom event hooks by
--- combining them with ewmhDesktopsEventHook.
---
 myEventHook = ewmhDesktopsEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
 
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
---
 
--- * NOTE: EwmhDesktops users should use the 'ewmh' function from
 
--- XMonad.Hooks.EwmhDesktops to modify their defaultConfig as a whole.
--- It will add EWMH logHook actions to your custom log hook by
--- combining it with ewmhDesktopsLogHook.
---
-myLogHook = return ()
-
+myLogHook = return()
 ------------------------------------------------------------------------
 -- Startup hook
 
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
---
-
--- * NOTE: EwmhDesktops users should use the 'ewmh' function from
-
--- XMonad.Hooks.EwmhDesktops to modify their defaultConfig as a whole.
--- It will add initialization of EWMH support to your custom startup
--- hook by combining it with ewmhDesktopsStartup.
---
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
@@ -351,20 +257,13 @@ myStartupHook = do
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 
--- Run xmonad with the settings you specify. No need to modify this.
---
 main = do
   xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
   xmonad . ewmh $
     docks
       defaults
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
 -- No need to modify this.
---
 defaults =
   def
     { -- simple stuff

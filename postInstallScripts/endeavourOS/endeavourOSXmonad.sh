@@ -278,9 +278,10 @@ nitrogen ~/Documents/dotfiles/img/space.png
 sudo pacman -S --needed --noconfirm xmobar #more to polybar later
 yay -S --noconfirm dunst #notification system
 yay -S --noconfirm maim #screen capture
+yay -S --noconfirm xkb-switch #screen capture
 echo -e 'Done.\n'
 
-sudo pacman -S --noconfirm playerctl # for audio controls
+sudo pacman -S --needed --noconfirm playerctl # for audio controls
 sudo pacman -S --noconfirm zsa-wally 
 sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
 
