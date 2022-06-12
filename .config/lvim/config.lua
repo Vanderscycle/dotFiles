@@ -10,7 +10,6 @@ lvim.builtin.lightspeed = { active = true }
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers({
 -- 	"gopls",
 -- }))
-
 -- vim.g.glow_binary_path = vim.env.HOME .. "/bin"
 -- Extra plugin
 -- =========================================

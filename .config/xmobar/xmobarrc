@@ -1,5 +1,5 @@
-Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
-       , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"
+Config { font = "xft:JetBrains Mono:pixelsize=12 Emoji:size=12:antialias=true:hinting:true"
+       , additionalFonts = [ "xft:Mononoki:pixelsize=12:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"
                            ]
@@ -50,6 +50,7 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
                     , Run DynNetwork ["-t", "Up <tx> | Dn <rx> kB/s"] 10
                         -- Current keyboard layout
                     , Run ComX "xkb-switch" [] "en" "lang" 1
+                    , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
@@ -59,10 +60,11 @@ Config { font = "xft:JetBrains Mono:pixelsize=12:antialias=true:hinting:true"
        \  <box type=Bottom width=2 mb=4 color=#bb9af7>%memory%</box>\
        \  <box type=Bottom width=2 mb=4 color=#c0caf5>%disku%</box>\
        \  <box type=Bottom width=2 mb=4 color=#b4f9f8>%dynnetwork%</box> \
+       \ %StdinReader% \
        \  }{\
        \  <box type=Bottom width=2 mb=4 color=#2ac3de>%CYWH%</box>\
        \  <box type=Bottom width=2 mb=4 color=#7dcfff>%default:Master%</box>\
        \  <box type=Bottom width=2 mb=4 color=#7dcfff>%date%</box>\
-       \  <box type=Bottom width=2 mb=4 color=#73daca><fc=#e0af68>%uname%</fc></box>\
-       \   "
+       \  <box type=Bottom width=2 mb=4 color=#73daca><fc=#e0af68><fn=1></fn>%uname%</fc></box>\
+       \   "
        }

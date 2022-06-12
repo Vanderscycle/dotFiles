@@ -27,6 +27,13 @@ M.config = function()
 
 		-- visual aid
 		{
+			"SmiteshP/nvim-navic",
+			requires = "neovim/nvim-lspconfig",
+			-- config = function()
+			-- 	require("plugins.navic").config()
+			-- end,
+		},
+		{
 			"mvllow/modes.nvim",
 			config = function()
 				require("plugins.modes").config()

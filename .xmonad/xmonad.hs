@@ -58,7 +58,8 @@ myBorderWidth = 2
 myGaps              = [(U, 30), (D, 10), (L, 10), (R, 10)]
 mySpacing           = 3
 
-myModMask = mod4Mask
+myModMask = mod4Mask -- super
+modm2 = myModMask .|. controlMask
 myWorkspaces = [" 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 "]
 -- myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
 
@@ -76,6 +77,7 @@ myFocusedBorderColor = "#74BBFB"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
+-- INFO:https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Util-EZConfig.html
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
@@ -85,6 +87,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       ((modm, xK_p), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\""),
       -- launch gmrun
       ((modm .|. shiftMask, xK_p), spawn "gmrun"),
+    -- Run xmessage with a summary of the default keybindings (useful for beginners)
+      ((modm, xK_equal ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -")),
       -- dedicated nnn finder with tmux preview window
       ((modm, xK_f), spawn "kitty -e nnn -H"),
       -- close focused window
@@ -165,6 +169,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
+
 myMouseBindings (XConfig {XMonad.modMask = modm}) =
   M.fromList $
     -- mod-button1, Set the window to floating mode and move by dragging
@@ -237,10 +242,17 @@ myEventHook = ewmhDesktopsEventHook
 ------------------------------------------------------------------------
 -- Status bars and logging
 
+-- myLogHook = return()
+myLogHook h = dynamicLogWithPP $ def
+  { ppLayout = wrap "(<fc=#e4b63c>" "</fc>)"
+  -- , ppSort = getSortByXineramaRule  -- Sort left/right screens on the left, non-empty workspaces after those
+  , ppTitleSanitize = const ""  -- Also about window's title
+  , ppVisible = wrap "(" ")"  -- Non-focused (but still visible) screen
+  , ppCurrent = wrap "<fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>"-- Non-focused (but still visible) screen
+  , ppOutput = hPutStrLn h
+  }
 
-
-myLogHook = return()
-------------------------------------------------------------------------
+----------------------------------------------------------------------
 -- Startup hook
 
 myStartupHook = do
@@ -260,12 +272,7 @@ myStartupHook = do
 main = do
   xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
   xmonad . ewmh $
-    docks
-      defaults
-
--- No need to modify this.
-defaults =
-  def
+    docks $  def
     { -- simple stuff
       terminal = myTerminal,
       focusFollowsMouse = myFocusFollowsMouse,
@@ -276,13 +283,68 @@ defaults =
       workspaces = myWorkspaces,
       normalBorderColor = myNormalBorderColor,
       focusedBorderColor = myFocusedBorderColor,
+
       -- key bindings
       keys = myKeys,
       mouseBindings = myMouseBindings,
+
       -- hooks, layouts
       layoutHook = spacingWithEdge 10 $ myLayout,
       manageHook = myManageHook,
       handleEventHook = myEventHook,
       startupHook = myStartupHook,
-      logHook = myLogHook
+      logHook = myLogHook xmproc
     }
+
+
+
+
+-- | Finally, a copy of the default bindings in simple textual tabular format.
+help :: String
+help = unlines ["The default modifier key is 'alt'. Default keybindings:",
+    "",
+    "-- launching and killing programs",
+    "mod-Shift-Enter  Launch kitty term",
+    "mod-p            Launch dmenu",
+    "mod-Shift-p      Launch gmrun",
+    "mod-Shift-c      Close/kill the focused window",
+    "mod-Space        Rotate through the available layout algorithms",
+    "mod-Shift-Space  Reset the layouts on the current workSpace to default",
+    "mod-n            Resize/refresh viewed windows to the correct size",
+    "",
+    "-- move focus up or down the window stack",
+    "mod-Tab        Move focus to the next window",
+    "mod-Shift-Tab  Move focus to the previous window",
+    "mod-j          Move focus to the next window",
+    "mod-k          Move focus to the previous window",
+    "mod-m          Move focus to the master window",
+    "",
+    "-- modifying the window order",
+    "mod-Return   Swap the focused window and the master window",
+    "mod-Shift-j  Swap the focused window with the next window",
+    "mod-Shift-k  Swap the focused window with the previous window",
+    "",
+    "-- resizing the master/slave ratio",
+    "mod-h  Shrink the master area",
+    "mod-l  Expand the master area",
+    "",
+    "-- floating layer support",
+    "mod-t  Push window back into tiling; unfloat and re-tile it",
+    "",
+    "-- increase or decrease number of windows in the master area",
+    "mod-comma  (mod-,)   Increment the number of windows in the master area",
+    "mod-period (mod-.)   Deincrement the number of windows in the master area",
+    "",
+    "-- quit, or restart",
+    "mod-Shift-q  Quit xmonad",
+    "mod-q        Restart xmonad",
+    "mod-[1..9]   Switch to workSpace N",
+    "",
+    "-- Workspaces & screens",
+    "mod-Shift-[1..9]   Move client to workspace N",
+    "mod-Shift-{1..9}  Move client to screen 1, 2, or 3",
+    "",
+    "-- Mouse bindings: default actions bound to mouse events",
+    "mod-button1  Set the window to floating mode and move by dragging",
+    "mod-button2  Raise the window to the top of the stack",
+    "mod-button3  Set the window to floating mode and resize by dragging"]
