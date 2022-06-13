@@ -36,7 +36,8 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.Spiral
 import XMonad.Layout.Gaps
 
-import Control.Monad (join)
+
+import XMonad.Actions.SpawnOn
 
 import XMonad.Util.NamedWindows (getName)
 import XMonad.Util.Run
@@ -45,6 +46,8 @@ import XMonad.Util.SpawnOnce
 import Graphics.X11.ExtraTypes.XF86
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
+
+import Control.Monad (join)
 
 myTerminal = "kitty"
 
@@ -244,11 +247,11 @@ myEventHook = ewmhDesktopsEventHook
 
 -- myLogHook = return()
 myLogHook h = dynamicLogWithPP $ def
-  { ppLayout = wrap "(<fc=#e4b63c>" "</fc>)"
+  { ppLayout = wrap "(<fc=#e0af68>" "</fc>)"
   -- , ppSort = getSortByXineramaRule  -- Sort left/right screens on the left, non-empty workspaces after those
   , ppTitleSanitize = const ""  -- Also about window's title
   , ppVisible = wrap "(" ")"  -- Non-focused (but still visible) screen
-  , ppCurrent = wrap "<fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>"-- Non-focused (but still visible) screen
+  , ppCurrent = wrap "<fc=#f7768e>[</fc><fc=#73daca>" "</fc><fc=#f7768e>]</fc>"-- Non-focused (but still visible) screen
   , ppOutput = hPutStrLn h
   }
 
@@ -258,10 +261,10 @@ myLogHook h = dynamicLogWithPP $ def
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom &"
-  spawnOnOnce "workspace3" "spotify &" --spawnOnOnce :: WorkspaceId -> String -> X ()Source -- https://hackage.haskell.org/package/xmonad-contrib-0.14/docs/XMonad-Util-SpawnOnce.html
-  spawnOnOnce "workspace2" "qutebrowser &"
-  spawnOnOnce "workspace3" "discord &"
-  spawnOnOnce "workspace3" "slack &"
+  spawnOn "3" "spotify &" --spawnOnOnce :: WorkspaceId -> String -> X ()Source -- https://hackage.haskell.org/package/xmonad-contrib-0.14/docs/XMonad-Util-SpawnOnce.html
+  spawnOn "2" "qutebrowser &"
+  spawnOn "3" "discord &"
+  spawnOn "2" "slack &"
   spawnOnce "kitty &"
   spawnOnce "fcitx -d &"
   spawnOnce "xmobar &"
