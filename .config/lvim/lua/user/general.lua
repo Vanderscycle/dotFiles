@@ -46,16 +46,17 @@ M.config = function()
 	-- =========================================
 	lvim.builtin.which_key.setup.window.winblend = 10
 	lvim.builtin.which_key.setup.ignore_missing = true
-	lvim.builtin.which_key.on_config_done = function(wk)
-		local keys = {
-			["ga"] = { "<cmd>lua require('user.telescope').code_actions()<CR>", "Code Action" },
-			["gR"] = { "<cmd>Trouble lsp_references<CR>", "Goto References" },
-			["gI"] = { "<cmd>lua require('user.telescope').lsp_implementations()<CR>", "Goto Implementation" },
-			["gA"] = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
-			["gt"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
-		}
-		wk.register(keys, { mode = "n" })
-	end
+	-- WIP: move to keybindings??
+	-- lvim.builtin.which_key.on_config_done = function(wk)
+	-- 	local keys = {
+	-- 		["ga"] = { "<cmd>lua require('user.telescope').code_actions()<CR>", "Code Action" },
+	-- 		["gR"] = { "<cmd>Trouble lsp_references<CR>", "Goto References" },
+	-- 		["gI"] = { "<cmd>lua require('user.telescope').lsp_implementations()<CR>", "Goto Implementation" },
+	-- 		["gA"] = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
+	-- 		["gt"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
+	-- 	}
+	-- 	wk.register(keys, { mode = "n" })
+	-- end
 end
 
 return M

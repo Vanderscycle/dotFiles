@@ -10,7 +10,6 @@ M.config = function()
 	if not status_ok then
 		return
 	end
-
 	local custom_md_hover = require("user.null_ls.markdown")
 
 	-- you can either config null-ls itself

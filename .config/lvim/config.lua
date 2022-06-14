@@ -14,7 +14,6 @@ lvim.builtin.lightspeed = { active = true }
 -- Extra plugin
 -- =========================================
 require("user.additionalPlugins").config()
--- require("user.luasnip").config()
 -- Customization
 -- =========================================
 require("user.autocommands")
@@ -24,6 +23,8 @@ require("user.keybindings").config()
 -- =========================================
 -- require("user.todoComments ")
 require("user.general").config()
+require("user.lsp")
+require("plugins.telescope").config()
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
 	paths = { "~/.config/lvim/snippets" },

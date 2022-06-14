@@ -29,9 +29,9 @@ M.config = function()
 		{
 			"SmiteshP/nvim-navic",
 			requires = "neovim/nvim-lspconfig",
-			-- config = function()
-			-- 	require("plugins.navic").config()
-			-- end,
+			config = function()
+				require("plugins.navic").config()
+			end,
 		},
 		{
 			"mvllow/modes.nvim",
@@ -75,7 +75,7 @@ M.config = function()
 		-- 		require("nnn").setup()
 		-- 	end,
 		-- },
-		{
+		{ -- BUG: not working
 			"smjonas/inc-rename.nvim",
 			config = function()
 				-- require("inc_rename").setup()
