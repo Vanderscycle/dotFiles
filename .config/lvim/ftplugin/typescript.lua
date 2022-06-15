@@ -13,3 +13,19 @@ linters.setup({
     filetypes = { "typescript" },
   },
 })
+
+local navic = require("nvim-navic")
+
+require("lspconfig").tsserver.setup({
+  on_attach = function(client, bufnr)
+    navic.attach(client, bufnr)
+  end,
+})
+
+require("lualine").setup({
+  sections = {
+    lualine_c = {
+      { navic.get_location, cond = navic.is_available },
+    },
+  },
+})

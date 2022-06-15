@@ -8,11 +8,11 @@ M.config = function()
 		codelens_viewer = "lua require('plugins.codelens').show_line_sign()"
 	end
 	-- vim.api.nvim_create_autocmd()
-	lvim.autocommands.custom_groups = {
+	lvim.autocommands = {
 		-- On entering insert mode in any file, scroll the window so the cursor line is centered
-		{ "InsertEnter", "*", ":normal zz" },
+		{ "InsertEnter", { pattern = "*", command = ":normal zz" } },
 		-- { "CursorHold", "*", ":normal zz" },
-		{ "CursorHold", "*.rs,*.go,*.ts,*.tsx", codelens_viewer },
+		{ "CursorHold", { pattern = "*.rs,*.go,*.ts,*.tsx", command = codelens_viewer } },
 		-- {"","*", ":<Esc>" }
 	}
 	vim.cmd([[

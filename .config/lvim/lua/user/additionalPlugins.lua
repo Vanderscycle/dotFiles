@@ -75,14 +75,15 @@ M.config = function()
 		-- 		require("nnn").setup()
 		-- 	end,
 		-- },
-		{ -- BUG: not working
-			"smjonas/inc-rename.nvim",
-			config = function()
-				-- require("inc_rename").setup()
-				require("plugins.inc_rename").config()
-			end,
-			event = "BufRead",
-		},
+		-- { -- BUG: not working
+		-- 	"smjonas/inc-rename.nvim",
+		-- 	config = function()
+		-- 		-- require("inc_rename").setup()
+		-- 		require("plugins.inc_rename").config()
+		-- 	end,
+		-- 	disable = true,
+		-- 	event = "BufRead",
+		-- },
 		{
 			"tpope/vim-surround",
 			keys = { "c", "d", "y" },

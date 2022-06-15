@@ -24,6 +24,7 @@ require("user.keybindings").config()
 -- require("user.todoComments ")
 require("user.general").config()
 require("user.lsp")
+
 require("plugins.telescope").config()
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
