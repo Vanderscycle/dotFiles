@@ -275,14 +275,14 @@ echo -e '\n=> install the window manager and bar'
 sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
 sudo pacman -S --needed --noconfirm nitrogen picom xorg-xrandr #wallpaper and else
 nitrogen ~/Documents/dotfiles/img/space.png
-sudo pacman -S --needed --noconfirm xmobar #more to polybar later
+sudo pacman -S --needed --noconfirm xmobar hoogle #more to polybar later
 yay -S --noconfirm dunst #notification system
 yay -S --noconfirm maim #screen capture
 yay -S --noconfirm xkb-switch #screen capture
 echo -e 'Done.\n'
 
 sudo pacman -S --needed --noconfirm playerctl # for audio controls
-sudo pacman -S --noconfirm zsa-wally 
+sudo pacman -S --noconfirm zsa-wally # zsa keyboard
 sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
 
 }
