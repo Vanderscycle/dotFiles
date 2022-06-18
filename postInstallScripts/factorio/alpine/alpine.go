@@ -2,8 +2,10 @@ package alpine
 
 import (
 	"bytes"
+	"fmt"
 	"log"
 	"os/exec"
+	"strings"
 )
 
 const ShellToUse = "bash"
@@ -18,14 +20,15 @@ func Shellout(command string) (error, string, string) {
 	return err, stdout.String(), stderr.String()
 }
 
-func Apk() {
-	err, out, errout := Shellout("ls ltr")
-
+func Apk(cmd string, args []string) error {
+	command := cmd + " " + strings.Join(args[:], " ")
+	err, out, errout := Shellout(command)
 	if err != nil {
-		log.Printf("error: %v\n", err)
-		log.Println(errout)
-		return
+		// log.Printf("error: %v\n", err)
+		// log.Fatal(errout)
+		return fmt.Errorf("%s", errout)
 	}
 	log.Println("--- stdout ---")
 	log.Println(out)
+	return nil
 }
