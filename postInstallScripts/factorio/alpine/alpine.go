@@ -24,11 +24,9 @@ func Apk(cmd string, args []string) error {
 	command := cmd + " " + strings.Join(args[:], " ")
 	err, out, errout := Shellout(command)
 	if err != nil {
-		// log.Printf("error: %v\n", err)
-		// log.Fatal(errout)
 		return fmt.Errorf("%s", errout)
 	}
-	log.Println("--- stdout ---")
-	log.Println(out)
+	log.Println()
+	log.Printf("--- stdout ---\n%s", out)
 	return nil
 }
