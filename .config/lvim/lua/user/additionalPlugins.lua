@@ -1,164 +1,164 @@
 local M = {}
 M.config = function()
-  lvim.plugins = {
-    { "rafcamlet/nvim-whid" }, -- TEST remnove later
-    -- themes
-    { "folke/tokyonight.nvim" },
-    { "LunarVim/ColorSchemes" },
-    {
-      "simrat39/symbols-outline.nvim",
-      cmd = "SymbolsOutline",
-    },
-    {
-      "ray-x/lsp_signature.nvim",
-      config = function()
-        require("plugins.signature").config()
-      end,
-      event = { "BufRead", "BufNew" },
-    },
-    {
-      "ggandor/lightspeed.nvim",
-      event = "BufRead",
-      config = function()
-        require("plugins.lightspeed").config()
-      end,
-      disable = lvim.builtin.motion_provider ~= "lightspeed",
-    },
+	lvim.plugins = {
+		{ "rafcamlet/nvim-whid" }, -- TEST remnove later
+		-- themes
+		{ "folke/tokyonight.nvim" },
+		{ "LunarVim/ColorSchemes" },
+		{
+			"simrat39/symbols-outline.nvim",
+			cmd = "SymbolsOutline",
+		},
+		{
+			"ray-x/lsp_signature.nvim",
+			config = function()
+				require("plugins.signature").config()
+			end,
+			event = { "BufRead", "BufNew" },
+		},
+		{
+			"ggandor/lightspeed.nvim",
+			event = "BufRead",
+			config = function()
+				require("plugins.lightspeed").config()
+			end,
+			disable = lvim.builtin.motion_provider ~= "lightspeed",
+		},
 
-    -- visual aid
-    {
-      "SmiteshP/nvim-navic",
-      requires = "neovim/nvim-lspconfig",
-      config = function()
-        require("plugins.navic").config()
-      end,
-    },
-    {
-      "mvllow/modes.nvim",
-      config = function()
-        require("plugins.modes").config()
-      end,
-      event = "BufRead",
-    },
-    {
-      "sidebar-nvim/sidebar.nvim",
-      config = function()
-        require("plugins.sidebar").config()
-      end,
-      event = "BufRead",
-      -- disable = not lvim.builtin.sidebar.active, -- TODO: activation
-    },
-    {
-      "npxbr/glow.nvim",
-      ft = { "markdown" },
-      config = function()
-        require("plugins.glow").config()
-      end,
-      -- run = "yay -S glow"
-    },
-    -- utility
-    {
-      "tpope/vim-surround",
-      keys = { "c", "d", "y" },
-      event = "BufRead",
-    },
-    {
-      "andymass/vim-matchup",
-      event = "CursorMoved",
-      config = function()
-        vim.g.matchup_matchparen_offscreen = { method = "popup" }
-      end,
-    },
-    -- git
-    { "kdheepak/lazygit.nvim" },
-    -- search
-    {
-      "nacro90/numb.nvim",
-      config = function()
-        require("plugins.numb").config()
-      end,
-      event = "BufRead",
-    },
-    {
-      "kevinhwang91/nvim-bqf",
-      requires = "junegunn/fzf",
-      config = function()
-        require("plugins.bqf").config()
-      end,
-      event = "BufRead",
-    },
-    {
-      "junegunn/fzf",
-      run = function()
-        vim.fn["fzf#install"]()
-      end,
-    },
-    -- better comment flags
-    {
-      "folke/todo-comments.nvim",
-      event = "BufRead",
-      requires = "nvim-lua/plenary.nvim",
-      config = function()
-        require("plugins.todoComments").config()
-      end,
-    },
-    -- telescope plugins
-    -- TODO: how to add them to the telescope
-    {
-      "nvim-telescope/telescope-fzy-native.nvim",
-      run = "make",
-      event = "BufRead",
-    },
-    -- { "nvim-telescope/telescope-media-files.nvim" }, --WARN: not working
-    { "nvim-telescope/telescope-file-browser.nvim" },
-    -- autoSave
-    {
-      "Pocco81/AutoSave.nvim",
-      config = function()
-        require("autosave").setup({ debounce_delay = 125 })
-      end,
-    },
-    {
-      "lukas-reineke/indent-blankline.nvim",
-      setup = function()
-        vim.g.indent_blankline_char = "▏"
-      end,
-      config = function()
-        require("plugins.indent_blankline").config()
-      end,
-      event = "BufRead",
-    },
-    {
-      "kevinhwang91/nvim-hlslens",
-      config = function()
-        require("plugins.hlslens").config()
-      end,
-      event = "BufReadPost",
-      -- disable = not lvim.builtin.hlslens.active,
-    },
-    {
-      "tzachar/cmp-tabnine",
-      run = "./install.sh",
-      requires = "hrsh7th/nvim-cmp",
-      config = function()
-        require("plugins.tabnine").config()
-      end,
-      event = "InsertEnter",
-      -- disable = not lvim.builtin.tabnine.active,
-    },
-    {
-      "David-Kunz/cmp-npm",
-      requires = {
-        "nvim-lua/plenary.nvim",
-      },
-    },
-    {
-      "chipsenkbeil/distant.nvim",
-      config = function()
-        require("plugins.distant").config()
-      end,
-    },
-  }
+		-- visual aid
+		{
+			"SmiteshP/nvim-navic",
+			requires = "neovim/nvim-lspconfig",
+			config = function()
+				require("plugins.navic").config()
+			end,
+		},
+		{
+			"mvllow/modes.nvim",
+			config = function()
+				require("plugins.modes").config()
+			end,
+			event = "BufRead",
+		},
+		{
+			"sidebar-nvim/sidebar.nvim",
+			config = function()
+				require("plugins.sidebar").config()
+			end,
+			event = "BufRead",
+			-- disable = not lvim.builtin.sidebar.active, -- TODO: activation
+		},
+		{
+			"npxbr/glow.nvim",
+			ft = { "markdown" },
+			config = function()
+				require("plugins.glow").config()
+			end,
+			-- run = "yay -S glow"
+		},
+		-- utility
+		{
+			"tpope/vim-surround",
+			keys = { "c", "d", "y" },
+			event = "BufRead",
+		},
+		{
+			"andymass/vim-matchup",
+			event = "CursorMoved",
+			config = function()
+				vim.g.matchup_matchparen_offscreen = { method = "popup" }
+			end,
+		},
+		-- git
+		{ "kdheepak/lazygit.nvim" },
+		-- search
+		{
+			"nacro90/numb.nvim",
+			config = function()
+				require("plugins.numb").config()
+			end,
+			event = "BufRead",
+		},
+		{
+			"kevinhwang91/nvim-bqf",
+			requires = "junegunn/fzf",
+			config = function()
+				require("plugins.bqf").config()
+			end,
+			event = "BufRead",
+		},
+		{
+			"junegunn/fzf",
+			run = function()
+				vim.fn["fzf#install"]()
+			end,
+		},
+		-- better comment flags
+		{
+			"folke/todo-comments.nvim",
+			event = "BufRead",
+			requires = "nvim-lua/plenary.nvim",
+			config = function()
+				require("plugins.todoComments").config()
+			end,
+		},
+		-- telescope plugins
+		-- TODO: how to add them to the telescope
+		{
+			"nvim-telescope/telescope-fzy-native.nvim",
+			run = "make",
+			event = "BufRead",
+		},
+		-- { "nvim-telescope/telescope-media-files.nvim" }, --WARN: not working
+		{ "nvim-telescope/telescope-file-browser.nvim" },
+		-- autoSave
+		-- {
+		-- 	"Pocco81/AutoSave.nvim",
+		-- 	config = function()
+		-- 		require("plugins.autosave").config()
+		-- 	end,
+		-- },
+		{
+			"lukas-reineke/indent-blankline.nvim",
+			setup = function()
+				vim.g.indent_blankline_char = "▏"
+			end,
+			config = function()
+				require("plugins.indent_blankline").config()
+			end,
+			event = "BufRead",
+		},
+		{
+			"kevinhwang91/nvim-hlslens",
+			config = function()
+				require("plugins.hlslens").config()
+			end,
+			event = "BufReadPost",
+			-- disable = not lvim.builtin.hlslens.active,
+		},
+		{
+			"tzachar/cmp-tabnine",
+			run = "./install.sh",
+			requires = "hrsh7th/nvim-cmp",
+			config = function()
+				require("plugins.tabnine").config()
+			end,
+			event = "InsertEnter",
+			-- disable = not lvim.builtin.tabnine.active,
+		},
+		{
+			"David-Kunz/cmp-npm",
+			requires = {
+				"nvim-lua/plenary.nvim",
+			},
+		},
+		{
+			"chipsenkbeil/distant.nvim",
+			config = function()
+				require("plugins.distant").config()
+			end,
+		},
+	}
 end
 
 return M
