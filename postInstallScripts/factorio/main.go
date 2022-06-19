@@ -1,34 +1,36 @@
 package main
 
 import (
-	"encoding/json"
 	"factorio/server/alpine"
-	"fmt"
-	"io/ioutil"
 	"log"
-	"os"
+	"reflect"
 )
 
-func parseOrder() { // Open our jsonFile
-	jsonFile, err := os.Open("routines/k8s.json")
-	// if we os.Open returns an error then handle it
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer jsonFile.Close()
-
-	byteValue, _ := ioutil.ReadAll(jsonFile)
-
-	var result map[string]interface{}
-	json.Unmarshal([]byte(byteValue), &result)
-
-	json.MarshalIndent(&result, "", "\t")
-	fmt.Println(&result)
+type Bash struct {
+	Args []string `json:"args"`
+	Cmd  string   `json:"cmd"`
 }
+
+type Data struct {
+	Test    []Bash `json:"test"`
+	Kubectl []Bash `json:"kubectl"`
+}
+
 func main() {
-	parseOrder()
+	json, err := alpine.ParseOrder("routines/k8s.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(reflect.TypeOf(json))
+	test := json["test"]
+	log.Println(test)
+
+	for _, name := range json {
+		log.Printf("Hello, %s\n", name.([]string))
+	}
+
 	args := []string{"-la", "-z"}
-	err := alpine.Apk("ls", args)
+	err = alpine.Apk("ls", args)
 	if err != nil {
 		log.Fatal(err)
 	}
