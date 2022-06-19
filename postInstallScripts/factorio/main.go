@@ -6,6 +6,7 @@ import (
 	"reflect"
 )
 
+// structure (not used)
 type Bash struct {
 	Args []string `json:"args"`
 	Cmd  string   `json:"cmd"`
@@ -26,7 +27,8 @@ func main() {
 	log.Println(test)
 
 	for _, name := range json {
-		log.Printf("Hello, %s\n", name.([]string))
+		// https://stackoverflow.com/questions/41665383/accessing-data-from-interfaces-in-go
+		log.Printf("Hello, %s\n", name.([]interface{})[0])
 	}
 
 	args := []string{"-la", "-z"}

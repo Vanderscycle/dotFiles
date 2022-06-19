@@ -9,6 +9,8 @@ import (
 	"github.com/TylerBrock/colorjson"
 )
 
+//unstructured
+// https://tutorialedge.net/golang/parsing-json-with-golang/#working-with-unstructured-data
 var data map[string]interface{}
 
 // figure out pointers * and address-of operator (&)
