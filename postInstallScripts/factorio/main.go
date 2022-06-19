@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"factorio/server/alpine"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 )
@@ -13,7 +15,15 @@ func parseOrder() { // Open our jsonFile
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(jsonFile)
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	var result map[string]interface{}
+	json.Unmarshal([]byte(byteValue), &result)
+
+	json.MarshalIndent(&result, "", "\t")
+	fmt.Println(&result)
 }
 func main() {
 	parseOrder()
