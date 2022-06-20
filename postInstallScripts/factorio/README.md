@@ -7,7 +7,7 @@ https://itnext.io/generically-working-with-kubernetes-resources-in-go-53bce678f8
 
 deploy to a linode cli
 https://www.youtube.com/watch?v=VSPUWEtqtnY
-
+1
 plan create a kubernetes factorio launcher
 
 ```

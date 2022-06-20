@@ -11,10 +11,7 @@
   "test": [
     {
       "cmd": "neofetch",
-      "args": [
-        "|",
-        "lolcat"
-      ]
+      "args": []
     },
     {
       "cmd": "exa",
