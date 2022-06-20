@@ -1,0 +1,22 @@
+https://hub.docker.com/r/factoriotools/factorio
+https://github.com/Noah-Huppert/k8s-factorio-server
+docker container go-client
+https://pkg.go.dev/github.com/docker/docker/client
+k8s go-client
+https://itnext.io/generically-working-with-kubernetes-resources-in-go-53bce678f887
+
+deploy to a linode cli
+https://www.youtube.com/watch?v=VSPUWEtqtnY
+
+plan create a kubernetes factorio launcher
+
+```
+factoriotools/factorio:stable
+```
+
+## Goals
+
+write as much as possible in go
+land on the computer (empty alpine server)
+update and install the required program (k8s, docker)
+run a k8s instance of the server
