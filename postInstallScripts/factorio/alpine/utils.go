@@ -9,12 +9,48 @@ import (
 	"github.com/TylerBrock/colorjson"
 )
 
+// structure (not used)
+type Bash struct {
+	Args []string `json:"args"`
+	Cmd  string   `json:"cmd"`
+}
+
+type Data struct {
+	Kubectl []Bash `json:"kubectl"`
+	Test    []Bash `json:"test"`
+}
+
 //unstructured
 // https://tutorialedge.net/golang/parsing-json-with-golang/#working-with-unstructured-data
-var data map[string]interface{}
+var unstructData map[string]interface{}
+var data Data
 
 // figure out pointers * and address-of operator (&)
-func ParseOrder(path string) (map[string]interface{}, error) {
+func ParseOrder(path string) (Data, error) {
+	// Open our jsonFile
+	jsonFile, err := os.Open(path)
+	// if we os.Open returns an error then handle it
+	if err != nil {
+		// return nil, fmt.Errorf("--- unable to import file %s ---", path)
+		return data, fmt.Errorf("--- unable to import file %s ---", path)
+	}
+	defer jsonFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+
+	json.Unmarshal([]byte(byteValue), &data)
+	// color json options
+	f := colorjson.NewFormatter()
+	f.Indent = 2
+
+	s, _ := f.Marshal(data)
+	fmt.Println(string(s))
+	fmt.Println(&data)
+	return data, nil
+}
+
+func UnstructuredParseOrder(path string) (map[string]interface{}, error) {
+	var data map[string]interface{}
 	// Open our jsonFile
 	jsonFile, err := os.Open(path)
 	// if we os.Open returns an error then handle it
@@ -32,5 +68,6 @@ func ParseOrder(path string) (map[string]interface{}, error) {
 
 	s, _ := f.Marshal(data)
 	fmt.Println(string(s))
+	fmt.Println(data)
 	return data, nil
 }

@@ -3,33 +3,25 @@ package main
 import (
 	"factorio/server/alpine"
 	"log"
-	"reflect"
+	// "reflect" //check the type
 )
-
-// structure (not used)
-type Bash struct {
-	Args []string `json:"args"`
-	Cmd  string   `json:"cmd"`
-}
-
-type Data struct {
-	Test    []Bash `json:"test"`
-	Kubectl []Bash `json:"kubectl"`
-}
 
 func main() {
 	json, err := alpine.ParseOrder("routines/k8s.json")
 	if err != nil {
 		log.Fatal(err)
 	}
-	log.Println(reflect.TypeOf(json))
-	test := json["test"]
-	log.Println(test)
-
-	for _, name := range json {
-		// https://stackoverflow.com/questions/41665383/accessing-data-from-interfaces-in-go
-		log.Printf("Hello, %s\n", name.([]interface{})[0])
-	}
+	log.Print(len(json.Test[0].Args))
+	json2, _ := alpine.UnstructuredParseOrder("routines/k8s.json")
+	log.Println(json2)
+	// for k, v := range json {
+	// https://stackoverflow.com/questions/41665383/accessing-data-from-interfaces-in-go
+	// https://stackoverflow.com/questions/28806951/accessing-nested-map-of-type-mapstringinterface-in-golang
+	// if v.([]interface{})[1] == "neofetch" {
+	// log.Println(k, "value is", v.([]interface{})[0])
+	// log.Printf("Hello, %s\n", v.([]interface{})[0])
+	// }
+	// }
 
 	args := []string{"-la", "-z"}
 	err = alpine.Apk("ls", args)
