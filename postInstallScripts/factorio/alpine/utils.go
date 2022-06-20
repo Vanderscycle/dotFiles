@@ -26,7 +26,7 @@ var unstructData map[string]interface{}
 var data Data
 
 // figure out pointers * and address-of operator (&)
-func ParseOrder(path string) (Data, error) {
+func ParseOrder(path string, debug bool) (Data, error) {
 	// Open our jsonFile
 	jsonFile, err := os.Open(path)
 	// if we os.Open returns an error then handle it
@@ -44,12 +44,14 @@ func ParseOrder(path string) (Data, error) {
 	f.Indent = 2
 
 	s, _ := f.Marshal(data)
-	fmt.Println(string(s))
-	fmt.Println(&data)
+	if debug {
+		fmt.Println(string(s))
+		fmt.Println(&data)
+	}
 	return data, nil
 }
 
-func UnstructuredParseOrder(path string) (map[string]interface{}, error) {
+func UnstructuredParseOrder(path string, debug bool) (map[string]interface{}, error) {
 	var data map[string]interface{}
 	// Open our jsonFile
 	jsonFile, err := os.Open(path)
@@ -67,7 +69,9 @@ func UnstructuredParseOrder(path string) (map[string]interface{}, error) {
 	f.Indent = 2
 
 	s, _ := f.Marshal(data)
-	fmt.Println(string(s))
-	fmt.Println(data)
+	if debug {
+		fmt.Println(string(s))
+		fmt.Println(&data)
+	}
 	return data, nil
 }
