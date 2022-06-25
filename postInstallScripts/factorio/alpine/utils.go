@@ -17,8 +17,9 @@ type Bash struct {
 }
 
 type Data struct {
-	Kubectl []Bash `json:"kubectl"`
-	Test    []Bash `json:"test"`
+	Schema  []string `json:"schema"`
+	Kubectl []Bash   `json:"kubectl"`
+	Test    []Bash   `json:"test"`
 }
 
 //unstructured
@@ -54,7 +55,7 @@ func ParseOrder(path string, debug bool) (Data, error) {
 	return data, nil
 }
 
-// TODO:: correctly parse unstructured data
+// TODO: correctly parse unstructured data
 func UnstructuredParseOrder(path string, debug bool) (map[string]interface{}, error) {
 	// log.Print(len(json.Test[0].Args))
 	// json2, _ := alpine.UnstructuredParseOrder("routines/k8s.json" , false)
