@@ -1,10 +1,21 @@
 {
   "kubectl": [
     {
-      "cmd": "curl",
+      "cmd": "apk",
       "args": [
-        "-LO",
-        "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+        "update"
+      ]
+    },
+    {
+      "cmd": "apk",
+      "args": [
+        "kubectl"
+      ]
+    },
+    {
+      "cmd": "kubectl",
+      "args": [
+        "version --client"
       ]
     }
   ],
