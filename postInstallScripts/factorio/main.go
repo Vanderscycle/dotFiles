@@ -21,17 +21,21 @@ func main() {
 	// generics...ish
 	// figure a way to enfore order e.g. installer, build, deployment, etc...
 	// https://stackoverflow.com/questions/18926303/iterate-through-the-fields-of-a-struct-in-go
-	v := reflect.ValueOf(json)
-	for i := 0; i < v.NumField(); i++ {
+	rv := reflect.ValueOf(json)
+	for i := 0; i < rv.NumField(); i++ {
 
-		switch v.Type().Field(i).Name {
+		switch rv.Type().Field(i).Name {
 
 		case json.Schema[1]:
 			log.Print(json.Schema[1])
+			vSchema := rv.FieldByName("Test")
+
+			log.Print(vSchema.Kind())
+			// log.Print(json)
 
 		default:
-			log.Println(v.Type().Field(i).Name)
-			log.Println("\t", v.Field(i))
+			log.Println(rv.Type().Field(i).Name)
+			log.Println("\t", rv.Field(i).Len())
 		}
 	}
 	// log.Print(json)
