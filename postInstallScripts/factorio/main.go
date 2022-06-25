@@ -9,13 +9,17 @@ import (
 var orderInstall = []string{"Kubectl", "Test"}
 
 func main() {
-	json, err := alpine.ParseOrder("routines/k8s.json", false)
+	args, errParser := alpine.ArgParser()
+	if errParser != nil {
+		log.Fatal(errParser)
+	}
+	log.Print(args)
+
+	var json, err = alpine.ParseOrder(args.Path, false)
 	if err != nil {
 		log.Fatal(err)
 	}
-	// log.Print(len(json.Test[0].Args))
-	// json2, _ := alpine.UnstructuredParseOrder("routines/k8s.json" , false)
-	// log.Println(json2)
+
 	for _, block := range orderInstall {
 		log.Print(block)
 	}
@@ -32,5 +36,4 @@ func main() {
 	// }
 
 	log.Printf("%s started", "factorio k8")
-
 }
