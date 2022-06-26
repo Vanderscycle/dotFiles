@@ -29,12 +29,14 @@ require("user.lsp")
 require("plugins.telescope").config()
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
-	paths = { "~/.config/lvim/snippets" },
+  paths = { "~/.config/lvim/snippets" },
 })
+-- adding friendly snipperts to
+require("luasnip.loaders.from_snipmate").lazy_load()
 
--- WIP:
 -- =========================================
 -- TODO: lightbulb/codelens auto action
+--TODO: learn about luasnip
 -- TODO: fix  the keybindings and assign leader t for telescope
 -- unfuck section g (no leader)
 -- figure out folds z
