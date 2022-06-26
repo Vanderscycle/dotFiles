@@ -1,1 +1,34 @@
-{}
+{
+  "schema": [
+    "Build",
+    "Test"
+  ],
+  "build": [
+    {
+      "cmd": "apk",
+      "args": [
+        "update"
+      ]
+    },
+    {
+      "cmd": "apk",
+      "args": [
+        "kubectl docker"
+      ]
+    }
+  ],
+  "test": [
+    {
+      "cmd": "kubectl",
+      "args": [
+        "version --client"
+      ]
+    },
+    {
+      "cmd": "docker",
+      "args": [
+        "--version"
+      ]
+    }
+  ]
+}

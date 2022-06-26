@@ -1,9 +1,9 @@
 {
   "schema": [
-    "Kubectl",
+    "Build",
     "Test"
   ],
-  "kubectl": [
+  "build": [
     {
       "cmd": "apk",
       "args": [

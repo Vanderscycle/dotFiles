@@ -2,13 +2,14 @@ package main
 
 import (
 	"factorio/server/alpine"
+	"factorio/server/utils"
 	"log"
 	"reflect"
 	// "reflect" //check the type
 )
 
 func main() {
-	args, errParser := alpine.ArgParser()
+	args, errParser := utils.ArgParser()
 	if errParser != nil {
 		log.Fatal(errParser)
 	}
@@ -35,7 +36,9 @@ func main() {
 
 		default:
 			log.Println(rv.Type().Field(i).Name)
-			log.Println("\t", rv.Field(i).Len())
+			log.Println("\t", rv.Field(i))
+			log.Println(reflect.TypeOf(rv.Field(i)))
+			log.Println(getUnderlyingAsValue(rv.Field(i)))
 		}
 	}
 	// log.Print(json)
@@ -46,4 +49,8 @@ func main() {
 		}
 	}
 	log.Printf("%s started", "factorio k8")
+}
+
+func getUnderlyingAsValue(data interface{}) reflect.Value {
+	return reflect.ValueOf(data)
 }
