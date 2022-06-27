@@ -1,3 +1,4 @@
+# this is the moment to update/create the environment since we will be unable to do later.
 FROM golang:alpine AS build
 
 WORKDIR /app

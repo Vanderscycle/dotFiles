@@ -5,29 +5,17 @@
   ],
   "build": [
     {
-      "cmd": "apk",
+      "cmd": "ls",
       "args": [
-        "upgrade --available && sync"
-      ]
-    },
-    {
-      "cmd": "apk",
-      "args": [
-        "kubectl docker"
+        ""
       ]
     }
   ],
   "test": [
     {
-      "cmd": "kubectl",
+      "cmd": "pwd",
       "args": [
-        "version --client"
-      ]
-    },
-    {
-      "cmd": "docker",
-      "args": [
-        "--version"
+        ""
       ]
     }
   ]

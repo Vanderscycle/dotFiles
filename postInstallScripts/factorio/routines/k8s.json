@@ -5,18 +5,6 @@
   ],
   "build": [
     {
-      "cmd": "apk",
-      "args": [
-        "update"
-      ]
-    },
-    {
-      "cmd": "apk",
-      "args": [
-        "kubectl"
-      ]
-    },
-    {
       "cmd": "kubectl",
       "args": [
         "version --client"

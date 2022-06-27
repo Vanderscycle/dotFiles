@@ -344,7 +344,8 @@ sudo pacman -S --noconfirm --needed bpytop asciinema
 #TODO: revesit nnn
 echo -e 'tui file navigator'
 sudo pacman -S --noconfirm --needed mediainfo
-sudo pacman -S --noconfirm --needed nnn sxiv
+sudo pacman -S --noconfirm --needed sxiv
+
 pip install ueberzug #--required for file preview
 git clone https://github.com/jarun/nnn.git ~/Programs/
 (cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
