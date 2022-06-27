@@ -174,7 +174,7 @@ fc-cache -v -f
 echo -e 'Done.\n'
 
 echo -e '\n=> Adding emoji support'
-yay -S --noconfirm ttf-twemoji-color-git noto-fonts-extra
+yay -S --noconfirm ttf-joypixels noto-fonts-extra
 mkdir ~/.config/fontconfig/
 rsync -av ~/Documents/dotFiles/fonts.conf ~/.config/fontconfig/
 echo -e 'Done.\n'

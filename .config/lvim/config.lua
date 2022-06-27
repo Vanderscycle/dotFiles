@@ -12,6 +12,7 @@ lvim.builtin.lightspeed = { active = true }
 -- }))
 -- vim.g.glow_binary_path = vim.env.HOME .. "/bin"
 -- Extra plugin
+
 -- =========================================
 require("user.additionalPlugins").config()
 -- Customization
@@ -29,7 +30,7 @@ require("user.lsp")
 require("plugins.telescope").config()
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
-  paths = { "~/.config/lvim/snippets" },
+	paths = { "~/.config/lvim/snippets" },
 })
 -- adding friendly snipperts to
 require("luasnip.loaders.from_snipmate").lazy_load()

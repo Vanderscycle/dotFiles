@@ -6,7 +6,13 @@ M.config = function()
 	lvim.format_on_save = true
 	lvim.lint_on_save = true
 	lvim.lsp.diagnostics.virtual_text = true
+
+	-- theme
+	vim.g.tokyonight_style = "night"
+	vim.g.tokyonight_italic_functions = true
+	vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
 	lvim.colorscheme = "tokyonight"
+
 	vim.opt.relativenumber = true
 	vim.opt.wrap = true
 	lvim.builtin.notify.active = true

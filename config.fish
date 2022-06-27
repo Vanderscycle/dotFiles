@@ -61,9 +61,9 @@ if status is-interactive
   set -xg NNN_FCOLORS "$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
   set -xg NNN_FIFO '/tmp/nnn.fifo'
   export NNN_FIFO
-  set -xg NNN_PLUG 'f:finder;o:fzopen;v:imgview'
+  set -xg NNN_PLUG 'f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed'
   set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/'
-  set -xg NNN_OPTS HEd
+  set -xg NNN_OPTS "Hed"
   set -xg SPLIT 'v' # to split Kitty vertically
   set -xg LC_COLLATE 'C' # hidden files on top
 
@@ -98,7 +98,6 @@ end
 function icat
   kitty +kitten icat "$argv"
 end
-
 # nnn
 function n
   nnn "$argv"
