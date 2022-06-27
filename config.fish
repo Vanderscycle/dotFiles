@@ -94,6 +94,10 @@ function fish_greeting
       curl v2d.wttr.in/ | tee $TMP_FILE
     end
 end
+# kitty
+function icat
+  kitty +kitten icat "$argv"
+end
 
 # nnn
 function n
