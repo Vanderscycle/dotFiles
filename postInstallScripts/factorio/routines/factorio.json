@@ -7,7 +7,7 @@
     {
       "cmd": "apk",
       "args": [
-        "update"
+        "upgrade --available && sync"
       ]
     },
     {

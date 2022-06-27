@@ -42,6 +42,12 @@ func main() {
 		}
 	}
 	// log.Print(json)
+	for _, v := range json.Build {
+		err = alpine.Apk(v.Cmd, v.Args)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 	for _, v := range json.Test {
 		err = alpine.Apk(v.Cmd, v.Args)
 		if err != nil {

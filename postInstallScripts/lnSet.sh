@@ -15,7 +15,7 @@ done
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n
 
-declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "rg" "qutebrowser" "mimeapps.list" "bat" "rg" "neofetch" "picom")
+declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "rg" "qutebrowser" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::local -> doots"    
   rsync -av --progress  ~/.config/$CONF ~/Documents/dotFiles/.config

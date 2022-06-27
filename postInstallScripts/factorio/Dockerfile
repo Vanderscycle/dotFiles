@@ -20,8 +20,7 @@ WORKDIR /app
 
 # `boilerplate` should be replaced here as well
 COPY --from=build /app .
-
 # Exposes port 3000 because our program listens on that port
-# EXPOSE 3000
+EXPOSE 3000
 
 CMD [ "./factorio", "-p", "./routines/factorio.json"]
