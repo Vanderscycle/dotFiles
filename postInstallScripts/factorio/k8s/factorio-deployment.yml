@@ -3,11 +3,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: factorio-deployment
   labels:
     app: server
+  name: factorio-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: server
@@ -27,3 +27,8 @@ spec:
                 secretKeyRef:
                   name: factorio-secret
                   key: factorio-server-load-latest-save
+            - name: UPDATE_MODS_ON_START
+              valueFrom:
+                secretKeyRef:
+                  name: factorio-secret
+                  key: factorio-server-update-mods
