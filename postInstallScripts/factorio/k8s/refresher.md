@@ -23,6 +23,7 @@ Get the error logs
 
 ```
 kubectl describe pod {pod name}
+kubectl describe {replicaset/pod/deployment/nodes/services} {name}
 kubectl logs {dpl_name-replicasetID-podID}
 ```
 
@@ -56,4 +57,8 @@ kubectl apply -f {config.yml}
 
 - metadata
 - specification
-- status
+- status (desired/actual - etcd)
+
+```
+kubectl get deplyment {depl-name} -o yaml
+```

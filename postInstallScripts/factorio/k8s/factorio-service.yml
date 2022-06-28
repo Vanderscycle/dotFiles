@@ -7,11 +7,10 @@ metadata:
   namespace: default
 spec:
   selector:
-    app: factorio-service
+    app: server
   type: ClusterIP
   ports:
-  - name: factorio-service
-    protocol: TCP
-    port: 80
-    targetPort: 5000
-    nodePort: 30001
+    - name: factorio-service
+      protocol: TCP
+      port: 80
+      targetPort: 34197

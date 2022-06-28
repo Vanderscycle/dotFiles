@@ -1,25 +1,29 @@
+---
 # https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: factorio-deployment 
-  namespace: default
+  name: factorio-deployment
   labels:
-    app:  
+    app: server
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: 
-  replicas: 1
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+      app: server
   template:
     metadata:
       labels:
-        app:  
+        app: server
     spec:
-
-
+      containers:
+        - name: server
+          image: factoriotools/factorio:stable
+          ports:
+            - containerPort: 34197
+          env:
+            - name: LOAD_LATEST_SAVE
+              valueFrom:
+                secretKeyRef:
+                  name: factorio-secret
+                  key: factorio-server-load-latest-save
