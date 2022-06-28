@@ -5,9 +5,15 @@
   ],
   "build": [
     {
-      "cmd": "ls",
+      "cmd": "mkdir",
       "args": [
-        ""
+        "-p /opt/factorio"
+      ]
+    },
+    {
+      "cmd": "chown",
+      "args": [
+        "845:845 /opt/factorio"
       ]
     }
   ],

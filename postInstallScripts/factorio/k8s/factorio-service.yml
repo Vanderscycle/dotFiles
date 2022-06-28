@@ -1,0 +1,17 @@
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: factorio-service
+  namespace: default
+spec:
+  selector:
+    app: factorio-service
+  type: ClusterIP
+  ports:
+  - name: factorio-service
+    protocol: TCP
+    port: 80
+    targetPort: 5000
+    nodePort: 30001
