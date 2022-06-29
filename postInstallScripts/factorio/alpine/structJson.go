@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-
-	"github.com/TylerBrock/colorjson"
+	// "github.com/TylerBrock/colorjson"
 )
 
 // structure (not used)
@@ -43,13 +42,13 @@ func ParseOrder(path string, debug bool) (Data, error) {
 
 	json.Unmarshal([]byte(byteValue), &data)
 	// color json options
-	f := colorjson.NewFormatter()
-	f.Indent = 2
+	// f := colorjson.NewFormatter()
+	// f.Indent = 2
 
-	s, _ := f.Marshal(data)
-	if debug {
-		fmt.Println(string(s))
-		fmt.Println(&data)
-	}
+	// s, _ := f.Marshal(data)
+	// if debug {
+	// 	fmt.Println(string(s))
+	// 	fmt.Println(&data)
+	// }
 	return data, nil
 }

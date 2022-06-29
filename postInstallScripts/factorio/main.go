@@ -9,7 +9,11 @@ import (
 )
 
 func main() {
-	utils.Installer()
+	distro := "alpine"
+	e := utils.OsCheck(distro)
+	if e != nil {
+		panic("error detected")
+	}
 	args, errParser := utils.ArgParser()
 	if errParser != nil {
 		log.Fatal(errParser)
