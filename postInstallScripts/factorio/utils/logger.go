@@ -34,7 +34,6 @@ func Init(path string) {
 }
 
 func Logger(msg string) {
-	Init("logs.log")
 	log.Print(msg)
 	InfoLogger.Println(msg)
 	// InfoLogger.Println("Something noteworthy happened")
