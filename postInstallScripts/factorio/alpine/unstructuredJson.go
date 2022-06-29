@@ -2,22 +2,21 @@ package alpine
 
 import (
 	"encoding/json"
+	"factorio/server/utils"
 	"fmt"
 	"io/ioutil"
 	"os"
-
-	"github.com/TylerBrock/colorjson"
 )
 
 // TODO: correctly parse unstructured data
-func UnstructuredParseOrder(path string, debug bool) (map[string]interface{}, error) {
-	// log.Print(len(json.Test[0].Args))
-	// json2, _ := alpine.UnstructuredParseOrder("routines/k8s.json" , false)
-	// log.Println(json2)
+var unstructData map[string]interface{}
+
+//func that parses json data in an unstructured order
+func UnstructuredParseOrder(path string) (map[string]interface{}, error) {
+
 	var data map[string]interface{}
 	// Open our jsonFile
 	jsonFile, err := os.Open(path)
-	// if we os.Open returns an error then handle it
 	if err != nil {
 		return nil, fmt.Errorf("--- unable to import file %s ---", path)
 	}
@@ -26,14 +25,9 @@ func UnstructuredParseOrder(path string, debug bool) (map[string]interface{}, er
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 
 	json.Unmarshal([]byte(byteValue), &data)
-	// color json options
-	f := colorjson.NewFormatter()
-	f.Indent = 2
 
-	s, _ := f.Marshal(data)
-	if debug {
-		fmt.Println(string(s))
-		fmt.Println(&data)
+	if os.Getenv("DEBUG_LVL") != "NONE" {
+		utils.PrettyPrintJSON([]byte(byteValue))
 	}
 	return data, nil
 }

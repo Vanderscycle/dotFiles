@@ -9,21 +9,22 @@ import (
 )
 
 func main() {
-	distro := "alpine"
-	e := utils.OsCheck(distro)
-	if e != nil {
-		panic("error detected")
-	}
+
+	// utils.PrettyPrintJSON(str)
+
 	args, errParser := utils.ArgParser()
 	if errParser != nil {
 		log.Fatal(errParser)
 	}
 
-	var json, err = alpine.ParseOrder(args.Path, false)
+	var json, err = alpine.ParseOrder(args.Path)
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	var _, err2 = alpine.UnstructuredParseOrder(args.Path)
+	if err2 != nil {
+		log.Fatal(err)
+	}
 	// generics...ish
 	// figure a way to enfore order e.g. installer, build, deployment, etc...
 	// https://stackoverflow.com/questions/18926303/iterate-through-the-fields-of-a-struct-in-go
