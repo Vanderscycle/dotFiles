@@ -11,7 +11,7 @@ import (
 func main() {
 
 	// utils.PrettyPrintJSON(str)
-
+	utils.Logger("test")
 	args, errParser := utils.ArgParser()
 	if errParser != nil {
 		log.Fatal(errParser)
