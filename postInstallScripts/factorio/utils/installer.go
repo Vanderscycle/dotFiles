@@ -58,7 +58,7 @@ func PrettyPrintJSON(rawStr []byte) {
 	f.Indent = 2
 
 	// Marshall the Colorized JSON
-	s, _ := f.Marshal(obj)
-	Logger(string(s))
+	// s, _ := f.Marshal(obj)
+	// Logger(string(s))
 	// log.Println(string(s))
 }

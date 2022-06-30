@@ -8,11 +8,18 @@ import (
 	// "reflect" //check the type
 )
 
+type Stuff struct {
+	logger utils.BuiltinLogger
+}
+
+func NewStuff(logger utils.BuiltinLogger) *Stuff {
+	return &Stuff{logger: logger}
+}
+
 func main() {
 
-	// utils.PrettyPrintJSON(str)
-	utils.Init("logs.log")
-	utils.Logger("test")
+	s := NewStuff(*utils.NewBuiltinLogger("logs.log"))
+	s.logger.Debug("hello")
 	args, errParser := utils.ArgParser()
 	if errParser != nil {
 		log.Fatal(errParser)
