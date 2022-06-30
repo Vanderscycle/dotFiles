@@ -8,6 +8,7 @@ import (
 	// "reflect" //check the type
 )
 
+//TODO: rename this correctly
 type Stuff struct {
 	logger utils.BuiltinLogger
 }
@@ -19,6 +20,7 @@ func NewStuff(logger utils.BuiltinLogger) *Stuff {
 func main() {
 
 	s := NewStuff(*utils.NewBuiltinLogger("logs.log"))
+	s.logger.ClearLogFile()
 	s.logger.Debug("hello")
 	args, errParser := utils.ArgParser()
 	if errParser != nil {
@@ -36,6 +38,7 @@ func main() {
 	// generics...ish
 	// figure a way to enfore order e.g. installer, build, deployment, etc...
 	// https://stackoverflow.com/questions/18926303/iterate-through-the-fields-of-a-struct-in-go
+	//TODO: figure out the json bag of strings
 	rv := reflect.ValueOf(json)
 	for i := 0; i < rv.NumField(); i++ {
 

@@ -13,16 +13,7 @@ type BuiltinLogger struct {
 }
 
 func NewBuiltinLogger(path string) *BuiltinLogger {
-	// logPresence, errFile := exists(path)
-	// if errFile != nil {
-	// 	log.Fatal(errFile)
-	// }
 
-	// if logPresence == true {
-	// 	log.Printf("log file: %s detected! deleting", path)
-	// 	os.Remove(path)
-	// }
-	// //creates the log file
 	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
@@ -35,6 +26,17 @@ func NewBuiltinLogger(path string) *BuiltinLogger {
 	}
 }
 
+func (l *BuiltinLogger) ClearLogFile() {
+	logPresence, errFile := exists(l.LogFilePath)
+	if errFile != nil {
+		log.Fatal(errFile)
+	}
+
+	if logPresence == true {
+		log.Printf("log file: %s detected! deleting", l.LogFilePath)
+		os.Remove(l.LogFilePath)
+	}
+}
 func (l *BuiltinLogger) Debug(args ...interface{}) {
 	l.InfoLogger.Println(args...)
 }
