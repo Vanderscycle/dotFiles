@@ -11,6 +11,7 @@ deploy to a linode cli
 https://www.youtube.com/watch?v=VSPUWEtqtnY
 1
 plan create a kubernetes factorio launcher
+https://gogoapps.io/blog/passing-loggers-in-go-golang-logging-best-practices/
 
 ```
 factoriotools/factorio:stable

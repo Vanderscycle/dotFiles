@@ -17,6 +17,13 @@ import (
 // if e != nil {
 // 	log.Fatal(e)
 // }
+type Stuff struct {
+	logger BuiltinLogger
+}
+
+func NewStuff(logger BuiltinLogger) *Stuff {
+	return &Stuff{logger: logger}
+}
 
 // checks for the distro used by the system
 func OsCheck(distro string) error {
