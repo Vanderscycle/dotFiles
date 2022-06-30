@@ -2,7 +2,7 @@ package alpine
 
 import (
 	"fmt"
-	"log"
+	// "log"
 	"strings"
 
 	"factorio/server/utils"
@@ -17,6 +17,6 @@ func Apk(cmd string, args []string) error {
 	if err != nil {
 		return fmt.Errorf("--- stderr { %s } ---\n%s", command, errout)
 	}
-	log.Printf("--- stdout { %s } ---\n%s", command, out)
+	utils.Logger(fmt.Sprintf("--- stdout { %s } ---\n%s", command, out))
 	return nil
 }

@@ -38,9 +38,7 @@ func ParseOrder(path string) (Data, error) {
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	json.Unmarshal([]byte(byteValue), &data)
 
-	if os.Getenv("DEBUG_LVL") != "NONE" {
-		utils.PrettyPrintJSON([]byte(byteValue))
-	}
+	utils.PrettyPrintJSON([]byte(byteValue))
 
 	return data, nil
 }

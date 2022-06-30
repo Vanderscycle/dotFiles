@@ -61,7 +61,6 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-	log.Printf("%s started", "factorio k8")
 }
 
 func getUnderlyingAsValue(data interface{}) reflect.Value {

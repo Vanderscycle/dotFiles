@@ -9,6 +9,7 @@ var (
 	WarningLogger *log.Logger
 	InfoLogger    *log.Logger
 	ErrorLogger   *log.Logger
+	LogFile       string
 )
 
 func Init(path string) {
@@ -31,10 +32,14 @@ func Init(path string) {
 	InfoLogger = log.New(file, "INFO: ", log.Ldate|log.Ltime|log.Lshortfile)
 	WarningLogger = log.New(file, "WARNING: ", log.Ldate|log.Ltime|log.Lshortfile)
 	ErrorLogger = log.New(file, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile)
+	LogFile = path
 }
 
 func Logger(msg string) {
-	log.Print(msg)
+	// add type (err,warn, etc ) case of an enum parameter
+	if os.Getenv("DEBUG_LVL") != "NONE" {
+		log.Print(msg)
+	}
 	InfoLogger.Println(msg)
 	// InfoLogger.Println("Something noteworthy happened")
 	// WarningLogger.Println("There is something you should know about")
