@@ -28,9 +28,11 @@ var data Data
 
 // TODO: pass a struct if possible
 func ParseOrder(path string) (Data, error) {
+	s := NewStuff(*utils.NewBuiltinLogger("logs.log"))
 	// Open our jsonFile
 	jsonFile, err := os.Open(path)
 	if err != nil {
+		s.logger.Error("--- unable to import file %s ---", path)
 		return data, fmt.Errorf("--- unable to import file %s ---", path)
 	}
 	defer jsonFile.Close()

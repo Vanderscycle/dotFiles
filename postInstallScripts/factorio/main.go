@@ -21,7 +21,7 @@ func main() {
 
 	s := NewStuff(*utils.NewBuiltinLogger("logs.log"))
 	s.logger.ClearLogFile()
-	s.logger.Debug("hello")
+	s.logger.Info("hello")
 	args, errParser := utils.ArgParser()
 	if errParser != nil {
 		log.Fatal(errParser)

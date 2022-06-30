@@ -10,6 +10,7 @@ type BuiltinLogger struct {
 	InfoLogger    *log.Logger
 	ErrorLogger   *log.Logger
 	LogFilePath   string
+	LogLevel      string
 }
 
 func NewBuiltinLogger(path string) *BuiltinLogger {
@@ -23,6 +24,7 @@ func NewBuiltinLogger(path string) *BuiltinLogger {
 		WarningLogger: log.New(file, "WARNING: ", log.Ldate|log.Ltime|log.Lshortfile),
 		ErrorLogger:   log.New(file, "ERROR: ", log.Ldate|log.Ltime|log.Lshortfile),
 		LogFilePath:   path,
+		LogLevel:      os.Getenv("DEBUG_LVL"),
 	}
 }
 
@@ -37,13 +39,30 @@ func (l *BuiltinLogger) ClearLogFile() {
 		os.Remove(l.LogFilePath)
 	}
 }
-func (l *BuiltinLogger) Debug(args ...interface{}) {
+
+//INFO severity level
+func (l *BuiltinLogger) Info(args ...interface{}) {
+	if l.LogLevel != "NONE" {
+		log.Println(args...)
+	}
 	l.InfoLogger.Println(args...)
 }
 
-// func (l *BuiltinLogger) Debugf(format string, args ...interface{}) {
-// 	l.logger.Printf(format, args...)
-// }
+//WARNING severity level
+func (l *BuiltinLogger) Warn(args ...interface{}) {
+	if l.LogLevel != "NONE" {
+		log.Println(args...)
+	}
+	l.WarningLogger.Println(args...)
+}
+
+//ERROR severity level
+func (l *BuiltinLogger) Error(args ...interface{}) {
+	if l.LogLevel != "NONE" {
+		log.Println(args...)
+	}
+	l.ErrorLogger.Println(args...)
+}
 
 // exists returns whether the given file or directory exists
 func exists(path string) (bool, error) {
