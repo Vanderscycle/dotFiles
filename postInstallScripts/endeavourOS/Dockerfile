@@ -1,9 +1,8 @@
-FROM alpine:latest as builder
-
-# LABEL maintainer "Henri Vandersleyen <henri-vandersleyen@protonmail.com>"
+FROM alpine:latest 
 
 RUN apk --no-cache --update add \
   bash \
+  g++\
   curl \
   git \
   make \
@@ -14,10 +13,20 @@ RUN apk --no-cache --update add \
   cargo \
   neovim 
 
-RUN bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh) \
-  bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
+ENV RUSTUP_HOME=/usr/local/rustup \
+  CARGO_HOME=/usr/local/cargo \
+  PATH=/usr/local/cargo/bin:$PATH
 
-WORKDIR /src
+RUN curl https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh -o lvim.sh && \
+  chmod +x lvim.sh && \
+  bash lvim.sh --install-dependencies ; exit 0 
+# exit 0 because verify install always breaks
 
-ENTRYPOINT ["nvim"]
-CMD ["/src"]
+RUN ~/.local/bin/lvim --headless +PackerSync +qa && \
+  rm lvim.sh
+
+RUN touch ~/.bashrc && \
+  echo alias lvim="~/.local/bin/lvim" > ~/.bashrc && \
+  source ~/.bashrc
+
+CMD ["source","~/.bashrc"]
