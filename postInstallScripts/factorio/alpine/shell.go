@@ -8,6 +8,7 @@ import (
 	"factorio/server/utils"
 )
 
+//INFO: shared accross packages
 type Stuff struct {
 	logger utils.BuiltinLogger
 }

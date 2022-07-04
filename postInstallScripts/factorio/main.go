@@ -17,28 +17,52 @@ func NewStuff(logger utils.BuiltinLogger) *Stuff {
 	return &Stuff{logger: logger}
 }
 
+//init the logger
+var s = NewStuff(*utils.NewBuiltinLogger("logs.log"))
+
 func main() {
 
-	s := NewStuff(*utils.NewBuiltinLogger("logs.log"))
-	s.logger.ClearLogFile()
-	s.logger.Info("hello")
+	// handle file args
 	args, errParser := utils.ArgParser()
 	if errParser != nil {
 		log.Fatal(errParser)
 	}
 
+	s.logger.ClearLogFile()
+
+	unStructuredJSON(args)
+
+	//TODO: figure out the json bag of strings
+
+}
+
+//
+func unStructuredJSON(args utils.AvailArgs) {
+	var json, err = alpine.UnstructuredParseOrder(args.Path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	s.logger.Info(json["test"])
+	var test = json["schema"]
+	for _, val := range test {
+		s.logger.Info(val)
+		s.logger.Info(reflect.TypeOf(val))
+		//https://www.sohamkamani.com/golang/type-assertions-vs-type-conversions/
+		s.logger.Info(json[val.(string)])      //
+		s.logger.Info(len(json[val.(string)])) //
+		s.logger.Info(json[val.(string)][0])   //
+
+	}
+}
+
+func structuredJSON(args utils.AvailArgs) {
+	// generics...ish
+	// figure a way to enfore order e.g. installer, build, deployment, etc...
+	// https://stackoverflow.com/questions/18926303/iterate-through-the-fields-of-a-struct-in-go
 	var json, err = alpine.ParseOrder(args.Path)
 	if err != nil {
 		log.Fatal(err)
 	}
-	var _, err2 = alpine.UnstructuredParseOrder(args.Path)
-	if err2 != nil {
-		log.Fatal(err)
-	}
-	// generics...ish
-	// figure a way to enfore order e.g. installer, build, deployment, etc...
-	// https://stackoverflow.com/questions/18926303/iterate-through-the-fields-of-a-struct-in-go
-	//TODO: figure out the json bag of strings
 	rv := reflect.ValueOf(json)
 	for i := 0; i < rv.NumField(); i++ {
 
@@ -55,7 +79,6 @@ func main() {
 			log.Println(rv.Type().Field(i).Name)
 			log.Println("\t", rv.Field(i))
 			log.Println(reflect.TypeOf(rv.Field(i)))
-			log.Println(getUnderlyingAsValue(rv.Field(i)))
 		}
 	}
 	// log.Print(json)
@@ -71,8 +94,4 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-}
-
-func getUnderlyingAsValue(data interface{}) reflect.Value {
-	return reflect.ValueOf(data)
 }

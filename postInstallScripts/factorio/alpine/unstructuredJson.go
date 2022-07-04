@@ -9,12 +9,12 @@ import (
 )
 
 // TODO: correctly parse unstructured data
-var unstructData map[string]interface{}
+var unstructData map[string][]interface{}
 
 //func that parses json data in an unstructured order
-func UnstructuredParseOrder(path string) (map[string]interface{}, error) {
+func UnstructuredParseOrder(path string) (map[string][]interface{}, error) {
 
-	var data map[string]interface{}
+	var data map[string][]interface{}
 	// Open our jsonFile
 	jsonFile, err := os.Open(path)
 	if err != nil {

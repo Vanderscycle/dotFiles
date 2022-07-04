@@ -1,7 +1,7 @@
 {
   "schema": [
-    "Build",
-    "Test"
+    "build",
+    "test"
   ],
   "build": [
     {

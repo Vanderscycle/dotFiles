@@ -14,16 +14,16 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: minikube
-  currentCluster: minikube
+  currentContext: ""
+  currentCluster: ""
   clusters:
-    minikube:
+    "":
       namespace:
         active: default
         favorites:
         - default
       view:
-        active: pod
+        active: po
       featureGates:
         nodeShell: false
       shellPod:

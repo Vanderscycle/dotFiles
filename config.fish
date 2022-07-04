@@ -267,18 +267,18 @@ end
 function docker-crmAll
     echo -e "Removing all containers"
 	# docker stop (docker ps -q)
-	docker rm -f (docker ps -a -q)
+	docker rm -f (docker ps -aq)
 end
 
 function docker-irmAll
   echo -e "Removing all images"
-	docker rmi (docker images -f "dangling=true" -q)
+	docker rmi (docker images "dangling=true" -aq)
   	echo "done"
 end
 
 function docker-vrmAll
   echo -e "removing all volumes"
-	docker volume rm (docker volume ls -qf dangling=true)
+	docker volume rm -f (docker volume ls -aq dangling=true)
 	echo "done"
 end
 
@@ -287,10 +287,17 @@ echo -e "purging everything"
  	docker-crmAll
   docker-irmAll
   docker-vrmAll
-	docker builder prune -af
+	docker builder prune -afq
   echo "done"
 end
 
+
+# docker containers
+function linode-docker 
+  docker run -it --rm -v (pwd):/work -w /work --entrypoint /bin/bash aimvector/linode:2.15.0
+end
+
+# ripgrep
 function rga-fzf 
   bash "$DOOTFILE_LOC"/scripts/rga-fzf.sh "$argv"
 end
@@ -358,5 +365,3 @@ end
 # !! Contents within this block are managed by 'conda init' !!
 eval /home/henri/miniconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
-
-
