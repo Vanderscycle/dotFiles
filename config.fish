@@ -150,7 +150,7 @@ end
 
 # kill port
 function kill-port
-  kill -9 $(lsof -t -i:"$argv")
+  kill -9 (lsof -t -i:"$argv")
 end
 # go
 function goGet 
@@ -272,13 +272,13 @@ end
 
 function docker-irmAll
   echo -e "Removing all images"
-	docker rmi (docker images "dangling=true" -aq)
+	docker rmi -f (docker images  -aq)
   	echo "done"
 end
 
 function docker-vrmAll
   echo -e "removing all volumes"
-	docker volume rm -f (docker volume ls -aq dangling=true)
+	docker volume rm -f (docker volume ls -aq )
 	echo "done"
 end
 
@@ -291,7 +291,15 @@ echo -e "purging everything"
   echo "done"
 end
 
+# k8s
+function k
+ kubectl "$argv"
+end
 
+function k8s-prmAll
+echo -e "purging everything"
+  kubectl delete all --all --namespaces
+end
 # docker containers
 function linode-docker 
   docker run -it --rm -v (pwd):/work -w /work --entrypoint /bin/bash aimvector/linode:2.15.0

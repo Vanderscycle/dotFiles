@@ -458,7 +458,7 @@ echo -e 'Done.\n'
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> Gaming Monitah'
-sudo pacman -S --needed --noconfirm kubectl minikube argocd
+sudo pacman -S --needed --noconfirm kubectl minikube argocd kustomize
 # since we have virtualBox installed it will detect virtual box as the hypervisor of choice.
 # otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
 yay -S --needed --noconfirm k9s

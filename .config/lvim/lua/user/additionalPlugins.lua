@@ -1,7 +1,8 @@
 local M = {}
 M.config = function()
 	lvim.plugins = {
-		{ "rafcamlet/nvim-whid" }, -- TEST remnove later
+		-- { "rafcamlet/nvim-whid" }, -- TEST remnove later
+		{ "j-hui/fidget.nvim" },
 		-- themes
 		{ "folke/tokyonight.nvim" },
 		{ "LunarVim/ColorSchemes" },
@@ -58,9 +59,12 @@ M.config = function()
 		},
 		-- utility
 		{
-			"tpope/vim-surround",
-			keys = { "c", "d", "y" },
-			event = "BufRead",
+			"kylechui/nvim-surround",
+			config = function()
+				require("nvim-surround").setup({
+					-- Configuration here, or leave empty to use defaults
+				})
+			end,
 		},
 		{
 			"andymass/vim-matchup",
