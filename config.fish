@@ -37,11 +37,11 @@ if status is-interactive
   # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
   fish_ssh_agent
-  ssh-add ~/.ssh/endavourGit
+  ssh-add ~/.ssh/endeavourGit
   ssh-add ~/.ssh/atreidesGit
   # eval (ssh-agent -c)
   # https://www.funtoo.org/Funtoo:Keychain (currently not working for fish shell T_T)
-  keychain --eval --agents gpg,ssh ~/.ssh/endavourGit ~/.ssh/atreidesGit
+  keychain --eval --agents gpg,ssh ~/.ssh/endeavourGit ~/.ssh/atreidesGit
 
 
   # dotfiles

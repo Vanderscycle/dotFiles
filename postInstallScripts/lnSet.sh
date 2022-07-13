@@ -23,3 +23,4 @@ done
 rsync -av --progress ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 
 #TOOD add ag , wgetrc, curlrc? 
+rsync -av --progress  /etc/fstab ~/Documents/dotFiles/etc/

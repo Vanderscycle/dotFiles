@@ -1,4 +1,4 @@
-Config { font = "xft:JetBrains Mono:pixelsize=12 Emoji:size=12:antialias=true:hinting:true"
+Config { font = "xft:Jet Brains Mono:pixelsize=12 Emoji:size=12:antialias=true:hinting:true"
        , additionalFonts = [ "xft:Mononoki:pixelsize=12:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"

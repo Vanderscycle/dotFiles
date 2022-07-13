@@ -128,7 +128,7 @@ fisher install PatrickF1/fzf.fish #fzf but fish
 fisher install edc/bass # allows bash in fish
 fisher install jorgebucaran/nvm.fish
 fisher install jethrokuan/z #zoxide?
-
+wget https://gitlab.com/kyb/fish_ssh_agent/raw/master/functions/fish_ssh_agent.fish -P ~/.config/fish/functions/
 echo -e 'Done. \n'
 }
 

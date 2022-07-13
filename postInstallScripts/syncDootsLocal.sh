@@ -19,4 +19,5 @@ for CONF in "${ConfArray[@]}"; do
 done
 rsync -av --progress ~/Documents/dotFiles/.xmonad/ ~/.xmonad/
 
+rsync -av --progress   ~/Documents/dotFiles/etc/fstab /etc/fstab
 lvim +PackerSync +qall
