@@ -3,6 +3,138 @@
 # WARN: due for a reboot and time in vr for bug testing
 # wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
 
+mongo(){
+# -----------------------------------------------------------------------------
+# => Databases
+# -----------------------------------------------------------------------------
+
+echo -e '\n=>Installing Mongo'
+git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
+(cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed)
+
+echo -e 'Configuring Mongo'
+# sudo systemctl start mongodb
+# sudo systemctl enable mongodb 
+susdo systemctl enable --now mongodb
+sudo systemctl status mongodb # visual confirmation
+echo -e 'Done.\n'
+}
+
+postgresql(){
+# -----------------------------------------------------------------------------
+# => Databases
+# -----------------------------------------------------------------------------
+
+echo -e '\n=>Installing Postgresql'
+# https://lobotuerto.com/blog/how-to-install-postgresql-in-manjaro-linux/
+
+yay -S --noconfirm postgresql postgis
+
+echo -e 'Configuring Postgresql'
+# need to pass commands directly investigate
+sudo su postgres -l <<EOF # or sudo -u postgres -i
+initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
+EOF
+# sudo systemctl start postgresql
+# sudo systemctl enable postgresql 
+sudo systemctl enable --now postgresql
+sudo systemctl status postgresql # visual confirmation
+echo -e 'Done.\n'
+}
+
+kubernetes(){
+# -----------------------------------------------------------------------------
+# => Kubernetes k8s 
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> kubernetes'
+sudo pacman -S --needed --noconfirm kubectl minikube argocd kustomize
+# since we have virtualBox installed it will detect virtual box as the hypervisor of choice.
+# otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
+yay -S --needed --noconfirm k9s
+pacman -S --needed --noconfirm dive
+echo -e 'Done.\n'
+}
+
+docker(){}
+
+podman(){
+# -----------------------------------------------------------------------------
+# => Containers (Podman/buildah)
+# -----------------------------------------------------------------------------
+
+echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
+sudo pacman -S --noconfirm --needed podman buildah
+sudo yay -S --noconfirm --needed podman-compose
+
+echo -e '\n=>Configuring podman/buildah'
+sudo touch /etc/containers/registries.conf.d/docker.conf 
+echo `unqualified-search-registries=["docker.io"]` > /etc/containers/registries.conf.d/docker.conf
+sudo touch /etc/subuid
+sudo touch /etc/subgid 
+sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
+
+sudo mkdir -p /root/buildah
+echo -e 'Done.\n'
+}
+
+xmonad(){
+# -----------------------------------------------------------------------------
+# => Window manager (Xmonad)
+# -----------------------------------------------------------------------------
+# INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
+
+echo -e '\n=> install the window manager and bar'
+sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
+sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
+nitrogen ~/Documents/dotfiles/img/space.png
+sudo pacman -S --needed --noconfirm xmobar hoogle #more to polybar later
+yay -S --needed --noconfirm dunst #notification system
+yay -S --needed --noconfirm maim #screen capture
+yay -S --needed --noconfirm xkb-switch #screen capture
+yay -S --needed --noconfirm picom-git #screen capture
+echo -e 'Done.\n'
+
+sudo pacman -S --needed --noconfirm playerctl # for audio controls
+sudo pacman -S --noconfirm zsa-wally # zsa keyboard
+sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
+}
+
+emacs(){
+# -----------------------------------------------------------------------------
+# => emacs (doom emacs)
+# -----------------------------------------------------------------------------
+echo -e '\n=> installing Emacs'
+pacman -S --needed --noconfirm emacs
+echo -e '\n=> installing Doom emacs'
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+~/.emacs.d/bin/doom install
+echo -e 'Done.\n'
+}
+
+fish(){
+# -----------------------------------------------------------------------------
+# => emacs (doom emacs)
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> Installing Fish'
+sudo pacman -S --noconfirm --needed fish
+#TODO: the following must be done while executing in a fish shell
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher # like zplug
+fisher install ilancosman/tide #use that or starship
+fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
+fisher install jorgebucaran/autopair.fish #same as tpope autopair 
+fisher install PatrickF1/fzf.fish #fzf but fish
+fisher install edc/bass # allows bash in fish
+fisher install jorgebucaran/nvm.fish
+fisher install jethrokuan/z #zoxide?
+
+echo -e 'Done. \n'
+}
+
+lunarvim(){
+
+}
 before_reboot(){
     # Do stuff
 #TODO: add the usb mounting https://www.youtube.com/watch?v=LkwZZIsY9uE
@@ -179,9 +311,9 @@ mkdir ~/.config/fontconfig/
 rsync -av ~/Documents/dotFiles/fonts.conf ~/.config/fontconfig/
 echo -e 'Done.\n'
 
-echo -e '\n=>Colors in terminal'
-yay -S --noconfirm shell-color-scripts pokemon-colorscripts-git
-echo -e 'Done.\n'
+# echo -e '\n=>Colors in terminal'
+# yay -S --noconfirm shell-color-scripts pokemon-colorscripts-git
+# echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Keyboard Languages (en/cn)
@@ -190,7 +322,7 @@ echo -e 'Done.\n'
 echo -e 'Adding keyboard languages (cn)'
 #https://classicforum.manjaro.org/index.php?topic=1044.0
 # TODO: add --no needed 
-sudo pacman -S --noconfirm --needed fcitx fcitx-googlepinyin #TODO: double check the right dependence
+sudo pacman -S --noconfirm --needed fcitx fcitx-googlepinyin fcitx-configtool #TODO: double check the right dependence
 # sudo pacman -Ss --noconfirm --needed chinese
 sudo sh -c "cat >> /etc/environment <<EOF
 GTK_IM_MODULE=fcitx
@@ -209,54 +341,7 @@ EOF"
 # EOF
 # echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => Containers (Podman/buildah)
-# -----------------------------------------------------------------------------
 
-echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
-sudo pacman -S --noconfirm --needed podman buildah
-sudo yay -S --noconfirm --needed podman-compose
-
-echo -e '\n=>Configuring podman/buildah'
-sudo touch /etc/containers/registries.conf.d/docker.conf 
-echo `unqualified-search-registries=["docker.io"]` > /etc/containers/registries.conf.d/docker.conf
-sudo touch /etc/subuid
-sudo touch /etc/subgid 
-sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
-
-sudo mkdir -p /root/buildah
-echo -e 'Done.\n'
-
-# -----------------------------------------------------------------------------
-# => Databases
-# -----------------------------------------------------------------------------
-
-echo -e '\n=>Installing Postgresql'
-# https://lobotuerto.com/blog/how-to-install-postgresql-in-manjaro-linux/
-
-yay -S --noconfirm postgresql postgis
-
-echo -e 'Configuring Postgresql'
-# need to pass commands directly investigate
-sudo su postgres -l <<EOF # or sudo -u postgres -i
-initdb --locale $LANG -E UTF8 -D '/var/lib/postgres/data/'
-EOF
-# sudo systemctl start postgresql
-# sudo systemctl enable postgresql 
-sudo systemctl enable --now postgresql
-sudo systemctl status postgresql # visual confirmation
-echo -e 'Done.\n'
-
-echo -e '\n=>Installing Mongo'
-git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
-(cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed)
-
-echo -e 'Configuring Mongo'
-# sudo systemctl start mongodb
-# sudo systemctl enable mongodb 
-susdo systemctl enable --now mongodb
-sudo systemctl status mongodb # visual confirmation
-echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # => Enabling weekly system maintenance
@@ -266,25 +351,6 @@ echo -e '\n=> Enabling weekly system maintenance'
 sudo systemctl enable --now paccache.timer
 echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => Window manager (Xmonad)
-# -----------------------------------------------------------------------------
-# INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
-
-echo -e '\n=> install the window manager and bar'
-sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
-sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
-nitrogen ~/Documents/dotfiles/img/space.png
-sudo pacman -S --needed --noconfirm xmobar hoogle #more to polybar later
-yay -S --needed --noconfirm dunst #notification system
-yay -S --needed --noconfirm maim #screen capture
-yay -S --needed --noconfirm xkb-switch #screen capture
-yay -S --needed --noconfirm picom-git #screen capture
-echo -e 'Done.\n'
-
-sudo pacman -S --needed --noconfirm playerctl # for audio controls
-sudo pacman -S --noconfirm zsa-wally # zsa keyboard
-sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
 
 }
 
@@ -310,18 +376,7 @@ echo -e 'Done.\n'
 # => Let's actually move to fish
 # -----------------------------------------------------------------------------
 
-echo -e '\n=> Installing Fish'
-sudo pacman -S --noconfirm --needed fish
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher # like zplug
-fisher install ilancosman/tide #use that or starship
-fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
-fisher install jorgebucaran/autopair.fish #same as tpope autopair 
-fisher install PatrickF1/fzf.fish #fzf but fish
-fisher install edc/bass # allows bash in fish
-fisher install jorgebucaran/nvm.fish
-fisher install jethrokuan/z #zoxide?
 
-echo -e 'Done. \n'
 
 # -----------------------------------------------------------------------------
 # => Virtual Machines (level 2)
@@ -359,8 +414,6 @@ sudo pacman -S --noconfirm --needed qutebrowser #TODO: learn the bindings and re
 sudo pacman -S python-adblock
 # :set content.blocking.method both
 echo -e 'Done.\n'
-
-
 
 # -----------------------------------------------------------------------------
 # => enhancing gnome
@@ -453,17 +506,6 @@ yay -S --needed --noconfirm steam lutris
 pacman -S --needed --noconfirm dwarffortress
 echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => Kubernetes k8s 
-# -----------------------------------------------------------------------------
-
-echo -e '\n=> Gaming Monitah'
-sudo pacman -S --needed --noconfirm kubectl minikube argocd kustomize
-# since we have virtualBox installed it will detect virtual box as the hypervisor of choice.
-# otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
-yay -S --needed --noconfirm k9s
-pacman -S --needed --noconfirm dive
-echo -e 'Done.\n'
 
 
 
@@ -580,15 +622,7 @@ bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils
 echo -e 'Done.\n'
 
 
-# -----------------------------------------------------------------------------
-# => emacs (doom emacs)
-# -----------------------------------------------------------------------------
-echo -e '\n=> installing Emacs'
-pacman -S --needed --noconfirm emacs
-echo -e '\n=> installing Doom emacs'
-git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-~/.emacs.d/bin/doom install
-echo -e 'Done.\n'
+
 
 
 
