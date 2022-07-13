@@ -20,4 +20,5 @@ done
 rsync -av --progress ~/Documents/dotFiles/.xmonad/ ~/.xmonad/
 
 rsync -av --progress   ~/Documents/dotFiles/etc/fstab /etc/fstab
+rsync -av --progress   ~/Documents/dotFiles/etc/nvidia.hook /etc/pacman.d/hooks/nvidia.hook
 lvim +PackerSync +qall

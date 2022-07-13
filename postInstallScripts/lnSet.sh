@@ -23,4 +23,6 @@ done
 rsync -av --progress ~/.xmonad/ ~/Documents/dotFiles/.xmonad/
 
 #TOOD add ag , wgetrc, curlrc? 
+# etc
 rsync -av --progress  /etc/fstab ~/Documents/dotFiles/etc/
+rsync -av --progress  /etc/pacman.d/hooks/nvidia.hook ~/Documents/dotFiles/etc/
