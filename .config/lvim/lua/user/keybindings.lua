@@ -3,7 +3,7 @@ local M = {}
 M.config = function()
 	lvim.leader = "space"
 	-- add your own keymapping
-	lvim.builtin.which_key.mappings["l"] = {
+	lvim.builtin.which_key.mappings["t"] = {
 		name = "Tabs",
 		n = { "<cmd>:tabnew<cr>", "New Tab" },
 		j = { "<cmd>:tabprevious<cr>", "Previous Tab" },
@@ -37,9 +37,7 @@ M.config = function()
 		q = { vim.diagnostic.setloclist, "Quickfix" },
 		-- r = { vim.lsp.buf.rename, "Rename" },
 		r = {
-			function()
-				return ":IncRename " .. vim.fn.expand("<cword>")
-			end,
+			'<cmd>lua require("renamer").rename()<cr>',
 			"Rename",
 		},
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },

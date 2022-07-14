@@ -26,7 +26,7 @@ require("user.keybindings").config()
 require("user.general").config()
 require("user.lsp")
 -- require("user.lsp")
-
+require("renamer").setup()
 require("plugins.telescope").config()
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({

@@ -59,6 +59,11 @@ M.config = function()
 		},
 		-- utility
 		{
+			"filipdutescu/renamer.nvim",
+			branch = "master",
+			requires = { { "nvim-lua/plenary.nvim" } },
+		},
+		{
 			"kylechui/nvim-surround",
 			config = function()
 				require("nvim-surround").setup({

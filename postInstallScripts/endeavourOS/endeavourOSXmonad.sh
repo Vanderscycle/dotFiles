@@ -1,7 +1,15 @@
 #!/bin/sh
 # sudo pacman -S --needed --noconfirm httpie && 
 # WARN: due for a reboot and time in vr for bug testing
-# wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && sudo bash ./endeavourOSXmonad.sh
+
+nvidia(){
+# -----------------------------------------------------------------------------
+# => Nvidia drivers
+# https://wiki.archlinux.org/title/NVIDIA
+# -----------------------------------------------------------------------------
+sudo pacman -S --needed --noconfirm nvidia-dkms mkinitcpio 
+mkinitcpio -P
+}
 
 mongo(){
 # -----------------------------------------------------------------------------
@@ -15,7 +23,7 @@ git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
 echo -e 'Configuring Mongo'
 # sudo systemctl start mongodb
 # sudo systemctl enable mongodb 
-susdo systemctl enable --now mongodb
+sudo systemctl enable --now mongodb
 sudo systemctl status mongodb # visual confirmation
 echo -e 'Done.\n'
 }
