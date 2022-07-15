@@ -4,8 +4,8 @@
 # be used with UUID= as a more robust way to name devices that works even if
 # disks are added and removed. See fstab(5).
 #
-# <file system>             <mount point>  <type>  <options>  <dump>  <pass>
+# <file system>                           <mount point>  <type>  <options>  <dump>  <pass>
 UUID=7dc5eeb4-da1d-4e0a-9df1-7080fee570d2 /              ext4    defaults,noatime 0 1
 /swapfile                                 swap           swap    defaults   0 0
 # steam games (dev/sdb1)
-UUID=3001cf2c-460f-4ed6-b1d7-b5375a54f5ad /mnt/steam  ext4 rw,defaults   0 0
+UUID=3001cf2c-460f-4ed6-b1d7-b5375a54f5ad /mnt/steam     ext4    defaults   0 0
