@@ -178,7 +178,7 @@ echo -e 'Done.\n'
 
 echo -e '=> Perform system update'
 sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm base-devel git 
+sudo pacman -S --needed --noconfirm base-devel git update-grub
 echo 'cli download programs'
 #BUG: httpie doesn't work
 sudo pacman -S --needed --noconfirm curl wget

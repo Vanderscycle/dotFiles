@@ -80,6 +80,7 @@ M.config = function()
 		},
 		-- git
 		{ "kdheepak/lazygit.nvim" },
+		{ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" },
 		-- search
 		{
 			"nacro90/numb.nvim",

@@ -2,7 +2,7 @@
 local M = {}
 M.config = function()
 	lvim.leader = "space"
-	-- add your own keymapping
+	-- tabs
 	lvim.builtin.which_key.mappings["t"] = {
 		name = "Tabs",
 		n = { "<cmd>:tabnew<cr>", "New Tab" },
@@ -10,6 +10,36 @@ M.config = function()
 		k = { "<cmd>:tabnext<cr>", "Next Tab" },
 		q = { "<cmd>:tabclose<cr>", "Close Tab" },
 	}
+
+	-- git
+
+	lvim.builtin.which_key.mappings["g"] = {
+		name = "Git",
+		f = { ":DiffviewFileHistory % <cr>", "History" },
+		j = { ":lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+		k = { ":lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+		l = { ":lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+		p = { ":lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+		r = { ":lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+		R = { ":lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+		s = { ":lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+		u = {
+			"<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+			"Undo Stage Hunk",
+		},
+		o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+		b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+		c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+		C = {
+			"<cmd>Telescope git_bcommits<cr>",
+			"Checkout commit(for current file)",
+		},
+		d = {
+			"<cmd>Gitsigns diffthis HEAD<cr>",
+			"Git Diff",
+		},
+	}
+
 	-- lsp
 	lvim.builtin.which_key.mappings["l"] = {
 		name = "LSP",
@@ -47,6 +77,7 @@ M.config = function()
 		},
 		e = { "<cmd>Telescope quickfix<cr>", "Telescope Quickfix" },
 	}
+
 	-- search
 	lvim.builtin.which_key.mappings["s"] = {
 		name = "Search",
@@ -71,6 +102,7 @@ M.config = function()
 			"Find File *Ignore",
 		},
 	}
+
 	-- buffer
 	lvim.builtin.which_key.mappings["b"] = {
 		name = "buffer",
@@ -140,6 +172,7 @@ M.config = function()
 		"O<Esc>",
 		"insert ln abv",
 	}
+
 	-- https://github.com/rmagatti/goto-preview
 	M.set_goto_preview_keybindings = function()
 		-- vim.cmd("nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>")
@@ -147,6 +180,7 @@ M.config = function()
 		-- vim.cmd("nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>")
 		-- vim.cmd("nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>")
 	end
+
 	M.set_luasnip_keymaps = function()
 		vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
 		vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
@@ -155,6 +189,7 @@ M.config = function()
 		vim.api.nvim_set_keymap("i", "<C-E>", "<Plug>luasnip-next-choice", {})
 		vim.api.nvim_set_keymap("s", "<C-E>", "<Plug>luasnip-next-choice", {})
 	end
+
 	-- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 	local actions = require("telescope.actions")
 	lvim.builtin.telescope.defaults.mappings = {
