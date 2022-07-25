@@ -1,7 +1,21 @@
 #!/bin/sh
 # sudo pacman -S --needed --noconfirm httpie && 
 # WARN: due for a reboot and time in vr for bug testing
+systenInit(){
+# -----------------------------------------------------------------------------
+# => Annoying programs that requires user permission
+# -----------------------------------------------------------------------------
 
+# -S: synchronize your system's packages with those in the official repo
+# -y: download fresh package databases from the server
+
+echo -e '=> Perform system update'
+sudo pacman -Syu --noconfirm
+echo 'cli critical programs'
+sudo pacman -S --needed --noconfirm base-devel git update-grub curl wget
+yay -S --needed --noconfirm topgrade
+echo -e 'Done.\n'
+}
 nvidia(){
 # -----------------------------------------------------------------------------
 # => Nvidia drivers
@@ -166,6 +180,11 @@ go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
 }
 
+guiPrograms(){
+  sudo pacman -S --noconfirm --needed signal-desktop
+
+}
+
 before_reboot(){
     # Do stuff
 #TODO: add the usb mounting https://www.youtube.com/watch?v=LkwZZIsY9uE
@@ -179,7 +198,6 @@ echo '------------------------------------------------------------------------'
 # -----------------------------------------------------------------------------
 # => Critical programs that installs bug out later
 # -----------------------------------------------------------------------------
-sudo touch /var/run/rebooting-for-updates 
 echo -e '\n=> installing neovim'
 sudo pacman -S --noconfirm --needed neovim
 
@@ -192,23 +210,7 @@ mkdir -p ~/.config/xmobar/
 wget -O ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc
 echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => Annoying programs that requires user permission
-# -----------------------------------------------------------------------------
 
-# -S: synchronize your system's packages with those in the official repo
-# -y: download fresh package databases from the server
-
-echo -e '=> Perform system update'
-sudo pacman -Syu --noconfirm
-sudo pacman -S --needed --noconfirm base-devel git update-grub
-echo 'cli download programs'
-#BUG: httpie doesn't work
-sudo pacman -S --needed --noconfirm curl wget
-
-#WARN: not working need to grep and replace
-# sudo -- sh -c "echo Defaults env_reset,timestamp_timeout=300 >> /etc/sudoers"
-echo -e 'Done.\n'
 
 
 
