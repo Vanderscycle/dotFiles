@@ -19,11 +19,12 @@ k9s:
   clusters:
     minikube:
       namespace:
-        active: default
+        active: all
         favorites:
+        - all
         - default
       view:
-        active: service
+        active: cm
       featureGates:
         nodeShell: false
       shellPod:

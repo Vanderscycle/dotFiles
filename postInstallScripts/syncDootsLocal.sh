@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a StringArray=( ".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf"  ".gpg/gpg-agent" ".condarc")
+declare -a StringArray=( ".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf"  ".gpg/gpg-agent" ".condarc" ".vale.ini")
 for DOTFILE in "${StringArray[@]}"; do
     echo -e "\n=>${DOTFILE}::doots --> local"    
 

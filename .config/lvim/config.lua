@@ -34,6 +34,7 @@ require("luasnip/loaders/from_vscode").load({
 })
 -- adding friendly snipperts to
 require("luasnip.loaders.from_snipmate").lazy_load()
+vim.diagnostic.config({ virtual_lines = lines_enabled, virtual_text = false })
 
 -- =========================================
 -- TODO: lightbulb/codelens auto action

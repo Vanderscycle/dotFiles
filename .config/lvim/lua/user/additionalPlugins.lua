@@ -35,6 +35,12 @@ M.config = function()
 			end,
 		},
 		{
+			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+			config = function()
+				require("lsp_lines").register_lsp_virtual_lines()
+			end,
+		},
+		{
 			"mvllow/modes.nvim",
 			config = function()
 				require("plugins.modes").config()
@@ -61,7 +67,7 @@ M.config = function()
 		{
 			"filipdutescu/renamer.nvim",
 			branch = "master",
-			requires = { { "nvim-lua/plenary.nvim" } },
+			requires = { "nvim-lua/plenary.nvim" },
 		},
 		{
 			"kylechui/nvim-surround",
@@ -167,6 +173,19 @@ M.config = function()
 			config = function()
 				require("plugins.distant").config()
 			end,
+		},
+		-- refactoring (requires config)
+		-- https://github.com/ThePrimeagen/harpoon
+		{
+			"ThePrimeagen/harpoon",
+			requires = { "nvim-lua/plenary.nvim" },
+		},
+		{
+			"ThePrimeagen/refactoring.nvim",
+			requires = {
+				{ "nvim-lua/plenary.nvim" },
+				{ "nvim-treesitter/nvim-treesitter" },
+			},
 		},
 	}
 end

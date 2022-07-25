@@ -3,7 +3,7 @@ echo $(pwd)
 #https://linuxhint.com/bash_loop_list_strings/
 # ".zshrc" ".oh-my-zsh" ".conda" ".alias"
 # https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where 
-declare -a StringArray=(".xinitrc"  ".gitconfig"".tmux.conf"  ".gpg/gpg-agent" ".ripgreprc" ".condarc")
+declare -a StringArray=(".xinitrc"  ".gitconfig"".tmux.conf"  ".gpg/gpg-agent" ".ripgreprc" ".condarc" ".vale.ini")
 for DOTFILE in "${StringArray[@]}"; do
       echo -e "\n=>${DOTFILE}::local -> doots"    
     rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/.config/

@@ -9,7 +9,11 @@ formatters.setup({
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
 	{
-		exe = "write-good",
+		exe = "vale",
+		filetypes = { "markdown" },
+	},
+	{
+		exe = "write_good",
 		filetypes = { "markdown" },
 	},
 })

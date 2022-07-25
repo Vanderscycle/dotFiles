@@ -64,7 +64,11 @@ pacman -S --needed --noconfirm dive
 echo -e 'Done.\n'
 }
 
-docker(){}
+docker(){
+# -----------------------------------------------------------------------------
+# => Containers (docker)
+# -----------------------------------------------------------------------------
+}
 
 podman(){
 # -----------------------------------------------------------------------------
@@ -143,6 +147,25 @@ echo -e 'Done. \n'
 lunarvim(){
 
 }
+
+lspNull(){
+# -----------------------------------------------------------------------------
+# => languages /linter/formatter (lsp)
+# npm/pnpm must be installed prior
+# golang must be installed prior
+# -----------------------------------------------------------------------------
+
+# Markdown 
+yay -S --noconfirm --needed vale-bin
+sudo npm install -g write-good
+vale sync
+
+#bash
+yay -S --noconfirm --needed shellcheck-bin
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
+
+}
+
 before_reboot(){
     # Do stuff
 #TODO: add the usb mounting https://www.youtube.com/watch?v=LkwZZIsY9uE
@@ -202,9 +225,7 @@ echo 'installing c lang'
 sudo pacman -S --noconfirm --needed  clang
 echo -e 'Done.\n'
 
-#bash
-sudo yay -S --noconfirm --needed shellcheck-bin
-go install mvdan.cc/sh/v3/cmd/shfmt@latest
+
 #Python
 echo -e '\n=> Installing Miniconda'
 export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
