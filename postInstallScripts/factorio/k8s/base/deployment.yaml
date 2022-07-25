@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: factorio
+  labels:
+    app.kubernetes.io/component: game
+    app.kubernetes.io/instance: factorio
+    app.kubernetes.io/name: factorio
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: game
+      app.kubernetes.io/instance: factorio
+      app.kubernetes.io/name: factorio
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: game
+        app.kubernetes.io/instance: factorio
+        app.kubernetes.io/name: factorio
+    spec:
+      containers:
+        - name: factorio
+          image: factoriotools/factorio
+          imagePullPolicy: "IfNotPresent"
+          envFrom:
+            - configMapRef:
+                name: factorio-config
+          ports:
+            - name: http
+              containerPort: 27015
+              protocol: TCP
+            - name: udp
+              containerPort: 34197
+              protocol: UDP
+          volumeMounts:
+            - mountPath: /factorio
+              name: storage
+          readinessProbe: # To check if the Pod is ready to serve traffic or not
+            httpGet:
+              path: /
+              port: 27015
+              scheme: HTTP
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: factorio-pvc

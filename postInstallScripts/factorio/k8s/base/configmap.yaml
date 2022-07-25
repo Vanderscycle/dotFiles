@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: factorio-config
+  labels:
+    app.kubernetes.io/component: game
+    app.kubernetes.io/instance: factorio
+    app.kubernetes.io/name: factorio
+data:
+  LOAD_LATEST_SAVE: "false"
+  UPDATE_MODS_ON_START: "true"
