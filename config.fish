@@ -338,7 +338,8 @@ end
 
 #pacman
 function update
-  sudo pacman -Syu
+  topgrade
+  # sudo pacman -Syu
   xmonad --recompile
 end
 
