@@ -17,12 +17,46 @@ yay -S --needed --noconfirm topgrade
 echo -e 'Done.\n'
 }
 nvidia(){
-# -----------------------------------------------------------------------------
-# => Nvidia drivers
-# https://wiki.archlinux.org/title/NVIDIA
-# -----------------------------------------------------------------------------
-sudo pacman -S --needed --noconfirm nvidia-dkms mkinitcpio 
-mkinitcpio -P
+
+  # -----------------------------------------------------------------------------
+  # => Nvidia drivers
+  # https://wiki.archlinux.org/title/NVIDIA
+  # -----------------------------------------------------------------------------
+  sudo pacman -S --needed --noconfirm nvidia-dkms mkinitcpio nvidia-installer-dkms 
+  sudo nvidia-installer-dkms 
+  mkinitcpio -P
+
+}
+
+lnaguages(){
+
+  # -----------------------------------------------------------------------------
+  # => Keyboard Languages (en/cn)
+  # -----------------------------------------------------------------------------
+
+  echo -e 'Adding keyboard languages (cn)'
+  #https://classicforum.manjaro.org/index.php?topic=1044.0
+  # TODO: add --no needed 
+  sudo pacman -S --noconfirm --needed fcitx fcitx-googlepinyin fcitx-configtool #TODO: double check the right dependence
+  # sudo pacman -Ss --noconfirm --needed chinese
+  sudo sh -c "cat >> /etc/environment <<EOF
+  GTK_IM_MODULE=fcitx
+  QT_IM_MODULE=fcitx
+  XMODIFIERS='@im=fcitx'
+  EOF"
+
+
+  # https://wiki.archlinux.org/title/IBus
+  # touch ~/.config/autostart/ibus-daemon.desktop
+  # cat >> ~/.config/autostart/ibus-daemon.desktop <<EOF
+  # [Desktop Entry]
+  # Type=Application
+  # Name=IBus Daemon
+  # Exec=ibus-daemon -drx
+  # EOF
+  # echo -e 'Done.\n'
+
+
 }
 
 mongo(){
@@ -126,62 +160,142 @@ sudo pacman -S --noconfirm zsa-wally # zsa keyboard
 sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
 }
 
+fonts(){
+  
+  # -----------------------------------------------------------------------------
+  # => Font && colors
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=>Nerdfont'
+  mkdir -p ~/.local/share/fonts/NerdFonts/JetBrains
+  # https://github.com/ronniedroid/getnf
+  #TODO: use this address to download the font
+  #https://www.jetbrains.com/lp/mono/
+  rsync -auv ~/Documents/dotFiles/theme/JetBrainsMono.zip ~/.local/share/fonts/NerdFonts/JetBrains/
+  (cd ~/.local/share/fonts/NerdFonts/JetBrains && unzip ./JetBrainsMono.zip && rm ./JetBrainsMono )
+  # rm  ~/.local/share/fonts/NerdFonts/JetBrainsMono.zip
+  fc-cache -v -f
+  echo -e 'Done.\n'
+
+  echo -e '\n=> Adding emoji support'
+  yay -S --noconfirm ttf-joypixels noto-fonts-extra
+  mkdir ~/.config/fontconfig/
+  rsync -av ~/Documents/dotFiles/fonts.conf ~/.config/fontconfig/
+  echo -e 'Done.\n'
+
+}
+
 emacs(){
-# -----------------------------------------------------------------------------
-# => emacs (doom emacs)
-# -----------------------------------------------------------------------------
-echo -e '\n=> installing Emacs'
-pacman -S --needed --noconfirm emacs
-echo -e '\n=> installing Doom emacs'
-git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-~/.emacs.d/bin/doom install
-echo -e 'Done.\n'
+
+  # -----------------------------------------------------------------------------
+  # => emacs (doom emacs)
+  # -----------------------------------------------------------------------------
+  echo -e '\n=> installing Emacs'
+  pacman -S --needed --noconfirm emacs
+  echo -e '\n=> installing Doom emacs'
+  git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+  ~/.emacs.d/bin/doom install
+  echo -e 'Done.\n'
 }
 
 fish(){
-# -----------------------------------------------------------------------------
-# => emacs (doom emacs)
-# -----------------------------------------------------------------------------
 
-echo -e '\n=> Installing Fish'
-sudo pacman -S --noconfirm --needed fish
-#TODO: the following must be done while executing in a fish shell
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher # like zplug
-fisher install ilancosman/tide #use that or starship
-fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
-fisher install jorgebucaran/autopair.fish #same as tpope autopair 
-fisher install PatrickF1/fzf.fish #fzf but fish
-fisher install edc/bass # allows bash in fish
-fisher install jorgebucaran/nvm.fish
-fisher install jethrokuan/z #zoxide?
-wget https://gitlab.com/kyb/fish_ssh_agent/raw/master/functions/fish_ssh_agent.fish -P ~/.config/fish/functions/
-echo -e 'Done. \n'
+  # -----------------------------------------------------------------------------
+  # => emacs (doom emacs)
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=> Installing Fish'
+  sudo pacman -S --noconfirm --needed fish
+  #TODO: the following must be done while executing in a fish shell
+  curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher # like zplug
+  fisher install ilancosman/tide #use that or starship
+  fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
+  fisher install jorgebucaran/autopair.fish #same as tpope autopair 
+  fisher install PatrickF1/fzf.fish #fzf but fish
+  fisher install edc/bass # allows bash in fish
+  fisher install jorgebucaran/nvm.fish
+  fisher install jethrokuan/z #zoxide?
+  wget https://gitlab.com/kyb/fish_ssh_agent/raw/master/functions/fish_ssh_agent.fish -P ~/.config/fish/functions/
+  echo -e 'Done. \n'
+
 }
 
 lunarvim(){
 
+  # -----------------------------------------------------------------------------
+  # => lunarvim 
+  # -----------------------------------------------------------------------------
 }
 
 lspNull(){
-# -----------------------------------------------------------------------------
-# => languages /linter/formatter (lsp)
-# npm/pnpm must be installed prior
-# golang must be installed prior
-# -----------------------------------------------------------------------------
 
-# Markdown 
-yay -S --noconfirm --needed vale-bin
-sudo npm install -g write-good
-vale sync
+  # -----------------------------------------------------------------------------
+  # => languages /linter/formatter (lsp)
+  # npm/pnpm must be installed prior
+  # golang must be installed prior
+  # -----------------------------------------------------------------------------
 
-#bash
-yay -S --noconfirm --needed shellcheck-bin
-go install mvdan.cc/sh/v3/cmd/shfmt@latest
+  # Markdown 
+  yay -S --noconfirm --needed vale-bin
+  sudo npm install -g write-good
+  vale sync
+
+  #bash
+  yay -S --noconfirm --needed shellcheck-bin
+  go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
 }
 
 guiPrograms(){
-  sudo pacman -S --noconfirm --needed signal-desktop
+
+  # -----------------------------------------------------------------------------
+  # => GUI programs
+  # -----------------------------------------------------------------------------
+
+  sudo pacman -S --noconfirm --needed signal-desktop nomacs #image viewwer/editor
+  yay -S --needed --noconfirm vlc  postman-bin slack-desktop zoom transmission-qt
+}
+
+spotify(){
+
+  # -----------------------------------------------------------------------------
+  # => spotify
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=> spotify'
+  yay -S --needed --noconfirm spotify spicetify-cli
+
+  #adjusting spotify permission
+  #INFO: https://github.com/khanhas/spicetify-cli/wiki/Installation#spotify-installed-from-aur
+  sudo chmod a+wr /opt/spotify
+  sudo chmod a+wr /opt/spotify/Apps -R
+
+  #Configuring spotify themes
+  spicetify
+  spicetify backup apply enable-devtool
+  # BUG: something isn't right with spicetify
+  (cd ~/.config/spicetify/Themes/ &&
+  git clone https://github.com/NYRI4/Comfy-spicetify &&
+  spicetify config current_theme Comfy-spicetify &&
+  spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 &&
+  spicetify apply)
+  echo -e 'Done.\n'
+
+}
+
+discord(){
+
+  # -----------------------------------------------------------------------------
+  # => discord 
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=> discord'
+  yay -S --needed --noconfirm discord
+  curl -O https://raw.githubusercontent.com/bb010g/betterdiscordctl/master/betterdiscordctl
+  chmod +x betterdiscordctl
+  sudo mv betterdiscordctl /usr/local/bin
+  betterdiscordctl install
+  echo -e 'Done.\n'
 
 }
 
@@ -321,55 +435,9 @@ sudo pacman -S --noconfirm --needed bitwarden
 
 echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => Font && colors
-# -----------------------------------------------------------------------------
-
-echo -e '\n=>Nerdfont'
-mkdir -p ~/.local/share/fonts/NerdFonts/JetBrains
-# https://github.com/ronniedroid/getnf
-#TODO: use this address to download the font
-#https://www.jetbrains.com/lp/mono/
-rsync -auv ~/Documents/dotFiles/theme/JetBrainsMono.zip ~/.local/share/fonts/NerdFonts/JetBrains/
-(cd ~/.local/share/fonts/NerdFonts/JetBrains && unzip ./JetBrainsMono.zip && rm ./JetBrainsMono )
-# rm  ~/.local/share/fonts/NerdFonts/JetBrainsMono.zip
-fc-cache -v -f
-echo -e 'Done.\n'
-
-echo -e '\n=> Adding emoji support'
-yay -S --noconfirm ttf-joypixels noto-fonts-extra
-mkdir ~/.config/fontconfig/
-rsync -av ~/Documents/dotFiles/fonts.conf ~/.config/fontconfig/
-echo -e 'Done.\n'
 
 # echo -e '\n=>Colors in terminal'
 # yay -S --noconfirm shell-color-scripts pokemon-colorscripts-git
-# echo -e 'Done.\n'
-
-# -----------------------------------------------------------------------------
-# => Keyboard Languages (en/cn)
-# -----------------------------------------------------------------------------
-
-echo -e 'Adding keyboard languages (cn)'
-#https://classicforum.manjaro.org/index.php?topic=1044.0
-# TODO: add --no needed 
-sudo pacman -S --noconfirm --needed fcitx fcitx-googlepinyin fcitx-configtool #TODO: double check the right dependence
-# sudo pacman -Ss --noconfirm --needed chinese
-sudo sh -c "cat >> /etc/environment <<EOF
-GTK_IM_MODULE=fcitx
-QT_IM_MODULE=fcitx
-XMODIFIERS='@im=fcitx'
-EOF"
-
-
-# https://wiki.archlinux.org/title/IBus
-# touch ~/.config/autostart/ibus-daemon.desktop
-# cat >> ~/.config/autostart/ibus-daemon.desktop <<EOF
-# [Desktop Entry]
-# Type=Application
-# Name=IBus Daemon
-# Exec=ibus-daemon -drx
-# EOF
 # echo -e 'Done.\n'
 
 
@@ -456,50 +524,22 @@ pacman -S --needed --noconfirm pulseaudio-equalizer pavucontrol
 pactl load-module module-equalizer-sink
 pactl load-module module-dbus-protocol
 
-# -----------------------------------------------------------------------------
-# => Local application (gui)
-# -----------------------------------------------------------------------------
 
-echo '\n=> Installing local machine applications'
-curl -O https://raw.githubusercontent.com/bb010g/betterdiscordctl/master/betterdiscordctl
-chmod +x betterdiscordctl
-sudo mv betterdiscordctl /usr/local/bin
-betterdiscordctl install
 
 yay -S --noconfirm --needed qimgv-light signal-desktop 
-pacman -S --noconfirm --needed gimp nomacs #image viewwer/editor
 #INFO: removing the develope edition
-pacman -R --noconfirm firefox-developer-edition
 
 # I actually rely on vim more than libreoffice
 #sudo pacman -S --needed --noconfirm libreoffice-fresh
 sudo yay -S --needed --noconfirm onlyoffice-bin 
 
-yay -S --needed --noconfirm discord vlc spotify spicetify-cli 
-yay -S --needed --noconfirm postman-bin slack-desktop
 
-
-#adjusting spotify permission
-#INFO: https://github.com/khanhas/spicetify-cli/wiki/Installation#spotify-installed-from-aur
-sudo chmod a+wr /opt/spotify
-sudo chmod a+wr /opt/spotify/Apps -R
-
-#Configuring spotify themes
-spicetify
-spicetify backup apply enable-devtool
-# BUG: something isn't right with spicetify
-(cd ~/.config/spicetify/Themes/ &&
-git clone https://github.com/NYRI4/Comfy-spicetify &&
-spicetify config current_theme Comfy-spicetify &&
-spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 &&
-spicetify apply)
 
 # launch config keeb
 #BUG: cargo may not work tho :/
 
 
 #TODO: add the betterDiscord folder to the sync and better10k
-yay -S --noconfirm zoom transmission-qt
 echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
