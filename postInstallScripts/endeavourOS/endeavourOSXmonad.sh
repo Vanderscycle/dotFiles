@@ -325,9 +325,6 @@ wget -O ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle
 echo -e 'Done.\n'
 
 
-
-
-
 # -----------------------------------------------------------------------------
 # => Install system utilities
 # -----------------------------------------------------------------------------
@@ -533,15 +530,6 @@ yay -S --noconfirm --needed qimgv-light signal-desktop
 #sudo pacman -S --needed --noconfirm libreoffice-fresh
 sudo yay -S --needed --noconfirm onlyoffice-bin 
 
-
-
-# launch config keeb
-#BUG: cargo may not work tho :/
-
-
-#TODO: add the betterDiscord folder to the sync and better10k
-echo -e 'Done.\n'
-
 # -----------------------------------------------------------------------------
 # => Quad9 dns
 # -----------------------------------------------------------------------------
@@ -553,17 +541,6 @@ domain dnsknowledge.com
 options rotate
 EOF
 echo -e 'Done.\n'
-
-# -----------------------------------------------------------------------------
-# => Linux Gaming
-# -----------------------------------------------------------------------------
-
-echo -e '\n=> Gaming Monitah'
-yay -S --needed --noconfirm steam lutris
-pacman -S --needed --noconfirm dwarffortress
-echo -e 'Done.\n'
-
-
 
 
 # -----------------------------------------------------------------------------
@@ -677,23 +654,4 @@ sudo bash install.sh --noinstall-dependencies
 rm install.sh
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 echo -e 'Done.\n'
-
-
-
-
-
-
-if [ -f /usr/bin/endeavourOSXmonad.sh ]; then
-  after_reboot
-  rm ~/endeavourOSXmonad.sh 
-  sudo rm /etc/systemd/system/endavoursInstaller.service /usr/bin/endeavourOSXmonad.sh
-  sudo systemctl disable endavoursInstaller.service
-
-else
-  sudo ln ~/endeavourOSXmonad.sh /usr/bin/
-  sudo curl -o /etc/systemd/system/endavoursInstaller.service https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endavoursInstaller.service
-  sudo systemctl enable endavoursInstaller.service
-  before_reboot
-fi
-
 

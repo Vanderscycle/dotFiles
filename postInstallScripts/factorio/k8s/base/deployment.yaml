@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/instance: factorio
     app.kubernetes.io/name: factorio
 spec:
+  revisionHistoryLimit: 0
   selector:
     matchLabels:
       app.kubernetes.io/component: game
@@ -25,7 +26,7 @@ spec:
     spec:
       containers:
         - name: factorio
-          image: factoriotools/factorio
+          image: factoriotools/factorio:stable
           imagePullPolicy: "IfNotPresent"
           envFrom:
             - configMapRef:
@@ -40,13 +41,19 @@ spec:
           volumeMounts:
             - mountPath: /factorio
               name: storage
-          readinessProbe: # To check if the Pod is ready to serve traffic or not
-            httpGet:
-              path: /
-              port: 27015
-              scheme: HTTP
-            initialDelaySeconds: 5
-            timeoutSeconds: 1
+          # readinessProbe: # To check if the Pod is ready to serve traffic or not
+          #   httpGet:
+          #     path: /
+          #     port: 27015
+          #     scheme: HTTP
+          #   initialDelaySeconds: 5
+          #   timeoutSeconds: 1
+          # resources:
+          #   requests:
+          #     cpu: 300m
+          #     memory: 1Gi
+          #   limits:
+          #     memory: 2Gi
       volumes:
         - name: storage
           persistentVolumeClaim:

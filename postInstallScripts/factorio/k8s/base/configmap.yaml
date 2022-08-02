@@ -8,5 +8,6 @@ metadata:
     app.kubernetes.io/instance: factorio
     app.kubernetes.io/name: factorio
 data:
-  LOAD_LATEST_SAVE: "false"
+  # LOAD_LATEST_SAVE: "false"
+  PORT: "34197"
   UPDATE_MODS_ON_START: "true"

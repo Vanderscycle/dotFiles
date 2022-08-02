@@ -35,7 +35,8 @@ import XMonad.Layout.Fullscreen
 import XMonad.Layout.Spacing
 import XMonad.Layout.Spiral
 import XMonad.Layout.Gaps
-
+import XMonad.Layout.ThreeColumns
+import XMonad.Layout.NoBorders
 
 import XMonad.Actions.SpawnOn
 
@@ -196,9 +197,9 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 
 ------------------------------------------------------------------------
 -- Layouts:
-
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full ||| spiral (6/7) 
-               )
+threeLayout = ThreeCol 2 (3/100) (1/2)
+myLayout = avoidStruts (smartBorders (threeLayout ||| tiled ||| Mirror tiled ||| Full ||| spiral (6/7) 
+               ))
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled = Tall nmaster delta ratio

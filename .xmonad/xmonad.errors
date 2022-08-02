@@ -1,9 +1,9 @@
 $ ghc --make xmonad.hs -i -ilib -fforce-recomp -main-is main -dynamic -v0 -outputdir /home/henri/.xmonad/build-x86_64-linux -o /home/henri/.xmonad/xmonad-x86_64-linux
 
-xmonad.hs:242:15: warning: [-Wdeprecations]
+xmonad.hs:243:15: warning: [-Wdeprecations]
     In the use of ‘ewmhDesktopsEventHook’
     (imported from XMonad.Hooks.EwmhDesktops):
     Deprecated: "Use ewmh instead."
     |
-242 | myEventHook = ewmhDesktopsEventHook
+243 | myEventHook = ewmhDesktopsEventHook
     |               ^^^^^^^^^^^^^^^^^^^^^
