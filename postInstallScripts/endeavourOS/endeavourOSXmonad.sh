@@ -104,7 +104,7 @@ kubernetes(){
 # -----------------------------------------------------------------------------
 
 echo -e '\n=> kubernetes'
-sudo pacman -S --needed --noconfirm kubectl minikube argocd kustomize
+sudo pacman -S --needed --noconfirm kubectl minikube kubeseal argocd kustomize
 # since we have virtualBox installed it will detect virtual box as the hypervisor of choice.
 # otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
 yay -S --needed --noconfirm k9s
@@ -296,6 +296,17 @@ discord(){
   sudo mv betterdiscordctl /usr/local/bin
   betterdiscordctl install
   echo -e 'Done.\n'
+
+}
+
+cliClients () {
+# -----------------------------------------------------------------------------
+# => AWS
+# -----------------------------------------------------------------------------
+
+echo -e '\n=> installing AWS-cli'
+pacman --needed --noconfirm aws-cli-v2-bin
+echo -e 'Done.\n'
 
 }
 
@@ -619,13 +630,7 @@ echo -e '\n=> haskell'
 yay --needed --noconfirm ghcup-hs-bin 
 echo -e 'Done.\n'
 
-# -----------------------------------------------------------------------------
-# => AWS
-# -----------------------------------------------------------------------------
 
-echo -e '\n=> installing AWS-cli'
-pacman --needed --noconfirm aws-cli-v2-bin
-echo -e 'Done.\n'
 
 # -----------------------------------------------------------------------------
 # =>linode 
