@@ -240,7 +240,7 @@ setTransparentHook _ = return (All True)
 ------------------------------------------------------------------------
 -- Event handling
 
-myEventHook = ewmhDesktopsEventHook
+-- myEventHook =  ewmhDesktopsEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -274,7 +274,7 @@ myStartupHook = do
 
 main = do
   xmproc <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
-  xmonad . ewmh $
+  xmonad . ewmhFullscreen . ewmh $
     docks $  def
     { -- simple stuff
       terminal = myTerminal,
@@ -294,7 +294,7 @@ main = do
       -- hooks, layouts
       layoutHook = spacingWithEdge 10 $ myLayout,
       manageHook = myManageHook,
-      handleEventHook = myEventHook,
+      -- handleEventHook = myEventHook,
       startupHook = myStartupHook,
       logHook = myLogHook xmproc
     }

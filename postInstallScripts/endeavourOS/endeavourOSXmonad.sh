@@ -244,6 +244,15 @@ lspNull(){
   yay -S --noconfirm --needed shellcheck-bin
   go install mvdan.cc/sh/v3/cmd/shfmt@latest
 
+  #yamll
+  echo -e '\n=> installing yaml(lint)'
+  pacman --needed --noconfirm yamllint
+  yay --needed --noconfirm actionlint-bin
+  echo -e 'Done.\n'
+
+  #python
+  pip install isort
+
 }
 
 guiPrograms(){
@@ -612,10 +621,7 @@ sudo luarocks install luacheck # linter
 cargo install stylua # formatter
 echo -e 'Done.\n'
 
-echo -e '\n=> installing yaml(lint)'
-pacman --needed --noconfirm yamllint
-yay --needed --noconfirm actionlint-bin
-echo -e 'Done.\n'
+
 
 echo -e '\n=> installing md'
 yay --needed --noconfirm write-good
