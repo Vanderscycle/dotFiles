@@ -15,6 +15,12 @@ lvim.builtin.lightspeed = { active = true }
 
 -- =========================================
 require("user.additionalPlugins").config()
+
+-- post plugin config
+-- =========================================
+require("colorizer").setup()
+require("document-color").buf_attach()
+require("lsp.tailwindcss") -- WARN: working?
 -- Customization
 -- =========================================
 require("user.autocommands")
@@ -24,7 +30,7 @@ require("user.keybindings").config()
 -- =========================================
 -- require("user.todoComments ")
 require("user.general").config()
-require("user.lsp")
+require("lsp")
 -- require("user.lsp")
 require("renamer").setup()
 require("plugins.telescope").config()
@@ -43,6 +49,7 @@ vim.diagnostic.config({ virtual_lines = lines_enabled, virtual_text = false })
 -- unfuck section g (no leader)
 -- figure out folds z
 -- vim.api.nvim_create_autocmd
+
 -- https://chrisarcand.com/vims-new-cdo-command/ cdo/cfdo for bqf batch renaming
 -- TODO: coda actions requires telescope drop down menu
 --TODO: add a telescopr config and plugins

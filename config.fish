@@ -116,7 +116,7 @@ end
 function gTestTags 
   git tag -l | xargs -n 1 git push --delete origin
   git tag -l | xargs git tag -d                   
-  git tag -a v0.0.2"$argv"-pre -m 'delete me later'     
+  git tag -a v1.0.2"$argv" -m 'testing promotion'     
   git push origin --tags
 end
 

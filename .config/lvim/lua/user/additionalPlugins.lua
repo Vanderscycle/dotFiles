@@ -35,6 +35,16 @@ M.config = function()
 			end,
 		},
 		{
+			"mrshmllow/document-color.nvim",
+			config = function()
+				require("document-color").setup({
+					-- Default options
+					mode = "background", -- "background" | "foreground"
+				})
+			end,
+		},
+		{ "norcalli/nvim-colorizer.lua" },
+		{
 			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
 			config = function()
 				require("lsp_lines").register_lsp_virtual_lines()
