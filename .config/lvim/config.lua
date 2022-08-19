@@ -21,6 +21,9 @@ require("user.additionalPlugins").config()
 require("colorizer").setup()
 require("document-color").buf_attach()
 require("lsp.tailwindcss") -- WARN: working?
+require("hologram").setup({
+	auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
+})
 -- Customization
 -- =========================================
 require("user.autocommands")

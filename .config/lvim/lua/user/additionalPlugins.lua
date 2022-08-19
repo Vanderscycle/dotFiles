@@ -25,8 +25,8 @@ M.config = function()
 			end,
 			disable = lvim.builtin.motion_provider ~= "lightspeed",
 		},
-
 		-- visual aid
+		{ "edluffy/hologram.nvim" },
 		{
 			"SmiteshP/nvim-navic",
 			requires = "neovim/nvim-lspconfig",
