@@ -26,7 +26,7 @@ M.config = function()
 			disable = lvim.builtin.motion_provider ~= "lightspeed",
 		},
 		-- visual aid
-		{ "edluffy/hologram.nvim" },
+		-- { "edluffy/hologram.nvim" }, -- needs a toggle binding
 		{
 			"SmiteshP/nvim-navic",
 			requires = "neovim/nvim-lspconfig",
