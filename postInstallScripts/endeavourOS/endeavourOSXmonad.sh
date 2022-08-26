@@ -2,20 +2,22 @@
 # sudo pacman -S --needed --noconfirm httpie && 
 # WARN: due for a reboot and time in vr for bug testing
 systenInit(){
-# -----------------------------------------------------------------------------
-# => Annoying programs that requires user permission
-# -----------------------------------------------------------------------------
+  # -----------------------------------------------------------------------------
+  # => Annoying programs that requires user permission
+  # -----------------------------------------------------------------------------
 
-# -S: synchronize your system's packages with those in the official repo
-# -y: download fresh package databases from the server
+  # -S: synchronize your system's packages with those in the official repo
+  # -y: download fresh package databases from the server
 
-echo -e '=> Perform system update'
-sudo pacman -Syu --noconfirm
-echo 'cli critical programs'
-sudo pacman -S --needed --noconfirm base-devel git update-grub curl wget
-yay -S --needed --noconfirm topgrade
-echo -e 'Done.\n'
+  echo -e '=> Perform system update'
+  sudo pacman -Syu --noconfirm
+  echo 'cli critical programs'
+  sudo pacman -S --needed --noconfirm base-devel git update-grub curl wget
+  yay -S --needed --noconfirm topgrade
+  echo -e 'Done.\n'
 }
+
+
 nvidia(){
 
   # -----------------------------------------------------------------------------
@@ -28,7 +30,7 @@ nvidia(){
 
 }
 
-lnaguages(){
+languages(){
 
   # -----------------------------------------------------------------------------
   # => Keyboard Languages (en/cn)
@@ -60,20 +62,21 @@ lnaguages(){
 }
 
 mongo(){
-# -----------------------------------------------------------------------------
-# => Databases
-# -----------------------------------------------------------------------------
 
-echo -e '\n=>Installing Mongo'
-git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
-(cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed)
+  # -----------------------------------------------------------------------------
+  # => Databases
+  # -----------------------------------------------------------------------------
 
-echo -e 'Configuring Mongo'
-# sudo systemctl start mongodb
-# sudo systemctl enable mongodb 
-sudo systemctl enable --now mongodb
-sudo systemctl status mongodb # visual confirmation
-echo -e 'Done.\n'
+  echo -e '\n=>Installing Mongo'
+  git clone https://aur.archlinux.org/mongodb-bin.git ~/Programs/mongo/
+  (cd ~/Programs/mongo/ && makepkg -si --noconfirm --needed)
+
+  echo -e 'Configuring Mongo'
+  # sudo systemctl start mongodb
+  # sudo systemctl enable mongodb 
+  sudo systemctl enable --now mongodb
+  sudo systemctl status mongodb # visual confirmation
+  echo -e 'Done.\n'
 }
 
 postgresql(){
@@ -99,17 +102,18 @@ echo -e 'Done.\n'
 }
 
 kubernetes(){
-# -----------------------------------------------------------------------------
-# => Kubernetes k8s 
-# -----------------------------------------------------------------------------
 
-echo -e '\n=> kubernetes'
-sudo pacman -S --needed --noconfirm kubectl minikube kubeseal argocd kustomize
-# since we have virtualBox installed it will detect virtual box as the hypervisor of choice.
-# otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
-yay -S --needed --noconfirm k9s
-pacman -S --needed --noconfirm dive
-echo -e 'Done.\n'
+  # -----------------------------------------------------------------------------
+  # => Kubernetes k8s 
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=> kubernetes'
+  sudo pacman -S --needed --noconfirm kubectl minikube kubeseal argocd kustomize
+  # since we have virtualBox installed it will detect virtual box as the hypervisor of choice.
+  # otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
+  yay -S --needed --noconfirm k9s
+  pacman -S --needed --noconfirm dive
+  echo -e 'Done.\n'
 }
 
 docker(){
@@ -119,46 +123,48 @@ docker(){
 }
 
 podman(){
-# -----------------------------------------------------------------------------
-# => Containers (Podman/buildah)
-# -----------------------------------------------------------------------------
 
-echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
-sudo pacman -S --noconfirm --needed podman buildah
-sudo yay -S --noconfirm --needed podman-compose
+  # -----------------------------------------------------------------------------
+  # => Containers (Podman/buildah)
+  # -----------------------------------------------------------------------------
 
-echo -e '\n=>Configuring podman/buildah'
-sudo touch /etc/containers/registries.conf.d/docker.conf 
-echo `unqualified-search-registries=["docker.io"]` > /etc/containers/registries.conf.d/docker.conf
-sudo touch /etc/subuid
-sudo touch /etc/subgid 
-sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
+  echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
+  sudo pacman -S --noconfirm --needed podman buildah
+  sudo yay -S --noconfirm --needed podman-compose
 
-sudo mkdir -p /root/buildah
-echo -e 'Done.\n'
+  echo -e '\n=>Configuring podman/buildah'
+  sudo touch /etc/containers/registries.conf.d/docker.conf 
+  echo `unqualified-search-registries=["docker.io"]` > /etc/containers/registries.conf.d/docker.conf
+  sudo touch /etc/subuid
+  sudo touch /etc/subgid 
+  sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
+
+  sudo mkdir -p /root/buildah
+  echo -e 'Done.\n'
 }
 
 xmonad(){
-# -----------------------------------------------------------------------------
-# => Window manager (Xmonad)
-# -----------------------------------------------------------------------------
-# INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
-echo -e '\n=> install the window manager and bar'
-sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
-sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
-nitrogen ~/Documents/dotfiles/img/space.png
-sudo pacman -S --needed --noconfirm xmobar hoogle #more to polybar later
-yay -S --needed --noconfirm dunst #notification system
-yay -S --needed --noconfirm maim #screen capture
-yay -S --needed --noconfirm xkb-switch #screen capture
-yay -S --needed --noconfirm picom-git #screen capture
-echo -e 'Done.\n'
+  # -----------------------------------------------------------------------------
+  # => Window manager (Xmonad)
+  # -----------------------------------------------------------------------------
+  # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
-sudo pacman -S --needed --noconfirm playerctl # for audio controls
-sudo pacman -S --noconfirm zsa-wally # zsa keyboard
-sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
-}
+  echo -e '\n=> install the window manager and bar'
+  sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
+  sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
+  nitrogen ~/Documents/dotfiles/img/space.png
+  sudo pacman -S --needed --noconfirm xmobar hoogle #more to polybar later
+  yay -S --needed --noconfirm dunst #notification system
+  yay -S --needed --noconfirm maim #screen capture
+  yay -S --needed --noconfirm xkb-switch #screen capture
+  yay -S --needed --noconfirm picom-git #screen capture
+  echo -e 'Done.\n'
+
+  sudo pacman -S --needed --noconfirm playerctl # for audio controls
+  sudo pacman -S --noconfirm zsa-wally # zsa keyboard
+  sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
+  }
 
 fonts(){
   
@@ -235,6 +241,9 @@ lspNull(){
   # golang must be installed prior
   # -----------------------------------------------------------------------------
 
+  # rust (installs rustup which installs rust and cargo)
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
   # Markdown 
   yay -S --noconfirm --needed vale-bin
   sudo npm install -g write-good
@@ -252,6 +261,13 @@ lspNull(){
 
   #python
   pip install isort
+
+  #toml
+  cargo install taplo-cli --locked
+
+  #lua
+  pacman --needed --noconfirm luarocks #lua package manager
+  luarocks install luacheck
 
 }
 

@@ -91,6 +91,7 @@ function fish_greeting
     if not test -f '/tmp/weather_report'
       touch /tmp/weather_report
       set -l TMP_FILE  /tmp/weather_report
+      xmonad --recompile; xmonad --restart
       xrandr --output DP-2 --mode 3440x1440 --rate 144 # force the monitor to move from 60 to 144hz
       curl -s v2d.wttr.in/ | tee $TMP_FILE
     end
