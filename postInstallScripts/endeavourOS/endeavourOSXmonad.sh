@@ -278,7 +278,7 @@ guiPrograms(){
   # -----------------------------------------------------------------------------
 
   sudo pacman -S --noconfirm --needed signal-desktop nomacs #image viewwer/editor
-  yay -S --needed --noconfirm vlc  postman-bin slack-desktop zoom transmission-qt
+  yay -S --needed --noconfirm vlc  postman-bin slack-desktop zoom transmission-qt rpi-imager
 }
 
 spotify(){
@@ -314,7 +314,7 @@ gaming(){
   # =>  gaming clients
   # -----------------------------------------------------------------------------
 
-echo -e '\n=> installing AWS-cli'
+echo -e '\n=> installing steam/gog/epic'
 pacman --needed --noconfirm steam
 yay --needed --noconfirm wine heroic-games-launcher-bin
 echo -e 'Done.\n'

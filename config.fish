@@ -42,7 +42,7 @@ if status is-interactive
   # eval (ssh-agent -c)
   # https://www.funtoo.org/Funtoo:Keychain (currently not working for fish shell T_T)
   keychain --eval --agents gpg,ssh ~/.ssh/endeavourGit ~/.ssh/atreidesGit
-
+  set -xg s kitty +kitten ssh
 
   # dotfiles
   set -xg DOOTFILE_LOC ~/Documents/dotFiles/
@@ -124,13 +124,20 @@ end
 
 
 # ssh/servers
+
 function pihole 
-  ssh pi@192.168.1.154
+  kitty +kitten ssh pi@192.168.1.154
 end
 
-function linode
-  ssh
+#TODO: find the pi address automatically?
+function pik8s
+  kitty +kitten ssh pi@192.168.1.51
 end
+
+# INFO: better to havev a linode-cli config?
+# function linode
+#   s
+# end
 
 #fish
 function fzf_complete
