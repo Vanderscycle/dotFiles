@@ -108,7 +108,17 @@ kubernetes(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> kubernetes'
-  sudo pacman -S --needed --noconfirm kubectl minikube kubeseal argocd kustomize
+  sudo pacman -S --needed --noconfirm kubectl  kubeseal argocd kustomize
+
+  yay -S --needed --noconfirm kind-bin
+  kind create cluster
+  # argocd
+  kubectl create namespace argocd
+  kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+# argocd repo add git@github.com:Vanderscycle/Professional-website.git --ssh-private-key-path ~/.ssh/endeavourGit
+
+
   # since we have virtualBox installed it will detect virtual box as the hypervisor of choice.
   # otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
   yay -S --needed --noconfirm k9s
@@ -140,6 +150,26 @@ podman(){
   sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
 
   sudo mkdir -p /root/buildah
+  echo -e 'Done.\n'
+}
+python(){
+  # -----------------------------------------------------------------------------
+  # => Go language install and programs 
+  # -----------------------------------------------------------------------------
+  # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
+
+  echo -e '\n=> installing python'
+  echo -e 'Done.\n'
+  pip install ueberzug
+}
+
+golang(){
+  # -----------------------------------------------------------------------------
+  # => Go language install and programs 
+  # -----------------------------------------------------------------------------
+  # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
+
+  echo -e '\n=> installing golang'
   echo -e 'Done.\n'
 }
 
@@ -281,6 +311,17 @@ guiPrograms(){
   yay -S --needed --noconfirm vlc  postman-bin slack-desktop zoom transmission-qt rpi-imager
 }
 
+cliPrograms(){
+  # -----------------------------------------------------------------------------
+  # => CLI PROGRAMS
+  # -----------------------------------------------------------------------------
+
+echo -e '\n=> installing cli programs'
+yay -S --needed --noconfirm slides
+echo -e 'Done.\n'
+
+}
+
 spotify(){
 
   # -----------------------------------------------------------------------------
@@ -319,6 +360,7 @@ pacman --needed --noconfirm steam
 yay --needed --noconfirm wine heroic-games-launcher-bin
 echo -e 'Done.\n'
 }
+
 discord(){
 
   # -----------------------------------------------------------------------------
@@ -343,6 +385,8 @@ cliClients () {
 echo -e '\n=> installing AWS-cli'
 pacman --needed --noconfirm aws-cli-v2-bin
 echo -e 'Done.\n'
+# what about linode?
+
 
 }
 

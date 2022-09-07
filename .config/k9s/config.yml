@@ -6,6 +6,7 @@ k9s:
   logoless: false
   crumbsless: false
   readOnly: false
+  noExitOnCtrlC: false
   noIcons: false
   logger:
     tail: 100
@@ -14,17 +15,17 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: minikube
-  currentCluster: minikube
+  currentContext: kind-infrastructure-professional-website
+  currentCluster: kind-infrastructure-professional-website
   clusters:
-    minikube:
+    kind-infrastructure-professional-website:
       namespace:
         active: all
+        lockFavorites: false
         favorites:
-        - all
         - default
       view:
-        active: cm
+        active: secret
       featureGates:
         nodeShell: false
       shellPod:

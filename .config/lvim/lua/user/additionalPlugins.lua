@@ -46,8 +46,15 @@ M.config = function()
 		{ "norcalli/nvim-colorizer.lua" },
 		{
 			"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+			-- todo: move to plugin file
 			config = function()
-				require("lsp_lines").register_lsp_virtual_lines()
+				require("lsp_lines").setup()
+				vim.diagnostic.config({
+					virtual_text = false,
+				})
+				--	require("lsp_lines").register_lsp_virtual_lines()
+				-- 	lvim.builtin.which_key.mappings["lL"] =
+				-- 		{ require("lsp_lines").toggle, { desc = "Toggle lsp_lines" }, "lsp_lines" }
 			end,
 		},
 		{
@@ -96,6 +103,13 @@ M.config = function()
 		},
 		-- git
 		{ "kdheepak/lazygit.nvim" },
+		{
+			"f-person/git-blame.nvim",
+			config = function()
+				vim.g.gitblame_ignored_filetypes = { "nvim-tree" }
+				-- 	vim.g.gitblame_highlight_group = { "#ff9e64" }
+			end,
+		},
 		{ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" },
 		-- search
 		{
@@ -130,13 +144,18 @@ M.config = function()
 		},
 		-- telescope plugins
 		-- TODO: how to add them to the telescope
+		-- {
+		-- 	"nvim-telescope/telescope-fzy-native.nvim",
+		-- 	run = "make",
+		-- 	event = "BufRead",
+		-- },
+		{ "nvim-telescope/telescope-symbols.nvim" },
 		{
-			"nvim-telescope/telescope-fzy-native.nvim",
-			run = "make",
-			event = "BufRead",
+			"nvim-telescope/telescope-media-files.nvim",
 		},
-		-- { "nvim-telescope/telescope-media-files.nvim" }, --WARN: not working
-		{ "nvim-telescope/telescope-file-browser.nvim" },
+		{
+			"nvim-telescope/telescope-file-browser.nvim",
+		},
 		-- autoSave
 		-- {
 		-- 	"Pocco81/AutoSave.nvim",

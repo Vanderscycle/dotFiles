@@ -36,6 +36,7 @@ require("user.general").config()
 require("lsp")
 -- require("user.lsp")
 require("renamer").setup()
+require("telescope").load_extension("media_files")
 require("plugins.telescope").config()
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
@@ -43,7 +44,9 @@ require("luasnip/loaders/from_vscode").load({
 })
 -- adding friendly snipperts to
 require("luasnip.loaders.from_snipmate").lazy_load()
-vim.diagnostic.config({ virtual_lines = lines_enabled, virtual_text = false })
+vim.diagnostic.config({ virtual_lines = true })
+-- vim.g.gitblame_ignored_filetypes = { "NvimTree" }
+-- vim.g.gitblame_highlight_group = "Todo"
 
 -- =========================================
 -- TODO: lightbulb/codelens auto action
@@ -56,3 +59,8 @@ vim.diagnostic.config({ virtual_lines = lines_enabled, virtual_text = false })
 -- https://chrisarcand.com/vims-new-cdo-command/ cdo/cfdo for bqf batch renaming
 -- TODO: coda actions requires telescope drop down menu
 --TODO: add a telescopr config and plugins
+--
+--TODO: when opening an md open another side window running glow
+--WARN: toggletern not woking and nvim-surround unaware
+--WARN: use telescope/quick lists
+--BUG: check on

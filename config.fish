@@ -14,6 +14,7 @@ end
 
 
 if status is-interactive
+  kubectl completion fish | source
   # https://fishshell.com/docs/current/tutorial.html
 
   # weather 
@@ -37,11 +38,10 @@ if status is-interactive
   # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
   fish_ssh_agent
-  ssh-add ~/.ssh/endeavourGit
-  ssh-add ~/.ssh/atreidesGit
+
   # eval (ssh-agent -c)
   # https://www.funtoo.org/Funtoo:Keychain (currently not working for fish shell T_T)
-  keychain --eval --agents gpg,ssh ~/.ssh/endeavourGit ~/.ssh/atreidesGit
+  keychain --eval --agents gpg,ssh ~/.ssh/endeavourGit ~/.ssh/atreidesGit ~/.ssh/argocd
   set -xg s kitty +kitten ssh
 
   # dotfiles
@@ -49,6 +49,9 @@ if status is-interactive
 
   # ripgrep
   set RIPGREP_CONFIG_PATH -xg ~/.config/rg/
+ 
+  # argocd
+  set -xg ARGO_LOCAL "admin1!admin"
 
   # zoxide
   set -x _ZO_ECHO '1'
@@ -89,6 +92,9 @@ function fish_greeting
     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
     # pokemon-colorscripts -r
     if not test -f '/tmp/weather_report'
+      ssh-add ~/.ssh/endeavourGit
+      ssh-add ~/.ssh/atreidesGit
+      ssh-add ~/.ssh/argocd
       touch /tmp/weather_report
       set -l TMP_FILE  /tmp/weather_report
       xmonad --recompile; xmonad --restart
