@@ -156,10 +156,17 @@ python(){
   # -----------------------------------------------------------------------------
   # => Go language install and programs 
   # -----------------------------------------------------------------------------
-  # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
-  echo -e '\n=> installing python'
-  echo -e 'Done.\n'
+  echo -e '\n=> Installing Miniconda'
+  export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
+  cd ~
+  yay -S --needed --noconfirm miniconda3
+  sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+  conda install -c python=3.9
+  conda install -c conda-forge pynvim
+  conda install -c conda-forge flake8
+  conda install -c conda-forge black
+    echo -e 'Done.\n'
   pip install ueberzug
 }
 
@@ -167,9 +174,20 @@ golang(){
   # -----------------------------------------------------------------------------
   # => Go language install and programs 
   # -----------------------------------------------------------------------------
-  # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
   echo -e '\n=> installing golang'
+  echo -e 'Done.\n'
+}
+
+node(){
+  # -----------------------------------------------------------------------------
+  # => Node language install and programs 
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=> installing Node'
+  sudo pacman -S --noconfirm --needed nodejs npm
+  # installing pnpm
+  curl -fsSL https://get.pnpm.io/install.sh | sh -
   echo -e 'Done.\n'
 }
 
@@ -299,6 +317,16 @@ lspNull(){
   pacman --needed --noconfirm luarocks #lua package manager
   luarocks install luacheck
 
+  # -----------------------------------------------------------------------------
+  # => Develloper tools (Modern Unix)
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=> Installing developer packages and useful tui alternatives'
+  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task zoxide
+  sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr ytfzf #entr is for file cahnges
+  sudo yay -S --noconfirm openshift-client-bin # redhat openshift
+
+
 }
 
 guiPrograms(){
@@ -317,7 +345,7 @@ cliPrograms(){
   # -----------------------------------------------------------------------------
 
 echo -e '\n=> installing cli programs'
-yay -S --needed --noconfirm slides
+yay -S --needed --noconfirm slides glow sysz
 echo -e 'Done.\n'
 
 }
@@ -431,20 +459,10 @@ echo -e 'Done.\n'
 
 
 #Python
-echo -e '\n=> Installing Miniconda'
-export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
-cd ~
-yay -S --needed --noconfirm miniconda3
-sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
-conda install -c python=3.9
-conda install -c conda-forge pynvim
-conda install -c conda-forge flake8
-conda install -c conda-forge black
-echo -e 'Done.\n'
+
 
 #JS/TS
 echo -e 'Installing nodeJs'
-sudo pacman -S --noconfirm --needed nodejs npm
 sudo npm i -g prettier eslint neovim tree-sitter-cli
 echo -e 'Done.\n'
 
@@ -462,19 +480,7 @@ sudo pacman -S --noconfirm --needed zellij
 echo -e 'Done.\n'
 
 
-# -----------------------------------------------------------------------------
-# => Develloper tools (Modern Unix)
-# -----------------------------------------------------------------------------
 
-echo -e '\n=> Installing developer packages and useful tui alternatives'
-sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task zoxide
-sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr ytfzf #entr is for file cahnges
-sudo yay -S --noconfirm openshift-client-bin # redhat openshift
-# installing pnpm
-curl -fsSL https://get.pnpm.io/install.sh | sh -
-
-#md file reader
-yay -S --needed --noconfirm glow sysz
 
 # -----------------------------------------------------------------------------
 # => Security (ssh/gpg/password manager)
