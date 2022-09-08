@@ -53,6 +53,9 @@ if status is-interactive
   # argocd
   set -xg ARGO_LOCAL "admin1!admin"
 
+  # aws/linode/cli login
+  set -xg AWS_PROFILE "admin-data"
+
   # zoxide
   set -x _ZO_ECHO '1'
    zoxide init fish | source
@@ -118,7 +121,6 @@ end
 # git
 function gSquash 
     git reset (git merge-base "$argv" (git branch --show-current))
-
 end
 
 function gTestTags 

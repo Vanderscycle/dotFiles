@@ -2,9 +2,23 @@ local M = {}
 M.config = function()
 	lvim.plugins = {
 		-- { "rafcamlet/nvim-whid" }, -- TEST remnove later
-		{ "j-hui/fidget.nvim" },
+		{ "j-hui/fidget.nvim" }, --WARN: working?
+		-- note taking
+		{ "renerocksai/calendar-vim" }, -- TODO: needs binding and spawn on the right
+		{
+			"renerocksai/telekasten.nvim",
+			requires = "renerocksai/calendar-vim",
+			config = function()
+				require("plugins.telekasten").config()
+			end,
+		},
 		-- themes
-		{ "folke/tokyonight.nvim" },
+		{
+			"folke/tokyonight.nvim",
+			config = function()
+				require("plugins.tokyonight").config()
+			end,
+		},
 		{ "LunarVim/ColorSchemes" },
 		{
 			"simrat39/symbols-outline.nvim",
@@ -110,7 +124,7 @@ M.config = function()
 				-- 	vim.g.gitblame_highlight_group = { "#ff9e64" }
 			end,
 		},
-		{ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" },
+		{ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }, --WARN: required anymore since lazygit??
 		-- search
 		{
 			"nacro90/numb.nvim",
