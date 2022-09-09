@@ -18,7 +18,7 @@ M.config = function()
 	lvim.builtin.notify.active = true
 	lvim.builtin.notify.opts.background_colour = "normal"
 	lvim.builtin.cmp.completion.keyword_length = 2
-	lvim.lsp.automatic_servers_installation = true
+	lvim.lsp.installer.setup.ensure_installed = true
 	lvim.builtin.alpha.active = true --dashboard replacement
 	lvim.builtin.terminal.active = true
 	lvim.builtin.nvimtree.side = "left"
@@ -33,14 +33,15 @@ M.config = function()
 		"lua",
 		"rust",
 		"bash",
-		"dockerfile",
-		"html",
-		"javascript",
-		"json",
-		"svelte",
-		"typescript",
-		"yaml",
 		"fish",
+		"dockerfile",
+		"javascript",
+		"typescript",
+		"svelte",
+		"html",
+		"css",
+		"json",
+		"yaml",
 	}
 	vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
 	vim.opt.guifont = "jetbrainsmono" -- the font used in graphical neovim applications
@@ -54,17 +55,6 @@ M.config = function()
 	-- =========================================
 	lvim.builtin.which_key.setup.window.winblend = 10
 	lvim.builtin.which_key.setup.ignore_missing = true
-	-- WIP: move to keybindings??
-	-- lvim.builtin.which_key.on_config_done = function(wk)
-	-- 	local keys = {
-	-- 		["ga"] = { "<cmd>lua require('user.telescope').code_actions()<CR>", "Code Action" },
-	-- 		["gR"] = { "<cmd>Trouble lsp_references<CR>", "Goto References" },
-	-- 		["gI"] = { "<cmd>lua require('user.telescope').lsp_implementations()<CR>", "Goto Implementation" },
-	-- 		["gA"] = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
-	-- 		["gt"] = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
-	-- 	}
-	-- 	wk.register(keys, { mode = "n" })
-	-- end
 end
 
 return M

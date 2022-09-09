@@ -10,7 +10,21 @@ M.config = function()
 		k = { "<cmd>:tabnext<cr>", "Next Tab" },
 		q = { "<cmd>:tabclose<cr>", "Close Tab" },
 	}
-
+	-- zettelkasten
+	lvim.builtin.which_key.mappings["z"] = {
+		name = "zettelkasten",
+		f = { ":lua require('telekasten').find_notes()<cr>", "Find Notes" },
+		n = { ":lua require('telekasten').new_note()<cr>", "New Notes" },
+		i = { ":lua require('telekasten').insert_link()<cr>", "Insert Link" },
+		d = { ":lua require('telekasten').find_daily_notes()<cr>", "Find Daily Notes" },
+		g = { ":lua require('telekasten').search_notes()<cr>", "Search Notes" },
+		l = { ":lua require('telekasten').follow_link()<cr>", "Follow Link" },
+		p = { ":lua require('telekasten').panel()<cr>", "Open Panel" },
+		a = {
+			l = { ":CalendarVR<cr>", "Open Calendar R" },
+			L = { ":Calendar<cr>", "Open Calendar L" },
+		},
+	}
 	-- git
 
 	lvim.builtin.which_key.mappings["g"] = {
@@ -135,6 +149,7 @@ M.config = function()
 			f = { "<cmd>ToggleTerm<cr>", "Floating Term" },
 		},
 	}
+	-- lvim doesn't support numbers
 	lvim.builtin.which_key.mappings["b1"] = { "<Cmd>BufferLineGoToBuffer 1<CR>", "Buffer1" }
 	lvim.builtin.which_key.mappings["b2"] = { "<Cmd>BufferLineGoToBuffer 2<CR>", "Buffer2" }
 	lvim.builtin.which_key.mappings["b3"] = { "<Cmd>BufferLineGoToBuffer 3<CR>", "Buffer3" }
@@ -161,10 +176,16 @@ M.config = function()
 		"<Cmd>LazyGit<CR>",
 		"lazyGit",
 	}
-	lvim.builtin.which_key.mappings["Ln"] = {
-		"<Cmd>NullLsInfo<CR>",
-		"null-ls logs",
+	-- config specific
+	lvim.builtin.which_key.mappings["LK"] = {
+		"<cmd>edit " .. get_config_dir() .. "/lua/user/keybindings.lua<cr>",
+		"Edit Keybindings",
 	}
+	lvim.builtin.which_key.mappings["LP"] = {
+		"<cmd>edit " .. get_config_dir() .. "/lua/user/additionalPlugins.lua<cr>",
+		"Edit Keybindings",
+	}
+	-- better inserts
 	lvim.builtin.which_key.mappings["o"] = {
 		"o<Esc>",
 		"insert ln blw",

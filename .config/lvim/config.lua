@@ -2,6 +2,7 @@
 -- WIP: learn surround,hlslens and lightspeed plugins
 -- enabling plugins
 -- =========================================
+
 lvim.builtin.motion_provider = "lightspeed"
 lvim.builtin.sidebar = { active = true } -- enable/disable sidebar
 lvim.builtin.hlslens = { active = true } -- enable/disable hlslens
@@ -32,12 +33,12 @@ require("user.keybindings").config()
 -- user specific
 -- =========================================
 -- require("user.todoComments ")
-require("user.general").config()
 require("lsp")
 -- require("user.lsp")
 require("renamer").setup()
 require("telescope").load_extension("media_files")
 require("plugins.telescope").config()
+require("plugins.lualine").config() -- working?
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
 	paths = { "~/.config/lvim/snippets" },
@@ -45,6 +46,7 @@ require("luasnip/loaders/from_vscode").load({
 -- adding friendly snipperts to
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.diagnostic.config({ virtual_lines = true })
+require("user.general").config()
 -- vim.g.gitblame_ignored_filetypes = { "NvimTree" }
 -- vim.g.gitblame_highlight_group = "Todo"
 
