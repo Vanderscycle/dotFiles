@@ -54,7 +54,8 @@ if status is-interactive
   set -xg ARGO_LOCAL "admin1!admin"
 
   # aws/linode/cli login
-  set -xg AWS_PROFILE "admin-data"
+  set -xg AWS_PROFILE "admin-build"
+
 
   # zoxide
   set -x _ZO_ECHO '1'

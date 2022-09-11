@@ -2,7 +2,13 @@ local M = {}
 M.config = function()
 	lvim.plugins = {
 		-- { "rafcamlet/nvim-whid" }, -- TEST remnove later
-		{ "j-hui/fidget.nvim" }, --WARN: working?
+		{
+			"j-hui/fidget.nvim",
+			config = function()
+				require("fidget").setup({})
+			end,
+			event = { "BufRead", "BufNew" },
+		},
 		-- note taking
 		{ "renerocksai/calendar-vim" }, -- TODO: needs binding and spawn on the right
 		{
@@ -47,7 +53,7 @@ M.config = function()
 			config = function()
 				require("plugins.navic").config()
 			end,
-		},
+		}, --WARN: config incomplete
 		{
 			"mrshmllow/document-color.nvim",
 			config = function()
