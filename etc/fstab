@@ -1,12 +1,6 @@
-# /etc/fstab: static file system information.
-#
-# Use 'blkid' to print the universally unique identifier for a device; this may
-# be used with UUID= as a more robust way to name devices that works even if
-# disks are added and removed. See fstab(5).
-#
-# <file system>                           <mount point>  <type>  <options>  <dump>  <pass>
-UUID=7dc5eeb4-da1d-4e0a-9df1-7080fee570d2 /              ext4    defaults,noatime 0 1
-/swapfile                                 swap           swap    defaults   0 0
-# steam games (dev/sdb1)
-UUID=256057ca-b33e-497c-882f-da37a3831b39 /mnt/steam     ext4    rw,defaults   0 0
-192.168.1.95:/volume1/linuxBackup         /mnt/nas       nfs     defaults   0 0 
+# <file system> <mount point> <type> <options> <dump> <pass>
+
+UUID=7dc5eeb4-da1d-4e0a-9df1-7080fee570d2	/	ext4	defaults,noatime	0	1
+/swapfile	swap	swap	defaults	0	0
+UUID=256057ca-b33e-497c-882f-da37a3831b39	/mnt/steam	ext4	rw,defaults	0	0
+192.168.1.95:/volume1/linuxBackup	/mnt/nas	nfs	defaults	0	0

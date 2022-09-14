@@ -17,6 +17,8 @@ systenInit(){
   echo -e 'Done.\n'
 }
 
+# cargo install cargo-update 
+# add topgrade
 
 nvidia(){
 
