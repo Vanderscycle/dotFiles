@@ -10,8 +10,8 @@ systemInit(){
   echo -e '=> Perform system update'
   sudo pacman -Syu --noconfirm
   echo 'cli critical programs'
-  sudo pacman -S --needed --noconfirm base-devel git update-grub curl wget clang yay
-  yay -S --needed --noconfirm topgrade
+  sudo pacman -S --needed --noconfirm base-devel git curl wget clang yay
+  yay -S --needed --noconfirm topgrade update-grub
   echo -e 'Done.\n'
 
   echo -e '\n=> importing our doots'
@@ -31,7 +31,7 @@ nvidia(){
   # https://wiki.archlinux.org/title/NVIDIA
   # -----------------------------------------------------------------------------
   sudo pacman -S --needed --noconfirm nvidia-dkms mkinitcpio nvidia-installer-dkms 
-  sudo nvidia-installer-dkms 
+  yes yes | sudo nvidia-installer-dkms 
   mkinitcpio -P
 
 }
@@ -212,7 +212,6 @@ podman(){
 
   echo -e '\n=>Installing Podman(DockerFile reader) and Buildah(DockerFile writer)'
   sudo pacman -S --noconfirm --needed podman buildah
-  sudo yay -S --noconfirm --needed podman-compose
 
   echo -e '\n=>Configuring podman/buildah'
   sudo touch /etc/containers/registries.conf.d/docker.conf 
@@ -232,14 +231,14 @@ pythonInstall(){
 
   echo -e '\n=> Installing Miniconda'
   export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
-  cd "$HOME"
+  cd "$HOME"  
   yay -S --needed --noconfirm miniconda3
   sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
   conda install -c python=3.9
   conda install -c conda-forge pynvim
   conda install -c conda-forge flake8
   conda install -c conda-forge black
-    echo -e 'Done.\n'
+  echo -e 'Done.\n'
   pip install ueberzug
 }
 
@@ -331,8 +330,9 @@ emacs(){
   # -----------------------------------------------------------------------------
   # => emacs (doom emacs)
   # -----------------------------------------------------------------------------
+
   echo -e '\n=> installing Emacs'
-  pacman -S --needed --noconfirm emacs
+  sudo pacman -S --needed --noconfirm emacs
   echo -e '\n=> installing Doom emacs'
   git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
   ~/.emacs.d/bin/doom install
@@ -379,7 +379,6 @@ lspNull(){
   # -----------------------------------------------------------------------------
 
   # rust (installs rustup which installs rust and cargo)
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
   # Markdown 
   yay -S --noconfirm --needed vale-bin
@@ -416,7 +415,6 @@ lspNull(){
   echo -e '\n=> Installing developer packages and useful tui alternatives'
   sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task zoxide
   sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr ytfzf #entr is for file cahnges
-  sudo yay -S --noconfirm openshift-client-bin # redhat openshift
 
 
 }
@@ -427,11 +425,15 @@ guiPrograms(){
   # => GUI programs
   # -----------------------------------------------------------------------------
 
+  echo -e '\n=> installing gui programs'
   sudo pacman -S --noconfirm --needed signal-desktop nomacs #image viewwer/editor
-  yay -S --needed --noconfirm vlc  postman-bin slack-desktop zoom transmission-qt rpi-imager
+  yay -S --needed --noconfirm vlc  postman-bin slack-desktop transmission-qt rpi-imager
+  yay -S --needed --noconfirm  zoom
+  echo -e 'Done.\n'
 }
 
 cliPrograms(){
+
   # -----------------------------------------------------------------------------
   # => CLI PROGRAMS
   # -----------------------------------------------------------------------------
@@ -515,8 +517,7 @@ cliClients () {
   echo -e '\n=> installing AWS-cli'
   pacman -S --needed --noconfirm aws-cli-v2-bin
   echo -e 'Done.\n'
-# what about linode? have it run in a container
-
+  #TODO: what about linode? have it run in a container?
 
 }
 
@@ -532,6 +533,8 @@ install(){
   xmonad
   security
   languages
+  fish
+  backupMaintenance
 
   # programming languages
   golang
@@ -547,6 +550,7 @@ install(){
   # programs
   cliPrograms
   guiPrograms
+  spotify
   lunarvim
   emacs
 }
