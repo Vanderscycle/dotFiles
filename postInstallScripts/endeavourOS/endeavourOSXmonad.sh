@@ -427,8 +427,9 @@ guiPrograms(){
 
   echo -e '\n=> installing gui programs'
   sudo pacman -S --noconfirm --needed signal-desktop nomacs #image viewwer/editor
-  yay -S --needed --noconfirm vlc  postman-bin slack-desktop transmission-qt rpi-imager
-  yay -S --needed --noconfirm  zoom
+  yay -S --needed --noconfirm vlc  postman-bin slack-desktop transmission-qt 
+  # rpi-imager
+  yay -S --needed --noconfirm zoom brave-bin zsa-wally
   echo -e 'Done.\n'
 
   # -----------------------------------------------------------------------------
@@ -562,5 +563,7 @@ install(){
   spotify
   lunarvim
   emacs
+
+  reboot
 }
-install
+instal
