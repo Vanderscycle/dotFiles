@@ -9,6 +9,7 @@ systemInit(){
 
   echo -e '=> Perform system update'
   sudo pacman -Syu --noconfirm
+  yay -Syu --noconfirm --needed
   echo 'cli critical programs'
   sudo pacman -S --needed --noconfirm base-devel git curl wget clang yay
   yay -S --needed --noconfirm topgrade update-grub
@@ -248,7 +249,6 @@ golang(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing golang'
-
   pacman -S --needed --noconfirm go
   echo -e 'Done.\n'
 }
@@ -429,6 +429,15 @@ guiPrograms(){
   sudo pacman -S --noconfirm --needed signal-desktop nomacs #image viewwer/editor
   yay -S --needed --noconfirm vlc  postman-bin slack-desktop transmission-qt rpi-imager
   yay -S --needed --noconfirm  zoom
+  echo -e 'Done.\n'
+
+  # -----------------------------------------------------------------------------
+  # => Virtual Machines (level 2)
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=>Installing vm'
+  # INFO: kvm too complex
+  sudo pacman -S --noconfirm --needed virtualbox
   echo -e 'Done.\n'
 }
 
