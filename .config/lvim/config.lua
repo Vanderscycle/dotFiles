@@ -1,5 +1,6 @@
--- TODO:
 -- WIP: learn surround,hlslens and lightspeed plugins
+-- TODO: whenever I open an MD file a second split window should also open
+
 -- enabling plugins
 -- =========================================
 
@@ -12,19 +13,21 @@ lvim.builtin.lightspeed = { active = true }
 -- 	"gopls",
 -- }))
 -- vim.g.glow_binary_path = vim.env.HOME .. "/bin"
--- Extra plugin
 
+-- Extra plugin
 -- =========================================
 require("user.additionalPlugins").config()
 
 -- post plugin config
 -- =========================================
+require("plugins.tokyonight").config() -- needs to be configured prior loading
 require("colorizer").setup()
 require("document-color").buf_attach()
-require("lsp.tailwindcss") -- WARN: working?
+-- require("lsp.tailwindcss") -- WARN: working?
 -- require("hologram").setup({
 -- 	auto_display = true, -- WIP automatic markdown image display, may be prone to breaking
 -- })
+
 -- Customization
 -- =========================================
 require("user.autocommands")
@@ -32,9 +35,7 @@ require("user.keybindings").config()
 
 -- user specific
 -- =========================================
--- require("user.todoComments ")
 require("lsp")
--- require("user.lsp")
 require("renamer").setup()
 require("telescope").load_extension("media_files")
 require("plugins.telescope").config()
@@ -43,7 +44,7 @@ require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
 	paths = { "~/.config/lvim/snippets" },
 })
--- adding friendly snipperts to
+-- adding friendly snippets to
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.diagnostic.config({ virtual_lines = true })
 require("user.general").config()

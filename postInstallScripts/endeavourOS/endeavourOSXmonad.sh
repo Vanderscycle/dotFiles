@@ -273,7 +273,7 @@ nodeJS(){
   sudo pacman -S --noconfirm --needed nodejs npm
   # installing pnpm
   curl -fsSL https://get.pnpm.io/install.sh | sh -
-  sudo npm i -g prettier eslint neovim tree-sitter-cli
+  sudo npm i -g prettier eslint neovim
   echo -e 'Done.\n'
 }
 
@@ -414,8 +414,9 @@ lspNull(){
 
   echo -e '\n=> Installing developer packages and useful tui alternatives'
   sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task zoxide
-  sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr ytfzf #entr is for file cahnges
+  sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
 
+  yay -S --needed --noconfirm ytfzf 
 
 }
 
@@ -457,7 +458,7 @@ cliPrograms(){
   sudo pacman -S --noconfirm --needed sxiv
 
   pip install ueberzug #--required for file preview
-  git clone https://github.com/jarun/nnn.git ~/Programs/
+  git clone https://github.com/jarun/nnn.git ~/Programs/nnn/
   (cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
   # installing the plugins
   (cd ~/Programs/nnn/ && curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh)
@@ -544,6 +545,7 @@ install(){
   security
   languages
   fish
+  chsh -s "$(which fish)" # change the default shell
   backupMaintenance
 
   # programming languages
@@ -564,6 +566,7 @@ install(){
   lunarvim
   emacs
 
+  bash "$HOME"/Document/dotFiles/postInstallScripts/syncDootsLocal.sh # syncs the files
   reboot
 }
 instal

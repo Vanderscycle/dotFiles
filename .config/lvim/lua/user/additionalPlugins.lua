@@ -59,7 +59,7 @@ M.config = function()
 			config = function()
 				require("document-color").setup({
 					-- Default options
-					mode = "background", -- "background" | "foreground"
+					mode = "single", -- "background" | "foreground | single"
 				})
 			end,
 		},

@@ -82,7 +82,10 @@ if status is-interactive
   
   # path -> Cargo, Conda 
   set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri/.config/broot:/home/henri/.emacs.d/bin"
-
+# pnpm
+  set -gx PNPM_HOME "/home/henri/.local/share/pnpm"
+  set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
   # golang
   set -xg GOPATH $HOME/go
   set -xg PATH $PATH $GOPATH/bin
@@ -162,9 +165,9 @@ end
 
 bind \t 'fzf_complete; commandline -f repaint'
 #conda/python
-function condaUpdate
-  conda update --all -y
-end
+# function condaUpdate
+#   conda update --all -y
+# end
 
 # kill port
 function kill-port
@@ -203,24 +206,6 @@ end
 
 function :qa
   exit
-end
-
-function gsps
-  # eval run 
-  # exec runs a new shell
-
-
-  if [ "$argv" = '-a' ]
-    #TODO: find all the keys and add them
-    ssh-add ~/.ssh/atreidesGit
-    ssh-add ~/.ssh/endavourGit
-  end
-  if [ "$argv" = '-r' ]
-    exec ssh-agent fish
-  # else 
-  #   ssh-agent /usr/bin/fish
-    # eval ssh-agent fish
-  end
 end
 
 function img
@@ -356,6 +341,8 @@ end
 
 #pacman
 function update
+  # create a backyp
+  sudo timeshift --create
   topgrade
   # sudo pacman -Syu
   xmonad --recompile
@@ -377,7 +364,6 @@ end
 
 function tmuxinator-ls 
     # because we changed the behavior of ls (alias:ls = exa -al) we can use exa as vanila ls.
-    gsps
     set -xg ymlConfigs (exa ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
     echo $ymlConfigs
 
@@ -392,3 +378,5 @@ end
 # !! Contents within this block are managed by 'conda init' !!
 eval /home/henri/miniconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
+
+
