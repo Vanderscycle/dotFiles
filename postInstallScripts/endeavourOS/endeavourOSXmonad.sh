@@ -366,8 +366,12 @@ lunarvim(){
   # => lunarvim 
   # -----------------------------------------------------------------------------
 
-  echo -e '\n=> Installing Fish'
-  yay -S --noconfirm --needed lunarvim-git
+  echo -e '\n=> Installing Lvim'
+  (cd "$HOME" && curl https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/inst
+aller/install.sh -o lvim_installer.sh && bash lvim_installer --install-dependencies --yes)
+ 
+
+  echo -e 'Done. \n'
 }
 
 lspNull(){
@@ -413,7 +417,7 @@ lspNull(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> Installing developer packages and useful tui alternatives'
-  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task zoxide
+  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task zoxide bpytop
   sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
 
   yay -S --needed --noconfirm ytfzf 
@@ -430,7 +434,7 @@ guiPrograms(){
   sudo pacman -S --noconfirm --needed signal-desktop nomacs #image viewwer/editor
   yay -S --needed --noconfirm vlc  postman-bin slack-desktop transmission-qt 
   # rpi-imager
-  yay -S --needed --noconfirm zoom brave-bin zsa-wally
+  yay -S --needed --noconfirm zoom brave-bin zsa-wally brave-bin
   echo -e 'Done.\n'
 
   # -----------------------------------------------------------------------------
