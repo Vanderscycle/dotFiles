@@ -356,6 +356,7 @@ fish(){
   fisher install edc/bass # allows bash in fish
   fisher install jorgebucaran/nvm.fish
   fisher install jethrokuan/z #zoxide?
+  fisher install jorgebucaran/nvm.fish
   wget https://gitlab.com/kyb/fish_ssh_agent/raw/master/functions/fish_ssh_agent.fish -P ~/.config/fish/functions/
   echo -e 'Done. \n'
 
@@ -503,8 +504,9 @@ gaming(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing steam/gog/epic'
-  pacman -S --needed --noconfirm steam
-  yay -S --needed --noconfirm wine heroic-games-launcher-bin
+  pacman -S --needed --noconfirm steam gamemoderun
+  pip install mako
+  yay -S --needed --noconfirm wine heroic-games-launcher-bin mangohud-git
   echo -e 'Done.\n'
 }
 

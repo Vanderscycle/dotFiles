@@ -15,17 +15,18 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: kind-infrastructure-professional-website
-  currentCluster: kind-infrastructure-professional-website
+  currentContext: lke71976-ctx
+  currentCluster: lke71976
   clusters:
-    kind-infrastructure-professional-website:
+    lke71976:
       namespace:
         active: all
         lockFavorites: false
         favorites:
+        - all
         - default
       view:
-        active: secret
+        active: pod
       featureGates:
         nodeShell: false
       shellPod:

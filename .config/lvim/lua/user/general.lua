@@ -55,6 +55,9 @@ M.config = function()
 	-- =========================================
 	lvim.builtin.which_key.setup.window.winblend = 10
 	lvim.builtin.which_key.setup.ignore_missing = true
+	-- mvmt keys
+	lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
+	lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 end
 
 return M

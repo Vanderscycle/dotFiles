@@ -69,7 +69,7 @@ if status is-interactive
   set -xg NNN_FIFO '/tmp/nnn.fifo'
   export NNN_FIFO
   set -xg NNN_PLUG 'f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed'
-  set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/'
+  set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/;s:~/.local/share/Steam/steamapps/common/Proton - Experimental'
   set -xg NNN_OPTS "Hed"
   set -xg SPLIT 'v' # to split Kitty vertically
   set -xg LC_COLLATE 'C' # hidden files on top

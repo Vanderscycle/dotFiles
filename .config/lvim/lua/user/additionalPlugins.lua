@@ -140,6 +140,22 @@ M.config = function()
 			event = "BufRead",
 		},
 		{
+			"junegunn/fzf",
+			run = function()
+				vim.fn["fzf#install"]()
+			end,
+		},
+		-- enhancement over existing nvim features
+		{
+			"kevinhwang91/nvim-ufo",
+			requires = "kevinhwang91/promise-async",
+			run = ":TSUpdate",
+			config = function()
+				require("plugins.ufo").config()
+			end,
+			event = "BufRead",
+		},
+		{
 			"kevinhwang91/nvim-bqf",
 			requires = "junegunn/fzf",
 			config = function()
@@ -147,12 +163,7 @@ M.config = function()
 			end,
 			event = "BufRead",
 		},
-		{
-			"junegunn/fzf",
-			run = function()
-				vim.fn["fzf#install"]()
-			end,
-		},
+
 		-- better comment flags
 		{
 			"folke/todo-comments.nvim",
