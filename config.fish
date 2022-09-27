@@ -130,7 +130,7 @@ end
 function gTestTags 
   git tag -l | xargs -n 1 git push --delete origin
   git tag -l | xargs git tag -d                   
-  git tag -a v1.0.2"$argv" -m 'testing promotion'     
+  git tag -a v"$argv" -m 'testing promotion'     
   git push origin --tags
 end
 
@@ -164,10 +164,6 @@ function fzf_complete
 end
 
 bind \t 'fzf_complete; commandline -f repaint'
-#conda/python
-# function condaUpdate
-#   conda update --all -y
-# end
 
 # kill port
 function kill-port
@@ -223,7 +219,7 @@ end
 
 
 function ls
-  exa -al"$argv"
+  eval exa -al"$argv"
 end
 
 function lvim 
@@ -295,9 +291,16 @@ echo -e "purging everything"
 end
 
 # k8s
+# INFO: for aliases you need eval
 function k
- kubectl "$argv"
+  eval kubectl "$argv[..-1]"
 end
+
+#INFO: https://stackoverflow.com/questions/24093649/how-to-access-remaining-arguments-in-a-fish-script
+function k-s --description "secret <namespace> <secret-name>"
+  kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
+end
+
 
 function k8s-prmAll
 echo -e "purging everything"

@@ -126,8 +126,7 @@ M.config = function()
 		{
 			"f-person/git-blame.nvim",
 			config = function()
-				vim.g.gitblame_ignored_filetypes = { "nvim-tree" }
-				-- 	vim.g.gitblame_highlight_group = { "#ff9e64" }
+				require("plugins.blame").config()
 			end,
 		},
 		{ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }, --WARN: required anymore since lazygit??

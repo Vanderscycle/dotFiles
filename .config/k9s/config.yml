@@ -15,10 +15,10 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: lke71976-ctx
-  currentCluster: lke71976
+  currentContext: lke74103-ctx
+  currentCluster: lke74103
   clusters:
-    lke71976:
+    lke74103:
       namespace:
         active: all
         lockFavorites: false

@@ -342,12 +342,22 @@ emacs(){
 fish(){
 
   # -----------------------------------------------------------------------------
-  # => emacs (doom emacs)
+  # => fisher 
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> Installing Fish'
   sudo pacman -S --noconfirm --needed fish
-  #TODO: the following must be done while executing in a fish shell
+  echo -e 'Done. \n'
+
+}
+
+fisher(){
+
+  # -----------------------------------------------------------------------------
+  # => fisher 
+  #INFO: the following must be done while executing in a fish shell
+  # -----------------------------------------------------------------------------
+
   curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher # like zplug
   fisher install ilancosman/tide #use that or starship
   fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
@@ -358,8 +368,6 @@ fish(){
   fisher install jethrokuan/z #zoxide?
   fisher install jorgebucaran/nvm.fish
   wget https://gitlab.com/kyb/fish_ssh_agent/raw/master/functions/fish_ssh_agent.fish -P ~/.config/fish/functions/
-  echo -e 'Done. \n'
-
 }
 
 lunarvim(){
@@ -538,6 +546,7 @@ cliClients () {
 
 }
 
+# TODO: creates an arg-parser
 install(){
 
   # -----------------------------------------------------------------------------
@@ -572,7 +581,13 @@ install(){
   lunarvim
   emacs
 
+  if [[ "$LOCATION" = "home" ]]; then
+    discord
+    gaming
+  fi
+
+  #TODO: read about systemd to create a "callback" post reboot to install all of the fisher
+
   bash "$HOME"/Document/dotFiles/postInstallScripts/syncDootsLocal.sh # syncs the files
   reboot
 }
-instal
