@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -a StringArray=( ".xinitrc" ".gitconfig" ".p10k.zsh" ".tmux.conf"  ".gpg/gpg-agent" ".condarc" ".vale.ini")
+declare -a StringArray=( ".xinitrc" ".gitconfig" ".p10k.zsh" ".gpg/gpg-agent" ".condarc" ".vale.ini")
 for DOTFILE in "${StringArray[@]}"; do
     echo -e "\n=>${DOTFILE}::doots --> local"    
 
@@ -12,7 +12,7 @@ done
 
 rg --passthru 'henri' -r $DOOTS_USER_NAME ~/.zshrc > ~/.temp.txt && mv ~/.temp.txt ~/.zshrc.sh
 
-declare -a ConfArray=("lvim" "broot" "tmuxinator" "zellij" "tmux" "kitty" "xmobar" "dunst" "fontconfig" "ag" "qutebrowser" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s")
+declare -a ConfArray=("lvim" "broot""zellij" "kitty" "xmobar" "dunst" "fontconfig" "ag" "qutebrowser" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s")
 for CONF in "${ConfArray[@]}"; do
   echo -e "\n=>${CONF}::doots --> local"    
   rsync -av --progress ~/Documents/dotFiles/.config/$CONF  ~/.config/
