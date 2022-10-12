@@ -460,6 +460,9 @@ lspNull(){
   pacman -S --needed --noconfirm luarocks #lua package manager
   luarocks install luacheck
 
+  #ts/js/etc.
+  pnpm install -g svelte-language-server typescript typescript-language-server @tailwindcss/language-server emmet-ls
+
   # -----------------------------------------------------------------------------
   # => Develloper tools (Modern Unix)
   # -----------------------------------------------------------------------------
@@ -543,7 +546,15 @@ spotify(){
   echo -e 'Done.\n'
 
 }
+file_sharing(){
 
+  # -----------------------------------------------------------------------------
+  # => Enabling weekly system maintenance
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=> Enabling weekly system maintenance'
+  sudo pacman -S --noconfirm --needed transmission-gtk
+}
 gaming(){
 
   # -----------------------------------------------------------------------------
@@ -623,6 +634,7 @@ install(){
   fi
   if [[ "$LOCATION" = "home" ]]; then
     discord
+    file_sharing
     gaming
   fi
 
