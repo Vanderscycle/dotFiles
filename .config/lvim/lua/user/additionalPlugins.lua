@@ -19,12 +19,12 @@ M.config = function()
 			end,
 		},
 		-- themes
-		{
-			"folke/tokyonight.nvim",
-			config = function()
-				require("plugins.tokyonight").config()
-			end,
-		},
+		-- { -- WARN: lunarvim have it by default
+		-- 	"folke/tokyonight.nvim",
+		-- 	config = function()
+		-- 		require("plugins.tokyonight").config()
+		-- 	end,
+		-- },
 		{ "LunarVim/ColorSchemes" },
 		{
 			"simrat39/symbols-outline.nvim",
@@ -46,14 +46,19 @@ M.config = function()
 			disable = lvim.builtin.motion_provider ~= "lightspeed",
 		},
 		-- visual aid
-		-- { "edluffy/hologram.nvim" }, -- needs a toggle binding
 		{
-			"SmiteshP/nvim-navic",
-			requires = "neovim/nvim-lspconfig",
+			"gorbit99/codewindow.nvim",
 			config = function()
-				require("plugins.navic").config()
+				require("plugins.codewindow").config()
 			end,
-		}, --WARN: config incomplete
+		}, -- { "edluffy/hologram.nvim" }, -- needs a toggle binding
+		-- { -- WARN: lunarvim have it by default
+		-- 	"SmiteshP/nvim-navic",
+		-- 	requires = "neovim/nvim-lspconfig",
+		-- 	config = function()
+		-- 		require("plugins.navic").config()
+		-- 	end,
+		-- },
 		{
 			"mrshmllow/document-color.nvim",
 			config = function()
@@ -91,14 +96,6 @@ M.config = function()
 			end,
 			event = "BufRead",
 			-- disable = not lvim.builtin.sidebar.active, -- TODO: activation
-		},
-		{
-			"npxbr/glow.nvim",
-			ft = { "markdown" },
-			config = function()
-				require("plugins.glow").config()
-			end,
-			-- run = "yay -S glow"
 		},
 		-- utility
 		{

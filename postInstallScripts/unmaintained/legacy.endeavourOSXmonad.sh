@@ -195,7 +195,7 @@ sudo systemctl enable --now bluetooth
 
 # volume control
 # https://gist.github.com/iamcaleberic/5d1b5663f57185410964449c5417b996
-pacman -S --needed --noconfirm pulseaudio-equalizer pavucontrol
+sudo pacman -S --needed --noconfirm pulseaudio-equalizer pavucontrol
 pactl load-module module-equalizer-sink
 pactl load-module module-dbus-protocol
 
@@ -258,11 +258,11 @@ zx
   echo -e 'Done.\n'
 
   echo '=>Terraform'
-  pacman -S --needed --noconfirm terraform
+  sudo pacman -S --needed --noconfirm terraform
   echo -e 'Done.\n'
 
   echo '=>Go'
-  pacman -S --needed --noconfirm go
+  sudo pacman -S --needed --noconfirm go
   go install golang.org/x/tools/gopls@latest
   go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
   echo -e 'Done.\n'
@@ -274,7 +274,7 @@ zx
   echo -e 'Done.\n'
 
   echo -e '\n=> installing lua'
-  pacman --needed --noconfirm luarocks
+  sudo pacman --needed --noconfirm luarocks
   sudo luarocks install luacheck # linter
   cargo install stylua # formatter
   echo -e 'Done.\n'

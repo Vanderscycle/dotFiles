@@ -4,35 +4,29 @@ if not status_ok then
 end
 
 local on_attach = function(client, bufnr)
-	require("nvim-navic").attach(client, bufnr)
-	require("lsp_signature").on_attach()
+	-- require("nvim-navic").attach(client, bufnr)
+	require("lsp_signature").on_attach(client, bufnr)
 end
 
-lspconfig["sumneko_lua"].setup({
-	on_attach = on_attach,
-})
+local desired_servers = { "sumneko_lua", "tsserver", "emmet", "svelte", "gopls", "pyright", "bashls", "yamlls" }
+-- for _, s in pairs(desired_servers) do
+-- 	lspconfig[s].setup({
+-- 		on_attach = on_attach,
+-- 	})
+-- end
 
-lspconfig["javascript"].setup({
-	on_attach = on_attach,
-})
-lspconfig["svelte"].setup({
-	on_attach = on_attach,
-})
-lspconfig["typescript"].setup({
-	on_attach = on_attach,
-})
-
-lspconfig["gopls"].setup({
-	on_attach = on_attach,
-})
-
-lspconfig["pyright"].setup({
-	on_attach = on_attach,
-})
-
-lspconfig["bashls"].setup({
-	on_attach = on_attach,
-})
+for _, s in pairs(desired_servers) do
+	if s == "yamlls" then
+		-- Wrapping the "default" function like this is important.
+		if vim.bo.buftype ~= "" or vim.bo.filetype == "helm" then
+			vim.diagnostic.disable()
+		end
+	else
+		lspconfig[s].setup({
+			on_attach = on_attach,
+		})
+	end
+end
 
 -- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(name)
 -- 	return name ~= "tailwindcss"

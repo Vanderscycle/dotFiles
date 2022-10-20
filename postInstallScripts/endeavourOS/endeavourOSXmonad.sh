@@ -16,7 +16,7 @@ while (( "$#" )); do
       shift
       ;;
     -w|--window-manager)
-      if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
+      if [ -n "$2" ] && [ $"{2:0:1}" != "-" ]; then
         WM=$2
         shift 2
       else
@@ -288,7 +288,7 @@ golang(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing golang'
-  pacman -S --needed --noconfirm go
+  sudo pacman -S --needed --noconfirm go
   echo -e 'Done.\n'
 }
 
@@ -446,7 +446,7 @@ lspNull(){
 
   #yamll
   echo -e '\n=> installing yaml(lint)'
-  pacman -S --needed --noconfirm yamllint
+  sudo pacman -S --needed --noconfirm yamllint
   yay -S --needed --noconfirm actionlint-bin
   echo -e 'Done.\n'
 
@@ -457,7 +457,7 @@ lspNull(){
   cargo install taplo-cli --locked
 
   #lua
-  pacman -S --needed --noconfirm luarocks #lua package manager
+  sudo pacman -S --needed --noconfirm luarocks #lua package manager
   luarocks install luacheck
 
   #ts/js/etc.
@@ -562,7 +562,7 @@ gaming(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing steam/gog/epic'
-  pacman -S --needed --noconfirm steam gamemoderun
+  sudo pacman -S --needed --noconfirm steam gamemoderun
   pip install mako
   yay -S --needed --noconfirm wine heroic-games-launcher-bin mangohud-git
   echo -e 'Done.\n'
@@ -590,7 +590,7 @@ cliClients () {
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing AWS-cli'
-  pacman -S --needed --noconfirm aws-cli-v2-bin
+  yay -S --needed --noconfirm aws-cli-v2-bin
   echo -e 'Done.\n'
   #TODO: what about linode? have it run in a container?
 

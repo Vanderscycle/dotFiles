@@ -1,3 +1,10 @@
+# http://lewandowski.io/2016/10/fish-env/ 
+function posix-source
+	for i in (cat $argv)
+		set arr (echo $i |tr = \n)
+  		set -gx $arr[1] $arr[2]
+	end
+end
 
 function nnnTheme
   set -xg BLK "04"
@@ -13,12 +20,13 @@ function nnnTheme
 end
 
 
+# https://fishshell.com/docs/current/tutorial.html
 if status is-interactive
+  # auto completion
   kubectl completion fish | source
-  # https://fishshell.com/docs/current/tutorial.html
 
-  # weather 
-  # curl -s 'wttr.in/?format=3'
+  #sourcing secrets
+  posix-source "$DOOTFILE_LOC".env
 
   # General variables
   set -xg EDITOR lvim
@@ -54,7 +62,7 @@ if status is-interactive
   set -xg ARGO_LOCAL "admin1!admin"
 
   # aws/linode/cli login
-  set -xg AWS_PROFILE "admin-build"
+  set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config
 
 
   # zoxide
@@ -365,6 +373,7 @@ function yay-ls
     yay -Slq | fzf -m --preview 'bat (yay -Si {1} | psub) (yay -Fl {1} | awk "{print \$2}" | psub) --color=always -n' | xargs -ro  yay -S
 end
 
+#INFO: not used anymore
 function tmuxinator-ls 
     # because we changed the behavior of ls (alias:ls = exa -al) we can use exa as vanila ls.
     set -xg ymlConfigs (exa ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
@@ -374,7 +383,6 @@ function tmuxinator-ls
         tmuxinator start $ymlConfigs
     end
 end
-
 
 
 # >>> conda initialize >>>

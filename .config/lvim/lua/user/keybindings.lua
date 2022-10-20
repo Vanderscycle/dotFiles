@@ -53,6 +53,14 @@ M.config = function()
 			"Git Diff",
 		},
 	}
+	-- git
+
+	lvim.builtin.which_key.mappings["m"] = {
+		name = "CodeWindow",
+		m = { ":codewindow.open_minimap() <cr>", "open" },
+		c = { ":codewindow.close_minimap() <cr>", "close" },
+		f = { ":codewindow.toggle_focus() <cr>", "focus" },
+	}
 
 	-- lsp
 	-- lvim.builtin.which_key.mappings["l"] = {
@@ -185,6 +193,10 @@ M.config = function()
 		"<cmd>edit " .. get_config_dir() .. "/lua/user/additionalPlugins.lua<cr>",
 		"Edit Keybindings",
 	}
+	lvim.builtin.which_key.mappings["lr"] = {
+		'<cmd>lua require("renamer").rename()<cr>',
+		"Rename",
+	}
 	-- better inserts
 	lvim.builtin.which_key.mappings["o"] = {
 		"o<Esc>",
@@ -226,10 +238,6 @@ M.config = function()
 			["<C-k>"] = actions.move_selection_previous,
 		},
 	}
-end
-
-M.set_glow_keymaps = function()
-	vim.cmd([[ noremap <leader>G :Glow<CR> ]])
 end
 
 M.set_hlslens_keymaps = function()

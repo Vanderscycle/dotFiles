@@ -65,7 +65,7 @@ sudo pacman -S --noconfirm shellcheck # maybe bloat?
 # ctrl+t (?) 
 # ctrl+r(history)
 echo 'installing c lang'
-pacman -S clang
+sudo pacman -S clang
 pamac install base-devel
 echo 'Installing npm and lsp(nvim)'
 # https://stackoverflow.com/questions/50495519/how-can-i-pass-yes-response-when-npm-installing-on-dockerfile
@@ -466,7 +466,7 @@ cd ~/
 yay -S --noconfirm zoom 
 
 echo -e 'Installing libreOffice'
-pacman -S --noconfirm --needed libreoffice
+sudo pacman -S --noconfirm --needed libreoffice
 
 echo -e 'Installing entertainment (spotify)'
 yay -S --noconfirm vlc #command line client for spotify (may want to move to Ncmpcpp later)

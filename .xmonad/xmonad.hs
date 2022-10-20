@@ -25,11 +25,14 @@ import Data.List (sortBy)
 import Graphics.X11.Xlib
 import Graphics.X11.Xlib.Extras
 import System.Exit
+
 import XMonad
 import XMonad.Hooks.DynamicLog (PP (..), dynamicLogWithPP, shorten, wrap, xmobarColor, xmobarPP)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+
+-- import XMonad.EZConfig (additionalKeysP) -- https://lambdablob.com/posts/xmonad-ez-keyboard-shortcuts/
 
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.Spacing
@@ -82,6 +85,7 @@ myFocusedBorderColor = "#74BBFB"
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 -- INFO:https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Util-EZConfig.html
+-- ctrlMask = controlMask
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
@@ -147,6 +151,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       -- printscreen
       ((modm .|. shiftMask, xK_s), spawn "maim -s ~/Pictures/$(date +%s).png"),
       ((modm .|. shiftMask, xK_x), spawn "maim -s | xclip -selection clipboard -t image/png"),
+      ((modm .|. controlMask .|. shiftMask, xK_p), spawn "picom --experimental-backends -b  &"),
+      ((modm .|. controlMask .|. shiftMask, xK_k), spawn "killall picom"),
+-- "picom --experimental-backends -b  &"
       ((modm, xK_Escape), spawn "$HOME/Documents/dotFiles/postInstallScripts/keebsLayout.sh")
     ]
       ++
@@ -264,7 +271,7 @@ myStartupHook = do
   spawnOnOnce "3" "spotify &" --spawnOnOnce :: WorkspaceId -> String -> X ()Source -- https://hackage.haskell.org/package/xmonad-contrib-0.14/docs/XMonad-Util-SpawnOnce.html
   spawnOnOnce "2" "qutebrowser &"
   spawnOnOnce "3" "discord &"
-  spawnOnOnce "2" "slack &"
+  -- spawnOnOnce "2" "slack &"
   spawnOnce "kitty &"
   spawnOnce "fcitx -d &"
   spawnOnce "xmobar &"

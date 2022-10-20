@@ -1,4 +1,5 @@
 local M = {}
+local opts = { noremap = true, silent = true }
 
 M.config = function()
 	lvim.guicursor = "#378900"
@@ -58,6 +59,7 @@ M.config = function()
 	-- mvmt keys
 	lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 	lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
+	vim.api.nvim_set_keymap("i", "jk", "<ESC>", opts)
 end
 
 return M

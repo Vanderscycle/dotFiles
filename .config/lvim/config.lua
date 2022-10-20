@@ -3,7 +3,6 @@
 
 -- enabling plugins
 -- =========================================
-
 lvim.builtin.motion_provider = "lightspeed"
 lvim.builtin.sidebar = { active = true } -- enable/disable sidebar
 lvim.builtin.hlslens = { active = true } -- enable/disable hlslens

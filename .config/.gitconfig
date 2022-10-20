@@ -4,6 +4,7 @@
   name = Henri Vandersleyen 
 
 [alias]
+  squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-NO-TICKET:A new start}\");};f"
   clearcache = !"git rm -r --cached ."
 # https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
   lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
@@ -17,10 +18,10 @@
 [gpg]
 	program = /usr/bin/gpg
 [commit]
-  gpgsign = true
+	gpgsign = true
 
 [include]
   path = ~/.gitconfig.personal
 
-[includeIf "gitdir:**/houseAtreides/**/.git"]
+[includeIf "gitdir:**/houseAtreides/**/*"] #git
   path = ~/.gitconfig.atreides
