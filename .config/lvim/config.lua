@@ -35,7 +35,7 @@ require("user.keybindings").config()
 -- user specific
 -- =========================================
 require("lsp")
-require("renamer").setup()
+-- require("renamer").setup({})
 require("telescope").load_extension("media_files")
 require("plugins.telescope").config()
 require("plugins.lualine").config() -- working?

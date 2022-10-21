@@ -18,13 +18,6 @@ M.config = function()
 				require("plugins.telekasten").config()
 			end,
 		},
-		-- themes
-		-- { -- WARN: lunarvim have it by default
-		-- 	"folke/tokyonight.nvim",
-		-- 	config = function()
-		-- 		require("plugins.tokyonight").config()
-		-- 	end,
-		-- },
 		{ "LunarVim/ColorSchemes" },
 		{
 			"simrat39/symbols-outline.nvim",
@@ -98,6 +91,13 @@ M.config = function()
 			-- disable = not lvim.builtin.sidebar.active, -- TODO: activation
 		},
 		-- utility
+		{
+			"toppair/peek.nvim",
+			run = "deno task --quiet build:fast",
+			config = function()
+				require("plugins.peek").config()
+			end,
+		},
 		{
 			"filipdutescu/renamer.nvim",
 			branch = "master",
@@ -190,16 +190,6 @@ M.config = function()
 		-- 		require("plugins.autosave").config()
 		-- 	end,
 		-- },
-		{
-			"lukas-reineke/indent-blankline.nvim",
-			setup = function()
-				vim.g.indent_blankline_char = "▏"
-			end,
-			config = function()
-				require("plugins.indent_blankline").config()
-			end,
-			event = "BufRead",
-		},
 		{
 			"kevinhwang91/nvim-hlslens",
 			config = function()

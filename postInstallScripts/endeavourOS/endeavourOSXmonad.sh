@@ -314,6 +314,8 @@ nodeJS(){
   curl -fsSL https://get.pnpm.io/install.sh | sh -
   sudo npm i -g prettier eslint neovim
   echo -e 'Done.\n'
+  # Deno
+  curl -fsSL https://deno.land/install.sh | sh
 }
 
 xmonad(){

@@ -77,7 +77,7 @@ if status is-interactive
   set -xg NNN_FIFO '/tmp/nnn.fifo'
   export NNN_FIFO
   set -xg NNN_PLUG 'f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed'
-  set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/;s:~/.local/share/Steam/steamapps/common/Proton - Experimental'
+  set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/;s:~/.local/share/Steam/steamapps/common/Proton - Experimental;h:~/Documents/houseAtreides'
   set -xg NNN_OPTS "Hed"
   set -xg SPLIT 'v' # to split Kitty vertically
   set -xg LC_COLLATE 'C' # hidden files on top
@@ -90,6 +90,10 @@ if status is-interactive
   
   # path -> Cargo, Conda 
   set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri/.config/broot:/home/henri/.emacs.d/bin"
+ # deno
+
+  set -xg DENO_INSTALL "/home/henri/.deno"
+  set -xg PATH "$DENO_INSTALL/bin" "$PATH"
 # pnpm
   set -gx PNPM_HOME "/home/henri/.local/share/pnpm"
   set -gx PATH "$PNPM_HOME" $PATH

@@ -242,6 +242,18 @@ end
 
 M.set_hlslens_keymaps = function()
 	local opts = { noremap = true, silent = true }
+	vim.keymap.set({ "n", "x" }, "z*", function()
+		vim.api.nvim_feedkeys(
+			vim.api.nvim_replace_termcodes([[<Plug>(asterisk-gz*)<Cmd>noh<CR>]], true, false, true),
+			"in",
+			false
+		)
+		vim.schedule(function()
+			if require("hlslens").exportLastSearchToQuickfix() then
+				vim.cmd("cw")
+			end
+		end)
+	end)
 	vim.api.nvim_set_keymap(
 		"n",
 		"n",
