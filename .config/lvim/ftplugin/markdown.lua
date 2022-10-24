@@ -2,7 +2,7 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
 	{
 		exe = "prettier",
-		filetypes = { "markdown" },
+		filetypes = { "markdown", "telekasten" },
 	},
 })
 
@@ -10,11 +10,11 @@ local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
 	{
 		exe = "vale",
-		filetypes = { "markdown" },
+		filetypes = { "markdown", "telekasten" },
 	},
 	{
 		exe = "write_good",
-		filetypes = { "markdown" },
+		filetypes = { "markdown", "telekasten" },
 	},
 })
 

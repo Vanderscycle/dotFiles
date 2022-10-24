@@ -233,8 +233,7 @@ kubernetes(){
 
   yay -S --needed --noconfirm kind-bin
   # otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
-  yay -S --needed --noconfirm k9s
-  # pacman -S --needed --noconfirm dive
+  yay -S --needed --noconfirm k9s dive
   echo -e 'Done.\n'
 }
 
