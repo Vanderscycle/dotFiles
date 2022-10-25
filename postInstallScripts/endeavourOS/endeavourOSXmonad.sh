@@ -407,6 +407,7 @@ fisher(){
   fisher install jorgebucaran/nvm.fish
   fisher install jethrokuan/z #zoxide?
   fisher install jorgebucaran/nvm.fish
+  fisher install gazorby/fish-abbreviation-tips
   wget https://gitlab.com/kyb/fish_ssh_agent/raw/master/functions/fish_ssh_agent.fish -P ~/.config/fish/functions/
 }
 
