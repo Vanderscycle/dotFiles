@@ -49,7 +49,7 @@ if status is-interactive
 
   # eval (ssh-agent -c)
   # https://www.funtoo.org/Funtoo:Keychain (currently not working for fish shell T_T)
-  keychain --eval --agents gpg,ssh ~/.ssh/endeavourGit ~/.ssh/atreidesGit ~/.ssh/argocd
+  keychain --eval --agents gpg,ssh ~/.ssh/endeavourGit ~/.ssh/atreidesGit
   set -xg s kitty +kitten ssh
 
   # dotfiles
@@ -89,11 +89,16 @@ if status is-interactive
   set -gx GPG_TTY (tty)
   
   # path -> Cargo, Conda 
-  set -xg PATH "/home/henri/miniconda3/bin:/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.cargo/bin:/home/henri/.config/broot:/home/henri/.emacs.d/bin"
- # deno
-
-  set -xg DENO_INSTALL "/home/henri/.deno"
-  set -xg PATH "$DENO_INSTALL/bin" "$PATH"
+  set -xg PATH "/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.config/broot:/home/henri/.emacs.d/bin"
+# poetry
+  set -xg POETRY_HOME "/home/henri/.local/"
+  set -xg PATH "$POETRY_HOME/bin" "$PATH"
+# rust 
+  set -xg RUST_HOME "/home/henri/.cargo"
+  set -xg PATH "$RUST_HOME/bin" "$PATH"
+# deno
+  set -xg DENO_HOME "/home/henri/.deno"
+  set -xg PATH "$DENO_HOME/bin" "$PATH"
 # pnpm
   set -gx PNPM_HOME "/home/henri/.local/share/pnpm"
   set -gx PATH "$PNPM_HOME" $PATH
@@ -387,11 +392,3 @@ function tmuxinator-ls
         tmuxinator start $ymlConfigs
     end
 end
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /home/henri/miniconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-
-

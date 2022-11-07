@@ -8,6 +8,7 @@
 PARAMS=""
 LOCATION=""
 WM="default" # default being whateve we chose to install
+GPU=""
 
 while (( "$#" )); do
   case "$1" in
@@ -18,6 +19,15 @@ while (( "$#" )); do
     -w|--window-manager)
       if [ -n "$2" ] && [ $"{2:0:1}" != "-" ]; then
         WM=$2
+        shift 2
+      else
+        echo "Error: Argument for $1 is missing" >&2
+        exit 1
+      fi
+      ;;
+    -g|--gpu)
+      if [ -n "$2" ] && [ $"{2:0:1}" != "-" ]; then
+        GPU=$2
         shift 2
       else
         echo "Error: Argument for $1 is missing" >&2
@@ -70,9 +80,37 @@ nvidia(){
   # => Nvidia drivers
   # https://wiki.archlinux.org/title/NVIDIA
   # -----------------------------------------------------------------------------
+  echo -e 'Instaling Nvidea drivers \n'
   sudo pacman -S --needed --noconfirm nvidia-dkms mkinitcpio nvidia-installer-dkms 
   yes yes | sudo nvidia-installer-dkms 
   mkinitcpio -P
+  echo -e 'Done.\n'
+}
+
+# TODO: test with amd
+radeon(){
+  # -----------------------------------------------------------------------------
+  # => amd radeon drivers
+  # https://wiki.archlinux.org/title/AMDGPU#Selecting_the_right_driver
+  # -----------------------------------------------------------------------------
+  echo -e 'Instaling AMD drivers \n'
+  echo -e 'Done.\n'
+}
+
+Ansible(){
+  # -----------------------------------------------------------------------------
+  # => Ansible
+  # -----------------------------------------------------------------------------
+  echo -e 'Instaling AMD drivers \n'
+  pip install ansible
+  # autocomplete
+  pip3 install argcomplete
+  activate-global-python-argcomplete
+  register-python-argcomplete --shell fish my-awesome-script | source
+  # creating the cfg file
+  sudo mkdir -p /etc/ansible/
+  ansible-config init --disabled -t all > ansible.cfg && sudo rsync -av ./ansible.cfg /etc/ansible/ 
+  echo -e 'Done.\n'
 
 }
 
@@ -229,19 +267,36 @@ kubernetes(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> kubernetes'
-  sudo pacman -S --needed --noconfirm kubectl  kubeseal argocd kustomize
-
+  sudo pacman -S --needed --noconfirm kubectl kubeseal argocd kustomize
+  kubectl completion fish | source
   yay -S --needed --noconfirm kind-bin
   # otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
   yay -S --needed --noconfirm k9s dive
   echo -e 'Done.\n'
 }
 
-# docker(){
-# -----------------------------------------------------------------------------
-# => Containers (docker)
-# -----------------------------------------------------------------------------
-# }
+docker(){
+  # -----------------------------------------------------------------------------
+  # => Containers (docker)
+  # -----------------------------------------------------------------------------
+  echo -e '\n=> Installing Docker'
+  # ctop is a vizualization tool for docker
+  sudo pacman -S --noconfirm --needed docker ctop
+  # https://wiki.archlinux.org/index.php/Docker
+  # https://docs.docker.com/config/daemon/
+  # touch /etc/docker/daemon.json # for specific user config
+  sudo systemctl start docker
+  sudo systemctl enable docker # allows it to start on start
+  sudo systemctl status docker # visual confirmation
+
+  echo -e '\n=> Installing Docker compose# '
+  # sudo pacman -S --noconfirm docker-compose
+
+  echo -e 'Removing Sudo requirements'
+  sudo groupadd docker
+  sudo usermod -aG docker "${USER}"
+  echo -e 'Done.\n'
+}
 
 podman(){
 
@@ -268,15 +323,19 @@ pythonInstall(){
   # => Go language install and programs 
   # -----------------------------------------------------------------------------
 
-  echo -e '\n=> Installing Miniconda'
-  export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
-  cd "$HOME"  
-  yay -S --needed --noconfirm miniconda3
-  sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
-  conda install -c python=3.9
-  conda install -c conda-forge pynvim
-  conda install -c conda-forge flake8
-  conda install -c conda-forge black
+  echo -e '\n=> Installing Poetry'
+  curl -sSL https://install.python-poetry.org | python3 -
+  poetry config virtualenvs.in-project true
+  poetry completions fish > ~/.config/fish/completions/poetry.fish
+  # echo -e '\n=> Installing Miniconda'
+  # export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
+  # cd "$HOME"  
+  # yay -S --needed --noconfirm miniconda3
+  # sudo ln -s /opt/miniconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
+  # conda install -c python=3.9
+  # conda install -c conda-forge pynvim
+  # conda install -c conda-forge flake8
+  # conda install -c conda-forge black
   echo -e 'Done.\n'
   pip install ueberzug
 }
@@ -470,7 +529,7 @@ lspNull(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> Installing developer packages and useful tui alternatives'
-  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat exa lazygit htop unzip xclip task zoxide bpytop
+  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat fd exa lazygit unzip xclip task zoxide bpytop
   sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
 
   yay -S --needed --noconfirm ytfzf 
@@ -606,11 +665,16 @@ install(){
   # -----------------------------------------------------------------------------
 
   systemInit
-  nvidia
+  if [[ "$GPU" = "amd" ]]; then
+    amd
+  elif [[ "$GPU" = "nvidia" ]]; then
+    nvidia
+  fi
   fonts
   security
   languages
   fish
+  #fisher
   chsh -s "$(which fish)" # change the default shell
   backupMaintenance
 
@@ -624,6 +688,7 @@ install(){
   podman
   kubernetes
   lspNull
+  ansible
   
   # programs
   cliPrograms
@@ -631,9 +696,11 @@ install(){
   spotify
   lunarvim
   emacs
+
   if [[ "$WM" = "xmonad" ]]; then
     xmonad
   fi
+
   if [[ "$LOCATION" = "home" ]]; then
     discord
     file_sharing
