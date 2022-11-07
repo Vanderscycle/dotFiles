@@ -16,7 +16,7 @@ M.config = function()
 
 	vim.opt.relativenumber = true
 	vim.opt.wrap = true
-	lvim.builtin.notify.active = true
+	-- lvim.builtin.notify.active = true
 	-- lvim.builtin.notify.opts.background_colour = "normal"
 	lvim.builtin.cmp.completion.keyword_length = 2
 	lvim.lsp.installer.setup.ensure_installed = true
@@ -43,6 +43,7 @@ M.config = function()
 		"css",
 		"json",
 		"yaml",
+    "hcl"
 	}
 	vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
 	vim.opt.guifont = "jetbrainsmono" -- the font used in graphical neovim applications

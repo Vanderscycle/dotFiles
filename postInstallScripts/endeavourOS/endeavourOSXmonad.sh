@@ -113,7 +113,15 @@ Ansible(){
   echo -e 'Done.\n'
 
 }
+terraform(){
+  # -----------------------------------------------------------------------------
+  # => Security (ssh/gpg/password manager)
+  # -----------------------------------------------------------------------------
 
+  echo -e '\n=> Configuring SSH'
+  pacman -S --noconfirm terraform
+  echo -e 'Done.\n'
+}
 security(){
   # -----------------------------------------------------------------------------
   # => Security (ssh/gpg/password manager)
@@ -159,6 +167,9 @@ security(){
 
   echo -e '\n=>Installing the password manager'
   sudo pacman -S --noconfirm --needed bitwarden
+
+  echo -e '\n=>Installing Vault'
+  sudo pacman -S --noconfirm --needed vault
   echo -e 'Done.\n'
 
   # -----------------------------------------------------------------------------
@@ -651,7 +662,7 @@ cliClients () {
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing AWS-cli'
-  yay -S --needed --noconfirm aws-cli-v2-bin
+  yay -S --needed --noconfirm aws-cli-v2
   echo -e 'Done.\n'
   #TODO: what about linode? have it run in a container?
 

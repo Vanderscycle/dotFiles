@@ -62,12 +62,17 @@ if status is-interactive
   set -xg ARGO_LOCAL "admin1!admin"
 
   # aws/linode/cli login
-  set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config
+  # TODO: create an fzf multi choice
+  # set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config #eks 
+  set -xg AWS_PROFILE "atreides-build"
 
 
   # zoxide
   set -x _ZO_ECHO '1'
    zoxide init fish | source
+  # vault
+  set -xg VAULT_ADDR "https://vault.non-prod.atreidesaccount.io"
+  # vault login -method=oidc
 
   # nnn config
   # nnnTheme

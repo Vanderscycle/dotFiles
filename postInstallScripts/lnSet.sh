@@ -2,7 +2,7 @@
 #https://linuxhint.com/bash_loop_list_strings/
 # ".zshrc" ".oh-my-zsh" ".conda" ".alias"
 # https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where 
-declare -a StringArray=(".xinitrc"  ".gitconfig" ".gpg/gpg-agent" ".ripgreprc" ".condarc" ".vale.ini")
+declare -a StringArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" ".condarc" ".vale.ini" "zettlekasten")
 for DOTFILE in "${StringArray[@]}"; do
       echo -e "\n=>${DOTFILE}::local -> doots"    
     rsync -av --progress  ~/$DOTFILE ~/Documents/dotFiles/.config/
