@@ -6,10 +6,10 @@ date: { { date } }
 
 ## 
 
-A playbook is a single `yml` file that contains a `play` and one or more `tasks` per play.
+A playbook is a single `yml` file that contains one or more `plays` and one or more `tasks` per play. Each task has one or more modules. The ansible documentation is comprehensible enough to use as a reference point.
 ```yaml
 - name: Update web servers #Play 1
-  hosts: webservers
+  hosts: webservers # must match the invetory file
   remote_user: root
 
   tasks:
@@ -35,6 +35,10 @@ A playbook is a single `yml` file that contains a `play` and one or more `tasks`
     ansible.builtin.service:
       name: postgresql
       state: started
+```
+## Common Commands
+```bash
+ansible-playbook <playbook.yml>
 ```
 
 ## References
