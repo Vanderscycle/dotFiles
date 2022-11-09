@@ -40,6 +40,15 @@ A playbook is a single `yml` file that contains one or more `plays` and one or m
 ```bash
 ansible-playbook <playbook.yml>
 ```
+## Advanced 
+
+You can create the role pattern where a common playbook (e.g. above) is called with roles.
+```
+- name: Update web and db servers
+hosts: root
+roles:
+  - update
+```
 
 ## References
 * [Ansible Ref](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html)

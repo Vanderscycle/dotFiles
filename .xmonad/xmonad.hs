@@ -268,7 +268,7 @@ myLogHook h = dynamicLogWithPP $ def
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom -b &"
-  spawnOnOnce "3" "spotify &" --spawnOnOnce :: WorkspaceId -> String -> X ()Source -- https://hackage.haskell.org/package/xmonad-contrib-0.14/docs/XMonad-Util-SpawnOnce.html
+  -- spawnOnOnce "3" "spotify &" --spawnOnOnce :: WorkspaceId -> String -> X ()Source -- https://hackage.haskell.org/package/xmonad-contrib-0.14/docs/XMonad-Util-SpawnOnce.html
   spawnOnOnce "2" "firefox&"
   spawnOnOnce "3" "discord &"
   -- spawnOnOnce "2" "slack &"

@@ -10,6 +10,7 @@ rsync -av --progress   ~/Documents/dotFiles/config.fish ~/.config/fish/config.fi
 rsync -av --progress  ~/Documents/dotFiles/.gnupg ~/.gnupg/ 
 rsync -av --progress  ~/Documents/dotFiles/ssh/ ~/.ssh/config 
 rsync -av --progress   ~/Documents/dotFiles/zettelkasten/ ~/zettelkasten
+sudo rsync -av --progress  ~/Documents/dotFiles/pacman.conf /etc/pacman.conf 
 # rg --passthru 'henri' -r $DOOTS_USER_NAME ~/.zshrc > ~/.temp.txt && mv ~/.temp.txt ~/.zshrc.sh
 
 declare -a ConfArray=("lvim" "broot""zellij" "kitty" "xmobar" "dunst" "fontconfig" "ag" "qutebrowser" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s")

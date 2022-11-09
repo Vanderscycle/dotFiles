@@ -11,6 +11,7 @@ rsync -av --progress  ~/.config/fish/config.fish ~/Documents/dotFiles/config.fis
 rsync -av --progress  ~/.gnupg/ ~/Documents/dotFiles/.gnupg/*.conf
 rsync -av --progress  ~/.ssh/config ~/Documents/dotFiles/ssh/
 rsync -av --progress  ~/zettelkasten ~/Documents/dotFiles/zettelkasten/
+rsync -av --progress  /etc/pacman.conf ~/Documents/dotFiles/pacman.conf
 
 # https://stackoverflow.com/questions/4585929/how-to-use-cp-command-to-exclude-a-specific-directory
 # of note you can do a dry run using -n

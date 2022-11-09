@@ -107,6 +107,8 @@ Ansible(){
   pip3 install argcomplete
   activate-global-python-argcomplete
   register-python-argcomplete --shell fish my-awesome-script | source
+  
+  sudo pacman -S --noconfirm sshpass
   # creating the cfg file
   sudo mkdir -p /etc/ansible/
   ansible-config init --disabled -t all > ansible.cfg && sudo rsync -av ./ansible.cfg /etc/ansible/ 
@@ -119,7 +121,7 @@ terraform(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> Configuring SSH'
-  pacman -S --noconfirm terraform
+  sudo pacman -S --noconfirm terraform
   echo -e 'Done.\n'
 }
 security(){
@@ -195,7 +197,13 @@ backupMaintenance(){
 
   echo -e '\n=> Enabling weekly system maintenance'
   sudo systemctl enable --now paccache.timer
+
   sudo pacman -S --noconfirm --needed fcitx fcitx-googlepinyin fcitx-configtool #TODO: double check the right dependence
+  # timeshift backup
+  yay -S --noconfirm --needed timeshift
+  # create backup location https://www.youtube.com/watch?v=LkwZZIsY9uE
+  sudo mkdir /mnt/backup
+  sudo mkdir /mnt/nas
   echo -e 'Done.\n'
 }
 
