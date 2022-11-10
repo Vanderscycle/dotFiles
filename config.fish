@@ -131,10 +131,7 @@ function fish_greeting
       curl -s v2d.wttr.in/ | tee $TMP_FILE
     end
 end
-# kitty
-function icat
-  kitty +kitten icat "$argv"
-end
+
 # nnn
 function n
   nnn "$argv"
@@ -161,6 +158,12 @@ end
 
 function pihole 
   kitty +kitten ssh pi@192.168.1.154
+end
+function ans
+  kitty +kitten ssh root@172.105.9.43
+end
+function kitty-ssh --description "kitty-ssh "
+  kitty +kitten ssh "$argv"
 end
 
 #TODO: find the pi address automatically?
@@ -197,10 +200,6 @@ function goGet
 end
 
 #npm/pnpm
-function p-lock
-  npm i --package-lock-only "$argv"
-
-end
 
 function p 
 	pnpm $argv
@@ -210,12 +209,6 @@ end
 function dig
   dog "$argv"
 end
-
-# zellij
-function zel
-  zellij options --theme tokyonightDark $argv
-end
-
 
 #aliases
 function :q
@@ -234,11 +227,9 @@ function fishy
   lvim ~/.config/fish/config.fish
 end
 
-
 function htop
   bpytop #"$argv"
 end
-
 
 function ls
   eval exa -al"$argv"
@@ -323,13 +314,12 @@ function k-s --description "secret <namespace> <secret-name>"
   kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
 end
 
-
 function k8s-prmAll
 echo -e "purging everything"
   kubectl delete all --all --namespaces
 end
 # docker containers
-function linode-docker 
+function linode-docker  #TODO: review
   docker run -it --rm -v (pwd):/work -w /work --entrypoint /bin/bash aimvector/linode:2.15.0
 end
 
@@ -367,7 +357,7 @@ end
 #pacman
 function update
   # create a backyp
-  sudo timeshift --create
+  # sudo timeshift --create
   topgrade
   # sudo pacman -Syu
   xmonad --recompile

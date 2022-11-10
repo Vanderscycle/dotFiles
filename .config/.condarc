@@ -1,4 +1,0 @@
-pip_interop_enabled: true
-channels:
-  - conda-forge
-  - defaults
