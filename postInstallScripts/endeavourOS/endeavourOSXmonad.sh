@@ -285,12 +285,18 @@ kubernetes(){
   # => Kubernetes k8s 
   # -----------------------------------------------------------------------------
 
-  echo -e '\n=> kubernetes'
+  echo -e '\n=> Installing kubernetes'
   sudo pacman -S --needed --noconfirm kubectl kubeseal argocd kustomize
   kubectl completion fish | source
   yay -S --needed --noconfirm kind-bin
   # otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
   yay -S --needed --noconfirm k9s dive
+  echo -e 'Done.\n'
+  echo -e '\n=> Intalling Helm'
+  curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 && \
+    chmod 700 get_helm.sh && \
+    ./get_helm.sh && \
+    rm get_helm.sh
   echo -e 'Done.\n'
 }
 
@@ -669,8 +675,12 @@ cliClients () {
   # => AWS
   # -----------------------------------------------------------------------------
 
-  echo -e '\n=> installing AWS-cli'
+  echo -e '\n=> Installing AWS-cli'
   yay -S --needed --noconfirm aws-cli-v2
+  echo -e 'Done.\n'
+
+  echo -e '\n=> Installing Linode' 
+  pip3 install linode-cli --upgrade  
   echo -e 'Done.\n'
   #TODO: what about linode? have it run in a container?
 
