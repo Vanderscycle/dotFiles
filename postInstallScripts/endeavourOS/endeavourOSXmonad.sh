@@ -298,6 +298,10 @@ kubernetes(){
     ./get_helm.sh && \
     rm get_helm.sh
   echo -e 'Done.\n'
+  echo -e 'Installing Tilt\n'
+
+  curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash
+  echo -e 'Done.\n'
 }
 
 docker(){

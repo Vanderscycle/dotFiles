@@ -376,6 +376,10 @@ end
 function yay-ls
     yay -Slq | fzf -m --preview 'bat (yay -Si {1} | psub) (yay -Fl {1} | awk "{print \$2}" | psub) --color=always -n' | xargs -ro  yay -S
 end
+function git-ls
+  #TODO:h add a mv to ~/.local/bin
+  curl -sL "$argv"| tar zx   
+end
 
 #INFO: not used anymore
 function tmuxinator-ls 
