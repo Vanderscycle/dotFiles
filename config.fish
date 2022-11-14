@@ -153,7 +153,6 @@ function gTestTags
   git push origin --tags
 end
 
-
 # ssh/servers
 
 function pihole 
@@ -308,6 +307,13 @@ end
 function k
   eval kubectl "$argv[..-1]"
 end
+
+function k-encode  --description "k-encode <secret.yaml>"
+  # echo -n "$argv" | base64
+    yq '.data' "$argv" | jq -r 'values[]' | xargs -I '{}' bash -c  'echo -n {} | base64'
+
+end
+
 
 #INFO: https://stackoverflow.com/questions/24093649/how-to-access-remaining-arguments-in-a-fish-script
 function k-s --description "secret <namespace> <secret-name>"

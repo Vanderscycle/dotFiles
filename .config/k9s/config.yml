@@ -15,22 +15,21 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: lke74103-ctx
-  currentCluster: lke74103
+  currentContext: lke78534-ctx
+  currentCluster: lke78534
   clusters:
-    lke74103:
+    lke78534:
       namespace:
-        active: all
+        active: default
         lockFavorites: false
         favorites:
-        - all
         - default
       view:
-        active: pod
+        active: cm
       featureGates:
         nodeShell: false
       shellPod:
-        image: busybox:1.31
+        image: busybox:1.35.0
         command: []
         args: []
         namespace: default

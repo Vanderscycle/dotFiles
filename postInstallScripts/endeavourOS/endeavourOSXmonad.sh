@@ -559,7 +559,7 @@ lspNull(){
 
   echo -e '\n=> Installing developer packages and useful tui alternatives'
   sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat fd exa lazygit unzip xclip task zoxide bpytop
-  sudo pacman -S --noconfirm --needed broot jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
+  sudo pacman -S --noconfirm --needed broot yq jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
 
   yay -S --needed --noconfirm ytfzf 
 
