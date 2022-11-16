@@ -1,0 +1,18 @@
+- hosts: all
+  tasks:
+    # use a package conditional
+    - name: Pinging localhost
+      ansible.builtin.ping:
+
+    - name: Run Hello world container
+      containers.podman.podman_container:
+        name: test
+        image: hello-world:latest
+        state: present
+
+  # roles:
+  #   - role: geerlingguy.docker
+  #     tags: docker
+
+  #   - role: os_hardening
+  #     tags: security

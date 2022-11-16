@@ -1,0 +1,10 @@
+collections:
+  - name: community.general
+    version: 5.8.0
+    source: https://galaxy.ansible.com
+  - name: devsec.hardening
+    version: 8.3.0
+    source: https://galaxy.ansible.com
+
+roles:
+  - src: geerlingguy.docker
