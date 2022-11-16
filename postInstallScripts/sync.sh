@@ -31,12 +31,12 @@ declare -a ConfArray=("lvim" "broot" "zellij" "kitty" "xmobar" "dunst" "fontconf
 sync(){
   echo -e "sync"
   for DOTFILE in "${HomeArray[@]}"; do
-        echo -e "\n=>${DOTFILE}::doots -> local"    
+      echo -e "\n=>${DOTFILE}::doots -> local"    
       rsync -av --progress   ~/Documents/dotFiles/.config/ ~/"$DOTFILE"
   done
 
   for DOTFILE in "${ConfArray[@]}"; do
-        echo -e "\n=>${DOTFILE}::doots -> local"    
+      echo -e "\n=>${DOTFILE}::doots -> local"    
       rsync -av --progress   ~/Documents/dotFiles/.config/ ~/.config/"$DOTFILE"
   done
 
@@ -47,12 +47,12 @@ sync(){
 save(){
   echo -e "save"
   for DOTFILE in "${HomeArray[@]}"; do
-        echo -e "\n=>${DOTFILE}::local -> doots"    
-      rsync -av --progress  ~/"$DOTFILE" ~/Documents/dotFiles/.config/
+      echo -e "\n=>${DOTFILE}::local -> doots"    
+      rsync -av --progress  ~/"$DOTFILE" ~/Documents/dotFiles/
 
   done
   for DOTFILE in "${ConfArray[@]}"; do
-        echo -e "\n=>${DOTFILE}::doots -> local"    
+      echo -e "\n=>${DOTFILE}::local -> doots"    
       rsync -av --progress ~/.config/"$DOTFILE" ~/Documents/dotFiles/.config/ 
   done
   rsync -av --progress /etc/fstab ~/Documents/dotFiles/etc/fstab
