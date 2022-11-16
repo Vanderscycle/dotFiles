@@ -7,7 +7,8 @@
 # export GTK_IM_MODULE=fcitx
 # export QT_IM_MODULE=fcitx
 # export XMODIFIERS=@im=fcitx
-
+# BUG: Keep track of the following solution (xmonad)
+# https://forum.manjaro.org/t/gedit-plugin-warning-when-opening-from-terminal/75437
 PARAMS=""
 LOCATION=""
 WM="default" # default being whateve we chose to install

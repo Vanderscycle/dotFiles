@@ -26,7 +26,7 @@ done
 
 declare -a HomeArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" "zettelkasten" ".gnupg" ".ssh/config" "zettelkasten" ".xmonad")
 
-declare -a ConfArray=("lvim" "broot" "zellij" "kitty" "xmobar" "dunst" "fontconfig" "rg" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s" "fish/config.fish")
+declare -a ConfArray=("lvim" "broot" "zellij" "kitty" "xmobar" "dunst" "fontconfig" "rg" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s" "fish/config.fish" "bpytop")
 
 sync(){
   echo -e "sync"
@@ -37,7 +37,7 @@ sync(){
 
   for DOTFILE in "${ConfArray[@]}"; do
         echo -e "\n=>${DOTFILE}::doots -> local"    
-      rsync -av --progress   ~/Documents/dotFiles/.config/ ~/"$DOTFILE"
+      rsync -av --progress   ~/Documents/dotFiles/.config/ ~/.config/"$DOTFILE"
   done
 
   rsync -av --progress   ~/Documents/dotFiles/etc/fstab /etc/fstab
@@ -53,7 +53,7 @@ save(){
   done
   for DOTFILE in "${ConfArray[@]}"; do
         echo -e "\n=>${DOTFILE}::doots -> local"    
-      rsync -av --progress ~/"$DOTFILE" ~/Documents/dotFiles/.config/ 
+      rsync -av --progress ~/.config/"$DOTFILE" ~/Documents/dotFiles/.config/ 
   done
   rsync -av --progress /etc/fstab ~/Documents/dotFiles/etc/fstab
   sudo rsync -av --progress /etc/pacman.conf ~/Documents/dotFiles/pacman.conf

@@ -363,13 +363,17 @@ function sync
   cd $CURRENTLOCATION
 end
 
-#pacman
+# system/pacman
 function update
   # create a backyp
   # sudo timeshift --create
   topgrade
   # sudo pacman -Syu
   xmonad --recompile
+end
+
+function crash-log
+  lvim ~/.error.log
 end
 
 function pacPruneCache
