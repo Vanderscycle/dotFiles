@@ -121,9 +121,12 @@ function fish_greeting
     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
     # pokemon-colorscripts -r
     if not test -f '/tmp/weather_report'
+      
+    # adding all the ssh keys
       ssh-add ~/.ssh/endeavourGit
       ssh-add ~/.ssh/atreidesGit
-      ssh-add ~/.ssh/argocd
+    # dumping the latest
+      journalctl --since=today > ~/.error.log # look for Boot 
       touch /tmp/weather_report
       set -l TMP_FILE  /tmp/weather_report
       xmonad --recompile; xmonad --restart

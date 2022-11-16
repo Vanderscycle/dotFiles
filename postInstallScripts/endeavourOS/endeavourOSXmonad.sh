@@ -4,6 +4,9 @@
 # => ArgParser
 # https://medium.com/@Drew_Stokes/bash-argument-parsing-54f3b81a6a8f
 # -----------------------------------------------------------------------------
+# export GTK_IM_MODULE=fcitx
+# export QT_IM_MODULE=fcitx
+# export XMODIFIERS=@im=fcitx
 
 PARAMS=""
 LOCATION=""
