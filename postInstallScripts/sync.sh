@@ -56,7 +56,8 @@ save(){
       rsync -av --progress ~/.config/"$DOTFILE" ~/Documents/dotFiles/.config/ 
   done
   rsync -av --progress /etc/fstab ~/Documents/dotFiles/etc/fstab
-  sudo rsync -av --progress /etc/pacman.conf ~/Documents/dotFiles/pacman.conf
+  rsync -av --progress /etc/default/grub ~/Documents/dotFiles/
+  rsync -av --progress /etc/pacman.conf ~/Documents/dotFiles/pacman.conf
   lvim +PackerSync +qall
 }
 
