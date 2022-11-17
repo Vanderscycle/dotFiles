@@ -32,16 +32,19 @@ sync(){
   echo -e "sync"
   for DOTFILE in "${HomeArray[@]}"; do
       echo -e "\n=>${DOTFILE}::doots -> local"    
-      rsync -av --progress   ~/Documents/dotFiles/.config/ ~/"$DOTFILE"
+      rsync -av --progress   ~/Documents/dotFiles/"$DOTFILE"
   done
 
   for DOTFILE in "${ConfArray[@]}"; do
       echo -e "\n=>${DOTFILE}::doots -> local"    
-      rsync -av --progress   ~/Documents/dotFiles/.config/ ~/.config/"$DOTFILE"
+      rsync -av --progress   ~/Documents/dotFiles/.config/"$DOTFILE" ~/.config/
   done
 
   rsync -av --progress   ~/Documents/dotFiles/etc/fstab /etc/fstab
+  rsync -av --progress /etc/default/grub ~/Documents/dotFiles/
   sudo rsync -av --progress  ~/Documents/dotFiles/pacman.conf /etc/pacman.conf 
+
+  lvim +PackerSync +qall
 }
 
 save(){
@@ -58,7 +61,6 @@ save(){
   rsync -av --progress /etc/fstab ~/Documents/dotFiles/etc/fstab
   rsync -av --progress /etc/default/grub ~/Documents/dotFiles/
   rsync -av --progress /etc/pacman.conf ~/Documents/dotFiles/pacman.conf
-  lvim +PackerSync +qall
 }
 
 main(){

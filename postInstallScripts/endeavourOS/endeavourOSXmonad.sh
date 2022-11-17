@@ -98,6 +98,7 @@ radeon(){
   # https://wiki.archlinux.org/title/AMDGPU#Selecting_the_right_driver
   # -----------------------------------------------------------------------------
   echo -e 'Instaling AMD drivers \n'
+  sudo pacman -S --needed --noconfirm radeontop
   echo -e 'Done.\n'
 }
 
@@ -164,10 +165,10 @@ security(){
   chmod 700 ~/.gnupg
 
   # https://dev.to/mage1k99/how-to-sign-commits-in-git-for-fish-shell-4o5i
-  # gpg --full-gen-key
-  # gpg --list-secret-keys --keyid-format=long
-  # git config --global gpg.program (which gpg)
-  # git config --global commit.gpgsign true
+  gpg --full-gen-key
+  gpg --list-secret-keys --keyid-format=long
+  git config --global gpg.program (which gpg)
+  git config --global commit.gpgsign true
   gpg-connect-agent reloadagent /bye
   echo -e 'Done.\n'
 

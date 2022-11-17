@@ -8,3 +8,4 @@ collections:
 
 roles:
   - src: geerlingguy.docker
+  - src: jahrik.yay
