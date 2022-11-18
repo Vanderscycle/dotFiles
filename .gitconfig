@@ -18,8 +18,10 @@
 [gpg]
 	program = /usr/bin/gpg
 [commit]
+	gpgsign = true
 	; gpgsign = true
 [include]
   path = ~/.gitconfig.personal
 [includeIf "gitdir:**/houseAtreides/**/*"] #git
   path = ~/.gitconfig.atreides
+[user]

@@ -311,7 +311,7 @@ function k
   eval kubectl "$argv[..-1]"
 end
 
-function k-encode  --description "k-encode <secret.yaml>"
+function k-encode --description "k-encode <secret.yaml>"
   # echo -n "$argv" | base64
     yq '.data' "$argv" | jq -r 'values[]' | xargs -I '{}' bash -c  'echo -n {} | base64'
 
@@ -346,7 +346,7 @@ function save
   set -l CURRENTLOCATION $PWD
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
-  bash "$DOOTFILE_LOC"/postInstallScripts/lnSet.sh
+  bash "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c save
   git cmp "Everything that is not saved will be lost"
   # return to where we were
   cd "$CURRENTLOCATION"
@@ -358,7 +358,7 @@ function sync
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
   git pull --all
-  bash  "$DOOTFILE_LOC"/postInstallScripts/syncDootsLocal.sh
+  bash "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c sync
   # return to where we were
   cd $CURRENTLOCATION
 end
@@ -372,12 +372,11 @@ function update
   xmonad --recompile
 end
 
+function tz-download --description "download <url>" # alternative curl -sL
+  https --download "$argv"| tar xz 
+end
 function crash-log
   lvim ~/.error.log
-end
-
-function pacPruneCache
-  sudo paccache -r
 end
 
 # explanation https://stackoverflow.com/questions/48855508/fish-error-while-trying-to-run-command-on-mac/48855746
@@ -389,6 +388,7 @@ end
 function yay-ls
     yay -Slq | fzf -m --preview 'bat (yay -Si {1} | psub) (yay -Fl {1} | awk "{print \$2}" | psub) --color=always -n' | xargs -ro  yay -S
 end
+
 function git-ls
   #TODO:h add a mv to ~/.local/bin
   curl -sL "$argv"| tar zx   

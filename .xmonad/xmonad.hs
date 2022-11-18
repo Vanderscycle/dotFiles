@@ -225,8 +225,8 @@ myManageHook =
     [ className =? "MPlayer" --> doFloat,
       className =? "Gimp" --> doFloat,
       className =? "gmrun" --> doFloat,
-      -- , className =? "Steam"          --> doFloat
-      className =? "steam" --> doFullFloat,
+       className =? "Steam"          --> doFloat,
+      -- className =? "steam" --> doFullFloat,
       resource =? "desktop_window" --> doIgnore,
       resource =? "kdesktop" --> doIgnore
     ]
