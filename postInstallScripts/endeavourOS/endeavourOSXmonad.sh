@@ -113,7 +113,7 @@ Ansible(){
   activate-global-python-argcomplete
   register-python-argcomplete --shell fish my-awesome-script | source
   
-  sudo pacman -S --noconfirm sshpass
+  sudo pacman -S --needed --noconfirm sshpass
   # creating the cfg file
   sudo mkdir -p /etc/ansible/
   ansible-config init --disabled -t all > ansible.cfg && sudo rsync -av ./ansible.cfg /etc/ansible/ 
