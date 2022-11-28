@@ -6,17 +6,18 @@ There's a backlog list of old issues found in the [todo.md](./todo.md) that I wi
 ## EndavourOS
 
 Install script is after a clean install and can be used on any arch-based distro.
+
 ```bash
-wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh
+wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/endeavourOSXmonad.sh && chmod +x ./endeavourOSXmonad.sh && bash ./endeavourOSXmonad.sh -w xmonad -h
 ```
+
 # Screenshots
 
-* WM: Xmonad
-* Colorscheme: tokyonightDark
-* IDE: Neovim(LunarVim)
-* TMUX: Tmux/Zellij
-* Terminal: kitty
-* Shell: Fish(zsh config available)
+- WM: Xmonad
+- Colorscheme: tokyonightDark
+- IDE: Neovim(LunarVim)
+- Terminal: kitty
+- Shell: Fish(zsh config available)
 
 ![Desktop layout img 1](./img/README/1645798633.png)
 ![Desktop layout img 2](./img/README/1645798767.png)
@@ -24,16 +25,18 @@ wget https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallS
 
 ## Bindings
 
-* WM [navigation](https://gist.github.com/micrub/aeebe7eb4d2df9e5e203e76a0fd89542)
-* Tmux [navigation](.tmux.conf)
+- WM [navigation](https://gist.github.com/micrub/aeebe7eb4d2df9e5e203e76a0fd89542)
+
 ## Installed programs
+
 EndavourOS install script will installs the following non-exhaustive list of programs:
-* Postgresql
-* MongoDB
-* Podman/Buildah as a backup
-* Fish/Zsh 
-* Miniconda
-* Modern unix commands
-* Neovim
-* Oracle VM
-* And so much more...
+
+- Postgresql
+- MongoDB
+- Podman/Buildah as a backup
+- Fish/Zsh
+- Miniconda
+- Modern unix commands
+- Neovim
+- Oracle VM
+- And so much more...

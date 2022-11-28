@@ -239,8 +239,6 @@ languages(){
   # Exec=ibus-daemon -drx
   # EOF
   # echo -e 'Done.\n'
-
-
 }
 
 mongo(){
@@ -359,6 +357,7 @@ pythonInstall(){
 
   echo -e '\n=> Installing Poetry'
   curl -sSL https://install.python-poetry.org | python3 -
+  sudo pacman -S --noconfirm --needed python-poetry
   poetry config virtualenvs.in-project true
   poetry completions fish > ~/.config/fish/completions/poetry.fish
   # echo -e '\n=> Installing Miniconda'
