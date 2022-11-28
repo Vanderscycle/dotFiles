@@ -165,10 +165,10 @@ security(){
   chmod 700 ~/.gnupg
 
   # https://dev.to/mage1k99/how-to-sign-commits-in-git-for-fish-shell-4o5i
-  gpg --full-gen-key
-  gpg --list-secret-keys --keyid-format=long
-  git config --global gpg.program (which gpg)
-  git config --global commit.gpgsign true
+  # gpg --full-gen-key
+  # gpg --list-secret-keys --keyid-format=long
+  # git config --global gpg.program (which gpg)
+  # git config --global commit.gpgsign true
   gpg-connect-agent reloadagent /bye
   echo -e 'Done.\n'
 
@@ -343,7 +343,7 @@ podman(){
 
   echo -e '\n=>Configuring podman/buildah'
   sudo touch /etc/containers/registries.conf.d/docker.conf 
-  echo -e `unqualified-search-registries=["docker.io"]` > /etc/containers/registries.conf.d/docker.conf
+  echo -e "${unqualified-search-registries=['docker.io']}" > /etc/containers/registries.conf.d/docker.conf
   sudo touch /etc/subuid
   sudo touch /etc/subgid 
   sudo usermod --add-subuids 200000-201000 --add-subgids 200000-201000 henri
@@ -750,4 +750,4 @@ install(){
   bash "$HOME"/Document/dotFiles/postInstallScripts/syncDootsLocal.sh # syncs the files
   reboot
 }
-
+install
