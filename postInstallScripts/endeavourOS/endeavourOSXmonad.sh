@@ -491,7 +491,8 @@ fisher(){
   # -----------------------------------------------------------------------------
 
   curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher # like zplug
-  fisher install ilancosman/tide #use that or starship
+  # fisher install ilancosman/tide # theme
+  curl -sS https://starship.rs/install.sh | sh # startship
   fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
   fisher install jorgebucaran/autopair.fish #same as tpope autopair 
   fisher install PatrickF1/fzf.fish #fzf but fish

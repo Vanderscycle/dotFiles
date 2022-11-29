@@ -24,7 +24,7 @@ while (( "$#" )); do
   esac
 done
 
-declare -a HomeArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" "zettelkasten" ".gnupg" ".ssh/config" "zettelkasten" ".xmonad")
+declare -a HomeArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" "zettelkasten" ".ssh/config" "zettelkasten" ".xmonad")
 
 declare -a ConfArray=("lvim" "broot" "zellij" "kitty" "xmobar" "dunst" "fontconfig" "rg" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s" "fish/config.fish" "bpytop")
 
@@ -41,7 +41,7 @@ sync(){
   done
 
   rsync -av --progress   ~/Documents/dotFiles/etc/fstab /etc/fstab
-  rsync -av --progress /etc/default/grub ~/Documents/dotFiles/
+  rsync -av --progress  ~/Documents/dotFiles/ /etc/default/grub
   sudo rsync -av --progress  ~/Documents/dotFiles/pacman.conf /etc/pacman.conf 
 
   lvim +PackerSync +qall
@@ -60,7 +60,7 @@ save(){
   done
   rsync -av --progress /etc/fstab ~/Documents/dotFiles/etc/fstab
   rsync -av --progress /etc/default/grub ~/Documents/dotFiles/
-  rsync -av --progress /etc/pacman.conf ~/Documents/dotFiles/pacman.conf
+  sudo rsync -av --progress /etc/pacman.conf ~/Documents/dotFiles/pacman.conf
 }
 
 main(){
