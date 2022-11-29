@@ -46,7 +46,7 @@ if status is-interactive
   # ssh
   # https://www.rockyourcode.com/ssh-agent-could-not-open-a-connection-to-your-authentication-agent-with-fish-shell/
   fish_ssh_agent
-
+  starship init fish | source
   # eval (ssh-agent -c)
   # https://www.funtoo.org/Funtoo:Keychain (currently not working for fish shell T_T)
   keychain --eval --agents gpg,ssh ~/.ssh/endeavourGit ~/.ssh/atreidesGit
@@ -149,6 +149,11 @@ function gSquash
     git reset (git merge-base "$argv" (git branch --show-current))
 end
 
+function gFetch --description "gFetch <branch name>"
+  git fetch origin "$argv"
+  git switch "$argv"
+end
+
 function gTestTags 
   git tag -l | xargs -n 1 git push --delete origin
   git tag -l | xargs git tag -d                   
@@ -213,11 +218,11 @@ function dig
 end
 
 #aliases
-function :q
+function :q --description "exit like its vim"
   exit
 end
 
-function :qa
+function :qa --description "exit like its vim"
   exit
 end
 
@@ -346,7 +351,7 @@ function save
   set -l CURRENTLOCATION $PWD
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
-  bash "$DOOTFILE_LOC"/postInstallScripts/lnSet.sh
+  bash "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c "save"
   git cmp "Everything that is not saved will be lost"
   # return to where we were
   cd "$CURRENTLOCATION"
@@ -358,7 +363,7 @@ function sync
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
   git pull --all
-  bash  "$DOOTFILE_LOC"/postInstallScripts/syncDootsLocal.sh
+  bash  "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c "sync"
   # return to where we were
   cd $CURRENTLOCATION
 end

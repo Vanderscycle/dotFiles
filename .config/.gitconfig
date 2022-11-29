@@ -1,7 +1,7 @@
 # https://markentier.tech/posts/2021/02/github-with-multiple-profiles-gpg-ssh-keys/
 # Home
-; [user]
-;   name = Henri Vandersleyen 
+[user]
+  name = Henri Vandersleyen 
 
 [alias]
   squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-NO-TICKET:A new start}\");};f"
@@ -16,9 +16,11 @@
 [init]
   defaultBranch = "main"
 [gpg]
-	program = /usr/bin/gpg
+	program = gpg#/usr/bin/gpg
+[log]
+  showSignature = true
 [commit]
-	; gpgsign = true
+	gpgsign = true
 [include]
   path = ~/.gitconfig.personal
 [includeIf "gitdir:**/houseAtreides/**/*"] #git
