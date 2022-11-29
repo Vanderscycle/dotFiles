@@ -2,6 +2,6 @@
     name = Henri Vandersleyen
     email = henri-vandersleyen@protonmail.com
     IdentityFile = ~/.ssh/endeavourGit
-    signingkey = BAF9F0A5940437D9
+    signingKey = 2664645CF72BE38A
     
 

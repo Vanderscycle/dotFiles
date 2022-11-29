@@ -1,32 +1,4 @@
-06/11/22 (20:53:32) | ERROR: Input thread failed with exception: (5, 'Input/output error')
-Traceback (most recent call last):
-  File "/usr/bin/bpytop", line 954, in _get_key
-    with Raw(sys.stdin):
-  File "/usr/bin/bpytop", line 798, in __exit__
-    termios.tcsetattr(self.stream, termios.TCSANOW, self.original_stty)
-termios.error: (5, 'Input/output error')
-07/11/22 (19:10:49) | ERROR: Input thread failed with exception: (5, 'Input/output error')
-Traceback (most recent call last):
-  File "/usr/bin/bpytop", line 954, in _get_key
-    with Raw(sys.stdin):
-  File "/usr/bin/bpytop", line 798, in __exit__
-    termios.tcsetattr(self.stream, termios.TCSANOW, self.original_stty)
-termios.error: (5, 'Input/output error')
-10/11/22 (19:19:46) | ERROR: Input thread failed with exception: (5, 'Input/output error')
-Traceback (most recent call last):
-  File "/usr/bin/bpytop", line 954, in _get_key
-    with Raw(sys.stdin):
-  File "/usr/bin/bpytop", line 798, in __exit__
-    termios.tcsetattr(self.stream, termios.TCSANOW, self.original_stty)
-termios.error: (5, 'Input/output error')
-15/11/22 (20:06:27) | ERROR: Input thread failed with exception: (5, 'Input/output error')
-Traceback (most recent call last):
-  File "/usr/bin/bpytop", line 954, in _get_key
-    with Raw(sys.stdin):
-  File "/usr/bin/bpytop", line 798, in __exit__
-    termios.tcsetattr(self.stream, termios.TCSANOW, self.original_stty)
-termios.error: (5, 'Input/output error')
-16/11/22 (09:10:55) | ERROR: Input thread failed with exception: (5, 'Input/output error')
+27/11/22 (17:44:00) | ERROR: Input thread failed with exception: (5, 'Input/output error')
 Traceback (most recent call last):
   File "/usr/bin/bpytop", line 954, in _get_key
     with Raw(sys.stdin):
