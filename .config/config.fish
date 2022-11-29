@@ -351,7 +351,7 @@ function save
   set -l CURRENTLOCATION $PWD
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
-  bash "$DOOTFILE_LOC"/postInstallScripts/lnSet.sh
+  bash "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c "save"
   git cmp "Everything that is not saved will be lost"
   # return to where we were
   cd "$CURRENTLOCATION"
@@ -363,7 +363,7 @@ function sync
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
   git pull --all
-  bash  "$DOOTFILE_LOC"/postInstallScripts/syncDootsLocal.sh
+  bash  "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c "sync"
   # return to where we were
   cd $CURRENTLOCATION
 end
