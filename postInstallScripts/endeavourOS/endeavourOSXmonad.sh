@@ -730,6 +730,7 @@ install(){
   
   # programs
   cliPrograms
+  cliClients
   guiPrograms
   spotify
   lunarvim
@@ -747,7 +748,7 @@ install(){
 
   #TODO: read about systemd to create a "callback" post reboot to install all of the fisher
 
-  bash "$HOME"/Document/dotFiles/postInstallScripts/syncDootsLocal.sh # syncs the files
+  bash "$HOME"/Document/dotFiles/postInstallScripts/sync.sh -c sync # syncs the files
   reboot
 }
 install
