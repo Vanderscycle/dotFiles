@@ -352,6 +352,7 @@ function save
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
   bash "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c "save"
+  git status
   git cmp "Everything that is not saved will be lost"
   # return to where we were
   cd "$CURRENTLOCATION"
@@ -394,18 +395,9 @@ end
 function yay-ls
     yay -Slq | fzf -m --preview 'bat (yay -Si {1} | psub) (yay -Fl {1} | awk "{print \$2}" | psub) --color=always -n' | xargs -ro  yay -S
 end
+
+#WARN: unfinished. goal is to download releases (tar.gz) from github and extract them
 function git-ls
   #TODO:h add a mv to ~/.local/bin
   curl -sL "$argv"| tar zx   
-end
-
-#INFO: not used anymore
-function tmuxinator-ls 
-    # because we changed the behavior of ls (alias:ls = exa -al) we can use exa as vanila ls.
-    set -xg ymlConfigs (exa ~/.config/tmuxinator/ | fzf | cut -f 1 -d '.'| xargs)
-    echo $ymlConfigs
-
-    if [ -n "$ymlConfigs" ]
-        tmuxinator start $ymlConfigs
-    end
 end
