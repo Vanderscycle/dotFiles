@@ -350,6 +350,16 @@ podman(){
   echo -e 'Done.\n'
 }
 
+3dPrinting(){
+  # -----------------------------------------------------------------------------
+  # => For Pruscia printer
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=>Installing Printer'
+  sudo pacman -S --noconfirm --needed blender prusca-slicer
+  echo -e 'Done.\n'
+}
+
 pythonInstall(){
   # -----------------------------------------------------------------------------
   # => Go language install and programs 
