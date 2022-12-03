@@ -111,6 +111,10 @@ if status is-interactive
   # golang
   set -xg GOPATH $HOME/go
   set -xg PATH $PATH $GOPATH/bin
+  # python
+  set PYENV_ROOT $HOME/.pyenv
+  set -x PATH $PYENV_ROOT/shims $PYENV_ROOT/bin $PATH
+  pyenv rehash
 
 end
   

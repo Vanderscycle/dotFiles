@@ -370,6 +370,8 @@ pythonInstall(){
   sudo pacman -S --noconfirm --needed python-poetry
   poetry config virtualenvs.in-project true
   poetry completions fish > ~/.config/fish/completions/poetry.fish
+  curl https://pyenv.run | bash
+
   # echo -e '\n=> Installing Miniconda'
   # export CONDA_ALWAYS_YES="true" # allows us to skip conda asking for permission
   # cd "$HOME"  
@@ -379,6 +381,7 @@ pythonInstall(){
   # conda install -c conda-forge pynvim
   # conda install -c conda-forge flake8
   # conda install -c conda-forge black
+  #
   echo -e 'Done.\n'
   pip install ueberzug
 }
