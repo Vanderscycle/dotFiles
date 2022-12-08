@@ -12,17 +12,40 @@ date: {{ date }}
 棒球 bang4qiu2 basketball
 高尔夫球 gao1er3fu1 qiu2 golf
 
+## space
+星星 xingxing1 start
+
+## nature
+红叶 hong2ye4 red leaves
+枫叶 feng1ye4 maple leaf
+
 ## Random
 一直 yi1zhi2 always
 到处 dao4chu4 everywhere
 结婚 jiehun marriage/marry
 个性 ge4xing4 personality
+将来 jiang1lai2 future
+懂 dong3 understand
+欢迎 huanying2 welcome
+礼物 li1wu4 gift
+电影票 dian4ying1 piao4 movie ticket
+巧克力 qiao1ke4li4 chocolate
+家伙 jia1huo guy
 
 ## Small sayings
 很久好不见 hen3jiu3 hao3bu4jian4 long time no see
 什么都没有做太多 shen2me dou1 mei2you3 zuo4tai4 duo1 didn't do much
 到处是人 dao4chu4 shi4ren2 people (are) everywhere
 三年的结婚 san nian de jiehun three years of marriage
+一共有几个角吗 how many corners are there?
+放在我面前 fang4zai4 wo3 main4qian2 put if in front of me
+或者是跟那个有关的事 youguan de shi or something about that
+什么都不懂啊 shenme dou budong3a what will (he) understand
+i肯定喜欢 ken4ding xihuan1 I sure like
+
+## country
+国旗 guo2qi2 flag
+国花 guo2hua1 national flower
 
 ## Pattern
 A 比 B (verb*) 更 *not always
@@ -36,6 +59,9 @@ A 比 B (verb*) 更 *not always
 ## Emotion/Emotional state
 小气 xian3qi4 stingy
 笑话 xiao4hua4 joke 
+感动 gan3dong4 be moved / touched
+感觉 gan2jue feel
+流眼泪 liu2 yan3lei4 shed tears
 
 看起来 kan4 qi3lai2 looks like
 看来 kan4 lai2
@@ -43,12 +69,15 @@ A 比 B (verb*) 更 *not always
 ## Adjectives 
 著名 zhu4ming2 Famous
 有名 you3ming2 Famous
+极了 ji2le extremely
 
 ## Verb
 放 fang4 put/place
+抓 zhua1 grasp
+参加 can1jia1 join
 
 ## Furniture
-桌子
+桌子 zhuo zi table
 
 ## Clothes
 M.W. 双 shuang4 pair   
@@ -64,6 +93,13 @@ M.W. 件 jian item/component
 
 手臂 shou3bi4 arm
 头发 tou2fa3 hair
+
+## usefull linking works 
+正然 zheng4ran still/but
+或者 huo4zhe1 or
+可是 ke3shi4 but
+虽然 shuo1ran2 although
+才 cai2 only
 
 ## References
 

@@ -1,4 +1,3 @@
-# http://lewandowski.io/2016/10/fish-env/ 
 function posix-source
 	for i in (cat $argv)
 		set arr (echo $i |tr = \n)
@@ -30,7 +29,7 @@ if status is-interactive
 
   # General variables
   set -xg EDITOR lvim
-  set -xq BROWSER qutebrowser
+  set -xq BROWSER firefox
   set -xg SHELL fish
   set -xg TERMINAL kitty
   set -xg LV_BRANCH rolling 
@@ -211,7 +210,6 @@ function goGet
 end
 
 #npm/pnpm
-
 function p 
 	pnpm $argv
 end
@@ -405,3 +403,9 @@ function git-ls
   #TODO:h add a mv to ~/.local/bin
   curl -sL "$argv"| tar zx   
 end
+
+function bios-boot 
+  systemctl reboot --firmware-setup
+end
+
+

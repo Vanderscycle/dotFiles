@@ -226,7 +226,7 @@ myManageHook =
       className =? "Gimp" --> doFloat,
       className =? "gmrun" --> doFloat,
        className =? "Steam"          --> doFloat,
-      -- className =? "steam" --> doFullFloat,
+      className =? "steam" --> doFullFloat,
       resource =? "desktop_window" --> doIgnore,
       resource =? "kdesktop" --> doIgnore
     ]
@@ -358,3 +358,4 @@ help = unlines ["The default modifier key is 'alt'. Default keybindings:",
     "mod-button1  Set the window to floating mode and move by dragging",
     "mod-button2  Raise the window to the top of the stack",
     "mod-button3  Set the window to floating mode and resize by dragging"]
+
