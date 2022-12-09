@@ -41,12 +41,18 @@ require("plugins.telescope").config()
 require("plugins.lualine").config() -- working?
 require("user.autocommands").config()
 require("luasnip/loaders/from_vscode").load({
-	paths = { "~/.config/lvim/snippets" },
+  paths = { "~/.config/lvim/snippets" },
 })
 -- adding friendly snippets to
 require("luasnip.loaders.from_snipmate").lazy_load()
 vim.diagnostic.config({ virtual_lines = true })
 require("user.general").config()
+-- install lsps
+require("mason-lspconfig").setup({
+  ensure_installed = { "sumneko_lua", "rust_analyzer", "gopls", "bashls", "dockerls",
+    "yamlls", "tsserver", "svelte", "hls", "pyright",
+    "jsonls", "emmet_ls" }
+})
 -- vim.g.gitblame_ignored_filetypes = { "NvimTree" }
 -- vim.g.gitblame_highlight_group = "Todo"
 

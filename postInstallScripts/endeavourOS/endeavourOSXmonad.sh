@@ -61,8 +61,9 @@ systemInit(){
   # -y: download fresh package databases from the server
 
   echo -e '=> Perform system update'
+  sudo pacman -S --noconfirm --needed archlinux-keyring
   sudo pacman -Syu --noconfirm
-  yay -Syu --noconfirm --needed
+  yay -Syu --noconfirm
   echo 'cli critical programs'
   sudo pacman -S --needed --noconfirm base-devel git curl wget clang yay
   yay -S --needed --noconfirm topgrade update-grub
@@ -430,7 +431,7 @@ xmonad(){
   # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
   echo -e '\n=> install the window manager and bar'
-  sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu httpie
+  sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu wofi
   sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
   nitrogen ~/Documents/dotfiles/img/space.png
   sudo pacman -S --needed --noconfirm xmobar hoogle #more to polybar later
@@ -442,7 +443,6 @@ xmonad(){
 
   sudo pacman -S --needed --noconfirm playerctl # for audio controls
   sudo pacman -S --noconfirm zsa-wally # zsa keyboard
-  sudo pacman -S --needed --noconfirm lxappareance #more to polybar later
   }
 
 fonts(){
@@ -576,7 +576,7 @@ lspNull(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> Installing developer packages and useful tui alternatives'
-  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat fd exa lazygit unzip xclip task zoxide bpytop
+  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat fd exa lazygit unzip xclip task zoxide bpytop httpie
   sudo pacman -S --noconfirm --needed broot yq jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
 
   yay -S --needed --noconfirm ytfzf 
