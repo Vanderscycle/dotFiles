@@ -541,9 +541,6 @@ lspNull(){
   # rust (installs rustup which installs rust and cargo)
 
   # Markdown 
-  yay -S --noconfirm --needed vale-bin
-  sudo npm install -g write-good
-  vale sync
 
   #bash
   yay -S --noconfirm --needed shellcheck-bin
@@ -555,7 +552,6 @@ lspNull(){
   #yamll
   echo -e '\n=> installing yaml(lint)'
   sudo pacman -S --needed --noconfirm yamllint
-  yay -S --needed --noconfirm actionlint-bin
   echo -e 'Done.\n'
 
   #python
@@ -567,6 +563,10 @@ lspNull(){
   #lua
   sudo pacman -S --needed --noconfirm luarocks #lua package manager
   luarocks install luacheck
+
+  #haskell
+  sudo pacman -S --needed --noconfirm ghcup-hs-bin
+
 
   #ts/js/etc.
   pnpm install -g svelte-language-server typescript typescript-language-server @tailwindcss/language-server emmet-ls
