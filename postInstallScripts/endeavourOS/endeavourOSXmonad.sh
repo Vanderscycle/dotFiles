@@ -437,6 +437,7 @@ xmonad(){
   sudo pacman -S --needed --noconfirm xmobar hoogle #more to polybar later
   yay -S --needed --noconfirm dunst #notification system
   yay -S --needed --noconfirm maim #screen capture
+  sudo pacman -S --needed --noconfirm lxappearance #change teh defailt theme
   yay -S --needed --noconfirm xkb-switch #screen capture
   yay -S --needed --noconfirm picom-git #screen capture
   echo -e 'Done.\n'
@@ -635,22 +636,18 @@ spotify(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> spotify'
-  yay -S --needed --noconfirm spotify spicetify-cli
+  yay -S --needed --noconfirm spotify
 
+  #BUG: spotify must run first prior spicetify working
+  echo -e '\n=> spicetify'
+  yay -S --nocinfirm spicetify-cli
   #adjusting spotify permission
   #INFO: https://github.com/khanhas/spicetify-cli/wiki/Installation#spotify-installed-from-aur
   sudo chmod a+wr /opt/spotify
   sudo chmod a+wr /opt/spotify/Apps -R
 
   #Configuring spotify themes
-  spicetify
-  spicetify backup apply enable-devtool
-  # BUG: something isn't right with spicetify
-  (cd ~/.config/spicetify/Themes/ &&
-  git clone https://github.com/NYRI4/Comfy-spicetify &&
-  spicetify config current_theme Comfy-spicetify &&
-  spicetify config inject_css 1 replace_colors 1 overwrite_assets 1 &&
-  spicetify apply)
+  curl -fsSL https://raw.githubusercontent.com/NYRI4/Comfy-spicetify/main/install.sh | sh
   echo -e 'Done.\n'
 
 }

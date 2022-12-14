@@ -11,4 +11,6 @@ UUID=dd7fad76-a1ea-4d33-8b2d-f90f2b5d7f89 /home          btrfs   subvol=/@home,d
 UUID=dd7fad76-a1ea-4d33-8b2d-f90f2b5d7f89 /var/cache     btrfs   subvol=/@cache,defaults,noatime,compress=zstd 0 0
 UUID=dd7fad76-a1ea-4d33-8b2d-f90f2b5d7f89 /var/log       btrfs   subvol=/@log,defaults,noatime,compress=zstd 0 0
 UUID=dd7fad76-a1ea-4d33-8b2d-f90f2b5d7f89 /swap          btrfs   subvol=/@swap,defaults,noatime 0 0
+# timeshift + steam
+UUID=c73d85a6-abe1-4c09-b019-f3db9332fa08 /mnt/backup btrfs   defaults,noatime,compress=zstd,nofail      0  0
 /swap/swapfile                            swap           swap    defaults   0 0

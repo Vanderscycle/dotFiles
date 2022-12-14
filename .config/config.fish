@@ -81,7 +81,7 @@ if status is-interactive
   set -xg NNN_FIFO '/tmp/nnn.fifo'
   export NNN_FIFO
   set -xg NNN_PLUG 'f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed'
-  set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/;s:~/.local/share/Steam/steamapps/common/Proton - Experimental;h:~/Documents/houseAtreides'
+  set -xg NNN_BMS 'w:~/Documents/houseAtreides;d:~/Documents;u:~;D:~/Downloads;C:~/Documents/dotFiles/postInstallScripts;c:~/.config;p:~/Pictures/;h:~/Documents/houseAtreides;v:/mnt/backup/transmission/'
   set -xg NNN_OPTS "Hed"
   set -xg SPLIT 'v' # to split Kitty vertically
   set -xg LC_COLLATE 'C' # hidden files on top
@@ -353,6 +353,7 @@ function save
   set -l CURRENTLOCATION $PWD
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
+  sudo rsync -av $HOME/Downloads/transmission /mnt/transmission/
   bash "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c "save"
   git status
   git cmp "Everything that is not saved will be lost"
@@ -374,10 +375,11 @@ end
 # system/pacman
 function update
   # create a backyp
-  # sudo timeshift --create
+  sudo timeshift --create
   topgrade
   # sudo pacman -Syu
   xmonad --recompile
+  betterdiscordctl install
 end
 
 function crash-log
@@ -409,3 +411,4 @@ function bios-boot
 end
 
 
+fish_add_path /home/henri/.spicetify
