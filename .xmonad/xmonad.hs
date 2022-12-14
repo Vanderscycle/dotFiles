@@ -94,7 +94,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       -- launch dmenu
       ((modm, xK_p), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\""),
       -- launch gmrun
-      ((modm .|. shiftMask, xK_p), spawn "rofi -show run"),
+      ((modm .|. shiftMask, xK_p), spawn "rofi -show run -theme $HOME/.config/rofi/launcher.rasi"),
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
       ((modm, xK_equal ), spawn ("echo \"" ++ help ++ "\" | xmessage -file -")),
       -- dedicated nnn finder with tmux preview window

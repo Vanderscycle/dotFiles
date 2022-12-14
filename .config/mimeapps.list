@@ -17,6 +17,7 @@ x-scheme-handler/unknown=firefox.desktop
 x-scheme-handler/etcher=balena-etcher-electron.desktop
 image/jpeg=nomacs.desktop
 image/png=nomacs.desktop
+video/x-avi=vlc
 
 [Added Associations]
 image/png=org.gnome.eog.desktop;
@@ -31,3 +32,4 @@ application/xhtml+xml=firefox.desktop;
 application/x-extension-xhtml=firefox.desktop;
 application/x-extension-xht=firefox.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-JK56H1.desktop;
+video/x-matroska=vlc.desktop;

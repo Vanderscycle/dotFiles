@@ -353,7 +353,7 @@ function save
   set -l CURRENTLOCATION $PWD
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
-  sudo rsync -av $HOME/Downloads/transmission /mnt/transmission/
+  sudo rsync -av --remove-source-files $HOME/Downloads/transmission /mnt/backup/transmission/
   bash "$DOOTFILE_LOC"/postInstallScripts/sync.sh -c "save"
   git status
   git cmp "Everything that is not saved will be lost"
