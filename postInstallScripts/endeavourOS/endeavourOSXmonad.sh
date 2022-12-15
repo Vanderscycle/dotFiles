@@ -292,7 +292,7 @@ kubernetes(){
   echo -e '\n=> Installing kubernetes'
   sudo pacman -S --needed --noconfirm kubectl kubeseal argocd kustomize
   kubectl completion fish | source
-  yay -S --needed --noconfirm kind-bin
+  yay -S --needed --noconfirm kind-bin ctlptl-bin
   # otherwise you can install something like hyperkit and minikube start --vm-driver=minikube
   yay -S --needed --noconfirm k9s dive
   echo -e 'Done.\n'
