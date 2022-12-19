@@ -1,11 +1,11 @@
 local status_ok, lspconfig = pcall(require, "lspconfig")
 if not status_ok then
-	return
+  return
 end
 
 local on_attach = function(client, bufnr)
-	-- require("nvim-navic").attach(client, bufnr)
-	require("lsp_signature").on_attach(client, bufnr)
+  -- require("nvim-navic").attach(client, bufnr)
+  require("lsp_signature").on_attach(client, bufnr)
 end
 
 local desired_servers = { "sumneko_lua", "tsserver", "emmet", "svelte", "gopls", "pyright", "bashls", "yamlls" }
@@ -16,16 +16,30 @@ local desired_servers = { "sumneko_lua", "tsserver", "emmet", "svelte", "gopls",
 -- end
 
 for _, s in pairs(desired_servers) do
-	if s == "yamlls" then
-		-- Wrapping the "default" function like this is important.
-		if vim.bo.buftype ~= "" or vim.bo.filetype == "helm" then
-			vim.diagnostic.disable()
-		end
-	else
-		lspconfig[s].setup({
-			on_attach = on_attach,
-		})
-	end
+  if s == "yamlls" then
+    -- Wrapping the "default" function like this is important.
+    -- if vim.bo.buftype ~= "" or vim.bo.filetype == "helm" then
+    --   vim.diagnostic.disable()
+    -- end
+    if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+      vim.diagnostic.disable(bufnr)
+      vim.defer_fn(function()
+        vim.diagnostic.reset(nil, bufnr)
+      end, 1000)
+    end
+    elseif vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "env" then
+      vim.diagnostic.disable(bufnr)
+      vim.defer_fn(function()
+        vim.diagnostic.reset(nil, bufnr)
+      end, 1000)
+    -- elseif vim.bo.filename == "*.env" then
+    -- 	vim.diagnostic.disable()
+    -- end
+  else
+    lspconfig[s].setup({
+      on_attach = on_attach,
+    })
+  end
 end
 
 -- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(name)
