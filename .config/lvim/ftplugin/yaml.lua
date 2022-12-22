@@ -37,6 +37,6 @@ linters.setup({
   {
     exe = "yamllint",
     filetypes = { "yaml", "yml" },
-    -- args = { "{extends: default, rules: {line-length: disable}}" },
+    args = { "{extends: default, rules: {line-length: disable}}" },
   },
 })

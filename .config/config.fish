@@ -262,6 +262,32 @@ end
 #TODO: add kubectl get/apply describe/ etc 
 #k8s
 
+#Helm
+function helm-compile --description "helm-compile <name chart>"
+	helm install "$argv" .
+end
+
+function helm-degug --description "helm-debug <name chart>"
+	helm install --debug --dry-run "$argv" .
+end
+
+function helm-get --description "helm-get <name chart>"
+	helm get manifest "$argv" 
+end
+
+function helm-template --description "helm-template <name chart>"
+	helm template "$argv" . | tee "$argv".log.yaml
+end
+
+#terraform
+function t-apply
+  terraform plan --out=output.tfplan
+end
+
+function t-execute
+  terraform apply output.tfplan
+end
+
 #Podman
 function podman-crmAll
   echo -e "Removing all containers"
@@ -299,7 +325,8 @@ end
 
 function docker-vrmAll
   echo -e "removing all volumes"
-	docker volume rm -f (docker volume ls -aq )
+	# docker volume rm -f (docker volume ls -aq )
+  docker volume prune
 	echo "done"
 end
 
@@ -308,7 +335,7 @@ echo -e "purging everything"
  	docker-crmAll
   docker-irmAll
   docker-vrmAll
-	docker builder prune -afq
+	docker builder prune -af
   echo "done"
 end
 

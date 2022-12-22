@@ -15,12 +15,32 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: lke78534-ctx
-  currentCluster: lke78534
+  currentContext: kind-infrastructure
+  currentCluster: kind-infrastructure
   clusters:
-    lke78534:
+    kind-infrastructure:
       namespace:
-        active: default
+        active: all
+        lockFavorites: false
+        favorites:
+        - keycloak
+        - default
+      view:
+        active: svc
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    kind-infrastructure-website:
+      namespace:
+        active: all
         lockFavorites: false
         favorites:
         - default
