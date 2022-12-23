@@ -668,6 +668,7 @@ gaming(){
 
   echo -e '\n=> installing steam/gog/epic'
   sudo pacman -S --needed --noconfirm steam gamemoderun
+  yay -S --needed --noconfirm lib32-glu
   pip install mako
   yay -S --needed --noconfirm heroic-games-launcher-bin mangohud-git
   echo -e 'Done.\n'
