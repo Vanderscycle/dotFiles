@@ -723,6 +723,10 @@ install(){
   security
   languages
   fish
+# bluetooth
+  sudo pacman -S --needed bluez bluez-utils
+sudo systemctl enable --now bluetooth
+
   #fisher
   chsh -s "$(which fish)" # change the default shell
   backupMaintenance

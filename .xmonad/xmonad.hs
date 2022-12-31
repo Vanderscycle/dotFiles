@@ -205,7 +205,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) =
 ------------------------------------------------------------------------
 -- Layouts:
 threeLayout = ThreeCol 2 (3/100) (1/2)
-myLayout = avoidStruts (smartBorders (threeLayout ||| tiled ||| Mirror tiled ||| Full ||| spiral (6/7) 
+myLayout = avoidStruts (smartBorders (tiled ||| threeLayout  ||| Mirror tiled ||| Full ||| spiral (6/7) 
                ))
   where
     -- default tiling algorithm partitions the screen into two panes
@@ -225,8 +225,8 @@ myManageHook =
     [ className =? "MPlayer" --> doFloat,
       className =? "Gimp" --> doFloat,
       className =? "gmrun" --> doFloat,
-       className =? "Steam"          --> doFloat,
-      className =? "steam" --> doFullFloat,
+      -- className =? "Steam" --> doFloat,
+      -- className =? "steam" --> doFullFloat,
       resource =? "desktop_window" --> doIgnore,
       resource =? "kdesktop" --> doIgnore
     ]
@@ -265,10 +265,10 @@ myLogHook h = dynamicLogWithPP $ def
 ----------------------------------------------------------------------
 -- Startup hook
 
-myStartupHook = do
+myStartupHook =  do
   spawnOnce "nitrogen --restore &"
   spawnOnce "picom -b &"
-  -- spawnOnOnce "3" "spotify &" --spawnOnOnce :: WorkspaceId -> String -> X ()Source -- https://hackage.haskell.org/package/xmonad-contrib-0.14/docs/XMonad-Util-SpawnOnce.html
+  spawnOnOnce "3" "spotify &" --spawnOnOnce :: WorkspaceId -> String -> X ()Source -- https://hackage.haskell.org/package/xmonad-contrib-0.14/docs/XMonad-Util-SpawnOnce.html
   spawnOnOnce "2" "firefox&"
   spawnOnOnce "3" "discord &"
   -- spawnOnOnce "2" "slack &"
@@ -303,6 +303,7 @@ main = do
       manageHook = myManageHook,
       -- handleEventHook = myEventHook,
       startupHook = myStartupHook,
+      -- manageHook = manageSpawn,
       logHook = myLogHook xmproc
     }
 

@@ -11,13 +11,24 @@ Victoria, BC<br>
 
 ## Employment
 
-2021 Fullstack Software Developer Aviary Tech
+2022 DevOps Engineer
+Atreides
+  - techStack: Kubernetes, Ansible, Helm, Argocd, GitOps, DevOps, Gitlab-ci, NextJs, NestJs
+  - Learned, as a Jr. DevOps engineer, the advanced tech infrastructure stack and contributed with PR.
+  - Created the Atreides CICD gitlab pipelines
+  - Incorporated [Test Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) with cypress and jest into the CICD pipeline
+  - 
+  
+2021 Fullstack Software Developer
+Aviary Tech
+  - techStack: NestJs, svelte, cypress, github actions, typescript, bash
   - Created a fullstack blockchain miner using the [Command and Query Responsibility Segregation (CQRS)](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) pattern, paired with a svelte frontend
-  - Created DevOps pipeline, workflow automation, applied [Test Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) using Jest and cypress
+  - Created DevOps pipeline, workflow automation, applied TDD using Jest and cypress
   - Mentored and taught non-developers how to use javascript and the Svelte frontend framework
   - Mastered VIM and Linux scripting for automation
     
-2007 Royal Canadian Navy
+2007 Marine Engineering Offcier 
+Royal Canadian Navy
   - Retired as a fully qualified [Marine System Engineering Officer](https://forces.ca/en/career/marine-systems-engineering-officer/) where I informed, advised, and recommend technical courses of action to non-technical superiors during normal, wartime, emergency operations, and maintence periods.
   - Earned the admiration of my peers and superiors to my grit and can-do attitude in the face of great adversity.
   - Led projects varying from simple ceremonial duties to time and cost sensitive projects
@@ -39,24 +50,23 @@ A non exhaustive list of open source projects that I contributed:
   - [Zellig](https://github.com/zellij-org/zellij); 
   - [highlight.js](https://github.com/highlightjs/highlight.js);
   - [prism-themes](https://github.com/PrismJS/prism-themes);
-  - [lunarVim](https://github.com/LunarVim/LunarVimCommunity);
 
 ## Professional Qualifications
 P.eng, Engineers and Geoscientists BC (non-practicing)
 
 ## Programming Skills
-| Language/Framework  | Competence level   | 
+| Language/Framework/Tool  | Competence level   | 
 |-------------- | -------------- | 
 | Bash/fish    | Expert     | 
 | Javascript    | Advanced     | 
 | Typescript    | Advanced     | 
 | Docker     | Advanced    | 
+| k8s/helm/kustomize | Intermediate    | 
+| ansible | Intermediate    | 
 | Python     | Advanced    | 
-| Numpy/Pandas     | Advanced    | 
 | Svelte    | Advanced     | 
 | NestJs    | Advanced     | 
-| Rust    | Basic-Intermediate     | 
-| Go    | Basic     | 
+| Go    | Basic-Intermediate     | 
 | Lua/xmonad    | Basic    | 
 
 ## Language skills

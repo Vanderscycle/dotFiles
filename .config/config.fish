@@ -259,8 +259,6 @@ end
 function glowAll
   exa -a | entr -c  glow  "$argv"
 end
-#TODO: add kubectl get/apply describe/ etc 
-#k8s
 
 #Helm
 function helm-compile --description "helm-compile <name chart>"
@@ -351,16 +349,26 @@ function k-encode  --description "k-encode <secret.yaml>"
 
 end
 
-
 #INFO: https://stackoverflow.com/questions/24093649/how-to-access-remaining-arguments-in-a-fish-script
-function k-s --description "secret <namespace> <secret-name>"
+function k-secret --description "secret <namespace> <secret-name>"
   kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
+end
+
+function k-build --description "secret <namespace> <secret-name>"
+  kustomize build --load-restrictor LoadRestrictionsNone --enable-helm . > build.log
+  bat build.log
 end
 
 function k8s-prmAll
 echo -e "purging everything"
   kubectl delete all --all --namespaces
 end
+
+function k8s-prmNamespace
+echo -e "purging everything in ns: $argv"
+  kubectl delete all --all "$argv"
+end
+
 # docker containers
 function linode-docker  #TODO: review
   docker run -it --rm -v (pwd):/work -w /work --entrypoint /bin/bash aimvector/linode:2.15.0
