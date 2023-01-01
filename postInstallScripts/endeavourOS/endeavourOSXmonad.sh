@@ -670,7 +670,7 @@ gaming(){
   sudo pacman -S --needed --noconfirm steam gamemoderun
   yay -S --needed --noconfirm lib32-glu
   pip install mako
-  yay -S --needed --noconfirm heroic-games-launcher-bin mangohud-git
+  yay -S --needed --noconfirm heroic-games-launcher-bin mangohud-git goverlay-bin
   echo -e 'Done.\n'
 }
 
