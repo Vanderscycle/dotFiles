@@ -19,7 +19,7 @@ Atreides
   - Incorporated [Test Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) with cypress and jest into the CICD pipeline
   - 
   
-2021 Fullstack Software Developer
+2021-2022 Jr. Fullstack Software Developer
 Aviary Tech
   - techStack: NestJs, svelte, cypress, github actions, typescript, bash
   - Created a fullstack blockchain miner using the [Command and Query Responsibility Segregation (CQRS)](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) pattern, paired with a svelte frontend
@@ -27,7 +27,7 @@ Aviary Tech
   - Mentored and taught non-developers how to use javascript and the Svelte frontend framework
   - Mastered VIM and Linux scripting for automation
     
-2007 Marine Engineering Offcier 
+2007-2020 Marine Engineering Offcier 
 Royal Canadian Navy
   - Retired as a fully qualified [Marine System Engineering Officer](https://forces.ca/en/career/marine-systems-engineering-officer/) where I informed, advised, and recommend technical courses of action to non-technical superiors during normal, wartime, emergency operations, and maintence periods.
   - Earned the admiration of my peers and superiors to my grit and can-do attitude in the face of great adversity.

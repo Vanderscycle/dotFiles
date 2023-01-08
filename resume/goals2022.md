@@ -1,6 +1,6 @@
 ## Short term
 - [ ] create a user preference where the user can choose what to save and sync
-- [ ] reformat the sync and save, add arg parser, make sure it sources the user file
+- [x] reformat the sync and save, add arg parser, make sure it sources the user file
 - [ ] figure out  yaml/json/toml for the user data file
 - [ ] learn rust through discord bots
 - [x] OS: move from Manjaro to endavourOs

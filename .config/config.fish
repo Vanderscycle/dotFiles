@@ -62,8 +62,8 @@ if status is-interactive
 
   # aws/linode/cli login
   # TODO: create an fzf multi choice
-  # set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config #eks 
-  set -xg AWS_PROFILE "atreides-build"
+  set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config #eks 
+  # set -xg AWS_PROFILE "atreides-build"
 
 
   # zoxide
