@@ -152,7 +152,7 @@ function gSquash
     git reset (git merge-base "$argv" (git branch --show-current))
 end
 
-function gFetch --description "gFetch <branch name>"
+function gFS --description "gFetch <branch name>"
   git fetch origin "$argv"
   git switch "$argv"
 end
@@ -275,6 +275,12 @@ end
 
 function helm-template --description "helm-template <name chart>"
 	helm template "$argv" . | tee "$argv".log.yaml
+end
+
+function helm-ignore --description "helm-ignore <.>"
+  helm template . --output-dir=file-size-test
+  tree --du -h file-size-test
+  rm -rf file-size-test
 end
 
 #terraform
