@@ -14,33 +14,32 @@ local desired_servers = { "sumneko_lua", "tsserver", "emmet", "svelte", "gopls",
 -- 		on_attach = on_attach,
 -- 	})
 -- end
-
 for _, s in pairs(desired_servers) do
-	if s == "yamlls" then
-		-- Wrapping the "default" function like this is important.
-		-- if vim.bo.buftype ~= "" or vim.bo.filetype == "helm" then
-		--   vim.diagnostic.disable()
-		-- end
-		if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-			vim.diagnostic.disable(bufnr)
-			vim.defer_fn(function()
-				vim.diagnostic.reset(nil, bufnr)
-			end, 1000)
-		end
-	elseif vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "env" then
-		vim.diagnostic.disable(bufnr)
-		vim.defer_fn(function()
-			vim.diagnostic.reset(nil, bufnr)
-		end, 1000)
-	-- elseif vim.bo.filename == "*.env" then
+	-- if s == "yamlls" then
+	-- 	-- Wrapping the "default" function like this is important.
+	-- 	-- if vim.bo.buftype ~= "" or vim.bo.filetype == "helm" then
+	-- 	--   vim.diagnostic.disable()
+	-- 	-- end
+	-- 	if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+	-- 		vim.diagnostic.disable(bufnr)
+	-- 		vim.defer_fn(function()
+	-- 			vim.diagnostic.reset(nil, bufnr)
+	-- 		end, 1000)
+	-- 	end
+	-- elseif vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "env" then
+	-- 	vim.diagnostic.disable(bufnr)
+	-- 	vim.defer_fn(function()
+	-- 		vim.diagnostic.reset(nil, bufnr)
+	-- 	end, 1000)
+	-- -- elseif vim.bo.filename == "*.env" then
 	-- 	vim.diagnostic.disable()
 	-- end
-	else
-		lspconfig[s].setup({
-			on_attach = on_attach,
-		})
-	end
+	-- else
+	lspconfig[s].setup({
+		on_attach = on_attach,
+	})
 end
+-- end
 
 -- lvim.lsp.automatic_configuration.skipped_servers = vim.tbl_filter(function(name)
 -- 	return name ~= "tailwindcss"

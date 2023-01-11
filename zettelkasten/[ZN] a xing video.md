@@ -36,16 +36,44 @@ M.W. 堂 tang2
 尝 chang2 taste
 (wo)尝一尝 chang2 yi chang2 I am tasting it
 这个季节来因为太冷了 its cold this season
-季节 season
+季节ji4jie2 season
 不是旺季 not peak season
 旺 wang4 properous.flourishing.vigorous
 但是现在人也不少 but there are many people
 咱吃什么呢 what should we eat
 啥/什么 sha2/shen2me what
+怎么买 zen me mai3 what's the price
+买 mai3 buy
+卖 mai4 sell
+来上3根油条
+(根)油条 gen1you2tiao2 fritters
+M.W. 根 gen1 classifier for long slender objects e.g. guitar strings, cigarettes
+来上3根油条一碗都将
+3根油条 3 fritters
+一份豆腐 yi fen doufu a serving of tofu
+臭豆腐 chou4 dou4fu stinky todu
+一碗都将 one bowl of soy milk
+再来一个炒鸭脚 
+炒鸭脚 chao3 ya1jiao3 fired duck feet
+大的肉吃着过瘾 the big ones are satisying to eat
+过瘾 guo4 yin1 satisfying
+但是你闻起来不有看起来全是螺蛳粉那一味里边都是酸笋
+全quan2 all
+## action
+闻wen smell
 ### Food
+酸笋 suan1sun1 sour bamboo shoots
 臭豆腐 chou4 dou4fu 
 鸭大脚 ya1 da4 jiao1 duck feet
 豆浆dou4jiang1 soy milk
-https://www.youtube.com/watch?v=Kzu_TlgbUzA
+石螺 shi2 luo2 stone snails 
+螺蛳粉 lousi fen snail noodles
+## Sayings
+闻起来 wen qi lai to smell
+
+给我来一个gei3 wo3 lai2 yi ge give me one
+再来一个 zai4lai2 yi ge bring another
+这个里头是什么 zhe4ge litou shi4 shen2me what's in this
+里头 kitou container 
 ## References
 
