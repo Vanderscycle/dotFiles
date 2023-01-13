@@ -260,6 +260,37 @@ function glowAll
   exa -a | entr -c  glow  "$argv"
 end
 
+# kubernetes / k8s
+# INFO: for aliases you need eval
+function k
+  eval kubectl "$argv[..-1]"
+end
+
+function k-encode  --description "k-encode <secret.yaml>"
+  # echo -n "$argv" | base64
+    yq '.data' "$argv" | jq -r 'values[]' | xargs -I '{}' bash -c  'echo -n {} | base64'
+end
+
+#INFO: https://stackoverflow.com/questions/24093649/how-to-access-remaining-arguments-in-a-fish-script
+function k-secret --description "secret <namespace> <secret-name>"
+  kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
+end
+
+function k-build --description "secret <namespace> <secret-name>"
+  kustomize build --load-restrictor LoadRestrictionsNone --enable-helm . > build.log
+  bat build.log
+end
+
+function k8s-prmAll
+echo -e "purging everything"
+  kubectl delete all --all --namespaces
+end
+
+function k8s-prmNamespace
+echo -e "purging everything in ns: $argv"
+  kubectl delete all --all "$argv"
+end
+
 #Helm
 function helm-compile --description "helm-compile <name chart>"
 	helm install "$argv" .
@@ -341,38 +372,6 @@ echo -e "purging everything"
   docker-vrmAll
 	docker builder prune -af
   echo "done"
-end
-
-# k8s
-# INFO: for aliases you need eval
-function k
-  eval kubectl "$argv[..-1]"
-end
-
-function k-encode  --description "k-encode <secret.yaml>"
-  # echo -n "$argv" | base64
-    yq '.data' "$argv" | jq -r 'values[]' | xargs -I '{}' bash -c  'echo -n {} | base64'
-
-end
-
-#INFO: https://stackoverflow.com/questions/24093649/how-to-access-remaining-arguments-in-a-fish-script
-function k-secret --description "secret <namespace> <secret-name>"
-  kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
-end
-
-function k-build --description "secret <namespace> <secret-name>"
-  kustomize build --load-restrictor LoadRestrictionsNone --enable-helm . > build.log
-  bat build.log
-end
-
-function k8s-prmAll
-echo -e "purging everything"
-  kubectl delete all --all --namespaces
-end
-
-function k8s-prmNamespace
-echo -e "purging everything in ns: $argv"
-  kubectl delete all --all "$argv"
 end
 
 # docker containers
