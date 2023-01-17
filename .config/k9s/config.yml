@@ -15,10 +15,10 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: kind-infrastructure-website
-  currentCluster: kind-infrastructure-website
+  currentContext: lke84758-ctx
+  currentCluster: lke84758
   clusters:
-    kind-infrastructure-website:
+    lke84758:
       namespace:
         active: all
         lockFavorites: false

@@ -201,7 +201,7 @@ end
 bind \t 'fzf_complete; commandline -f repaint'
 
 # kill port
-function kill-port
+function killport
   kill -9 (lsof -t -i:"$argv")
 end
 # go
@@ -260,6 +260,10 @@ function glowAll
   exa -a | entr -c  glow  "$argv"
 end
 
+# converter json => yaml
+function j2y --description "<name>.json}"
+  cat "$PWD"/"$argv" | python "$DOOTFILE_LOC"scripts/j2y.py > j2y.yaml
+end
 # kubernetes / k8s
 # INFO: for aliases you need eval
 function k
@@ -289,6 +293,13 @@ end
 function k8s-prmNamespace
 echo -e "purging everything in ns: $argv"
   kubectl delete all --all "$argv"
+end
+
+#Tilt-kind
+function tilt-purge --description "restart the local cluster"""
+  docker-crmAll
+  ctlptl create registry ctlptl-registry
+  ctlptl apply -f "$DOOTFILE_LOC"scripts/tilt-kind.yaml
 end
 
 #Helm
