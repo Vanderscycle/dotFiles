@@ -280,6 +280,10 @@ function k-secret --description "secret <namespace> <secret-name>"
   kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
 end
 
+function k-seal --description "secret <path> "
+   kubeseal --cert kubeseal-public.pem -f "$argv"/secret.yaml -o yaml > "$argv"/sealed-secret.yaml
+end
+
 function k-build --description "secret <namespace> <secret-name>"
   kustomize build --load-restrictor LoadRestrictionsNone --enable-helm . > build.log
   bat build.log
