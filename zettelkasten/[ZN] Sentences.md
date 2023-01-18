@@ -30,5 +30,16 @@ date: {{ date }}
 想着 xiangzhe thinking about
 想着骑我的自行车我明天会骑再一次
 
+## 18/01/23
+上个圣诞节我买一小本笔记本
+我最大工作坏习惯是写小知识点在一个便利贴
+便利贴 bian4li4 tie1 post it
+知识 zhi1shi4 information/knowledge
+写完以后我常常忘记了在哪里我离开的地方便利贴
+离开的地方li2kai1 di4 di4fang1 where I left
+所以我应该用新笔记书但是我还试试看改掉这个坏习惯
+现在上便我们的桌子有太多便利贴
+因此我有时候失去重要的知识当我找不到能发现我便利贴
+
 ## References
 
