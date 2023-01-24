@@ -38,8 +38,15 @@ date: {{ date }}
 写完以后我常常忘记了在哪里我离开的地方便利贴
 离开的地方li2kai1 di4 di4fang1 where I left
 所以我应该用新笔记书但是我还试试看改掉这个坏习惯
-现在上便我们的桌子有太多便利贴
-因此我有时候失去重要的知识当我找不到能发现我便利贴
+改掉gai3diao4 give up
+坏习惯 huai4 xi2guan4 bad habit
+现在上面我们的桌子有太多便利贴
+上面 shang4mian4 above
+因此我有时候失去重要的知识当我找不到我便利贴
+因此 yin1ci3 therefore
+失去 shi1qu4 lose
+当我找不到 dang1 wo zhao3bu4dao4 when I can't find
+发现 faxian find/search
 
 ## References
 
