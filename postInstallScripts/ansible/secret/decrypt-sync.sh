@@ -28,7 +28,7 @@ while (( "$#" )); do
       ;;
   esac
 done
-declare -a SecureFiles=("github-gpg-private.key" "gitlab-gpg-private.key" "aws-config" "atreidesGit" "endeavourGit")
+declare -a SecureFiles=("github-gpg-private.key" "gitlab-gpg-private.key" "aws-config" "atreidesGit" "endeavourGit" ".env-general")
 
 decrypt(){
 
@@ -69,8 +69,9 @@ load-ssh(){
 if [[ "${OPERATION}" = "decrypt" ]];then
   decrypt
   if [[ "${LOCATION}" = "home" ]];then
-  load-gpg
-  load-ssh
+    load-gpg
+    load-ssh
+    rsync -av --progress .env-general "$HOME/Documents/dotFiles/.env" 
 fi
 elif [[ "${OPERATION}" = "encrypt" ]];then
   encrypt
