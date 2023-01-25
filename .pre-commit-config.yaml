@@ -1,0 +1,25 @@
+# https://pre-commit.com/hooks.html
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/psf/black
+    rev: 22.10.0
+    hooks:
+      - id: black
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: 1.4.0
+    hooks:
+      - id: detect-secrets
+  - repo: https://github.com/adrienverge/yamllint
+    rev: 1.29.0
+    hooks:
+      - id: yamllint
+
+  - repo: https://github.com/lovesegfault/beautysh
+    rev: 6.2.1
+    hooks:
+      - id: beautysh
