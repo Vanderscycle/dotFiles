@@ -15,11 +15,11 @@ repos:
     hooks:
       - id: detect-secrets
   - repo: https://github.com/adrienverge/yamllint
-    rev: 1.29.0
+    rev: v1.29.0
     hooks:
       - id: yamllint
 
   - repo: https://github.com/lovesegfault/beautysh
-    rev: 6.2.1
+    rev: v6.2.1
     hooks:
       - id: beautysh
