@@ -11,7 +11,7 @@ repos:
     hooks:
       - id: black
   - repo: https://github.com/Yelp/detect-secrets
-    rev: 1.4.0
+    rev: v1.4.0
     hooks:
       - id: detect-secrets
   - repo: https://github.com/adrienverge/yamllint
