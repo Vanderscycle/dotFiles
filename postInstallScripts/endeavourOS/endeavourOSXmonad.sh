@@ -702,11 +702,12 @@ cliClients () {
   echo -e '\n=> Installing Linode' 
   pip3 install linode-cli --upgrade  
   echo -e 'Done.\n'
-  #TODO: what about linode? have it run in a container?
 
+  echo -e '\n=> Installing gitlab cli' 
+  pacman -S --needed --noconfirm glab
+  echo -e 'Done.\n'
 }
 
-# TODO: creates an arg-parser
 install(){
 
   # -----------------------------------------------------------------------------
