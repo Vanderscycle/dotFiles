@@ -48,5 +48,23 @@ date: {{ date }}
 当我找不到 dang1 wo zhao3bu4dao4 when I can't find
 发现 faxian find/search
 
-## References
+## 25/01/23
 
+我最近享受清爽的音乐从一个日本演奏这
+音乐 yinyue music
+享受 xiangshou enjoyed
+清爽 qing1shuang3 refreshing
+演奏这 yan3zou4 zhe4 musician/performer
+音乐家 yinyue jia musician
+这位音乐家叫Takaneka和他是有名日本吉他手
+吉他手 jita shou guitarist
+他的音乐听起来就想你在拉丁美洲
+就想... xiang like
+美洲 meizhou america
+亚洲 yazhou asia
+欧洲 ouzhou europe
+他最有名音乐做了从1975到大概1990
+最后一次我播放他的音乐我太太对我说话你《和我的爸爸喜欢一样奇怪的音乐》
+这位吉他家还做新的音乐但是我比较喜欢他就的音乐
+当音乐玩的时候他有时候用拉丁美洲的鸟声例如 kookabura
+## References
