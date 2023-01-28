@@ -32,13 +32,13 @@ if status is-interactive
   set -xq BROWSER firefox
   set -xg SHELL fish
   set -xg TERMINAL kitty
-  set -xg LV_BRANCH rolling 
+  set -xg LV_BRANCH rolling
 
   # fzf
   set -xg fzf_preview_dir_cmd exa --all --color=always
   set -xg fzf_preview_file_cmd bat
   set -xg FZF_DEFAULT_OPTS '--multi --no-height --extended --bind "alt-a:select-all,alt-d:deselect-all"'
-  
+
   # fish
   fish_config theme choose "fish default"
 
@@ -56,13 +56,16 @@ if status is-interactive
 
   # ripgrep
   set RIPGREP_CONFIG_PATH -xg ~/.config/rg/
- 
+
   # argocd
   set -xg ARGO_LOCAL "admin1!admin"
+  # k9s
+  # set -xg $XDG_CONFIG_HOME/k9s/in_the_navy_skin.yml
+
 
   # aws/linode/cli login
   # TODO: create an fzf multi choice
-  set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config #eks 
+  set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config #eks
   # set -xg AWS_PROFILE "atreides-build"
 
 
@@ -91,13 +94,13 @@ if status is-interactive
 
   #gpg
   set -gx GPG_TTY (tty)
-  
-  # path -> Cargo, Conda 
+
+  # path -> Cargo, Conda
   set -xg PATH "/home/henri/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/henri/.config/broot:/home/henri/.emacs.d/bin"
 # poetry
   set -xg POETRY_HOME "/home/henri/.local/"
   set -xg PATH "$POETRY_HOME/bin" "$PATH"
-# rust 
+# rust
   set -xg RUST_HOME "/home/henri/.cargo"
   set -xg PATH "$RUST_HOME/bin" "$PATH"
 # deno
@@ -116,7 +119,7 @@ if status is-interactive
   pyenv rehash
 
 end
-  
+
 # aliases/func
 #fish
 function fish_greeting
@@ -124,15 +127,15 @@ function fish_greeting
     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
     # pokemon-colorscripts -r
     if not test -f '/tmp/weather_report'
-      
+
     # adding all the ssh keys
       ssh-add ~/.ssh/endeavourGit
       ssh-add ~/.ssh/atreidesGit
     # dumping the latest
-      journalctl --since=today > ~/.error.log # look for Boot 
+      journalctl --since=today > ~/.error.log # look for Boot
       touch /tmp/weather_report
       set -l TMP_FILE  /tmp/weather_report
-      xmonad --recompile; xmonad --restart
+      # xmonad --recompile; xmonad --restart
       xrandr --output DP-2 --mode 3440x1440 --rate 144 # force the monitor to move from 60 to 144hz
       curl -s v2d.wttr.in/ | tee $TMP_FILE
     end
@@ -148,7 +151,7 @@ function n
 end
 
 # git
-function gSquash 
+function gSquash
     git reset (git merge-base "$argv" (git branch --show-current))
 end
 
@@ -157,16 +160,16 @@ function gFS --description "gFetch <branch name>"
   git switch "$argv"
 end
 
-function gTestTags 
+function gTestTags
   git tag -l | xargs -n 1 git push --delete origin
-  git tag -l | xargs git tag -d                   
-  git tag -a v"$argv" -m 'testing promotion'     
+  git tag -l | xargs git tag -d
+  git tag -a v"$argv" -m 'testing promotion'
   git push origin --tags
 end
 
 # ssh/servers
 
-function pihole 
+function pihole
   kitty +kitten ssh pi@192.168.1.154
 end
 function ans
@@ -205,12 +208,12 @@ function killport
   kill -9 (lsof -t -i:"$argv")
 end
 # go
-function goGet 
+function goGet
   go get -u ./...
 end
 
 #npm/pnpm
-function p 
+function p
 	pnpm $argv
 end
 
@@ -244,7 +247,7 @@ function ls
   eval exa -al"$argv"
 end
 
-function lvim 
+function lvim
  bash /home/henri/.local/bin/lvim $argv
 end
 
@@ -316,7 +319,7 @@ function helm-degug --description "helm-debug <name chart>"
 end
 
 function helm-get --description "helm-get <name chart>"
-	helm get manifest "$argv" 
+	helm get manifest "$argv"
 end
 
 function helm-template --description "helm-template <name chart>"
@@ -343,7 +346,7 @@ function podman-crmAll
   echo -e "Removing all containers"
   podman rm --all --force
   echo "done"
- 
+
 end
 
 function podman-irmAll
@@ -356,7 +359,7 @@ function podman-prmAll
   echo -e "pruging everything"
   podman-compose stop
   podman-crmAll
-  podman system prune --all --force 
+  podman system prune --all --force
   echo "done"
 end
 
@@ -395,16 +398,16 @@ function linode-docker  #TODO: review
 end
 
 # ripgrep
-function rga-fzf 
+function rga-fzf
   bash "$DOOTFILE_LOC"/scripts/rga-fzf.sh "$argv"
 end
 
-function rgr 
+function rgr
   bash "$DOOTFILE_LOC"/scripts/rgr.sh "$argv"
 end
 
 function save
-  # save our current location 
+  # save our current location
   set -l CURRENTLOCATION $PWD
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
@@ -417,7 +420,7 @@ function save
 end
 
 function sync
-  # save our current location 
+  # save our current location
   set -l CURRENTLOCATION $PWD
   # cd into the dotfile folder for git
   cd "$DOOTFILE_LOC"
@@ -458,10 +461,10 @@ end
 #WARN: unfinished. goal is to download releases (tar.gz) from github and extract them
 function git-ls
   #TODO:h add a mv to ~/.local/bin
-  curl -sL "$argv"| tar zx   
+  curl -sL "$argv"| tar zx
 end
 
-function bios-boot 
+function bios-boot
   systemctl reboot --firmware-setup
 end
 

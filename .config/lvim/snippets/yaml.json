@@ -13,12 +13,12 @@
     "body": [
       "patches:",
       "\t- target:",
-      "\t\tkind: {0:k8s target}",
-      "\t\tname: {1:target name}",
+      "\t\tkind: ${0:k8s target}",
+      "\t\tname: ${1:target name}",
       "\t  patch: |-",
-      "\t\t\t- op: {2: operation}",
-      "\t\t\tpath: {3: path}",
-      "\t\t\tvalue: \"{4: value}\""
+      "\t\t\t- op: ${2: operation}",
+      "\t\t\tpath: ${3: path}",
+      "\t\t\tvalue: \"${4: value}\""
     ]
   },
   "kustomize-overlays": {
@@ -34,12 +34,12 @@
     "prefix": "ku-helm",
     "body": [
       "helmCharts:",
-      "- name: {0:helm-name}",
-      "\tversion: {1:version}",
-      "\trepo: {2:chart-repo}",
-      "\tvaluesFile: {3:values.yaml}",
-      "\tnamespace: {4:helm}",
-      "\treleaseName: {5:helm}"
+      "- name: ${0:helm-name}",
+      "\tversion: ${1:version}",
+      "\trepo: ${2:chart-repo}",
+      "\tvaluesFile: ${3:values.yaml}",
+      "\tnamespace: ${4:helm}",
+      "\treleaseName: ${5:helm}"
     ]
   },
   "kubernetes-role": {
@@ -62,17 +62,10 @@
   "kubernetes-rolebinding": {
     "prefix": "k-rolebinding",
     "body": [
-      "apiVersion: rbac.authorization.k8s.io/v1",
-      "kind: RoleBinding",
+      "apiVersion: v1",
+      "kind: ServiceAccount",
       "metadata:",
-      "\tname:{0: name}",
-      "roleRef:",
-      "\tapiGroup: rbac.authorization.k8s.io",
-      "\tkind: Role",
-      "\tname: {0: name}",
-      "subjects:",
-      "- kind: ServiceAccount",
-      "\tname: {0: name}"
+      "\tname: ${0: name}"
     ]
   }
 }
