@@ -1,7 +1,5 @@
 local awful = require("awful")
 local wibox = require("wibox")
-local beautiful = require("beautiful")
-local menubar = require("menubar")
 local gears = require("gears")
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.

@@ -22,3 +22,8 @@ repos:
     rev: v1.29.0
     hooks:
       - id: yamllint
+  # - repo: https://github.com/lunarmodules/luacheck
+  #   rev: v1.1.0
+  #   hooks:
+  #     - id: luacheck
+  #       args: [--only=0]
