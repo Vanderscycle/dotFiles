@@ -1,7 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
-
+-- local client = {}
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function(c)
@@ -69,3 +69,4 @@ end)
 
 awful.spawn.with_shell("nitrogen --restore")
 -- }}}
+-- return client

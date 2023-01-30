@@ -18,10 +18,11 @@ repos:
     rev: v1.4.0
     hooks:
       - id: detect-secrets
-  - repo: https://github.com/adrienverge/yamllint
-    rev: v1.29.0
-    hooks:
-      - id: yamllint
+  # - repo: https://github.com/adrienverge/yamllint
+  #   rev: v1.29.0
+  #   hooks:
+  #     - id: yamllint
+  #       args: ['-d="indentation: {spaces: 2, indent-sequences: false}"']
   # - repo: https://github.com/lunarmodules/luacheck
   #   rev: v1.1.0
   #   hooks:
