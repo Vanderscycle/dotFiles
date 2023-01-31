@@ -8,10 +8,13 @@ pcall(require, "luarocks.loader")
 local awful = require("awful")
 local menubar = require("menubar")
 local beautiful = require("beautiful")
+-- local gears = require("gears")
 require("awful.autofocus")
 
 local theme = "tokyonight-dark"
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/" .. theme .. "/theme.lua")
+
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 -- beautiful.useless_gap = 10
 -- beautiful.gap_single_client = true
 

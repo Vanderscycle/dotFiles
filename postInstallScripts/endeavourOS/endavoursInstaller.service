@@ -1,9 +1,0 @@
-[Unit]
-Description=Post reboot installer
-
-[Service]
-Type=oneshot
-ExecStart=bash ~/endeabourOSXmonad.sh
-
-[Install]
-WantedBy=multi-user.target
