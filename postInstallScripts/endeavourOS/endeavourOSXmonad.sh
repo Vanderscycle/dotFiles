@@ -450,7 +450,7 @@ awesome(){
   # => Window manager (Xmonad)
   # -----------------------------------------------------------------------------
 
-  sudo pacman -S --needed --noconfirm awesome #more to polybar later
+  sudo pacman -S --needed --noconfirm awesome lain #more to polybar later
 }
 
 fonts(){
