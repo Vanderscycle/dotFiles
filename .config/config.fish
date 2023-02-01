@@ -436,7 +436,7 @@ function update
   sudo timeshift --create
   topgrade
   # sudo pacman -Syu
-  xmonad --recompile
+  # xmonad --recompile
   betterdiscordctl install
 end
 

@@ -8,6 +8,7 @@ k9s:
   readOnly: false
   noExitOnCtrlC: false
   noIcons: false
+  skipLatestRevCheck: false
   logger:
     tail: 100
     buffer: 5000
@@ -24,7 +25,6 @@ k9s:
         lockFavorites: false
         favorites:
         - keycloak
-        - all
         - default
       view:
         active: deploy
@@ -38,6 +38,7 @@ k9s:
         limits:
           cpu: 100m
           memory: 100Mi
+        labels: {}
       portForwardAddress: localhost
   thresholds:
     cpu:
