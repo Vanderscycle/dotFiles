@@ -70,14 +70,20 @@ date: {{ date }}
 
 01/02/23
 Esquimalt的直辖市上个星期四给我们的建筑许可证
-直辖市
-建筑许可证
+直辖市 zhu2xua2shi4 municipality
+建筑许可证jian4zhu2 xu3ke3zheng4 building permit
+许可证xu3ke3zheng4 permit
+建筑 jian4zhu2 building
 建筑许可价格只是八白块但是我们不得不付二千五百块了
-卫生 weisheng
+卫生 weisheng health
 最近太太的医生和她讨论关于她的身体健康
-身体健康
+讨论 tao lun discuss
+身体健康 shen1ti3 jian4kang1 in good health
+身体 shen1ti3 body/health
 从小的时候她有一些问题在他的肝脏
 讨论的时候她的医生收你应该减肥也只吃地中海饮食
 所以我们现在吃米饭肉比较少
 自从我们都要减肥我们试试看着间歇性禁食
+减肥 jian3fei2 lose weight
+间歇性禁食 jian4xie1 xing4 jin4 shi2 intermittent fasting
 ## References

@@ -431,7 +431,7 @@ xmonad(){
   # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
 
   echo -e '\n=> install the window manager and bar'
-  sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty dmenu wofi
+  sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty wezterm dmenu wofi
   sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
   nitrogen ~/Documents/dotfiles/img/space.png
   sudo pacman -S --needed --noconfirm xmobar #more to polybar later
@@ -451,6 +451,7 @@ awesome(){
   # -----------------------------------------------------------------------------
 
   sudo pacman -S --needed --noconfirm awesome lain #more to polybar later
+  sudo pacman -S --needed --noconfirm flameshot
 }
 
 fonts(){
@@ -599,7 +600,7 @@ guiPrograms(){
 
   echo -e '\n=> installing gui programs'
   sudo pacman -S --noconfirm --needed signal-desktop nomacs #image viewwer/editor
-  yay -S --needed --noconfirm vlc  postman-bin slack-desktop transmission-qt
+  yay -S --needed --noconfirm vlc  postman-bin slack-desktop transmission-qt onlyoffice-bin
   # rpi-imager
   yay -S --needed --noconfirm zoom brave-bin zsa-wally brave-bin
   echo -e 'Done.\n'

@@ -28,17 +28,16 @@ require("awful.hotkeys_popup.keys")
 local local_bin = os.getenv("HOME") .. "/.local/bin/"
 local rofi_bin = os.getenv("HOME") .. "/.config/rofi/bin/"
 local randr = local_bin .. "randr"
-local picom = "picom --experimental-backends -b --config " .. theme_dir .. "conf/picom.conf"
+-- local picom = "picom --experimental-backends -b --config " .. theme_dir .. "conf/picom.conf"
+local picom = "picom --experimental-backends &"
 local autostart = local_bin .. "awesome-autostart"
 local restore_wall = "nitrogen --restore"
-local random_wall = "python " .. local_bin .. "nitrogen_randomizer.py " .. theme_dir .. "2K"
-local recordmenu = local_bin .. "recordmenu"
-local pycharm = local_bin .. "pycharm"
-local webstorm = local_bin .. "webstorm"
-local dmenu_run = local_bin .. "dmenu_run_history"
+-- local random_wall = "python " .. local_bin .. "nitrogen_randomizer.py " .. theme_dir .. "2K"
+-- local recordmenu = local_bin .. "recordmenu"
+-- local dmenu_run = local_bin .. "dmenu_run_history"
 local rofi_window = rofi_bin .. "rofi_window"
 local rofi_launcher = rofi_bin .. "rofi_launcher"
-local rofi_powermenu = rofi_bin .. "rofi_powermenu"
+-- local rofi_powermenu = rofi_bin .. "rofi_powermenu"
 
 awful.spawn.with_shell(randr)
 awful.spawn.with_shell(restore_wall)
@@ -83,7 +82,7 @@ end
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "kitty"
-local editor = os.getenv("EDITOR") or "nvim"
+local editor = os.getenv("EDITOR") or "lvim"
 local editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -134,36 +133,27 @@ local myawesomemenu = {
 }
 
 local editormenu = {
-	{ "neovim", "kitty -e nvim" },
-	{ "helix", "kitty -e helix" },
+	{ "neovim", "kitty -e lvim" },
 	{ "vscode", "code" },
 }
 
 local officemenu = {
 	{ "files", "thunar" },
-	{ "Word", "wps" },
-	{ "Excel", "et" },
-	{ "Power Point", "wpp" },
+	{ "office", "onlyoffice-desktopeditors" },
 }
 
 local networkmenu = {
-	{ "chrome", "google-chrome-stable" },
 	{ "firefox", "firefox" },
-	{ "nm-editor", "nm-connection-editor" },
 }
 
 local termmenu = {
-	-- { "st", "st" },
-	-- { "wezterm", "wezterm" },
+	{ "wezterm", "wezterm" },
 	{ "kitty", "kitty" },
-	-- { "alacritty", "alacritty" },
 }
 
 local multimediamenu = {
-	-- { "netease-cloud-music", "netease-cloud-music" },
-	-- { "yesplaymusic", "yesplaymusic" },
 	{ "spotify", "spotify" },
-	-- { "ncmpcpp", "alacritty --class music -e ncmpcpp" },
+	-- { "ncmpcpp", "kitty -e ncmpcpp" },
 	{ "vlc", "vlc" },
 	{ "pulseaudio", "pavucontrol" },
 }
@@ -171,12 +161,10 @@ local multimediamenu = {
 local settingsmenu = {
 	{ "lxappearance", "lxappearance" },
 	{ "wallpaper settings", "nitrogen" },
-	-- { "qt5 settings", "qt5ct" },
 }
 
 local utilsmenu = {
-	-- { "screenshot", "flameshot gui" },
-	-- { "screenkey", "screenkey" },
+	{ "screenshot", "flameshot gui" },
 }
 
 local myexitmenu = {
@@ -266,7 +254,6 @@ local cpu = lain.widget.cpu({
 		widget:set_markup(markup.fontfg(beautiful.font, beautiful.yellow, " " .. cpu_now.usage .. "%"))
 	end,
 })
-
 local mem = lain.widget.mem({
 	timeout = 1,
 	settings = function()
@@ -489,43 +476,30 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 	awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 	awful.key({ modkey }, "Tab", awful.tag.history.restore, { description = "go back", group = "tag" }),
-
 	-- Toggle wibox
 	awful.key({ modkey }, "b", function()
 		mouse.screen.mywibox.visible = not mouse.screen.mywibox.visible
 	end),
 
 	-- Standard program
-	awful.key({ modkey }, "d", function()
-		awful.util.spawn(dmenu_run, false)
-	end, { description = "launch dmenu", group = "launcher" }),
-	awful.key({ modkey }, "c", function()
-		awful.util.spawn(recordmenu, false)
-	end, { description = "launch recordmenu", group = "launcher" }),
+	-- awful.key({ modkey }, "d", function()
+	-- 	awful.util.spawn(dmenu_run, false)
+	-- end, { description = "launch dmenu", group = "launcher" }),
+	-- awful.key({ modkey }, "c", function()
+	-- 	awful.util.spawn(recordmenu, false)
+	-- end, { description = "launch recordmenu", group = "launcher" }),
+	-- awful.key({ modkey, "Shift" }, "p", function()
+	-- 	awful.spawn.with_shell("rofi -show run -theme $HOME/.config/rofi/launcher.rasi")
+	-- end, { description = "open a menu launcher", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "p", function()
-		awful.spawn.with_shell("rofi -show run -theme $HOME/.config/rofi/launcher.rasi")
-	end, { description = "open a menu launcher", group = "launcher" }),
-	awful.key({ modkey }, "r", function()
 		awful.util.spawn(rofi_launcher, false)
 	end, { description = "launch launcher", group = "launcher" }),
 	awful.key({ modkey }, "w", function()
 		awful.util.spawn(rofi_window, false)
 	end, { description = "launch window", group = "launcher" }),
-	awful.key({ modkey }, "p", function()
-		awful.util.spawn(rofi_powermenu, false)
-	end, { description = "launch powermenu", group = "launcher" }),
-	awful.key({ modkey }, "e", function()
-		awful.util.spawn("firefox")
-	end, { description = "launch firefox", group = "launcher" }),
-	awful.key({ modkey }, "x", function()
-		awful.util.spawn("typora")
-	end, { description = "launch typora", group = "launcher" }),
-	awful.key({ modkey }, "z", function()
-		awful.util.spawn("obsidian")
-	end, { description = "launch obsidian", group = "launcher" }),
-	awful.key({ modkey }, "v", function()
-		awful.util.spawn("glrnvim")
-	end, { description = "launch nvim", group = "launcher" }),
+	-- awful.key({ modkey }, "p", function()
+	-- 	awful.util.spawn(rofi_powermenu, false)
+	-- end, { description = "launch powermenu", group = "launcher" }),
 	awful.key({ altkey }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open kitty", group = "launcher" }),
@@ -540,15 +514,15 @@ local globalkeys = gears.table.join(
 		awful.util.spawn("google-chrome-stable")
 	end, { description = "launch chrome", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "n", function()
-		awful.util.spawn("nautilus")
-	end, { description = "launch nautilus", group = "launcher" }),
-	awful.key({ modkey, "Shift" }, "h", function()
-		awful.util.spawn(terminal .. "htop")
+		awful.util.spawn("thunar")
+	end, { description = "launch thunar", group = "launcher" }),
+	awful.key({ modkey, "Shift" }, "h", function() -- WARN: not working
+		awful.spawn.with_shell("htop")
 	end, { description = "launch htop", group = "launcher" }),
-	awful.key({ modkey, "Shift" }, "m", function()
-		awful.util.spawn("alacritty --class music -e ncmpcpp")
-	end, { description = "launch ncmpcpp", group = "launcher" }),
-
+	-- awful.key({ modkey, "Shift" }, "m", function()
+	-- 	awful.util.spawn("alacritty --class music -e ncmpcpp")
+	-- end, { description = "launch ncmpcpp", group = "launcher" }),
+	-- playerctl
 	awful.key({ altkey, "Control" }, "p", function()
 		awful.util.spawn("playerctl play-pause", false)
 	end, { description = "toggle mpris", group = "launcher" }),
@@ -558,7 +532,7 @@ local globalkeys = gears.table.join(
 	awful.key({ altkey, "Control" }, "Right", function()
 		awful.util.spawn("playerctl next", false)
 	end, { description = "play next mpris", group = "launcher" }),
-
+	-- mpc
 	awful.key({ modkey, "Control" }, "p", function()
 		awful.util.spawn("mpc toggle", false)
 	end, { description = "mpc toggle", group = "launcher" }),
@@ -570,18 +544,8 @@ local globalkeys = gears.table.join(
 	end, { description = "mpc next", group = "launcher" }),
 
 	awful.key({ modkey, "Shift" }, "Return", function()
-		awful.spawn("kitty")
+		awful.spawn(terminal)
 	end, { description = "open kitty with default shell", group = "launcher" }),
-	awful.key({ altkey }, "v", function()
-		awful.spawn("neovide")
-	end, { description = "launch neovide", group = "launcher" }),
-	awful.key({ altkey }, "w", function()
-		awful.spawn(webstorm)
-	end, { description = "launch webstorm", group = "launcher" }),
-	awful.key({ altkey }, "p", function()
-		awful.spawn(pycharm)
-	end, { description = "launch pycharm", group = "launcher" }),
-
 	awful.key({}, "XF86AudioMute", function()
 		awful.spawn("pamixer -t", false)
 	end, { description = "toggle mute", group = "launcher" }),
@@ -614,11 +578,9 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey }, "h", function()
 		awful.screen.focus_relative(-1)
 	end, { description = "focus the previous screen", group = "screen" }),
-
 	-- awful.key({ modkey }, "w", function()
 	-- 	mymainmenu:show()
 	-- end, { description = "show main menu", group = "awesome" }),
-
 	-- Client manipulation
 	awful.key({ modkey }, "j", function()
 		awful.client.focus.byidx(1)
@@ -849,22 +811,14 @@ awful.rules.rules = {
 				"Places",
 			},
 			class = {
-				"Arandr",
 				"Blueman-manager",
 				"Gpick",
-				"Kruler",
-				"MessageWin", -- kalarm.
 				"Sxiv",
-				"Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
 				"Wpa_gui",
 				"veromix",
 				"xtightvncviewer",
-				"jetbrains-toolbox",
-				"Wine",
-				"wechat.exe",
 				"Lxappearance",
 				"Nitrogen",
-				"Org.gnome.Nautilus",
 				"Timeshift-gtk",
 			},
 
@@ -884,39 +838,16 @@ awful.rules.rules = {
 
 	-- Add titlebars to normal clients and dialogs
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
-
 	-- Set Firefox to always map on the tag1 on screen 1.
-	{ rule = { class = "firefox" }, properties = { screen = 1, tag = tag1 } },
+	{ rule = { class = "firefox" }, properties = { screen = 2, tag = tag1 } },
+	{ rule = { class = "slack" }, properties = { screen = 3, tag = tag1 } },
 	{ rule = { instance = "Devtools" }, properties = { screen = 2, tag = tag1 } },
-	-- { rule = { class = "Typora" }, properties = { screen = 2, tag = tag1 } },
-
-	{ rule = { class = "jetbrains-webstorm" }, properties = { screen = 1, tag = tag2 } },
-	{ rule = { class = "jetbrains-pycharm" }, properties = { screen = 1, tag = tag2 } },
-
-	{ rule = { class = "Google-chrome" }, properties = { screen = 1, tag = tag3 } },
-
-	{ rule = { instance = "spotify" }, properties = { screen = 1, tag = tag4 } },
-	{ rule = { class = "Spotify" }, properties = { screen = 1, tag = tag4 } },
-	{ rule = { class = "netease-cloud-music" }, properties = { screen = 1, tag = tag4 } },
-	{ rule = { class = "electron-netease-cloud-music" }, properties = { screen = 1, tag = tag4 } },
-	{ rule = { instance = "music" }, properties = { screen = 2, tag = tag4 } },
-	{ rule = { class = "yesplaymusic" }, properties = { screen = 2, tag = tag4 } },
-
-	{ rule = { class = "Steam" }, properties = { screen = 2, tag = tag5 } },
-
-	{ rule = { class = "icalingua" }, properties = { screen = 1, tag = tag6 } },
-	{ rule = { class = "Wine" }, properties = { screen = 1, tag = tag6 } },
-	{ rule = { class = "wechat.exe" }, properties = { screen = 1, tag = tag6 } },
-	{ rule = { class = "discord" }, properties = { screen = 2, tag = tag6 } },
-	{ rule = { class = "TelegramDesktop" }, properties = { screen = 2, tag = tag6 } },
-
-	{ rule = { class = "Solaar" }, properties = { screen = 1, tag = tag7 } },
-	{ rule = { class = "qBittorrent" }, properties = { screen = 1, tag = tag7 } },
-	{ rule = { class = "Clash for Windows" }, properties = { screen = 2, tag = tag7 } },
-
-	{ rule = { class = "Joplin" }, properties = { screen = 1, tag = tag8 } },
-
-	{ rule = { class = "winedbg.exe" }, properties = { screen = 1, tag = tag9 } },
+	{ rule = { instance = "spotify" }, properties = { screen = 3, tag = tag4 } },
+	{ rule = { class = "Spotify" }, properties = { screen = 3, tag = tag4 } },
+	{ rule = { class = "Steam" }, properties = { screen = 4, tag = tag5 } },
+	{ rule = { class = "discord" }, properties = { screen = 3, tag = tag6 } },
+	{ rule = { class = "SignalDesktop" }, properties = { screen = 2, tag = tag6 } },
+	{ rule = { class = "transmission-gtk" }, properties = { screen = 5, tag = tag7 } },
 }
 -- }}}
 
