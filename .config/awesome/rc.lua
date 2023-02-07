@@ -297,11 +297,11 @@ local mpris = require("themes.default.mpris")
 local mpd = require("themes.default.mpdarc")
 local spacer = wibox.widget.textbox(" ")
 
-local tag1 = "  "
-local tag2 = "  "
-local tag3 = "  "
-local tag4 = "  "
-local tag5 = "  "
+local tag1 = "  "
+local tag2 = "  "
+local tag3 = "  "
+local tag4 = "  "
+local tag5 = "  "
 local tag6 = "  "
 local tag7 = "  "
 local tag8 = " ﴬ "
@@ -839,15 +839,15 @@ awful.rules.rules = {
 	-- Add titlebars to normal clients and dialogs
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 	-- Set Firefox to always map on the tag1 on screen 1.
-	{ rule = { class = "firefox" }, properties = { screen = 2, tag = tag1 } },
-	{ rule = { class = "slack" }, properties = { screen = 3, tag = tag1 } },
+	{ rule = { class = "firefox" }, properties = { screen = 2, tag = tag2 } },
+	{ rule = { class = "Slack" }, properties = { screen = 3, tag = tag3 } },
 	{ rule = { instance = "Devtools" }, properties = { screen = 2, tag = tag1 } },
-	{ rule = { instance = "spotify" }, properties = { screen = 3, tag = tag4 } },
-	{ rule = { class = "Spotify" }, properties = { screen = 3, tag = tag4 } },
-	{ rule = { class = "Steam" }, properties = { screen = 4, tag = tag5 } },
-	{ rule = { class = "discord" }, properties = { screen = 3, tag = tag6 } },
-	{ rule = { class = "SignalDesktop" }, properties = { screen = 2, tag = tag6 } },
-	{ rule = { class = "transmission-gtk" }, properties = { screen = 5, tag = tag7 } },
+	{ rule = { instance = "spotify" }, properties = { screen = 3, tag = tag3 } },
+	{ rule = { class = "Spotify" }, properties = { screen = 3, tag = tag3 } },
+	{ rule = { class = "Steam" }, properties = { screen = 4, tag = tag4 } },
+	{ rule = { class = "discord" }, properties = { screen = 3, tag = tag3 } },
+	{ rule = { class = "SignalDesktop" }, properties = { screen = 6, tag = tag6 } },
+	{ rule = { class = "transmission-gtk" }, properties = { screen = 7, tag = tag7 } },
 }
 -- }}}
 

@@ -299,7 +299,7 @@ end
 
 function k8s-prmNamespace
 echo -e "purging everything in ns: $argv"
-  kubectl delete all --all "$argv"
+  kubectl delete all --all -n "$argv"
 end
 
 #Tilt-kind

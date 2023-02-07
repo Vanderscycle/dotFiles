@@ -16,18 +16,20 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: kind-infrastructure
-  currentCluster: kind-infrastructure
+  currentContext: lke84758-ctx
+  currentCluster: lke84758
   clusters:
-    kind-infrastructure:
+    lke84758:
       namespace:
         active: all
         lockFavorites: false
         favorites:
-        - keycloak
+        - argocd
+        - cert-manager
+        - all
         - default
       view:
-        active: deploy
+        active: ing
       featureGates:
         nodeShell: false
       shellPod:
