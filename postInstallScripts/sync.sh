@@ -24,7 +24,7 @@ while (( "$#" )); do
   esac
 done
 
-declare -a HomeArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" "zettelkasten" ".ssh/config" "zettelkasten" ".xmonad" ".wezterm")
+declare -a HomeArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" "zettelkasten" ".ssh/config" "zettelkasten" ".xmonad" ".wezterm" ".doom.d")
 
 declare -a ConfArray=("lvim" "broot" "zellij" "rofi" "kitty" "xmobar" "dunst" "fontconfig" "rg" "BetterDiscord" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s" "fish/config.fish" "bpytop" "starship.toml" "awesome")
 
