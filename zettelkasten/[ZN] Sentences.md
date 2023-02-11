@@ -68,7 +68,7 @@ date: {{ date }}
 这位吉他家还做新的音乐但是我比较喜欢他就的音乐
 当音乐玩的时候他有时候用拉丁美洲的鸟声例如 kookabura
 
-01/02/23
+## 01/02/23
 Esquimalt的直辖市上个星期四给我们的建筑许可证
 直辖市 zhu2xua2shi4 municipality
 建筑许可证jian4zhu2 xu3ke3zheng4 building permit
@@ -86,4 +86,36 @@ Esquimalt的直辖市上个星期四给我们的建筑许可证
 自从我们都要减肥我们试试看着间歇性禁食
 减肥 jian3fei2 lose weight
 间歇性禁食 jian4xie1 xing4 jin4 shi2 intermittent fasting
+
+## 08/02/23
+第一的 first
+我明白I see 我理解 I understand (almost the same)
+基本 ji1ben3 basics
+基本上jiben3 shang4 basically
+基本guan
+昨天我最后明白基本关于我的工作
+基本上我现在我可以创造云基础设施
+创造 chuang4zao4 create/produce
+设施 she1shi1 infrastructure
+基础 ji1chu3 base/foundation
+云 yun cloud
+例如看我用一个云供应商叫Linode
+云供应商 yun2 gongying4 shang1 cloud provider
+比如 bi3ru2 for example
+例如 li4ru2 for example
+在这个云供应商我安装了一个Google Drive替代品
+安装 an1zhuang1 install
+这事比较便宜如果你希望更多硬盘空间。
+便宜 pian yi
+硬盘空间 ying4pan2 kong1jian1 hard drive space
+硬盘ying4pan2 hard drive
+虽然了解这个知识是很复杂也耗时也令人沮丧
+了解 liao3jie3 learn
+知识 zhi1shi4 knowledge
+复杂 fu zha complicated
+耗时 hao4shi2 time consuming
+令人沮丧 ling4ren2ju3sang4 frustrating
+有一天不远的将来我会有我的房子的云与raspberry Pi
+远的将来 yuan3 de jiang1lai2 far future
+
 ## References

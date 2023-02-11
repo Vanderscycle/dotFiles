@@ -273,6 +273,16 @@ function k
   eval kubectl "$argv[..-1]"
 end
 
+function aks --description "aks"
+  set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config #eks
+  aws sso login
+  aws eks update-kubeconfig --region eu-west-1 --name atreides-non-prod
+end
+
+function local-k
+  kubectl config use-context kind-infrastructure
+end
+
 function k-encode  --description "k-encode <secret.yaml>"
   # echo -n "$argv" | base64
     yq '.data' "$argv" | jq -r 'values[]' | xargs -I '{}' bash -c  'echo -n {} | base64'

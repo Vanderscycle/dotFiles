@@ -29,7 +29,8 @@ local local_bin = os.getenv("HOME") .. "/.local/bin/"
 local rofi_bin = os.getenv("HOME") .. "/.config/rofi/bin/"
 local randr = local_bin .. "randr"
 -- local picom = "picom --experimental-backends -b --config " .. theme_dir .. "conf/picom.conf"
-local picom = "picom --experimental-backends &"
+local picom = "picom &"
+local fcitx = "fcitx &"
 local autostart = local_bin .. "awesome-autostart"
 local restore_wall = "nitrogen --restore"
 -- local random_wall = "python " .. local_bin .. "nitrogen_randomizer.py " .. theme_dir .. "2K"
@@ -40,8 +41,9 @@ local rofi_launcher = rofi_bin .. "rofi_launcher"
 -- local rofi_powermenu = rofi_bin .. "rofi_powermenu"
 
 awful.spawn.with_shell(randr)
+awful.spawn.with_shell(fcitx)
 awful.spawn.with_shell(restore_wall)
-awful.spawn.with_shell(picom)
+-- awful.spawn.with_shell(picom)
 awful.spawn.with_shell(autostart)
 
 -- }}}
@@ -485,9 +487,9 @@ local globalkeys = gears.table.join(
 	-- awful.key({ modkey }, "d", function()
 	-- 	awful.util.spawn(dmenu_run, false)
 	-- end, { description = "launch dmenu", group = "launcher" }),
-	-- awful.key({ modkey }, "c", function()
-	-- 	awful.util.spawn(recordmenu, false)
-	-- end, { description = "launch recordmenu", group = "launcher" }),
+	awful.key({ modkey }, "c", function()
+		awful.util.spawn("", false)
+	end, { description = "launch recordmenu", group = "launcher" }),
 	-- awful.key({ modkey, "Shift" }, "p", function()
 	-- 	awful.spawn.with_shell("rofi -show run -theme $HOME/.config/rofi/launcher.rasi")
 	-- end, { description = "open a menu launcher", group = "launcher" }),
@@ -785,18 +787,18 @@ awful.rules.rules = {
 			placement = awful.placement.no_overlap + awful.placement.no_offscreen,
 		},
 	},
+	-- {
+	-- 	rule_any = {
+	-- 		instance = { "Tim.exe", "QQ.exe" },
+	-- 	},
+	-- 	properties = {
+	-- 		focusable = true,
+	-- 		floating = true,
+	-- 		border_width = 0,
+	-- 	},
+	-- },
 	{
-		rule_any = {
-			instance = { "Tim.exe", "QQ.exe" },
-		},
-		properties = {
-			focusable = true,
-			floating = true,
-			border_width = 0,
-		},
-	},
-	{
-		rule_any = { class = { "St", "kitty" } },
+		rule_any = { class = { "wezterm", "kitty" } },
 		properties = {},
 		callback = awful.client.setslave,
 	},

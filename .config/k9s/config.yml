@@ -16,20 +16,17 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: lke84758-ctx
-  currentCluster: lke84758
+  currentContext: arn:aws:eks:eu-west-1:962991595505:cluster/atreides-non-prod
+  currentCluster: arn:aws:eks:eu-west-1:962991595505:cluster/atreides-non-prod
   clusters:
-    lke84758:
+    arn:aws:eks:eu-west-1:962991595505:cluster/atreides-non-prod:
       namespace:
         active: all
         lockFavorites: false
         favorites:
-        - argocd
-        - cert-manager
-        - all
         - default
       view:
-        active: ing
+        active: deploy
       featureGates:
         nodeShell: false
       shellPod:
