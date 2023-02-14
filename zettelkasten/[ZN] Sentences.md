@@ -118,4 +118,24 @@ Esquimalt的直辖市上个星期四给我们的建筑许可证
 有一天不远的将来我会有我的房子的云与raspberry Pi
 远的将来 yuan3 de jiang1lai2 far future
 
+## 15/02/23
+上圣诞节我的太太给了我们温泉票
+这温泉在维多利亚旁边Forge健身房叫Ritual nordic
+温泉 wen1quan2 spa/hot spring *find better word
+这温泉有一个桑拿，一间蒸汽间， 和一个小冷水汤
+桑拿 sang1na2 suana
+蒸汽间 zhengqi4 jian hot room
+冷水汤 leng SUi tang1
+这温泉有一间桑拿间，一间蒸汽间， 和一个小冷水汤
+温泉开始了以后两个小时左右我们去吃在小云南餐厅
+云南 yunan (Yunan)
+当我们开始地中海饮食的时候两星期以前我们别过吃面饭
+地中海饮食 dizhong1hai3 ying3shi2 mediterranean diet
+我们现在尝试一起去每个月所以我们尝试休息和复苏
+尝试 chang2shi4 try (shishikan)
+休息 xiu1xi2 (rest)
+休息和复苏 fu4su1 recover (money/health)
+然后我们回家的时候一边累而且包
+温泉和餐厅的时候以后有时候我感觉太累的我休息
+
 ## References
