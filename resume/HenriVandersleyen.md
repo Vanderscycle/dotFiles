@@ -52,7 +52,7 @@ Stack: Bash, modern unix tools
 
 HomeServer
 A local raspberry pi cluster used as a local home server using k3s
-Stack: linux, k3s, DDNS, kubernetes
+Stack: linux, k3s, DDNS, kubernetes, ansible
 
 ## Open source contribution
 
@@ -61,6 +61,7 @@ A non exhaustive list of open source projects that I contributed:
 - [Zellig](https://github.com/zellij-org/zellij);
 - [highlight.js](https://github.com/highlightjs/highlight.js);
 - [prism-themes](https://github.com/PrismJS/prism-themes);
+- [factorio-server-charts](https://github.com/SQLJames/factorio-server-charts)
 
 ## Professional Qualifications
 
