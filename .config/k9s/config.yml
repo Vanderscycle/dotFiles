@@ -24,6 +24,7 @@ k9s:
         active: all
         lockFavorites: false
         favorites:
+        - corpus-test
         - default
       view:
         active: deploy
