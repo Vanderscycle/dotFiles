@@ -16,15 +16,16 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: arn:aws:eks:eu-west-1:962991595505:cluster/atreides-non-prod
-  currentCluster: arn:aws:eks:eu-west-1:962991595505:cluster/atreides-non-prod
+  currentContext: default
+  currentCluster: default
   clusters:
-    arn:aws:eks:eu-west-1:962991595505:cluster/atreides-non-prod:
+    default:
       namespace:
         active: all
         lockFavorites: false
         favorites:
-        - corpus-test
+        - octoprint
+        - all
         - default
       view:
         active: deploy

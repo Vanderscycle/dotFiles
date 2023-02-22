@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Jet Brains Mono" :size 12 :weight 'semi-light)
-     doom-variable-pitch-font (font-spec :family "Jet Brains Mono" :size 13))
+;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
+;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-tokyo-night)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -41,8 +41,6 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-
-
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -74,3 +72,56 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(setq display-line-numbers-type 'relative)
+(setq +evil-want-o/O-to-continue-comments nil)
+;;projectile config
+(setq
+ projectile-project-search-path '("~/Documents/")
+ doom-font (font-spec :family "JetBrains Mono Medium Nerd Font"))
+
+;; https://emacsredux.com/blog/2013/04/02/move-current-line-up-or-down/
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(global-set-key [(control shift n)]  'move-line-down)
+(global-set-key [(control shift p)]  'move-line-up)
+
+(defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)
+        (forward-line 1)))
+
+(global-set-key (kbd "C-/")  'comment-or-uncomment-region-or-line)
+(define-key evil-normal-state-map (kbd "RET")
+  (lambda ()
+    (interactive)
+    (call-interactively 'spacemacs/evil-insert-line-below)
+    (evil-next-line)))
+
+;;(def-package! org-super-agenda
+;;  :after org-agenda
+;;  :init
+;;  (setq org-supe//r-agenda-groups '((:name "Today"
+;;                                   :time-grid t
+;;                                   :scheduled today)
+;;                                  (:name "Important"
+;;                                         :priority "A")))
+;;  :config
+;;  (org-super-agenda-mode))

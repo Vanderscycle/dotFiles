@@ -109,7 +109,6 @@ if status is-interactive
 # pnpm
   set -gx PNPM_HOME "/home/henri/.local/share/pnpm"
   set -gx PATH "$PNPM_HOME" $PATH
-# pnpm end
   # golang
   set -xg GOPATH $HOME/go
   set -xg PATH $PATH $GOPATH/bin
@@ -117,6 +116,9 @@ if status is-interactive
   set PYENV_ROOT $HOME/.pyenv
   set -x PATH $PYENV_ROOT/shims $PYENV_ROOT/bin $PATH
   pyenv rehash
+# doom emacs
+  set -gx DOOM_HOME "$HOME/.emacs.d/bin"
+  set -gx PATH "$DOOM_HOME" $PATH
 
 end
 
@@ -247,9 +249,9 @@ function ls
   eval exa -al"$argv"
 end
 
-function lvim
- bash /home/henri/.local/bin/lvim $argv
-end
+#function lvim
+# bash /home/henri/.local/bin/lvim $argv
+#end
 
 function nvim
 	lvim
@@ -281,6 +283,15 @@ end
 
 function local-k
   kubectl config use-context kind-infrastructure
+end
+
+function pik3s --description "local pi cluster"
+  set -xg KUBECONFIG $HOME/Documents/infrastructure/infrastructure-k3s-kubeconfig.yaml
+end
+
+
+function lke --description "linode k8s cluster"
+  set -xg KUBECONFIG $HOME/Documents/infrastructure/infrastructure-kubeconfig.yaml
 end
 
 function k-encode  --description "k-encode <secret.yaml>"
