@@ -26,7 +26,7 @@ done
 
 declare -a HomeArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" "zettelkasten" ".ssh/config" "zettelkasten" ".xmonad" ".wezterm" ".doom.d")
 
-declare -a ConfArray=("lvim" "broot" "zellij" "rofi" "kitty" "xmobar" "dunst" "fontconfig" "rg" "BetterDiscord" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s" "fish/config.fish" "bpytop" "starship.toml" "awesome")
+declare -a ConfArray=("broot" "zellij" "rofi" "kitty" "xmobar" "dunst" "fontconfig" "rg" "BetterDiscord" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s" "fish/config.fish" "bpytop" "starship.toml" "awesome")
 
 sync(){
   echo -e "sync"
@@ -41,6 +41,7 @@ sync(){
   done
 
   rsync -av --progress   ~/Documents/dotFiles/etc/fstab /etc/fstab
+  rsync -av --progress  ~/Documents/dotFiles/etc/resolv.conf /etc/resolvconf
   rsync -av --progress  ~/Documents/dotFiles/ /etc/default/grub
   sudo rsync -av --progress  ~/Documents/dotFiles/pacman.conf /etc/pacman.conf
 
@@ -59,6 +60,7 @@ save(){
       rsync -av --progress ~/.config/"$DOTFILE" ~/Documents/dotFiles/.config/
   done
   rsync -av --progress /etc/fstab ~/Documents/dotFiles/etc/fstab
+  rsync -av --progress /etc/resolv.conf ~/Documents/dotFiles/etc/resolv.conf
   rsync -av --progress /etc/default/grub ~/Documents/dotFiles/
   sudo rsync -av --progress /etc/pacman.conf ~/Documents/dotFiles/pacman.conf
 }

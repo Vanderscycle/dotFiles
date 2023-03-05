@@ -397,6 +397,15 @@ golang(){
   echo -e 'Done.\n'
 }
 
+antivirus(){
+
+  # -----------------------------------------------------------------------------
+  # => AV recommended by work
+  # -----------------------------------------------------------------------------
+
+  sudo pacman -S --needed --noconfirm clamav
+}
+
 rust(){
   # -----------------------------------------------------------------------------
   # => Rust language install and programs
@@ -429,7 +438,7 @@ xmonad(){
   # => Window manager (Xmonad)
   # -----------------------------------------------------------------------------
   # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
-
+  curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
   echo -e '\n=> install the window manager and bar'
   sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty wezterm dmenu wofi
   sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
@@ -759,6 +768,7 @@ sudo systemctl enable --now bluetooth
   spotify
   lunarvim
   emacs
+  antivirus
 
   if [[ "$WM" = "xmonad" ]]; then
     xmonad

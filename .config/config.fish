@@ -119,6 +119,7 @@ if status is-interactive
 # doom emacs
   set -gx DOOM_HOME "$HOME/.emacs.d/bin"
   set -gx PATH "$DOOM_HOME" $PATH
+  set -gx emacs "emacslient -c -a 'emacs'"
 
 end
 

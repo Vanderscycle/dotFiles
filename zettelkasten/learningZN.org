@@ -1,0 +1,102 @@
+* Chinese
+** Full sentences
+为什么你自己去拿 why did you take it yourself?
+我丢了好塑胶在垃圾桶 I threw plastic in the trash
+** Dictionary
+*** International units
+公斤 gong1jin1 kg
+公里 gong1li3 kilometer
+*** Computer/science
+文本编辑器 wen2ben1 bian1ji2 qi4 test editor
+电脑程序 dian4nao3 cheng2xu4 computer program
+微控制器 wei1 kong4zhi4 qi4 microcontroller
+3D打印机  da1yin4ji1 3d printer
+*** Action verb
+坏了 huai4le broke
+拿 na2 take
+丢 diu1 toss
+修理/修补 xiu1li3/xiu1bu3 repair
+被打 bei4da3 beaten (physically)
+*** Adjectives
+坏 huai4 bad
+强大 qiang2da4 powerful
+相关 xiang1guan1 relevant
+普通 pu3tong1 local
+受欢迎 shou4 huan1ying2 popular
+好笑 hao3xiao4 funny
+*** Business
+客户 ke4nu4 client
+开除 kai1chu2 fired/explusion
+*** Relationships
+丈夫 zhang4fu1 husband
+妻子 qi1zi wife
+妻夫 qi1fu1 husband and wife
+*** Crime
+(v) 偷吃 tou1chi1 steal (food)
+偷用 tou1yong4 steal
+*** sport
+球赛 qiu2sai4 match
+篮球 lan2qiu2 basketball
+*** Usefull patterns
+一半百年 yiban4 bai1nian2 half a century
+*** Frequency
+*** Material
+塑胶 su4 jiao1 plastic
+*** Savyings
+看什么看 kan4shen2me kan what are you looking at?
+笑什么笑 xiao4 shen2me xiao4 what you laughing at?
+*** School
+作业 zuo4ye4 homework
+*** Body
+手臂 shou3bi4 arm
+脚 jiao3 foot
+手 shou3 hand
+*** Unk
+这件事 zhe4 jian4 shi4 this matter
+
+**  Often missed chars
+睡觉 shuijiao sleep
+休息 xiuxi rest
+** 22日/02月/2023年
+*** sentences
+我几天以前开始用第三次老板的3D打印机
+我现在用一个Raspberry pi为控制器对它
+可是我现在有两大的问题。
+第一个问题这个3D打印机打印不好基本上我必须修修补补跟多。
+第二个问题我的raspberry Pi控制器不可能套或与3D打印机。
+所以现在我不印机跟多自从1个公斤成本三十块左右
+我的文本编辑器一些天以前坏了然后我更改文本编辑器为更老的而是更强大的
+这个文本编辑器叫EMACS被创建在1970年而且一半百年以后这个电脑程序还是相关的
+*** linking words
+或者 huo4zhe3 or
+只要 zhi3yao4 so long as
+不关 bu4guan3 regardless of...
+而是 re2shi4 but
+*** New words
+履历表 lv3li4 biao3 resume
+3D打印机  da1yin4ji1 3d printer
+控制器 kong4zhi4 qi4 controller
+微控制器 wei1 kong4zhi4 qi4 microcontroller
+印机  yin4ji1 print
+坏习惯 huai4 xi2quan4 bad habit
+*** Teacher sentences
+我休息在我的沙发上 I slep on the couch
+** 01日/01月/2023年
+我这个星期开始我的工作感觉着了比较生产性的
+生产性的 sheng1xhang3 xing4 de productif
+事件 shi4jian4 event(s)
+第二老板开被除的事件以后也第一老板讨论这个事件于每一个工作人亲自的
+老板 lao3ban3 boss
+亲自 qing1zi4 personally
+也次的时候我试试看新的东西当我应该做比较重要的东西
+重要 zhong4yao4 important
+例如当这个事件发生了的时候我变化了我的文本编辑器
+发生 fa1sheng1 occur
+变化 bian4hua4 change
+文本编辑器 wenben bian1ji2 qi4 text editor
+这个文本编辑器为更老的而是更强大的
+强大 qiang2da4 powerful
+1978年左右它生去了在MIT的大学
+一半百年的修修补补以后使这个电脑程序非常复杂但是非常有用
+修修补补 xiuxiu1bubu3 tinker
+复杂 fuza

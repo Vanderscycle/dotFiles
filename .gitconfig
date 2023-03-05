@@ -25,4 +25,4 @@
 [includeIf "gitdir:**/houseAtreides/**/*"] #git
   path = ~/.gitconfig.atreides
 [core]
-	editor = lvim
+	editor = emacs --wait

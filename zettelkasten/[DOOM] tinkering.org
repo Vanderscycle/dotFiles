@@ -1,0 +1,137 @@
+* Roadmap to Emacs
+
+** Table of Content
+
+1. +[[Simple]]
+2. +[[Plugins]]
+   - +[[Maggit]]
+   - +[[evil-surrond/evil-embrace]]
+3. +[[LSP]]
+4. +[[Org-mode]]
+
+** Simple
+
+1. Create a keybinding for an existing submenu `SPC o o`
+2. become familiar with [Doom](https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#configuring-doom)
+3. You can clear the buffer using `c-x x g`
+   4. You can search system wide for a file using `spc f l`
+
+** Plugins
+
+*** Maggit
+was previously unable to [push](https://github.com/doomemacs/doomemacs/issues/2434)
+unable to commit but now able to push
+
+*** evil-surrond/evil-embrace
+Learn the bindings
+
+*** evil-easymotion
+use `g s` more often to navigate
+
+*** evil-nerd-commenter
+`g c` to comment blocks of code
+
+*** QuickFix list
+TODO Is there an emacs equicalent
+
+*** Hydra
+learn about it
+
+*** Help/documentation
+Really useful to learn about any command/plugins installed `spc h f` and then search the command e.g (`projectile-dicover`)
+Sometimes you can figure ou a keybinding `spc h k` then any command like `spc-h-RET`
+[[https://naghdbishi.ir/Doom-Emacs-Cheat-Sheet/README.html#org02a1bcf][cheatsheet regarding bindings.]]
+*** Vertico
+open a buffer in a specific window  `C-x 4`
+[[https://github.com/minad/vertico/wiki][Documentation]]
+
+
+***  Evil-lion (for alignement)
+[[https://github.com/edkolev/evil-lion][evil-lion]]
+This package provides gl and gL align operators: gl MOTION CHAR and right-align gL MOTION CHAR.
+Use CHAR / to enter regular expression if a single character wouldn't suffice.
+Use CHAR RET to align with align.el's default rules for the active major mode.
+
+*** Projectile
+Really usefull
+A real pain to make him discover the wanted files despite how simple it is:[[https://www.youtube.com/watch?v=Rx3wRl5d-J0][tutorial]]
+projectile [[https://docs.projectile.mx/projectile/projects.html][documentation]]
+
+WARN: You can search within the project you are with `spc s p` or the buffer only with `spc s s`
+Once you have the search you desire, use embark mode `C-;` WARN: fcitx and emacs can have a conflict at that binding.
+[[https://hungyi.net/posts/doom-emacs-search-replace-project/][a real good start regarding seraching and replacing project wwise]]
+
+*** Eshell (another one?)
+runs elisp (emacs lisp)
+[[https://learnxinyminutes.com/docs/elisp/][Elist learnXinY]] on elsip
+List in 100 Seconds [[https://www.youtube.com/watch?v=INUHCQST7CU][video]], or the excelent  [[https://www.youtube.com/watch?v=9xLeqwl_7n0][10 reasons]] to switch to eshell
+
+*** Workspaces (not a plugin)
+you can easily navigate them using `M-1/2/3/etc.`
+
+*** Bookmarks
+easily jump between them using `spc RET`
+add a new one using `spc b m`
+delete one with `spc b d`
+
+*** evil-multiedit
+Extremely powerful find and replace for emacs. select what is to be replaced in viusal mode then press `R`
+
+*** Dired
+****   Edit files
+[[https://pragmaticemacs.wordpress.com/2015/05/26/dired-rename-multiple-files/][Reference]]
+- use C-x d to enter dired and choose the directory with the files in
+- use C-x C-q to turn dired into editing mode. You can then edit the file names by hand or
+- use M-% to replace foo with bar in the dired buffer. This will change the file names
+- use C-c C-c so apply the changes, or C-c ESC to cancel
+When in `dired-by-name` use `a` to reuse the same buffer otherwise `RET` to enter and `-` to move out
+
+** LSP
+
+How td does it even work
+`spc c l` Essentialyy `spc c ...`
+** Org-mode
+
+Continue learning about it
+Learn about org-calendar
+
+*** links, hyperlinks
+you can add a checkbox by pressing `p` in normal mode
+document links can be generated using `+[[]]` or with `spc m l l`
+hyperlinks [[https://orgmode.org/guide/Hyperlinks.html]]
+work for external links
+[[https://orgmode.org/][pus]] https:
+[[elisp:(+ 22 3)][elisp terminal hyperlink]]
+[[elisp:org-agenda][Linking my agenda]] elisp:
+[[shell: ls ][Executing shell cmd]]
+TODO: How do I edit the links? ANSWER: `spc m l t` toggle
+
+*** Tasks
+You can automatically convert headlines to tasks by prepending TODO
+To add tag you can use the shorthand `spc m t`
+you can quickly shift between statuses using `S-left/right`
+**** TODO Become an astronaut
+**** WAITING INPROGRESS Become an programmer
+**** DONE IDEA CANCELLED Become a poet
+
+*** agenda
+You can use org-agenda to view the tasks `spc o a`
+* Ressources
+
+** Internal
+
+- [[file:Org Mode]]
+  -[[https://abdelhakbougouffa.pro/posts/config/#language-support--lang][Excellent walkthrought]] config
+
+** external
+
+- [[https://orgmode.org/org.html][Org Mode Documentation]]
+* Improving my knowledge
+**   read the documentation
+Start with `spc-h`
+* Improving my speed
+
+** Keyboard
+
+Reduce the amount of time I look over my keycoard.
+Create and learn a better layer for movement, typing, gaming, etc.

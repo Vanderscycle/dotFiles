@@ -1,5 +1,6 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
+;; NOTE: https://abdelhakbougouffa.pro/posts/config/
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -76,8 +77,10 @@
 (setq +evil-want-o/O-to-continue-comments nil)
 ;;projectile config
 (setq
- projectile-project-search-path '("~/Documents/")
  doom-font (font-spec :family "JetBrains Mono Medium Nerd Font"))
+(after! projectile
+ projectile-project-search-path '("~" "~/Documents/*"  "~/Documents/houseAtreides/" "~/zettelkasten/" "~/.config/"))
+
 
 ;; https://emacsredux.com/blog/2013/04/02/move-current-line-up-or-down/
 (defun move-line-up ()
@@ -109,12 +112,18 @@
         (forward-line 1)))
 
 (global-set-key (kbd "C-/")  'comment-or-uncomment-region-or-line)
-(define-key evil-normal-state-map (kbd "RET")
-  (lambda ()
-    (interactive)
-    (call-interactively 'spacemacs/evil-insert-line-below)
-    (evil-next-line)))
 
+;; TODO: remove later
+(after! :map org-mode-map
+  :n "M-j" #'org-metadown
+  :n "M-k" #'org-metaup)
+
+;; (when noninteractive
+;;   (add-to-list 'doom-env-whitelist "^SSH_"))
+;; TODO: fix magit and emacs SSH_AUTH_SOCK being M-X setenv SSH_AUTH_SOCK
+;; https://github.com/doomemacs/doomemacs/issues/2434
+
+;; custom user implementation
 ;;(def-package! org-super-agenda
 ;;  :after org-agenda
 ;;  :init
@@ -125,3 +134,73 @@
 ;;                                         :priority "A")))
 ;;  :config
 ;;  (org-super-agenda-mode))
+
+;; Evil-snipe package
+;; https://github.com/hlissner/evil-snipe
+(evil-snipe-override-mode 1)
+(add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode)
+(setq flyspell-mouse-map nil)
+
+;; Emacs sometimes has a white flash when starting.
+;;https://github.com/doomemacs/doomemacs/issues/2828
+(when (daemonp)
+  (remove-hook 'after-make-frame-functions #'doom-init-theme-h)
+  (add-hook 'server-after-make-frame-hook #'doom-init-theme-h))
+
+;; Fixes SSH_AUTH_SOCK not being mounted by default
+(when noninteractive
+  (add-to-list 'doom-env-whitelist "^SSH_" ))
+
+;; WARN: This will completly change the default org-todo
+(after! org
+        (setq org-roam-directory "~/zettelkasten/")
+        (setq org-roam-index-file "~/zettelkasten/index.org")
+        (setq org-todo-keywords '((sequence "TODO(t)" "INPROGRESS(i)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)"))
+                org-todo-keyword-faces
+                '(("TODO" :foreground "#7c7c75" :weight normal :underline t)
+                ("WAITING" :foreground "#9f7efe" :weight normal :underline t)
+                ("INPROGRESS" :foreground "#0098dd" :weight normal :underline t)
+                ("DONE" :foreground "#50a14f" :weight normal :underline t))
+                org-agenda-files (list "~/zettelkasten/")))
+
+;; there is a hl-todo-mode
+(after! hl-todo
+  (setq hl-todo-keyword-faces
+                `(("TODO"       warning bold)
+                ("FIXME"      error bold)
+                ("HACK"       font-lock-constant-face bold)
+                ("REVIEW"     font-lock-keyword-face bold)
+                ("NOTE"       success bold)
+                ("DEPRECATED" font-lock-doc-face bold))))
+;; Insead of using iedit we use evil-multiedit
+(setq fcitx-remote-command "fcitx-remote")
+(after! pyim
+  (setq default-input-method "pyim")
+  (global-set-key (kbd "C-\\") 'toggle-input-method)
+)
+;; lsp (enable with K)
+;; https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/
+
+(after! lsp-mode
+  (setq lsp-lens-enable t
+        lsp-semantic-tokens-enable t ;; hide unreachable ifdefs
+        lsp-enable-symbol-highlighting t
+        lsp-headerline-breadcrumb-enable nil
+        ;; LSP UI related tweaks
+        lsp-ui-sideline-enable nil
+        lsp-ui-sideline-show-hover nil
+        lsp-ui-sideline-show-symbol nil
+        lsp-ui-sideline-show-diagnostics nil
+        lsp-ui-sideline-show-code-actions nil))
+;; don't treat underscores as word delimeters
+(defalias 'forward-evil-word 'forward-evil-symbol)
+(add-hook! 'js2-mode-hook (modify-syntax-entry ?_ "w")) ;; because the above doesn't work for JS
+
+(after! magit
+  ;; makes magit prompt me for the new branch name first:
+  (setq magit-branch-read-upstream-first nil))
+
+(after! epg
+  (setq epg-pinentry-mode nil))
+
+(setq fcitx-active-evil-states '(insert emacs hybrid))
