@@ -1,0 +1,30 @@
+;;;; Emacs Bookmark Format Version 1;;;; -*- coding: utf-8-emacs; mode: lisp-data -*-
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("EndeavourOS"
+ (filename . "/home/henri/Documents/dotFiles/postInstallScripts/endeavourOS/endeavourOSXmonad.sh")
+ (front-context-string . "#!/bin/bash\n\n# -")
+ (rear-context-string)
+ (position . 1))
+("config.fish"
+ (filename . "/home/henri/.config/fish/config.fish")
+ (front-context-string . "	for i in (cat $")
+ (rear-context-string . "on posix-source\n")
+ (position . 23))
+(".gitconfig"
+ (filename . "/home/henri/.gitconfig")
+ (front-context-string . "# https://marken")
+ (rear-context-string)
+ (position . 1))
+("learning doom"
+ (filename . "/home/henri/zettelkasten/[DOOM] tinkering.org")
+ (front-context-string . "* Roadmap to Ema")
+ (rear-context-string)
+ (position . 1))
+("learning chinese"
+ (filename . "/home/henri/zettelkasten/learningZN.org")
+ (front-context-string . "* Chinese\n** Ful")
+ (rear-context-string)
+ (position . 1))
+)

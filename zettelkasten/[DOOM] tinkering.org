@@ -17,6 +17,20 @@
    4. You can search system wide for a file using `spc f l`
 
 ** Plugins
+*** Kubernetes
+https://kubernetes-el.github.io/kubernetes-el/
+like k9s but in emacs
+
+*** Ansible
+
+*** Terraform
+*** htop
+you can use `M-x proceed`
+*** occur
+A quickfix list replacement `M-s o`
+
+*** Mu4e (mail) FIXME
+https://gist.github.com/A6GibKm/238b754a4a90051f60906b9efa3e8000
 
 *** Maggit
 was previously unable to [push](https://github.com/doomemacs/doomemacs/issues/2434)
@@ -33,6 +47,14 @@ use `g s` more often to navigate
 
 *** QuickFix list
 TODO Is there an emacs equicalent
+
+*** Docker
+THERE IS DOCKER INTEGRATION LIKE MAGIT
+`spc o D`
+
+*** Restclient
+litteraly an api client in emacs
+[[https://www.youtube.com/watch?v=fTvQTMOGJaw][quick tutorial]]
 
 *** Hydra
 learn about it
@@ -90,6 +112,8 @@ When in `dired-by-name` use `a` to reuse the same buffer otherwise `RET` to ente
 
 How td does it even work
 `spc c l` Essentialyy `spc c ...`
+https://emacs-lsp.github.io/lsp-mode/page/settings/mode/
+
 ** Org-mode
 
 Continue learning about it
@@ -116,19 +140,29 @@ you can quickly shift between statuses using `S-left/right`
 
 *** agenda
 You can use org-agenda to view the tasks `spc o a`
+
+*** Notebook like jupyter but better
+[[https://www.youtube.com/watch?v=qTncc2lI6OI][tutorial]]
+example org file[[file:notebook.org][notebook.org]]
+
 * Ressources
 
 ** Internal
 
 - [[file:Org Mode]]
-  -[[https://abdelhakbougouffa.pro/posts/config/#language-support--lang][Excellent walkthrought]] config
+- [[https://abdelhakbougouffa.pro/posts/config/#language-support--lang][Excellent walkthrought]] config
+https://tecosaur.github.io/emacs-config/config.html
+https://abdelhakbougouffa.pro/posts/config/#language-support--lang
+https://zzamboni.org/post/my-doom-emacs-configuration-with-commentary/
 
 ** external
 
 - [[https://orgmode.org/org.html][Org Mode Documentation]]
+
 * Improving my knowledge
 **   read the documentation
 Start with `spc-h`
+
 * Improving my speed
 
 ** Keyboard

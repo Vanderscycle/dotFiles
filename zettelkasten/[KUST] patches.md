@@ -21,7 +21,7 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/name
         value: keycloak-non-prod
-      # - op: replace
+      # - op: replace 
       #   path: /spec/template/spec/containers/0/command
       #   value: ["start-dev"]
       - op: replace
@@ -30,3 +30,4 @@ patches:
 
 ```
 ## References
+

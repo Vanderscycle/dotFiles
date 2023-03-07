@@ -108,13 +108,13 @@ Esquimalt的直辖市上个星期四给我们的建筑许可证
 这事比较便宜如果你希望更多硬盘空间。
 便宜 pian yi
 硬盘空间 ying4pan2 kong1jian1 hard drive space
-硬盘ying4pan2 hard drive
+硬盘ying4pan2 hard drive 
 虽然了解这个知识是很复杂也耗时也令人沮丧
 了解 liao3jie3 learn
 知识 zhi1shi4 knowledge
 复杂 fu zha complicated
-耗时 hao4shi2 time consuming
-令人沮丧 ling4ren2ju3sang4 frustrating
+耗时 hao4shi2 time consuming 
+令人沮丧 ling4ren2ju3sang4 frustrating 
 有一天不远的将来我会有我的房子的云与raspberry Pi
 远的将来 yuan3 de jiang1lai2 far future
 
@@ -139,3 +139,4 @@ Esquimalt的直辖市上个星期四给我们的建筑许可证
 温泉和餐厅的时候以后有时候我感觉太累的我休息
 
 ## References
+

@@ -496,6 +496,7 @@ emacs(){
 
   echo -e '\n=> installing Emacs'
   sudo pacman -S --needed --noconfirm emacs
+  yay -S --noconfirm protonmial-bridge mbsync-git # mail bridge for proton
   echo -e '\n=> installing Doom emacs'
   git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
   ~/.emacs.d/bin/doom install

@@ -2,7 +2,7 @@
 # Home
 # test
 [user]
-  name = Henri Vandersleyen
+  name = Henri Vandersleyen 
 [alias]
   squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-NO-TICKET:A new start}\");};f"
   clearcache = !"git rm -r --cached ."
@@ -25,5 +25,3 @@
   path = ~/.gitconfig.personal
 [includeIf "gitdir:**/houseAtreides/**/*"] #git
   path = ~/.gitconfig.atreides
-[core]
-	editor = emacs --wait

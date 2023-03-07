@@ -52,15 +52,15 @@ i肯定喜欢 ken4ding xihuan1 I sure like
 A 比 B (verb*) 更 *not always
 维多利亚比温哥华更好看
 维多利亚的飞机比温哥华的飞机(快)更多
-A 点左右 A (time) dian zuo3you4
+A 点左右 A (time) dian zuo3you4 
 
-## Ba sentences
+## Ba sentences 
 我吧你的手机放在那个桌子
 你把它放 ni3ba3 ta1fang4 you put it
 
 ## Emotion/Emotional state
 小气 xian3qi4 stingy
-笑话 xiao4hua4 joke
+笑话 xiao4hua4 joke 
 感动 gan3dong4 be moved / touched
 感觉 gan2jue feel
 流眼泪 liu2 yan3lei4 shed tears
@@ -69,7 +69,7 @@ A 点左右 A (time) dian zuo3you4
 看起来 kan4 qi3lai2 looks like
 看来 kan4 lai2
 
-## Adjectives
+## Adjectives 
 著名 zhu4ming2 Famous
 有名 you3ming2 Famous
 极了 ji2le extremely
@@ -83,14 +83,14 @@ A 点左右 A (time) dian zuo3you4
 桌子 zhuo zi table
 
 ## Clothes
-M.W. 双 shuang4 pair
+M.W. 双 shuang4 pair   
 M.W. else tiao
 M.W. 件 jian item/component
 
 (件)衬衫 chen4shan1 shirt
 (双)鞋子 xie2zi shoe
 裤子 ku4zi pants
-(件)衣服 yi1fu2 clothing
+(件)衣服 yi1fu2 clothing 
 
 ## Body part
 手臂 shou3bi4 arm
@@ -100,7 +100,7 @@ M.W. 件 jian item/component
 活动 hou2dong4 activity
 户外 hu4wai4 outdoor
 
-## usefull linking works
+## usefull linking works 
 正然 zheng4ran still/but
 或者 huo4zhe1 or
 可是 ke3shi4 but
@@ -108,10 +108,11 @@ M.W. 件 jian item/component
 才 cai2 only
 
 ???
-摆出 bai3chu1 put out
+摆出 bai3chu1 put out 
 开出 kaichu1  out
 * 办公室 ban4gong1shi4 office
 移民据 yi2min2 ju4 immigration documents
 移民 immigrant
 我送她在医院 wo song4 ta1 zai4 yi1yuan4 I dropped her to the hospital
 ## References
+
