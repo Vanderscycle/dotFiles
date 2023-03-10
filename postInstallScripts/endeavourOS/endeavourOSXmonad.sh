@@ -495,11 +495,12 @@ emacs(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing Emacs'
-  sudo pacman -S --needed --noconfirm emacs
+  sudo pacman -S --needed --noconfirm emacs aspell #  aspell for flyspell ( there are many languages however )
   yay -S --noconfirm protonmial-bridge mbsync-git # mail bridge for proton
   echo -e '\n=> installing Doom emacs'
   git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
   ~/.emacs.d/bin/doom install
+  yay -S --noconfirm terraform-ls
   echo -e 'Done.\n'
 }
 
