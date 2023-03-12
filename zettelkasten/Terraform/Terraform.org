@@ -1,0 +1,265 @@
+#+title: Terraform
+#+author:    Henri Vandersleyen
+#+email:     henri-vandersleyen@protonmail.com
+
+* Terraform
+** Table of Content
+Terraform is used as an extensible and powerful tool
+
+** Basic structure
+*** File
+
+The basic file structure of a `.tf` file is as follow.
+#+begin_src terraform
+<block> <resource type> <resource name> {
+# arguments
+    key1 = value1
+    key2 = value2
+}
+#+end_src
+Nomenclature
+
+*** Folder
+
+A simple project terraform folder structure:
+#+begin_src terraform
+.
+└── tf/
+    ├── versions.tf
+    ├── variables.tf
+    ├── provider.tf
+    ├── droplets.tf
+    ├── dns.tf
+    ├── data-sources.tf
+    └── external/
+        └── name-generator.py
+#+end_src
+
+
+a more complex terraform folder structure:
+#+begin_src terraform
+.
+└── tf/
+├── modules/
+│   ├── network/
+│   │   ├── main.tf
+│   │   ├── dns.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   └── spaces/
+│       ├── main.tf
+│       ├── outputs.tf
+│       └── variables.tf
+└── applications/
+├── backend-app/
+│   ├── env/
+│   │   ├── dev.tfvars
+│   │   ├── staging.tfvars
+│   │   ├── qa.tfvars
+│   │   └── production.tfvars
+│   └── main.tf
+└── frontend-app/
+├── env/
+│   ├── dev.tfvars
+│   ├── staging.tfvars
+│   ├── qa.tfvars
+│   └── production.tfvars
+└── main.tf
+#+end_src
+
+**** File explanation
+- main.tf - call modules, locals, and data sources to create all resources
+- variables.tf - contains declarations of variables used in main.tf
+- outputs.tf - contains outputs from the resources created in main.tf
+- versions.tf - contains version requirements for Terraform and providers
+- resources.tf - ??
+- providers.tf - version control for provides
+
+** Basic Workflow
+1. Create resources
+2. `terraform init`
+3. `terraform plan -out=output.tfplan`
+4. `terraform apply output.tfplan`
+   - idempotent config meaning that futher plan/apply will mirror
+5. `terraform destroy` will destroy all ressources in the folder
+
+When using terraform plan and apply, we want the have the exact configuration listed in the `main.tf`. This entails destroying ressources (e.g a change in file name)  to create new ones.
+
+You should always `plan` before `applying` even if you are not required.
+#+begin_src bash
+terraform init
+terraform plan -out=output.tfplan
+terraform apply output.tfplan
+#+end_src
+
+#+RESULTS:
+|                           |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+| [0m[1mInitializing    | the                | backend...[0m |                |                              |                |                     |                 |               |               |          |                 |     |
+|                           |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+| [0m[1mInitializing    | provider           | plugins...[0m |                |                              |                |                     |                 |               |               |          |                 |     |
+|                           |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+| [0m[1m[32mTerraform | has                | been            | successfully   | initialized![0m[32m[0m |                |                     |                 |               |               |          |                 |     |
+| [0m[32m               |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+| You                       | may                | now             | begin          | working                      | with           | Terraform.          | Try             | running       | "terraform    | plan"    | to              | see |
+| any                       | changes            | that            | are            | required                     | for            | your                | infrastructure. | All           | Terraform     | commands |                 |     |
+| should                    | now                | work.           |                |                              |                |                     |                 |               |               |          |                 |     |
+|                           |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+| If                        | you                | ever            | set            | or                           | change         | modules             | or              | backend       | configuration | for      | Terraform,      |     |
+| rerun                     | this               | command         | to             | reinitialize                 | your           | working             | directory.      | If            | you           | forget,  | other           |     |
+| commands                  | will               | detect          | it             | and                          | remind         | you                 | to              | do            | so            | if       | necessary.[0m |     |
+|                           |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+| [0m[1m[32mNo        | changes.[0m[1m | Your            | infrastructure | matches                      | the            | configuration.[0m |                 |               |               |          |                 |     |
+|                           |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+| [0mTerraform            | has                | compared        | your           | real                         | infrastructure | against             | your            | configuration |               |          |                 |     |
+| and                       | found              | no              | differences,   | so                           | no             | changes             | are             | needed.       |               |          |                 |     |
+| [0m[1m[32m          |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+| Apply                     | complete!          | Resources:      | 0              | added,                       | 0              | changed,            | 0               | destroyed.    |               |          |                 |     |
+| [0m                     |                    |                 |                |                              |                |                     |                 |               |               |          |                 |     |
+
+** Terraform providers
+When executing `terraform init` it will pull all of the listed terraform provides. There are several types of provides:
+- Official (Terraform)
+- Partner (e.g. heroku, digitalOcean)
+- OSS (community)
+`terraform init` is a safe command that can be run any number of times init.
+Should the provider's version be specified (which you should) then populate the `provides.tf`
+
+Each different providers will be downloaded upon `terraform init` inside `.terraform/plugins/`
+
+
+** Input variables
+
+Contend of a `variables.tf`
+#+begin_src terraform
+variable "byte_length" {
+  default = 8
+}
+#+end_src
+
+Contend of a `main.tf` in the same folder as `variables.tf`
+#+begin_src terraform
+resource "random_id" "server" {
+  byte_length = var.byte_length
+}
+#+end_src
+
+Current folder will look like this
+#+begin_src
+❯ ls
+drwxr-xr-x    - henri 10 Mar 07:55 .terraform
+.rw-r--r--  290 henri 11 Mar 22:05 main.tf
+.rw-r--r-- 2.3k henri 10 Mar 07:57 output.tfplan
+.rw-r--r-- 2.0k henri 11 Mar 21:19 terraform.tfstate
+.rw-r--r--  141 henri 11 Mar 22:05 variables.tf
+drwxr-xr-x    - henri 10 Mar 07:57 ~
+#+end_src
+
+**  Variable block
+
+While only default is needed, `type` and `description` greatly enhance the code longevity.
+
+
+#+begin_src terraform
+variable "file_permisson" {
+  default = "0700"
+  type = string
+  description = "permissions associated with the file"
+}
+#+end_src
+
+The only variable types are:
+
+| Type   | Example        |
+|--------+----------------|
+| string | "hello mom"    |
+| number | 1              |
+| bool   | true/false     |
+| any    | Default Value  |
+| list   | ["cat", "dog"] |
+| map    | pet1=cat       |
+| object |                |
+| tuple  |                |
+
+List
+#+begin_src terraform
+variable "file_permisson" {
+  default = [ "0700" "777"]
+  type = list(string)
+  description = "list of allowed permissions"
+}
+
+resource "local_file" "foo" {
+  filename = "${path.module}/foo.txt"
+  content = var.content
+  file_permission = var.file_permission[0]
+}
+#+end_src
+
+the `list` type support greater accuracy with list(string/number)
+
+Map
+#+begin_src terraform
+variable "file_permisson" {
+  default = {
+    "secret" = "700"
+    "admin"  "777"
+    }
+  type = map(string)
+  description = "Map of allowed permissions"
+}
+
+resource "local_file" "foo" {
+  filename = "${path.module}/foo.txt"
+  content = var.content
+  file_permission = var.file_permission["admin"]
+}
+#+end_src
+
+
+the `map` type support greater accuracy with map(string/number)
+
+Set
+A set is a list that cannot have a duplicate element. Same with subtyples `set(string/number)`
+
+Object
+#+begin_src terraform
+variable "bob" {
+  default = {
+    name = "bob"
+    color = "no importance"
+    age = 33
+    food = ["humous" , "feta"]
+    permission = "777"
+
+    }
+  type = object({
+  name = string
+  color = string
+  age = number
+  food = list(string)
+  permission = string})
+  description = "Object of employee type privileges and info"
+}
+
+resource "local_file" "foo" {
+  filename = "${path.module}/foo.txt"
+  content = var.content
+  file_permission = var.bob["permission"]
+}
+#+end_src
+
+Tuples
+#+begin_src terraform
+variable "bob" {
+  default = [ 43, "777" , true]
+  type = tuple([number, string, bool])
+  description = "Object of employee type privileges and info"
+}
+
+resource "local_file" "foo" {
+  filename = "${path.module}/foo.txt"
+  content = var.content
+  file_permission = var.bob[1]
+}
+#+end_src
+Similar to lists but can be of different variable types.

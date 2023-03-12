@@ -24,11 +24,9 @@ k9s:
         active: all
         lockFavorites: false
         favorites:
-        - octoprint
-        - all
         - default
       view:
-        active: deploy
+        active: po
       featureGates:
         nodeShell: false
       shellPod:

@@ -2,6 +2,7 @@
 ** Full sentences
 为什么你自己去拿 why did you take it yourself?
 我丢了好塑胶在垃圾桶 I threw plastic in the trash
+
 ** Dictionary
 *** International units
 公斤 gong1jin1 kg
@@ -24,6 +25,8 @@
 普通 pu3tong1 local
 受欢迎 shou4 huan1ying2 popular
 好笑 hao3xiao4 funny
+*** Money
+省钱 sheng3qian2 save money
 *** Business
 客户 ke4nu4 client
 开除 kai1chu2 fired/explusion
@@ -57,6 +60,16 @@
 **  Often missed chars
 睡觉 shuijiao sleep
 休息 xiuxi rest
+读 du2 read
+最近 zui4jin4 recently
+情况 qing2kuang4 situation/circumstances
+
+** Patterns
+百分之。。。 for example 百分之20人 20% of people
+
+** Sayings...
+你有别的吗？you have an another one?
+
 ** 22日/02月/2023年
 *** sentences
 我几天以前开始用第三次老板的3D打印机
@@ -81,6 +94,7 @@
 坏习惯 huai4 xi2quan4 bad habit
 *** Teacher sentences
 我休息在我的沙发上 I slep on the couch
+
 ** 01日/01月/2023年
 我这个星期开始我的工作感觉着了比较生产性的
 生产性的 sheng1xhang3 xing4 de productif
@@ -100,3 +114,56 @@
 一半百年的修修补补以后使这个电脑程序非常复杂但是非常有用
 修修补补 xiuxiu1bubu3 tinker
 复杂 fuza
+
+** 07日/02月/2023年
+*** Previous week Words
+剪头发 jian toufa cut hairs
+剪刀 jiandao scissors
+剪（v）jian cut/sheer
+也许 ye3xu3 maybe
+也许以后 ye3xu3 yi3hou4 maybe later
+换新的工作 huan4xin1de gong1zuo4 change to a new job
+换 huan4 change
+新的同时 xin1de tong2shi4 new colleague
+总共 zong3gong4 all together/total
+我们现在总共有10个人 We have all together 10 people
+一年以前比现在更少的工人 a year ago to now we have fewer people
+我在。。。读到
+读 du2 read
+我最近读到开除百分之30的
+到少 dao4shao3
+省钱 sheng3qian2 save money
+而是 ershi but
+收 shou1 to receive/to accept
+不敢相信 bu4gan3 xiang1xin4 unbelievable
+跟着 gen1zhe follow
+跟着我 gen1zhe follow me
+别人做  bie2 ren2zuo other people do
+比较 bi3jiao4 (to compare)
+有效率 you3xiao4lv4 efficient
+工厂 gongchang factory
+回来了 hui2lai2le came back
+情况 qing2kuang4 situation/circumstances
+升值 sheng1zhi2 appreciation
+变成 bian4 cheng2 become
+电脑工程的经理
+经理 jing1li3 manager
+努力工作 nuli gong1zuo4 work hard
+聪明 cong1ming2 clever/intelligent
+*** Sentences
+昨天我尝试过一家餐厅叫酸泡菜在Wharf和Johnson路口
+酸泡菜 suan1pao4cai4 sour pickle/kimchi
+这家餐厅提供白人舒适的食物
+提供 ti2gong1 provides/offer
+舒适 shu1shi4 cozy/comfort
+他有全天早餐和三明治
+全天 quan2tian1 all day
+三明治 san1ming1 zhi1 sandwinch (loan word)
+这家餐厅的老板是中国人所以他有好喝绿茶而且茉莉花茶
+绿茶 lv4cha2 green tea
+茉莉花茶 mo4li4hua1 cha2 jasmine tea
+总共的经验不错
+总共 zong3gong4 all together
+下次我会带上我的太太所以她可以常一常
+带上 dai4shang4 take/bring on
+带下 dai4xia4 take off

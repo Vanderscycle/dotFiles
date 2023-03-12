@@ -1,3 +1,7 @@
+#+title:     Learning Doom
+#+author:    Henri Vandersleyen
+#+email:     henri-vandersleyen@protonmail.com
+
 * Roadmap to Emacs
 
 ** Table of Content
@@ -14,7 +18,17 @@
 1. Create a keybinding for an existing submenu `SPC o o`
 2. become familiar with [Doom](https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org#configuring-doom)
 3. You can clear the buffer using `c-x x g`
-   4. You can search system wide for a file using `spc f l`
+4. You can search system wide for a file using `spc f l`
+5. finding mode bindings `spc h b m `
+6. localleade `spc m`
+
+** how do I?
+add a table of content in org-mode
+
+** known bugs
+flyspell not working
+solution: install `aspell`
+https://emacs.stackexchange.com/questions/69588/error-enabling-flyspell-in-emacs-aspell-macos
 
 ** Plugins
 *** Kubernetes
@@ -24,8 +38,11 @@ like k9s but in emacs
 *** Ansible
 
 *** Terraform
+using localleader `spc m` will yield terraform plan/apply/init
+
 *** htop
 you can use `M-x proceed`
+
 *** occur
 A quickfix list replacement `M-s o`
 
@@ -58,6 +75,8 @@ litteraly an api client in emacs
 
 *** Hydra
 learn about it
+*** dired
+can use dired-image `spc o i` to display iamges
 
 *** Help/documentation
 Really useful to learn about any command/plugins installed `spc h f` and then search the command e.g (`projectile-dicover`)
@@ -113,6 +132,7 @@ When in `dired-by-name` use `a` to reuse the same buffer otherwise `RET` to ente
 How td does it even work
 `spc c l` Essentialyy `spc c ...`
 https://emacs-lsp.github.io/lsp-mode/page/settings/mode/
+*** Terraform
 
 ** Org-mode
 
@@ -144,6 +164,32 @@ You can use org-agenda to view the tasks `spc o a`
 *** Notebook like jupyter but better
 [[https://www.youtube.com/watch?v=qTncc2lI6OI][tutorial]]
 example org file[[file:notebook.org][notebook.org]]
+
+*** unordered list to ordered list and back
+you can create an `ul` using - and then changed the top - to 1. and apply the cascading change using `C-c C-c`
+the same can be done using `1)` or `+`
+
+*** Using checkbox :test:
+same as markdown [ ]
+can check using `C-c C-c` or `Enter`
+you can nest checkboxes which will give in progress
+`[-]` in process
+`[X]` completed
+you can create counter using [/] and then `C-c C-c` you can also use [%] to show percentage
+checkboxes cannot have a tag/priority. They are simple markers
+1. [-] Create requirements.yaml [1/2]
+   - [X] test
+   - [ ] test2
+you can see all of the todo using `spc o a t` in org-agenda
+
+*** tags :fun:
+you can mark a heading using `spc m q` you can add multiple tags to each headings or you can add them manually
+you can see all of the tags using `spc o a m` in org-agenda
+**** Cascading headlines :organized:
+in this example this heading inherits the `fun` tag
+*** org-sparse-tree
+`spc m s s` then m which reorganize the current buffer wicht only shows the headlines with the selected tags
+
 
 * Ressources
 

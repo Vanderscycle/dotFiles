@@ -104,8 +104,7 @@ doom-font (font-spec :family "JetBrains Mono Medium Nerd Font"))
 ;; plugins config
 
 (after! projectile
- projectile-project-search-path '("~/" "~/Documents/*"  "~/Documents/houseAtreides/" "~/zettelkasten/" "~/.config/"))
-
+ (setq projectile-project-search-path '("~/" ("~/Documents/" . 2)  "~/Documents/houseAtreides/" "~/zettelkasten/" "~/.config/")))
 (after! hl-todo
   (setq hl-todo-keyword-faces
                 `(("TODO"       warning bold)
@@ -178,3 +177,8 @@ doom-font (font-spec :family "JetBrains Mono Medium Nerd Font"))
         "kill the xkcd buffer"
         (interactive)
         (kill-buffer "xkcd"))
+
+(map! :leader
+      (:prefix "o"
+        :desc "image-dired" "i" 'image-dired))
+(setq org-src-fontify-natively t) ;;https://stackoverflow.com/questions/10642888/syntax-highlighting-within-begin-src-block-in-emacs-orgmode-not-working
