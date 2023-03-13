@@ -24,6 +24,8 @@
 
 ** how do I?
 add a table of content in org-mode
+figure out snippets
+org-mode #+begin pattern?
 
 ** known bugs
 flyspell not working
