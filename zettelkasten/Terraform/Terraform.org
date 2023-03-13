@@ -439,3 +439,204 @@ Use version at least`"> 2.0.0"`
 Only use this version or its `semver` increment `"~> 1.2"` so 1.2 to 1.9
     Can also use greater accuracy `~> 1.2.0` so 1.2.0 to 1.2.9
 you can also use them in combinations `"> 1.2.0, < 2.0.0, != 1.4.0"`
+
+** Conditions
+if using Terraform >=0.13.0 conditionals are available. `resource`, `variable`, `data source` all can take conditionals.
+
+*** variables
+
+`variables` can take the optional validation tag
+#+begin_src yaml
+variable "image_id" {
+  type        = string
+  description = "The id of the machine image (AMI) to use for the server."
+
+  validation {
+    condition     = length(var.image_id) > 4 && substr(var.image_id, 0, 4) == "ami-"
+    error_message = "The image_id value must be a valid AMI id, starting with \"ami-\"."
+  }
+}
+#+end_src yaml
+
+*** resources, data sources, outputs
+`resources`, `data sources`, and `outputs` can take `preconditions` (before evaluation) or `postconditions` (after evaluating the object).
+- Use `preconditions` for assumptions
+- Use `postconditions` for guarantees
+
+#+begin_src yaml
+data "aws_ami" "example" {
+  owners = ["amazon"]
+
+  filter {
+    name   = "image-id"
+    values = ["ami-abc123"]
+  }
+}
+
+resource "aws_instance" "example" {
+  instance_type = "t3.micro"
+  ami           = data.aws_ami.example.id
+
+  lifecycle {
+    # The AMI ID must refer to an AMI that contains an operating system
+    # for the `x86_64` architecture.
+    precondition {
+      condition     = data.aws_ami.example.architecture == "x86_64"
+      error_message = "The selected AMI must be for the x86_64 architecture."
+    }
+
+    # The EC2 instance must be allocated a public DNS hostname.
+    postcondition {
+      condition     = self.public_dns != ""
+      error_message = "EC2 instance must be in a VPC that has public DNS hostnames enabled."
+    }
+  }
+}
+
+data "aws_ebs_volume" "example" {
+  # Use data resources that refer to other resources to
+  # load extra data that isn't directly exported by a resource.
+  #
+  # Read the details about the root storage volume for the EC2 instance
+  # declared by aws_instance.example, using the exported ID.
+
+  filter {
+    name = "volume-id"
+    values = [aws_instance.example.root_block_device.volume_id]
+  }
+
+  # Whenever a data resource is verifying the result of a managed resource
+  # declared in the same configuration, you MUST write the checks as
+  # postconditions of the data resource. This ensures Terraform will wait
+  # to read the data resource until after any changes to the managed resource
+  # have completed.
+  lifecycle {
+    # The EC2 instance will have an encrypted root volume.
+    postcondition {
+      condition     = self.encrypted
+      error_message = "The server's root volume is not encrypted."
+    }
+  }
+}
+
+output "api_base_url" {
+  value = "https://${aws_instance.example.private_dns}:8433/"
+}
+#+end_src yaml
+
+** tags
+
+* Terraform import, tainting, debugging
+
+** taint
+Over time, resources that are deployed using Terraform undergo certain configuration changes. The causes may lie in the application layer and the processing logic of various automation tools and processes. This introduces the probability of resources being modified in an undesired manner. For example someone manually changed the infrastructure and instead of using Terraform.
+
+Terraform will mark a ressource as tainted when it fails to run `terraform apply`. Terraform will recreate/replace the resource next time `terraform apply` is run.
+
+To manually taint/untaint a resource
+#+begin_src bash
+ressource_name = <resource_type>.<resource_name>
+terraform taint <resource_name>
+terraform untaint <resource_name>
+#+end_src
+
+** debugging
+For proper debugging it is recommended to change the log level using `export TF_LOG=`
+- INFO
+- WARNING
+- ERROR
+- DEBUG
+- TRACE
+To disable loggin unset the var: `UNSET tf_log_path`
+
+Use var `export TF_LOG_PATH=/tmp/terraform.log` to store the output
+
+** Import
+Terraform can import resources created by other methods (e.g. ansible, manually, etx.). This is different from `data source` as terraform cannot update or delete the `data source` resource.
+#+begin_src bash
+#terraform import <resource_type>.<resource_name> <attribute>
+terraform import aws_instace.webserver-2 i-023424
+#+end_src
+*** workflow
+
+1. declare the resource manually in an empty block.
+#+begin_src yaml
+resource "aws_instance" "webserver-2"{
+# terraform will update
+}
+#+end_src
+
+2. Then run the `terraform import` command to update terraform state.
+3. You can then populate the empty block with required/optional parameters
+4. Run `terraform plan`
+
+* Terraform Modules
+tldr: modules makes your code reusable and allow for the same abstration as a function.
+
+* Terraform cloud
+
+** Introduction
+Store, and manage your terraform state using Terraform cloud.
+
+** CLI login
+You will be prompted to add an api token.
+#+begin_src bash options
+terraform login
+#+end_src bash
+
+** variable sets
+Variable sets allow you to avoid redefining the same variables across workspaces, so you can standardize common configurations throughout your organization. One common use case for variable sets is for provider credentials.
+
+However, they can be used in similar fashion to your `terraform.tfvars` and have an order of [[https://developer.hashicorp.com/terraform/cloud-docs/workspaces/variables#precedence][precedence]]
+
+** workspaces
+Terraform cloud workspaces allow us to groups pieces of infrastructure like `AWS`, `gitlab`, `azure`, etc. However, you need to tell terraform explicitely.
+#+begin_src yaml options
+terraform {
+
+  cloud {
+    organization = "organization-name" # change me
+
+    workspaces {
+      name = "learn-terraform-cloud" # change me
+    }
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.28.0"
+    }
+  }
+
+  required_version = ">= 1.0.1" # terraform version specific
+}
+
+#+end_src yaml
+
+Unless you have a global `variable set` you will need to add it to the workspace.
+** Policy enforcement
+
+** Registry
+Terraform cloud registry are a reuse existing module through an url, instead of a local file.
+
+* TODO scratch learning AWS [0/1]
+- [ ] LEARN ABOUT LOGIC IF etc foten peoples use count for either 0/1
+[[https://stackoverflow.com/questions/69918762/how-to-use-a-condition-count-statement-in-terraform][count conditionals]]
+
+[[https://about.gitlab.com/handbook/][handbook]]
+- RTFM: gitlab manual
+  aim for sudo mono repo -> e.g. Caseri App/corpus app
+
+review terraform modules, but thewy are basicalluy
+AWS offers, excellent repos examples. cehck ` terraform-aws-modules`
+terraform has logic available most people use ccount for logic, ekse w just use foreach
+what are terraform tags again?
+
+critical awz repo `terraform-aws-module` (first place to look) `aws-ia` (egood reference)
+https://about.gitlab.com/topics/gitops/gitlab-enables-infrastructure-as-code/
+how do I tally aws costs?
+
+The data account will yield the most granular information about the s3 usage.
+    The majority of s3 costs are data transfer costs `eu-request-tier1/tier2`
+For the total cost of our aws usage, check the root account

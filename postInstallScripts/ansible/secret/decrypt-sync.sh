@@ -28,7 +28,7 @@ while (( "$#" )); do
       ;;
   esac
 done
-declare -a SecureFiles=("github-gpg-private.key" "gitlab-gpg-private.key" "aws-config" "atreidesGit" "endeavourGit" ".env-general")
+declare -a SecureFiles=("github-gpg-private.key" "gitlab-gpg-private.key" "aws-config" "atreidesGit" "endeavourGit" ".env-general" "terraform")
 
 decrypt(){
 
