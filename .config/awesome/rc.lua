@@ -512,18 +512,12 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey, "Shift" }, "s", function()
 		awful.util.spawn("flameshot gui", false)
 	end, { description = "launch flameshot", group = "launcher" }),
-	awful.key({ modkey, "Shift" }, "e", function()
-		awful.util.spawn("google-chrome-stable")
-	end, { description = "launch chrome", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "n", function()
 		awful.util.spawn("thunar")
 	end, { description = "launch thunar", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "h", function() -- WARN: not working
 		awful.spawn.with_shell("htop")
 	end, { description = "launch htop", group = "launcher" }),
-	-- awful.key({ modkey, "Shift" }, "m", function()
-	-- 	awful.util.spawn("alacritty --class music -e ncmpcpp")
-	-- end, { description = "launch ncmpcpp", group = "launcher" }),
 	-- playerctl
 	awful.key({ altkey, "Control" }, "p", function()
 		awful.util.spawn("playerctl play-pause", false)
@@ -569,9 +563,6 @@ local globalkeys = gears.table.join(
 	awful.key({ "Shift" }, "Print", function()
 		awful.spawn("flameshot screen -n 1 -c", false)
 	end, { description = "Shot screen 1", group = "launcher" }),
-	awful.key({ "Control" }, "Print", function()
-		awful.spawn("flameshot full -c", false)
-	end, { description = "Shot all screen", group = "launcher" }),
 
 	-- Screen manipulation
 	awful.key({ modkey }, "l", function()
@@ -802,7 +793,14 @@ awful.rules.rules = {
 		properties = {},
 		callback = awful.client.setslave,
 	},
-
+	-- rule to not launch firefox in floating mode
+	{ rule = { class = "firefox","SuperSlicer" },
+		properties = {
+			opacity = 1,
+			maximized = false,
+			floating = false
+		}
+	},
 	-- Floating clients.
 	{
 		rule_any = {
@@ -842,6 +840,7 @@ awful.rules.rules = {
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 	-- Set Firefox to always map on the tag1 on screen 1.
 	{ rule = { class = "firefox" }, properties = { screen = 1, tag = tag2 } },
+	{ rule = { class = "SuperSlicer" }, properties = { screen = 1, tag = tag6 } },
 	{ rule = { class = "Slack" }, properties = { screen = 1, tag = tag3 } },
 	{ rule = { instance = "Devtools" }, properties = { screen = 1, tag = tag1 } },
 	{ rule = { instance = "spotify" }, properties = { screen = 1, tag = tag3 } },
