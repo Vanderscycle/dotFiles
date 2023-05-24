@@ -66,13 +66,15 @@ load-ssh(){
 
 }
 
+#TODO be able to target specific files. Also decrypt should encrypt files right away
 if [[ "${OPERATION}" = "decrypt" ]];then
   decrypt
-  if [[ "${LOCATION}" = "home" ]];then
+  if [[ "${LOCATION}" = "ssh" ]];then
     load-gpg
     load-ssh
-    rsync -av --progress .env-general "$HOME/Documents/dotFiles/.env" 
-fi
+    elif [[ "${LOCATION}" = "env" ]];then
+    rsync -av --progress .env-general "$HOME/Documents/dotFiles/.env"
+  fi
 elif [[ "${OPERATION}" = "encrypt" ]];then
   encrypt
 fi
