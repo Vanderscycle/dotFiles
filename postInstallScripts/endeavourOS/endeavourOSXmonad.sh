@@ -782,6 +782,7 @@ sudo systemctl enable --now bluetooth
   ai
 
   if [[ "$WM" = "xmonad" ]]; then
+  # BUG known errors (pacman unable to install proprely)
     xmonad
   fi
 
