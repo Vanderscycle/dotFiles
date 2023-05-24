@@ -108,7 +108,7 @@ Ansible(){
     # => Ansible + vault
     # ----------------------------------------------- ------------------------------
     echo -e 'Instaling AMD drivers \n'
-    pip install ansible
+    pip install ansible netaddr
     # autocomplete
     pip3 install argcomplete
     activate-global-python-argcomplete
@@ -404,6 +404,14 @@ antivirus(){
   # -----------------------------------------------------------------------------
 
   sudo pacman -S --needed --noconfirm clamav
+}
+
+ai (){
+
+  # -----------------------------------------------------------------------------
+  # => AI tools
+  # -----------------------------------------------------------------------------
+  pip install shell-gpt==0.8.3
 }
 
 rust(){
@@ -715,11 +723,11 @@ cliClients () {
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> Installing AWS-cli'
-  yay -S --needed --noconfirm aws-cli-v2
+  yay -S --needed --noconfirm aws-cli-v2 aws-session-manager-plugin
   echo -e 'Done.\n'
 
   echo -e '\n=> Installing Linode'
-  pip3 install linode-cli --upgrade
+  pip3 install linode-cli boto3 --upgrade
   echo -e 'Done.\n'
 
   echo -e '\n=> Installing gitlab cli'
@@ -771,6 +779,7 @@ sudo systemctl enable --now bluetooth
   lunarvim
   emacs
   antivirus
+  ai
 
   if [[ "$WM" = "xmonad" ]]; then
     xmonad

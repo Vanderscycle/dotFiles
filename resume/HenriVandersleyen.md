@@ -12,16 +12,29 @@ Victoria, BC<br>
 ## Employment
 
 2022 DevOps Engineer
+
+2023-Present Intermediate DevOps Engineer
 Atreides
 
-- techStack: Kubernetes, Helm, Argocd, GitOps, Ansible, Gitlab-ci, NextJs, NestJs
+- SysAdmin of AWS, Azure, Gitlab, ArgoCD
+- Proficient in Linux, Terraform, Kubernetes, Ansible, Helm, DevOps and GitOps pattern
+- Integrates ChatOps services into slack
+- Familiar with Vault and Terraform Cloud
+- Proactive in automating areas that are susceptible to human error
+- Keep security and potential vulnerabilities in mind when building new services 
+- Foster the team spirit and resilience
+- reated a homelab using a cluster of raspberry pis, ansible and k3s to host my private cloud
+
+2022-2023 Jr. DevOps Engineer
+Atreides
+
 - Learned how to use ArgoCD to control services using GitOps declarative pattern
-- Created the Atreides CICD gitlab pipelines which controls testing, semver, releases, and more
+- Created the Atreides CICD Gitlab pipelines, which control testing, server, releases, and more
 - Packaged Atreides microservices into an helm chart for SaaS
-- integrated new architecture on aws using terraform
-- created custom kubernetes deployment for our microservices
+- integrated new architecture on AWS using Terraform
+- created custom Kubernetes deployment for our microservices
 - configured remote servers using ansible scripts
-- Incorporated [Test Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) with cypress, and jest into the CICD pipeline
+- Incorporated Test Driven Development (TDD) with cypress and jest into the CICD pipeline
 
 2021-2022 Jr. Fullstack Software Developer
 Aviary Tech
@@ -32,7 +45,7 @@ Aviary Tech
 - Mentored and taught non-developers how to use javascript and the Svelte frontend framework
 - Mastered VIM and Linux scripting for automation
 
-2007-2020 Marine Engineering Offcier
+2007-2020 Marine Engineering Officer
 Royal Canadian Navy
 
 - Retired as a fully qualified [Marine System Engineering Officer](https://forces.ca/en/career/marine-systems-engineering-officer/) where I informed, advised, and recommend technical courses of action to non-technical superiors during normal, wartime, emergency operations, and maintence periods.
@@ -52,7 +65,7 @@ Stack: Bash, modern unix tools
 
 HomeServer
 A local raspberry pi cluster used as a local home server using k3s
-Stack: linux, k3s, DDNS, kubernetes, ansible
+Stack: linux, k3s, DDNS, kubernetes, ansible, helm
 
 ## Open source contribution
 
@@ -70,15 +83,13 @@ P.eng, Engineers and Geoscientists BC (non-practicing)
 ## Programming Skills
 
 | Language/Framework/Tool | Competence level |
-| ----------------------- | ---------------- |
+|-------------------------|------------------|
 | Bash/fish               | Expert           |
 | JS/TS                   | Advanced         |
 | Docker                  | Advanced         |
-| k8s/helm/kustomize      | Intermediate     |
+| k8s/helm/kustomize      | Adavanced        |
 | ansible                 | Intermediate     |
 | Python                  | Advanced         |
-| Svelte                  | Advanced         |
-| NestJs                  | Advanced         |
 | Go                      | Basic            |
 | Lua                     | Basic            |
 

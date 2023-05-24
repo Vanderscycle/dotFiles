@@ -151,6 +151,9 @@
 (when noninteractive
   (add-to-list 'doom-env-whitelist "^SSH_" ))
 
+(after! evil-escape
+  (setq  evil-escape-delay 0.2)
+  (setq evil-escape-unordered-key-sequence t))
 ;; WARN: This will completly change the default org-todo
 (after! org
         (setq org-roam-directory "~/zettelkasten/")
