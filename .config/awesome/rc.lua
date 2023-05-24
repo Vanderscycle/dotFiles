@@ -841,15 +841,15 @@ awful.rules.rules = {
 	-- Add titlebars to normal clients and dialogs
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 	-- Set Firefox to always map on the tag1 on screen 1.
-	{ rule = { class = "firefox" }, properties = { screen = 2, tag = tag2 } },
-	{ rule = { class = "Slack" }, properties = { screen = 3, tag = tag3 } },
-	{ rule = { instance = "Devtools" }, properties = { screen = 2, tag = tag1 } },
-	{ rule = { instance = "spotify" }, properties = { screen = 3, tag = tag3 } },
-	{ rule = { class = "Spotify" }, properties = { screen = 3, tag = tag3 } },
-	{ rule = { class = "Steam" }, properties = { screen = 4, tag = tag4 } },
-	{ rule = { class = "discord" }, properties = { screen = 3, tag = tag3 } },
-	{ rule = { class = "SignalDesktop" }, properties = { screen = 6, tag = tag6 } },
-	{ rule = { class = "transmission-gtk" }, properties = { screen = 7, tag = tag7 } },
+	{ rule = { class = "firefox" }, properties = { screen = 1, tag = tag2 } },
+	{ rule = { class = "Slack" }, properties = { screen = 1, tag = tag3 } },
+	{ rule = { instance = "Devtools" }, properties = { screen = 1, tag = tag1 } },
+	{ rule = { instance = "spotify" }, properties = { screen = 1, tag = tag3 } },
+	{ rule = { class = "Spotify" }, properties = { screen = 1, tag = tag3 } },
+	{ rule = { class = "Steam" }, properties = { screen = 1, tag = tag4 } },
+	{ rule = { class = "discord" }, properties = { screen = 1, tag = tag3 } },
+	{ rule = { class = "SignalDesktop" }, properties = { screen = 1, tag = tag6 } },
+	{ rule = { class = "transmission-gtk" }, properties = { screen = 1, tag = tag7 } },
 }
 -- }}}
 
