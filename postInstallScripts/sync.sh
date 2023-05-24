@@ -24,9 +24,9 @@ while (( "$#" )); do
   esac
 done
 
-declare -a HomeArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" "zettelkasten" ".ssh/config" "zettelkasten" ".xmonad" ".wezterm" ".doom.d")
+declare -a HomeArray=(".xinitrc"  ".gitconfig" ".gitconfig.personal" ".gpg/gpg-agent" ".ripgreprc" "zettelkasten" ".ssh/config" "zettelkasten" ".wezterm" ".doom.d")
 
-declare -a ConfArray=("broot" "/systemd/emuser/emacs.service" "zellij" "rofi" "kitty" "xmobar" "dunst" "fontconfig" "rg" "BetterDiscord" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s" "fish/config.fish" "bpytop" "starship.toml" "awesome"  "emacs/.local/etc/bookmarks" "doom")
+declare -a ConfArray=("broot" "/systemd/emuser/emacs.service" "zellij" "rofi" "kitty" "dunst" "fontconfig" "rg" "BetterDiscord" "mimeapps.list" "bat" "rg" "neofetch" "picom" "k9s" "fish/config.fish" "bpytop" "starship.toml" "awesome"  "emacs/.local/etc/bookmarks" "doom")
 
 sync(){
   echo -e "sync"
