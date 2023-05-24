@@ -1,0 +1,14 @@
+#+title: Programing
+
+* Programming Goals
+
+** Ongoing problems :AwesomeWM:
+*** TODO annoying error messages on new window :AwesomeWM:
+*** TODO fix sync doot files and cleanse :Important:
+*** TODO Can't close some windows (e.g firefox history manager) :AwesomeWM:
+*** TODO Become better at Org-mode [0/1] :Emacs:
+**** TODO Write documentation at work
+*** TODO Create ansible playbook to configure k3s on a rpi. [0/1]:Ansible:
+**** TODO Test on the local rpi
+*** Print ABS/ASA part for hoepfully my future printer (v-minion) :3Dprinting:
+**** TODO Fix and give shaun's printer back :3Dprinting:

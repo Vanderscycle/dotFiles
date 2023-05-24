@@ -21,11 +21,23 @@
 4. You can search system wide for a file using `spc f l`
 5. finding mode bindings `spc h b m `
 6. localleade `spc m`
+7. kill project and all its opened buffer `spc p k`
+8. create hyperlink from clipboard content `spc m l c`
+9. in the event vanilla emacs open instead of doom [[https://github.com/doomemacs/doomemacs/issues/1512][emacs]]
+10. Emacs mode (turns cursor solid yellow box) `c-z`
 
 ** how do I?
 add a table of content in org-mode
 figure out snippets
 org-mode #+begin pattern?
+snippets again
+use org roam
+use scratch pads
+codelens
+code action
+lsp actions
+search more effectively a buffer instead of `/name of instanve`
+
 
 ** known bugs
 flyspell not working
@@ -152,6 +164,10 @@ work for external links
 [[shell: ls ][Executing shell cmd]]
 TODO: How do I edit the links? ANSWER: `spc m l t` toggle
 
+*** Images
+https://orgmode.org/manual/Images.html
+press enter on the linkg to show it
+
 *** Tasks
 You can automatically convert headlines to tasks by prepending TODO
 To add tag you can use the shorthand `spc m t`
@@ -183,6 +199,7 @@ checkboxes cannot have a tag/priority. They are simple markers
    - [X] test
    - [ ] test2
 you can see all of the todo using `spc o a t` in org-agenda
+SHORTCUT `spc enter`
 
 *** tags :fun:
 you can mark a heading using `spc m q` you can add multiple tags to each headings or you can add them manually
@@ -192,6 +209,13 @@ in this example this heading inherits the `fun` tag
 *** org-sparse-tree
 `spc m s s` then m which reorganize the current buffer wicht only shows the headlines with the selected tags
 
+*** hemphasis + monospace
+[[https://orgmode.org/manual/Emphasis-and-Monospace.html][Emphasis and Monospace (The Org Manual)]]
+~Code~
+=verbatim=
+_underline_
+/italic/
+ ‘*bold*’, ‘/italic/’, ‘_underlined_’, ‘=verbatim=’ and ‘~code~’, and, if you must, ‘+strike-through+’
 
 * Ressources
 

@@ -108,14 +108,17 @@ if status is-interactive
   set -xg PATH "$DENO_HOME/bin" "$PATH"
 # pnpm
   set -gx PNPM_HOME "/home/henri/.local/share/pnpm"
-  set -gx PATH "$PNPM_HOME" $PATH
+  set -gx PATH "$PNPM_HOME" "$PATH"
   # golang
   set -xg GOPATH $HOME/go
-  set -xg PATH $PATH $GOPATH/bin
+  set -xg PATH "$GOPATH/bin" "$PATH"
   # python
   set PYENV_ROOT $HOME/.pyenv
   set -x PATH $PYENV_ROOT/shims $PYENV_ROOT/bin $PATH
   pyenv rehash
+  # ruby
+  set -xg GEM_HOME "$(ruby -e 'puts Gem.user_dir')"
+  set -gx PATH "$GEM_HOME" "$PATH"
 # doom emacs
   set -gx DOOM_HOME "$HOME/.config/emacs"
   set -gx PATH "$PATH" "$DOOM_HOME"/bin
@@ -129,8 +132,9 @@ function fish_greeting
     echo Hello "$USER"!
     echo The time is (set_color yellow; date +%T; set_color normal) and this machine is called $hostname
     # pokemon-colorscripts -r
+    # emacsStart
     if not test -f '/tmp/weather_report'
-      
+
     # adding all the ssh keys
       ssh-add ~/.ssh/endeavourGit
       ssh-add ~/.ssh/atreidesGit
@@ -140,7 +144,8 @@ function fish_greeting
       set -l TMP_FILE  /tmp/weather_report
       # xmonad --recompile; xmonad --restart
       xrandr --output DP-2 --mode 3440x1440 --rate 144 # force the monitor to move from 60 to 144hz
-      curl -s v2d.wttr.in/ | tee $TMP_FILE
+      # curl -s v2d.wttr.in/ | tee $TMP_FILE
+
     end
 end
 
@@ -218,6 +223,11 @@ end
 #npm/pnpm
 function p 
 	pnpm $argv
+end
+
+function pnpx --description "npx but for pnpm"
+# INFO: https://pnpm.io/cli/dlx
+	pnpm dlx $argv
 end
 
 #dns/dog
@@ -492,3 +502,13 @@ end
 
 
 fish_add_path /home/henri/.spicetify
+
+function emacsStart
+  emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" ^ /dev/null | grep --silent t
+  if test $status -eq 1
+    # not running, -a '' starts a new server
+    emacsclient -a '' -nqc $argv > /dev/null ^ /dev/null
+  else
+    emacsclient -nq $argv > /dev/null ^ /dev/null
+  end
+end

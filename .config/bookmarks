@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("EndeavourOS"
+(("programing.org"
+ (filename . "/home/henri/zettelkasten/programing.org")
+ (front-context-string)
+ (rear-context-string . "nter (v-minion)\n")
+ (position . 460))
+("EndeavourOS"
  (filename . "/home/henri/Documents/dotFiles/postInstallScripts/endeavourOS/endeavourOSXmonad.sh")
  (front-context-string . "#!/bin/bash\n\n# -")
  (rear-context-string)
