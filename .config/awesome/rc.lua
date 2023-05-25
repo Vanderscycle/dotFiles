@@ -1,5 +1,8 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+
+-- referencehh:
+-- https://github.com/ayamir/dotfiles/tree/master
 pcall(require, "luarocks.loader")
 
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/default/"
@@ -169,6 +172,11 @@ local utilsmenu = {
 	{ "screenshot", "flameshot gui" },
 }
 
+local printer = {
+	{ "super slicer", "superslicer" },
+	{ "prusca slicer", "PruscaSlicer" },
+}
+
 local myexitmenu = {
 	{
 		"logout",
@@ -191,6 +199,7 @@ local mymainmenu = awful.menu({
 		{ "settings", settingsmenu },
 		{ "utils", utilsmenu },
 		{ "awesome", myawesomemenu },
+		{ "3Dprinting", printer },
 		{ "exit options", myexitmenu },
 	},
 })
@@ -794,7 +803,7 @@ awful.rules.rules = {
 		callback = awful.client.setslave,
 	},
 	-- rule to not launch firefox in floating mode
-	{ rule = { class = "firefox","SuperSlicer" },
+	{ rule = { class = "firefox","SuperSlicer", "PrusaSlicer" },
 		properties = {
 			opacity = 1,
 			maximized = false,
@@ -842,6 +851,7 @@ awful.rules.rules = {
 	{ rule = { class = "firefox" }, properties = { screen = 1, tag = tag2 } },
 	{ rule = { class = "emacs" }, properties = { screen = 1, tag = tag1 } },
 	{ rule = { class = "SuperSlicer" }, properties = { screen = 1, tag = tag6 } },
+	{ rule = { class = "PrusaSlicer" }, properties = { screen = 1, tag = tag6 } },
 	{ rule = { class = "Slack" }, properties = { screen = 1, tag = tag3 } },
 	{ rule = { instance = "Devtools" }, properties = { screen = 1, tag = tag1 } },
 	{ rule = { instance = "spotify" }, properties = { screen = 1, tag = tag3 } },
