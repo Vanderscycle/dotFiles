@@ -20,7 +20,7 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+-- require("awful.hotkeys_popup.keys")
 
 -- {{{ Autostart
 
@@ -135,8 +135,8 @@ local myawesomemenu = {
 }
 
 local editormenu = {
-	{ "neovim", "kitty -e lvim" },
-	{ "vscode", "code" },
+	-- { "neovim", "kitty -e lvim" },
+	{ "Doom emacs", "emacs" },
 }
 
 local officemenu = {
@@ -840,6 +840,7 @@ awful.rules.rules = {
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 	-- Set Firefox to always map on the tag1 on screen 1.
 	{ rule = { class = "firefox" }, properties = { screen = 1, tag = tag2 } },
+	{ rule = { class = "emacs" }, properties = { screen = 1, tag = tag1 } },
 	{ rule = { class = "SuperSlicer" }, properties = { screen = 1, tag = tag6 } },
 	{ rule = { class = "Slack" }, properties = { screen = 1, tag = tag3 } },
 	{ rule = { instance = "Devtools" }, properties = { screen = 1, tag = tag1 } },

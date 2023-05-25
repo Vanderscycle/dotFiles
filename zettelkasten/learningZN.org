@@ -372,7 +372,7 @@ Doubling of adjectives
 我们雇了一个营造商在我们假期的时候然后他说我们会开始装修一天后你回家
 雇了 gu4le
 装修 zhuangxiu1 renovation
-营造商 ying2zhaoshang1 builder
+营造商 ying2zaoshang1 builder
 我觉得我的太太不特别喜欢收拾假期到来同一天
 假期 jia4qi1 vacations
 收拾 shoushhi pack
@@ -383,3 +383,19 @@ Doubling of adjectives
 层楼 cenglou first floor
 我面见在网上一个以色列人他最帮助我到我的3D打印机工作
 以色列 yi3se4lie4 israel
+
+** 24 05 2023年
+我上个漫长周末有到忙的
+漫长 mang4chang2 long
+我用了我的打印机太多所以我的太太告诉我《请与交建设者在隔音》
+da yin ji (printer)
+与建设者 yu3 jian4shezhe builder
+隔音 ge2yin sound proof
+建设者在房子的装修开始的时候告诉我们《他发现一个承重墙在地层楼》
+发现 fa xian found
+承重墙 cheng2zhong4 qiang load bearing wall
+墙 qiang4 wall
+土木工程师 tu3mu4 gong1cheng2shi1 civil engineer
+土木工程师的计划不显示这个墙在第一层楼作为承重墙
+计划 ji4hua2
+-  作为 zuo4wei2 as (pattern) did not show this (作为) as that
