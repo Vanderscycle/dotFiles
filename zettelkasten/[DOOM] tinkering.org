@@ -25,7 +25,7 @@
 8. create hyperlink from clipboard content `spc m l c`
 9. in the event vanilla emacs open instead of doom [[https://github.com/doomemacs/doomemacs/issues/1512][emacs]]
 10. Emacs mode (turns cursor solid yellow box) `c-z`
-
+11. When inspecting a definition c-l-d you can jump back
 ** how do I?
 add a table of content in org-mode
 figure out snippets

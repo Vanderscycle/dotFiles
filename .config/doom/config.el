@@ -40,10 +40,12 @@
 (setq +evil-want-o/O-to-continue-comments nil)
 (setq
 doom-font (font-spec :family "JetBrains Mono Medium Nerd Font"))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-
+(xterm-mouse-mode 1)
+(xclip-mode 1)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -182,3 +184,15 @@ doom-font (font-spec :family "JetBrains Mono Medium Nerd Font"))
       (:prefix "o"
         :desc "image-dired" "i" 'image-dired))
 (setq org-src-fontify-natively t) ;;https://stackoverflow.com/questions/10642888/syntax-highlighting-within-begin-src-block-in-emacs-orgmode-not-working
+
+;; https://gist.github.com/jordangarrison/8720cf98126a1a64890b2f18c1bc69f5
+(use-package! python-black
+  :demand t
+  :after python
+  :config
+  (add-hook! 'python-mode-hook #'python-black-on-save-mode)
+  ;; Feel free to throw your own personal keybindings here
+  (map! :leader :desc "Blacken Buffer" "m b b" #'python-black-buffer)
+  (map! :leader :desc "Blacken Region" "m b r" #'python-black-region)
+  (map! :leader :desc "Blacken Statement" "m b s" #'python-black-statement)
+)

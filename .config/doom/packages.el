@@ -54,4 +54,4 @@
 (package! restclient)
 (package! org-roam
   :recipe (:host github :repo "org-roam/org-roam" :branch "main"))
-(package! xkcd)
+(package! python-black)
