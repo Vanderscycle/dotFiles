@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: section
+# uuid: t
+# key: section
+# condition: t
+# --
+
+** ${1:section}
+*** Table of Content
+    1. +[[$2]]
+    *** $2

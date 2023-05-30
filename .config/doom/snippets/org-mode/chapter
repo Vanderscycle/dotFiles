@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: chapter
+# key: chapter
+# uid: t
+# --
+
+* ${1:chapter}
+** Table of Content
+   1. +[[$2]]
+** $2
+*** ${3:sub-section}
