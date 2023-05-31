@@ -45,6 +45,12 @@ solution: install `aspell`
 https://emacs.stackexchange.com/questions/69588/error-enabling-flyspell-in-emacs-aspell-macos
 
 ** Plugins
+*** snippets
+using yasnipet Under the hood
+need to run =yas-recompile-all + yas-relead-all= for changes to take effect
+https://github.com/doomemacs/snippets
+[[https://www.youtube.com/watch?v=W-bRZlseNm0][tutorial]]
+
 *** Kubernetes
 https://kubernetes-el.github.io/kubernetes-el/
 like k9s but in emacs

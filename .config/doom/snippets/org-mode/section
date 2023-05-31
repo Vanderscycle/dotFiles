@@ -6,6 +6,5 @@
 # --
 
 ** ${1:section}
-*** Table of Content
-    1. +[[$2]]
-    *** $2
+   - +[[Table of Content]]
+    *** ${2:subsection}
