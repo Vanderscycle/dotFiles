@@ -16,17 +16,19 @@ k9s:
     fullScreenLogs: false
     textWrap: false
     showTime: false
-  currentContext: default
-  currentCluster: default
+  currentContext: lke111935-ctx
+  currentCluster: lke111935
   clusters:
-    default:
+    lke111935:
       namespace:
         active: all
         lockFavorites: false
         favorites:
+        - secrets
+        - all
         - default
       view:
-        active: po
+        active: secret
       featureGates:
         nodeShell: false
       shellPod:
