@@ -170,8 +170,6 @@ doom-font (font-spec :family "JetBrains Mono Medium Nerd Font"))
 ;; fun
 ;; FIXME really janky and keybindings not workings
 ;; https://github.com/vibhavp/emacs-xkcd/blob/master/xkcd.el
-(after! xkcd
-  :enable t)
 (map! :leader
       (:prefix "o"
         :desc "Kubernetes" "x" 'xkcd))

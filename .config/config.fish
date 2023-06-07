@@ -466,6 +466,7 @@ end
 function update
   # create a backyp
   sudo timeshift --create
+  sudo pacman -Sy endeavouros-keyring
   topgrade
   # sudo pacman -Syu
   # xmonad --recompile

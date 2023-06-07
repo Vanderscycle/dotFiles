@@ -803,7 +803,15 @@ awful.rules.rules = {
 		callback = awful.client.setslave,
 	},
 	-- rule to not launch firefox in floating mode
-	{ rule = { class = "firefox","SuperSlicer", "PrusaSlicer" },
+	{ rule = { class = "firefox"},
+		properties = {
+			opacity = 1,
+			maximized = false,
+			floating = false
+		}
+	},
+-- not working
+	{ rule = { class = "SuperSlicer"},
 		properties = {
 			opacity = 1,
 			maximized = false,
