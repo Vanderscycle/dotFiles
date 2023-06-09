@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: module
+# key: module_python
+# condition: t
+# uid: t
+# --
+
+if __name__ == "__main__":
+   pass
