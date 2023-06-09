@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: enum
+# key: enum_interface
+# uid: t
+# --
+
+class ${1:enum}(Enum):
+    ACCOUNTING = 0

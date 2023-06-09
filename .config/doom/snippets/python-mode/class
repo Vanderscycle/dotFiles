@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: class
+# key: class
+# uid: t
+# --
+class ${1:}:
+def __init__(self, ${2:arguments}) -> None:
+    """docs"""
+    pass
+def first_method(self) -> None:
+    pass
