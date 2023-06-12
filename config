@@ -1,0 +1,5 @@
+# BEGIN: Platform.sh certificate configuration
+Host *.platform.sh
+  Include /home/henri/.platformsh/ssh/*.config
+Host *
+# END: Platform.sh certificate configuration
