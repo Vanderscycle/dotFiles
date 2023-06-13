@@ -552,3 +552,10 @@ liao
 为什么你住不了这儿
 可是我的太太爱得了
 这个飞机快不了
+ba
+你把我作为孩子
+zhao 着
+你看得着那间餐厅吗 (can you see the restaurant) possibility
+你看不着那间餐厅吗 ( can you NOT see the restaurant) impossibility
+你到得着吗 (can you get there?) possibility
+你到不着吗 (can you not get there ) impossibility

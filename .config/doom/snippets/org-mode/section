@@ -6,5 +6,5 @@
 # --
 
 ** ${1:section}
-   - +[[Table of Content
+   - +[[Table of Content]]
 *** ${2:subsection}
