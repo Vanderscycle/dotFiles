@@ -8,4 +8,4 @@
                        ("class" "class ${1:}:\ndef __init__(self, ${2:arguments}) -> None:\n    \"\"\"docs\"\"\"\n    pass\ndef first_method(self) -> None:\n    pass\n" "class" nil nil nil "/home/henri/.config/doom/snippets/python-mode/class" nil nil)))
 
 
-;;; Do not edit! File generated at Thu Jun  8 20:13:53 2023
+;;; Do not edit! File generated at Wed Jun 14 10:33:26 2023
