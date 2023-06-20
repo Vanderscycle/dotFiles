@@ -439,8 +439,7 @@ xmonad(){
   curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
   echo -e '\n=> install the window manager and bar'
   sudo pacman -S --needed --noconfirm xmonad xmonad-contrib
-  sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
-  nitrogen ~/Documents/dotfiles/img/space.png
+
   sudo pacman -S --needed --noconfirm xmobar #more to polybar later
   yay -S --needed --noconfirm dunst #notification system
   yay -S --needed --noconfirm maim #screen capture
@@ -458,7 +457,8 @@ awesome(){
   # => Window manager (Xmonad)
   # -----------------------------------------------------------------------------
 
-  sudo pacman -S --needed --noconfirm awesome lain #more to polybar later
+  sudo pacman -S --needed --noconfirm awesome 
+  yay -S --needed --noconfimr lain-git #more to polybar later
 }
 
 fonts(){
@@ -600,11 +600,18 @@ guiPrograms(){
 
   echo -e '\n=> installing gui programs'
   sudo pacman -S --noconfirm --needed signal-desktop nomacs flameshot #image viewwer/editor
-  sudo pacman -S --needed --noconfirm kitty wezterm dmenu wofi
+  sudo pacman -S --needed --noconfirm kitty wezterm dmenu rofi
   yay -S --needed --noconfirm vlc slack-desktop onlyoffice-bin
   # rpi-imager
   yay -S --needed --noconfirm zoom zsa-wally
   echo -e 'Done.\n'
+
+  # -----------------------------------------------------------------------------
+  # => Wallpapers
+  # -----------------------------------------------------------------------------
+
+  sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
+  nitrogen ~/Documents/dotfiles/img/space.png
 
   # -----------------------------------------------------------------------------
   # => Virtual Machines (level 2)
