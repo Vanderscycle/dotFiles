@@ -71,11 +71,6 @@ systemInit(){
 
     echo -e '\n=> importing our doots'
     git clone https://github.com/Vanderscycle/dot-config.git ~/Documents/dotFiles/
-    mkdir -p ~/.xmonad/
-    wget -O ~/.xmonad/xmonad.hs https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmonad.hs
-
-    mkdir -p ~/.config/xmobar/
-    wget -O ~/.config/xmobar/xmobarrc https://raw.githubusercontent.com/Vanderscycle/dot-config/main/postInstallScripts/endeavourOS/xmobarrc
     echo -e 'Done.\n'
 }
 
@@ -107,8 +102,10 @@ Ansible(){
     # -----------------------------------------------------------------------------
     # => Ansible + vault
     # ----------------------------------------------- ------------------------------
+    
     echo -e 'Instaling AMD drivers \n'
-    pip install ansible netaddr
+    sudo pacman -S --needed --noconfirm ansible
+    pip install  netaddr #not working
     # autocomplete
     pip3 install argcomplete
     activate-global-python-argcomplete
@@ -206,7 +203,6 @@ backupMaintenance(){
     echo -e '\n=> Enabling weekly system maintenance'
     sudo systemctl enable --now paccache.timer
 
-    sudo pacman -S --noconfirm --needed fcitx fcitx-googlepinyin fcitx-configtool #TODO: double check the right dependence
     # timeshift backup
     yay -S --noconfirm --needed timeshift
     # create backup location https://www.youtube.com/watch?v=LkwZZIsY9uE
@@ -316,7 +312,7 @@ docker(){
   # -----------------------------------------------------------------------------
   echo -e '\n=> Installing Docker'
   # ctop is a vizualization tool for docker
-  sudo pacman -S --noconfirm --needed docker ctop
+  sudo pacman -S --noconfirm --needed docker
   # https://wiki.archlinux.org/index.php/Docker
   # https://docs.docker.com/config/daemon/
   # touch /etc/docker/daemon.json # for specific user config
@@ -384,9 +380,9 @@ pythonInstall(){
   # conda install -c conda-forge pynvim
   # conda install -c conda-forge flake8
   # conda install -c conda-forge black
-  #
+  
   echo -e 'Done.\n'
-  pip install ueberzug
+
 }
 
 golang(){
@@ -592,13 +588,7 @@ lspNull(){
   #ts/js/etc.
   pnpm install -g svelte-language-server typescript typescript-language-server @tailwindcss/language-server emmet-ls
 
-  # -----------------------------------------------------------------------------
-  # => Develloper tools (Modern Unix)
-  # -----------------------------------------------------------------------------
 
-  echo -e '\n=> Installing developer packages and useful tui alternatives'
-  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat fd exa lazygit unzip xclip zoxide bpytop httpie
-  sudo pacman -S --noconfirm --needed broot yq jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
 
 }
 
@@ -645,6 +635,14 @@ cliPrograms(){
   (cd ~/Programs/nnn/ && sudo make O_NERD=1 && sudo cp nnn /bin/nnn   )
   # installing the plugins
   (cd ~/Programs/nnn/ && curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh)
+  
+  # -----------------------------------------------------------------------------
+  # => Develloper tools (Modern Unix)
+  # -----------------------------------------------------------------------------
+
+  echo -e '\n=> Installing developer packages and useful tui alternatives'
+  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat fd exa lazygit unzip xclip zoxide bpytop httpie
+  sudo pacman -S --noconfirm --needed broot yq jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
   echo -e 'Done.\n'
 }
 
