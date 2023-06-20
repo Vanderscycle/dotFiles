@@ -657,7 +657,7 @@ spotify(){
 
   #BUG: spotify must run first prior spicetify working
   echo -e '\n=> spicetify'
-  yay -S --nocinfirm spicetify-cli
+  yay -S --noconfirm spicetify-cli
   #adjusting spotify permission
   #INFO: https://github.com/khanhas/spicetify-cli/wiki/Installation#spotify-installed-from-aur
   sudo chmod a+wr /opt/spotify
@@ -678,8 +678,7 @@ file_sharing(){
   echo -e '\n=> Enabling weekly system maintenance'
   sudo pacman -S --noconfirm --needed transmission-gtk
 }
-gami
-ng(){
+gaming(){
 
   # -----------------------------------------------------------------------------
   # =>  gaming clients

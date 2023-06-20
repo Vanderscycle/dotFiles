@@ -45,7 +45,7 @@ sync(){
   rsync -av --progress  ~/Documents/dotFiles/ /etc/default/grub
   sudo rsync -av --progress  ~/Documents/dotFiles/pacman.conf /etc/pacman.conf
 
-  lvim +PackerSync +qall
+  #lvim +PackerSync +qall #TODO: removed lunarvim?
 }
 
 save(){
