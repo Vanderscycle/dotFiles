@@ -121,6 +121,7 @@ Ansible(){
     echo -e 'Done.\n'
 
 }
+
 terraform(){
     # -----------------------------------------------------------------------------
     # => Security (ssh/gpg/password manager)
@@ -130,6 +131,7 @@ terraform(){
     sudo pacman -S --noconfirm terraform
     echo -e 'Done.\n'
 }
+
 security(){
     # -----------------------------------------------------------------------------
     # => Security (ssh/gpg/password manager)
@@ -138,10 +140,10 @@ security(){
     echo -e '\n=> Configuring SSH'
     # https://pandammonium.org/how-to-change-a-git-repository-from-https-to-ssh/
     mkdir ~/.ssh/
-    (cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f endavourGit -N "")
-    eval "$(ssh-agent)"
-    ssh-add  ~/.ssh/endavourGit
-    echo -e 'Done.\n'
+    # (cd ~/.ssh/ && ssh-keygen -t ed25519 -C "hvandersleyen@gmail.com" -f endavourGit -N "")
+    # eval "$(ssh-agent)"
+    # ssh-add  ~/.ssh/endavourGit
+    # echo -e 'Done.\n'
 
 
     #because everytime you open a new terminal you need to create an agent id
@@ -357,7 +359,7 @@ podman(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=>Installing Printer'
-  sudo pacman -S --noconfirm --needed blender prusca-slicer
+  sudo pacman -S --noconfirm --needed super-slicer
   echo -e 'Done.\n'
 }
 
@@ -406,14 +408,6 @@ antivirus(){
   sudo pacman -S --needed --noconfirm clamav
 }
 
-ai (){
-
-  # -----------------------------------------------------------------------------
-  # => AI tools
-  # -----------------------------------------------------------------------------
-  pip install shell-gpt==0.8.3
-}
-
 rust(){
   # -----------------------------------------------------------------------------
   # => Rust language install and programs
@@ -448,7 +442,7 @@ xmonad(){
   # INFO: references: https://www.youtube.com/watch?v=3noK4GTmyMw
   curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
   echo -e '\n=> install the window manager and bar'
-  sudo pacman -S --needed --noconfirm xmonad xmonad-contrib kitty wezterm dmenu wofi
+  sudo pacman -S --needed --noconfirm xmonad xmonad-contrib
   sudo pacman -S --needed --noconfirm nitrogen xorg-xrandr #wallpaper and else
   nitrogen ~/Documents/dotfiles/img/space.png
   sudo pacman -S --needed --noconfirm xmobar #more to polybar later
@@ -462,13 +456,13 @@ xmonad(){
   sudo pacman -S --needed --noconfirm playerctl # for audio controls
   sudo pacman -S --noconfirm zsa-wally # zsa keyboard
   }
+
 awesome(){
   # -----------------------------------------------------------------------------
   # => Window manager (Xmonad)
   # -----------------------------------------------------------------------------
 
   sudo pacman -S --needed --noconfirm awesome lain #more to polybar later
-  sudo pacman -S --needed --noconfirm flameshot
 }
 
 fonts(){
@@ -515,7 +509,7 @@ emacs(){
 fish(){
 
   # -----------------------------------------------------------------------------
-  # => fisher
+  # => fish shell
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> Installing Fish'
@@ -553,7 +547,6 @@ lunarvim(){
   echo -e '\n=> Installing Lvim'
   (cd "$HOME" && curl https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/inst
 aller/install.sh -o lvim_installer.sh && bash lvim_installer --install-dependencies --yes)
-
 
   echo -e 'Done. \n'
 }
@@ -593,7 +586,7 @@ lspNull(){
   luarocks install luacheck
 
   #haskell
-  sudo pacman -S --needed --noconfirm ghcup-hs-bin
+  # sudo pacman -S --needed --noconfirm ghcup-hs-bin
 
 
   #ts/js/etc.
@@ -604,10 +597,8 @@ lspNull(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> Installing developer packages and useful tui alternatives'
-  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat fd exa lazygit unzip xclip task zoxide bpytop httpie
+  sudo pacman -S --noconfirm --needed rsync git fzf github-cli bat fd exa lazygit unzip xclip zoxide bpytop httpie
   sudo pacman -S --noconfirm --needed broot yq jq ripgrep the_silver_searcher ripgrep-all entr #entr is for file cahnges
-
-  yay -S --needed --noconfirm ytfzf
 
 }
 
@@ -618,10 +609,11 @@ guiPrograms(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing gui programs'
-  sudo pacman -S --noconfirm --needed signal-desktop nomacs #image viewwer/editor
-  yay -S --needed --noconfirm vlc  postman-bin slack-desktop transmission-qt onlyoffice-bin
+  sudo pacman -S --noconfirm --needed signal-desktop nomacs flameshot #image viewwer/editor
+  sudo pacman -S --needed --noconfirm kitty wezterm dmenu wofi
+  yay -S --needed --noconfirm vlc slack-desktop onlyoffice-bin
   # rpi-imager
-  yay -S --needed --noconfirm zoom brave-bin zsa-wally brave-bin
+  yay -S --needed --noconfirm zoom zsa-wally
   echo -e 'Done.\n'
 
   # -----------------------------------------------------------------------------
@@ -641,7 +633,7 @@ cliPrograms(){
   # -----------------------------------------------------------------------------
 
   echo -e '\n=> installing cli programs'
-  yay -S --needed --noconfirm slides glow sysz
+  yay -S --needed --noconfirm slides glow sysz ytfzf
   echo -e 'Done.\n'
 
   echo -e 'tui file navigator'
@@ -678,6 +670,7 @@ spotify(){
   echo -e 'Done.\n'
 
 }
+
 file_sharing(){
 
   # -----------------------------------------------------------------------------
@@ -687,7 +680,8 @@ file_sharing(){
   echo -e '\n=> Enabling weekly system maintenance'
   sudo pacman -S --noconfirm --needed transmission-gtk
 }
-gaming(){
+gami
+ng(){
 
   # -----------------------------------------------------------------------------
   # =>  gaming clients
@@ -697,7 +691,7 @@ gaming(){
   sudo pacman -S --needed --noconfirm steam gamemoderun
   yay -S --needed --noconfirm lib32-glu
   pip install mako
-  yay -S --needed --noconfirm heroic-games-launcher-bin mangohud-git goverlay-bin
+  yay -S --needed --noconfirm mangohud-git
   echo -e 'Done.\n'
 }
 
@@ -751,9 +745,9 @@ install(){
   security
   languages
   fish
-# bluetooth
+  # bluetooth
   sudo pacman -S --needed bluez bluez-utils
-sudo systemctl enable --now bluetooth
+  sudo systemctl enable --now bluetooth
 
   #fisher
   chsh -s "$(which fish)" # change the default shell
@@ -776,7 +770,9 @@ sudo systemctl enable --now bluetooth
   cliClients
   guiPrograms
   spotify
-  lunarvim
+  # mongo
+  # postgres
+  #lunarvim # add the option to choose the default editor
   emacs
   antivirus
   ai
