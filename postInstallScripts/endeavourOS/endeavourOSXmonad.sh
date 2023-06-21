@@ -527,8 +527,6 @@ fisher(){
   fisher install franciscolourenco/done # notify when any process taking longer than 5 sec is done
   fisher install jorgebucaran/autopair.fish #same as tpope autopair
   fisher install PatrickF1/fzf.fish #fzf but fish
-  fisher install edc/bass # allows bash in fish
-  fisher install jorgebucaran/nvm.fish
   fisher install jethrokuan/z #zoxide?
   fisher install jorgebucaran/nvm.fish
   fisher install gazorby/fish-abbreviation-tips
@@ -600,7 +598,7 @@ guiPrograms(){
 
   echo -e '\n=> installing gui programs'
   sudo pacman -S --noconfirm --needed signal-desktop nomacs flameshot #image viewwer/editor
-  sudo pacman -S --needed --noconfirm kitty wezterm dmenu rofi
+  sudo pacman -S --needed --noconfirm kitty wezterm dmenu rofi insomniac
   yay -S --needed --noconfirm vlc slack-desktop onlyoffice-bin
   # rpi-imager
   yay -S --needed --noconfirm zoom zsa-wally
