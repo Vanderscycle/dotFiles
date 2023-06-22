@@ -1,5 +1,4 @@
 theme = "tokyo_night"
-theme_background = true
 
 [editor]
 line-number = "relative"
