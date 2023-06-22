@@ -16,9 +16,9 @@
   ];
   nixpkgs = {
     # You can add overlays here
-    overlays = [
-      # If you want to use overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
+      # If you want to use overlays exported from other flakes:
+      bat
 
       # Or define it inline, for example:
       # (final: prev: {
@@ -39,25 +39,39 @@
     username = "henri";
     homeDirectory = "/home/henri";
     sessionVariables = {
-#EDITOR = "emacs";
+      EDITOR = "helix";
+
+      BROWSER = "firefox";
+      TERMINAL = "kitty";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
-    file = { };
+    file = {
+      # doom emacs
+      ".doom.d/init.el".source = /home/henri/Documents/dotFiles/.doom.d/init.el;
+      ".doom.d/packages.el".source = /home/henri/Documents/dotFiles/.doom.d/packages.el;
+      ".doom.d/config.el".source = /home/henri/Documents/dotFiles/.doom.d/config.el;
+      # kitty
+      ".config/kitty/kitty.conf".source = /home/henri/Documents/dotFiles/.config/kitty/kitty.conf;
+      # K9s
+      ".config/k9s/config.yml".source = /home/henri/Documents/dotFiles/.config/k9s/config.yml;
+      ".config/k9s/skin.yml".source = /home/henri/Documents/dotFiles/.config/k9s/skin.yml;
+    };
+    # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
       # editor
       emacs
       vim
-helix
+      helix
       # languages
-tldr
+      tldr
       luajitPackages.luarocks
       nixpkgs-fmt
       fcitx5
-	fcitx5-chinese-addons
+      fcitx5-chinese-addons
       fcitx5-configtool
       # nixos
-      home-manager
+      # home-manage
       # shell
       starship
       fish
@@ -78,23 +92,23 @@ tldr
       fd
       rsync
       exa
-      bat
-      lazygit
       unzip
+      lazygit
+  systemd.user.startServices = "sd-switch";
       fzf
       yq
       silver-searcher
       ripgrep
-      btop
       httpie
       xclip
       broot
       zoxide
-      nnn
+      #nnn
       xclip
       #3d printing/cad
-      super-slicer-latest
+      super-slicer
       #devops
+      k9s
       helm
       kubernetes
       docker
@@ -127,13 +141,33 @@ tldr
   # Enable home-manager and git
   programs = {
     home-manager = {
-enable = true;
-};
+      enable = true;
+    };
+    nnn = {
+      enable = true;
+      package = pkgs.nnn.override ({ withNerdIcons = true; });
+      bookmarks = {
+        d = "~/Documents";
+        D = "~/Downloads";
+        p = "~/Pictures";
+        v = "~/Videos";
+      };
+    };
+    kitty = {
+      theme = "tokyo_night_night";
+    };
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "tokyo-night";
+        theme_background = true;
+      };
+    };
     git = {
-enable = true;
-};
+      enable = true;
+    };
   };
   # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
+}
 
 }
