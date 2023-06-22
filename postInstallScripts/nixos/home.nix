@@ -1,64 +1,139 @@
-{ config, pkgs, ... }:
+# This is your home-manager configuration file
+# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 
+{ inputs, lib, config, pkgs, ... }:
+
+#TODO figure it out with fcitx
+#i8n.inputMethod.fcitx5.addons = with pkgs; [  fcitx5-chinese-addons ];
 {
-  # please change the username & home direcotry to your own
-  home.username = "henri";
-  home.homeDirectory = "/home/henri";
+  # You can import other home-manager modules here
+  imports = [
+    # If you want to use home-manager modules from other flakes (such as nix-colors):
+    # inputs.nix-colors.homeManagerModule
 
-  # link the configuration file in current directory to the specified location in home directory
-  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
-
-  # link all files in `./scripts` to `~/.config/i3/scripts`
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # link recursively
-  #   executable = true;  # make all files executable
-  # };
-
-  # encode the file content in nix configuration file directly
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
-
-  # set cursor size and dpi for 4k monitor
-  xresources.properties = {
-    "Xcursor.size" = 16;
-    "Xft.dpi" = 172;
-  };
-
-  # basic configuration of git, please change to your own
-  programs.git = {
-    enable = true;
-    userName = "vanderscycle";
-    userEmail = "henri-vandersleyen@protonmail.com";
-  };
-
-  # Packages that should be installed to the user profile.
-  home.packages = [
-    pkgs.btop
+    # You can also split up your configuration and import pieces of it here:
+    # ./nvim.nix
   ];
+  nixpkgs = {
+    # You can add overlays here
+    overlays = [
+      # If you want to use overlays exported from other flakes:
+      # neovim-nightly-overlay.overlays.default
 
-  # enable starship, a beautiful shell prompt
-  programs.starship = {
-    enable = true;
-    settings = {
-      add_newline = false;
-      aws.disabled = false;
-      gcloud.disabled = true;
-      line_break.disabled = true;
+      # Or define it inline, for example:
+      # (final: prev: {
+      #   hi = final.hello.overrideAttrs (oldAttrs: {
+      #     patches = [ ./change-hello-to-hi.patch ];
+      #   });
+      # })
+    ];
+    # Configure your nixpkgs instance
+    config = {
+      # Disable if you don't want unfree packages
+      allowUnfree = true;
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
+      allowUnfreePredicate = (_: true);
     };
   };
+  home = {
+    username = "henri";
+    homeDirectory = "/home/henri";
+    sessionVariables = {
+#EDITOR = "emacs";
+    };
+    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+    stateVersion = "23.05";
+    file = { };
+    packages = with pkgs; [
+      # editor
+      emacs
+      vim
+helix
+      # languages
+tldr
+      luajitPackages.luarocks
+      nixpkgs-fmt
+      fcitx5
+	fcitx5-chinese-addons
+      fcitx5-configtool
+      # nixos
+      home-manager
+      # shell
+      starship
+      fish
+      fishPlugins.done
+      fishPlugins.fzf
+      fishPlugins.autopair
+      fishPlugins.z
+      kitty
+      wezterm
+      git
+      gnupg
+      pinentry
+      # client
+      awscli2
+      linode-cli
+      # cli
+      sysz
+      fd
+      rsync
+      exa
+      bat
+      lazygit
+      unzip
+      fzf
+      yq
+      silver-searcher
+      ripgrep
+      btop
+      httpie
+      xclip
+      broot
+      zoxide
+      nnn
+      xclip
+      #3d printing/cad
+      super-slicer-latest
+      #devops
+      helm
+      kubernetes
+      docker
+      ansible
+      kustomize
+      tilt
+      terraform
+      # gui
+      vlc
+      transmission
+      xfce.thunar
+      nitrogen
+      #insomniac
+      slack
+      firefox
+      # social
+      zoom
+      discord
+      betterdiscordctl
+      spotify
+      spicetify-cli
+      # gaming	
+      steam
+    ];
+  };
+  # Add stuff for your user as you see fit:
+  # programs.neovim.enable = true;
+  # home.packages = with pkgs; [ steam ];
 
-  # This value determines the home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update home Manager without changing this value. See
-  # the home Manager release notes for a list of state version
-  # changes in each release.
-  home.stateVersion = "22.11";
+  # Enable home-manager and git
+  programs = {
+    home-manager = {
+enable = true;
+};
+    git = {
+enable = true;
+};
+  };
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
 
-  # Let home Manager install and manage itself.
-  programs.home-manager.enable = true;
 }
