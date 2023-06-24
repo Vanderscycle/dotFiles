@@ -7,8 +7,19 @@ config = {}
 auto-format = true
 
 [[language]]
+name = "nix"
+auto-format = true
+formatter = { command = "nixpkg fmt" }
+language-server = { command = "nil" }
+
+[[language]]
 name = "rust"
 auto-format = true
+
+[[language]]
+name = "go"
+auto-format = true
+language-server = { command = "gopls" }
 
 [[language]]
 name = "typescript"
