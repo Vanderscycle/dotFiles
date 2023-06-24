@@ -64,6 +64,7 @@ in
       ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
       # helix
       ".config/helix/config.toml".source = "${dotfiles_dir}/.config/helix/config.toml";
+      ".config/helix/languages.toml".source = "${dotfiles_dir}/.config/helix/languages.toml";
       # awesome wm
       # "awesome" = {
       #   source = "${dotfiles_dir}/.config/awesome";
@@ -89,7 +90,15 @@ in
       fcitx5-chinese-addons
       fcitx5-configtool
       # programming
+# bash
       shellcheck
+# python
+nodePackages.pyright
+      poetry
+      black
+# nix
+# node
+nodePackages.pnpm
       # shell
       starship
       fishPlugins.done
@@ -126,16 +135,13 @@ in
 
       dogdns
       k9s
-      helm
+      kubernetes-helm
       kubernetes
-      docker
       ansible
       kustomize
       tilt
       terraform
-      poetry
-      # gui
-      nitrogen
+      # gui/
       signal-desktop
       gparted
       vlc
@@ -187,6 +193,9 @@ in
       };
 
     };
+    starship = {
+      enable = true;
+    };
     home-manager = {
       enable = true;
     };
@@ -230,6 +239,9 @@ in
     helix = {
       enable = true;
 
+    };
+    go = {
+      enable = true;
     };
   };
 
