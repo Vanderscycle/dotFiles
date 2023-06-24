@@ -1,0 +1,17 @@
+[[language]]
+name = "python"
+roots = ["pyproject.toml"]
+formatter = { command = "black", args = ["--quiet", "-"] }
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
+config = {} 
+auto-format = true
+
+[[language]]
+name = "rust"
+auto-format = true
+
+[[language]]
+name = "typescript"
+auto-format = true
+# pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
+config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
