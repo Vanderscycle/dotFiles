@@ -22,6 +22,20 @@ auto-format = true
 language-server = { command = "gopls" }
 
 [[language]]
+name = "yaml"
+file-types = ["yml", "yaml"]
+indent = { tab-width = 2, unit = "  " }
+language-servers = [ "yaml-language-server" ]
+auto-format = true
+# language-server = { command = "gopls" }
+
+[[language]]
+name = "hcl"
+indent = { tab-width = 2, unit = "  " }
+language-servers = [ "terraform-ls" ]
+auto-format = true
+
+[[language]]
 name = "typescript"
 auto-format = true
 # pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
