@@ -88,6 +88,8 @@ in
       fcitx5
       fcitx5-chinese-addons
       fcitx5-configtool
+      # programming
+      shellcheck
       # shell
       starship
       fishPlugins.done
