@@ -1,13 +1,10 @@
 #!/bin/bash
-
-declare -a NIX_FOLDERS_PATH=("/etc/nixos/" "$HOME/.config/home-manger/")
+# in rsync (bash?) if the path is followed by a / it only copies the contents of the directory
+declare -a NIX_FOLDERS_PATH=("/etc/nixos" "$HOME/.config/home-manger")
 sync(){
     for FOLDER in "${NIX_FOLDERS_PATH}"; do
-        rsync -av --progress "$FOLDER" .
+        rsync -aPv "$FOLDER" .
     done
-    echo -e "sync"
-    rsync
-
 }
 
 sync
