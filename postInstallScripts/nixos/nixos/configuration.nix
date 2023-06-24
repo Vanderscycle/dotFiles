@@ -55,12 +55,12 @@ in
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-with-addons fcitx5-gtk fcitx5-rime ];
-  };
+  # i18n.inputMethod = {
+  #   enabled = "fcitx5";
+  #   fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-with-addons fcitx5-gtk fcitx5-rime ];
+  # };
 
- # Configure keymap in X11
+  # Configure keymap in X11
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
@@ -90,7 +90,10 @@ in
 
 
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  hardware = {
+    pulseaudio.enable = false;
+    bluetooth.enable = true;
+  };
   security.rtkit.enable = true;
   services = {
 
@@ -146,24 +149,24 @@ in
     #      VISUAL = "emacs";
     #    };
     systemPackages = with pkgs; [
-    docker
+      docker
       ansible
       git
       fish
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      #  wget
+      wget
+      helix
       emacs
       fd
       ripgrep
-
     ];
   };
   # steam config
   # https://nixos.wiki/wiki/Steam
   programs = {
-  fish.enable = true;
-ssh.startAgent = true;
-  
+    fish.enable = true;
+    ssh.startAgent = true;
+
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -174,7 +177,7 @@ ssh.startAgent = true;
   # https://nixos.wiki/wiki/Docker
   virtualisation.docker = {
     enable = true;
-   # storageDriver = "btrfs";
+    # storageDriver = "btrfs";
     rootless = {
       setSocketVariable = true;
       enable = true;
@@ -186,11 +189,11 @@ ssh.startAgent = true;
     options = [ "defaults" "noatime" "nofail" "compress=zstd" ];
   };
 
-#  fileSystems."/mnt/usb" = {
-#    device = "/dev/sda";
-#    fsType = "auto";
-#    options = [ "defaults" "noatime" ];
-#  };
+  #  fileSystems."/mnt/usb" = {
+  #    device = "/dev/sda";
+  #    fsType = "auto";
+  #    options = [ "defaults" "noatime" ];
+  #  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -217,5 +220,4 @@ ssh.startAgent = true;
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 }

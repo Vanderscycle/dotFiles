@@ -6,7 +6,7 @@ let
   dotfiles_dir = /home/henri/Documents/dotFiles;
 in
 #TODO figure it out with fcitx
-#i8n.inputMethod.fcitx5.addons = with pkgs; [  fcitx5-chinese-addons ];
+  #i8n.inputMethod.fcitx5.addons = with pkgs; [  fcitx5-chinese-addons ];
 {
   # You can import other home-manager modules here
   imports = [
@@ -43,8 +43,8 @@ in
     sessionVariables = {
       EDITOR = "helix";
 
-RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
-       BROWSER = "firefox";
+      RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
+      BROWSER = "firefox";
       TERMINAL = "kitty";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
@@ -62,17 +62,17 @@ RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
       ".config/kitty/kitty.conf".source = "${dotfiles_dir}/.config/kitty/kitty.conf";
       # discord
       ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
-     # helix
+      # helix
       ".config/helix/config.toml".source = "${dotfiles_dir}/.config/helix/config.toml";
       # awesome wm
-    # "awesome" = {
-    #   source = "${dotfiles_dir}/.config/awesome";
-    #   target = "./.config/awesome";     
-    #   };
-          "xprofile" = {
-      source = "${dotfiles_dir}/.config/.xprofile";
-      target = "./.xprofile";
-    };
+      # "awesome" = {
+      #   source = "${dotfiles_dir}/.config/awesome";
+      #   target = "./.config/awesome";     
+      #   };
+      "xprofile" = {
+        source = "${dotfiles_dir}/.config/.xprofile";
+        target = "./.xprofile";
+      };
       # K9s
       ".config/k9s/config.yml".source = "${dotfiles_dir}/.config/k9s/config.yml";
       ".config/k9s/skin.yml".source = "${dotfiles_dir}/.config/k9s/skin.yml";
@@ -80,7 +80,7 @@ RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
     # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
       # languages /fonts
-noto-fonts-emoji
+      noto-fonts-emoji
       tldr
       luajitPackages.luarocks
       nixpkgs-fmt
@@ -122,7 +122,7 @@ noto-fonts-emoji
       super-slicer-latest
       #devops
 
-dogdns
+      dogdns
       k9s
       helm
       kubernetes
@@ -131,10 +131,10 @@ dogdns
       kustomize
       tilt
       terraform
-poetry
+      poetry
       # gui
-nitrogen
-signal-desktop
+      nitrogen
+      signal-desktop
       gparted
       vlc
       transmission-gtk
@@ -159,31 +159,32 @@ signal-desktop
   # home.packages = with pkgs; [ steam ];
 
   # Enable home-manager and git
-services = {
-  gpg-agent = {
-   enableSshSupport = true;
-};
-
-};
-  programs = {
-gpg = {
-  enable = true;
-};
-   ssh = {
-#     enable = true;
- includes = ["$HOME/.ssh/endeavourGit"];
-  };
-  fish = {
-    enable = true;
-    shellAbbrs = {
-      l = "less";
-         };
-    shellAliases = {
-      "..." = "cd ../..";
-         ls = "exa -al";
+  services = {
+    gpg-agent = {
+      enableSshSupport = true;
     };
-    
+
   };
+  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-rime ];
+  programs = {
+    gpg = {
+      enable = true;
+    };
+    ssh = {
+      #     enable = true;
+      includes = [ "$HOME/.ssh/endeavourGit" ];
+    };
+    fish = {
+      enable = true;
+      shellAbbrs = {
+        l = "less";
+      };
+      shellAliases = {
+        "..." = "cd ../..";
+        ls = "exa -al";
+      };
+
+    };
     home-manager = {
       enable = true;
     };
@@ -218,21 +219,21 @@ gpg = {
         user.signingkey = "~/.ssh/endeavourGit.pub";
         gpg = {
           format = "ssh";
-          };
         };
-    #  signing = {
-    #    key = "2664645CF72BE38A";
-    #  };
+      };
+      #  signing = {
+      #    key = "2664645CF72BE38A";
+      #  };
     };
     helix = {
       enable = true;
-      
+
     };
-    };
+  };
 
   xsession = {
     windowManager.awesome.enable = true;
-  };  # Nicely reload system units when changing configs
+  }; # Nicely reload system units when changing configs
   # systemd.user.startServices = "sd-switch";
 
 }
