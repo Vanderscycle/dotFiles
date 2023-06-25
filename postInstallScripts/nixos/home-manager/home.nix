@@ -42,6 +42,8 @@ in
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
       BROWSER = "firefox";
       TERMINAL = "wezterm";
+NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
+NNN_OPTS = "Hed";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
