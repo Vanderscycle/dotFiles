@@ -54,8 +54,6 @@ in
       ".doom.d/init.el".source = "${dotfiles_dir}/.doom.d/init.el";
       ".doom.d/packages.el".source = "${dotfiles_dir}/.doom.d/packages.el";
       ".doom.d/config.el".source = "${dotfiles_dir}/.doom.d/config.el";
-      # fish
-      #".config/fish/config.fish".source = "${dotfiles_dir}/config.fish";
       # ripgrep
       ".config/rg/.ripgreprc".source = "${dotfiles_dir}/.config/rg/.ripgreprc";
       # kitty
@@ -65,6 +63,8 @@ in
       # helix
       ".config/helix/config.toml".source = "${dotfiles_dir}/.config/helix/config.toml";
       ".config/helix/languages.toml".source = "${dotfiles_dir}/.config/helix/languages.toml";
+      # broot
+      ".config/broot/conf.hjson".source = "${dotfiles_dir}/.config/broot/conf.hjson";
       # awesome wm
       # "awesome" = {
       #   source = "${dotfiles_dir}/.config/awesome";
@@ -118,6 +118,7 @@ in
       nodePackages.typescript-language-server
       # node
       nodePackages.pnpm
+      nodejs
       # shell
       starship
       fishPlugins.done
@@ -144,7 +145,6 @@ in
       silver-searcher
       httpie
       xclip
-      broot
       zoxide
       xclip
       #3d printing/cad
@@ -206,6 +206,10 @@ in
         docker-irmAll = "docker rmi -f (docker images  -aq)";
         docker-vrmAll = "docker volume prune";
         docker-prmAll = "docker builder prune -af";
+        k-seal = ''
+kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
+        '';
+        k8s-prmAll = "kubectl delete all --all --namespaces";
       };
       shellAbbrs = {
         l = "less";
@@ -231,6 +235,9 @@ in
       enable = true;
     };
     rofi = {
+      enable = true;
+    };
+    broot = {
       enable = true;
     };
     nnn = {
