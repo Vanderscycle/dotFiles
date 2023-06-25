@@ -174,12 +174,23 @@ in
   };
   # docker
   # https://nixos.wiki/wiki/Docker
-  virtualisation.docker = {
-    enable = true;
-    # storageDriver = "btrfs";
-    rootless = {
-      setSocketVariable = true;
+  virtualisation = {
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        "jsoncrack" = {
+          image = "shokohsc/jsoncrack";
+          ports = [ "8888:8080" ];
+        };
+      };
+    };
+    docker = {
       enable = true;
+      # storageDriver = "btrfs";
+      rootless = {
+        setSocketVariable = true;
+        enable = true;
+      };
     };
   };
   fileSystems."/mnt/backup" = {
