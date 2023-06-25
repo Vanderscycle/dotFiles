@@ -125,8 +125,6 @@ in
       fishPlugins.autopair
       fishPlugins.z
       kitty
-      wezterm
-      git
       gnupg
       pinentry
       # client
@@ -232,6 +230,23 @@ in
     };
     kitty = {
       theme = "tokyo_night_night";
+    };
+    wezterm = {
+      enable = true;
+      extraConfig = ''
+      -- Your lua code / config here
+-- local mylib = require 'mylib';
+return {
+  -- usemylib = mylib.do_fun();
+  font = wezterm.font("JetBrains Mono"),
+  font_size = 16.0,
+  color_scheme = "Tomorrow Night",
+  hide_tab_bar_if_only_one_tab = true,
+  keys = {
+    {key="n", mods="SHIFT|CTRL", action="ToggleFullScreen"},
+  }
+}
+      '';
     };
     btop = {
       enable = true;
