@@ -25,44 +25,41 @@ language-server = { command = "gopls" }
 name = "yaml"
 file-types = ["yml", "yaml"]
 indent = { tab-width = 2, unit = "  " }
-language-servers = [ "yaml-language-server" ]
+language-server = { command =  "yaml-language-server" }
 auto-format = true
 # language-server = { command = "gopls" }
 
 [[language]]
 name = "hcl"
 indent = { tab-width = 2, unit = "  " }
-language-servers = [ "terraform-ls" ]
+language-server = { command = "terraform-ls" }
 auto-format = true
 
 [[language]]
 name = "toml"
 injection-regex = "toml"
 file-types = ["toml", "poetry.lock", "Cargo.lock"]
-roots = []
 comment-token = "#"
-language-servers = [ "taplo" ]
+language-server = { command = "taplo" }
 indent = { tab-width = 2, unit = "  " }
 
 [[language]]
 name = "typescript"
 injection-regex = "(ts|typescript)"
 file-types = ["ts", "mts", "cts"]
-language-id = "typescript"
 roots = []
 # pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
 config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
-language-servers = [ "typescript-language-server" ]
+language-server = { command =  "typescript-language-server" }
 auto-format = true
 
 [[language]]
 name = "javascript"
 injection-regex = "(js|javascript)"
-language-id = "javascript"
 file-types = ["js", "mjs", "cjs"]
 #shebangs = ["node"]
 comment-token = "//"
-language-servers = [ "typescript-language-server" ]
+language-server = { command =  "typescript-language-server" }
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
 
@@ -72,6 +69,6 @@ scope = "source.json"
 injection-regex = "json"
 file-types = ["json", "jsonc", "arb", "ipynb", "geojson"]
 roots = []
-language-servers = [ "vscode-json-language-server" ]
+language-server = { command =  "vscode-json-language-server" }
 auto-format = true
 indent = { tab-width = 2, unit = "  " }
