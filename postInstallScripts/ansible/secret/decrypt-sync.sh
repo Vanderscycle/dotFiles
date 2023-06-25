@@ -28,7 +28,7 @@ while (( "$#" )); do
       ;;
   esac
 done
-declare -a SecureFiles=("github-gpg-private.key" "gitlab-gpg-private.key" "aws-config" "endeavourGit" ".env-general" "terraform")
+declare -a SecureFiles=( "aws-config" "endeavourGit" ".env-general" "terraform")
 
 decrypt(){
 
@@ -50,14 +50,14 @@ encrypt(){
 
 }
 
-declare -a GPGKeys=("github-gpg-private.key" "gitlab-gpg-private.key")
+# declare -a GPGKeys=("github-gpg-private.key" "gitlab-gpg-private.key")
 declare -a SSHKeys=("atreidesGit" "endeavourGit" "endeavourGit.pub")
-load-gpg(){
-  for GPG_KEY in "${GPGKeys[@]}"; do
-    gpg --import "$GPG_KEY"
-  done
+# load-gpg(){
+#   for GPG_KEY in "${GPGKeys[@]}"; do
+#     gpg --import "$GPG_KEY"
+#   done
 
-}
+# }
 
 load-ssh(){
   for SSH_KEY in "${SSHKeys[@]}"; do
