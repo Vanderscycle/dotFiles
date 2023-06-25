@@ -39,13 +39,6 @@ if status is-interactive
   keychain --eval --agents gpg,ssh ~/.ssh/endeavourGit ~/.ssh/atreidesGit
   set -xg s kitty +kitten ssh
 
-  # dotfiles
-  set -xg DOOTFILE_LOC ~/Documents/dotFiles/
-
-  # ripgrep
-  set RIPGREP_CONFIG_PATH -xg ~/.config/rg/
- 
-
   # aws/linode/cli login
   # TODO: create an fzf multi choice
   set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config #eks 
@@ -163,30 +156,15 @@ function :qa --description "exit like its vim"
   exit
 end
 
-
 function ls
   eval exa -al"$argv"
 end
-
-#function lvim 
-# bash /home/henri/.local/bin/lvim $argv
-#end
-
-function nvim
-	lvim
-end
-
-
 
 # converter json => yaml
 function j2y --description "<name>.json}"
   cat "$PWD"/"$argv" | python "$DOOTFILE_LOC"scripts/j2y.py > j2y.yaml
 end
-# kubernetes / k8s
-# INFO: for aliases you need eval
-function k
-  eval kubectl "$argv[..-1]"
-end
+
 
 function aks --description "aks"
   set -xg AWS_PROFILE "atreides-non-prod" # ~/.aws/config #eks 
@@ -224,11 +202,6 @@ end
 function k-build --description "secret <namespace> <secret-name>"
   kustomize build --load-restrictor LoadRestrictionsNone --enable-helm . > build.log
   bat build.log
-end
-
-function k8s-prmAll
-echo -e "purging everything"
-  kubectl delete all --all --namespaces
 end
 
 function k8s-prmNamespace
@@ -275,35 +248,6 @@ function t-execute
   terraform apply output.tfplan
 end
 
-
-# Docker
-function docker-crmAll
-    echo -e "Removing all containers"
-	# docker stop (docker ps -q)
-	docker rm -f (docker ps -aq)
-end
-
-function docker-irmAll
-  echo -e "Removing all images"
-	docker rmi -f (docker images  -aq)
-  	echo "done"
-end
-
-function docker-vrmAll
-  echo -e "removing all volumes"
-	# docker volume rm -f (docker volume ls -aq )
-  docker volume prune
-	echo "done"
-end
-
-function docker-prmAll
-echo -e "purging everything"
- 	docker-crmAll
-  docker-irmAll
-  docker-vrmAll
-	docker builder prune -af
-  echo "done"
-end
 
 # docker containers
 function linode-docker  #TODO: review
