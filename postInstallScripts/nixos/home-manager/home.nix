@@ -83,7 +83,6 @@ in
       # languages /fonts
       noto-fonts-emoji
       tldr
-      luajitPackages.luarocks
       nixpkgs-fmt
       ripgrep
       fcitx5
@@ -92,6 +91,11 @@ in
       # programming
 #terraform
 terraform-ls
+# svelte
+nodePackages.svelte-language-server 
+# lua
+lua-language-server
+      luajitPackages.luarocks
 # toml
 taplo
 # yaml
@@ -147,7 +151,6 @@ nodePackages.pnpm
       #3d printing/cad
       super-slicer-latest
       #devops
-
       dogdns
       k9s
       kubernetes-helm

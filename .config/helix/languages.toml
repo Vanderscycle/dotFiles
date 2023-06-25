@@ -72,3 +72,21 @@ roots = []
 language-server = { command =  "vscode-json-language-server" }
 auto-format = true
 indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "svelte"
+injection-regex = "svelte"
+file-types = ["svelte"]
+roots = []
+indent = { tab-width = 2, unit = "  " }
+language-server = { command =  "svelte-language-server" }
+
+[[language]]
+name = "lua"
+injection-regex = "lua"
+file-types = ["lua"]
+shebangs = ["lua"]
+roots = [".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git"]
+comment-token = "--"
+indent = { tab-width = 2, unit = "  " }
+language-server = { command = "lua-language-server" }
