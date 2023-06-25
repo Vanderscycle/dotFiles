@@ -136,3 +136,6 @@ P = "paste_clipboard_before"
 
 # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+
+[editor.lsp]
+auto-signature-help = true
