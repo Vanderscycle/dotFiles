@@ -200,17 +200,30 @@ in
     };
     fish = {
       enable = true;
+      functions = {
+        docker-crmAll = "docker rm -f (docker ps -aq)";
+        docker-irmAll = "docker rmi -f (docker images  -aq)";
+        docker-vrmAll = "docker volume prune";
+        docker-prmAll = "docker builder prune -af";
+      };
       shellAbbrs = {
         l = "less";
+        k = "kustomize";
       };
       shellAliases = {
         "..." = "cd ../..";
         ls = "exa -al";
+        dig = "dog";
+        ":q" = "exit";
       };
 
     };
     starship = {
       enable = true;
+    };
+    keychain = {
+      enable = true;
+      keys = [ "$HOME/.ssh/endeavourGit"];
     };
     home-manager = {
       enable = true;
