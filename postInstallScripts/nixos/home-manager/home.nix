@@ -89,35 +89,35 @@ in
       fcitx5-chinese-addons
       fcitx5-configtool
       # programming
-#terraform
-terraform-ls
-# svelte
-nodePackages.svelte-language-server 
-# lua
-lua-language-server
+      #terraform
+      terraform-ls
+      # svelte
+      nodePackages.svelte-language-server
+      # lua
+      lua-language-server
       luajitPackages.luarocks
-# toml
-taplo
-# yaml
-nodePackages.yaml-language-server
-# json
-nodePackages.vscode-json-languageserver
-# nix
-nil
-# bash
-nodePackages.bash-language-server
+      # toml
+      taplo
+      # yaml
+      nodePackages.yaml-language-server
+      # json
+      nodePackages.vscode-json-languageserver
+      # nix
+      nil
+      # bash
+      nodePackages.bash-language-server
       shellcheck
-# python
-nodePackages.pyright
+      # python
+      nodePackages.pyright
       poetry
       black
-# go
-gopls
-delve
-# typescript/javascript
-nodePackages.typescript-language-server
-# node
-nodePackages.pnpm
+      # go
+      gopls
+      delve
+      # typescript/javascript
+      nodePackages.typescript-language-server
+      # node
+      nodePackages.pnpm
       # shell
       starship
       fishPlugins.done
@@ -244,15 +244,18 @@ nodePackages.pnpm
       enable = true;
       userEmail = "henri-vandersleyen@protonmail.com";
       userName = "vanderscycle";
+      # commit = {
+      #   gpgsign = true;
+      # };
       extraConfig = {
         user.signingkey = "~/.ssh/endeavourGit.pub";
         gpg = {
           format = "ssh";
         };
       };
-      #  signing = {
-      #    key = "2664645CF72BE38A";
-      #  };
+      signing = {
+        key = "AAAAC3NzaC1lZDI1NTE5AAAAIOYTNJEemZVjjyRY57nQRj4NHLL58aR1U5CyAsGtuUD3";
+      };
     };
     helix = {
       enable = true;
