@@ -90,13 +90,28 @@ in
       fcitx5-chinese-addons
       fcitx5-configtool
       # programming
+#terraform
+terraform-ls
+# toml
+taplo
+# yaml
+nodePackages.yaml-language-server
+# json
+nodePackages.vscode-json-languageserver
+# nix
+nil
 # bash
+nodePackages.bash-language-server
       shellcheck
 # python
 nodePackages.pyright
       poetry
       black
-# nix
+# go
+gopls
+delve
+# typescript/javascript
+nodePackages.typescript-language-server
 # node
 nodePackages.pnpm
       # shell
