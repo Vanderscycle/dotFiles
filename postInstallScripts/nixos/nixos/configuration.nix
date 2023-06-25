@@ -94,7 +94,13 @@ in
     pulseaudio.enable = false;
     bluetooth.enable = true;
   };
-  security.rtkit.enable = true;
+  security = {
+    rtkit.enable = true;
+    # https://github.com/NixOS/nixpkgs/issues/40157#issuecomment-387269306
+    sudo.extraConfig = ''
+    Defaults        timestamp_timeout=120
+  '';
+  };
   services = {
 
     # Enable CUPS to print documents.
@@ -151,7 +157,6 @@ in
     systemPackages = with pkgs; [
       docker
       git
-      nodejs
       fish
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
@@ -163,6 +168,8 @@ in
   # steam config
   # https://nixos.wiki/wiki/Steam
   programs = {
+  # https://github.com/nix-community/home-manager/issues/3113#issuecomment-1194271028
+    dconf.enable = true;
     fish.enable = true;
     ssh.startAgent = true;
 

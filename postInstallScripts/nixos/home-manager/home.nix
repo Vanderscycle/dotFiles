@@ -140,6 +140,7 @@ in
       unzip
       fzf
       yq
+      jq
       silver-searcher
       httpie
       xclip
@@ -163,8 +164,9 @@ in
       vlc
       transmission-gtk
       xfce.thunar
-      nitrogen
-      #insomniac
+      xfce.thunar-volman
+      lxappearance
+      insomnia
       slack
       firefox
       # social
@@ -181,7 +183,6 @@ in
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   # home.packages = with pkgs; [ steam ];
-
   # Enable home-manager and git
   services = {
     gpg-agent = {
@@ -215,6 +216,7 @@ in
         ls = "exa -al";
         dig = "dog";
         ":q" = "exit";
+        
       };
 
     };
@@ -255,9 +257,6 @@ return {
   font_size = 16.0,
   color_scheme = "Tomorrow Night",
   hide_tab_bar_if_only_one_tab = true,
-  keys = {
-    {key="n", mods="SHIFT|CTRL", action="ToggleFullScreen"},
-  }
 }
       '';
     };
@@ -293,7 +292,25 @@ return {
       enable = true;
     };
   };
-
+# INFO used for lxappearance dark mode theme
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita:Dark";
+      package = pkgs.gnome.gnome-themes-extra;
+          };
+  gtk3 = {
+    extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+  };
+  qt = {
+    style = {
+      package = pkgs.adwaita-qt;
+      name = "adwaita-dark";
+    };
+  };
   xsession = {
     windowManager.awesome.enable = true;
   }; # Nicely reload system units when changing configs
