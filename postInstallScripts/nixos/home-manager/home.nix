@@ -42,10 +42,9 @@ in
     homeDirectory = "/home/henri";
     sessionVariables = {
       EDITOR = "helix";
-
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
       BROWSER = "firefox";
-      TERMINAL = "kitty";
+      TERMINAL = "wezterm";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
@@ -303,9 +302,9 @@ return {
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita:Dark";
-      package = pkgs.gnome.gnome-themes-extra;
-          };
+      name = "Materia-dark";
+      package = pkgs.materia-theme;
+                };
   gtk3 = {
     extraConfig = {
       gtk-application-prefer-dark-theme = true;
