@@ -42,6 +42,7 @@ file-types = ["toml", "poetry.lock", "Cargo.lock"]
 comment-token = "#"
 language-server = { command = "taplo" }
 indent = { tab-width = 2, unit = "  " }
+auto-format = true
 
 [[language]]
 name = "typescript"
@@ -70,8 +71,8 @@ injection-regex = "json"
 file-types = ["json", "jsonc", "arb", "ipynb", "geojson"]
 roots = []
 language-server = { command =  "vscode-json-language-server" }
-auto-format = true
 indent = { tab-width = 2, unit = "  " }
+auto-format = true
 
 [[language]]
 name = "svelte"
@@ -80,6 +81,7 @@ file-types = ["svelte"]
 roots = []
 indent = { tab-width = 2, unit = "  " }
 language-server = { command =  "svelte-language-server" }
+auto-format = true
 
 [[language]]
 name = "lua"
@@ -90,3 +92,5 @@ roots = [".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git"]
 comment-token = "--"
 indent = { tab-width = 2, unit = "  " }
 language-server = { command = "lua-language-server" }
+formatter = { command = "LuaFormatter"}
+auto-format = true
