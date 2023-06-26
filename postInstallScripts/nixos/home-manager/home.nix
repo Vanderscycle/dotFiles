@@ -64,10 +64,10 @@ NNN_OPTS = "Hed";
       # broot
       ".config/broot/conf.hjson".source = "${dotfiles_dir}/.config/broot/conf.hjson";
       # awesome wm
-      # "awesome" = {
-      #   source = "${dotfiles_dir}/.config/awesome";
-      #   target = "./.config/awesome";     
-      #   };
+      "awesome" = {
+        source = "${dotfiles_dir}/.config/awesome";
+        target = "./.config/awesome";     
+        };
       "xprofile" = {
         source = "${dotfiles_dir}/.config/.xprofile";
         target = "./.xprofile";
@@ -94,6 +94,7 @@ NNN_OPTS = "Hed";
       # lua
       lua-language-server
       luajitPackages.luarocks
+luaformatter
       # toml
       taplo
       # yaml
