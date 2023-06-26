@@ -30,10 +30,10 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Shell programs
 local local_bin = os.getenv("HOME") .. "/.local/bin/"
 local rofi_bin = os.getenv("HOME") .. "/.config/rofi/bin/"
-local randr = local_bin .. "randr"
+-- local randr = local_bin .. "randr"
 -- local picom = "picom --experimental-backends -b --config " .. theme_dir .. "conf/picom.conf"
-local picom = "picom &"
-local fcitx = "fcitx &"
+-- local picom = "picom &"
+local fcitx = "fcitx5 &"
 local autostart = local_bin .. "awesome-autostart"
 local restore_wall = "nitrogen --restore"
 -- local random_wall = "python " .. local_bin .. "nitrogen_randomizer.py " .. theme_dir .. "2K"
@@ -43,7 +43,7 @@ local rofi_window = rofi_bin .. "rofi_window"
 local rofi_launcher = rofi_bin .. "rofi_launcher"
 -- local rofi_powermenu = rofi_bin .. "rofi_powermenu"
 
-awful.spawn.with_shell(randr)
+-- awful.spawn.with_shell(randr)
 awful.spawn.with_shell(fcitx)
 awful.spawn.with_shell(restore_wall)
 -- awful.spawn.with_shell(picom)
@@ -138,7 +138,6 @@ local myawesomemenu = {
 }
 
 local editormenu = {
-	-- { "neovim", "kitty -e lvim" },
 	{ "Doom emacs", "emacs" },
 }
 
@@ -153,18 +152,14 @@ local networkmenu = {
 
 local termmenu = {
 	{ "wezterm", "wezterm" },
-	{ "kitty",   "kitty" },
 }
 
 local multimediamenu = {
-	{ "spotify",    "spotify" },
-	-- { "ncmpcpp", "kitty -e ncmpcpp" },
-	{ "vlc",        "vlc" },
-	{ "pulseaudio", "pavucontrol" },
+	{ "spotify", "spotify" },
+	{ "vlc",     "vlc" },
 }
 
 local settingsmenu = {
-	{ "lxappearance",       "lxappearance" },
 	{ "wallpaper settings", "nitrogen" },
 }
 
@@ -173,8 +168,7 @@ local utilsmenu = {
 }
 
 local printer = {
-	{ "super slicer",  "superslicer" },
-	{ "prusca slicer", "PruscaSlicer" },
+	{ "super slicer", "superslicer" },
 }
 
 local myexitmenu = {
@@ -515,9 +509,9 @@ local globalkeys = gears.table.join(
 	-- awful.key({ modkey }, "p", function()
 	-- 	awful.util.spawn(rofi_powermenu, false)
 	-- end, { description = "launch powermenu", group = "launcher" }),
-	awful.key({ altkey }, "Return", function()
-		awful.spawn(terminal)
-	end, { description = "open kitty", group = "launcher" }),
+	-- awful.key({ altkey }, "Return", function()
+	-- 	awful.spawn(terminal)
+	-- end, { description = "open kitty", group = "launcher" }),
 
 	awful.key({ modkey, "Shift" }, "q", function()
 		awful.util.spawn("xkill", false)
