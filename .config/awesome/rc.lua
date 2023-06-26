@@ -13,7 +13,7 @@ local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
 local wibox = require("wibox")
-local lain = require("lain")
+-- local lain = require("lain")
 -- Theme handling library
 local beautiful = require("beautiful")
 beautiful.init(theme_dir .. "theme.lua")
@@ -86,7 +86,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 
 -- This is used later as the default terminal and editor to run.
-local terminal = "kitty"
+local terminal = "wezterm"
 local editor = os.getenv("EDITOR") or "lvim"
 local editor_cmd = terminal .. " -e " .. editor
 
@@ -126,9 +126,9 @@ local myawesomemenu = {
 			hotkeys_popup.show_help(nil, awful.screen.focused())
 		end,
 	},
-	{ "manual", terminal .. " -e man awesome" },
+	{ "manual",      terminal .. " -e man awesome" },
 	{ "edit config", editor_cmd .. " " .. awesome.conffile },
-	{ "restart", awesome.restart },
+	{ "restart",     awesome.restart },
 	{
 		"quit",
 		function()
@@ -143,7 +143,7 @@ local editormenu = {
 }
 
 local officemenu = {
-	{ "files", "thunar" },
+	{ "files",  "thunar" },
 	{ "office", "onlyoffice-desktopeditors" },
 }
 
@@ -153,18 +153,18 @@ local networkmenu = {
 
 local termmenu = {
 	{ "wezterm", "wezterm" },
-	{ "kitty", "kitty" },
+	{ "kitty",   "kitty" },
 }
 
 local multimediamenu = {
-	{ "spotify", "spotify" },
+	{ "spotify",    "spotify" },
 	-- { "ncmpcpp", "kitty -e ncmpcpp" },
-	{ "vlc", "vlc" },
+	{ "vlc",        "vlc" },
 	{ "pulseaudio", "pavucontrol" },
 }
 
 local settingsmenu = {
-	{ "lxappearance", "lxappearance" },
+	{ "lxappearance",       "lxappearance" },
 	{ "wallpaper settings", "nitrogen" },
 }
 
@@ -173,7 +173,7 @@ local utilsmenu = {
 }
 
 local printer = {
-	{ "super slicer", "superslicer" },
+	{ "super slicer",  "superslicer" },
 	{ "prusca slicer", "PruscaSlicer" },
 }
 
@@ -184,22 +184,22 @@ local myexitmenu = {
 			awesome.quit()
 		end,
 	},
-	{ "reboot", "sudo systemctl reboot" },
-	{ "suspend", "sudo systemctl suspend" },
+	{ "reboot",   "sudo systemctl reboot" },
+	{ "suspend",  "sudo systemctl suspend" },
 	{ "shutdown", "sudo systemctl poweroff" },
 }
 
 local mymainmenu = awful.menu({
 	items = {
-		{ "editors", editormenu },
-		{ "terms", termmenu },
-		{ "network", networkmenu },
-		{ "office", officemenu },
-		{ "multimedia", multimediamenu },
-		{ "settings", settingsmenu },
-		{ "utils", utilsmenu },
-		{ "awesome", myawesomemenu },
-		{ "3Dprinting", printer },
+		{ "editors",      editormenu },
+		{ "terms",        termmenu },
+		{ "network",      networkmenu },
+		{ "office",       officemenu },
+		{ "multimedia",   multimediamenu },
+		{ "settings",     settingsmenu },
+		{ "utils",        utilsmenu },
+		{ "awesome",      myawesomemenu },
+		{ "3Dprinting",   printer },
 		{ "exit options", myexitmenu },
 	},
 })
@@ -257,52 +257,52 @@ local tasklist_buttons = gears.table.join(
 	end)
 )
 
-local markup = lain.util.markup
+-- local markup = lain.util.markup
 
-local cpu = lain.widget.cpu({
-	timeout = 1,
-	settings = function()
-		widget:set_markup(markup.fontfg(beautiful.font, beautiful.yellow, " " .. cpu_now.usage .. "%"))
-	end,
-})
-local mem = lain.widget.mem({
-	timeout = 1,
-	settings = function()
-		widget:set_markup(markup.fontfg(beautiful.font, beautiful.blue, " " .. mem_now.perc .. "%"))
-	end,
-})
+-- local cpu = lain.widget.cpu({
+-- 	timeout = 1,
+-- 	settings = function()
+-- 		widget:set_markup(markup.fontfg(beautiful.font, beautiful.yellow, " " .. cpu_now.usage .. "%"))
+-- 	end,
+-- })
+-- local mem = lain.widget.mem({
+-- 	timeout = 1,
+-- 	settings = function()
+-- 		widget:set_markup(markup.fontfg(beautiful.font, beautiful.blue, " " .. mem_now.perc .. "%"))
+-- 	end,
+-- })
 
 local systray = wibox.widget.systray()
 
-local vol = lain.widget.alsa({
-	timeout = 1,
-	settings = function()
-		if volume_now.status == "off" then
-			volume_now.level = "Muted"
-			widget:set_markup(markup.fontfg(beautiful.font, beautiful.grey, "婢 " .. volume_now.level))
-		else
-			widget:set_markup(markup.fontfg(beautiful.font, beautiful.pink, "奔 " .. volume_now.level .. "% "))
-		end
-	end,
-})
+-- local vol = lain.widget.alsa({
+-- 	timeout = 1,
+-- 	settings = function()
+-- 		if volume_now.status == "off" then
+-- 			volume_now.level = "Muted"
+-- 			widget:set_markup(markup.fontfg(beautiful.font, beautiful.grey, "婢 " .. volume_now.level))
+-- 		else
+-- 			widget:set_markup(markup.fontfg(beautiful.font, beautiful.pink, "奔 " .. volume_now.level .. "% "))
+-- 		end
+-- 	end,
+-- })
 
-vol.widget:buttons(awful.util.table.join(
-	awful.button({}, 1, function() -- left click
-		awful.spawn("pamixer -t")
-		vol.update()
-	end),
-	awful.button({}, 3, function() -- middle click
-		awful.spawn("pavucontrol")
-	end),
-	awful.button({}, 4, function() -- scroll up
-		awful.spawn("pamixer -i 3")
-		vol.update()
-	end),
-	awful.button({}, 5, function() -- scroll down
-		awful.spawn("pamixer -d 3")
-		vol.update()
-	end)
-))
+-- vol.widget:buttons(awful.util.table.join(
+-- 	awful.button({}, 1, function() -- left click
+-- 		awful.spawn("pamixer -t")
+-- 		vol.update()
+-- 	end),
+-- 	awful.button({}, 3, function() -- middle click
+-- 		awful.spawn("pavucontrol")
+-- 	end),
+-- 	awful.button({}, 4, function() -- scroll up
+-- 		awful.spawn("pamixer -i 3")
+-- 		vol.update()
+-- 	end),
+-- 	awful.button({}, 5, function() -- scroll down
+-- 		awful.spawn("pamixer -d 3")
+-- 		vol.update()
+-- 	end)
+-- ))
 
 local mpris = require("themes.default.mpris")
 local mpd = require("themes.default.mpdarc")
@@ -421,13 +421,15 @@ awful.screen.connect_for_each_screen(function(s)
 		-- Add widgets to the wibox
 		s.mywibox:setup({
 			layout = wibox.layout.align.horizontal,
-			{ -- Left widgets
+			{
+				-- Left widgets
 				layout = wibox.layout.fixed.horizontal,
 				mylauncher,
 				s.mytaglist,
 			},
 			s.mytasklist, -- Middle widget
-			{ -- Right widgets
+			{
+				-- Right widgets
 				layout = wibox.layout.fixed.horizontal,
 				mpris(),
 				spacer,
@@ -446,13 +448,15 @@ awful.screen.connect_for_each_screen(function(s)
 		-- Add widgets to the wibox
 		s.mywibox:setup({
 			layout = wibox.layout.align.horizontal,
-			{ -- Left widgets
+			{
+				-- Left widgets
 				layout = wibox.layout.fixed.horizontal,
 				mylauncher,
 				s.mytaglist,
 			},
 			s.mytasklist, -- Middle widget
-			{ -- Right widgets
+			{
+				-- Right widgets
 				layout = wibox.layout.fixed.horizontal,
 				mpd,
 				spacer,
@@ -476,8 +480,8 @@ root.buttons(gears.table.join(
 	awful.button({}, 3, function()
 		mymainmenu:toggle()
 	end)
-	-- awful.button({}, 4, awful.tag.viewnext),
-	-- awful.button({}, 5, awful.tag.viewprev)
+-- awful.button({}, 4, awful.tag.viewnext),
+-- awful.button({}, 5, awful.tag.viewprev)
 ))
 -- }}}
 
@@ -503,7 +507,7 @@ local globalkeys = gears.table.join(
 	-- 	awful.spawn.with_shell("rofi -show run -theme $HOME/.config/rofi/launcher.rasi")
 	-- end, { description = "open a menu launcher", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "p", function()
-		awful.util.spawn(rofi_launcher, false)
+		awful.util.spawn("rofi -show run", false)
 	end, { description = "launch launcher", group = "launcher" }),
 	awful.key({ modkey }, "w", function()
 		awful.util.spawn(rofi_window, false)
@@ -596,7 +600,6 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey, "Shift" }, "k", function()
 		awful.client.swap.byidx(-1)
 	end, { description = "swap with previous client by index", group = "client" }),
-
 	awful.key({ modkey }, "u", awful.client.urgent.jumpto, { description = "jump to urgent client", group = "client" }),
 	awful.key({ modkey }, "Escape", function()
 		awful.client.focus.history.previous()
@@ -616,14 +619,12 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey }, "comma", function()
 		awful.tag.incmwfact(-0.05)
 	end, { description = "decrease master width factor", group = "layout" }),
-
 	awful.key({ modkey, "Shift" }, "h", function()
 		awful.tag.incnmaster(1, nil, true)
 	end, { description = "increase the number of master clients", group = "layout" }),
 	awful.key({ modkey, "Shift" }, "l", function()
 		awful.tag.incnmaster(-1, nil, true)
 	end, { description = "decrease the number of master clients", group = "layout" }),
-
 	awful.key({ modkey, "Control" }, "h", function()
 		awful.tag.incncol(1, nil, true)
 	end, { description = "increase the number of columns", group = "layout" }),
@@ -756,11 +757,11 @@ local function myfocus_filter(c)
 		if c.class == "Wine" and c.above == true then
 			return nil
 		elseif
-			c.class == "Wine"
-			and c.type == "dialog"
-			and c.skip_taskbar == true
-			and c.size_hints.max_width
-			and c.size_hints.max_width < 160
+				c.class == "Wine"
+				and c.type == "dialog"
+				and c.skip_taskbar == true
+				and c.size_hints.max_width
+				and c.size_hints.max_width < 160
 		then
 			-- for popup item menus of Photoshop CS5
 			return nil
@@ -803,15 +804,17 @@ awful.rules.rules = {
 		callback = awful.client.setslave,
 	},
 	-- rule to not launch firefox in floating mode
-	{ rule = { class = "firefox"},
+	{
+		rule = { class = "firefox" },
 		properties = {
 			opacity = 1,
 			maximized = false,
 			floating = false
 		}
 	},
--- not working
-	{ rule = { class = "SuperSlicer"},
+	-- not working
+	{
+		rule = { class = "SuperSlicer" },
 		properties = {
 			opacity = 1,
 			maximized = false,
@@ -847,7 +850,7 @@ awful.rules.rules = {
 			role = {
 				"AlarmWindow", -- Thunderbird's calendar.
 				"ConfigManager", -- Thunderbird's about:config.
-				"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
+				"pop-up",    -- e.g. Google Chrome's (detached) Developer Tools.
 			},
 		},
 		properties = { floating = true },
@@ -856,18 +859,18 @@ awful.rules.rules = {
 	-- Add titlebars to normal clients and dialogs
 	{ rule_any = { type = { "normal", "dialog" } }, properties = { titlebars_enabled = false } },
 	-- Set Firefox to always map on the tag1 on screen 1.
-	{ rule = { class = "firefox" }, properties = { screen = 1, tag = tag2 } },
-	{ rule = { class = "emacs" }, properties = { screen = 1, tag = tag1 } },
-	{ rule = { class = "SuperSlicer" }, properties = { screen = 1, tag = tag6 } },
-	{ rule = { class = "PrusaSlicer" }, properties = { screen = 1, tag = tag6 } },
-	{ rule = { class = "Slack" }, properties = { screen = 1, tag = tag3 } },
-	{ rule = { instance = "Devtools" }, properties = { screen = 1, tag = tag1 } },
-	{ rule = { instance = "spotify" }, properties = { screen = 1, tag = tag3 } },
-	{ rule = { class = "Spotify" }, properties = { screen = 1, tag = tag3 } },
-	{ rule = { class = "Steam" }, properties = { screen = 1, tag = tag4 } },
-	{ rule = { class = "discord" }, properties = { screen = 1, tag = tag3 } },
-	{ rule = { class = "SignalDesktop" }, properties = { screen = 1, tag = tag6 } },
-	{ rule = { class = "transmission-gtk" }, properties = { screen = 1, tag = tag7 } },
+	{ rule = { class = "firefox" },                 properties = { screen = 1, tag = tag2 } },
+	{ rule = { class = "emacs" },                   properties = { screen = 1, tag = tag1 } },
+	{ rule = { class = "SuperSlicer" },             properties = { screen = 1, tag = tag6 } },
+	{ rule = { class = "PrusaSlicer" },             properties = { screen = 1, tag = tag6 } },
+	{ rule = { class = "Slack" },                   properties = { screen = 1, tag = tag3 } },
+	{ rule = { instance = "Devtools" },             properties = { screen = 1, tag = tag1 } },
+	{ rule = { instance = "spotify" },              properties = { screen = 1, tag = tag3 } },
+	{ rule = { class = "Spotify" },                 properties = { screen = 1, tag = tag3 } },
+	{ rule = { class = "Steam" },                   properties = { screen = 1, tag = tag4 } },
+	{ rule = { class = "discord" },                 properties = { screen = 1, tag = tag3 } },
+	{ rule = { class = "SignalDesktop" },           properties = { screen = 1, tag = tag6 } },
+	{ rule = { class = "transmission-gtk" },        properties = { screen = 1, tag = tag7 } },
 }
 -- }}}
 
@@ -886,20 +889,24 @@ client.connect_signal("request::titlebars", function(c)
 	)
 
 	awful.titlebar(c):setup({
-		{ -- Left
+		{
+			-- Left
 			awful.titlebar.widget.iconwidget(c),
 			buttons = buttons,
 			layout = wibox.layout.fixed.horizontal,
 		},
-		{ -- Middle
-			{ -- Title
+		{
+			-- Middle
+			{
+				-- Title
 				align = "center",
 				widget = awful.titlebar.widget.titlewidget(c),
 			},
 			buttons = buttons,
 			layout = wibox.layout.flex.horizontal,
 		},
-		{ -- Right
+		{
+			-- Right
 			awful.titlebar.widget.floatingbutton(c),
 			awful.titlebar.widget.maximizedbutton(c),
 			awful.titlebar.widget.stickybutton(c),
