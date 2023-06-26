@@ -158,6 +158,7 @@ luaformatter
       tilt
       terraform
       # gui/
+nitrogen
       signal-desktop
       gparted
       vlc
