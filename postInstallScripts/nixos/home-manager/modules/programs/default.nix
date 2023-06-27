@@ -9,5 +9,8 @@
 ./starship.nix
 ./nnn.nix
 ./btop.nix
+./wezterm.nix
+# ./kitty.nix
+# ./modern-unix.nix
     ];
 }

@@ -50,15 +50,11 @@ NNN_OPTS = "Hed";
       ".doom.d/init.el".source = "${dotfiles_dir}/.doom.d/init.el";
       ".doom.d/packages.el".source = "${dotfiles_dir}/.doom.d/packages.el";
       ".doom.d/config.el".source = "${dotfiles_dir}/.doom.d/config.el";
-      # ripgrep
-      ".config/rg/.ripgreprc".source = "${dotfiles_dir}/.config/rg/.ripgreprc";
       # discord
       ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
       # helix
       ".config/helix/config.toml".source = "${dotfiles_dir}/.config/helix/config.toml";
       ".config/helix/languages.toml".source = "${dotfiles_dir}/.config/helix/languages.toml";
-      # broot
-      ".config/broot/conf.hjson".source = "${dotfiles_dir}/.config/broot/conf.hjson";
       # awesome wm
       "awesome" = {
         source = "${dotfiles_dir}/.config/awesome";
@@ -79,10 +75,6 @@ NNN_OPTS = "Hed";
       tldr
       nixpkgs-fmt
       ripgrep
-      # fcitx5
-      # fcitx5-chinese-addons
-      # fcitx5-configtool
-      # programming
       #terraform
       terraform-ls
       # svelte
@@ -121,18 +113,7 @@ luaformatter
       awscli2
       linode-cli
       # cli
-      sysz
-      fd
-      rsync
-      exa
-      bat
-      lazygit
       unzip
-      fzf
-      yq
-      jq
-      silver-searcher
-      httpie
       xclip
       zoxide
       xclip
@@ -170,15 +151,10 @@ nitrogen
       flameshot
     ];
   };
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
-  # Enable home-manager and git
   services = {
     gpg-agent = {
       enableSshSupport = true;
     };
-
   };
   programs = {
     gpg = {
@@ -201,65 +177,11 @@ nitrogen
     rofi = {
       enable = true;
     };
-    broot = {
-      enable = true;
-    };
-    wezterm = {
-      enable = true;
-      extraConfig = ''
-      -- Your lua code / config here
--- local mylib = require 'mylib';
-return {
-  -- usemylib = mylib.do_fun();
-  font = wezterm.font("JetBrains Mono"),
-  font_size = 16.0,
-  color_scheme = "Tomorrow Night",
-  hide_tab_bar_if_only_one_tab = true,
-}
-      '';
-    };
-    git = {
-      enable = true;
-      userEmail = "henri-vandersleyen@protonmail.com";
-      userName = "vanderscycle";
-      # commit = {
-      #   gpgsign = true;
-      # };
-      extraConfig = {
-        user.signingkey = "~/.ssh/endeavourGit.pub";
-        gpg = {
-          format = "ssh";
-        };
-      };
-      signing = {
-        key = "AAAAC3NzaC1lZDI1NTE5AAAAIOYTNJEemZVjjyRY57nQRj4NHLL58aR1U5CyAsGtuUD3";
-      };
-    };
     helix = {
       enable = true;
-
     };
     go = {
       enable = true;
-    };
-  };
-# INFO used for lxappearance dark mode theme
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Materia-dark";
-      package = pkgs.materia-theme;
-                };
-  gtk3 = {
-    extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-    };
-  };
-  };
-  qt = {
-    style = {
-      package = pkgs.adwaita-qt;
-      name = "adwaita-dark";
     };
   };
   xsession = {
