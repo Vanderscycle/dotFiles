@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+      # fishPlugins.done
+      # fishPlugins.fzf
+      # fishPlugins.autopair
+      # fishPlugins.z
   programs.fish = {
       enable = true;
       functions = {

@@ -8,5 +8,6 @@
 ./fish.nix
 ./starship.nix
 ./nnn.nix
+./btop.nix
     ];
 }

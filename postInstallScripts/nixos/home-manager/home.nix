@@ -47,13 +47,11 @@ NNN_OPTS = "Hed";
     stateVersion = "23.05";
     file = {
       # doom emacs
-      # ".doom.d/init.el".source = "${dotfiles_dir}/.doom.d/init.el";
-      # ".doom.d/packages.el".source = "${dotfiles_dir}/.doom.d/packages.el";
-      # ".doom.d/config.el".source = "${dotfiles_dir}/.doom.d/config.el";
+      ".doom.d/init.el".source = "${dotfiles_dir}/.doom.d/init.el";
+      ".doom.d/packages.el".source = "${dotfiles_dir}/.doom.d/packages.el";
+      ".doom.d/config.el".source = "${dotfiles_dir}/.doom.d/config.el";
       # ripgrep
       ".config/rg/.ripgreprc".source = "${dotfiles_dir}/.config/rg/.ripgreprc";
-      # kitty
-      ".config/kitty/kitty.conf".source = "${dotfiles_dir}/.config/kitty/kitty.conf";
       # discord
       ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
       # helix
@@ -116,13 +114,7 @@ luaformatter
       # node
       nodePackages.pnpm
       nodejs
-      # shell
-      starship
-      fishPlugins.done
-      fishPlugins.fzf
-      fishPlugins.autopair
-      fishPlugins.z
-      kitty
+            # shell
       gnupg
       pinentry
       # client
@@ -212,9 +204,6 @@ nitrogen
     broot = {
       enable = true;
     };
-    kitty = {
-      theme = "tokyo_night_night";
-    };
     wezterm = {
       enable = true;
       extraConfig = ''
@@ -228,13 +217,6 @@ return {
   hide_tab_bar_if_only_one_tab = true,
 }
       '';
-    };
-    btop = {
-      enable = true;
-      settings = {
-        color_theme = "tokyo-night";
-        theme_background = true;
-      };
     };
     git = {
       enable = true;
