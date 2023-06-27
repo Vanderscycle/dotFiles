@@ -40,8 +40,8 @@ in
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
       BROWSER = "firefox";
       TERMINAL = "wezterm";
-NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
-NNN_OPTS = "Hed";
+      NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
+      NNN_OPTS = "Hed";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
@@ -58,8 +58,8 @@ NNN_OPTS = "Hed";
       # awesome wm
       "awesome" = {
         source = "${dotfiles_dir}/.config/awesome";
-        target = "./.config/awesome";     
-        };
+        target = "./.config/awesome";
+      };
       "xprofile" = {
         source = "${dotfiles_dir}/.config/.xprofile";
         target = "./.xprofile";
@@ -82,7 +82,7 @@ NNN_OPTS = "Hed";
       # lua
       lua-language-server
       luajitPackages.luarocks
-luaformatter
+      luaformatter
       # toml
       taplo
       # yaml
@@ -106,7 +106,7 @@ luaformatter
       # node
       nodePackages.pnpm
       nodejs
-            # shell
+      # shell
       gnupg
       pinentry
       # client
@@ -129,7 +129,7 @@ luaformatter
       tilt
       terraform
       # gui/
-nitrogen
+      nitrogen
       signal-desktop
       gparted
       vlc
@@ -169,7 +169,7 @@ nitrogen
     };
     keychain = {
       enable = true;
-      keys = [ "$HOME/.ssh/endeavourGit"];
+      keys = [ "$HOME/.ssh/endeavourGit" ];
     };
     home-manager = {
       enable = true;

@@ -1,4 +1,4 @@
 let
-    tokyonight = import ./tokyonight.nix;
+  tokyonight = import ./tokyonight.nix;
 in
 tokyonight

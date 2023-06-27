@@ -4,10 +4,10 @@ let
 in
 {
   home.files = {
-      ".config/kitty/kitty.conf".source = "${dotfiles_dir}/.config/kitty/kitty.conf";
+    ".config/kitty/kitty.conf".source = "${dotfiles_dir}/.config/kitty/kitty.conf";
   };
   programs.kitty = {
-      enable = true;
-      theme = "tokyo_night_night";
-    };
-  }
+    enable = true;
+    theme = "tokyo_night_night";
+  };
+}

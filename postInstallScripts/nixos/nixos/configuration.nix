@@ -69,10 +69,10 @@ in
 
     windowManager.awesome = {
       enable = true;
-   #   luaModules = with pkgs.luaPackages; [
-   #     luarocks # is the package manager for Lua modules
-   #     luadbi-mysql # Database abstraction layer        
-   #   ];
+      #   luaModules = with pkgs.luaPackages; [
+      #     luarocks # is the package manager for Lua modules
+      #     luadbi-mysql # Database abstraction layer        
+      #   ];
 
     };
     displayManager = {
@@ -98,8 +98,8 @@ in
     rtkit.enable = true;
     # https://github.com/NixOS/nixpkgs/issues/40157#issuecomment-387269306
     sudo.extraConfig = ''
-    Defaults        timestamp_timeout=120
-  '';
+      Defaults        timestamp_timeout=120
+    '';
   };
   services = {
 
@@ -168,7 +168,7 @@ in
   # steam config
   # https://nixos.wiki/wiki/Steam
   programs = {
-  # https://github.com/nix-community/home-manager/issues/3113#issuecomment-1194271028
+    # https://github.com/nix-community/home-manager/issues/3113#issuecomment-1194271028
     dconf.enable = true;
     fish.enable = true;
     ssh.startAgent = true;
@@ -216,14 +216,14 @@ in
         # pinyin
 
         # add:
-        fcitx5-rime  # pinyin
+        fcitx5-rime # pinyin
         fcitx5-chinese-addons
         fcitx5-with-addons
         # cloudpinyin
         # hangul  # korean
       ];
     };
-    };
+  };
 
   #  fileSystems."/mnt/usb" = {
   #    device = "/dev/sda";

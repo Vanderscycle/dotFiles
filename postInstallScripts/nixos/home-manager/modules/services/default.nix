@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 {
-    imports = [
-        ./dunst.nix
-./git.nix
-./gnome.nix
-    ];
+  imports = [
+    ./dunst.nix
+    ./git.nix
+    ./gnome.nix
+  ];
 }
