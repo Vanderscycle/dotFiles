@@ -205,6 +205,25 @@ in
     fsType = "auto";
     options = [ "defaults" "noatime" "nofail" "compress=zstd" ];
   };
+  console.useXkbConfig = true;
+  i18n = {
+    inputMethod = {
+      enabled = "fcitx5";
+      uim.toolbar = "gtk"; # gtk-systray
+      fcitx5.addons = with pkgs; [
+        # default:
+        # fcitx-keyboard-us
+        # pinyin
+
+        # add:
+        fcitx5-rime  # pinyin
+        fcitx5-chinese-addons
+        fcitx5-with-addons
+        # cloudpinyin
+        # hangul  # korean
+      ];
+    };
+    };
 
   #  fileSystems."/mnt/usb" = {
   #    device = "/dev/sda";

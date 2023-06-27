@@ -5,8 +5,6 @@
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
 in
-#TODO figure it out with fcitx
-  #i8n.inputMethod.fcitx5.addons = with pkgs; [  fcitx5-chinese-addons ];
 {
   # You can import other home-manager modules here
   imports = [
@@ -49,9 +47,9 @@ NNN_OPTS = "Hed";
     stateVersion = "23.05";
     file = {
       # doom emacs
-      ".doom.d/init.el".source = "${dotfiles_dir}/.doom.d/init.el";
-      ".doom.d/packages.el".source = "${dotfiles_dir}/.doom.d/packages.el";
-      ".doom.d/config.el".source = "${dotfiles_dir}/.doom.d/config.el";
+      # ".doom.d/init.el".source = "${dotfiles_dir}/.doom.d/init.el";
+      # ".doom.d/packages.el".source = "${dotfiles_dir}/.doom.d/packages.el";
+      # ".doom.d/config.el".source = "${dotfiles_dir}/.doom.d/config.el";
       # ripgrep
       ".config/rg/.ripgreprc".source = "${dotfiles_dir}/.config/rg/.ripgreprc";
       # kitty
@@ -83,9 +81,9 @@ NNN_OPTS = "Hed";
       tldr
       nixpkgs-fmt
       ripgrep
-      fcitx5
-      fcitx5-chinese-addons
-      fcitx5-configtool
+      # fcitx5
+      # fcitx5-chinese-addons
+      # fcitx5-configtool
       # programming
       #terraform
       terraform-ls
@@ -190,7 +188,6 @@ nitrogen
     };
 
   };
-  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-rime ];
   programs = {
     gpg = {
       enable = true;
@@ -220,7 +217,7 @@ kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@ba
         ls = "exa -al";
         dig = "dog";
         ":q" = "exit";
-        
+        top = "btop";        
       };
 
     };
