@@ -8,7 +8,7 @@ in
 {
   # You can import other home-manager modules here
   imports = [
-    # ./modules/services
+    ./modules/services
     ./modules/programs
   ];
   nixpkgs = {
@@ -46,10 +46,6 @@ in
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
     file = {
-      # doom emacs
-      ".doom.d/init.el".source = "${dotfiles_dir}/.doom.d/init.el";
-      ".doom.d/packages.el".source = "${dotfiles_dir}/.doom.d/packages.el";
-      ".doom.d/config.el".source = "${dotfiles_dir}/.doom.d/config.el";
       # discord
       ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
       # helix
@@ -119,15 +115,6 @@ in
       xclip
       #3d printing/cad
       super-slicer-latest
-      #devops
-      dogdns
-      k9s
-      kubernetes-helm
-      kubernetes
-      ansible
-      kustomize
-      tilt
-      terraform
       # gui/
       nitrogen
       signal-desktop
@@ -183,7 +170,7 @@ in
     go = {
       enable = true;
     };
-  };
+    };
   xsession = {
     windowManager.awesome.enable = true;
   }; # Nicely reload system units when changing configs

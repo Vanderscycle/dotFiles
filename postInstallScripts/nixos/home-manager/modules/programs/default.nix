@@ -11,6 +11,7 @@
     ./btop.nix
     ./wezterm.nix
     # ./kitty.nix
-    # ./modern-unix.nix
+    ./modern-unix.nix
+    ./devops.nix
   ];
 }

@@ -4,8 +4,27 @@
   # fishPlugins.fzf
   # fishPlugins.autopair
   # fishPlugins.z
+
   programs.fish = {
     enable = true;
+    plugins = with pkgs.fishPlugins; [
+        {
+          name = "done";
+          src = done.src;
+        }
+        {
+          name = "z";
+          src = z.src;
+        }
+        {
+          name = "autopair-fish";
+          src = autopair-fish.src;
+        }
+        {
+          name = "fzf-fish";
+          src = fzf-fish.src;
+        }
+      ];
     functions = {
       docker-crmAll = "docker rm -f (docker ps -aq)";
       docker-irmAll = "docker rmi -f (docker images  -aq)";
