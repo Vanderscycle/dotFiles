@@ -17,7 +17,10 @@ in
   # https://nixos.wiki/wiki/Flakes
   nix = {
     package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      warn-dirty = false
+      '';
   };
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -55,11 +58,7 @@ in
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  # i18n.inputMethod = {
-  #   enabled = "fcitx5";
-  #   fcitx5.addons = with pkgs; [ fcitx5-chinese-addons fcitx5-with-addons fcitx5-gtk fcitx5-rime ];
-  # };
-
+  
   # Configure keymap in X11
   services.xserver = {
     # Enable the X11 windowing system.
@@ -69,11 +68,6 @@ in
 
     windowManager.awesome = {
       enable = true;
-      #   luaModules = with pkgs.luaPackages; [
-      #     luarocks # is the package manager for Lua modules
-      #     luadbi-mysql # Database abstraction layer        
-      #   ];
-
     };
     displayManager = {
       sddm.enable = true;
@@ -149,11 +143,6 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-    #    shells = with pkgs; [ fish ];
-    #    variables = {
-    #      EDITOR = "emacs";
-    #      VISUAL = "emacs";
-    #    };
     systemPackages = with pkgs; [
       docker
       git
