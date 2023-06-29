@@ -36,6 +36,7 @@ in
     username = "henri";
     homeDirectory = "/home/henri";
     sessionVariables = {
+      SUDO_EDITOR = "helix";
       EDITOR = "helix";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
       BROWSER = "firefox";

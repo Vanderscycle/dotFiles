@@ -87,7 +87,7 @@ end
 
 -- This is used later as the default terminal and editor to run.
 local terminal = "wezterm"
-local editor = os.getenv("EDITOR") or "lvim"
+local editor = os.getenv("EDITOR") or "helix"
 local editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -519,7 +519,7 @@ local globalkeys = gears.table.join(
 	awful.key({ modkey, "Shift" }, "s", function()
 		awful.util.spawn("flameshot gui", false)
 	end, { description = "launch flameshot", group = "launcher" }),
-	awful.key({ modkey, "Shift" }, "n", function()
+	awful.key({ modkey, "Shift" }, "t", function()
 		awful.util.spawn("thunar")
 	end, { description = "launch thunar", group = "launcher" }),
 	awful.key({ modkey, "Shift" }, "h", function() -- WARN: not working
@@ -833,7 +833,6 @@ awful.rules.rules = {
 				"xtightvncviewer",
 				"Lxappearance",
 				"Nitrogen",
-				"Timeshift-gtk",
 			},
 
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
@@ -862,6 +861,7 @@ awful.rules.rules = {
 	{ rule = { instance = "spotify" },              properties = { screen = 1, tag = tag3 } },
 	{ rule = { class = "Spotify" },                 properties = { screen = 1, tag = tag3 } },
 	{ rule = { class = "Steam" },                   properties = { screen = 1, tag = tag4 } },
+	{ rule = { class = "steam" },                   properties = { screen = 1, tag = tag4 } },
 	{ rule = { class = "discord" },                 properties = { screen = 1, tag = tag3 } },
 	{ rule = { class = "SignalDesktop" },           properties = { screen = 1, tag = tag6 } },
 	{ rule = { class = "transmission-gtk" },        properties = { screen = 1, tag = tag7 } },

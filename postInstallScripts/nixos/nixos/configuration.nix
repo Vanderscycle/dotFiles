@@ -78,10 +78,7 @@ in
         user = "henri";
       };
     };
-    # awesome wm
-    # https://nixos.wiki/wiki/Awesome
   };
-
 
   sound.enable = true;
   hardware = {
@@ -92,7 +89,7 @@ in
     rtkit.enable = true;
     # https://github.com/NixOS/nixpkgs/issues/40157#issuecomment-387269306
     sudo.extraConfig = ''
-      Defaults        timestamp_timeout=120
+      Defaults        timestamp_timeout=300
     '';
   };
   services = {
@@ -138,11 +135,22 @@ in
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
+  nixpkgs = {
+  config = {
+  allowUnfree = true;
+  allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-run"
+  ];
+  };
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
+    sessionVariables = rec {
+      EDITOR = "helix";
+    };
     systemPackages = with pkgs; [
       docker
       git
