@@ -149,7 +149,7 @@ in
   # $ nix search wget
   environment = {
     sessionVariables = rec {
-      EDITOR = "helix";
+      SUDO_EDITOR = "helix";
     };
     systemPackages = with pkgs; [
       docker

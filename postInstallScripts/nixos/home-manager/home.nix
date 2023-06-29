@@ -112,6 +112,8 @@ in
       #3d printing/cad
       super-slicer-latest
       # gui/
+
+      flameshot
       nitrogen
       signal-desktop
       gparted
@@ -131,7 +133,7 @@ in
       spicetify-cli
       # gaming	
       steam
-      flameshot
+      heroic
     ];
   };
   services = {
