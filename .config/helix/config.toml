@@ -3,6 +3,29 @@ theme = "tokyonight"
 [editor]
 line-number = "relative"
 mouse = false
+auto-save = true
+auto-format = true
+
+[editor.lsp]
+auto-signature-help = true
+display-inlay-hints = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.cursor-shape]
+insert = "underline"
+normal = "block"
+select = "block"
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
 
 [keys.normal]
 # Quick iteration on config changes
@@ -66,6 +89,10 @@ esc = ["collapse_selection", "keep_primary_selection"]
 "*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
 "#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
 
+[keys.normal.space]
+l = ":buffer-next"
+h = ":buffer-previous"
+c = ":buffer-close"
 # Extend and select commands that expect a manual input can't be chained
 # I've kept d[X] commands here because it's better to at least have the stuff you want to delete
 # selected so that it's just a keystroke away to delete
@@ -137,5 +164,3 @@ P = "paste_clipboard_before"
 # Escape the madness! No more fighting with the cursor! Or with multiple cursors!
 esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
 
-[editor.lsp]
-auto-signature-help = true
