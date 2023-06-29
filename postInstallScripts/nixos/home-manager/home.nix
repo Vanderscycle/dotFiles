@@ -51,11 +51,6 @@ in
       # helix
       ".config/helix/config.toml".source = "${dotfiles_dir}/.config/helix/config.toml";
       ".config/helix/languages.toml".source = "${dotfiles_dir}/.config/helix/languages.toml";
-      # awesome wm
-      "awesome" = {
-        source = "${dotfiles_dir}/.config/awesome";
-        target = "./.config/awesome";
-      };
       "xprofile" = {
         source = "${dotfiles_dir}/.config/.xprofile";
         target = "./.xprofile";
