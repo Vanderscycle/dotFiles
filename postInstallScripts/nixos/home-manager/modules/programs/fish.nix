@@ -26,14 +26,24 @@
         }
       ];
     functions = {
+      # docker
       docker-crmAll = "docker rm -f (docker ps -aq)";
       docker-irmAll = "docker rmi -f (docker images  -aq)";
       docker-vrmAll = "docker volume prune";
       docker-prmAll = "docker builder prune -af";
+      # kubernetes
       k-seal = ''
         kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
       '';
       k8s-prmAll = "kubectl delete all --all --namespaces";
+      # nnn
+      n = ''
+        nnn $argv
+        if test -e $NNN_TMPFILE
+                source $NNN_TMPFILE
+                rm $NNN_TMPFILE
+        end
+      '';
     };
     shellAbbrs = {
       l = "less";

@@ -43,6 +43,7 @@ in
       TERMINAL = "wezterm";
       NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
       NNN_OPTS = "Hed";
+      NNN_TMPFILE = "/tmp/nnn";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
@@ -111,6 +112,8 @@ in
       xclip
       #3d printing/cad
       super-slicer-latest
+      #keyboard
+      wally-cli
       # gui/
 
       flameshot
