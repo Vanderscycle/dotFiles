@@ -119,7 +119,6 @@ in
       #keyboard
       wally-cli
       # gui/
-
       flameshot
       nitrogen
       signal-desktop
@@ -174,6 +173,12 @@ in
     };
     go = {
       enable = true;
+    };
+    zathura = {
+      enable = true;
+      options = {
+        selection-clipboard = "clipboard";
+      };
     };
     };
   xsession = {

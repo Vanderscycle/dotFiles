@@ -38,7 +38,7 @@
       k8s-prmAll = "kubectl delete all --all --namespaces";
       # nnn
       n = ''
-        nnn $argv
+        nnn $argv -P p
         if test -e $NNN_TMPFILE
                 source $NNN_TMPFILE
                 rm $NNN_TMPFILE
