@@ -1,7 +1,0 @@
-[Unit]
-Description=Post reboot installer
-
-[Service]
-Type=oneshot
-ExecStart=~/test.sh
-
