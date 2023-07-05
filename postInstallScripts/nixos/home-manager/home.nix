@@ -44,6 +44,7 @@ in
       NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
       NNN_OPTS = "Hed";
       NNN_TMPFILE = "/tmp/nnn";
+      NNN_FIFO= "/tmp/nnn.fifo";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
@@ -99,10 +100,13 @@ in
       # node
       nodePackages.pnpm
       nodejs
+      # editing (3d/photos)
+      shotwell
       # shell
       gnupg
       pinentry
       # client
+      rclone
       awscli2
       linode-cli
       # cli

@@ -865,6 +865,7 @@ awful.rules.rules = {
 	{ rule = { class = "discord" },                 properties = { screen = 1, tag = tag3 } },
 	{ rule = { class = "SignalDesktop" },           properties = { screen = 1, tag = tag6 } },
 	{ rule = { class = "transmission-gtk" },        properties = { screen = 1, tag = tag7 } },
+	{ rule = { class = "Transmission-gtk" },        properties = { screen = 1, tag = tag7 } },
 }
 -- }}}
 
