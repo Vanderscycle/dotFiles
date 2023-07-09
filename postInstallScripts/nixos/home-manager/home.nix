@@ -10,6 +10,7 @@ in
   imports = [
     ./modules/services
     ./modules/programs
+    ./modules/languages
   ];
   nixpkgs = {
     # You can add overlays here
@@ -89,13 +90,6 @@ in
       # bash
       nodePackages.bash-language-server
       shellcheck
-      # python
-      nodePackages.pyright
-      poetry
-      black
-      # go
-      gopls
-      delve
       # typescript/javascript
       nodePackages.typescript-language-server
       # node
