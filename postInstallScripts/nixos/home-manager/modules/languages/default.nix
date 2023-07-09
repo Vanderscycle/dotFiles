@@ -4,5 +4,7 @@
   imports = [
     ./python.nix
     ./go.nix
+    ./javascript.nix
+    ./lua.nix
   ];
 }

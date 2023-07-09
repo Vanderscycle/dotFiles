@@ -8,23 +8,23 @@
   programs.fish = {
     enable = true;
     plugins = with pkgs.fishPlugins; [
-        {
-          name = "done";
-          src = done.src;
-        }
-        {
-          name = "z";
-          src = z.src;
-        }
-        {
-          name = "autopair-fish";
-          src = autopair-fish.src;
-        }
-        {
-          name = "fzf-fish";
-          src = fzf-fish.src;
-        }
-      ];
+      {
+        name = "done";
+        src = done.src;
+      }
+      {
+        name = "z";
+        src = z.src;
+      }
+      {
+        name = "autopair-fish";
+        src = autopair-fish.src;
+      }
+      {
+        name = "fzf-fish";
+        src = fzf-fish.src;
+      }
+    ];
     functions = {
       # docker
       docker-crmAll = "docker rm -f (docker ps -aq)";
@@ -44,10 +44,10 @@
                 rm $NNN_TMPFILE
         end
       '';
-    # git
-    gSquash = ''
-      git reset (git merge-base "$argv" (git branch --show-current))
-    '';
+      # git
+      gSquash = ''
+        git reset (git merge-base "$argv" (git branch --show-current))
+      '';
     };
     shellAbbrs = {
       l = "less";

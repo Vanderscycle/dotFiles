@@ -45,8 +45,8 @@ in
       NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
       NNN_OPTS = "Hed";
       NNN_TMPFILE = "/tmp/nnn";
-      NNN_FIFO= "/tmp/nnn.fifo";
-      TLDR_AUTO_UPDATE_DISABLED= "false";
+      NNN_FIFO = "/tmp/nnn.fifo";
+      TLDR_AUTO_UPDATE_DISABLED = "false";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
@@ -73,12 +73,6 @@ in
       ripgrep
       #terraform
       terraform-ls
-      # svelte
-      nodePackages.svelte-language-server
-      # lua
-      lua-language-server
-      luajitPackages.luarocks
-      luaformatter
       # toml
       taplo
       # yaml
@@ -90,11 +84,6 @@ in
       # bash
       nodePackages.bash-language-server
       shellcheck
-      # typescript/javascript
-      nodePackages.typescript-language-server
-      # node
-      nodePackages.pnpm
-      nodejs
       # editing (3d/photos)
       shotwell
       # shell
@@ -176,7 +165,7 @@ in
         selection-clipboard = "clipboard";
       };
     };
-    };
+  };
   xsession = {
     windowManager.awesome.enable = true;
   }; # Nicely reload system units when changing configs

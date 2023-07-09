@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 
 {
-home.packages = with pkgs; [
-      # go
-      gopls
-      delve
-];
+  home.packages = with pkgs; [
+    # go
+    gopls
+    delve
+  ];
 
 }      
