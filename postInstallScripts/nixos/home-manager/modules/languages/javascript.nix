@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
-
-  packages = with pkgs; [
+  home.packages = with pkgs; [
     # svelte
     nodePackages.svelte-language-server
     # typescript/javascript

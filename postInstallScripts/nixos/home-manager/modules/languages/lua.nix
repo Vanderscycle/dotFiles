@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
-
-  packages = with pkgs; [
+  home.packages = with pkgs; [
     # lua
     lua-language-server
     luajitPackages.luarocks
