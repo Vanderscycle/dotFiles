@@ -45,6 +45,7 @@ in
       NNN_OPTS = "Hed";
       NNN_TMPFILE = "/tmp/nnn";
       NNN_FIFO= "/tmp/nnn.fifo";
+      TLDR_AUTO_UPDATE_DISABLED= "false";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
@@ -119,6 +120,7 @@ in
       #keyboard
       wally-cli
       # gui/
+      rpi-imager
       flameshot
       nitrogen
       signal-desktop

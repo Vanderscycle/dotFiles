@@ -44,6 +44,10 @@
                 rm $NNN_TMPFILE
         end
       '';
+    # git
+    gSquash = ''
+      git reset (git merge-base "$argv" (git branch --show-current))
+    '';
     };
     shellAbbrs = {
       l = "less";
@@ -55,6 +59,7 @@
       dig = "dog";
       ":q" = "exit";
       top = "btop";
+      nyoom = "~/.config/nvim/bin/nyoom $argv";
     };
   };
 }

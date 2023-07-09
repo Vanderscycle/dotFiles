@@ -10,6 +10,7 @@
     ./nnn.nix
     ./btop.nix
     ./wezterm.nix
+    ./nyoom.nix
     # ./kitty.nix
     ./modern-unix.nix
     ./devops.nix
