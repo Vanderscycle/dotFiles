@@ -37,8 +37,8 @@ in
     username = "henri";
     homeDirectory = "/home/henri";
     sessionVariables = {
-      SUDO_EDITOR = "helix";
-      EDITOR = "helix";
+      SUDO_EDITOR = "nvim";
+      EDITOR = "hx";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
       BROWSER = "firefox";
       TERMINAL = "wezterm";
@@ -125,6 +125,8 @@ in
       # gaming	
       steam
       heroic
+      # nix
+      nix-prefetch-git
     ];
   };
   services = {

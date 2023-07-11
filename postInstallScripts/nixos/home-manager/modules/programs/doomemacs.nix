@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
