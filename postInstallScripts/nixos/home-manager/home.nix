@@ -53,9 +53,6 @@ in
     file = {
       # discord
       ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
-      # helix
-      ".config/helix/config.toml".source = "${dotfiles_dir}/.config/helix/config.toml";
-      ".config/helix/languages.toml".source = "${dotfiles_dir}/.config/helix/languages.toml";
       "xprofile" = {
         source = "${dotfiles_dir}/.config/.xprofile";
         target = "./.xprofile";
@@ -70,7 +67,6 @@ in
       noto-fonts-emoji
       tldr
       nixpkgs-fmt
-      ripgrep
       #terraform
       terraform-ls
       # toml
@@ -153,9 +149,6 @@ in
       enable = true;
     };
     rofi = {
-      enable = true;
-    };
-    helix = {
       enable = true;
     };
     go = {

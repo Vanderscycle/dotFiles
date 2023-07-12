@@ -8,6 +8,6 @@ in
   };
   programs.kitty = {
     enable = true;
-    theme = "tokyo_night_night";
+    theme = "Catppuccin-Mocha";
   };
 }

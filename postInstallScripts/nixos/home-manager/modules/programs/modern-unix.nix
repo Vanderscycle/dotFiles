@@ -14,6 +14,7 @@ in
     rsync
     exa
     bat
+    ripgrep
   ];
   home.file = {
 

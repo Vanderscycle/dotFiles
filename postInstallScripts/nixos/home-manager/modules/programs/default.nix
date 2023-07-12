@@ -14,5 +14,6 @@
     # ./kitty.nix
     ./modern-unix.nix
     ./devops.nix
+    ./helix.nix
   ];
 }
