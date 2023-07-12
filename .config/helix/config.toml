@@ -1,10 +1,14 @@
-theme = "tokyonight"
+# theme = "tokyonight"
+theme = "catppuccin_mocha"
 
 [editor]
 line-number = "relative"
+cursorline = true
+color-modes = true
 mouse = false
 auto-save = true
 auto-format = true
+# auto-pair = true
 
 [editor.lsp]
 auto-signature-help = true
@@ -14,9 +18,9 @@ display-inlay-hints = true
 hidden = false
 
 [editor.cursor-shape]
-insert = "underline"
+insert = "bar"
 normal = "block"
-select = "block"
+select = "underline"
 
 [editor.statusline]
 left = ["mode", "spinner"]
@@ -26,6 +30,9 @@ separator = "│"
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
+
+[editor.indent-guides]
+render = true
 
 [keys.normal]
 # Quick iteration on config changes

@@ -49,6 +49,18 @@ awful.spawn.with_shell(restore_wall)
 -- awful.spawn.with_shell(picom)
 awful.spawn.with_shell(autostart)
 
+do
+	local cmds =
+	{
+		"firefox",
+		"discord",
+		"wezterm"
+	}
+
+	for _, i in pairs(cmds) do
+		awful.util.spawn(i)
+	end
+end
 -- }}}
 
 -- {{{ Error handling
