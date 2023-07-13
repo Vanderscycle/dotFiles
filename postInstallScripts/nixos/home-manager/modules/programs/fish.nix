@@ -44,6 +44,10 @@
                 rm -rf $NNN_TMPFILE
         end
       '';
+      # dotFiles
+      save = ''
+      
+      ''
       # git
       gSquash = ''
         git reset (git merge-base "$argv" (git branch --show-current))

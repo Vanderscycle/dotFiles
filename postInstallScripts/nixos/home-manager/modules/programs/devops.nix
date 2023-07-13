@@ -13,6 +13,7 @@ in
       kustomize
       tilt
       terraform
+      terraform-docs
     ];
     file = {
       # K9s
