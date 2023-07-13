@@ -6,6 +6,7 @@
 pcall(require, "luarocks.loader")
 
 local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/default/"
+-- local theme_dir = os.getenv("HOME") .. "/.config/awesome/themes/catppuccin_mocha/"
 
 -- Standard awesome library
 local gears = require("gears")
@@ -310,8 +311,8 @@ local systray = wibox.widget.systray()
 -- 	end)
 -- ))
 
-local mpris = require("themes.default.mpris")
-local mpd = require("themes.default.mpdarc")
+-- local mpris = require("themes.default.mpris")
+-- local mpd = require("themes.default.mpdarc")
 local spacer = wibox.widget.textbox(" ")
 
 local tag1 = "  "
@@ -437,7 +438,7 @@ awful.screen.connect_for_each_screen(function(s)
 			{
 				-- Right widgets
 				layout = wibox.layout.fixed.horizontal,
-				mpris(),
+				-- mpris(),
 				spacer,
 				cpu,
 				spacer,
@@ -464,7 +465,7 @@ awful.screen.connect_for_each_screen(function(s)
 			{
 				-- Right widgets
 				layout = wibox.layout.fixed.horizontal,
-				mpd,
+				-- mpd,
 				spacer,
 				cpu,
 				spacer,
