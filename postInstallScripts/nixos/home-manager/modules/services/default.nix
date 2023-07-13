@@ -5,5 +5,6 @@
     ./dunst.nix
     ./git.nix
     ./gnome.nix
+    ./autorandr.nix
   ];
 }

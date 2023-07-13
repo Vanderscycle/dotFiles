@@ -51,15 +51,10 @@ in
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
     file = {
-      # discord
-      ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
       "xprofile" = {
         source = "${dotfiles_dir}/.config/.xprofile";
         target = "./.xprofile";
       };
-      # K9s
-      ".config/k9s/config.yml".source = "${dotfiles_dir}/.config/k9s/config.yml";
-      ".config/k9s/skin.yml".source = "${dotfiles_dir}/.config/k9s/skin.yml";
     };
     # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
@@ -114,8 +109,6 @@ in
       firefox
       # social
       zoom
-      discord
-      betterdiscordctl
       spotify
       spicetify-cli
       # gaming	
@@ -138,9 +131,6 @@ in
       #     enable = true;
       includes = [ "$HOME/.ssh/endeavourGit" ];
     };
-    starship = {
-      enable = true;
-    };
     keychain = {
       enable = true;
       keys = [ "$HOME/.ssh/endeavourGit" ];
@@ -150,15 +140,6 @@ in
     };
     rofi = {
       enable = true;
-    };
-    go = {
-      enable = true;
-    };
-    zathura = {
-      enable = true;
-      options = {
-        selection-clipboard = "clipboard";
-      };
     };
   };
   xsession = {

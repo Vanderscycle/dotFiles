@@ -9,10 +9,12 @@
     };
     theme = {
       name = "Adwaita";
-      # name = "Materia-dark";
       package = pkgs.gnome.adwaita-icon-theme;
-      # package = pkgs.materia-theme;
     };
+    # theme = {
+    #   name = "Catppuccin-Mocha";
+    #   package = pkgs.catppuccin-gtk;
+    # };
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;

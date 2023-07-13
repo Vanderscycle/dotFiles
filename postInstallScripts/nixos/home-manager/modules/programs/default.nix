@@ -15,5 +15,7 @@
     ./modern-unix.nix
     ./devops.nix
     ./helix.nix
+    ./discord.nix
+    ./zathura.nix
   ];
 }
