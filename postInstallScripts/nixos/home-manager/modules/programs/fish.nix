@@ -46,8 +46,8 @@
       '';
       # dotFiles
       save = ''
-      
-      ''
+        bash $HOME/Documents/dotFiles/postInstallScripts/nixos/save.sh
+      '';
       # git
       gSquash = ''
         git reset (git merge-base "$argv" (git branch --show-current))

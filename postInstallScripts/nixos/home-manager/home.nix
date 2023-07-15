@@ -58,6 +58,8 @@ in
     };
     # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
+      # wifi
+      # nmcli
       # languages /fonts
       noto-fonts-emoji
       tldr
