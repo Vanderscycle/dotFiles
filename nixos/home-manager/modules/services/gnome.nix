@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 {
+  home = {
+      packages = with pkgs; [
+        lxappearance
+      ];
+  };
   # INFO used for lxappearance dark mode theme
   gtk = {
     enable = true;
@@ -37,4 +42,5 @@
       name = "adwaita-dark";
     };
   };
+
 }

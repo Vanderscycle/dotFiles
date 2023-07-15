@@ -51,6 +51,7 @@ in
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
     file = {
+      ".config/neofetch/config.conf".source = "${dotfiles_dir}/.config/neofetch/config.conf";
       "xprofile" = {
         source = "${dotfiles_dir}/.config/.xprofile";
         target = "./.xprofile";
@@ -58,6 +59,10 @@ in
     };
     # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
+
+      # TODO: mv to awesome.nix
+      flameshot
+      nitrogen
       # wifi
       # nmcli
       # languages /fonts
@@ -96,16 +101,16 @@ in
       #keyboard
       wally-cli
       # gui/
+      slides # terminal based powerpoint
+      onlyoffice-bin # word/excel/etc
       rpi-imager
-      flameshot
-      nitrogen
+      neofetch
       signal-desktop
       gparted
       vlc
       transmission-gtk
       xfce.thunar
       xfce.thunar-volman
-      lxappearance
       insomnia
       slack
       firefox
