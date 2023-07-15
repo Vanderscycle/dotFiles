@@ -10,7 +10,7 @@ in
     };
     packages = with pkgs; [
       discord
-      discocss      
+      discocss
     ];
   };
 }

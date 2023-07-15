@@ -4,9 +4,9 @@ let
 in
 {
   home.file = {
-      # helix
-      ".config/helix/config.toml".source = "${dotfiles_dir}/.config/helix/config.toml";
-      ".config/helix/languages.toml".source = "${dotfiles_dir}/.config/helix/languages.toml";
+    # helix
+    ".config/helix/config.toml".source = "${dotfiles_dir}/.config/helix/config.toml";
+    ".config/helix/languages.toml".source = "${dotfiles_dir}/.config/helix/languages.toml";
   };
   programs = {
     helix = {

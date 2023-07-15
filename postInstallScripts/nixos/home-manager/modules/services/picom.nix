@@ -7,12 +7,16 @@
     fade = true;
     fadeDelta = 10;
     fadeSteps = [ (0.04) (0.04) ];
-    fadeExclude = [ "width=1920 && height=1080" "width=1440 && height=900" ];
+    # fadeExclude = [ "width=1920 && height=1080" "width=1440 && height=900" ];
     shadow = true;
     shadowOpacity = 0.25;
     shadowOffsets = [ (-10) (-10) ];
     shadowExclude = [ "class_g = 'firefox' && argb" ];
     settings = {
+
+      blur-method ="dual_kawase";
+      corner-radius = 10;
+      round-borders = 1;
       shadow-radius = 10;
       glx-no-stencil = true;
       glx-no-rebind-pixmap = true;

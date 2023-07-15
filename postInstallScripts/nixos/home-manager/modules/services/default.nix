@@ -6,5 +6,6 @@
     ./git.nix
     ./gnome.nix
     ./autorandr.nix
+    ./picom.nix
   ];
 }

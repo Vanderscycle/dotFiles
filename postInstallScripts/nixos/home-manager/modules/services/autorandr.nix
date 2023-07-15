@@ -10,7 +10,7 @@ in
       profiles = {
         "home" = {
           config = {
-              home = {
+            home = {
               mode = "3440x1440";
             };
           };

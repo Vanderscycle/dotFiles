@@ -5,12 +5,12 @@ declare -a NIX_FOLDERS_PATH=("/etc/nixos" "/home/henri/.config/home-manager")
 save(){
 
     for FOLDER in "${NIX_FOLDERS_PATH[@]}"; do
-        sudo rsync -aPv "$FOLDER" "$HOME"/Documents/dotFiles/nixos/
+        sudo rsync -av --progress "$FOLDER" "$HOME"/Documents/dotFiles/nixos
     done
 
-    git commit -am "all progress not saved will be lost"
-    git push
-    #  nixos-rebuildrsync -av --progress "$HOME/.config/home-manager" .
+    #git commit -am "all progress not saved will be lost"
+    #git push
+    #nixos-rebuildrsync -av --progress "$HOME/.config/home-manager" .
 }
 
 save
