@@ -203,11 +203,17 @@ in
       };
     };
   };
+  
   fileSystems."/mnt/backup" = {
     device = "/dev/nvme1n1p1";
     fsType = "auto";
     options = [ "defaults" "noatime" "nofail" "compress=zstd" ];
   };
+#  fileSystems."/mnt/usb" = {
+#    device = "/dev/sda1";
+#    fsType = "auto";
+#    options = [ "defaults" "rw" "umask=000" ];
+#  };
   console.useXkbConfig = true;
   i18n = {
     inputMethod = {

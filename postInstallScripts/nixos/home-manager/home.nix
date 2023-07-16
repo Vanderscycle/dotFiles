@@ -61,6 +61,9 @@ in
     packages = with pkgs; [
 
       # TODO: mv to awesome.nix
+      # auto mount drives
+      udisks
+      udiskie
       flameshot
       nitrogen
       # wifi
@@ -113,6 +116,7 @@ in
       xfce.thunar-volman
       insomnia
       slack
+      pulseaudioFull
       firefox
       # social
       zoom
