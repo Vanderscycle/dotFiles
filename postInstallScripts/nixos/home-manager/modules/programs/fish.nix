@@ -25,7 +25,13 @@
         src = fzf-fish.src;
       }
     ];
+
     functions = {
+
+      # cloud access
+      cloud-linode = ''
+        set -xg KUBECONFIG $HOME/.kube/infrastructure-kubeconfig.yaml
+      '';
       # docker
       docker-crmAll = "docker rm -f (docker ps -aq)";
       docker-irmAll = "docker rmi -f (docker images  -aq)";
