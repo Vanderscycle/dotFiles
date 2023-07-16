@@ -120,8 +120,6 @@ in
       firefox
       # social
       zoom
-      spotify
-      spicetify-cli
       # gaming	
       steam
       heroic

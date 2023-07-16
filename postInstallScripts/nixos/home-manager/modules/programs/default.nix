@@ -22,6 +22,7 @@
     ./devops.nix
     ./btop.nix
     ./discord.nix
+    ./spotify.nix
     ./zathura.nix
   ];
 }

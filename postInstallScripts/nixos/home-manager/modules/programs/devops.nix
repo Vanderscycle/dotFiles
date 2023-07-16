@@ -6,14 +6,18 @@ in
   home = {
     packages = with pkgs; [
       dogdns
+      # k8s
       k9s
       kubernetes-helm
       kubernetes
-      ansible
       kustomize
       tilt
+      ctlptl
+      # terraform
       terraform
       terraform-docs
+      # ansible
+      ansible
     ];
     file = {
       # K9s

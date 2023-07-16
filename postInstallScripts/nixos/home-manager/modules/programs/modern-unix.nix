@@ -17,7 +17,9 @@ in
     ripgrep
   ];
   home.file = {
-
+    # bat
+    ".config/bat/config".source = "${dotfiles_dir}/.config/bat/config";
+    ".config/bat/themes/Catppuccin-mocha.tmTheme".source = "${dotfiles_dir}/.config/bat/themes/Catppuccin-mocha.tmTheme";
     # ripgrep
     ".config/rg/.ripgreprc".source = "${dotfiles_dir}/.config/rg/.ripgreprc";
     # broot

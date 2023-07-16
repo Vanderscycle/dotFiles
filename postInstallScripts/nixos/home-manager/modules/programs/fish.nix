@@ -29,9 +29,7 @@
     functions = {
 
       # cloud access
-      cloud-linode = ''
-        set -xg KUBECONFIG $HOME/.kube/infrastructure-kubeconfig.yaml
-      '';
+      cloud-linode = "set -xg KUBECONFIG $HOME/.kube/infrastructure-kubeconfig.yaml";
       # docker
       docker-crmAll = "docker rm -f (docker ps -aq)";
       docker-irmAll = "docker rmi -f (docker images  -aq)";
@@ -42,6 +40,8 @@
         kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
       '';
       k8s-prmAll = "kubectl delete all --all --namespaces";
+      # nix
+      nix-clean = "nix-store --gc";
       # nnn
       n = ''
         nnn $argv -P p
@@ -58,6 +58,12 @@
       gSquash = ''
         git reset (git merge-base "$argv" (git branch --show-current))
       '';
+      # bios
+      bios = "systemctl reboot --firmware-setup"; 
+      # usb
+      usb-mount = "sudo mount /dev/sda1 /mnt/usb";
+      usb-eject = "sudo umount /mnt/usb";
+
     };
     shellAbbrs = {
       l = "less";
