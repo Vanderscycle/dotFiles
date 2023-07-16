@@ -4,7 +4,7 @@
   imports = [
     # wm
     ./awesomewm.nix
-    # ./polybar.nix
+    ./polybar.nix
     ./rofi.nix
     # editor
     ./doomemacs.nix

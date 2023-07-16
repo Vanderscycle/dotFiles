@@ -10,9 +10,6 @@ in
         source = "${dotfiles_dir}/.config/awesome";
         target = "./.config/awesome";
       };
-      # packages = with pkgs; [
-      #   xorg.xkill
-      # ];
     };
   };
 

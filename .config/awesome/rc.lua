@@ -32,22 +32,21 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local local_bin = os.getenv("HOME") .. "/.local/bin/"
 local rofi_bin = os.getenv("HOME") .. "/.config/rofi/bin/"
 -- local randr = local_bin .. "randr"
--- local picom = "picom --experimental-backends -b --config " .. theme_dir .. "conf/picom.conf"
--- local picom = "picom &"
 local fcitx = "fcitx5 &"
 local autostart = local_bin .. "awesome-autostart"
 local restore_wall = "nitrogen --restore"
 -- local random_wall = "python " .. local_bin .. "nitrogen_randomizer.py " .. theme_dir .. "2K"
 -- local recordmenu = local_bin .. "recordmenu"
 -- local dmenu_run = local_bin .. "dmenu_run_history"
+local polybar = os.getenv("HOME") .. "/Documents/dotFiles/.config/polybar/launch.sh"
 local rofi_window = rofi_bin .. "rofi_window"
-local rofi_launcher = rofi_bin .. "rofi_launcher"
+-- local rofi_launcher = rofi_bin .. "rofi_launcher"
 -- local rofi_powermenu = rofi_bin .. "rofi_powermenu"
 
 -- awful.spawn.with_shell(randr)
 awful.spawn.with_shell(fcitx)
 awful.spawn.with_shell(restore_wall)
--- awful.spawn.with_shell(picom)
+awful.spawn.with_shell(polybar)
 awful.spawn.with_shell(autostart)
 
 do
