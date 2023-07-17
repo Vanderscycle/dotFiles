@@ -314,16 +314,25 @@ local systray = wibox.widget.systray()
 -- local mpd = require("themes.default.mpdarc")
 local spacer = wibox.widget.textbox(" ")
 
-local tag1 = "  "
-local tag2 = "  "
-local tag3 = "  "
-local tag4 = "  "
-local tag5 = "  "
-local tag6 = "  "
-local tag7 = "  "
-local tag8 = " ﴬ "
-local tag9 = "  "
+-- local tag1 = "  "
+-- local tag2 = "  "
+-- local tag3 = "  "
+-- local tag4 = "  "
+-- local tag5 = "  "
+-- local tag6 = "  "
+-- local tag7 = "  "
+-- local tag8 = " ﴬ "
+-- local tag9 = "  "
 
+local tag1 = " 1 "
+local tag2 = " 2 "
+local tag3 = " 3 "
+local tag4 = " 4 "
+local tag5 = " 5 "
+local tag6 = " 6 "
+local tag7 = " 7 "
+local tag8 = " 8 "
+local tag9 = " 9 "
 awful.screen.connect_for_each_screen(function(s)
 	-- Each screen has its own tag table.
 	awful.tag.add(tag1, {
@@ -357,37 +366,37 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 	})
 
-	if s == screen[1] then
-		awful.tag.add(tag6, {
-			layout = awful.layout.layouts[5],
-			master_fill_policy = "master_width_factor",
-			screen = s,
-		})
-	else
-		awful.tag.add(tag6, {
-			layout = awful.layout.layouts[4],
-			master_fill_policy = "master_width_factor",
-			screen = s,
-		})
-	end
+	-- if s == screen[1] then
+	-- 	awful.tag.add(tag6, {
+	-- 		layout = awful.layout.layouts[5],
+	-- 		master_fill_policy = "master_width_factor",
+	-- 		screen = s,
+	-- 	})
+	-- else
+	-- 	awful.tag.add(tag6, {
+	-- 		layout = awful.layout.layouts[4],
+	-- 		master_fill_policy = "master_width_factor",
+	-- 		screen = s,
+	-- 	})
+	-- end
 
-	awful.tag.add(tag7, {
-		layout = awful.layout.layouts[1],
-		master_fill_policy = "master_width_factor",
-		screen = s,
-	})
+	-- awful.tag.add(tag7, {
+	-- 	layout = awful.layout.layouts[1],
+	-- 	master_fill_policy = "master_width_factor",
+	-- 	screen = s,
+	-- })
 
-	awful.tag.add(tag8, {
-		layout = awful.layout.layouts[1],
-		master_fill_policy = "master_width_factor",
-		screen = s,
-	})
+	-- awful.tag.add(tag8, {
+	-- 	layout = awful.layout.layouts[1],
+	-- 	master_fill_policy = "master_width_factor",
+	-- 	screen = s,
+	-- })
 
-	awful.tag.add(tag9, {
-		layout = awful.layout.layouts[1],
-		master_fill_policy = "master_width_factor",
-		screen = s,
-	})
+	-- awful.tag.add(tag9, {
+	-- 	layout = awful.layout.layouts[1],
+	-- 	master_fill_policy = "master_width_factor",
+	-- 	screen = s,
+	-- })
 
 	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
 	-- We need one layoutbox per screen.
@@ -407,18 +416,18 @@ awful.screen.connect_for_each_screen(function(s)
 		end)
 	))
 	-- Create a taglist widget
-	s.mytaglist = awful.widget.taglist({
-		screen = s,
-		filter = awful.widget.taglist.filter.all,
-		buttons = taglist_buttons,
-	})
+	-- s.mytaglist = awful.widget.taglist({
+	-- 	screen = s,
+	-- 	filter = awful.widget.taglist.filter.all,
+	-- 	buttons = taglist_buttons,
+	-- })
 
 	-- Create a tasklist widget
-	s.mytasklist = awful.widget.tasklist({
-		screen = s,
-		filter = awful.widget.tasklist.filter.currenttags,
-		buttons = tasklist_buttons,
-	})
+	-- s.mytasklist = awful.widget.tasklist({
+	-- 	screen = s,
+	-- 	filter = awful.widget.tasklist.filter.currenttags,
+	-- 	buttons = tasklist_buttons,
+	-- })
 
 	-- -- Create the wibox
 	-- s.mywibox = awful.wibar({ position = "top", screen = s })
