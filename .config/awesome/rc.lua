@@ -366,37 +366,29 @@ awful.screen.connect_for_each_screen(function(s)
 		screen = s,
 	})
 
-	-- if s == screen[1] then
-	-- 	awful.tag.add(tag6, {
-	-- 		layout = awful.layout.layouts[5],
-	-- 		master_fill_policy = "master_width_factor",
-	-- 		screen = s,
-	-- 	})
-	-- else
-	-- 	awful.tag.add(tag6, {
-	-- 		layout = awful.layout.layouts[4],
-	-- 		master_fill_policy = "master_width_factor",
-	-- 		screen = s,
-	-- 	})
-	-- end
+	awful.tag.add(tag6, {
+		layout = awful.layout.layouts[1],
+		master_fill_policy = "master_width_factor",
+		screen = s,
+	})
 
-	-- awful.tag.add(tag7, {
-	-- 	layout = awful.layout.layouts[1],
-	-- 	master_fill_policy = "master_width_factor",
-	-- 	screen = s,
-	-- })
+	awful.tag.add(tag7, {
+		layout = awful.layout.layouts[1],
+		master_fill_policy = "master_width_factor",
+		screen = s,
+	})
 
-	-- awful.tag.add(tag8, {
-	-- 	layout = awful.layout.layouts[1],
-	-- 	master_fill_policy = "master_width_factor",
-	-- 	screen = s,
-	-- })
+	awful.tag.add(tag8, {
+		layout = awful.layout.layouts[1],
+		master_fill_policy = "master_width_factor",
+		screen = s,
+	})
 
-	-- awful.tag.add(tag9, {
-	-- 	layout = awful.layout.layouts[1],
-	-- 	master_fill_policy = "master_width_factor",
-	-- 	screen = s,
-	-- })
+	awful.tag.add(tag9, {
+		layout = awful.layout.layouts[1],
+		master_fill_policy = "master_width_factor",
+		screen = s,
+	})
 
 	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
 	-- We need one layoutbox per screen.
