@@ -13,7 +13,8 @@ in
       polybar
     ];
     file = {
-      ".config/polybar/config.ini".source = "${dotfiles_dir}/.config/polybat/config.ini";
+      ".config/polybar/config.ini".source = "${dotfiles_dir}/.config/polybar/config.ini";
+      ".config/polybar/colors.ini".source = "${dotfiles_dir}/.config/polybar/mocha.ini";
     };
   };
 }
