@@ -9,7 +9,7 @@
         aws = {
           format = "on [$symbol($profile )(\($region\) )]($style)";
           style = "bold blue";
-          symbol = "🅰 ";       
+          symbol = "🅰 ";
         };
 
         kubernetes = {

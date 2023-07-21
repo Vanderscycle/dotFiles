@@ -15,6 +15,7 @@ in
     file = {
       ".config/polybar/config.ini".source = "${dotfiles_dir}/.config/polybar/config.ini";
       ".config/polybar/colors.ini".source = "${dotfiles_dir}/.config/polybar/mocha.ini";
+      ".config/polybar/fcitx5.sh".source = "${dotfiles_dir}/.config/polybar/fcitx5.sh";
     };
   };
 }

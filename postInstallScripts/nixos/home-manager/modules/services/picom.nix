@@ -14,7 +14,7 @@
     shadowExclude = [ "class_g = 'firefox' && argb" ];
     settings = {
 
-      blur-method ="dual_kawase";
+      blur-method = "dual_kawase";
       corner-radius = 10;
       round-borders = 1;
       shadow-radius = 10;

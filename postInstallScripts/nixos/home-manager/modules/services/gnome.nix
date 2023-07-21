@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 {
   home = {
-      packages = with pkgs; [
-        lxappearance
-      ];
+    packages = with pkgs; [
+      lxappearance
+    ];
   };
   # INFO used for lxappearance dark mode theme
   gtk = {
@@ -21,8 +21,8 @@
     #   package = pkgs.catppuccin-gtk;
     # };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "bibata-cursors";
+      package = pkgs.bibata-cursors;
     };
 
     gtk3 = {

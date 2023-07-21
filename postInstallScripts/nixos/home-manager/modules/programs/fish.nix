@@ -59,7 +59,7 @@
         git reset (git merge-base "$argv" (git branch --show-current))
       '';
       # bios
-      bios = "systemctl reboot --firmware-setup"; 
+      bios = "systemctl reboot --firmware-setup";
       # usb
       usb-mount = "sudo mount /dev/sda1 /mnt/usb";
       usb-eject = "sudo umount /mnt/usb";

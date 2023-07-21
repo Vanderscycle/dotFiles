@@ -120,9 +120,6 @@ in
       firefox
       # social
       zoom
-      # gaming	
-      steam
-      heroic
       # nix
       nix-prefetch-git
     ];

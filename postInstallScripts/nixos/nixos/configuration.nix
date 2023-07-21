@@ -65,26 +65,6 @@ in
     };
   };
 
-  # Configure keymap in X11
-  services.xserver = {
-    # Enable the X11 windowing system.
-    enable = true;
-    layout = "us";
-    xkbVariant = "";
-
-    windowManager.awesome = {
-      enable = true;
-    };
-    displayManager = {
-      sddm.enable = true;
-      defaultSession = "none+awesome";
-      # Enable automatic login for the user.
-      autoLogin = {
-        enable = true;
-        user = "henri";
-      };
-    };
-  };
 
   sound.enable = true;
   hardware = {
@@ -100,6 +80,26 @@ in
   };
   services = {
 
+    # Configure keymap in X11
+    xserver = {
+      # Enable the X11 windowing system.
+      enable = true;
+      layout = "us";
+      xkbVariant = "";
+
+      windowManager.awesome = {
+        enable = true;
+      };
+      displayManager = {
+        sddm.enable = true;
+        defaultSession = "none+awesome";
+        # Enable automatic login for the user.
+        autoLogin = {
+          enable = true;
+          user = "henri";
+        };
+      };
+    };
     # Enable CUPS to print documents.
     printing.enable = true;
     # Enalbe oenssh-server
@@ -166,6 +166,7 @@ in
       helix
       fd
       ripgrep
+      xorg.xkill
     ];
   };
   # steam config
@@ -203,17 +204,17 @@ in
       };
     };
   };
-  
+
   fileSystems."/mnt/backup" = {
     device = "/dev/nvme1n1p1";
     fsType = "auto";
     options = [ "defaults" "noatime" "nofail" "compress=zstd" ];
   };
-#  fileSystems."/mnt/usb" = {
-#    device = "/dev/sda1";
-#    fsType = "auto";
-#    options = [ "defaults" "rw" "umask=000" ];
-#  };
+  #  fileSystems."/mnt/usb" = {
+  #    device = "/dev/sda1";
+  #    fsType = "auto";
+  #    options = [ "defaults" "rw" "umask=000" ];
+  #  };
   console.useXkbConfig = true;
   i18n = {
     inputMethod = {

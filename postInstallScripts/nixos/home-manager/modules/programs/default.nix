@@ -18,6 +18,7 @@
     # ./kitty.nix
     ./wezterm.nix
     # cli/gui
+    ./gaming.nix
     ./modern-unix.nix
     ./devops.nix
     ./btop.nix
