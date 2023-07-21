@@ -563,13 +563,13 @@ local globalkeys = gears.table.join(
 		awful.spawn(terminal)
 	end, { description = "open kitty with default shell", group = "launcher" }),
 	awful.key({}, "XF86AudioMute", function()
-		awful.spawn("pamixer -t", false)
+		awful.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle", false)
 	end, { description = "toggle mute", group = "launcher" }),
 	awful.key({}, "XF86AudioRaiseVolume", function()
-		awful.spawn("pamixer -i 3", false)
+		awful.spawn("pactl -- set-sink-volume 0 +5%", false)
 	end, { description = "increace volume", group = "launcher" }),
 	awful.key({}, "XF86AudioLowerVolume", function()
-		awful.spawn("pamixer -d 3", false)
+		awful.spawn("pactl -- set-sink-volume 0 -5%", false)
 	end, { description = "decrease volume", group = "launcher" }),
 	awful.key({}, "XF86MonBrightnessUp", function()
 		awful.spawn("light -A 5", false)
