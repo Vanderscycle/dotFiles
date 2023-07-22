@@ -1,8 +1,13 @@
 #!/bin/bash
+# need to find a way to sudo hx and have the same config as the user
+# https://github.com/helix-editor/helix/discussions/4251
+# works?
 
 install() {
 	sudo cp -r nixos/configuration.nix /etc/nixos
-	mkdir /home/henri/.config/home-manager
+	# create folder structures (can nixos handle this instead?)
+	mkdir "$HOME"/.config/home-manager
+	mkidr "$HOME"/Screenshots
 	sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
 	sudo nix-channel --update
 	sudo cp -r home-manager /home/henri/.config/home-manager
