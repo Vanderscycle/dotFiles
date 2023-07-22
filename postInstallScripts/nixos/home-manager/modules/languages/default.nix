@@ -6,5 +6,6 @@
     ./go.nix
     ./javascript.nix
     ./lua.nix
+    ./java.nix
   ];
 }

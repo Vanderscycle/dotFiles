@@ -42,6 +42,8 @@
       k8s-prmAll = "kubectl delete all --all --namespaces";
       # nix
       nix-clean = "nix-store --gc";
+      # editor
+      hx-sudo = "sudo hx --config $HOME/.config/helix/config.toml";
       # nnn
       n = ''
         nnn $argv -P p
