@@ -1,5 +1,5 @@
 #!/bin/bash
-
+MOD_ARRAY=("")
 GAME_VERSION="0.96a-RC10"
 mkdir -p ~/Games/fractal-softworks
 
