@@ -60,6 +60,10 @@ in
     wget
   ];
   };
+
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  ];
   # bluetooth
   systemd.services.btattach = {
     before = [ "bluetooth.service" ];
