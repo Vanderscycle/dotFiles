@@ -3,8 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { inputs, config, lib, pkgs, ... }:
-let
-in
 {
   imports =
     [
@@ -17,10 +15,21 @@ in
   # https://nixos.wiki/wiki/Flakes
   nix = {
     package = pkgs.nixFlakes;
+    # Free up to 1GiB whenever there is less than 100MiB left.
     extraOptions = ''
       experimental-features = nix-command flakes
       warn-dirty = false
+      min-free = ${toString (100 * 1024 * 1024)}
+      max-free = ${toString (1024 * 1024 * 1024)}
     '';
+
+    autoOptimiseStore = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+
   };
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -47,24 +56,6 @@ in
 
   # Set your time zone.
   time.timeZone = "America/Vancouver";
-
-  # Select internationalisation properties.
-
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
-  };
-
 
   sound.enable = true;
   hardware = {
@@ -217,6 +208,21 @@ in
   #  };
   console.useXkbConfig = true;
   i18n = {
+
+  # Select internationalisation properties.
+    defaultLocale = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
+
     inputMethod = {
       enabled = "fcitx5";
       uim.toolbar = "gtk"; # gtk-systray

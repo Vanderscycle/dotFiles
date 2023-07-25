@@ -122,6 +122,8 @@ in
       zoom
       # nix
       nix-prefetch-git
+      # nfs 
+      nfs-utils
     ];
   };
   services = {
