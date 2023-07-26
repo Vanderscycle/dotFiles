@@ -8,20 +8,24 @@ in
 {
   imports = [ <nixpkgs/nixos/modules/installer/cd-dvd/sd-image-raspberrypi4.nix> ];
 
-  networking.wireless.enable = false;
-  services.xserver = {
-    enable = true;
-    displayManager.slim.enable = true;
-    desktopManager.gnome3.enable = true;
-    videoDrivers = [ "fbdev" ];
-  };
   # audio
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  # boot
+  boot = {
+    loader = {
+      
+      # NixOS wants to enable GRUB by default
+      grub.enable = false;
 
-  boot.loader.raspberryPi.firmwareConfig = ''
-    dtparam=audio=on
-  '';
+      # Enables the generation of /boot/extlinux/extlinux.conf
+      generic-extlinux-compatible.enable = true; 
+
+      raspberryPi.firmwareConfig = ''
+        dtparam=audio=on
+      '';
+    };
+  };
 
   # packages + env variables
   environment = {
@@ -29,26 +33,18 @@ in
     EDITOR = "vim";
   };
   systemPackages = with pkgs; [
-    bind
     curl
-    elinks
     file
     fzf
     gcc
     git
-    hdparm
     htop
-    inadyn
     libraspberrypi
     lsof
-    nginx
-    nmon
     parted
-    php
     pstree
     python3
     ripgrep
-    ncdu
     nixpkgs-fmt
     raspberrypi-eeprom
     shadowsocks-libev
@@ -58,26 +54,42 @@ in
     usbutils
     wireguard
     wget
-  ];
+    docker
+    fish
+    ];
   };
 
+  # put your own configuration here, for example ssh keys:
+  users = {
+    defaultUserShell = pkgs.fish;
+    mutableUsers = true;
+    groups = {
+      nixos = {
+        gid = 1000;
+        name = "nixos";
+      };
+    };
+    users = {
+      nixos = {
+        uid = 1000;
+        home = "/home/nixos";
+        name = "nixos";
+        group = "nixos";
+        shell = pkgs.fish;
+        extraGroups = [ "wheel" "docker" ];
+      };
+    };
+    
+  };
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
-  # bluetooth
-  systemd.services.btattach = {
-    before = [ "bluetooth.service" ];
-    after = [ "dev-ttyAMA0.device" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.bluez}/bin/btattach -B /dev/ttyAMA0 -P bcm -S 3000000";
-    };
-  };
 
 
   # Set your time zone.
   time.timeZone = "America/Vancouver";
 
+  virtualisation.docker.enable = true;
   # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -95,17 +107,36 @@ in
   };
 
   # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    permitRootLogin = "no";
-    passwordAuthentication = false;
+  services = {
+    openssh = {
+      enable = true;
+      permitRootLogin = "no";
+      passwordAuthentication = false;
+    };
+    xserver = {
+      enable = true;
+      displayManager.slim.enable = true;
+      desktopManager.gnome3.enable = true;
+      videoDrivers = [ "fbdev" ];
+    };
+  };
+
+  # bluetooth
+  systemd.services.btattach = {
+    before = [ "bluetooth.service" ];
+    after = [ "dev-ttyAMA0.device" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.bluez}/bin/btattach -B /dev/ttyAMA0 -P bcm -S 3000000";
+    };
   };
 
 networking = {
 
+  wireless.enable = false;
   interfaces.eth0.ipv4.addresses = [ {
-  address = "192.168.1.2";
-  prefixLength = 24;
+    address = "192.168.1.2";
+    prefixLength = 24;
   } ];
 
   defaultGateway = "192.168.1.1";
@@ -113,11 +144,14 @@ networking = {
 
   hostName = "rpi-plex";
   firewall = {
+
+    # Open ports in the firewall.
     allowedTCPPorts = [ 20 80 443 ];
   # allowedUDPPorts = [ ... ];
     };
   };
-    # Open ports in the firewall.
+
+  # nix specifc
   nix = {
     autoOptimiseStore = true;
     gc = { # garbage collector
