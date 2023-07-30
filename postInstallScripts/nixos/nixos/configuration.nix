@@ -23,7 +23,8 @@
       max-free = ${toString (1024 * 1024 * 1024)}
     '';
 
-    autoOptimiseStore = true;
+
+    settings.auto-optimise-store = true;
     gc = {
       automatic = true;
       dates = "weekly";
@@ -140,6 +141,9 @@
         "steam-original"
         "steam-run"
       ];
+      permittedInsecurePackages = [
+        "electron-12.2.3"
+      ];    
     };
   };
   # List packages installed in system profile. To search, run:
@@ -241,11 +245,6 @@
     };
   };
 
-  #  fileSystems."/mnt/usb" = {
-  #    device = "/dev/sda";
-  #    fsType = "auto";
-  #    options = [ "defaults" "noatime" ];
-  #  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

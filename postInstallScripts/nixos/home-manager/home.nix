@@ -61,11 +61,12 @@ in
     packages = with pkgs; [
 
       # TODO: mv to awesome.nix
+      #battery
+      acpi
       # auto mount drives
       udisks
       udiskie
       flameshot
-      nitrogen
       # wifi
       # nmcli
       # languages /fonts

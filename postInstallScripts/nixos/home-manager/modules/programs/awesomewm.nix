@@ -4,6 +4,9 @@ let
 in
 {
   home = {
+    packages = with pkgs; [
+      nitrogen
+    ];
     file = {
       # awesome wm
       "awesome" = {
