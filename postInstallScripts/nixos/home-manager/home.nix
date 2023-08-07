@@ -125,6 +125,8 @@ in
       nix-prefetch-git
       # nfs 
       nfs-utils
+      # ssh
+      sshpass
     ];
   };
   services = {

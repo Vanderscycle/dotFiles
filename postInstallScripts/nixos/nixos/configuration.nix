@@ -34,9 +34,13 @@
   };
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      noto-fonts 
+      noto-fonts-extra
+      noto-fonts-cjk-sans 
+      noto-fonts-cjk-serif
   ];
 
-  # Bootloader
+# Bootloader
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -146,6 +150,7 @@
       ];    
     };
   };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
