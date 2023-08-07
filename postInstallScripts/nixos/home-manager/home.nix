@@ -4,6 +4,7 @@
 { inputs, lib, config, pkgs, ... }:
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
+  
 in
 {
   # You can import other home-manager modules here
@@ -11,7 +12,7 @@ in
     ./modules/services
     ./modules/programs
     ./modules/languages
-  ];
+    ];
   nixpkgs = {
     # You can add overlays here
     overlays = [

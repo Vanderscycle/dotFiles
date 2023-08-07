@@ -49,7 +49,7 @@
     };
   };
   networking = {
-    hostName = "nixos"; # Define your hostname.
+    hostName = "nixos-desktop"; # Define your hostname.
     # Enable networking
     networkmanager.enable = true;
   };

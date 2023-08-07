@@ -1,10 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
-{
-  imports = [
-    # wm
+let 
+ base_imports = [
     ./awesomewm.nix
-    ./polybar.nix
+    # wm-anciliaries
     ./rofi.nix
     # editor
     ./doomemacs.nix
@@ -25,5 +24,10 @@
     ./discord.nix
     ./spotify.nix
     ./zathura.nix
-  ];
+ ];
+in
+{
+  imports =  base_imports;
+   # (lib.mkIf (config.networking.hostName == "nixos-desktop")
+   #  ./modules/programs/awesome.nix);]
 }
