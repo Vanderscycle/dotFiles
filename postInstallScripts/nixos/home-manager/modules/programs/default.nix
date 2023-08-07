@@ -3,6 +3,7 @@
 {
   imports = [
     # wm
+    # TODO: must disable them in the workstation.
     ./awesomewm.nix
     ./polybar.nix
     ./rofi.nix
