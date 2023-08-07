@@ -248,7 +248,7 @@ boot = {
         };
       };
       desktopManager.xfce.enable = true;
-      windowManager.default = "xfce";
+      windowManager.default = "none+xfce";
     };
   };
 
