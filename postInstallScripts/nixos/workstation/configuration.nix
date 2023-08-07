@@ -239,7 +239,6 @@ boot = {
         xterm
       ];
       displayManager = {
-        defaultSession = "xfce";
         lightdm = {
           enable = true;
           greeters.slick = {
