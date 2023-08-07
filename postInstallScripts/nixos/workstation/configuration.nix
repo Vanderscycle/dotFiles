@@ -13,24 +13,35 @@
     extraOptions = ''
       experimental-features = nix-command flakes
       warn-dirty = false
-      min-free = ${toString (100 * 1024 * 1024)}
+      min-free = ${toString (1000 * 1024 * 1024)}
       max-free = ${toString (1024 * 1024 * 1024)}
     '';
 
-
     settings.auto-optimise-store = true;
+    # garbarge collector
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-
   };
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-  ];
 
-  boot = {
+  # Allow unfree packages
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "steam"
+        "steam-original"
+        "steam-run"
+      ];
+      permittedInsecurePackages = [
+        "electron-12.2.3"
+      ];    
+    };
+  };
+  
+boot = {
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -43,6 +54,10 @@
     networkmanager.enable = true;
   };
 
+  # - user
+  autoLogin = {
+    enable = true;
+    user = "henri";  };
   home-manager.users.henri.imports = [ /home/henri/.config/home-manager/home.nix ];
   users.users.henri = {
     isNormalUser = true;
@@ -50,9 +65,8 @@
     extraGroups = [ "networkmanager" "wheel" "docker" "storage" ];
     shell = pkgs.fish;
 };
-    # https://github.com/nix-community/home-manager/issues/3113#issuecomment-1194271028
-  # docker
-  # https://nixos.wiki/wiki/Docker
+  
+  # - docker
   virtualisation = {
     oci-containers = {
       backend = "docker";
@@ -73,8 +87,13 @@
     };
   };
 
-  i18n = {
+  # - input
+  
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  ];
 
+  i18n = {
   # Select internationalisation properties.
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
