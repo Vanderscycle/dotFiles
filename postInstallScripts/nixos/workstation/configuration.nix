@@ -55,9 +55,6 @@ boot = {
   };
 
   # - user
-  autoLogin = {
-    enable = true;
-    user = "henri";  };
   home-manager.users.henri.imports = [ /home/henri/.config/home-manager/home.nix ];
   users.users.henri = {
     isNormalUser = true;
@@ -251,6 +248,7 @@ boot = {
         };
       };
       desktopManager.xfce.enable = true;
+      windowManager.default = "xfce"
     };
   };
 
