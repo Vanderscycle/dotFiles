@@ -16,15 +16,12 @@ in
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      # If you want to use overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+      # https://github.com/NixOS/nixpkgs/issues/157101
+      (self: super: {
+        waybar = super.waybar.overrideAttrs (oldAttrs: {
+          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+        });
+      })
     ];
     # Configure your nixpkgs instance
     config = {
@@ -38,6 +35,7 @@ in
     username = "henri";
     homeDirectory = "/home/henri";
     sessionVariables = {
+      # SWAYSOCK= "(ls /run/user/1000/sway-ipc.* | head -n 1)";
       SUDO_EDITOR = "nvim";
       EDITOR = "hx";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
