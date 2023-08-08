@@ -60,7 +60,7 @@ in
     };
     # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
-
+      nitrogen
       # TODO: mv to awesome.nix
       #battery
       acpi

@@ -1,6 +1,18 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+
+# ============================================================================================
+#
+# ███╗   ██╗██╗██╗  ██╗ ██████╗ ███████╗     ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ 
+# ████╗  ██║██║╚██╗██╔╝██╔═══██╗██╔════╝    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝ 
+# ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║███████╗    ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+# ██║╚██╗██║██║ ██╔██╗ ██║   ██║╚════██║    ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+# ██║ ╚████║██║██╔╝ ██╗╚██████╔╝███████║    ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+# ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝ 
+#
+# ============================================================================================
+
+# ----------------------
+# Imports and variables
+# ---------------------
 
 { inputs, config, lib, pkgs, ... }:
 {
@@ -11,9 +23,12 @@
       <home-manager/nixos>
     ];
 
-  # flake 
-  # https://nixos.wiki/wiki/Flakes
+
+  # ----------------------
+  # Nix Settings
+  # ---------------------  
   nix = {
+  # https://nixos.wiki/wiki/Flakes
     package = pkgs.nixFlakes;
     # Free up to 1GiB whenever there is less than 100MiB left.
     extraOptions = ''
@@ -22,16 +37,34 @@
       min-free = ${toString (100 * 1024 * 1024)}
       max-free = ${toString (1024 * 1024 * 1024)}
     '';
-
-
     settings.auto-optimise-store = true;
     gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
-
   };
+
+  # ----------------------
+  # nixpkgs settings
+  # ---------------------  
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "steam"
+        "steam-original"
+        "steam-run"
+      ];
+      permittedInsecurePackages = [
+        "electron-12.2.3"
+      ];    
+    };
+  };
+
+  # ----------------------
+  # fonts
+  # ---------------------  
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       noto-fonts 
@@ -40,7 +73,9 @@
       noto-fonts-cjk-serif
   ];
 
-# Bootloader
+  # ----------------------
+  # Bootloader
+  # ---------------------  
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -48,25 +83,40 @@
       systemd-boot.configurationLimit = 5;
     };
   };
+
+  # ----------------------
+  # networking 
+  # ---------------------  
   networking = {
     hostName = "nixos-desktop"; # Define your hostname.
-    # Enable networking
     networkmanager.enable = true;
+    # Configure network proxy if necessary
+    # proxy.default = "http://user:password@proxy:port/";
+    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # Open ports in the firewall.
+    # firewall.allowedTCPPorts = [ ... ];
+    # firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # firewall.enable = false;
   };
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Set your time zone.
+  # ----------------------
+  # time
+  # ---------------------  
   time.timeZone = "America/Vancouver";
 
+  # ---------------------
+  # sound
+  # ---------------------
   sound.enable = true;
   hardware = {
     pulseaudio.enable = false;
     bluetooth.enable = true;
   };
+
+  # ---------------------
+  # Security
+  # ---------------------
   security = {
     rtkit.enable = true;
     # https://github.com/NixOS/nixpkgs/issues/40157#issuecomment-387269306
@@ -74,28 +124,145 @@
       Defaults        timestamp_timeout=300
     '';
   };
-  services = {
 
-    # Configure keymap in X11
+  # ---------------------
+  # Display Configuration
+  # ---------------------
+  # awesome wm (x)
+  # services = {
+  #   # Configure keymap in X11
+  #   xserver = {
+  #     # Enable the X11 windowing system.
+  #     enable = true;
+  #     layout = "us";
+  #     xkbVariant = "";
+
+  #     windowManager.awesome = {
+  #       enable = true;
+  #     };
+  #     displayManager = {
+  #       sddm.enable = true;
+  #       defaultSession = "none+awesome";
+  #       # Enable automatic login for the user.
+  #       autoLogin = {
+  #         enable = true;
+  #         user = "henri";
+  #       };
+  #     };
+  #   };
+  # };
+  # hyprland (wayland)
+  services = {
     xserver = {
-      # Enable the X11 windowing system.
       enable = true;
       layout = "us";
       xkbVariant = "";
-
-      windowManager.awesome = {
-        enable = true;
-      };
+      excludePackages = [ pkgs.xterm ];
+      libinput.enable = true;
       displayManager = {
-        sddm.enable = true;
-        defaultSession = "none+awesome";
-        # Enable automatic login for the user.
         autoLogin = {
           enable = true;
           user = "henri";
         };
+        gdm = {
+          enable = true;
+          wayland = true;
+        };
       };
     };
+  };
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # ----------------------
+  # user + home-manager
+  # ---------------------
+  home-manager.users.henri.imports = [ /home/henri/.config/home-manager/home.nix ];
+  users.users.henri = {
+    isNormalUser = true;
+    description = "Henri Vandersleyen";
+    extraGroups = [ "networkmanager" "wheel" "docker" "storage" ];
+    shell = pkgs.fish;
+  };
+
+  # ----------------------
+  # Default packages + env variables
+  # ---------------------
+  environment = {
+    sessionVariables = rec {
+      SUDO_EDITOR = "helix";
+    };
+    systemPackages = with pkgs; [
+      # wayland
+      waybar
+
+      docker
+      git
+      fish
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
+      helix
+      fd
+      ripgrep
+      xorg.xkill
+    ];
+  };
+
+  # ----------------------
+  # Default programs
+  # ---------------------
+  programs = {
+    # https://github.com/nix-community/home-manager/issues/3113#issuecomment-1194271028
+    dconf.enable = true;
+    fish.enable = true;
+    ssh.startAgent = true;
+    # https://nixos.wiki/wiki/Steam
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+  };
+
+  # ----------------------
+  # Docker + Containers
+  # ---------------------
+  virtualisation = {
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        "jsoncrack" = {
+          image = "shokohsc/jsoncrack";
+          ports = [ "8888:8080" ];
+        };
+      };
+    };
+    docker = {
+      enable = true;
+      # storageDriver = "btrfs";
+      rootless = {
+        setSocketVariable = true;
+        enable = true;
+      };
+    };
+  };
+
+  # ----------------------
+  # File system and drives
+  # ---------------------
+  fileSystems."/mnt/backup" = {
+    device = "/dev/nvme1n1p1";
+    fsType = "auto";
+    options = [ "defaults" "noatime" "nofail" "compress=zstd" ];
+  };
+
+  # ---------------------
+  # Services
+  # ---------------------
+  services = {
     # Enable CUPS to print documents.
     printing.enable = true;
     # Enalbe oenssh-server
@@ -122,102 +289,12 @@
       #media-session.enable = true;
     };
   };
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-
-  home-manager.users.henri.imports = [ /home/henri/.config/home-manager/home.nix ];
-  users.users.henri = {
-    isNormalUser = true;
-    description = "Henri Vandersleyen";
-    extraGroups = [ "networkmanager" "wheel" "docker" "storage" ];
-    shell = pkgs.fish;
-
-  };
-
-  # Allow unfree packages
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "steam"
-        "steam-original"
-        "steam-run"
-      ];
-      permittedInsecurePackages = [
-        "electron-12.2.3"
-      ];    
-    };
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment = {
-    sessionVariables = rec {
-      SUDO_EDITOR = "helix";
-    };
-    systemPackages = with pkgs; [
-      docker
-      git
-      fish
-      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      wget
-      helix
-      fd
-      ripgrep
-      xorg.xkill
-    ];
-  };
-  # steam config
-  # https://nixos.wiki/wiki/Steam
-  programs = {
-    # https://github.com/nix-community/home-manager/issues/3113#issuecomment-1194271028
-    dconf.enable = true;
-    fish.enable = true;
-    ssh.startAgent = true;
-
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    };
-  };
-  # docker
-  # https://nixos.wiki/wiki/Docker
-  virtualisation = {
-    oci-containers = {
-      backend = "docker";
-      containers = {
-        "jsoncrack" = {
-          image = "shokohsc/jsoncrack";
-          ports = [ "8888:8080" ];
-        };
-      };
-    };
-    docker = {
-      enable = true;
-      # storageDriver = "btrfs";
-      rootless = {
-        setSocketVariable = true;
-        enable = true;
-      };
-    };
-  };
-
-  fileSystems."/mnt/backup" = {
-    device = "/dev/nvme1n1p1";
-    fsType = "auto";
-    options = [ "defaults" "noatime" "nofail" "compress=zstd" ];
-  };
-  #  fileSystems."/mnt/usb" = {
-  #    device = "/dev/sda1";
-  #    fsType = "auto";
-  #    options = [ "defaults" "rw" "umask=000" ];
-  #  };
+  # ----------------------
+  # Input methods/languages
+  # ---------------------
   console.useXkbConfig = true;
   i18n = {
-
   # Select internationalisation properties.
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
@@ -250,24 +327,6 @@
     };
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

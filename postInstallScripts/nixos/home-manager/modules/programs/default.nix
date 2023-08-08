@@ -2,7 +2,11 @@
 
 let 
  base_imports = [
-    ./awesomewm.nix
+    # x wm
+    # ./awesomewm.nix
+    # wayland wm
+    ./hyprland.nix
+    ./waybar.nix
     # wm-anciliaries
     ./rofi.nix
     # editor
@@ -14,7 +18,7 @@ let
     # terminal
     ./fish.nix
     ./starship.nix
-    # ./kitty.nix
+    ./kitty.nix
     ./wezterm.nix
     # cli/gui
     ./gaming.nix
@@ -28,6 +32,4 @@ let
 in
 {
   imports =  base_imports;
-   # (lib.mkIf (config.networking.hostName == "nixos-desktop")
-   #  ./modules/programs/awesome.nix);]
 }
