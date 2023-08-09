@@ -1,10 +1,10 @@
-#/bin/bash
+#!/bin/bash
 
 # iniciar o wallpaper engine
-# swww init &
+swww init &
 
 # definindo wallpaper
-# swww img ~/pictures/imagem &
+swww img ~/Pictures/switch.png &
 
 # network manager
 # nm-applet --indicator &

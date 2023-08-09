@@ -60,7 +60,7 @@ window > box {
   background: transparent;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
   color: @blue;
 }
 

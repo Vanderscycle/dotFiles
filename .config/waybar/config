@@ -19,7 +19,6 @@
   ],
   "modules-right": [
     "backlight",
-    "custom/pacman",
     "disk",
     "memory",
     "cpu",
@@ -40,25 +39,24 @@
     "tooltip": false
   },
   "wlr/workspaces": {
-    "disable-scroll": true,
-    /* "all-outputs": true, */
-    "active-only": true,
-    "format": "{icon}",
-    "format-icons": {
-      "1": "一",
-      "2": "二",
-      "3": "三",
-      "4": "四",
-      "5": "五",
-      "6": "六",
-      "7": "七",
-      "8": "八",
-      "9": "九",
-      "10": "十",
-      "urgent": "",
-      "focused": "",
-      "default": ""
-    }
+       "format": "{icon}",
+       "on-scroll-up": "hyprctl dispatch workspace e+1",
+       "on-scroll-down": "hyprctl dispatch workspace e-1",
+      "format-icons": {
+        "1": "一",
+        "2": "二",
+        "3": "三",
+        "4": "四",
+        "5": "五",
+        "6": "六",
+        "7": "七",
+        "8": "八",
+        "9": "九",
+        "10": "十",
+        "urgent": "",
+        "focused": "",
+        "default": ""
+      }
   },
   "idle_inhibitor": {
     "format": "{icon}",
@@ -184,16 +182,6 @@
   "tray": {
     "icon-size": 15,
     "spacing": 5
-  },
-  "custom/pacman": {
-    "format": " {}",
-    "interval": 3600, // every hour
-    "exec": "checkupdates | wc -l", // # of updates
-    "exec-if": "exit 0", // always run; consider advanced run conditions
-    "exec-if": "checkupdates | wc -l > 0", // always run; consider advanced run conditions
-    /* "on-click": "termite -e 'sudo pacman -Syu'; pkill -SIGRTMIN+8 waybar", // update system */
-    "on-click": "kitty yay -Syu",
-    "signal": 8
   },
   "custom/scratchpad-indicator": {
     "interval": 3,

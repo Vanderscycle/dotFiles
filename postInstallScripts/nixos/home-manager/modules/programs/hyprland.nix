@@ -7,6 +7,7 @@ in
 
     packages = with pkgs; [
       sway
+      swww
     ];
     file = {
       ".config/hypr/hyprland.conf".source = "${dotfiles_dir}/.config/hypr/hyprland.conf";

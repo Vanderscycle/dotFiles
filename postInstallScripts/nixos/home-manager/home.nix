@@ -35,7 +35,8 @@ in
     username = "henri";
     homeDirectory = "/home/henri";
     sessionVariables = {
-      # SWAYSOCK= "(ls /run/user/1000/sway-ipc.* | head -n 1)";
+      XDG_CURRENT_DESKTOP = "Sway"; 
+      QT_QPA_PLATFORM="wayland";
       SUDO_EDITOR = "nvim";
       EDITOR = "hx";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
