@@ -66,7 +66,7 @@
       usb-mount = "sudo mount /dev/sda1 /mnt/usb";
       usb-eject = "sudo umount /mnt/usb";
       nas-mount = "sudo mount.nfs 192.168.1.245:/volume1/linuxBackup /mnt/nas"; # how to allow users acces to the file?
-      nas-eject = "sudo umount /mnt/nas"; 
+      nas-eject = "sudo umount /mnt/nas";
 
     };
     shellAbbrs = {

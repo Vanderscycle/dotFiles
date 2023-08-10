@@ -4,7 +4,7 @@
 { inputs, lib, config, pkgs, ... }:
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
-  
+
 in
 {
   # You can import other home-manager modules here
@@ -12,7 +12,7 @@ in
     ./modules/services
     ./modules/programs
     ./modules/languages
-    ];
+  ];
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -35,8 +35,9 @@ in
     username = "henri";
     homeDirectory = "/home/henri";
     sessionVariables = {
-      XDG_CURRENT_DESKTOP = "Sway"; 
-      QT_QPA_PLATFORM="wayland";
+      NIXOS_OZONE_WL = "1";
+      XDG_CURRENT_DESKTOP = "Sway";
+      QT_QPA_PLATFORM = "wayland";
       SUDO_EDITOR = "nvim";
       EDITOR = "hx";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";

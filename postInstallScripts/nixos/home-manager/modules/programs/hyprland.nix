@@ -4,7 +4,6 @@ let
 in
 {
   home = {
-
     packages = with pkgs; [
       sway
       swww

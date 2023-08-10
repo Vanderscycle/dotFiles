@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
-let 
- base_imports = [
+let
+  base_imports = [
     # x wm
     # ./awesomewm.nix
     # wayland wm
@@ -28,8 +28,8 @@ let
     ./discord.nix
     ./spotify.nix
     ./zathura.nix
- ];
+  ];
 in
 {
-  imports =  base_imports;
+  imports = base_imports;
 }

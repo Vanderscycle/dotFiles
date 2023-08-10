@@ -1,4 +1,3 @@
-
 # ============================================================================================
 #
 # ███╗   ██╗██╗██╗  ██╗ ██████╗ ███████╗     ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ 
@@ -28,7 +27,7 @@
   # Nix Settings
   # ---------------------  
   nix = {
-  # https://nixos.wiki/wiki/Flakes
+    # https://nixos.wiki/wiki/Flakes
     package = pkgs.nixFlakes;
     # Free up to 1GiB whenever there is less than 100MiB left.
     extraOptions = ''
@@ -58,7 +57,7 @@
       ];
       permittedInsecurePackages = [
         "electron-12.2.3"
-      ];    
+      ];
     };
   };
 
@@ -67,10 +66,10 @@
   # ---------------------  
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      noto-fonts 
-      noto-fonts-extra
-      noto-fonts-cjk-sans 
-      noto-fonts-cjk-serif
+    noto-fonts
+    noto-fonts-extra
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
   ];
 
   # ----------------------
@@ -175,6 +174,17 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+  };
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+      gtkUsePortal = true;
+    };
   };
 
   # ----------------------
@@ -295,7 +305,7 @@
   # ---------------------
   console.useXkbConfig = true;
   i18n = {
-  # Select internationalisation properties.
+    # Select internationalisation properties.
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
       LC_ADDRESS = "en_US.UTF-8";
