@@ -7,10 +7,9 @@
     "pulseaudio",
     "idle_inhibitor",
     "mpd",
-    "custom/cava-internal",
-    "sway/mode",
+    "hyprland/submap",
   ],
-  "sway/mode": {
+  "hyprland/submap": {
     "format": " {}"
   },
   "modules-center": [
@@ -33,10 +32,6 @@
     "on-click": "wofi --show drun",
     "tooltip-format": "sudo pacman -Q linux",
     "tooltip": false,
-  },
-  "custom/cava-internal": {
-    "exec": "~/.config/waybar/Cava.sh",
-    "tooltip": false
   },
   "wlr/workspaces": {
        "format": "{icon}",
@@ -195,17 +190,8 @@
     "format": "{}",
     "tooltip": true,
     "interval": 3600,
-    "exec": "~/.config/waybar/wabar-wttr.py",
+    "exec": "~/.config/waybar/waybar-wttr.py",
     "return-type": "json"
-  },
-  "custom/recording": {
-    "exec": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh status",
-    "format": "{}",
-    "on-click": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh toggle fullscreen",
-    "on-click-right": "$XDG_CONFIG_HOME/waybar/scripts/recording.sh toggle region",
-    "restart-interval": 1,
-    "return-type": "json",
-    "tooltip": true
   },
   "sway/language": {
     "format": "{}",
