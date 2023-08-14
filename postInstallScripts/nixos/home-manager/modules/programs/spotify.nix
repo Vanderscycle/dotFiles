@@ -4,10 +4,9 @@ let
 in
 {
   home = {
-    # file = {
-    #   # spicetify
-    #   ".config//settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
-    # };
+    file = {
+      ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
+    };
     packages = with pkgs; [
       spotify
       spicetify-cli

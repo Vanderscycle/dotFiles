@@ -26,8 +26,8 @@ let
     ./devops.nix
     ./btop.nix
     ./discord.nix
-    ./spotify.nix
     ./zathura.nix
+    ./spotify.nix
   ];
 in
 {

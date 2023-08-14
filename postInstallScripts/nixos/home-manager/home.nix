@@ -36,6 +36,10 @@ in
     username = "henri";
     homeDirectory = "/home/henri";
     sessionVariables = {
+      GTK_IM_MODULE="fcitx5";
+      QT_IM_MODULE="fcitx5";
+      XMODIFIERS="@im=fcitx5";
+      XIM="fcitx5";
       NIXOS_OZONE_WL = "1";
       XDG_CURRENT_DESKTOP = "Sway";
       QT_QPA_PLATFORM = "wayland";
