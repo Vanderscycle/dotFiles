@@ -13,7 +13,7 @@
 # Imports and variables
 # ---------------------
 
-{ inputs, config, lib, pkgs, ... }:
+{ unstable, inputs, config, lib, pkgs, ... }:
 {
   imports =
     [
@@ -191,6 +191,7 @@
   # user + home-manager
   # ---------------------
   home-manager.users.henri.imports = [ /home/henri/.config/home-manager/home.nix ];
+  home-manager.extraSpecialArgs = { inherit unstable; };
   users.users.henri = {
     isNormalUser = true;
     description = "Henri Vandersleyen";

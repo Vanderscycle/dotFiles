@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ nixpkgs, config, pkgs, unstable, ... }:
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
 in
@@ -7,6 +7,8 @@ in
     packages = with pkgs; [
       sway
       swww
+      xdg-desktop-portal-hyprland
+      waybar-hyprland
     ];
     file = {
       ".config/hypr/hyprland.conf".source = "${dotfiles_dir}/.config/hypr/hyprland.conf";

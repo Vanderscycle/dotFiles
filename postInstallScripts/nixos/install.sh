@@ -9,8 +9,11 @@ install() {
 	mkdir "$HOME"/.config/home-manager
 	mkidr "$HOME"/Screenshots
 	mkdir -p /mnt/usb /mnt/nas
+
 	sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz home-manager
+	sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
 	sudo nix-channel --update
+
 	sudo cp -r home-manager /home/henri/.config/home-manager
 	nixos-rebuild switch
 }

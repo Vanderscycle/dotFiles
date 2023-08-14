@@ -12,6 +12,7 @@ in
     ./modules/services
     ./modules/programs
     ./modules/languages
+    ./unstable-packages.nix
   ];
   nixpkgs = {
     # You can add overlays here
