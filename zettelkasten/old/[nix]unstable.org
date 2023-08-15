@@ -1,0 +1,49 @@
+Using an unstable package in NixOS can be a bit tricky because it might not be thoroughly tested and could potentially break your system. However, if you still want to proceed, you can follow these steps:
+
+1. **Add Unstable Channel**: Unstable packages are usually available in the `nixpkgs-unstable` channel. To add this channel, you can use the following command:
+
+   ```bash
+   sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs-unstable
+   sudo nix-channel --update
+   ```
+
+2. **Create a Configuration File**: Create a configuration file (e.g., `unstable-packages.nix`) where you can define the package you want to install from the unstable channel. For instance:
+
+   ```nix
+   { config, lib, pkgs, ... }:
+
+   let
+     unstable = import <nixpkgs-unstable> {};
+   in
+   {
+     nixpkgs.config.packageOverrides = pkgs: {
+       myUnstablePackage = unstable.myPackage;
+     };
+   }
+   ```
+
+   Replace `myPackage` with the actual package name from the unstable channel.
+
+3. **Include the Configuration**: In your main NixOS configuration file (usually located at `/etc/nixos/configuration.nix`), import the previously created configuration file:
+
+   ```nix
+   imports = [
+     ./unstable-packages.nix
+   ];
+   ```
+
+4. **Enable the Package**: Now you can enable the unstable package by adding it to your NixOS configuration. For instance:
+
+   ```nix
+   environment.systemPackages = with pkgs; [
+     myUnstablePackage
+   ];
+   ```
+
+5. **Update Configuration and Rebuild**: After making the changes, update your NixOS configuration:
+
+   ```bash
+   sudo nixos-rebuild switch
+   ```
+
+Please be cautious when using unstable packages, especially in critical systems. They might not be well-tested and can potentially lead to system instability or breakage. Consider using a dedicated test environment or a virtual machine to experiment with unstable packages before introducing them to your main system. It's also a good practice to regularly update your system and monitor the updates in the unstable channel to ensure you're staying up-to-date with any changes or improvements.
