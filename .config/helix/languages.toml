@@ -7,6 +7,12 @@ config = {}
 auto-format = true
 
 [[language]]
+name = "common-lisp"
+auto-format = true
+formatter = { command = "cl-lisp" }
+language-server = { command = "nil" }
+
+[[language]]
 name = "nix"
 auto-format = true
 formatter = { command = "nixpkg fmt" }
