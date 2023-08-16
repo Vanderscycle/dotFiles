@@ -14,9 +14,9 @@
         dashboard            ; a nifty splash screen for neovim
         ;;nyoom-quit         ; WIP: buggy, terrible implementation of doom-quit. 
         hydra                ; Discount modality for mythological beast hunters
-        ;;indent-guides      ; highlighted indent columns
+        indent-guides      ; highlighted indent columns
         modeline             ; snazzy, nano-emacs-inspired modeline
-        ;;nvimtree           ; a project drawer, like NERDTree for vim
+        nvimtree           ; a project drawer, like NERDTree for vim
         neotree              ; tree-like structures for neovim
         quickfix             ; enhancements to vim's builtin quickfix functionality
         trouble              ; view your diagnostics, now with icons! (i knew u were trouble when you walked iiiinnn)
@@ -47,7 +47,7 @@
         :tools
         debugger             ; stepping through code, to help you add bugs
         docker               ; row row row your boat TODO +netman?
-        ;;editorconfig       ; let someone else argue about tabs vs spaces
+        editorconfig       ; let someone else argue about tabs vs spaces
         ;;magma              ; tame Jupyter notebooks
         mason                ; setting your tools in stone
         eval                 ; run code, run (also, repls)

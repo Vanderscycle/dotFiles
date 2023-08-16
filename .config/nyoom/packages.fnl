@@ -71,6 +71,7 @@
 ;; Put your plugins here
 ;; ---------------------
 
+(use-package! :hashicorp/terraform-ls)
 ;; Send plugins to packer
 
 (echo! "Installing Packages")
