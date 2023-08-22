@@ -42,6 +42,9 @@
   };
   
 boot = {
+    extraModprobeConfig = ''
+      options snd-intel-dspcfg dsp_driver=1
+    '';
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -195,8 +198,8 @@ boot = {
 
   programs = {
     fish.enable = true;
-    ssh.startAgent = true;
-
+    # INFO: enabled by gnupg
+    # ssh.startAgent = true;
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -239,6 +242,7 @@ boot = {
         xterm
       ];
       displayManager = {
+        defaultSession = "xfce";
         lightdm = {
           enable = true;
           greeters.slick = {
@@ -248,7 +252,7 @@ boot = {
         };
       };
       desktopManager.xfce.enable = true;
-      windowManager.default = "none+xfce";
+      # windowManager.default = "xfce";
     };
   };
 
