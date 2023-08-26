@@ -25,6 +25,7 @@ in
         dkjson
         ldbus
         lgi
+        xclip
       ];
     };
   };

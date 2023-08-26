@@ -5,17 +5,21 @@ in
 {
   home = {
     packages = with pkgs; [
+      # sql/db
+      dbeaver
       dogdns
       # k8s
       k9s
       kubernetes-helm
       kubernetes
       kustomize
+      kind
       tilt
       ctlptl
       # terraform
       terraform
       terraform-docs
+      terragrunt
       # ansible
       ansible
     ];

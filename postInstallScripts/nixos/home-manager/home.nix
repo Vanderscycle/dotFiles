@@ -36,13 +36,25 @@ in
     username = "henri";
     homeDirectory = "/home/henri";
     sessionVariables = {
+      # FCITX input-related
       GTK_IM_MODULE="fcitx5";
       QT_IM_MODULE="fcitx5";
       XMODIFIERS="@im=fcitx5";
-      XIM="fcitx5";
+      GLFW_IM_MODULE="fcitx5";
+      INPUT_METHOD            ="fcitx5";
+      IMSETTINGS_MODULE       ="fcitx5";
+
+      # Wayland compatibility
       NIXOS_OZONE_WL = "1";
       XDG_CURRENT_DESKTOP = "Sway";
       QT_QPA_PLATFORM = "wayland";
+      CLUTTER_BACKEND         ="wayland";
+      SDL_VIDEODRIVER         = "wayland";
+      MOZ_ENABLE_WAYLAND      = 1;
+      MOZ_WEBRENDER           = 1;
+      XDG_SESSION_TYPE        ="wayland";
+
+      # other
       SUDO_EDITOR = "nvim";
       EDITOR = "hx";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
@@ -72,7 +84,11 @@ in
       # auto mount drives
       udisks
       udiskie
-      flameshot
+      # screenshots
+      slurp
+      grim
+      swappy
+      # flameshot # not working rn
       # wifi
       # nmcli
       # languages /fonts
@@ -89,6 +105,7 @@ in
       nodePackages.vscode-json-languageserver
       # nix
       nil
+      #lisp
       # bash
       nodePackages.bash-language-server
       shellcheck
@@ -103,9 +120,7 @@ in
       linode-cli
       # cli
       unzip
-      xclip
       zoxide
-      xclip
       #3d printing/cad
       super-slicer-latest
       #keyboard
@@ -146,7 +161,7 @@ in
     };
     ssh = {
       #     enable = true;
-      includes = [ "$HOME/.ssh/endeavourGit" ];
+      includes = [ "$HOME/.ssh/endeavourGit" "$HOME/.ssh/opsBox" ];
     };
     keychain = {
       enable = true;

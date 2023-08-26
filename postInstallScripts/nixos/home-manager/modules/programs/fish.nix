@@ -27,7 +27,9 @@
     ];
 
     functions = {
-
+      screenshot = ''
+        grim -g "$(slurp -d)" - | swappy -f -
+      '';
       # cloud access
       cloud-linode = "set -xg KUBECONFIG $HOME/.kube/infrastructure-kubeconfig.yaml";
       # docker

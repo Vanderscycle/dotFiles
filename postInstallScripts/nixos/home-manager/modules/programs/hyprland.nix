@@ -9,6 +9,7 @@ in
       swww
       xdg-desktop-portal-hyprland
       waybar-hyprland
+      wl-clipboard
     ];
     file = {
       ".config/hypr/hyprland.conf".source = "${dotfiles_dir}/.config/hypr/hyprland.conf";
