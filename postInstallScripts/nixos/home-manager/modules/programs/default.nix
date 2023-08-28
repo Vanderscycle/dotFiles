@@ -10,7 +10,8 @@ let
     # wm-anciliaries
     ./rofi.nix
     # editor
-    ./doomemacs.nix
+    # ./doomemacs.nix
+    ./spacemacs.nix
     ./nyoom.nix
     ./helix.nix
     # navigation
