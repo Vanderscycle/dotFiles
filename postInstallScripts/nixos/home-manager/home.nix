@@ -106,6 +106,8 @@ in
       # nix
       nil
       #lisp
+      #grammar
+      ispell
       # bash
       nodePackages.bash-language-server
       shellcheck
