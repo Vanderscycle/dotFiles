@@ -32,7 +32,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -53,7 +53,28 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      version-control
-     treemacs)
+     treemacs
+     ;; user added
+     ;;devops
+     docker
+     terraform
+     ansible
+     kubernetes
+     nixos
+     go
+     ;; web develop
+     svelte
+     javascript
+     typescript
+     ;;other
+     lua
+     python
+     rust ;; for that toml
+     ;;misc
+     chinese
+     themes-megapack
+     pdf
+     )
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -64,7 +85,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(exec-path-from-shell)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -237,7 +258,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(doom-tokyo-night
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -420,7 +441,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
@@ -571,11 +592,44 @@ before packages are loaded."
   ;; disable scroll bar
   (scroll-bar-mode -1)
   ;; relative line numbering
-  (setq display-line-numbers-type 'relative)
-
+  (setq display-line-numbers t)
   ;; prevents dired from using new buffers
   (setf dired-kill-when-opening-new-dired-buffer t)
+  ;; Chinese language layer
+  ;;TODO fix this
+  ;;(chinese :variables chinese-default-input-method 'wubi)
+  ;;devops
+  (terraform :variables terraform-auto-format-on-save t)
+  (docker :variables docker-dockerfile-backend 'lsp)
+  ;; web develop
+  (svelte :variables svelte-backend 'lsp)
+  ;; themes
+  (setq-default dotspacemacs-themes '(doom-tokyo-night))
+  ;; magit
+  ;; https://emacs.stackexchange.com/questions/17866/magit-how-to-use-systems-ssh-agent-and-dont-ask-for-password
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(dap-mode lsp-docker bui ron-mode rustic rust-mode xref toml-mode blacken code-cells company-anaconda anaconda-mode company-go company-lua cython-mode go-eldoc go-fill-struct go-gen-test go-guru go-impl go-rename go-tag go-mode godoctor helm-pydoc importmagic epc ctable concurrent deferred live-py-mode lsp-pyright lsp-python-ms lua-mode nose pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pytest pyvenv sphinx-doc typescript-mode yapfify exec-path-from-shell ace-pinyin afternoon-theme alect-themes ample-theme ample-zen-theme ansible ansible-doc anti-zenburn-theme apropospriate-theme badwolf-theme birds-of-paradise-plus-theme bubbleberry-theme busybee-theme cherry-blossom-theme chinese-conv chocolate-theme clues-theme color-theme-sanityinc-solarized color-theme-sanityinc-tomorrow company-ansible company-nixos-options company-terraform company-web web-completion-data cyberpunk-theme dakrone-theme darkmine-theme darkokai-theme darktooth-theme django-theme docker aio docker-tramp dockerfile-mode doom-themes dracula-theme emmet-mode espresso-theme exotica-theme eziam-themes farmhouse-themes find-by-pinyin-dired pinyinlib flatland-theme flatui-theme gandalf-theme gotham-theme grandshell-theme gruber-darker-theme gruvbox-theme hc-zenburn-theme helm-css-scss helm-nixos-options hemisu-theme heroku-theme impatient-mode inkpot-theme ir-black-theme jazz-theme jbeans-theme jinja2-mode js-doc js2-refactor multiple-cursors json-mode json-navigator hierarchy json-reformat json-snatcher kaolin-themes kubernetes-evil kubernetes magit-popup kubernetes-tramp light-soap-theme livid-mode lush-theme madhat2r-theme majapahit-themes material-theme minimal-theme modus-themes moe-theme molokai-theme monochrome-theme monokai-theme mustang-theme naquadah-theme nix-mode nixos-options noctilux-theme nodejs-repl npm-mode obsidian-theme occidental-theme oldlace-theme omtose-phellack-theme organic-green-theme pangu-spacing pdf-view-restore pdf-tools tablist phoenix-dark-mono-theme phoenix-dark-pink-theme planet-theme prettier-js professional-theme pug-mode purple-haze-theme pyim xr pyim-basedict railscasts-theme rebecca-theme reverse-theme sass-mode haml-mode scss-mode seti-theme skewer-mode js2-mode simple-httpd slim-mode smyx-theme soft-charcoal-theme soft-morning-theme soft-stone-theme solarized-theme soothe-theme autothemer spacegray-theme subatomic-theme subatomic256-theme sublime-themes sunny-day-theme tagedit tango-2-theme tango-plus-theme tangotango-theme tao-theme terraform-mode hcl-mode toxi-theme twilight-anti-bright-theme twilight-bright-theme twilight-theme ujelly-theme underwater-theme web-beautify web-mode white-sand-theme zen-and-art-theme zenburn-theme zonokai-emacs yasnippet-snippets yaml-mode xterm-color ws-butler writeroom-mode winum which-key volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package unfill undo-tree treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toc-org terminal-here term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc smeargle shell-pop restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer orgit-forge org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file nameless mwim multi-vterm multi-term multi-line mmm-mode markdown-toc macrostep lsp-ui lsp-treemacs lsp-origami lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete htmlize holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-gutter-fringe gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emr elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line ac-ispell)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
