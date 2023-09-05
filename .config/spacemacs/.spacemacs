@@ -618,24 +618,6 @@ before packages are loaded."
   (define-key evil-motion-state-map [down-mouse-1] 'silence)
   ;; also avoid any '<mouse-1> is undefined' when setting to 'undefined
   (define-key evil-motion-state-map [mouse-1] 'silence)
-  ;; jk/kj escape
-  ;; https://emacs.stackexchange.com/questions/19961/using-jk-to-exit-insert-mode-with-key-chord-or-anything-else
-  (defun my-jk ()
-    (interactive)
-    (let* ((initial-key ?j)
-           (final-key ?k)
-           (timeout 0.5)
-           (event (read-event nil nil timeout)))
-      (if event
-          ;; timeout met
-          (if (and (characterp event) (= event final-key))
-              (evil-normal-state)
-            (insert initial-key)
-            (push event unread-command-events))
-        ;; timeout exceeded
-        (insert initial-key))))
-
-  (define-key evil-insert-state-map (kbd "j") 'my-jk)
  )
 
 ;; Do not write anything past this comment. This is where Emacs will
