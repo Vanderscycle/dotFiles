@@ -105,6 +105,8 @@ in
       nodePackages.vscode-json-languageserver
       # nix
       nil
+      # docker
+      nodePackages.dockerfile-language-server-nodejs
       #lisp
       #grammar
       ispell

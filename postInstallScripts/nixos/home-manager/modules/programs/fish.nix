@@ -25,7 +25,8 @@
         src = fzf-fish.src;
       }
     ];
-
+    #interactiveShellIinit = ''
+    #'';
     functions = {
       screenshot = ''
         grim -g "$(slurp -d)" - | swappy -f -
