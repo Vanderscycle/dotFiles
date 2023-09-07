@@ -106,8 +106,6 @@ in
       # nix
       nil
       # docker
-      nodePackages.dockerfile-language-server-nodejs
-      hadolint
       #lisp
       #grammar
       ispell
