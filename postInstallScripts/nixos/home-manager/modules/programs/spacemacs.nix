@@ -3,11 +3,11 @@ let
   dotfiles_dir = /home/henri/Documents/dotFiles;
 in
 {
-    programs = {
-      emacs = {
-        enable = true;
-      };
+  programs = {
+    emacs = {
+      enable = true;
     };
+  };
 
   home = {
     # file."/.spacemacs" = {

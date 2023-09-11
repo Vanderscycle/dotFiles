@@ -58,6 +58,7 @@ in
     python310Packages.pyqt6
     python310Packages.yamllint
     python310Packages.pyyaml
+    python310Packages.editorconfig
 
     #user made
     prefect

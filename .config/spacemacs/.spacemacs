@@ -589,6 +589,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (define-key evil-emacs-state-map (kbd "<SPC> o s") 'shell-pop)
   ;; disable scroll bar
   (scroll-bar-mode -1)
   ;; relative line numbering

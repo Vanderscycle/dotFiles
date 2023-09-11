@@ -10,12 +10,12 @@ let
     # wm-anciliaries
     ./rofi.nix
     # editor
-    # ./doomemacs.nix
     ./spacemacs.nix
-    ./nyoom.nix
     ./helix.nix
     # navigation
     ./nnn.nix
+    # dbs
+    ./dbs.nix
     # terminal
     ./fish.nix
     ./starship.nix

@@ -78,7 +78,6 @@ in
     # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
       nitrogen
-      # TODO: mv to awesome.nix
       #battery
       acpi
       # auto mount drives
@@ -89,6 +88,7 @@ in
       grim
       swappy
       # flameshot # not working rn
+      gnumake
       # wifi
       # nmcli
       # languages /fonts
