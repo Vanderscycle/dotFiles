@@ -203,13 +203,15 @@
   # Default packages + env variables
   # ---------------------
   environment = {
+
     sessionVariables = rec {
-      SUDO_EDITOR = "helix";
+      SUDO_EDITOR = "emacs";
     };
     systemPackages = with pkgs; [
       # wayland
       waybar
 
+  (import (fetchTarball "https://install.devenv.sh/latest")).default
       docker
       git
       fish

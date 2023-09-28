@@ -100,12 +100,14 @@ in
       # toml
       taplo
       # yaml
+      yamlfix
       nodePackages.yaml-language-server
       # json
       nodePackages.vscode-json-languageserver
       # nix
       nil
       # docker
+      dive
       #lisp
       #grammar
       ispell
@@ -151,6 +153,8 @@ in
       nfs-utils
       # ssh
       sshpass
+      # port
+      lsof
     ];
   };
   services = {
