@@ -37,12 +37,12 @@ in
     homeDirectory = "/home/henri";
     sessionVariables = {
       # FCITX input-related
-      GTK_IM_MODULE="fcitx5";
-      QT_IM_MODULE="fcitx5";
-      XMODIFIERS="@im=fcitx5";
-      GLFW_IM_MODULE="fcitx5";
-      INPUT_METHOD            ="fcitx5";
-      IMSETTINGS_MODULE       ="fcitx5";
+      GTK_IM_MODULE="ibus";
+      QT_IM_MODULE="ibus";
+      XMODIFIERS="@im=ibus";
+      GLFW_IM_MODULE="ibus";
+      INPUT_METHOD            ="ibus";
+      IMSETTINGS_MODULE       ="ibus";
 
       # Wayland compatibility
       NIXOS_OZONE_WL = "1";

@@ -1,4 +1,6 @@
 { config, pkgs, ... }:
+# https://github.com/NixOS/nixpkgs/blob/master/doc/languages-frameworks/python.section.md
+# https://discourse.nixos.org/t/howto-disable-tests-in-buildpythonapplication/19844
 
 let
   coolname = pkgs.python3Packages.buildPythonPackage rec {
@@ -60,6 +62,7 @@ in
     python310Packages.pyyaml
     python310Packages.editorconfig
 
+    python310Packages.greenlet
     #user made
     prefect
   ];

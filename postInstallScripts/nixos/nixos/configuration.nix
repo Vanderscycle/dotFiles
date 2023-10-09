@@ -128,28 +128,6 @@
   # Display Configuration
   # ---------------------
   # awesome wm (x)
-  # services = {
-  #   # Configure keymap in X11
-  #   xserver = {
-  #     # Enable the X11 windowing system.
-  #     enable = true;
-  #     layout = "us";
-  #     xkbVariant = "";
-
-  #     windowManager.awesome = {
-  #       enable = true;
-  #     };
-  #     displayManager = {
-  #       sddm.enable = true;
-  #       defaultSession = "none+awesome";
-  #       # Enable automatic login for the user.
-  #       autoLogin = {
-  #         enable = true;
-  #         user = "henri";
-  #       };
-  #     };
-  #   };
-  # };
   # hyprland (wayland)
   services = {
     xserver = {
@@ -310,6 +288,7 @@
   i18n = {
     # Select internationalisation properties.
     defaultLocale = "en_US.UTF-8";
+    # defaultLocale = "zh_TW.UTF-8";
     extraLocaleSettings = {
       LC_ADDRESS = "en_US.UTF-8";
       LC_IDENTIFICATION = "en_US.UTF-8";
@@ -323,21 +302,25 @@
     };
 
     inputMethod = {
-      enabled = "fcitx5";
-      uim.toolbar = "gtk"; # gtk-systray
-      fcitx5.addons = with pkgs; [
-        # default:
-        # fcitx-keyboard-us
-        # pinyin
-
-        # add:
-        fcitx5-rime # pinyin
-        fcitx5-chinese-addons
-        fcitx5-with-addons
-        # cloudpinyin
-        # hangul  # korean
-      ];
+      enabled = "ibus";
+      ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
     };
+    # inputMethod = {
+    #   enabled = "fcitx5";
+    #   uim.toolbar = "gtk"; # gtk-systray
+    #   fcitx5.addons = with pkgs; [
+    #     # default:
+    #     # fcitx-keyboard-us
+    #     # pinyin
+
+    #     # add:
+    #     fcitx5-rime # pinyin
+    #     fcitx5-chinese-addons
+    #     fcitx5-with-addons
+    #     # cloudpinyin
+    #     # hangul  # korean
+    #   ];
+    # };
   };
 
 
