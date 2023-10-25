@@ -4,7 +4,8 @@
 { inputs, lib, config, pkgs, ... }:
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
-
+  my-packages = /home/henri/Documents/houseOfNixAndPain;
+  waterfox = (import "${my-packages}/waterfox" { pkgs = pkgs; });
 in
 {
   # You can import other home-manager modules here
@@ -146,6 +147,7 @@ in
       slack
       pulseaudioFull
       firefox
+      waterfox
       # social
       zoom
       # nix
