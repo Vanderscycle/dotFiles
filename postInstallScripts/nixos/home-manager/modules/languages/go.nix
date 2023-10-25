@@ -6,6 +6,8 @@
       # go
       gopls
       delve
+      # swagger module for gofiber
+      go-swag
     ];
   };
   programs = {

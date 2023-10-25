@@ -2,8 +2,6 @@
 
 let
   base_imports = [
-    # x wm
-    # ./awesomewm.nix
     # wayland wm
     ./hyprland.nix
     ./waybar.nix
@@ -29,6 +27,8 @@ let
     ./discord.nix
     ./zathura.nix
     ./spotify.nix
+    # web
+    # ./waterfox.nix
   ];
 in
 {

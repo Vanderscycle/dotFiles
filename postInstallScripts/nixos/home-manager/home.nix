@@ -77,6 +77,7 @@ in
     };
     # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
+      # dbs only
       nitrogen
       #battery
       acpi
@@ -132,16 +133,16 @@ in
       wally-cli
       # gui/
       slides # terminal based powerpoint
+      chafa # imag in terminal
       onlyoffice-bin # word/excel/etc
       rpi-imager
-      neofetch
+      neofetch # show that nixos symbol
       signal-desktop
       gparted
-      vlc
+      vlc # the only media player allowerd
       transmission-gtk
       xfce.thunar
       xfce.thunar-volman
-      insomnia
       slack
       pulseaudioFull
       firefox

@@ -8,6 +8,7 @@ in
       # sql/db
       dbeaver
       dogdns
+      azuredatastudio
       # k8s
       k9s
       kubernetes-helm
@@ -22,6 +23,8 @@ in
       terragrunt
       # ansible
       ansible
+      # backend api calls
+      insomnia
     ];
     file = {
       # K9s

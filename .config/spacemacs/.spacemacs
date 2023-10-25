@@ -85,7 +85,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(exec-path-from-shell)
+   dotspacemacs-additional-packages '(exec-path-from-shell, emacs-bazel-mode )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -605,6 +605,8 @@ before packages are loaded."
   (docker : docker-dockerfile-backend 'lsp)
   ;; web develop
   (svelte :variables svelte-backend 'lsp)
+  (setq-default js2-basic-offset 2
+                js-indent-level 2)
   ;; magit
   ;; https://emacs.stackexchange.com/questions/17866/magit-how-to-use-systems-ssh-agent-and-dont-ask-for-password
   (exec-path-from-shell-initialize)

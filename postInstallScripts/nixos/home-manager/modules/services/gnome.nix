@@ -5,6 +5,8 @@
       lxappearance
     ];
   };
+
+  services.gnome-keyring.enable = true;
   # INFO used for lxappearance dark mode theme
   gtk = {
     enable = true;
