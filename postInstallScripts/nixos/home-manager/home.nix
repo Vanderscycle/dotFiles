@@ -6,6 +6,7 @@ let
   dotfiles_dir = /home/henri/Documents/dotFiles;
   my-packages = /home/henri/Documents/houseOfNixAndPain;
   waterfox = (import "${my-packages}/waterfox" { pkgs = pkgs; });
+  # devcontainers = (import "${my-packages}/devcontainers/"); # another day/ another fight
 in
 {
   # You can import other home-manager modules here
@@ -144,7 +145,6 @@ in
       slack
       pulseaudioFull
       firefox
-      waterfox
       # social
       zoom
       # nfs 
@@ -153,6 +153,9 @@ in
       sshpass
       # port
       lsof
+      # custom pain
+      # devcontainers
+      waterfox
     ];
   };
   services = {
