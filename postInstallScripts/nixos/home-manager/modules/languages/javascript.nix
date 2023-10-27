@@ -1,4 +1,5 @@
-{ config, pkgs, ... }:
+{ config,lib, pkgs, ... }:
+
 {
   home.packages = with pkgs; [
     # svelte
@@ -8,5 +9,6 @@
     # node
     nodePackages.pnpm
     nodejs
+
   ];
 }

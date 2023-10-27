@@ -10,6 +10,7 @@ let
     # editor
     ./spacemacs.nix
     ./helix.nix
+    ./vscode.nix
     # navigation
     ./nnn.nix
     # dbs
@@ -17,8 +18,7 @@ let
     # terminal
     ./fish.nix
     ./starship.nix
-    ./kitty.nix
-    ./wezterm.nix
+    ./terminals.nix
     # cli/gui
     ./gaming.nix
     ./modern-unix.nix

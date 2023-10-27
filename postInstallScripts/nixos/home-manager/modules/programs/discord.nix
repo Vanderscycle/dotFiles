@@ -8,11 +8,14 @@ in
       # discord
       ".config/discord/settings.json".source = "${dotfiles_dir}/.config/discord/settings.json";
       # discocss
-      ".config/discocss/custom.css".source = "${dotfiles_dir}/.config/discocss/custom.css";
+      # ".config/discocss/custom.css".source = "${dotfiles_dir}/.config/discocss/custom.css";
+      # betterdiscordctl
+      ".config/BetterDiscord/themes/mocha.theme.css".source = "${dotfiles_dir}/.config/betterdiscord/mocha.theme.css";
     };
     packages = with pkgs; [
       discord
-      discocss
+      betterdiscordctl
+      # discocss
     ];
   };
 }

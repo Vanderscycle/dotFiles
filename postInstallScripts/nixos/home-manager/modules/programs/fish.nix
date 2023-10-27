@@ -54,11 +54,18 @@
       k8s-prmAll = "kubectl delete all --all --namespaces";
       # nix
       nix-clean = "nix-store --gc";
+      nix-purge = ''
+      
+        sudo nix-collect-garbage -d
+        sudo nix-store --optimise
+        sudo nix-env --delete-generations old 
+        sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
+      '';
       # editor
       hx-sudo = "sudo hx --config $HOME/.config/helix/config.toml";
       # nnn
       n = ''
-        nnn $argv -P p
+        nnn
         if test -e $NNN_TMPFILE
                 source $NNN_TMPFILE
                 rm -rf $NNN_TMPFILE

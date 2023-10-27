@@ -96,7 +96,6 @@ in
       # languages /fonts
       noto-fonts-emoji
       tldr
-      nixpkgs-fmt
       #terraform
       terraform-ls
       # toml
@@ -106,8 +105,6 @@ in
       nodePackages.yaml-language-server
       # json
       nodePackages.vscode-json-languageserver
-      # nix
-      nil
       # docker
       dive
       #lisp
@@ -150,8 +147,6 @@ in
       waterfox
       # social
       zoom
-      # nix
-      nix-prefetch-git
       # nfs 
       nfs-utils
       # ssh

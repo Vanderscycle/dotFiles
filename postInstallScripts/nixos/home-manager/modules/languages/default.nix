@@ -7,5 +7,6 @@
     ./javascript.nix
     ./lua.nix
     ./java.nix
+    ./nix.nix
   ];
 }

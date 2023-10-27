@@ -65,11 +65,13 @@
   # fonts
   # ---------------------  
   fonts.fonts = with pkgs; [
+
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     noto-fonts
     noto-fonts-extra
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
+
   ];
 
   # ----------------------
@@ -161,7 +163,6 @@
         xdg-desktop-portal-wlr
         xdg-desktop-portal-gtk
       ];
-      gtkUsePortal = true;
     };
   };
 
@@ -183,7 +184,10 @@
   environment = {
 
     sessionVariables = rec {
+
+      NIXOS_OZONE_WL = "1";
       SUDO_EDITOR = "emacs";
+      # gtkUsePortal = [true]; #fix
     };
     systemPackages = with pkgs; [
       # wayland
@@ -200,6 +204,33 @@
       ripgrep
       xorg.xkill
     ];
+
+    etc."fontconfig/conf.d/60-noto-cjk.conf".text = ''
+      <?xml version="1.0"?>
+      <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+      <fontconfig>
+          <!-- Prioritize Noto Sans CJK SC for monospace -->
+          <match target="pattern">
+              <test qual="any" name="family"><string>monospace</string></test>
+              <edit name="family" mode="prepend" binding="strong">
+                  <string>Noto Sans CJK SC</string>
+              </edit>
+          </match>
+
+          <!-- General font rendering improvements -->
+          <match target="font">
+              <edit name="rgba" mode="assign">
+                  <const>rgb</const>
+              </edit>
+              <edit name="hinting" mode="assign">
+                  <bool>true</bool>
+              </edit>
+              <edit name="hintstyle" mode="assign">
+                  <const>hintslight</const>
+              </edit>
+          </match>
+      </fontconfig>
+    '';
   };
 
   # ----------------------
