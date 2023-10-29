@@ -332,26 +332,27 @@
       LC_TIME = "en_US.UTF-8";
     };
 
-    inputMethod = {
-      enabled = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
-    };
+    # IBUS
     # inputMethod = {
-    #   enabled = "fcitx5";
-    #   uim.toolbar = "gtk"; # gtk-systray
-    #   fcitx5.addons = with pkgs; [
-    #     # default:
-    #     # fcitx-keyboard-us
-    #     # pinyin
-
-    #     # add:
-    #     fcitx5-rime # pinyin
-    #     fcitx5-chinese-addons
-    #     fcitx5-with-addons
-    #     # cloudpinyin
-    #     # hangul  # korean
-    #   ];
+    #   enabled = "ibus";
+    #   ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
     # };
+    inputMethod = {
+      enabled = "fcitx5";
+      uim.toolbar = "gtk"; # gtk-systray
+      fcitx5.addons = with pkgs; [
+        # default:
+        # fcitx-keyboard-us
+        # pinyin
+
+        # add:
+        fcitx5-rime # pinyin
+        fcitx5-chinese-addons
+        fcitx5-with-addons
+        # cloudpinyin
+        # hangul  # korean
+      ];
+    };
   };
 
 

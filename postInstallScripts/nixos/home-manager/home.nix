@@ -39,12 +39,12 @@ in
     homeDirectory = "/home/henri";
     sessionVariables = {
       # FCITX input-related
-      GTK_IM_MODULE="ibus";
-      QT_IM_MODULE="ibus";
-      XMODIFIERS="@im=ibus";
-      GLFW_IM_MODULE="ibus";
-      INPUT_METHOD            ="ibus";
-      IMSETTINGS_MODULE       ="ibus";
+      GTK_IM_MODULE="fcitx5";
+      QT_IM_MODULE="fcitx5";
+      XMODIFIERS="@im=fcitx5";
+      GLFW_IM_MODULE="fcitx5";
+      INPUT_METHOD            ="fcitx5";
+      IMSETTINGS_MODULE       ="fcitx5";
 
       # Wayland compatibility
       NIXOS_OZONE_WL = "1";
@@ -56,12 +56,13 @@ in
       MOZ_WEBRENDER           = 1;
       XDG_SESSION_TYPE        ="wayland";
 
+      # gtkUsePortal = [true]; #fix
       # other
-      SUDO_EDITOR = "nvim";
+      SUDO_EDITOR = "emacs";
       EDITOR = "hx";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
       BROWSER = "firefox";
-      TERMINAL = "wezterm";
+      TERMINAL = "kitty";
       NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
       NNN_OPTS = "Hed";
       NNN_TMPFILE = "/tmp/nnn";
@@ -70,13 +71,12 @@ in
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
-    file = {
-      ".config/neofetch/config.conf".source = "${dotfiles_dir}/.config/neofetch/config.conf";
-      "xprofile" = {
-        source = "${dotfiles_dir}/.config/.xprofile";
-        target = "./.xprofile";
-      };
-    };
+    # file = {
+    #   "xprofile" = {
+    #     source = "${dotfiles_dir}/.config/.xprofile";
+    #     target = "./.xprofile";
+    #   };
+    #  };
     # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
       # dbs only
@@ -135,7 +135,6 @@ in
       chafa # imag in terminal
       onlyoffice-bin # word/excel/etc
       rpi-imager
-      neofetch # show that nixos symbol
       signal-desktop
       gparted
       vlc # the only media player allowerd
