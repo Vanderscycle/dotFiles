@@ -6,5 +6,6 @@ in
 {
   nixpkgs.config.packageOverrides = pkgs: {
     waybar-hyprland = unstable.waybar-hyprland;
+    signal-desktop = unstable.signal-desktop;
   };
 }

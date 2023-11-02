@@ -39,12 +39,12 @@ in
     homeDirectory = "/home/henri";
     sessionVariables = {
       # FCITX input-related
-      GTK_IM_MODULE="fcitx5";
-      QT_IM_MODULE="fcitx5";
-      XMODIFIERS="@im=fcitx5";
-      GLFW_IM_MODULE="fcitx5";
-      INPUT_METHOD            ="fcitx5";
-      IMSETTINGS_MODULE       ="fcitx5";
+      GTK_IM_MODULE="fcitx";
+      QT_IM_MODULE="fcitx";
+      XMODIFIERS="@im=fcitx";
+      GLFW_IM_MODULE="fcitx";
+      INPUT_METHOD="fcitx";
+      IMSETTINGS_MODULE="fcitx";
 
       # Wayland compatibility
       NIXOS_OZONE_WL = "1";
@@ -61,7 +61,7 @@ in
       SUDO_EDITOR = "emacs";
       EDITOR = "hx";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
-      BROWSER = "firefox";
+      BROWSER = "waterfox";
       TERMINAL = "kitty";
       NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
       NNN_OPTS = "Hed";
@@ -71,13 +71,7 @@ in
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
-    # file = {
-    #   "xprofile" = {
-    #     source = "${dotfiles_dir}/.config/.xprofile";
-    #     target = "./.xprofile";
-    #   };
-    #  };
-    # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
+      # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
       # dbs only
       nitrogen
