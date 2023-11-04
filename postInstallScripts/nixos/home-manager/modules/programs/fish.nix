@@ -54,6 +54,7 @@
       k8s-prmAll = "kubectl delete all --all --namespaces";
       # nix
       nix-clean = "nix-store --gc";
+      nix-update="sudo nixos-rebuild switch";
       nix-purge = ''
       
         sudo nix-collect-garbage -d

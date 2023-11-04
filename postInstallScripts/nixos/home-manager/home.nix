@@ -180,4 +180,16 @@ in
   }; # Nicely reload system units when changing configs
   # systemd.user.startServices = "sd-switch";
 
+  # ----------------------
+  # default applications
+  # ---------------------  
+  xdg.mimeApps.defaultApplications = {
+    "text/html" = [ "waterfox.desktop" ];
+    "x-scheme-handler/http" = [ "waterfox.desktop" ];
+    "x-scheme-handler/https" = [ "waterfox.desktop" ];
+    "x-scheme-handler/about" = [ "waterfox.desktop" ];
+    "image/png" = [ "shotwell.desktop" ];
+    "image/jpeg" = [ "shotwell.desktop" ];
+    "application/pdf" = [ "zathura.desktop" ];
+  };
 }

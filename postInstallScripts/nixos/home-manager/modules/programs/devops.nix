@@ -1,8 +1,13 @@
 { config, pkgs, ... }:
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
+  unstable = import <nixpkgs-unstable> {};
 in
 {
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    tilt = unstable.tilt;
+  };
   home = {
     packages = with pkgs; [
       # sql/db

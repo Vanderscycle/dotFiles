@@ -16,6 +16,7 @@ in
     exa
     bat
     ripgrep
+    tree # that old school tree feel
   ];
   home.file = {
     # bat

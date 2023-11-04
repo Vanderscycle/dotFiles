@@ -57,6 +57,13 @@ This function should only modify configuration layer settings."
      ;; user added
      ;;devops
      (docker :variables docker-dockerfile-backend 'lsp)
+     (python :variables
+             python-backend 'lsp
+             python-lsp-server 'pylsp
+             python-fill-column 99
+             python-format-on-save t
+             python-sort-imports-on-save t)
+
      terraform
      ansible
      kubernetes
@@ -68,7 +75,6 @@ This function should only modify configuration layer settings."
      typescript
      ;;other
      lua
-     python
      rust ;; for that toml
      ;;misc
      chinese
@@ -85,7 +91,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(exec-path-from-shell sqlite3)
+   dotspacemacs-additional-packages '(exec-path-from-shell sqlite3 editorconfig poetry)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -589,24 +595,36 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; --- custom bindings ---
   (spacemacs/set-leader-keys "os" 'shell-pop)
-
+  ;; --- editorconfig ---
+  (use-package editorconfig
+    :ensure t
+    :config
+    (editorconfig-mode 1))
   ;; disable scroll bar
   (scroll-bar-mode -1)
   ;; relative line numbering
   (setq display-line-numbers t)
   ;; prevents dired from using new buffers
   (setf dired-kill-when-opening-new-dired-buffer t)
-  ;; Chinese language layer
-  ;; web develop
+  ;; --- svelte --- 
   ;; (svelte :variables svelte-backend 'lsp)
   (setq-default js2-basic-offset 2
                 js-indent-level 2)
+
+  ;; --- shell/eshell ---
+  (setq explicit-shell-file-name "/run/current-system/sw/bin/fish") ;; Adjust the path if Fish is located elsewhere
+  (setq shell-file-name "fish")
   ;; --- python ---
   (defun my/python-black-format ()
     (when (eq major-mode 'python-mode)
       (call-interactively 'python-black-buffer)))
+  (defun my/python-mode-hook ()
+    (when (projectile-project-p)
+      (poetry-tracking-mode)))
 
+  (add-hook 'python-mode-hook 'my/python-mode-hook)
   ;; Enable autoformatting with black on save
   (add-hook 'before-save-hook 'my/python-black-format)
   (setq python-formatter 'black)
