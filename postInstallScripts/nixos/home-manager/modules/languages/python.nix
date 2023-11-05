@@ -3,6 +3,7 @@
 # https://discourse.nixos.org/t/howto-disable-tests-in-buildpythonapplication/19844
 
 let
+  unstable = import <nixpkgs-unstable> {};
   coolname = pkgs.python3Packages.buildPythonPackage rec {
     owner = "alexanderlukanin13";
     name = "coolname";
@@ -49,6 +50,11 @@ let
 
 in
 {
+
+  nixpkgs.config.packageOverrides = pkgs: {
+
+    yamllint = unstable.yamllint;
+  };
   home.packages = with pkgs; [
     # python
     python310Full
@@ -58,8 +64,8 @@ in
 
     python310Packages.black
     python310Packages.pyqt6
-    python310Packages.yamllint
     python310Packages.pyyaml
+    yamllint
     python310Packages.editorconfig
 
     python310Packages.greenlet

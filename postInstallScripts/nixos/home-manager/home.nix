@@ -95,9 +95,6 @@ in
       terraform-ls
       # toml
       taplo
-      # yaml
-      yamlfix
-      nodePackages.yaml-language-server
       # json
       nodePackages.vscode-json-languageserver
       # docker

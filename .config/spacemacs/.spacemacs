@@ -616,6 +616,8 @@ before packages are loaded."
   ;; --- shell/eshell ---
   (setq explicit-shell-file-name "/run/current-system/sw/bin/fish") ;; Adjust the path if Fish is located elsewhere
   (setq shell-file-name "fish")
+  ;; --- yaml ---
+  (yaml :variables yaml-enable-lsp t))
   ;; --- python ---
   (defun my/python-black-format ()
     (when (eq major-mode 'python-mode)

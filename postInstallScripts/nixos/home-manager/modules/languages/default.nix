@@ -8,5 +8,6 @@
     ./lua.nix
     ./java.nix
     ./nix.nix
+    ./yaml.nix
   ];
 }
