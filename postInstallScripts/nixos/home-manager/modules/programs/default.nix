@@ -27,6 +27,9 @@ let
     ./discord.nix
     ./zathura.nix
     ./spotify.nix
+    # flatpak like
+    ./bottles.nix
+    
     # web
     # ./waterfox.nix
   ];

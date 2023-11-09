@@ -617,8 +617,11 @@ before packages are loaded."
   (setq explicit-shell-file-name "/run/current-system/sw/bin/fish") ;; Adjust the path if Fish is located elsewhere
   (setq shell-file-name "fish")
   ;; --- yaml ---
-  (yaml :variables yaml-enable-lsp t))
+  (yaml :variables yaml-enable-lsp t)
   ;; --- python ---
+  ;; Treat .star and .bzl files as Python files
+  (add-to-list 'auto-mode-alist '("\\.star\\'" . python-mode))
+  (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
   (defun my/python-black-format ()
     (when (eq major-mode 'python-mode)
       (call-interactively 'python-black-buffer)))

@@ -14,6 +14,9 @@
 # ---------------------
 
 { unstable, inputs, config, lib, pkgs, ... }:
+let
+  unstable = import <nixpkgs-unstable> {};
+in
 {
   imports =
     [
@@ -58,7 +61,15 @@
       permittedInsecurePackages = [
         "electron-12.2.3"
       ];
+      packageOverrides = pkgs: {
+        fcitx5 = unstable.fcitx5;
+        fcitx5-rime = unstable.fcitx5-rime;
+        fcitx5-gtk = unstable.fcitx5-gtk;
+        fcitx5-chinese-addons = unstable.fcitx5-chinese-addons;
+        fcitx5-with-addons = unstable.fcitx5-with-addons;
     };
+  };
+
   };
   # ----------------------
   # fonts
@@ -371,6 +382,7 @@
         fcitx5-rime # pinyin
         fcitx5-chinese-addons
         fcitx5-with-addons
+        fcitx5-gtk
         # cloudpinyin
         # hangul  # korean
       ];

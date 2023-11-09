@@ -95,15 +95,12 @@ in
       terraform-ls
       # toml
       taplo
-      # json
-      nodePackages.vscode-json-languageserver
       # docker
       dive
       #lisp
       #grammar
       ispell
       # bash
-      nodePackages.bash-language-server
       shellcheck
       # editing (3d/photos)
       shotwell

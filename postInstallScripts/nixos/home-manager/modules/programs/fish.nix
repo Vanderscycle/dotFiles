@@ -6,6 +6,9 @@
   # fishPlugins.z
 
   programs.fish = {
+    shellInit = ''
+      set -x PATH $PATH $HOME/.npm-global/bin
+    '';    
     enable = true;
     plugins = with pkgs.fishPlugins; [
       {
@@ -87,7 +90,6 @@
       usb-eject = "sudo umount /mnt/usb";
       nas-mount = "sudo mount.nfs 192.168.1.245:/volume1/linuxBackup /mnt/nas"; # how to allow users acces to the file?
       nas-eject = "sudo umount /mnt/nas";
-
     };
     shellAbbrs = {
       l = "less";
@@ -99,7 +101,7 @@
       dig = "dog";
       ":q" = "exit";
       top = "btop";
-      nyoom = "~/.config/nvim/bin/nyoom $argv";
     };
   };
+
 }
