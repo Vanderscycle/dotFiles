@@ -5,7 +5,10 @@
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
   my-packages = /home/henri/Documents/houseOfNixAndPain;
-  waterfox = (import "${my-packages}/waterfox" { pkgs = pkgs; });
+  waterfox = (import "${my-packages}/waterfox" { pkgs = pkgs; 
+        commandLineArgs = "";
+        # commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime";
+  });
   # devcontainers = (import "${my-packages}/devcontainers/"); # another day/ another fight
 in
 {
@@ -141,8 +144,8 @@ in
       # port
       lsof
       # custom pain
-      # devcontainers
       waterfox
+      # devcontainers
     ];
   };
   services = {

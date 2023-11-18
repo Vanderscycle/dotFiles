@@ -31,6 +31,7 @@
     #interactiveShellIinit = ''
     #'';
     functions = {
+
       envsource = ''
         for line in (cat $argv | grep -v '^#')
           set item (string split -m 1 '=' $line)
@@ -90,7 +91,9 @@
       usb-eject = "sudo umount /mnt/usb";
       nas-mount = "sudo mount.nfs 192.168.1.245:/volume1/linuxBackup /mnt/nas"; # how to allow users acces to the file?
       nas-eject = "sudo umount /mnt/nas";
-    };
+      # kitty
+      new_kitty_tab = "kitty @ new-tab --cwd (pwd)";
+      };
     shellAbbrs = {
       l = "less";
       k = "kustomize";
@@ -101,6 +104,7 @@
       dig = "dog";
       ":q" = "exit";
       top = "btop";
+      kt="new_kitty_tab";
     };
   };
 

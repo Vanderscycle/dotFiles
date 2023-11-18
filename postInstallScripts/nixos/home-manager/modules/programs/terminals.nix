@@ -48,6 +48,10 @@ in
       enable = true;
       theme = "Catppuccin-Mocha";
       shellIntegration.enableFishIntegration = true;
+      settings = {
+        allow_remote_control = "yes";
+        # Add other Kitty settings here if needed
+      };      
       environment = {
         KITTY_LISTEN_ON="/tmp/mykitty";
       };
