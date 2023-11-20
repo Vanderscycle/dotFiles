@@ -7,7 +7,9 @@ in
 
   nixpkgs.config.packageOverrides = pkgs: {
     tilt = unstable.tilt;
-  };
+    kubernetes-helm = unstable.kubernetes-helm;
+    kustomize = unstable.kustomize;
+   };
   home = {
     packages = with pkgs; [
       # sql/db
@@ -16,12 +18,13 @@ in
       azuredatastudio
       # k8s
       k9s
-      kubernetes-helm
       kubernetes
+      kubernetes-helm
       kustomize
       kind
       tilt
       ctlptl
+      argocd
       # terraform
       terraform
       terraform-docs
