@@ -15,6 +15,7 @@ in
         aliases = {
           co = "pr checkout";
           pv = "pr view";
+          pc = "pr create";
         };
       };
     };
@@ -25,6 +26,9 @@ in
       # commit = {
       #   gpgsign = true;
       # };
+      aliases = {  
+        sig = "status --ignored";
+      };
       extraConfig = {
         user.signingkey = "~/.ssh/endeavourGit.pub";
         gpg = {

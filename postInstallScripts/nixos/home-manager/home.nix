@@ -64,7 +64,7 @@ in
       SUDO_EDITOR = "emacs";
       EDITOR = "hx";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
-      BROWSER = "waterfox";
+      BROWSER = "firefox";
       TERMINAL = "kitty";
       NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
       NNN_OPTS = "Hed";
@@ -126,7 +126,7 @@ in
       chafa # imag in terminal
       onlyoffice-bin # word/excel/etc
       rpi-imager
-      signal-desktop
+      signal-desktop-beta
       gparted
       vlc # the only media player allowerd
       transmission-gtk
@@ -144,7 +144,7 @@ in
       # port
       lsof
       # custom pain
-      waterfox
+      # waterfox
       # devcontainers
     ];
   };
@@ -181,10 +181,10 @@ in
   # default applications
   # ---------------------  
   xdg.mimeApps.defaultApplications = {
-    "text/html" = [ "waterfox.desktop" ];
-    "x-scheme-handler/http" = [ "waterfox.desktop" ];
-    "x-scheme-handler/https" = [ "waterfox.desktop" ];
-    "x-scheme-handler/about" = [ "waterfox.desktop" ];
+    "text/html" = [ "firefox.desktop" ];
+    "x-scheme-handler/http" = [ "firefox.desktop" ];
+    "x-scheme-handler/https" = [ "firefox.desktop" ];
+    "x-scheme-handler/about" = [ "firefox.desktop" ];
     "image/png" = [ "shotwell.desktop" ];
     "image/jpeg" = [ "shotwell.desktop" ];
     "application/pdf" = [ "zathura.desktop" ];

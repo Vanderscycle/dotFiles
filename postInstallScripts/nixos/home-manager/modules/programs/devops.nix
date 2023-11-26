@@ -21,6 +21,7 @@ in
       kubernetes
       kubernetes-helm
       kustomize
+      kubeseal
       kind
       tilt
       ctlptl
