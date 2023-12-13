@@ -26,6 +26,8 @@ in
       tilt
       ctlptl
       argocd
+      # github actions
+      act
       # terraform
       terraform
       terraform-docs

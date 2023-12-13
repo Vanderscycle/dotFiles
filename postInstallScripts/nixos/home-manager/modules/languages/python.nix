@@ -62,6 +62,7 @@ in
     pre-commit
     nodePackages.pyright
 
+    python310Packages.boto3
     python310Packages.black
     python310Packages.pyqt6
     python310Packages.pyyaml

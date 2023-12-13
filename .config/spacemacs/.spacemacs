@@ -96,6 +96,7 @@ This function should only modify configuration layer settings."
      sqlite3
      editorconfig
      poetry
+     writeroom-mode
      (copilot :location (recipe
                          :fetcher github
                          :repo "zerolfx/copilot.el"
@@ -624,6 +625,10 @@ before packages are loaded."
   (add-hook 'prog-mode-hook 'copilot-mode)
   ;; --- custom bindings ---
   (spacemacs/set-leader-keys "os" 'shell-pop)
+  (with-eval-after-load 'evil
+    (define-key evil-window-map "|" 'split-window-right)
+    (define-key evil-window-map "_" 'split-window-below))
+
   ;; --- editorconfig ---
   (use-package editorconfig
     :ensure t

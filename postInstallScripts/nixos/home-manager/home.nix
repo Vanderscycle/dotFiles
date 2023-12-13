@@ -144,7 +144,7 @@ in
       # port
       lsof
       # custom pain
-      # waterfox
+      waterfox
       # devcontainers
     ];
   };

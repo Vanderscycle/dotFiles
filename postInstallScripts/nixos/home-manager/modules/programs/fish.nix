@@ -56,6 +56,9 @@
         kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
       '';
       k8s-prmAll = "kubectl delete all --all --namespaces";
+      k8s-prmNamespace = ''
+        kubectl delete all --all -n "$argv[1]"
+      '';
       # nix
       nix-clean = "nix-store --gc";
       nix-update="sudo nixos-rebuild switch";
