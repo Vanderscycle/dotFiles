@@ -76,6 +76,7 @@ in
     stateVersion = "23.05";
       # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
+      blueman
       # dbs only
       nitrogen
       #battery

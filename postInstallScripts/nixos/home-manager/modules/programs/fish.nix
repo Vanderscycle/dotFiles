@@ -60,6 +60,10 @@
         kubectl delete all --all -n "$argv[1]"
       '';
       # nix
+      nixit =  ''
+        set -xg SHELL_FILE (find /home/henri/Documents/houseOfNixAndPain/shells -name 'shell.nix' | fzf)
+        nix-shell $SHELL_FILE 
+      '';
       nix-clean = "nix-store --gc";
       nix-update="sudo nixos-rebuild switch";
       nix-purge = ''

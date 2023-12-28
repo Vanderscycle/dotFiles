@@ -92,6 +92,7 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 5;
+      extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
     };
   };
 
@@ -123,6 +124,7 @@ in
   hardware = {
     pulseaudio.enable = false;
     bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
   };
 
   # ---------------------
@@ -318,6 +320,7 @@ in
   # Services
   # ---------------------
   services = {
+    blueman.enable = true;
     # Enable CUPS to print documents.
     printing.enable = true;
     # Enalbe oenssh-server
