@@ -92,7 +92,6 @@ in
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 5;
-      extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
     };
   };
 

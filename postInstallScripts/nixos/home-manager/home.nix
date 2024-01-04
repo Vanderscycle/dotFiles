@@ -72,6 +72,10 @@ in
       NNN_FIFO = "/tmp/nnn.fifo";
       TLDR_AUTO_UPDATE_DISABLED = "false";
     };
+
+    file = {
+      ".config/fcitx5/profile".source = "${dotfiles_dir}/.config/fcitx5/profile";
+    };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
       # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict

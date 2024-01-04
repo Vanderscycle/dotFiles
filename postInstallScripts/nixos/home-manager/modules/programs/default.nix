@@ -29,6 +29,7 @@ let
     ./spotify.nix
     # flatpak like
     ./bottles.nix
+    # ./3dPrinting.nix
     
     # web
     # ./waterfox.nix

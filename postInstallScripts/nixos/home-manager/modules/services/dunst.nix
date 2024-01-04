@@ -10,7 +10,6 @@ in
       dunst
     ];
     file = {
-
       ".config/dunst/dunstrc".source = "${dotfiles_dir}/.config/dunst/dunstrc";
     };
   };

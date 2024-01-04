@@ -50,9 +50,7 @@ let
 
 in
 {
-
   nixpkgs.config.packageOverrides = pkgs: {
-
     yamllint = unstable.yamllint;
   };
   home.packages = with pkgs; [
