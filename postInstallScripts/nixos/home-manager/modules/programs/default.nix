@@ -30,6 +30,7 @@ let
     # flatpak like
     ./bottles.nix
     # ./3dPrinting.nix
+    ./ai.nix
     
     # web
     # ./waterfox.nix

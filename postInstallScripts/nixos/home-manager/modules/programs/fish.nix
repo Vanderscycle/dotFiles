@@ -107,7 +107,7 @@
     };
     shellAliases = {
       "..." = "cd ../..";
-      ls = "exa -al";
+      ls = "eza -al";
       dig = "dog";
       ":q" = "exit";
       top = "btop";

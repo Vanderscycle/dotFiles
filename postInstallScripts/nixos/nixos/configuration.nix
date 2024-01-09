@@ -51,6 +51,13 @@ in
   # nixpkgs settings
   # ---------------------  
   nixpkgs = {
+    overlays = [
+      (self: super: {
+        home-manager = super.fetchTarball {
+          url = "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+        };
+      })
+    ];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
@@ -60,6 +67,7 @@ in
       ];
       permittedInsecurePackages = [
         "electron-12.2.3"
+        "electron-25.9.0"
       ];
       packageOverrides = pkgs: {
         fcitx5 = unstable.fcitx5;
@@ -74,7 +82,7 @@ in
   # ----------------------
   # fonts
   # ---------------------  
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
 
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
@@ -182,6 +190,7 @@ in
   # ---------------------
   home-manager.users.henri.imports = [ /home/henri/.config/home-manager/home.nix ];
   home-manager.extraSpecialArgs = { inherit unstable; };
+  # home.stateVersion = "23.11";
   users.users.henri = {
     isNormalUser = true;
     description = "Henri Vandersleyen";
@@ -398,5 +407,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 }

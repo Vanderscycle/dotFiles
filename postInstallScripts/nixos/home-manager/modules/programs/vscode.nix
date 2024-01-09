@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   home.packages = with pkgs; [
-    electron_25 
+    electron_28 
   ];
 
   programs = {

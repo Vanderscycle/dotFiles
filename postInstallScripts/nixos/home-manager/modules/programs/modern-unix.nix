@@ -13,7 +13,7 @@ in
     sysz
     fd
     rsync
-    exa
+    eza
     bat
     ripgrep
     tree # that old school tree feel

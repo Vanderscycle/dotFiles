@@ -74,7 +74,7 @@ in
     };
 
     file = {
-      ".config/fcitx5/profile".source = "${dotfiles_dir}/.config/fcitx5/profile";
+      #".config/fcitx5/profile".source = "${dotfiles_dir}/.config/fcitx5/profile";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "23.05";
@@ -131,7 +131,6 @@ in
       chafa # imag in terminal
       onlyoffice-bin # word/excel/etc
       rpi-imager
-      signal-desktop-beta
       gparted
       vlc # the only media player allowerd
       transmission-gtk
@@ -142,6 +141,7 @@ in
       firefox
       # social
       zoom
+      signal-desktop
       # nfs 
       nfs-utils
       # ssh

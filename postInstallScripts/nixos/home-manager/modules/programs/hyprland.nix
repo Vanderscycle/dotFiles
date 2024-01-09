@@ -8,7 +8,6 @@ in
       sway
       swww
       xdg-desktop-portal-hyprland
-      waybar-hyprland
       wl-clipboard
     ];
     file = {
