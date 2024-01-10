@@ -9,6 +9,7 @@ in
     tilt = unstable.tilt;
     kubernetes-helm = unstable.kubernetes-helm;
     kustomize = unstable.kustomize;
+    terragrunt = unstable.terragrunt;
    };
   home = {
     packages = with pkgs; [

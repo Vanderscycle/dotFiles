@@ -50,7 +50,7 @@ in
       IMSETTINGS_MODULE="fcitx";
 
       # Wayland compatibility
-      NIXOS_OZONE_WL = "1";
+      # NIXOS_OZONE_WL = "1"; # disabled for vscode 09/01/2024
       XDG_CURRENT_DESKTOP = "Sway";
       QT_QPA_PLATFORM = "wayland";
       CLUTTER_BACKEND         ="wayland";
@@ -62,7 +62,7 @@ in
       # gtkUsePortal = [true]; #fix
       # other
       SUDO_EDITOR = "emacs";
-      EDITOR = "hx";
+      EDITOR = "emacs";
       RIPGREP_CONFIG_PATH = "$HOME/.config/rg";
       BROWSER = "firefox";
       TERMINAL = "kitty";
@@ -77,7 +77,7 @@ in
       #".config/fcitx5/profile".source = "${dotfiles_dir}/.config/fcitx5/profile";
     };
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-    stateVersion = "23.05";
+    stateVersion = "23.11";
       # of note: do not define a package here and then program.<name>.enable = true; it will cause a conflict
     packages = with pkgs; [
       blueman
@@ -92,7 +92,7 @@ in
       slurp
       grim
       swappy
-      # flameshot # not working rn
+      flameshot # not working rn
       gnumake
       # wifi
       # nmcli

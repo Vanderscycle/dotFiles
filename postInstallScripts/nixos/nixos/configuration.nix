@@ -49,7 +49,7 @@ in
 
   # ----------------------
   # nixpkgs settings
-  # ---------------------  
+  # ----------------------
   nixpkgs = {
     overlays = [
       (self: super: {
@@ -64,9 +64,9 @@ in
         "steam"
         "steam-original"
         "steam-run"
+        "terraform-1.6.6"
       ];
       permittedInsecurePackages = [
-        "electron-12.2.3"
         "electron-25.9.0"
       ];
       packageOverrides = pkgs: {
@@ -75,9 +75,8 @@ in
         fcitx5-gtk = unstable.fcitx5-gtk;
         fcitx5-chinese-addons = unstable.fcitx5-chinese-addons;
         fcitx5-with-addons = unstable.fcitx5-with-addons;
+      };
     };
-  };
-
   };
   # ----------------------
   # fonts
@@ -204,16 +203,11 @@ in
   environment = {
 
     sessionVariables = rec {
-
-      NIXOS_OZONE_WL = "1";
       SUDO_EDITOR = "emacs";
-      # gtkUsePortal = [true]; #fix
     };
     systemPackages = with pkgs; [
-      # wayland
+      (import (fetchTarball "https://install.devenv.sh/latest")).default
       waybar
-
-  (import (fetchTarball "https://install.devenv.sh/latest")).default
       docker
       git
       fish
@@ -376,26 +370,17 @@ in
       LC_TIME = "en_US.UTF-8";
     };
 
-    # IBUS
-    # inputMethod = {
-    #   enabled = "ibus";
-    #   ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
-    # };
     inputMethod = {
       enabled = "fcitx5";
       uim.toolbar = "gtk"; # gtk-systray
       fcitx5.addons = with pkgs; [
-        # default:
         # fcitx-keyboard-us
-        # pinyin
-
         # add:
         fcitx5-rime # pinyin
         fcitx5-chinese-addons
         fcitx5-with-addons
         fcitx5-gtk
         # cloudpinyin
-        # hangul  # korean
       ];
     };
   };

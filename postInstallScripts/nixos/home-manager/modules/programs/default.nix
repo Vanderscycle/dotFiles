@@ -31,6 +31,8 @@ let
     ./bottles.nix
     # ./3dPrinting.nix
     ./ai.nix
+    # ./npm_global.nix
+    ./devenv.nix
     
     # web
     # ./waterfox.nix
