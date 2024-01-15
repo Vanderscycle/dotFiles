@@ -94,6 +94,10 @@ in
       swappy
       flameshot # not working rn
       gnumake
+      # hyprland dependency
+      libsForQt5.qt5.qtwayland
+      xwayland
+      qt6.qtwayland
       # wifi
       # nmcli
       # languages /fonts

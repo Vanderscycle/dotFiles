@@ -641,14 +641,13 @@ before packages are loaded."
   (spacemacs/set-leader-keys "otc" 'tab-bar-close-tab)
   (spacemacs/set-leader-keys "ot>" 'tab-bar-switch-to-next-tab)
   (spacemacs/set-leader-keys "ot<" 'tab-bar-switch-to-prev-tab)
-  ;; --- custom styling ---
+  ;;; --- custom styling ---
   (custom-set-faces
    '(tab-bar-tab ((t (:background "#1e1e2e" :foreground "#cba6f7"
                                   :box (:line-width 2 :color "#7f849c" :style released-button)
                                   :overline "#7f849c" :underline "#f38ba8"))))
    '(tab-bar-tab-inactive ((t (:background "#1e1e2e" :foreground "#f5e0dc"
                                            :box (:line-width 2 :color "#7f849c" :style released-button))))))
-  ;; --- custom bindings ---
   ;; --- editorconfig ---
   (use-package editorconfig
     :ensure t
@@ -658,26 +657,47 @@ before packages are loaded."
   ;; --- maggit --
   (with-eval-after-load 'magit
     (require 'forge))
+
+  ;; --- exec-path ---
+  ;; https://emacs.stackexchange.com/questions/17866/magit-how-to-use-systems-ssh-agent-and-dont-ask-for-password
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
+  ;; --- projectile ---
+  (setq projectile-project-search-path '("~/.config/home-manager" "~/Documents" ("~/github" . 1)))
   ;; --- misc ---
   (scroll-bar-mode -1) ;; disable scroll bar
   (setq display-line-numbers t) ;; relative line numbering
   (setf dired-kill-when-opening-new-dired-buffer t) ;; prevents dired from using new buffers
-  ;; --- svelte --- 
-  ;; (svelte :variables svelte-backend 'lsp)
-  (setq-default js2-basic-offset 2
-                js-indent-level 2)
-  ;; --- org-roam ---
+  ;; --- org-mode ---
+  (defun org-summary-todo (n-done n-not-done)
+    "Switch entry to DONE when all subentries are done, to TODO otherwise."
+    (let (org-log-done org-todo-log-states)   ; turn off logging
+      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+  (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
+  ;;; --- org-mode agenda ---
+  (setq org-agenda-files (directory-files-recursively "~/Documents/zettelkasten/" "\\.org$"))
+  ;;; --- org-roam ---
   ;; (make-directory "~/org-roam)
-  (setq org-roam-directory (file-truename "/home/henri/Documents/zettelkasten"))
+  (setq org-roam-directory (file-truename "/home/henri/Documents/zettelkasten/org-roam"))
   (setq find-file-visit-truename t)
   (org-roam-db-autosync-mode)
+
   ;; --- shell/eshell ---
   (spacemacs/set-leader-keys "os" 'shell-pop)
   (setq explicit-shell-file-name "/run/current-system/sw/bin/fish") ;; Adjust the path if Fish is located elsewhere
   (setq shell-file-name "fish")
-  ;; --- yaml ---
+
+  ;; --- Programming ---
+  ;;; --- svelte ---
+  ;; (svelte :variables svelte-backend 'lsp)
+  (setq-default js2-basic-offset 2
+                js-indent-level 2)
+  ;;; --- yaml ---
   (yaml :variables yaml-enable-lsp t)
-  ;; --- python ---
+  ;;; --- python ---
   ;; Treat .star and .bzl files as Python files
   (add-to-list 'auto-mode-alist '("\\.star\\'" . python-mode))
   (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
@@ -692,13 +712,7 @@ before packages are loaded."
   ;; Enable autoformatting with black on save
   (add-hook 'before-save-hook 'my/python-black-format)
   (setq python-formatter 'black)
-  ;; magit
-  ;; https://emacs.stackexchange.com/questions/17866/magit-how-to-use-systems-ssh-agent-and-dont-ask-for-password
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
-  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
-  ;;projectile
-  (setq projectile-project-search-path '("~/.config/home-manager" "~/Documents" ("~/github" . 1)))
+
   ;; disable mouse
   ;; https://emacs.stackexchange.com/questions/21540/how-to-disable-mouse-in-spacemacs
   (defun silence ()
