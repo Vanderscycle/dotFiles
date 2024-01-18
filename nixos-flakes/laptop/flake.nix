@@ -2,6 +2,8 @@
   description = "A very basic flake";
 
   inputs = {
+    hosts.url = github:StevenBlack/hosts;
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -10,7 +12,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... } @ attrs:
+  outputs = { self, nixpkgs, hosts, ... } @ attrs:
     let
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -29,7 +31,9 @@
             } // attrs;
             modules = [
               ./.
-              # ./modules/virt
+		hosts.nixosModule {
+		  networking.stevenBlackHosts.enable = true;
+		}
             ];
           }; #laptop
       }; # nixosConfigurations
