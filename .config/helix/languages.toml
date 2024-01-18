@@ -2,21 +2,21 @@
 name = "python"
 roots = ["pyproject.toml"]
 formatter = { command = "black", args = ["--quiet", "-"] }
-language-server = { command = "pyright-langserver", args = ["--stdio"] }
-config = {} 
+#language-servers = [{ command = "pyright-langserver", args = ["--stdio"] }]
+# config = {} 
 auto-format = true
 
 [[language]]
 name = "common-lisp"
 auto-format = true
 formatter = { command = "cl-lisp" }
-language-server = { command = "nil" }
+#language-servers = [{ command = "nil" }]
 
 [[language]]
 name = "nix"
 auto-format = true
 formatter = { command = "nixpkg fmt" }
-language-server = { command = "nil" }
+#language-servers = { command = "nil" }
 
 [[language]]
 name = "rust"
@@ -25,20 +25,20 @@ auto-format = true
 [[language]]
 name = "go"
 auto-format = true
-language-server = { command = "gopls" }
+#language-servers = { command = "gopls" }
 
 [[language]]
 name = "yaml"
 file-types = ["yml", "yaml"]
 indent = { tab-width = 2, unit = "  " }
-language-server = { command =  "yaml-language-server" }
+#language-servers = { command =  "yaml-language-server" }
 auto-format = true
 # language-server = { command = "gopls" }
 
 [[language]]
 name = "hcl"
 indent = { tab-width = 2, unit = "  " }
-language-server = { command = "terraform-ls" }
+#language-servers = { command = "terraform-ls" }
 auto-format = true
 
 [[language]]
@@ -46,7 +46,7 @@ name = "toml"
 injection-regex = "toml"
 file-types = ["toml", "poetry.lock", "Cargo.lock"]
 comment-token = "#"
-language-server = { command = "taplo" }
+#language-servers = { command = "taplo" }
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
 
@@ -56,8 +56,8 @@ injection-regex = "(ts|typescript)"
 file-types = ["ts", "mts", "cts"]
 roots = []
 # pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
-config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
-language-server = { command =  "typescript-language-server" }
+# config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
+#language-servers = { command =  "typescript-language-server" }
 auto-format = true
 
 [[language]]
@@ -66,7 +66,7 @@ injection-regex = "(js|javascript)"
 file-types = ["js", "mjs", "cjs"]
 #shebangs = ["node"]
 comment-token = "//"
-language-server = { command =  "typescript-language-server" }
+#language-servers = { command =  "typescript-language-server" }
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
 
@@ -76,7 +76,7 @@ scope = "source.json"
 injection-regex = "json"
 file-types = ["json", "jsonc", "arb", "ipynb", "geojson"]
 roots = []
-language-server = { command =  "vscode-json-language-server" }
+#language-servers = { command =  "vscode-json-language-server" }
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
 
@@ -86,7 +86,7 @@ injection-regex = "svelte"
 file-types = ["svelte"]
 roots = []
 indent = { tab-width = 2, unit = "  " }
-language-server = { command =  "svelte-language-server" }
+#language-servers = { command =  "svelte-language-server" }
 auto-format = true
 
 [[language]]
@@ -97,6 +97,6 @@ shebangs = ["lua"]
 roots = [".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git"]
 comment-token = "--"
 indent = { tab-width = 2, unit = "  " }
-language-server = { command = "lua-language-server" }
+#language-servers = { command = "lua-language-server" }
 formatter = { command = "LuaFormatter"}
 auto-format = true

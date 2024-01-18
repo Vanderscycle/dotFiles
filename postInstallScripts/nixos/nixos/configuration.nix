@@ -108,6 +108,10 @@ in
   networking = {
     hostName = "nixos-desktop"; # Define your hostname.
     networkmanager.enable = true;
+    extraHosts = let
+        hostsPath = https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts;
+        hostsFile = builtins.fetchurl hostsPath;
+      in builtins.readFile "${hostsFile}";
     # Configure network proxy if necessary
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -201,7 +205,9 @@ in
   # Default packages + env variables
   # ---------------------
   environment = {
-
+    shellAliases = {
+      cc = "${pkgs.gcc}/bin/gcc";
+    };
     sessionVariables = rec {
       SUDO_EDITOR = "emacs";
     };
@@ -213,10 +219,12 @@ in
       fish
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
-      helix
+      micro
       fd
       ripgrep
       xorg.xkill
+      sqlite # for emacs
+      libgcc
     ];
     etc."security/pam_env.conf".text = ''
       # Wayland compatibility
@@ -232,7 +240,6 @@ in
       QT_QPA_PLATFORMTHEME    DEFAULT=qt5ct
 
       # FCITX input-related
-      #GLFW_IM_MODULE         DEFAULT=ibus
       GLFW_IM_MODULE          DEFAULT=fcitx
       GTK_IM_MODULE           DEFAULT=fcitx
       INPUT_METHOD            DEFAULT=fcitx

@@ -3,7 +3,7 @@
   # fishPlugins.done
   # fishPlugins.fzf
   # fishPlugins.autopair
-  # fishPlugins.z
+  # fishPlugins.z ? working?
 
   programs.fish = {
     shellInit = ''
@@ -31,7 +31,6 @@
     #interactiveShellIinit = ''
     #'';
     functions = {
-
       envsource = ''
         for line in (cat $argv | grep -v '^#')
           set item (string split -m 1 '=' $line)
@@ -114,5 +113,4 @@
       kt="new_kitty_tab";
     };
   };
-
 }
