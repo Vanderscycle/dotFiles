@@ -3,9 +3,9 @@
   imports = [
     ./fish
     ./fonts
-    ./kitty
+   # ./kitty
     ./starship
-    ./wezterm
+   # ./wezterm
   ];
 
   # ---- Home Configuration ----
@@ -19,6 +19,8 @@
 
 
   environment.systemPackages = with pkgs; [
+    kitty
+    wezterm
     btop
     vim
     fish

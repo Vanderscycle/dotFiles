@@ -6,3 +6,4 @@
     ./security
     ./terminal
   ];
+}

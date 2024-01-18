@@ -1,17 +1,17 @@
 { pkgs, ... }:
 {
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    noto-fonts-extra
-    nerdfonts
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-  ];
-  fontconfig.defaultFonts = {
-    serif = [ "JetBrains Mono" "Noto Color Emoji" ];
-    sansSerif = [ "JetBrains Mono" "Noto Color Emoji" ];
-    mono = [ "JetBrains Mono" ];
-    emoji = [ "Noto Color Emoji" ];
+  fonts = {
+    packages = with pkgs; [
+      nerdfonts
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      roboto
+    ];
+    fontconfig.defaultFonts = {
+      serif = [ "Roboto Serif" "Noto Color Emoji" ];
+      sansSerif = [ "Roboto" "Noto Color Emoji" ];
+      emoji = [ "Noto Color Emoji" ];
+    };
   };
 }
