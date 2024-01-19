@@ -1,6 +1,12 @@
 { pkgs, username, ... }:
 {
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  imports = [
+    ./fish
+    ./languages
+    #./services
+    #./themes
+  ] ;
+
   users.users.${username} = {
     shell = pkgs.fish;
     description = "Henri Vandersleyen";
@@ -10,7 +16,6 @@
     packages = with pkgs; [
       fish
     ];
-
   };
 }
 
