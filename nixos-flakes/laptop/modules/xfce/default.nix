@@ -2,12 +2,13 @@
 {
   services = {
     xserver = {
+      enable = true;
       desktopManager.xfce.enable = true;
       displayManager = {
         lightdm.enable = true;
-	autologin = {
+        autoLogin = {
 	  enable = true;
-	  user = $username
+	  user = "${username}";
 	};
       };
     };
