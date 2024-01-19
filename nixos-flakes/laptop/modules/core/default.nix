@@ -5,5 +5,6 @@
     ./pkgs
     ./security
     ./terminal
+    ./modern-unix
   ];
 }
