@@ -5,6 +5,6 @@
     ./pkgs
     ./security
     ./terminal
-    #./modern_unix
+    ./editors
   ];
 }

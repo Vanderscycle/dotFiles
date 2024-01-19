@@ -6,6 +6,27 @@
   # fishPlugins.z ? working?
 
   home-manager.users.${username} = {
+    home = {
+      sessionVariables = {
+        # FCITX input-related
+        GTK_IM_MODULE="fcitx";
+        QT_IM_MODULE="fcitx";
+        XMODIFIERS="@im=fcitx";
+        GLFW_IM_MODULE="fcitx";
+        INPUT_METHOD="fcitx";
+        IMSETTINGS_MODULE="fcitx";
+
+        SUDO_EDITOR = "emacs";
+        EDITOR = "vim";
+        BROWSER = "firefox";
+        TERMINAL = "kitty";
+        NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
+        NNN_OPTS = "Hed";
+        NNN_TMPFILE = "/tmp/nnn";
+        NNN_FIFO = "/tmp/nnn.fifo";
+        TLDR_AUTO_UPDATE_DISABLED = "false";
+      };    
+    };
     programs.fish = {
       shellInit = ''
         set -x PATH $PATH $HOME/.npm-global/bin
