@@ -2,10 +2,10 @@
 {
   imports = [
     ./fish
-    ./languages
+    #./languages
     #./services
     #./themes
-  ] ;
+  ];
 
   users.users.${username} = {
     shell = pkgs.fish;
