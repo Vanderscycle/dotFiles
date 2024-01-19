@@ -31,9 +31,11 @@
             } // attrs;
             modules = [
               ./.
-		hosts.nixosModule {
-		  networking.stevenBlackHosts.enable = true;
-		}
+              ./modules/programs/devops
+              ./modules/programs/multimedia
+              hosts.nixosModule {
+                networking.stevenBlackHosts.enable = true;
+              }
             ];
           }; #laptop
       }; # nixosConfigurations
