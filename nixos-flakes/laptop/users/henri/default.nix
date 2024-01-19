@@ -2,7 +2,7 @@
 {
   imports = [
     ./fish
-    #./languages
+    ./languages
     #./services
     #./themes
   ];

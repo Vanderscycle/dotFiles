@@ -33,21 +33,21 @@
         nil
 
         # python
-        python311Full
+        #python311
         poetry
         pre-commit
         nodePackages.pyright
-       # (lib.flatten map (pkgName: python311Packages.${pkgName}) [ 
-       #     black
-       #     pyqt6
-       #     #pyyaml
-       #     #editorconfig
-       #   ]
-       # )
+        (python311.withPackages(ps: with ps; [
+          toml
+          python-lsp-server
+          pyls-isort
+          black
+          flake8
+        ]))
 
-        #yaml 
-        yamllint
-        yamlfix
+        #yaml  #not working at all
+        #yamllint
+        #yamlfix
         nodePackages.yaml-language-server
       ];
 
