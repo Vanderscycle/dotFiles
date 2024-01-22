@@ -37,7 +37,7 @@
                 networking.stevenBlackHosts.enable = true;
               }
             ];
-          }; #laptop
+          }; #desktop
         laptop =
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
