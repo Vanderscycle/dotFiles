@@ -3,6 +3,7 @@
   imports = [
     ./docker
     ./libreoffice
+    ./devops
   ];
   environment.systemPackages = with pkgs; [
     docker

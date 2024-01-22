@@ -1,0 +1,17 @@
+# add hyprland config
+# { username, pkgs, ...}:
+# {
+#   services = {
+#     xserver = {
+#       enable = true;
+#       desktopManager.xfce.enable = true;
+#       displayManager = {
+#         lightdm.enable = true;
+#         autoLogin = {
+# 	  enable = true;
+# 	  user = "${username}";
+# 	};
+#       };
+#     };
+#   };
+# }

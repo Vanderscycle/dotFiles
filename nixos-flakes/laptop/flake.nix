@@ -21,6 +21,23 @@
     {
       nixosConfigurations = {
 
+        desktop =
+          let system = "x86_64-linux";
+          in nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              username = "henri";
+              hostname = "desktop";
+              inherit system;
+            } // attrs;
+            modules = [
+              ./.
+              ./modules/programs/gamings
+              ./modules/programs/multimedia
+              hosts.nixosModule {
+                networking.stevenBlackHosts.enable = true;
+              }
+            ];
+          }; #laptop
         laptop =
           let system = "x86_64-linux";
           in nixpkgs.lib.nixosSystem {
@@ -31,7 +48,6 @@
             } // attrs;
             modules = [
               ./.
-              ./modules/programs/devops
               ./modules/programs/multimedia
               hosts.nixosModule {
                 networking.stevenBlackHosts.enable = true;
