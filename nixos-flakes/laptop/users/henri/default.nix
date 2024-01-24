@@ -3,8 +3,9 @@
   imports = [
     ./fish
     ./languages
-    #./services
-    #./themes
+    ./services
+    ./themes
+    ./programs
   ];
 
   users.users.${username} = {

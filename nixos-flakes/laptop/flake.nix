@@ -49,6 +49,7 @@
             modules = [
               ./.
               ./modules/programs/multimedia
+              ./modules/desktop-environment/xfce
               hosts.nixosModule {
                 networking.stevenBlackHosts.enable = true;
               }
