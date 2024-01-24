@@ -25,12 +25,12 @@
         NNN_TMPFILE = "/tmp/nnn";
         NNN_FIFO = "/tmp/nnn.fifo";
         TLDR_AUTO_UPDATE_DISABLED = "false";
-      };    
+      };
     };
     programs.fish = {
       shellInit = ''
         set -x PATH $PATH $HOME/.npm-global/bin
-      '';    
+      '';
       enable = true;
       plugins = with pkgs.fishPlugins; [
         {
@@ -88,7 +88,6 @@
         nix-clean = "nix-store --gc";
         nix-update="sudo nixos-rebuild switch";
         nix-purge = ''
-        
           sudo nix-collect-garbage -d
           sudo nix-store --optimise
           sudo nix-env --delete-generations old 
@@ -129,7 +128,6 @@
       shellAliases = {
         "..." = "cd ../..";
         ls = "eza -al";
-        dig = "dog";
         ":q" = "exit";
         top = "btop";
         kt="new_kitty_tab";

@@ -11,7 +11,6 @@
     yq
     httpie
     zoxide
-    dog # dig but way better
     btop # htop but better
   ];
 }

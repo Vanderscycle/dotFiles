@@ -15,7 +15,6 @@ in
       packages = with pkgs; [
         # sql/db
         dbeaver
-        dogdns
         azuredatastudio
         # k8s
         k9s
@@ -37,6 +36,8 @@ in
         ansible
         # backend api calls
         insomnia
+        # dns
+        dogdns
       ];
       file = {
         # K9s

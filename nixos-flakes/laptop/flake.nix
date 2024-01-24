@@ -31,8 +31,9 @@
             } // attrs;
             modules = [
               ./.
-              ./modules/programs/gamings
+              ./modules/programs/gaming
               ./modules/programs/multimedia
+              ./modules/cloud
               hosts.nixosModule {
                 networking.stevenBlackHosts.enable = true;
               }
@@ -50,6 +51,7 @@
               ./.
               ./modules/programs/multimedia
               ./modules/desktop-environment/xfce
+              ./modules/cloud
               hosts.nixosModule {
                 networking.stevenBlackHosts.enable = true;
               }
