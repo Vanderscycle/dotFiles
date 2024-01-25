@@ -122,6 +122,7 @@ in
       # client
       rclone
       awscli2
+      ssm-session-manager-plugin
       linode-cli
       # cli
       unzip
