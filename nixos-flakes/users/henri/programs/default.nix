@@ -1,5 +1,5 @@
 {
   imports = [
-    ./btop
+    ./btop.nix
   ];
 }

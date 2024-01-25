@@ -3,5 +3,6 @@
     ./core
     ./hardware
     ./programs
+    ./cloud
   ];
 }

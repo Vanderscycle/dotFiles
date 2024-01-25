@@ -1,5 +1,6 @@
 {
   imports = [
-    ./aws
+    ./aws.nix
+    ./linode.nix
   ];
 }
