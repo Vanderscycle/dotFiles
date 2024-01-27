@@ -1,14 +1,14 @@
 { home-manager, username, pkgs, ... }:
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
-  unstable = import <nixpkgs-unstable> {};
+ # unstable = import <nixpkgs-unstable> {};
 in
 {
   nixpkgs.config.packageOverrides = pkgs: {
-    tilt = unstable.tilt;
-    kubernetes-helm = unstable.kubernetes-helm;
-    kustomize = unstable.kustomize;
-    terragrunt = unstable.terragrunt;
+   # tilt = unstable.tilt;
+   # kubernetes-helm = unstable.kubernetes-helm;
+   # kustomize = unstable.kustomize;
+   # terragrunt = unstable.terragrunt;
    };
   home-manager.users.${username} = {
     home = {

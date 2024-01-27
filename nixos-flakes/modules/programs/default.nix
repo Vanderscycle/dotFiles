@@ -5,7 +5,4 @@
     ./libreoffice
     ./devops
   ];
-  environment.systemPackages = with pkgs; [
-    docker
-  ];
 }

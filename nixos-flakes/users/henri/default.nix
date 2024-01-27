@@ -7,7 +7,6 @@
     #./themes
     ./programs
   ];
-
   users.users.${username} = {
     shell = pkgs.fish;
     description = "Henri Vandersleyen";

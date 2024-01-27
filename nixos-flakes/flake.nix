@@ -2,7 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
-    hosts.url = github:StevenBlack/hosts;
+    hosts.url = "github:StevenBlack/hosts";
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
