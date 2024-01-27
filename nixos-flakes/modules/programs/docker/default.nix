@@ -7,11 +7,6 @@
     docker
   ];
   virtualisation = {
-    oci-containers = {
-      backend = "docker";
-      containers = {
-      };
-    };
     docker = {
       enable = true;
       # storageDriver = "btrfs";
