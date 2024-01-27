@@ -686,6 +686,28 @@ before packages are loaded."
   (setf dired-kill-when-opening-new-dired-buffer t) ;; prevents dired from using new buffers
 
   ;; --- org-mode ---
+  (defun insert-todo-at-correct-level ()
+    "Insert a TODO item below the last TODO among immediate children, or one level deeper if no TODOs are present."
+    (interactive)
+    (let ((current-level (org-current-level))
+          (last-todo-pos nil))
+      (if current-level
+          (progn
+            ;; Search for the last TODO among the immediate children
+            (save-excursion
+              (while (outline-next-heading)
+                (when (and (= (org-current-level) (1+ current-level))
+                           (string-prefix-p "TODO " (org-get-heading t t)))
+                  (setq last-todo-pos (point)))))
+            ;; Go to the last TODO and insert a new one below it, or insert at one level deeper
+            (if last-todo-pos
+                (goto-char last-todo-pos)
+              (org-end-of-subtree))
+            (org-insert-heading-respect-content)
+            (insert "TODO (your name)"))
+        (message "Not in an Org heading."))))
+  (define-key org-mode-map (kbd "C-c t") 'insert-todo-at-correct-level)
+
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."
     (let (org-log-done org-todo-log-states)   ; turn off logging

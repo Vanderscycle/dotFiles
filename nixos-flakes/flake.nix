@@ -35,6 +35,7 @@
               ./modules/programs/multimedia
               # ./modules/window-managers/hyprland
               ./modules/cloud
+              ./modules/containers
               hosts.nixosModule {
                 networking.stevenBlackHosts.enable = true;
               }
