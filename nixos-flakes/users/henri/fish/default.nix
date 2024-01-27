@@ -63,6 +63,10 @@
         screenshot = ''
           grim -g "$(slurp -d)" - | swappy -f -
         '';
+        # Docker programs
+        prusa-slicer = ''
+          docker pull mikeah/prusaslicer-novnc:latest && docker run -v "/home/henri/Documents/3D-models:/data" -p 8080:8080 mikeah/prusaslicer-novnc:latest
+        ''
         # network
         kill-port = "kill -9 $(lsof -t -i:$argv)";
         # cloud access

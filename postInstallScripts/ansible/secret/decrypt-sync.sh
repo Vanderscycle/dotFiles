@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: Rethink the way this script works. Redo the securty and think about the security
+
 OPERATION=""
 LOCATION=""
 
