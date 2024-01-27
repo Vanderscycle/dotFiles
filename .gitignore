@@ -1,4 +1,7 @@
 .env
+*.log
+*.#
 
 #ansible related 
 geerlingguy*
+
