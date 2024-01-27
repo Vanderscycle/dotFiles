@@ -71,6 +71,9 @@
         s-laptop = ''
           ssh henri@192.168.1.231
         '';
+        s-printer = ''
+          ssh pi@192.168.1.243
+        '';
         # network
         kill-port = "kill -9 $(lsof -t -i:$argv)";
         # cloud access
