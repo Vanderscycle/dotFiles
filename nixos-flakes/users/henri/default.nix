@@ -4,7 +4,7 @@
     ./fish
     ./languages
     ./services
-    ./themes
+    #./themes
     ./programs
   ];
 
