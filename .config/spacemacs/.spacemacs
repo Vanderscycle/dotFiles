@@ -706,7 +706,8 @@ before packages are loaded."
             (org-insert-heading-respect-content)
             (insert "TODO (your name)"))
         (message "Not in an Org heading."))))
-  (define-key org-mode-map (kbd "C-c t") 'insert-todo-at-correct-level)
+  (with-eval-after-load 'org
+    (define-key org-mode-map (kbd "C-c t") 'insert-todo-at-correct-level))
 
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."
@@ -738,10 +739,10 @@ before packages are loaded."
 
   ;; --- perspective ---
   ;; workspace buffer management tool
-  (require 'perspective)
-  (global-set-key (kbd "C-x C-b") 'persp-list-buffers)
-  (customize-set-variable 'persp-mode-prefix-key (kbd "C-c M-p"))
-  (persp-mode)
+  ;; (require 'perspective)
+  ;; (global-set-key (kbd "C-x C-b") 'persp-list-buffers)
+  ;; (customize-set-variable 'persp-mode-prefix-key (kbd "C-c M-p"))
+  ;; (persp-mode)
 
   ;; --- shell/eshell ---
   (spacemacs/set-leader-keys "os" 'shell-pop)
