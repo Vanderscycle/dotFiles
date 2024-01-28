@@ -67,7 +67,6 @@
         prusa-slicer = ''
           docker pull mikeah/prusaslicer-novnc:latest && docker run -v "/home/henri/Documents/3D-models:/data" -p 8080:8080 mikeah/prusaslicer-novnc:latest
         '';
-        
         # ssh
         s-laptop = ''
           ssh henri@192.168.1.231
@@ -80,7 +79,7 @@
         '';
         v-minion-save = ''
           rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/henri/Documents/3D-models/printer_configs/v-minion/
-        ''
+        '';
         # network
         kill-port = "kill -9 $(lsof -t -i:$argv)";
         # cloud access

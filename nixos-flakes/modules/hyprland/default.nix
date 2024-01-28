@@ -4,6 +4,11 @@ let
 in
 
 {
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [

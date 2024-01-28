@@ -4,5 +4,6 @@
     ./hardware
     ./programs
     ./cloud
+    ./security
   ];
 }
