@@ -6,4 +6,5 @@
     # window beautifier
     ./picom.nix
   ];
+
 }
