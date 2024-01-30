@@ -1,6 +1,10 @@
+{ username, home-manager, pkgs, ... }:
 {
-  programs.keychain = {
-    enable = true;
-    keys = [ "$HOME/.ssh/endeavourGit" ];
+  home-manager.users.${username} = {
+    programs.keychain = {
+      enable = true;
+      enableFishIntegration = true;
+      keys = [ "$HOME/.ssh/endeavourGit" ];
+    };
   };
 }
