@@ -53,6 +53,17 @@
       #interactiveShellIinit = ''
       #'';
       functions = {
+        copy = ''
+            set selected_file (fzf)
+            if test -z "$selected_file"
+                    echo "No file selected."
+                    return 1
+                end
+
+            cat "$selected_file" | wl-copy
+            echo "Contents of $selected_file copied to clipboard."
+          end
+        '';
         envsource = ''
           for line in (cat $argv | grep -v '^#')
             set item (string split -m 1 '=' $line)
@@ -151,4 +162,7 @@
       };
     };
   };
+  environment.systemPackages = with pkgs; [
+    wl-clipboard
+  ];
 }

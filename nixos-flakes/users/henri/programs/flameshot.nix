@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = [
-    pkgs.flameshot
+  environment.systemPackages = with pkgs; [
+    flameshot
   ];
 }
