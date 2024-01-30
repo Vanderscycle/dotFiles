@@ -1,7 +1,4 @@
 { nixpkgs, config, pkgs, unstable, ... }:
-let
-  dotfiles_dir = /home/henri/Documents/dotFiles;
-in
 {
   home = {
     packages = with pkgs; [

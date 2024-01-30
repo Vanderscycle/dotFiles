@@ -102,35 +102,15 @@ in
       # nmcli
       # languages /fonts
       noto-fonts-emoji
-      tldr
-      #terraform
-      terraform-ls
-      # toml
-      taplo
-      # docker
-      dive
-      #lisp
-      #grammar
       ispell
-      # bash
-      shellcheck
       # editing (3d/photos)
       shotwell
-      # shell
-      gnupg
-      pinentry
       # client
-      rclone
-      awscli2
-      ssm-session-manager-plugin
-      linode-cli
-      # cli
       unzip
       zoxide
       #3d printing/cad
       super-slicer-latest
       #keyboard
-      wally-cli
       # gui/
       slides # terminal based powerpoint
       chafa # imag in terminal
@@ -145,17 +125,11 @@ in
       pulseaudioFull
       firefox
       # social
-      zoom
       signal-desktop
       # nfs 
       nfs-utils
-      # ssh
-      sshpass
       # port
       lsof
-      # custom pain
-      waterfox
-      # devcontainers
     ];
   };
   services = {
@@ -187,16 +161,4 @@ in
   }; # Nicely reload system units when changing configs
   # systemd.user.startServices = "sd-switch";
 
-  # ----------------------
-  # default applications
-  # ---------------------  
-  xdg.mimeApps.defaultApplications = {
-    "text/html" = [ "firefox.desktop" ];
-    "x-scheme-handler/http" = [ "firefox.desktop" ];
-    "x-scheme-handler/https" = [ "firefox.desktop" ];
-    "x-scheme-handler/about" = [ "firefox.desktop" ];
-    "image/png" = [ "shotwell.desktop" ];
-    "image/jpeg" = [ "shotwell.desktop" ];
-    "application/pdf" = [ "zathura.desktop" ];
-  };
 }

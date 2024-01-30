@@ -7,6 +7,9 @@
         nodePackages.dockerfile-language-server-nodejs
         hadolint
 
+        # bash
+        shellcheck
+
         # go
         gopls
         delve
@@ -31,6 +34,12 @@
         # nix programs
         node2nix
         nil
+
+        # toml
+        taplo
+
+        # terraform
+        terraform-ls
 
         # python
         #python311

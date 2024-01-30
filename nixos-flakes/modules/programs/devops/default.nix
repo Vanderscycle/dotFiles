@@ -32,6 +32,8 @@ in
         terraform
         terraform-docs
         terragrunt
+        # docker
+        dive #  dive into docker images
         # ansible
         ansible
         # backend api calls

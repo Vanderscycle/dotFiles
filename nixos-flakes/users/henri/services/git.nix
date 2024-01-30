@@ -3,7 +3,7 @@
 let
   theme = import ../themes;
 in
-  {
+{
   home-manager.users.${username} = {
     programs = {
         lazygit = {
