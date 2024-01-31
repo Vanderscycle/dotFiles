@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "My personal computers nix configurations";
 
   inputs = {
     hosts.url = "github:StevenBlack/hosts";
