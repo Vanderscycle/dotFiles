@@ -1,12 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ username, hostname, interface, pkgs, lib, ... }:
 
 let
-  user = "guest";
-  password = "guest";
-  SSID = "mywifi";
-  SSIDpassword = "mypassword";
-  interface = "wlan0";
-  hostname = "myhostname";
+  password = "root"; # temp psswd
+  # SSID = "mywifi";
+  # SSIDpassword = "mypassword";
 in {
 
   boot = {
@@ -26,11 +23,17 @@ in {
     };
   };
 
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
+
   networking = {
     hostName = hostname;
     wireless = {
       enable = true;
-      networks."${SSID}".psk = SSIDpassword;
+      # networks."${SSID}".psk = SSIDpassword; # unabled due to password
       interfaces = [ interface ];
     };
   };
@@ -45,7 +48,7 @@ in {
 
   users = {
     mutableUsers = false;
-    users."${user}" = {
+    users."${username}" = {
       isNormalUser = true;
       password = password;
       extraGroups = [ "wheel" ];

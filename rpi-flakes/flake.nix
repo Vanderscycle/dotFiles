@@ -2,10 +2,7 @@
   description = "My rpi k3s cluster configuration";
 
   inputs = {
-    hosts.url = "github:StevenBlack/hosts";
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
   };
 
   outputs = { self, nixpkgs, ... } @ attrs:
@@ -16,8 +13,9 @@
           let system = "aarch64-linux";
           in nixpkgs.lib.nixosSystem {
             specialArgs = {
-              username = "henri";
+              username = "root";
               hostname = "master";
+              interface = "wlan0";
               inherit system;
             } // attrs;
             modules = [
@@ -28,8 +26,9 @@
           let system = "aarch64-linux";
           in nixpkgs.lib.nixosSystem {
             specialArgs = {
-              username = "henri";
+              username = "root";
               hostname = "worker";
+              interface = "wlan0";
               inherit system;
             } // attrs;
             modules = [
