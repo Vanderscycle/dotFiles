@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    playerctl
-    ripgrep
     unzip
     wget
     curl

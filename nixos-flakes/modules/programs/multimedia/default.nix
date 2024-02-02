@@ -4,5 +4,7 @@
     spotify
     discord
     ytfzf
+    playerctl
+    vlc
   ];
 }
