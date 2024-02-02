@@ -6,6 +6,5 @@
     ./security
     ./terminal
     ./editors
-    ./programs
   ];
 }
