@@ -10,6 +10,21 @@
           volumes = [ "/home/henri/Documents/3D-models:/data" ];
           ports = [ "4243:8080" ];
         };
+       orcaslicer = {
+    backend = "docker";
+    image = "lscr.io/linuxserver/orcaslicer:latest";
+    volumes = [ "/path/to/config:/config" ];
+    environment = {
+      PUID = "1000";
+      PGID = "1000";
+      TZ = "Etc/UTC";
+    };
+    ports = [ "3000:3000", "3001:3001" ];
+    restartIfChanged = true;
+    seccomp = "unconfined"; # Optional seccomp settings
+  };
+}
+ 
       };
     };
   };
