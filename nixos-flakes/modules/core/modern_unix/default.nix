@@ -5,7 +5,7 @@
     bat # cat alternative
     fd # better find
     ripgrep # grep but easier
-    ag # also caled silver surfer
+    silver-searcher  # also known as ag
     fzf
     jq # json parser
     yq # yaml parser
