@@ -3,5 +3,6 @@
     [
       ./spacevim
       ./spacemacs
+      ./vscode
     ];
 }
