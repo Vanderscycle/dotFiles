@@ -4,5 +4,6 @@
     ./docker
     ./libreoffice
     ./devops
+    ./office
   ];
 }
