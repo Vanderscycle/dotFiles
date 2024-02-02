@@ -41,11 +41,11 @@ in
       sessionVariables = {
         XDG_CURRENT_DESKTOP = "Sway";
         QT_QPA_PLATFORM = "wayland";
-        CLUTTER_BACKEND         ="wayland";
-        SDL_VIDEODRIVER         = "wayland";
-        MOZ_ENABLE_WAYLAND      = 1;
-        MOZ_WEBRENDER           = 1;
-        XDG_SESSION_TYPE        ="wayland";
+        CLUTTER_BACKEND = "wayland";
+        SDL_VIDEODRIVER = "wayland";
+        MOZ_ENABLE_WAYLAND = 1;
+        MOZ_WEBRENDER = 1;
+        XDG_SESSION_TYPE = "wayland";
       };
       packages = with pkgs; [
         sway

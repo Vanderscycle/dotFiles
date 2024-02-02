@@ -3,19 +3,19 @@
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
-        electron_28 
+        electron_28
       ];
     };
-  programs = {
-    vscode = {
-      enable = true;
-      # search for vscode extension
-      extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        # theme
-        catppuccin.catppuccin-vsc
-        # ui
-        usernamehw.errorlens
+    programs = {
+      vscode = {
+        enable = true;
+        # search for vscode extension
+        extensions = with pkgs.vscode-extensions; [
+          bbenoist.nix
+          # theme
+          catppuccin.catppuccin-vsc
+          # ui
+          usernamehw.errorlens
         ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "remote-containers";

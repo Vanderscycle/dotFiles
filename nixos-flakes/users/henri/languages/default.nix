@@ -1,7 +1,7 @@
 { home-manager, username, pkgs, ... }:
 {
   home-manager.users.${username} = {
-    home = { 
+    home = {
       packages = with pkgs; [
         # docker
         nodePackages.dockerfile-language-server-nodejs
@@ -46,7 +46,7 @@
         poetry
         pre-commit
         nodePackages.pyright
-        (python311.withPackages(ps: with ps; [
+        (python311.withPackages (ps: with ps; [
           toml
           python-lsp-server
           pyls-isort

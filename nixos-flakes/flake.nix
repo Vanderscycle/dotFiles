@@ -37,7 +37,8 @@
               ./modules/status-bars/waybar
               ./modules/cloud
               ./modules/containers
-              hosts.nixosModule {
+              hosts.nixosModule
+              {
                 networking.stevenBlackHosts.enable = true;
               }
             ];
@@ -55,7 +56,8 @@
               ./modules/programs/multimedia
               ./modules/desktop-environment/xfce
               ./modules/cloud
-              hosts.nixosModule {
+              hosts.nixosModule
+              {
                 networking.stevenBlackHosts.enable = true;
               }
             ];

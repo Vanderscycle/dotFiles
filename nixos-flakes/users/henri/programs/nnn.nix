@@ -8,9 +8,9 @@
         NNN_TMPFILE = "/tmp/nnn";
         NNN_FIFO = "/tmp/nnn.fifo";
       };
-    packages = with pkgs; [
-      nnn
-    ];
+      packages = with pkgs; [
+        nnn
+      ];
     };
   };
 }

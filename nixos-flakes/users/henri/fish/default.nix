@@ -9,12 +9,12 @@
     home = {
       sessionVariables = {
         # FCITX input-related
-        GTK_IM_MODULE="fcitx";
-        QT_IM_MODULE="fcitx";
-        XMODIFIERS="@im=fcitx";
-        GLFW_IM_MODULE="fcitx";
-        INPUT_METHOD="fcitx";
-        IMSETTINGS_MODULE="fcitx";
+        GTK_IM_MODULE = "fcitx";
+        QT_IM_MODULE = "fcitx";
+        XMODIFIERS = "@im=fcitx";
+        GLFW_IM_MODULE = "fcitx";
+        INPUT_METHOD = "fcitx";
+        IMSETTINGS_MODULE = "fcitx";
 
         SUDO_EDITOR = "emacs";
         EDITOR = "vim";
@@ -109,12 +109,12 @@
           kubectl delete all --all -n "$argv[1]"
         '';
         # nix
-        nixit =  ''
+        nixit = ''
           set -xg SHELL_FILE (find /home/henri/Documents/houseOfNixAndPain/shells -name 'shell.nix' | fzf)
           nix-shell $SHELL_FILE 
         '';
         nix-clean = "nix-store --gc";
-        nix-update="sudo nixos-rebuild switch";
+        nix-update = "sudo nixos-rebuild switch";
         nix-purge = ''
           sudo nix-collect-garbage -d
           sudo nix-store --optimise
@@ -148,7 +148,7 @@
         nas-eject = "sudo umount /mnt/nas";
         # kitty
         new_kitty_tab = "kitty @ new-tab --cwd (pwd)";
-        };
+      };
       shellAbbrs = {
         l = "less";
         k = "kustomize";
@@ -158,7 +158,7 @@
         ls = "eza -al";
         ":q" = "exit";
         top = "btop";
-        kt="new_kitty_tab";
+        kt = "new_kitty_tab";
       };
     };
   };

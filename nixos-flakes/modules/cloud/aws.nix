@@ -1,6 +1,6 @@
-{pkgs,...}:
+{ pkgs, ... }:
 {
-    environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     ssm-session-manager-plugin
     awscli2
     rclone

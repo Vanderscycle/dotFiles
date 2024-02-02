@@ -1,16 +1,16 @@
-{ username, pkgs, ...}:
+{ username, pkgs, ... }:
 {
   services = {
     xserver = {
       enable = true;
       desktopManager.xfce.enable = true;
       displayManager = {
-        defaultSession = "xfce"; 
+        defaultSession = "xfce";
         lightdm.enable = true;
         autoLogin = {
-	  enable = true;
-	  user = "${username}";
-	};
+          enable = true;
+          user = "${username}";
+        };
       };
     };
   };

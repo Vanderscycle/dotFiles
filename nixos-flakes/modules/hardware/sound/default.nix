@@ -6,7 +6,7 @@
   # Sound settings
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.support32Bit = true; 
+  hardware.pulseaudio.support32Bit = true;
   #environment.systemPackages = with pkgs; [ pulseaudio ];
   services.pipewire = {
     enable = true;
@@ -15,7 +15,7 @@
       support32Bit = true;
     };
     pulse.enable = true;
-   # wireplumber.enable = true;
+    # wireplumber.enable = true;
   };
 }
 
