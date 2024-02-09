@@ -6,9 +6,13 @@
   };
 
   outputs = { self, nixpkgs, ... } @ attrs:
+    let
+      supportedSystems = [ "aarch64-linux" ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+    in
    {
       rpiConfigurations = {
-
         master =
           let system = "aarch64-linux";
           in nixpkgs.lib.nixosSystem {
