@@ -24,6 +24,7 @@
             } // attrs;
             modules = [
               ./.
+              ./modules/master
             ];
           }; #master
         worker =
@@ -36,6 +37,7 @@
             } // attrs;
             modules = [
               ./.
+              # ./modules/worker
             ];
           }; #worker
       }; # nixosConfigurations

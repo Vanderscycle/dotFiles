@@ -37,6 +37,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     git
+    fd
     vim
     k3s
     curl
