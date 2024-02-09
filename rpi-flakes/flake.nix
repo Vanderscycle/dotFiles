@@ -13,7 +13,7 @@
           let system = "aarch64-linux";
           in nixpkgs.lib.nixosSystem {
             specialArgs = {
-              username = "root";
+              username = "guest"; # root
               hostname = "master";
               interface = "wlan0";
               inherit system;

@@ -1,9 +1,7 @@
 { username, hostname, interface, pkgs, lib, ... }:
 
 let
-  password = "root"; # temp psswd
-  # SSID = "mywifi";
-  # SSIDpassword = "mypassword";
+  password = "guest"; # temp psswd
 in {
 
   boot = {
@@ -33,15 +31,15 @@ in {
     hostName = hostname;
     wireless = {
       enable = true;
-      # networks."${SSID}".psk = SSIDpassword; # unabled due to password
       interfaces = [ interface ];
     };
   };
 
   environment.systemPackages = with pkgs; [
+    git
     vim
     k3s
-    wget
+    curl
   ];
 
   services.openssh.enable = true;
