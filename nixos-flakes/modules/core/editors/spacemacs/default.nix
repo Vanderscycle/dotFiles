@@ -21,5 +21,11 @@
       };
     };
   };
+environment.systemPackages = with pkgs; [
+  sqlite
+  cmake
+  gcc
+];
+
 }
 
