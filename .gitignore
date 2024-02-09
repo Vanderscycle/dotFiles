@@ -5,3 +5,4 @@
 #ansible related 
 geerlingguy*
 
+/postInstallScripts/nixos/nixos/.#configuration.nix

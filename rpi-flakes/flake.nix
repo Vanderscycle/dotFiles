@@ -12,7 +12,7 @@
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in
    {
-      rpiConfigurations = {
+      nixosConfigurations = {
         master =
           let system = "aarch64-linux";
           in nixpkgs.lib.nixosSystem {
@@ -39,7 +39,7 @@
               ./.
             ];
           }; #worker
-      }; # rpiConfigurations
+      }; # nixosConfigurations
 
   };
 }
