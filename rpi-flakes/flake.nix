@@ -10,30 +10,29 @@
       supportedSystems = [ "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+      system = "aarch64-linux";
     in
    {
       nixosConfigurations = {
         master =
-          let system = "aarch64-linux";
-          in nixpkgs.lib.nixosSystem {
+          nixpkgs.lib.nixosSystem {
+            system = system;
             specialArgs = {
               username = "guest"; # root
               hostname = "master";
               interface = "wlan0";
-              inherit system;
             } // attrs;
             modules = [
               ./.
             ];
           }; #master
         worker =
-          let system = "aarch64-linux";
-          in nixpkgs.lib.nixosSystem {
+          nixpkgs.lib.nixosSystem {
+            system = system;
             specialArgs = {
               username = "root";
               hostname = "worker";
               interface = "wlan0";
-              inherit system;
             } // attrs;
             modules = [
               ./.
