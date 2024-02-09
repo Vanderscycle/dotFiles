@@ -8,7 +8,7 @@
       useDHCP = false;
       ipv4 = {
         addresses = [
-          { address = "10.7.1.60"; prefixLength = 24; }
+          { address = "10.7.1.60"; }
         ];
         routes = [
           { address = "default"; via = "10.7.1.3"; }

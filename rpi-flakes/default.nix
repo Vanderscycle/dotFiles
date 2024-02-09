@@ -40,6 +40,8 @@ in {
     fd
     vim
     k3s
+    helm
+    kustomize
     curl
   ];
 
