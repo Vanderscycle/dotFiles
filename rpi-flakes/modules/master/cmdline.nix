@@ -11,7 +11,7 @@
           { address = "10.7.1.60"; }
         ];
         routes = [
-          { address = "default"; via = "10.7.1.3"; }
+          { address = "10.7.1.3"; }
         ];
       };
     };
