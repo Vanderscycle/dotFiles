@@ -1,4 +1,4 @@
-{ hostname lib, pkgs, ... }:
+{ hostname, lib, pkgs, ... }:
 
 {
   networking = {
@@ -14,15 +14,15 @@
   };
 
   boot.kernelParams = [
-    "console=serial0,115200",
-    "console=tty1",
-    "root=/dev/mmcblk0p2",
-    "rootfstype=ext4",
-    "elevator=deadline",
-    "fsck.repair=yes",
-    "rootwait",
-    "cgroup_memory=1",
-    "cgroup_enable=memory",
+    "console=serial0,115200"
+    "console=tty1"
+    "root=/dev/mmcblk0p2"
+    "rootfstype=ext4"
+    "elevator=deadline"
+    "fsck.repair=yes"
+    "rootwait"
+    "cgroup_memory=1"
+    "cgroup_enable=memory"
   ];
 
   boot.kernel.sysctl = {
