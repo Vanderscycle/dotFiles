@@ -21,21 +21,12 @@ in
     specialArgs = { inherit colmena; };
   };
 
-  defaults = { pkgs, ... }: {
-    imports = [
-      # Assuming you have a way to provide the Raspberry Pi 4 module and common configuration.
-      # You might need to adjust this part to fit your setup.
-      ./hosts/rpis/common.nix
-    ];
-  };
-
   ${hostname} = {
-
     nixpkgs.system = "aarch64-linux";
     deployment = {
       buildOnTarget = true;
-      targetHost = "strawberry";
-      targetUser = "strawberry";
+      targetHost = "master";
+      targetUser = "master";
       tags = [ "rpi" ];
     };
   };

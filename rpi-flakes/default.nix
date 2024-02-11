@@ -4,7 +4,6 @@ let
   password = "root"; # temp psswd
 in {
   imports = [
-    ./modules/common
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/raspberry-pi/4"
   ];
 
@@ -63,6 +62,7 @@ in {
     helm
     kustomize
     curl
+    wget
   ];
 
   services.openssh = {
