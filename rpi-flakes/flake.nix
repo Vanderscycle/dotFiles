@@ -3,9 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    colmena.url = "github:zhaofengli/colmena";
   };
 
-  outputs = { self, nixpkgs, ... } @ attrs:
+  outputs = { self, colmena, nixpkgs, ... } @ attrs:
     let
       supportedSystems = [ "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;

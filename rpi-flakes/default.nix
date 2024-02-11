@@ -4,11 +4,18 @@ let
   password = "root"; # temp psswd
 in {
   imports = [
+    ./modules/common
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/raspberry-pi/4"
   ];
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+    kernelParams = [
+      "cgroup_memory=1"
+      "cgroup_enable=cpuset"
+      "cgroup_enable=memory"
+    ];
+
     initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
     loader = {
       grub.enable = false;
@@ -38,7 +45,12 @@ in {
     };
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ]; 
+      allowedTCPPorts = [
+        22
+        6443
+        6444
+        9000
+      ];
     };
   };
 
