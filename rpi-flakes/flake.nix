@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     colmena.url = "github:zhaofengli/colmena";
+    hardware.url = "github:NixOS/nixos-hardware";
   };
 
-  outputs = { self, colmena, nixpkgs, ... } @ attrs:
+  outputs = { self, hardware, colmena, nixpkgs, ... } @ attrs:
     let
       supportedSystems = [ "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -15,7 +16,7 @@
 
       commonConfiguration = { pkgs, ... }: {
         imports = [
-          attrs.hardware.nixosModules.raspberry-pi-4
+          hardware.nixosModules.raspberry-pi-4
         ];
       };
     in
@@ -27,6 +28,7 @@
             specialArgs = {
               hostname = "master";
               interface = "wlan0";
+              commonConfig = commonConfiguration;
             } // attrs;
             modules = [
               ./.
