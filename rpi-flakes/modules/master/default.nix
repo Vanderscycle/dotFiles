@@ -1,6 +1,6 @@
 {
   imports = [
-    # ./cmdline.nix
-    ./iptables.nix
+    ./cmdline.nix
+    #./iptables.nix
   ];
 }

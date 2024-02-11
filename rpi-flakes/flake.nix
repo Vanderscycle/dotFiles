@@ -18,7 +18,7 @@
           nixpkgs.lib.nixosSystem {
             system = system;
             specialArgs = {
-              username = "root"; # root
+              username = "master"; # root
               hostname = "master";
               interface = "wlan0";
             } // attrs;
@@ -31,7 +31,7 @@
           nixpkgs.lib.nixosSystem {
             system = system;
             specialArgs = {
-              username = "root";
+              username = "worker";
               hostname = "worker";
               interface = "wlan0";
             } // attrs;
