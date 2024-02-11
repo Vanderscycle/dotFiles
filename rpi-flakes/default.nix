@@ -1,8 +1,11 @@
-{ username, hostname, interface, pkgs, lib, ... }:
+{ hostname, interface, pkgs, lib, ... }:
 
 let
   password = "root"; # temp psswd
 in {
+  imports = [
+    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/raspberry-pi/4"
+  ];
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
@@ -43,23 +46,44 @@ in {
     git
     fd
     vim
+    raspberrypi-eeprom
     k3s
     helm
     kustomize
     curl
   ];
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
 
   users = {
     mutableUsers = false;
-    users."${username}" = {
+    users."${hostname}" = {
       isNormalUser = true;
       password = password;
       extraGroups = [ "wheel" ];
     };
   };
+  security.sudo.wheelNeedsPassword = false;
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+      workstation = true;
+    };
+  };
+
 
   hardware.enableRedistributableFirmware = true;
+
   system.stateVersion = "23.11";
 }
