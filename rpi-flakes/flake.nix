@@ -18,7 +18,7 @@
           nixpkgs.lib.nixosSystem {
             system = system;
             specialArgs = {
-              username = "guest"; # root
+              username = "root"; # root
               hostname = "master";
               interface = "wlan0";
             } // attrs;

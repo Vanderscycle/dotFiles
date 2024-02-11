@@ -4,13 +4,17 @@
   networking = {
     hostName = hostname; # Set the system's host name
     useDHCP = false; # Disable DHCP for all interfaces
-    interfaces.eth0.useDHCP = false; # Specifically disable DHCP on eth0
-    interfaces.eth0.ipv4.addresses = [
-      { address = "10.7.1.60"; prefixLength = 24; } # Include prefixLength for the IP address
-    ];
-    interfaces.eth0.routes = [ # Correct location for route configuration
-      { address = "default"; via = "10.7.1.3"; } # Define the default gateway
-    ];
+    interfaces.eth0 = {
+      useDHCP = false; # Specifically disable DHCP on eth0
+      ipv4 = {
+        addresses = [
+          { address = "10.7.1.60"; prefixLength = 24; } # Include prefixLength for the IP address
+        ];
+        routes = [ # Correct location for route configuration
+          { address = "default"; via = "10.7.1.3"; prefixLength = 24;} # Define the default gateway
+        ];
+      };
+    };
   };
   boot.kernelParams = [
     "console=serial0,115200"

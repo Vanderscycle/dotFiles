@@ -1,7 +1,7 @@
 { username, hostname, interface, pkgs, lib, ... }:
 
 let
-  password = "guest"; # temp psswd
+  password = "root"; # temp psswd
 in {
 
   boot = {
@@ -30,8 +30,12 @@ in {
   networking = {
     hostName = hostname;
     wireless = {
-      enable = true;
+      enable = false;
       interfaces = [ interface ];
+    };
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 22 ]; 
     };
   };
 
