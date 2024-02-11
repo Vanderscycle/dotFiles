@@ -12,6 +12,12 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
       system = "aarch64-linux";
+
+      commonConfiguration = { pkgs, ... }: {
+        imports = [
+          attrs.hardware.nixosModules.raspberry-pi-4
+        ];
+      };
     in
    {
       nixosConfigurations = {
@@ -24,7 +30,10 @@
             } // attrs;
             modules = [
               ./.
-              ./modules/master
+              #./modules/master
+              ({ config, pkgs, ... }: {
+                imports = [ attrs.commonConfig ];
+              })
             ];
           }; #master
         worker =
