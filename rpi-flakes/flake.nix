@@ -7,7 +7,7 @@
     hardware.url = "github:NixOS/nixos-hardware";
   };
 
-  outputs = { self, hardware, colmena, nixpkgs, ... } @ inputs:
+  outputs = { self, hardware, colmena, nixpkgs, ... } @ attrs:
     let
       supportedSystems = [ "aarch64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -29,13 +29,13 @@
               hostname = "master";
               interface = "wlan0";
               commonConfig = commonConfiguration;
-            };
+            } // attrs;
             modules = [
               ./.
-              #./modules/master
-              ({ config, pkgs, ... }: {
-                imports = [ inputs.commonConfig ];
-              })
+              ./modules/master
+              # ({ config, pkgs, ... }: {
+              #   imports = [ attrs.commonConfig ];
+              # })
             ];
           }; #master
         worker =
@@ -44,10 +44,13 @@
             specialArgs = {
               hostname = "worker";
               interface = "wlan0";
-            };
+            } // attrs;
             modules = [
               ./.
               # ./modules/worker
+              # ({ config, pkgs, ... }: {
+              #   imports = [ attrs.commonConfig ];
+              # })
             ];
           }; #worker
       }; # nixosConfigurations

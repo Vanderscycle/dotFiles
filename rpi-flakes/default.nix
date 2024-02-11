@@ -1,8 +1,6 @@
 { hostname, interface, pkgs, lib, ... }:
 
-let
-  password = "root"; # temp psswd
-in {
+{
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
@@ -50,34 +48,31 @@ in {
     };
   };
 
+  programs.fish.enable = true;
+
   environment.systemPackages = with pkgs; [
     git
     fd
     vim
     raspberrypi-eeprom
-    k3s
     helm
     kustomize
     curl
     wget
   ];
 
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
-  };
+  # sops.secrets.k3s_token = {
+  #   sopsFile = ./secrets.yaml;
+  # };
 
-  users = {
-    mutableUsers = false;
-    users."${hostname}" = {
-      isNormalUser = true;
-      password = password;
-      extraGroups = [ "wheel" ];
-    };
-  };
-  security.sudo.wheelNeedsPassword = false;
+  # services.k3s.tokenFile = config.sops.secrets.k3s_token.path;
 
+  # sops = {
+  #   age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+  # };
+
+  services.tailscale.enable = true;
+  services.k3s.enable = true;
   services.avahi = {
     enable = true;
     nssmdns = true;
@@ -91,8 +86,13 @@ in {
     };
   };
 
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
 
+  security.sudo.wheelNeedsPassword = false;
   hardware.enableRedistributableFirmware = true;
-
   system.stateVersion = "23.11";
 }

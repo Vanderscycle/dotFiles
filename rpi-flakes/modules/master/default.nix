@@ -1,7 +1,5 @@
 {
   imports = [
-    # ./cmdline.nix
-    #./iptables.nix
-    ./colmena.nix
+    ./user.nix
   ];
 }
