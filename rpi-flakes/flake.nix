@@ -13,14 +13,28 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
       system = "aarch64-linux";
-
-      commonConfiguration = { pkgs, ... }: {
-        imports = [
-          hardware.nixosModules.raspberry-pi-4
-        ];
-      };
     in
    {
+
+      colmena = {
+        meta = {
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+          };
+          specialArgs = attrs;
+        };
+
+        defaults = { pkgs, ... }: {
+          imports = [
+            inputs.hardware.nixosModules.raspberry-pi-4
+          ];
+        };
+        deployment = {
+          buildOnTarget = true;
+          targetHost = "master";
+          targetUser = "master";
+          tags = [ "rpi" ];
+        };
       nixosConfigurations = {
         master =
           nixpkgs.lib.nixosSystem {
@@ -47,7 +61,7 @@
             } // attrs;
             modules = [
               ./.
-              # ./modules/worker
+              ./modules/worker
               # ({ config, pkgs, ... }: {
               #   imports = [ attrs.commonConfig ];
               # })
