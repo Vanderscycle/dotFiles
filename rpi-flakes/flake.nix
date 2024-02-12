@@ -15,21 +15,25 @@
       system = "aarch64-linux";
     in
    {
-
       colmena = {
         meta = {
           nixpkgs = import nixpkgs {
             system = "x86_64-linux";
           };
-          specialArgs = attrs;
+          specialArgs = {
+            hostname = "master";
+            interface = "wlan0";
+          } // attrs;
         };
 
         defaults = { pkgs, ... }: {
           imports = [
             attrs.hardware.nixosModules.raspberry-pi-4
+            ./.
           ];
         };
         master = {
+          nixpkgs.system = "aarch64-linux";
           deployment = {
             buildOnTarget = true;
             targetHost = "master";
