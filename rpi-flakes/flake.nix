@@ -26,15 +26,18 @@
 
         defaults = { pkgs, ... }: {
           imports = [
-            inputs.hardware.nixosModules.raspberry-pi-4
+            attrs.hardware.nixosModules.raspberry-pi-4
           ];
         };
-        deployment = {
-          buildOnTarget = true;
-          targetHost = "master";
-          targetUser = "master";
-          tags = [ "rpi" ];
+        master = {
+          deployment = {
+            buildOnTarget = true;
+            targetHost = "master";
+            targetUser = "master";
+            tags = [ "rpi" ];
+          };
         };
+      };
       nixosConfigurations = {
         master =
           nixpkgs.lib.nixosSystem {
@@ -42,14 +45,10 @@
             specialArgs = {
               hostname = "master";
               interface = "wlan0";
-              commonConfig = commonConfiguration;
             } // attrs;
             modules = [
               ./.
               ./modules/master
-              # ({ config, pkgs, ... }: {
-              #   imports = [ attrs.commonConfig ];
-              # })
             ];
           }; #master
         worker =
@@ -62,9 +61,6 @@
             modules = [
               ./.
               ./modules/worker
-              # ({ config, pkgs, ... }: {
-              #   imports = [ attrs.commonConfig ];
-              # })
             ];
           }; #worker
       }; # nixosConfigurations
