@@ -17,8 +17,6 @@
             TZ = "Etc/UTC";
           };
           ports = [ "3000:3000" "3001:3001" ];
-          restartIfChanged = true;
-          seccomp = "unconfined"; # Optional seccomp settings
         };
       };
     };

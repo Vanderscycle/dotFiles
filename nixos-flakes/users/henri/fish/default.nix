@@ -82,6 +82,9 @@
         s-laptop = ''
           ssh henri@192.168.1.231
         '';
+        s-nas = ''
+          ssh sysAdminHarambe@192.168.1.246
+        '';
         s-router = ''
           ssh pi@192.168.1.1
         '';
