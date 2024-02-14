@@ -40,6 +40,7 @@ in
         insomnia
         # dns
         dogdns
+        nssmdns # for local rpi cluster
       ];
       file = {
         # K9s

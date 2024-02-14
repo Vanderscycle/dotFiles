@@ -51,6 +51,7 @@
               interface = "wlan0";
             } // attrs;
             modules = [
+              attrs.hardware.nixosModules.raspberry-pi-4
               ./.
               ./modules/master
             ];
