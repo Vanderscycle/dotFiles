@@ -32,7 +32,7 @@
               ./.
               ./modules/programs/gaming
               ./modules/programs/multimedia
-              ./modules/window-managers/hyprland
+              ./modules/window-manager/hyprland
               ./modules/status-bars/waybar
               ./modules/cloud
               ./modules/containers
