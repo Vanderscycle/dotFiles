@@ -5,6 +5,9 @@ in
 {
 
   home-manager.users.${username} = {
+    programs.waybar = {
+      enable = true;
+    };
     home = {
       file = {
         ".config/waybar/config".source = "${dotfiles_dir}/.config/waybar/config";

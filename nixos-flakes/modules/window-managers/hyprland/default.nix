@@ -24,6 +24,10 @@ in
     xserver = {
       enable = true;
       displayManager = {
+        autoLogin = {
+          enable = true;
+          user = "${username}";
+        };
         gdm = {
           enable = true;
           wayland = true;
