@@ -23,9 +23,7 @@
           restartIfChanged = true;
           seccomp = "unconfined"; # Optional seccomp settings
         };
-      }
-
-        };
+      };
     };
   };
 }
