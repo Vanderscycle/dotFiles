@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   virtualisation = {
     oci-containers = {
@@ -11,7 +9,6 @@
           ports = [ "4243:8080" ];
         };
         orcaslicer = {
-          backend = "docker";
           image = "lscr.io/linuxserver/orcaslicer:latest";
           volumes = [ "/path/to/config:/config" ];
           environment = {
