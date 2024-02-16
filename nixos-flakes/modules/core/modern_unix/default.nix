@@ -15,5 +15,6 @@
     zoxide
     tldr
     unzip
+    parted # remember about lslk
   ];
 }
