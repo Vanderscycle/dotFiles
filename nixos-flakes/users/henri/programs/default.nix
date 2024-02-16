@@ -7,6 +7,7 @@
     ./keychain.nix
     ./nnn.nix
     ./transmission.nix
+    ./rofi.nix
   ];
 
   # ----------------------

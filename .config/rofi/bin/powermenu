@@ -1,6 +1,5 @@
-sac
 #!/usr/bin/env bash
-rofi_command="rofi -theme $HOME/.config/rofi/powermenu.rasi"
+rofi_command="rofi -theme $HOME/.config/rofi/config/powermenu.rasi"
 
 uptime=$(uptime -p | sed -e 's/up //g')
 
@@ -11,13 +10,13 @@ if [[ "$DIR" == "powermenus" ]]; then
 	lock=""
 	suspend=""
 	logout=""
-	ddir="$HOME/.config/rofi"
+	ddir="$HOME/.config/rofi/config"
 else
 
 # For some reason the Icons are mess up I don't know why but to fix it uncomment section 2 and comment section 1 but if the section 1 icons are mess up uncomment section 2 and comment section 1
 
 	# Buttons
-	layout=`cat $HOME/.config/rofi/powermenu.rasi | grep BUTTON | cut -d'=' -f2 | tr -d '[:blank:],*/'`
+	layout=`cat $HOME/.config/rofi/config/powermenu.rasi | grep BUTTON | cut -d'=' -f2 | tr -d '[:blank:],*/'`
 	if [[ "$layout" == "TRUE" ]]; then
   # Section 1
 
@@ -48,7 +47,7 @@ else
 #		suspend="鈴Sleep"
 #		logout=" Logout"
 	fi
-	ddir="$HOME/.config/rofi"
+	ddir="$HOME/.config/rofi/config"
 fi
 
 # Ask for confirmation
