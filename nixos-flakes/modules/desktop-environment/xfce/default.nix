@@ -1,20 +1,9 @@
-{ username, pkgs, ... }:
+{ pkgs, ... }:
 {
   services = {
     xserver = {
       enable = true;
       desktopManager.xfce.enable = true;
-      displayManager = {
-        defaultSession = "xfce";
-        lightdm.enable = true;
-        autoLogin = {
-          enable = true;
-          user = "${username}";
-        };
-      };
     };
   };
-  environment.systemPackages = with pkgs; [
-    xclip
-  ];
 }

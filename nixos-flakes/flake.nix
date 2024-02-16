@@ -42,6 +42,7 @@
               ./.
               ./modules/programs/gaming
               ./modules/programs/multimedia
+              ./modules/desktop-environment/xfce
               ./modules/window-managers/hyprland
               ./modules/status-bars/waybar
               ./modules/cloud
@@ -64,6 +65,7 @@
               ./.
               ./modules/programs/multimedia
               ./modules/desktop-environment/xfce
+              ./modules/window-managers/lightdm
               ./modules/cloud
               hosts.nixosModule
               {
