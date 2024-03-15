@@ -103,6 +103,7 @@
         docker-irmAll = "docker rmi -f (docker images  -aq)";
         docker-vrmAll = "docker volume prune";
         docker-prmAll = "docker builder prune -af";
+        docker-clean = "docker system prune -af"; # remove all containers, images, volumes, and networks without destroying running containers/images
         # kubernetes
         k-seal = ''
           kubectl -n "$argv[1]" get secret "$argv[2]" -o json | jq '.data | map_values(@base64d)'
@@ -154,7 +155,7 @@
       };
       shellAbbrs = {
         l = "less";
-        k = "kustomize";
+        k = "kubectl";
       };
       shellAliases = {
         "..." = "cd ../..";

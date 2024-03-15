@@ -31,6 +31,19 @@
     #interactiveShellIinit = ''
     #'';
     functions = {
+
+        copy = ''
+    local selected_file
+    selected_file=$(fzf)
+
+    [ -z "$selected_file" ] && echo "No file selected." && return 1
+    [ ! -e "$selected_file" ] && echo "File does not exist: $selected_file" && return 1
+    [ ! -f "$selected_file" ] && echo "Not a regular file: $selected_file" && return 1
+
+    xclip -selection clipboard < "$selected_file"
+
+    echo "Contents of $selected_file copied to clipboard."
+            '';
       envsource = ''
         for line in (cat $argv | grep -v '^#')
           set item (string split -m 1 '=' $line)
@@ -66,7 +79,6 @@
       nix-clean = "nix-store --gc";
       nix-update="sudo nixos-rebuild switch";
       nix-purge = ''
-      
         sudo nix-collect-garbage -d
         sudo nix-store --optimise
         sudo nix-env --delete-generations old 
