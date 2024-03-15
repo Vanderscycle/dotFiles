@@ -1,4 +1,3 @@
-{  }:
 {
 services.transmission = {
     enable = true; #Enable transmission daemon
@@ -9,4 +8,5 @@ services.transmission = {
       download-dir = "~/Transmission";
       incomplete-dir = "/mnt/backup/transmission ";
   };
+};
 }
