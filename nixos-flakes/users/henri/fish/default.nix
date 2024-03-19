@@ -17,7 +17,7 @@
         IMSETTINGS_MODULE = "fcitx";
 
         SUDO_EDITOR = "emacs";
-        EDITOR = "vim";
+        EDITOR = "lvim";
         BROWSER = "firefox";
         TERMINAL = "kitty";
         NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
