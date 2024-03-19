@@ -15,13 +15,14 @@
         source = pkgs.fetchFromGitHub {
           owner = "syl20bnr";
           repo = "spacemacs";
-          rev = "d84b01172d68f09791210d7de385f596ccf26b7";
-          sha256 = "0367rpn4wkpb4zmwpfy7bfbxdwc6s2154hqwpmr9mnmj2k8fd43l";
+          rev = "4a227fc94651136a8de54bcafa7d22abe1fa0295";
+          sha256 = "1zfmmzxaa8ym2nqx9ii6gvavy34x1826s4zsf9dhc98nx9zy16zs";
         };
       };
     };
   };
 environment.systemPackages = with pkgs; [
+  emacs
   sqlite
   cmake
   gcc
