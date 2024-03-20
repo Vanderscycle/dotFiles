@@ -21,12 +21,12 @@
       };
     };
   };
-environment.systemPackages = with pkgs; [
-  emacs
-  sqlite
-  cmake
-  gcc
-];
+  environment.systemPackages = with pkgs; [
+    emacs
+    sqlite
+    cmake
+    gcc
+  ];
 
 }
 

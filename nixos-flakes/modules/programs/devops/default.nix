@@ -5,9 +5,9 @@ let
 in
 {
 
-services.postgresql = {
-  enable = true;
-};
+  services.postgresql = {
+    enable = true;
+  };
   nixpkgs.config.packageOverrides = pkgs: {
     # tilt = unstable.tilt;
     # kubernetes-helm = unstable.kubernetes-helm;
