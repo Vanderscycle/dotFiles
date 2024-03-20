@@ -2,11 +2,11 @@
 {
   imports = [
     ./btop.nix
-    ./flameshot.nix
+    ./screenshot.nix
     ./keyboard.nix
     ./keychain.nix
     ./nnn.nix
-    #./transmission.nix
+    ./transmission.nix
     ./rofi.nix
   ];
 
