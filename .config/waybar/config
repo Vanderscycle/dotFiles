@@ -2,7 +2,7 @@
   "layer": "top",
   "modules-left": [
     "custom/launcher",
-    "wlr/workspaces",
+    "hyprland/workspaces",
     "custom/scratchpad-indicator",
     "temperature",
     "pulseaudio",
@@ -21,7 +21,7 @@
     "disk",
     "memory",
     "cpu",
-    /* "network", */
+    "network",
     "battery",
     "tray",
     // "custom/recording",
@@ -34,9 +34,9 @@
     "tooltip": false,
   },
   "hyprland/workspaces": {
-       "format": "{icon}",
-       "on-scroll-up": "hyprctl dispatch workspace e+1",
-       "on-scroll-down": "hyprctl dispatch workspace e-1",
+      "format": "{icon}",
+      "on-scroll-up": "hyprctl dispatch workspace e+1",
+      "on-scroll-down": "hyprctl dispatch workspace e-1",
       "format-icons": {
         "1": "一",
         "2": "二",

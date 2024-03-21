@@ -47,10 +47,10 @@
               ./modules/status-bars/waybar
               ./modules/cloud
               #./modules/containers
-              # hosts.nixosModule
-              # {
-              #   networking.stevenBlackHosts.enable = true;
-              # }
+              hosts.nixosModule
+              {
+                networking.stevenBlackHosts.enable = true;
+              }
             ];
           }; #desktop
         laptop =
