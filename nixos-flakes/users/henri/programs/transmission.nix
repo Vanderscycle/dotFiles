@@ -1,4 +1,8 @@
+{pkgs, ...}
 {
+  environment.systemPackages = with pkgs;[
+    transmission-gtk
+  ];
   services.transmission = {
     enable = true; #Enable transmission daemon
     openRPCPort = true; #Open firewall for RPC
