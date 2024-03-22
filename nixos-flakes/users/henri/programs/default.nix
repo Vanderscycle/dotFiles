@@ -8,6 +8,7 @@
     ./nnn.nix
     ./transmission.nix
     ./rofi.nix
+    ./printer.nix
   ];
 
   # ----------------------
