@@ -15,9 +15,18 @@ in
       })
     ];
   };
-  programs.hyprland = {
+  programs = {
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+    sway = {
+      enable = true;
+    };
+  };
+  xdg.portal = {
     enable = true;
-    xwayland.enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
   };
 
   services = {
@@ -50,9 +59,9 @@ in
         MOZ_ENABLE_WAYLAND = 1;
         MOZ_WEBRENDER = 1;
         XDG_SESSION_TYPE = "wayland";
+
       };
       packages = with pkgs; [
-        sway
         swww
         xdg-desktop-portal-hyprland
         wl-clipboard

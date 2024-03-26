@@ -5,7 +5,6 @@
     ./fonts
     ./kitty
     ./starship
-    ./wezterm
   ];
 
   # ---- Home Configuration ----

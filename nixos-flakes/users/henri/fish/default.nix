@@ -16,16 +16,6 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
 
-        # Wayland compatibility
-        # NIXOS_OZONE_WL = "1"; # disabled for vscode 09/01/2024
-        XDG_CURRENT_DESKTOP = "Sway";
-        QT_QPA_PLATFORM = "wayland";
-        CLUTTER_BACKEND         ="wayland";
-        SDL_VIDEODRIVER         = "wayland";
-        MOZ_ENABLE_WAYLAND      = 1;
-        MOZ_WEBRENDER           = 1;
-        XDG_SESSION_TYPE        ="wayland";
-
         SUDO_EDITOR = "emacs";
         EDITOR = "lvim";
         BROWSER = "firefox";

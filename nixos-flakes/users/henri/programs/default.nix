@@ -9,19 +9,16 @@
     ./transmission.nix
     ./rofi.nix
     ./printer.nix
+    ./plastic_printer.nix
   ];
 
   # ----------------------
   # default applications
   # ---------------------  
-  # xdg.mimeApps.defaultApplications = {
-  #   "text/html" = [ "firefox.desktop" ];
-  #   "x-scheme-handler/http" = [ "firefox.desktop" ];
-  #   "x-scheme-handler/https" = [ "firefox.desktop" ];
-  #   "x-scheme-handler/about" = [ "firefox.desktop" ];
-  # #   "image/png" = [ "shotwell.desktop" ];
-  # #   "image/jpeg" = [ "shotwell.desktop" ];
-  # #   "application/pdf" = [ "zathura.desktop" ];
-  #   "inode/directory" = [ "org.xfce.Thunar.desktop" ];
-  # };
+  xdg.mimeApps = {
+    defaultApplications = {
+      "application/pdf" = [ "zathura.desktop" ];
+      "application/json" = [ "vim.desktop" ]; # You'll need a .desktop file for Vim or your preferred editor
+    };
+  };
 }
