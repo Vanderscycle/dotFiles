@@ -32,7 +32,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
     dotspacemacs-configuration-layers
-    '(yaml
+    '(shell-scripts
+      yaml
       ;; ----------------------------------------------------------------
       ;; Example of useful layers you may want to use right away.
       ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -96,6 +97,7 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
      exec-path-from-shell
+     rainbow-mode
      calfw
      perspective
      sqlite3
@@ -537,7 +539,7 @@ It should only modify the values of Spacemacs settings."
    ;; Color highlight trailing whitespace in all prog-mode and text-mode derived
    ;; modes such as c++-mode, python-mode, emacs-lisp, html-mode, rst-mode etc.
    ;; (default t)
-   dotspacemacs-show-trailing-whitespace t
+   dotspacemacs-show-trailing-whitespace nil
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
    ;; to aggressively delete empty line and long sequences of whitespace,
@@ -630,69 +632,6 @@ before packages are loaded."
 
   (add-hook 'prog-mode-hook 'copilot-mode)
 
-  ;; --- tab-bar ---
-  (defun my/tab-bar-tab-name ()
-    "Return the name of the current Projectile project, or the buffer name."
-    (if (and (fboundp 'projectile-project-name)
-             (projectile-project-p))
-        (projectile-project-name)
-      (buffer-name)))
-
-  (setq tab-bar-tab-name-function #'my/tab-bar-tab-name)
-  (tab-bar-mode 1)
-  (defhydra hydra-tab-bar (:color blue :hint nil)
-    "
-Tab Bar:
-  _n_: New Tab   _c_: Close Tab   _>_: Next Tab   _<_: Previous Tab
-"
-    ("n" tab-bar-new-tab "new")
-    ("x" tab-bar-close-tab "close")
-    (">" tab-bar-switch-to-next-tab "next")
-    ("<" tab-bar-switch-to-prev-tab "prev")
-    ("q" nil "quit" :color red))
-
-  (spacemacs/set-leader-keys "ot" 'hydra-tab-bar/body)  ;;; --- custom styling ---
-  (custom-set-faces
-   '(tab-bar-tab ((t (:background "#1e1e2e" :foreground "#cba6f7"
-                                  :box (:line-width 2 :color "#7f849c" :style released-button)
-                                  :overline "#7f849c" :underline "#f38ba8"))))
-   '(tab-bar-tab-inactive ((t (:background "#1e1e2e" :foreground "#f5e0dc"
-                                           :box (:line-width 2 :color "#7f849c" :style released-button))))))
-  ;; --- editorconfig ---
-  (editorconfig-mode 1)
-  ;; --- maggit --
-  (require 'sqlite3)
-  (with-eval-after-load 'magit
-    (require 'forge))
-
-  ;; --- exec-path ---
-  ;; https://emacs.stackexchange.com/questions/17866/magit-how-to-use-systems-ssh-agent-and-dont-ask-for-password
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
-  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
-
-  ;; --- projectile ---
-  (defun my/projectile-find-projects-in-directory (directory)
-    "Recursively search for Projectile projects in DIRECTORY."
-    (let (projects)
-      (dolist (dir (directory-files directory t "\\w+"))
-        (when (and (file-directory-p dir)
-                   (not (string-match-p "/\\." (file-name-nondirectory dir))))
-          (if (file-exists-p (expand-file-name ".git/" dir))
-              (push dir projects)
-            (setq projects (append projects (my/projectile-find-projects-in-directory dir))))))
-      projects))
-
-  (setq projectile-project-search-path
-        (append '("~/.config/home-manager")
-                (my/projectile-find-projects-in-directory "~/Documents")))
-  ;;(setq projectile-project-search-path '("~/.config/home-manager" "~/Documents" ))
-
-  ;; --- misc ---
-  (scroll-bar-mode -1) ;; disable scroll bar
-  (setq display-line-numbers t) ;; relative line numbering
-  (setf dired-kill-when-opening-new-dired-buffer t) ;; prevents dired from using new buffers
-
   ;; --- org-mode ---
   (with-eval-after-load 'org
     (defhydra hydra-org-block-insert (:color blue :hint nil)
@@ -741,15 +680,84 @@ _e_: example  _s_: source  _q_: quit
   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
   (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 
-  ;;; --- org-mode agenda ---
-  (setq org-agenda-files (directory-files-recursively "~/Documents/zettelkasten/" "\\.org$"))
-  (setq org-deadline-warning-days 14) ;; default is 14 days
-
   ;;; --- org-roam ---
-  ;; (make-directory "~/org-roam)
   (setq org-roam-directory (file-truename "/home/henri/Documents/zettelkasten/org-roam"))
   (setq find-file-visit-truename t)
   (org-roam-db-autosync-mode)
+
+  ;; --- tab-bar ---
+  (defun my/tab-bar-tab-name ()
+    "Return the name of the current Projectile project, or the buffer name."
+    (if (and (fboundp 'projectile-project-name)
+             (projectile-project-p))
+        (projectile-project-name)
+      (buffer-name)))
+
+  (setq tab-bar-tab-name-function #'my/tab-bar-tab-name)
+  (tab-bar-mode 1)
+  (defhydra hydra-tab-bar (:color blue :hint nil)
+    "
+Tab Bar:
+  _n_: New Tab    _>_: Next Tab   _<_: Previous Tab
+"
+    ("n" tab-bar-new-tab "new")
+    ("x" tab-bar-close-tab "close")
+    (">" tab-bar-switch-to-next-tab "next")
+    ("<" tab-bar-switch-to-prev-tab "prev")
+    ("q" nil "quit" :color red))
+
+  (spacemacs/set-leader-keys "ot" 'hydra-tab-bar/body)  ;;; --- custom styling ---
+  (custom-set-faces
+   '(tab-bar-tab ((t (:background "#1e1e2e" :foreground "#cba6f7"
+                                  :box (:line-width 2 :color "#7f849c" :style released-button)
+                                  :overline "#7f849c" :underline "#f38ba8"))))
+   '(tab-bar-tab-inactive ((t (:background "#1e1e2e" :foreground "#f5e0dc"
+                                           :box (:line-width 2 :color "#7f849c" :style released-button))))))
+  ;; --- editorconfig ---
+  (editorconfig-mode 1)
+  ;; --- maggit --
+  ;; (require 'sqlite3)
+  ;; (with-eval-after-load 'magit
+  ;;   (require 'forge))
+
+  ;; --- exec-path ---
+  ;; https://emacs.stackexchange.com/questions/17866/magit-how-to-use-systems-ssh-agent-and-dont-ask-for-password
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
+  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
+  ;; --- shell/eshell ---
+  (spacemacs/set-leader-keys "os" 'shell-pop)
+  (setq explicit-shell-file-name "/run/current-system/sw/bin/fish") ;; Adjust the path if Fish is located elsewhere
+  (setq shell-file-name "fish")
+
+
+
+  ;; --- projectile ---
+  (defun my/projectile-find-projects-in-directory (directory)
+    "Recursively search for Projectile projects in DIRECTORY."
+    (let (projects)
+      (dolist (dir (directory-files directory t "\\w+"))
+        (when (and (file-directory-p dir)
+                   (not (string-match-p "/\\." (file-name-nondirectory dir))))
+          (if (file-exists-p (expand-file-name ".git/" dir))
+              (push dir projects)
+            (setq projects (append projects (my/projectile-find-projects-in-directory dir))))))
+      projects))
+
+  (setq projectile-project-search-path
+        (append '("~/.config/home-manager")
+                (my/projectile-find-projects-in-directory "~/Documents")))
+
+  ;; --- misc ---
+  ;;(scroll-bar-mode -1) ;; disable scroll bar
+  (setq display-line-numbers t) ;; relative line numbering
+  (setf dired-kill-when-opening-new-dired-buffer t) ;; prevents dired from using new buffers
+
+  ;;; --- org-mode agenda ---
+  ;; (setq org-agenda-files (directory-files-recursively "~/Documents/zettelkasten/" "\\.org$"))
+  ;; (setq org-deadline-warning-days 14) ;; default is 14 days
+
 
   ;; --- org-todo ---
   (setq org-todo-keywords
@@ -758,10 +766,10 @@ _e_: example  _s_: source  _q_: quit
 
   ;; --- calfw ---
   ;; more user firendly calendar view
-  (require 'calfw)
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
+  ;; (require 'calfw)
+  ;; (setq org-agenda-start-with-log-mode t)
+  ;; (setq org-log-done 'time)
+  ;; (setq org-log-into-drawer t)
 
   ;; --- perspective ---
   ;; workspace buffer management tool
@@ -770,12 +778,13 @@ _e_: example  _s_: source  _q_: quit
   ;; (customize-set-variable 'persp-mode-prefix-key (kbd "C-c M-p"))
   ;; (persp-mode)
 
-  ;; --- shell/eshell ---
-  (spacemacs/set-leader-keys "os" 'shell-pop)
-  (setq explicit-shell-file-name "/run/current-system/sw/bin/fish") ;; Adjust the path if Fish is located elsewhere
-  (setq shell-file-name "fish")
 
   ;; --- Programming ---
+
+  ;; --- colors (hex)---
+  (add-hook 'css-mode-hook 'rainbow-mode)
+  (add-hook 'json-mode-hook 'rainbow-mode)
+
   ;;; --- svelte ---
   ;; (svelte :variables svelte-backend 'lsp)
   (setq-default js2-basic-offset 2
@@ -842,7 +851,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(sql-indent perspective calfw emacsql-sqlite org-roam-ui websocket org-roam compat copilot key-chord package-lint closql magit yaml git-commit transient helm lsp-mode helm-core magit-section treemacs evil emacsql-sqlite-module sqlite3 dap-mode lsp-docker bui zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode ws-butler writeroom-mode winum white-sand-theme which-key web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toxi-theme toml-mode toc-org terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode shell-pop seti-theme scss-mode sass-mode rustic ron-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pyim-basedict pyim pyenv-mode pydoc py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pdf-view-restore pcre2el password-generator paradox pangu-spacing overseer orgit-forge organic-green-theme org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme nix-mode naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes mmm-mode minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-python-ms lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-tramp kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jinja2-mode jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic impatient-mode hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-nixos-options helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-gutter-fringe gh-md gandalf-theme fuzzy flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-elsa flx-ido flatui-theme flatland-theme find-by-pinyin-dired farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emmet-mode elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes dockerfile-mode docker-tramp docker django-theme dired-quick-sort diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-web company-terraform company-nixos-options company-lua company-go company-ansible company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme chinese-conv cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ansible-doc ansible ample-zen-theme ample-theme all-the-icons alect-themes aggressive-indent afternoon-theme ace-pinyin ace-link ace-jump-helm-line ac-ispell))
+   '(company-shell counsel-gtags counsel swiper ivy fish-mode flycheck-bashate ggtags insert-shebang shfmt reformatter sql-indent perspective calfw emacsql-sqlite org-roam-ui websocket org-roam compat copilot key-chord package-lint closql magit yaml git-commit transient helm lsp-mode helm-core magit-section treemacs evil emacsql-sqlite-module sqlite3 dap-mode lsp-docker bui zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode ws-butler writeroom-mode winum white-sand-theme which-key web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toxi-theme toml-mode toc-org terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode shell-pop seti-theme scss-mode sass-mode rustic ron-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pyim-basedict pyim pyenv-mode pydoc py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pdf-view-restore pcre2el password-generator paradox pangu-spacing overseer orgit-forge organic-green-theme org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme nix-mode naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes mmm-mode minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-python-ms lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-tramp kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jinja2-mode jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic impatient-mode hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-nixos-options helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-gutter-fringe gh-md gandalf-theme fuzzy flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-elsa flx-ido flatui-theme flatland-theme find-by-pinyin-dired farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emmet-mode elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes dockerfile-mode docker-tramp docker django-theme dired-quick-sort diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-web company-terraform company-nixos-options company-lua company-go company-ansible company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme chinese-conv cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ansible-doc ansible ample-zen-theme ample-theme all-the-icons alect-themes aggressive-indent afternoon-theme ace-pinyin ace-link ace-jump-helm-line ac-ispell))
+ '(warning-suppress-log-types '((emacs)))
  '(warning-suppress-types
    '((emacsql)
      (emacsql)
