@@ -49,7 +49,7 @@ in
       file = {
         # K9s
         ".config/k9s/config.yml".source = "${dotfiles_dir}/.config/k9s/config.yml";
-        ".config/k9s/skin.yml".source = "${dotfiles_dir}/.config/k9s/catppucin.yml";
+        ".config/k9s/skin.yml".source = "${dotfiles_dir}/.config/k9s/skins/catppucin.yml";
       };
     };
   };

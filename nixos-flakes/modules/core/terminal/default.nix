@@ -1,7 +1,7 @@
 { pkgs, home-manager, username, ... }:
 {
   imports = [
-    ./fish
+    ./shell
     ./fonts
     ./kitty
     ./starship
@@ -14,11 +14,4 @@
     programs.vim.enable = true;
   };
 
-  # ---- System Configuration ----
-  environment.systemPackages = with pkgs; [
-    wezterm
-    vim
-    fish
-    git
-  ];
 }

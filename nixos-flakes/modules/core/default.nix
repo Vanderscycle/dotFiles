@@ -6,6 +6,6 @@
     ./security
     ./terminal
     ./editors
-    ./modern_unix
+    ./modern_unix.nix
   ];
 }
