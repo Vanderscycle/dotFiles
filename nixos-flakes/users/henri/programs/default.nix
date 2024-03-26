@@ -10,12 +10,13 @@
     ./rofi.nix
     ./printer.nix
     ./plastic_printer.nix
+    ./zathura.nix
   ];
 
   # ----------------------
   # default applications
   # ---------------------  
-  xdg.mimeApps = {
+  xdg.mime = {
     defaultApplications = {
       "application/pdf" = [ "zathura.desktop" ];
       "application/json" = [ "vim.desktop" ]; # You'll need a .desktop file for Vim or your preferred editor
