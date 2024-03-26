@@ -1,4 +1,5 @@
 k9s:
+  skin: catppucin
   refreshRate: 2
   maxConnRetry: 5
   enableMouse: false
