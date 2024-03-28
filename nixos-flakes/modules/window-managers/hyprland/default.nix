@@ -24,11 +24,16 @@ in
       enable = true;
     };
   };
+
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
   };
-
+  environment.systemPackages = with pkgs; [
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr # If you're using a wlroots-based compositor
+    # Other relevant applications
+  ];
   services = {
     xserver = {
       enable = true;

@@ -1,4 +1,4 @@
-{ theme, username, home-manager, pkgs, ... }:
+{ themes, username, home-manager, pkgs, ... }:
 
 let
   theme = import ../themes;
@@ -54,10 +54,10 @@ in
             decorations = {
               file-decoration-style = "none";
               whitespace-error-style = "22 reverse";
-              # minus-style = "${theme.base03}";
-              # minus-emph-style = "${theme.base03} bold";
-              # plus-style = "${theme.base0B}";
-              # plus-emph-style = "${theme.base06} bold";
+              # minus-style = "${themes.base03}";
+              # minus-emph-style = "${themes.base03} bold";
+              # plus-style = "${themes.base0B}";
+              # plus-emph-style = "${themes.base06} bold";
               file-style = "7 italic";
               hunk-header-style = "7";
               hunk-header-decoration-style = "8 ul";
