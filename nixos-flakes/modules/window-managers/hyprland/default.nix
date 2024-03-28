@@ -18,7 +18,9 @@ in
   programs = {
     hyprland = {
       enable = true;
-      xwayland.enable = true;
+    };
+    xwayland = {
+      enable = true;
     };
     sway = {
       enable = true;
@@ -29,12 +31,26 @@ in
     enable = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
   };
+
   environment.systemPackages = with pkgs; [
     xdg-desktop-portal
     xdg-desktop-portal-wlr # If you're using a wlroots-based compositor
     # Other relevant applications
   ];
+  environment.variables = {
+    MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
+    # For Electron apps, you might need to set these in the application launch options or scripts
+  };
   services = {
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.hyprland}/bin/Hyprland";
+          user = "paschoal";
+        };
+      };
+    };
     xserver = {
       enable = true;
       displayManager = {
