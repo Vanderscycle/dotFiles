@@ -11,6 +11,7 @@
     ./printer.nix
     ./plastic_printer.nix
     ./zathura.nix
+    ./discord.nix
   ];
 
   # ----------------------
