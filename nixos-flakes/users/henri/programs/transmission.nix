@@ -3,6 +3,8 @@
   environment.systemPackages = with pkgs;[
     transmission-gtk
   ];
+
+  networking.firewall.allowedTCPPorts = [ 57766 ];
   services.transmission = {
     enable = true; #Enable transmission daemon
     settings = {
