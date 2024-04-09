@@ -4,7 +4,6 @@
     ./nix
     ./security
     ./terminal
-    ./editors
-    ./modern_unix.nix
+    ./virtualisation.nix
   ];
 }

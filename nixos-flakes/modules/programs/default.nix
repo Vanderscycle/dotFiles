@@ -1,9 +1,10 @@
 { pkgs, home-manager, username, ... }:
 {
   imports = [
-    ./docker
-    ./libreoffice
-    ./devops
-    ./office
+    ./libreoffice.nix
+    ./devops.nix
+    ./work.nix
+    ./editors
+    ./modern_unix.nix
   ];
 }

@@ -5,17 +5,6 @@ let
 in
 
 {
-  # nixpkgs = {
-  #   # You can add overlays here
-  #   overlays = [
-  #     # https://github.com/NixOS/nixpkgs/issues/157101
-  #     (self: super: {
-  #       waybar = super.waybar.overrideAttrs (oldAttrs: {
-  #         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-  #       });
-  #     })
-  #   ];
-  # };
   programs = {
     hyprland = {
       enable = true;
@@ -41,18 +30,11 @@ in
   ];
   environment.variables = {
     MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
+    NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
   #   # For Electron apps, you might need to set these in the application launch options or scripts
   };
   services = {
-  #   greetd = {
-  #     enable = true;
-  #     settings = {
-  #       default_session = {
-  #         command = "${pkgs.hyprland}/bin/Hyprland";
-  #         user = "paschoal";
-  #       };
-  #     };
-  #   };
     xserver = {
       enable = true;
       displayManager = {
@@ -73,15 +55,6 @@ in
         ".config/hypr/hyprland.conf".source = "${dotfiles_dir}/.config/hypr/hyprland.conf";
         ".config/hypr/mocha.conf".source = "${dotfiles_dir}/.config/hypr/mocha.conf";
         ".config/hypr/start.sh".source = "${dotfiles_dir}/.config/hypr/start.sh";
-      };
-      sessionVariables = {
-        XDG_CURRENT_DESKTOP = "Sway";
-        QT_QPA_PLATFORM = "wayland";
-        CLUTTER_BACKEND = "wayland";
-        SDL_VIDEODRIVER = "wayland";
-        MOZ_ENABLE_WAYLAND = 1;
-        MOZ_WEBRENDER = 1;
-        XDG_SESSION_TYPE = "wayland";
       };
       packages = with pkgs; [
         swww
