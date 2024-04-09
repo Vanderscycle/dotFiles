@@ -62,7 +62,6 @@
 
             cat "$selected_file" | wl-copy
             echo "Contents of $selected_file copied to clipboard."
-          end
         '';
         envsource = ''
           for line in (cat $argv | grep -v '^#')
