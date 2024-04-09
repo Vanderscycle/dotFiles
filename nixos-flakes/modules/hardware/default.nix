@@ -1,7 +1,8 @@
 {
   imports = [
-    ./bluetooth
-    ./network
-    ./sound
+    ./bluetooth.nix
+    ./network.nix
+    ./sound.nix
+    ./firewall.nix
   ];
 }

@@ -3,18 +3,19 @@
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
 in
+
 {
-  nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # https://github.com/NixOS/nixpkgs/issues/157101
-      (self: super: {
-        waybar = super.waybar.overrideAttrs (oldAttrs: {
-          mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-        });
-      })
-    ];
-  };
+  # nixpkgs = {
+  #   # You can add overlays here
+  #   overlays = [
+  #     # https://github.com/NixOS/nixpkgs/issues/157101
+  #     (self: super: {
+  #       waybar = super.waybar.overrideAttrs (oldAttrs: {
+  #         mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+  #       });
+  #     })
+  #   ];
+  # };
   programs = {
     hyprland = {
       enable = true;
@@ -29,28 +30,29 @@ in
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
   environment.systemPackages = with pkgs; [
-    xdg-desktop-portal
-    xdg-desktop-portal-wlr # If you're using a wlroots-based compositor
-    # Other relevant applications
+  #   xdg-desktop-portal
+    xdg-desktop-portal-hyprland
+  #   xdg-desktop-portal-wlr # If you're using a wlroots-based compositor
+  #   # Other relevant applications
   ];
   environment.variables = {
     MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
-    # For Electron apps, you might need to set these in the application launch options or scripts
+  #   # For Electron apps, you might need to set these in the application launch options or scripts
   };
   services = {
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.hyprland}/bin/Hyprland";
-          user = "paschoal";
-        };
-      };
-    };
+  #   greetd = {
+  #     enable = true;
+  #     settings = {
+  #       default_session = {
+  #         command = "${pkgs.hyprland}/bin/Hyprland";
+  #         user = "paschoal";
+  #       };
+  #     };
+  #   };
     xserver = {
       enable = true;
       displayManager = {
@@ -80,7 +82,6 @@ in
         MOZ_ENABLE_WAYLAND = 1;
         MOZ_WEBRENDER = 1;
         XDG_SESSION_TYPE = "wayland";
-
       };
       packages = with pkgs; [
         swww

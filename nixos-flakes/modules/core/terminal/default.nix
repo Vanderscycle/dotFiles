@@ -2,9 +2,9 @@
 {
   imports = [
     ./shell
-    ./fonts
-    ./kitty
-    ./starship
+    ./fonts.nix
+    ./kitty.nix
+    ./starship.nix
   ];
 
   # ---- Home Configuration ----

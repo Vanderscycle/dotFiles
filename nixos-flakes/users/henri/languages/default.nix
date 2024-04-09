@@ -15,6 +15,9 @@
         delve
         go-swag # swagger module for gofiber
 
+        # java
+        maven
+
         # typescript/javascript
         nodePackages.svelte-language-server
         nodePackages.typescript-language-server
@@ -52,6 +55,9 @@
           pyls-isort
           black
           flake8
+          boto3
+          pyyaml
+          awscli
         ]))
 
         #yaml  #not working at all

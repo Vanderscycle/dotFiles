@@ -9,7 +9,7 @@
     rtkit.enable = true;
     # https://github.com/NixOS/nixpkgs/issues/40157#issuecomment-387269306
     sudo.extraConfig = ''
-      Defaults        timestamp_timeout=300
+      Defaults        timestamp_timeout=600
     '';
   };
 }

@@ -16,5 +16,14 @@
     tldr
     unzip
     parted # remember about lslk
+
+    killall
+    wget
+    curl
+    firefox
+    nixpkgs-fmt
+    nix-prefetch-git
+    nnn
+    xfce.thunar
   ];
 }
