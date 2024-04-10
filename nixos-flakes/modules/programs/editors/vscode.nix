@@ -3,7 +3,7 @@
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
-        electron_28
+        electron_28-bin
       ];
     };
     programs = {
