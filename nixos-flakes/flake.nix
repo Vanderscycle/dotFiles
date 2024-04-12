@@ -50,6 +50,7 @@
               ./modules/status-bars/waybar
               ./modules/cloud
               #./modules/containers
+              ./users/henri/programs/transmission
               hosts.nixosModule
               {
                 networking.stevenBlackHosts.enable = true;

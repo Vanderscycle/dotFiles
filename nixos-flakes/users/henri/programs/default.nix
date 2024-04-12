@@ -6,7 +6,6 @@
     ./keyboard.nix
     ./keychain.nix
     ./nnn.nix
-    ./transmission.nix
     ./rofi.nix
     ./printer.nix
     ./plastic_printer.nix
