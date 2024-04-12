@@ -15,8 +15,12 @@
         delve
         go-swag # swagger module for gofiber
 
+        # php
+        php
+
         # java
         maven
+        gradle
 
         # typescript/javascript
         nodePackages.svelte-language-server
