@@ -1,7 +1,6 @@
 { pkgs, username, ... }:
 {
   imports = [
-    ./fish
     ./languages
     ./services
     ./themes

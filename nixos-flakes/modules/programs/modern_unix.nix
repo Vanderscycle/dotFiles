@@ -16,6 +16,7 @@
     tldr
     unzip
     parted # remember about lslk
+    usbutils
 
     killall
     wget
