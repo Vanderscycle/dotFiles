@@ -22,11 +22,18 @@
         maven
         gradle
 
+        # emacs (pacakges)
+        emacsPackages.dumb-jump
+
         # typescript/javascript
         nodePackages.svelte-language-server
         nodePackages.typescript-language-server
         nodePackages.pnpm
         nodejs
+        # svelte
+        nodePackages.prettier
+        nodePackages.eslint
+        nodePackages.svelte-language-server
 
         # bash
         nodePackages.bash-language-server
