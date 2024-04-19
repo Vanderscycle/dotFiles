@@ -3,12 +3,13 @@
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
+
+        # sql
+        sqls
+
         # docker
         nodePackages.dockerfile-language-server-nodejs
         hadolint
-
-        # bash
-        shellcheck
 
         # go
         gopls
@@ -29,13 +30,21 @@
         nodePackages.svelte-language-server
         nodePackages.typescript-language-server
         nodePackages.pnpm
+        yarn
         nodejs
+        nodePackages.js-beautify
         # svelte
         nodePackages.prettier
         nodePackages.eslint
         nodePackages.svelte-language-server
 
+        # tailwindcss
+        nodePackages.tailwindcss
+        tailwindcss-language-server
+        rustywind
+
         # bash
+        shellcheck
         nodePackages.bash-language-server
 
         # json
@@ -45,9 +54,11 @@
         lua-language-server
         luajitPackages.luarocks
         luaformatter
+
         # nix programs
         node2nix
         nil
+        nixfmt-rfc-style
 
         # toml
         taplo
@@ -63,7 +74,8 @@
         (python311.withPackages (ps: with ps; [
           toml
           python-lsp-server
-          pyls-isort
+          isort
+          python-lsp-server
           black
           flake8
           boto3
@@ -71,9 +83,7 @@
           awscli
         ]))
 
-        #yaml  #not working at all
-        #yamllint
-        #yamlfix
+        #yaml
         nodePackages.yaml-language-server
       ];
 

@@ -16,16 +16,19 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # doesn't work...
-    # spacemacs.url = "github:syl20bnr/spacemacs";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, hosts, ... } @ attrs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      hosts,
+      ...
+    }@attrs:
     let
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -34,8 +37,10 @@
     {
       nixosConfigurations = {
         desktop =
-          let system = "x86_64-linux";
-          in nixpkgs.lib.nixosSystem {
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
             specialArgs = {
               username = "henri";
               hostname = "desktop";
@@ -52,14 +57,14 @@
               #./modules/containers
               ./users/henri/programs/transmission
               hosts.nixosModule
-              {
-                networking.stevenBlackHosts.enable = true;
-              }
+              { networking.stevenBlackHosts.enable = true; }
             ];
-          }; #desktop
+          }; # desktop
         laptop =
-          let system = "x86_64-linux";
-          in nixpkgs.lib.nixosSystem {
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
             specialArgs = {
               username = "henri";
               hostname = "laptop";
@@ -72,17 +77,15 @@
               ./modules/window-managers/lightdm
               ./modules/cloud
               hosts.nixosModule
-              {
-                networking.stevenBlackHosts.enable = true;
-              }
+              { networking.stevenBlackHosts.enable = true; }
             ];
-          }; #laptop
+          }; # laptop
       }; # nixosConfigurations
 
       templates.default = {
         path = ./.;
         description = "The default template for common nixflakes.";
-      }; #templates
+      }; # templates
 
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
     };

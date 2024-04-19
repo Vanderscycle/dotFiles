@@ -23,6 +23,7 @@
   };
   environment.systemPackages = with pkgs; [
     emacs
+    libtool
     sqlite
     cmake
     gcc
