@@ -63,6 +63,11 @@
               { networking.stevenBlackHosts.enable = true; }
               catppuccin.nixosModules.catppuccin
               home-manager.nixosModules.home-manager
+              {
+                home-manager.users.henri = {
+                  imports = [ catppuccin.homeManagerModules.catppuccin ];
+                };
+              }
             ];
           }; # desktop
 

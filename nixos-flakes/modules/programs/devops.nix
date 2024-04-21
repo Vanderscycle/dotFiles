@@ -1,8 +1,9 @@
-{ home-manager, username, pkgs, ... }:
-let
-  dotfiles_dir = /home/henri/Documents/dotFiles;
-  # unstable = import <nixpkgs-unstable> {};
-in
+{
+  home-manager,
+  username,
+  pkgs,
+  ...
+}:
 {
 
   services.postgresql = {
@@ -21,7 +22,6 @@ in
         dbeaver
         azuredatastudio
         # k8s
-        k9s
         kubernetes
         kubernetes-helm
         kustomize
@@ -37,7 +37,7 @@ in
         terraform-docs
         terragrunt
         # docker
-        dive #  dive into docker images
+        dive # dive into docker images
         # ansible
         ansible
         # backend api calls
@@ -46,12 +46,6 @@ in
         dogdns
         nssmdns # for local rpi cluster
       ];
-      file = {
-        # K9s
-        ".config/k9s/config.yml".source = "${dotfiles_dir}/.config/k9s/config.yml";
-        ".config/k9s/skin.yml".source = "${dotfiles_dir}/.config/k9s/skins/catppucin.yml";
-      };
     };
   };
 }
-      

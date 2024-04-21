@@ -6,7 +6,6 @@
     fd # better find
     ripgrep # grep but easier
     silver-searcher # also known as ag
-    fzf
     jq # json parser
     yq # yaml parser
     httpie

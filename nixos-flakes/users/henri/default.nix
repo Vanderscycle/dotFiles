@@ -10,9 +10,10 @@
     description = "Henri Vandersleyen";
     isNormalUser = true;
     initialPassword = "temp123";
-    extraGroups = [ "wheel" "docker" ];
-    packages = with pkgs; [
-      fish
+    extraGroups = [
+      "wheel"
+      "docker"
     ];
+    packages = with pkgs; [ fish ];
   };
 }
