@@ -3,7 +3,6 @@
   imports = [
     ./languages
     ./services
-    ./themes
     ./programs
   ];
   users.users.${username} = {

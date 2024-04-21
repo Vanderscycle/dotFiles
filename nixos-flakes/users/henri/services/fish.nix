@@ -1,4 +1,9 @@
-{ username, home-manager, pkgs, ... }:
+{
+  username,
+  home-manager,
+  pkgs,
+  ...
+}:
 {
   # fishPlugins.done
   # fishPlugins.fzf
@@ -53,15 +58,18 @@
       #interactiveShellIinit = ''
       #'';
       functions = {
+        clear-trash = ''
+          rm -rf ~/.local/share/Trash/*
+        '';
         copy = ''
-            set selected_file (fzf)
-            if test -z "$selected_file"
-                    echo "No file selected."
-                    return 1
-                end
+          set selected_file (fzf)
+          if test -z "$selected_file"
+                  echo "No file selected."
+                  return 1
+              end
 
-            cat "$selected_file" | wl-copy
-            echo "Contents of $selected_file copied to clipboard."
+          cat "$selected_file" | wl-copy
+          echo "Contents of $selected_file copied to clipboard."
         '';
         envsource = ''
           for line in (cat $argv | grep -v '^#')
@@ -85,7 +93,10 @@
           ssh sysAdminHarambe@192.168.1.246
         '';
         s-router = ''
-          ssh pi@192.168.1.1
+          ssh root@192.168.1.1
+        '';
+        s-router-2 = ''
+          ssh root@192.168.1.2
         '';
         s-printer = ''
           ssh pi@192.168.1.243

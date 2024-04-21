@@ -17,6 +17,10 @@
     unzip
     parted # remember about lslk
     usbutils
+    tree
+    dust # du
+    duf # df
+    hyperfine # how to find the xz weakness
 
     killall
     wget

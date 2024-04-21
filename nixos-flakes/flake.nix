@@ -16,6 +16,8 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    catppuccin.url = "github:catppuccin/nix";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +29,8 @@
       self,
       nixpkgs,
       hosts,
+      catppuccin,
+      home-manager,
       ...
     }@attrs:
     let
@@ -49,7 +53,6 @@
             modules = [
               ./.
               ./modules/programs/gaming
-              ./modules/programs/multimedia
               #./modules/desktop-environment/xfce
               ./modules/window-managers/hyprland
               ./modules/status-bars/waybar
@@ -58,8 +61,11 @@
               ./users/henri/programs/transmission
               hosts.nixosModule
               { networking.stevenBlackHosts.enable = true; }
+              catppuccin.nixosModules.catppuccin
+              home-manager.nixosModules.home-manager
             ];
           }; # desktop
+
         laptop =
           let
             system = "x86_64-linux";
@@ -72,12 +78,13 @@
             } // attrs;
             modules = [
               ./.
-              ./modules/programs/multimedia
               ./modules/desktop-environment/xfce
               ./modules/window-managers/lightdm
               ./modules/cloud
               hosts.nixosModule
               { networking.stevenBlackHosts.enable = true; }
+              catppuccin.nixosModules.catppuccin
+              home-manager.nixosModules.home-manager
             ];
           }; # laptop
       }; # nixosConfigurations
