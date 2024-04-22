@@ -48,6 +48,7 @@
             specialArgs = {
               username = "henri";
               hostname = "desktop";
+              palete-color = "mocha";
               inherit system;
             } // attrs;
             modules = [
@@ -63,11 +64,6 @@
               { networking.stevenBlackHosts.enable = true; }
               catppuccin.nixosModules.catppuccin
               home-manager.nixosModules.home-manager
-              {
-                home-manager.users.henri = {
-                  imports = [ catppuccin.homeManagerModules.catppuccin ];
-                };
-              }
             ];
           }; # desktop
 
@@ -79,6 +75,7 @@
             specialArgs = {
               username = "henri";
               hostname = "laptop";
+              palete-color = "mocha";
               inherit system;
             } // attrs;
             modules = [

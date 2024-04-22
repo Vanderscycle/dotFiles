@@ -7,11 +7,12 @@
 # https://home-manager-options.extranix.com/?query=k9s&release=master
 {
   home-manager.users.${username} = {
-    home = {
-      programs.k9s = {
-        enable = true;
-        catppuccin.enable = true;
-      };
+
+    xdg.enable = true;
+    home = { };
+    programs.k9s = {
+      enable = true;
+      catppuccin.enable = true;
     };
   };
 }

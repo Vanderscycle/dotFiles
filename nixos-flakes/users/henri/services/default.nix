@@ -6,7 +6,5 @@
     ./fish.nix
     # window beautifier
     ./picom.nix
-    ./theme.nix
   ];
-
 }
