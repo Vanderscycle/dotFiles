@@ -9,7 +9,7 @@
     programs = {
       kitty = {
         enable = true;
-        catppuccin = true;
+        catppuccin.enable = true;
         shellIntegration.enableFishIntegration = true;
         settings = {
           allow_remote_control = "yes";

@@ -15,6 +15,8 @@
     ./fzf.nix
     ./btop.nix
     ./kitty.nix
+    ./lazygit.nix
+    ./starship.nix
   ];
 
   # ----------------------
