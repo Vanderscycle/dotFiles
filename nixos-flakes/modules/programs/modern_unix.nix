@@ -25,7 +25,6 @@
     firefox
     nixpkgs-fmt
     nix-prefetch-git
-    nnn
     xfce.thunar
   ];
 }

@@ -5,5 +5,6 @@
     ./security
     ./terminal
     ./virtualisation.nix
+    ./cloud
   ];
 }

@@ -57,7 +57,6 @@
               #./modules/desktop-environment/xfce
               ./modules/window-managers/hyprland
               ./modules/status-bars/waybar
-              ./modules/cloud
               #./modules/containers
               ./users/henri/programs/transmission
               hosts.nixosModule
@@ -82,7 +81,6 @@
               ./.
               ./modules/desktop-environment/xfce
               ./modules/window-managers/lightdm
-              ./modules/cloud
               hosts.nixosModule
               { networking.stevenBlackHosts.enable = true; }
               catppuccin.nixosModules.catppuccin
