@@ -17,6 +17,7 @@
     ./kitty.nix
     ./lazygit.nix
     ./starship.nix
+    ./bat.nix
   ];
 
   # ----------------------

@@ -2,7 +2,6 @@
 {
   environment.systemPackages = with pkgs; [
     eza # ls replacement
-    bat # cat alternative
     fd # better find
     ripgrep # grep but easier
     silver-searcher # also known as ag
