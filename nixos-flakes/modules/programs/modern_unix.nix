@@ -10,7 +10,6 @@
     yq # yaml parser
     httpie
     zoxide
-    btop # htop but better
     zoxide
     tldr
     unzip

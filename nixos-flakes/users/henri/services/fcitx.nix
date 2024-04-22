@@ -1,4 +1,9 @@
-{ username, home-manager, pkgs, ... }:
+{
+  username,
+  home-manager,
+  pkgs,
+  ...
+}:
 {
   home-manager.users.${username} = {
     home = {
@@ -10,6 +15,7 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
       };
+      i18n.inputMethod.fcitx5.catppuccin = true;
     };
   };
 }

@@ -13,6 +13,8 @@
     ./discord.nix
     ./k9s.nix
     ./fzf.nix
+    ./btop.nix
+    ./kitty.nix
   ];
 
   # ----------------------

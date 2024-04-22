@@ -1,10 +1,15 @@
-{ username, home-manager, pkgs, ... }:
+{
+  username,
+  home-manager,
+  pkgs,
+  ...
+}:
 {
   home-manager.users.${username} = {
     programs = {
       kitty = {
         enable = true;
-        theme = "Catppuccin-Mocha";
+        catppuccin = true;
         shellIntegration.enableFishIntegration = true;
         settings = {
           allow_remote_control = "yes";
@@ -22,4 +27,3 @@
     };
   };
 }
-

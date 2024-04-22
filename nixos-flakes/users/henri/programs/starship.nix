@@ -5,7 +5,6 @@
   ...
 }:
 
-# https://home-manager-options.extranix.com/?query=btop&release=master
 {
   home-manager.users.${username} = {
     home = { };
