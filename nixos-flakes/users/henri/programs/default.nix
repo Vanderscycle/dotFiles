@@ -18,6 +18,7 @@
     ./lazygit.nix
     ./starship.nix
     ./bat.nix
+    ./rg.nix
   ];
 
   # ----------------------

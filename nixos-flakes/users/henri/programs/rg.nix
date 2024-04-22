@@ -11,13 +11,13 @@
     programs.ripgrep = {
       enable = true;
       arguments = [
-        --max-columns=150
-        --max-columns-preview
-        --smart-case
-        --colors=line:none
-        --colors=line:style:bold
-        --glob=!git/*
-      ]
+        "--max-columns=150"
+        "-max-columns-preview"
+        "--smart-case"
+        "-colors=line:none"
+        "--colors=line:style:bold"
+        "-glob=!git/*"
+      ];
     };
   };
 }

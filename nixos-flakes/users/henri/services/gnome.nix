@@ -1,33 +1,28 @@
-{ home-manager, username, pkgs, ... }:
+{
+  home-manager,
+  username,
+  pkgs,
+  ...
+}:
 {
   home-manager.users.${username} = {
     home = {
-      packages = with pkgs; [
-        lxappearance
-      ];
+      packages = with pkgs; [ lxappearance ];
     };
 
     services.gnome-keyring.enable = true;
     # INFO used for lxappearance dark mode theme
     gtk = {
       enable = true;
-      cursorTheme = {
-        name = "Adwaita";
-        package = pkgs.gnome.adwaita-icon-theme;
-      };
-      theme = {
-        name = "Adwaita";
-        package = pkgs.gnome.adwaita-icon-theme;
-      };
-      # theme = {
-      #   name = "Catppuccin-Mocha";
-      #   package = pkgs.catppuccin-gtk;
+      catppuccin.enable = true;
+      # iconTheme = {
+      #   name = "bibata-cursors";
+      #   package = pkgs.bibata-cursors;
       # };
       iconTheme = {
-        name = "bibata-cursors";
-        package = pkgs.bibata-cursors;
+        name = "material-cursors";
+        package = pkgs.material-cursors;
       };
-
       gtk3 = {
         extraConfig = {
           gtk-application-prefer-dark-theme = true;
