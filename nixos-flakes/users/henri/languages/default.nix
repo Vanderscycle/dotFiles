@@ -20,6 +20,7 @@
         php
 
         # java
+        jdk22
         maven
         gradle
 

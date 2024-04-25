@@ -4,22 +4,15 @@
   pkgs,
   ...
 }:
-let
-  dotfiles_dir = /home/henri/Documents/dotFiles;
-in
+# https://home-manager-options.extranix.com/?query=rofi&release=master
 {
   home-manager.users.${username} = {
-    home = {
-      # file.".config/rofi" = {
-      #   source = "${dotfiles_dir}/.config/rofi";
-      #   recursive = true;
-    };
-    packages.rofi = {
+    home = { };
+    programs.rofi = {
       enable = true;
       catppuccin.enable = true;
+      font = "JetBrains Nerd Font 12";
+      location = "top";
     };
-    # packages = with pkgs; [
-    #   rofi
-    # ];
   };
 }
