@@ -1,4 +1,9 @@
-{ username, home-manager, pkgs, ... }:
+{
+  username,
+  home-manager,
+  pkgs,
+  ...
+}:
 let
   dotfiles_dir = /home/henri/Documents/dotFiles;
 in
@@ -18,4 +23,3 @@ in
     };
   };
 }
-
