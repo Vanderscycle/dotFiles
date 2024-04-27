@@ -10,9 +10,9 @@
 # in
 {
   programs = {
-    # hyprland = {
-    #   enable = true;
-    # };
+    hyprland = {
+      enable = true;
+    };
     xwayland = {
       enable = true;
     };
@@ -69,6 +69,13 @@
         catppuccin.enable = true;
         enable = true;
         settings = {
+          input = {
+            kb_layout = "us";
+
+            # focus change on cursor move
+            follow_mouse = 0;
+            accel_profile = "flat";
+          };
           general = {
             gaps_in = 7;
             gaps_out = 20;
@@ -88,19 +95,25 @@
             drop_shadow = "yes";
             shadow_range = 2;
             shadow_render_power = 2;
-            col.shadow = "rgb (21 ce07)";
+            # col.shadow = "rgb (21 ce07)";
           };
           animations = {
             enabled = "yes";
             bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-            animation = {
-              "windows" = "1, 7, myBezier";
-              "windowsOut" = "1, 7, default, popin 80%";
-              "border" = "1, 10, default";
-              "borderangle" = "1, 8, default";
-              "fade" = "1, 7, default";
-              "workspaces" = "1, 6, default";
-            };
+            animation = [
+              "border, 1, 2, default"
+              "fade, 1, 4, default"
+              "windows, 1, 3, default, popin 80%"
+              "workspaces, 1, 2, default, slide"
+            ];
+            # animation = [
+            #   "windows = 1, 7, myBezier"
+            #   "windowsOut = 1, 7, default, popin 80%"
+            #   "border = 1, 10, default"
+            #   "borderangle = 1, 8, default"
+            #   "fade = 1, 7, default"
+            #   "workspaces = 1, 6, default"
+            # ];
           };
           # https://wiki.hyprland.org/Configuring/Dwindle-Layout/
           dwindle = {
@@ -157,6 +170,16 @@
           bindm = [
             "$mainMod, L, movewindow"
             "$mainMod, K, resizewindow"
+          ];
+          bindl = [
+            # media controls
+            ", XF86AudioPlay, exec, playerctl play-pause"
+            ", XF86AudioPrev, exec, playerctl previous"
+            ", XF86AudioNext, exec, playerctl next"
+
+            # volume
+            ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+            ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
           ];
           windowrule = [
             "workspace 1, Emacs"

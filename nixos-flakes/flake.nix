@@ -57,8 +57,7 @@
               #./modules/containers
               ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
-              ./users/henri/window-managers/hyprland # TODO: fix
-              # ./modules/window-managers/hyprland
+              ./users/henri/window-managers/hyprland
               hosts.nixosModule
               { networking.stevenBlackHosts.enable = true; }
               catppuccin.nixosModules.catppuccin
@@ -80,7 +79,7 @@
             modules = [
               ./.
               ./modules/desktop-environment/xfce
-              ./modules/window-managers/lightdm
+              ./users/henri/window-managers/lightdm
               hosts.nixosModule
               { networking.stevenBlackHosts.enable = true; }
               catppuccin.nixosModules.catppuccin
