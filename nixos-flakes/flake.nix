@@ -54,11 +54,11 @@
             modules = [
               ./.
               ./modules/programs/gaming
-              ./modules/window-managers/hyprland
               #./modules/containers
               ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
-              ./users/henri/window-managers/hyprland
+              ./users/henri/window-managers/hyprland # TODO: fix
+              # ./modules/window-managers/hyprland
               hosts.nixosModule
               { networking.stevenBlackHosts.enable = true; }
               catppuccin.nixosModules.catppuccin

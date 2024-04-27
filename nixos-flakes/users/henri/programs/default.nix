@@ -19,6 +19,7 @@
     ./starship.nix
     ./bat.nix
     ./rg.nix
+    ./signal.nix
   ];
 
   # ----------------------
