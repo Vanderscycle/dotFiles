@@ -18,6 +18,7 @@
     dust # du
     duf # df
     hyperfine # how to find the xz weakness
+    lsof
 
     killall
     wget

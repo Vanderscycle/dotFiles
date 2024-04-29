@@ -58,10 +58,10 @@
       # file = {
       #   ".config/hypr/hyprland.conf".source = "${dotfiles_dir}/.config/hypr/hyprland.conf";
       packages = with pkgs; [
+        fuzzel # https://codeberg.org/dnkl/fuzzel?ref=mark.stosberg.com
         swww
         xdg-desktop-portal-hyprland
         wl-clipboard
-        xdg-desktop-portal-hyprland
       ];
     };
     wayland.windowManager = {
@@ -138,7 +138,7 @@
             "$mainMod, l, movefocus, r"
             "$mainMod, k, movefocus, u"
             "$mainMod, j, movefocus, d"
-            "SHIFTSUPER, P, exec, rofi -show run"
+            "SHIFTSUPER, P, exec, fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff"
             "SHIFTSUPER, T, exec, thunar"
             "SHIFTSUPER, F, fullscreen,"
             "SHIFTSUPER, minus, exec, amixer -q sset Master 1%-"

@@ -27,9 +27,12 @@
         # emacs (pacakges)
         emacsPackages.dumb-jump
 
+        # deno
+        deno
         # typescript/javascript
         nodePackages.svelte-language-server
         nodePackages.typescript-language-server
+        nodePackages.typescript
         nodePackages.pnpm
         yarn
         nodejs

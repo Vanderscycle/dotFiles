@@ -106,7 +106,7 @@
           rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/henri/Documents/3D-models/printer_configs/v-minion/
         '';
         # network
-        kill-port = "kill -9 $(lsof -t -i:$argv)";
+        kill-port = "kill -9 $(lsof -t -i:$argv[1])";
         # cloud access
         cloud-linode = "set -xg KUBECONFIG $HOME/.kube/infrastructure-kubeconfig.yaml";
         # docker
