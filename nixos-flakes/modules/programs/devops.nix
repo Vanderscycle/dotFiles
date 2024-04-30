@@ -20,7 +20,6 @@
       packages = with pkgs; [
         # sql/db
         dbeaver
-        azuredatastudio
         # k8s
         kubernetes
         kubernetes-helm

@@ -6,7 +6,6 @@
     ./keyboard.nix
     ./keychain.nix
     ./nnn.nix
-    ./rofi.nix
     ./printer.nix
     ./plastic_printer.nix
     ./zathura.nix
