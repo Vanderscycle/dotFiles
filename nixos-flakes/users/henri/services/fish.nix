@@ -136,8 +136,6 @@
           sudo nix-env --delete-generations old 
           sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
         '';
-        # editor
-        hx-sudo = "sudo hx --config $HOME/.config/helix/config.toml";
         # nnn
         n = ''
           nnn
