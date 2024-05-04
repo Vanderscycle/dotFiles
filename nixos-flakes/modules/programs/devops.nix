@@ -5,16 +5,7 @@
   ...
 }:
 {
-
-  services.postgresql = {
-    enable = true;
-  };
-  nixpkgs.config.packageOverrides = pkgs: {
-    # tilt = unstable.tilt;
-    # kubernetes-helm = unstable.kubernetes-helm;
-    # kustomize = unstable.kustomize;
-    # terragrunt = unstable.terragrunt;
-  };
+  nixpkgs.config.packageOverrides = pkgs: { };
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
