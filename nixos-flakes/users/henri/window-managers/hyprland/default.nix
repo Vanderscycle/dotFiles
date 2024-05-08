@@ -138,6 +138,10 @@
             "$mainMod, l, movefocus, r"
             "$mainMod, k, movefocus, u"
             "$mainMod, j, movefocus, d"
+            "$mainMod ALT, H, movewindow, l"
+            "$mainMod ALT, L, movewindow, r"
+            "$mainMod ALT, K, movewindow, u"
+            "$mainMod ALT, J, movewindow, d "
             "SHIFTSUPER, P, exec, fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff"
             "SHIFTSUPER, T, exec, thunar"
             "SHIFTSUPER, F, fullscreen,"
@@ -168,7 +172,7 @@
             "$mainMod SHIFT, 0, movetoworkspace, 10"
           ];
           bindm = [
-            "$mainMod, L, movewindow"
+            # "$mainMod, L, movewindow" 
             "$mainMod, K, resizewindow"
           ];
           bindl = [
