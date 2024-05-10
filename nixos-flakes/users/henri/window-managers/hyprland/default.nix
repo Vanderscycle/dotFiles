@@ -138,10 +138,15 @@
             "$mainMod, l, movefocus, r"
             "$mainMod, k, movefocus, u"
             "$mainMod, j, movefocus, d"
-            "$mainMod ALT, H, movewindow, l"
-            "$mainMod ALT, L, movewindow, r"
-            "$mainMod ALT, K, movewindow, u"
-            "$mainMod ALT, J, movewindow, d "
+            # TODO: rework
+            # "$mainMod ALT, H, movewindow, l"
+            # "$mainMod ALT, L, movewindow, r"
+            # "$mainMod ALT, K, movewindow, u"
+            # "$mainMod ALT, J, movewindow, d"
+            # bind = $mainMod SHIFT, h, resizeactive, -40 0
+            # bind = $mainMod SHIFT, l, resizeactive, 40 0
+            # bind = $mainMod SHIFT, k, resizeactive, 0 -40
+            # bind = $mainMod SHIFT, j, resizeactive, 0 40
             "SHIFTSUPER, P, exec, fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff"
             "SHIFTSUPER, T, exec, thunar"
             "SHIFTSUPER, F, fullscreen,"
