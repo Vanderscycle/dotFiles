@@ -23,5 +23,5 @@
 	gpgsign = true
 [include]
   path = ~/.gitconfig.personal
-[includeIf "gitdir:**/houseAtreides/**/*"] #git
-  path = ~/.gitconfig.atreides
+[includeIf "gitdir:**/houseVanCylesIndustries/**/*"] #git
+  path = ~/.gitconfig.industries

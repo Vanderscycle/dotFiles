@@ -10,7 +10,6 @@ in
 {
   home-manager.users.${username} = {
     home = {
-
       file = {
         "/home/henri/SpaceVim.d/init.toml".source = "${dotfiles_dir}/.config/SpaceVim.d/init.toml";
       };
@@ -18,7 +17,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    #lunarvim
-    spacevim
+    lunarvim
+    # spacevim
   ];
 }
