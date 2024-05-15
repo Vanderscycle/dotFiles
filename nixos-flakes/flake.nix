@@ -22,6 +22,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix.url = "github:Mic92/sops-nix";
+    # optional, not necessary for the module
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -32,7 +36,7 @@
       catppuccin,
       home-manager,
       ...
-    }@attrs:
+    }@inputs:
     let
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
@@ -50,7 +54,8 @@
               hostname = "desktop";
               palete-color = "mocha";
               inherit system;
-            } // attrs;
+              inherit inputs;
+            } // inputs;
             modules = [
               ./.
               ./modules/programs/gaming
@@ -75,7 +80,8 @@
               hostname = "laptop";
               palete-color = "mocha";
               inherit system;
-            } // attrs;
+              inherit inputs;
+            } // inputs;
             modules = [
               ./.
               ./modules/desktop-environment/xfce

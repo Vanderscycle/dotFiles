@@ -4,5 +4,9 @@
     FLAKE = "/home/henri/Documents/dotFiles/nixos-flakes";
   };
 
-  environment.systemPackages = with pkgs; [ nh ];
+  environment.systemPackages = with pkgs; [
+    nh
+    nvd
+    nix-output-monitor
+  ];
 }

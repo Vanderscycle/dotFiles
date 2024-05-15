@@ -4,6 +4,7 @@
     ./gnupg.nix
     ./polkit.nix
     ./yubico.nix
+    ./sops.nix
   ];
   security = {
     rtkit.enable = true;
