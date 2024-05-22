@@ -107,21 +107,20 @@ This function should only modify configuration layer settings."
          sql-auto-indent nil
          sql-lsp-sqls-workspace-config-path 'workspace) ;; don't forget to add the json (sqlss2
      ;; web develop
-    ;;prettier
+    prettier
     toml
     (json :variables
-          json-fmt-on-save t
-          json-fmt-tool 'prettier)
+          json-fmt-on-save t)
     react
     (svelte :variables
             node-add-modules-path t) ;; rich harris is web jesus
     (javascript :variables
-                 ;;js2-basic-offset 2
+                 js2-basic-offset 2
                  node-add-modules-path t) ;; everything that can be written in js will be written in js
     (typescript :variables
-                typescript-fmt-tool 'prettier
-                typescript-linter 'eslint
-                typescript-fmt-on-save t) ;; js but safer? only took 2 decades
+                typescript-linter 'eslint)
+                ;; typescript-fmt-on-save t)
+    ;; js but safer? only took 2 decades
      ;;misc
     (colors :variables
             colors-enable-nyan-cat-progress-bar t) ;; overwhelming colors
@@ -688,14 +687,15 @@ before packages are loaded."
   ;; --- layers (config)---
   ;;; --- lsp ---
   (setq lsp-log-io t)
-    ;;; --- tailwindcss ---
-    ;;; --- auto-completion ---
+  ;;; --- tailwindcss ---
+  ;;; --- auto-completion ---
   (custom-set-faces
   '(company-tooltip-common
     ((t (:inherit company-tooltip :weight bold :underline nil))))
   '(company-tooltip-common-selection
     ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
-    ;;; --- svelte ---
+    ;;; --- react/svelte/ts/js ---
+  (add-hook 'web-mode-hook  'emmet-mode)
   (setq-default
   web-mode-markup-indent-offset 2
   web-mode-css-indent-offset 2
@@ -798,20 +798,19 @@ Tab Bar:
   (setq shell-file-name "fish")
 
   ;; --- projectile ---
-  (defun my/projectile-find-projects-in-directory (directory)
-    "Recursively search for Projectile projects in DIRECTORY."
-    (let (projects)
-      (dolist (dir (directory-files directory t "\\w+"))
-        (when (and (file-directory-p dir)
-                   (not (string-match-p "/\\." (file-name-nondirectory dir))))
-          (if (file-exists-p (expand-file-name ".git/" dir))
-              (push dir projects)
-            (setq projects (append projects (my/projectile-find-projects-in-directory dir))))))
-      projects))
+   (defun my/projectile-find-projects-in-directory (directory)
+     "Recursively search for Projectile projects in DIRECTORY."
+     (let (projects)
+       (dolist (dir (directory-files directory t "\\w+"))
+         (when (and (file-directory-p dir)
+                    (not (string-match-p "/\\." (file-name-nondirectory dir))))
+           (if (file-exists-p (expand-file-name ".git/" dir))
+               (push dir projects)
+             (setq projects (append projects (my/projectile-find-projects-in-directory dir))))))
+       projects))
 
-  (setq projectile-project-search-path
-        (append '("~/.config/home-manager")
-                (my/projectile-find-projects-in-directory "~/Documents")))
+   (setq projectile-project-search-path
+         (append '(my/projectile-find-projects-in-directory "~/Documents")))
 
   ;; --- misc ---
   ;;(scroll-bar-mode -1) ;; disable scroll bar

@@ -5,5 +5,7 @@
     ytfzf
     playerctl
     vlc
+    mpv # like vlc
+    wf-recorder # video recorder
   ];
 }
