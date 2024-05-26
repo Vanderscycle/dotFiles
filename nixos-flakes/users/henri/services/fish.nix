@@ -21,8 +21,8 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
 
-        SUDO_EDITOR = "emacs";
-        EDITOR = "lvim";
+        SUDO_EDITOR = "emacslient";
+        EDITOR = "emacslient";
         BROWSER = "firefox";
         TERMINAL = "kitty";
         NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
@@ -132,14 +132,14 @@ lfcd =''
         # nix
         nixit = ''
           set -xg SHELL_FILE (find /home/henri/Documents/houseOfNixAndPain/shells -name 'shell.nix' | fzf)
-          nix-shell $SHELL_FILE 
+          nix-shell $SHELL_FILE
         '';
         nix-clean = "nix-store --gc";
         nix-update = "sudo nixos-rebuild switch";
         nix-purge = ''
           sudo nix-collect-garbage -d
           sudo nix-store --optimise
-          sudo nix-env --delete-generations old 
+          sudo nix-env --delete-generations old
           sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
         '';
         # nnn

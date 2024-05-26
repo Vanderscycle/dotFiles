@@ -177,7 +177,7 @@
             "$mainMod SHIFT, 0, movetoworkspace, 10"
           ];
           bindm = [
-            # "$mainMod, L, movewindow" 
+            # "$mainMod, L, movewindow"
             "$mainMod, K, resizewindow"
           ];
           bindl = [
@@ -222,6 +222,7 @@
             "discord"
             "spotify"
             "firefox"
+            "emacs"
           ];
         };
       };
