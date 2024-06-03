@@ -107,5 +107,5 @@
 
   security.sudo.wheelNeedsPassword = false;
   hardware.enableRedistributableFirmware = true;
-  system.stateVersion = "24.05";
+  system.stateVersion = "23.11";
 }

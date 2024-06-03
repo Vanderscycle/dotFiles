@@ -25,12 +25,13 @@
     #       };
     #     };
     #   };
-    environment.systemPackages = with pkgs; [
-      emacs
-      libtool
-      sqlite
-      cmake
-      gcc
-    ];
   };
+
+  environment.systemPackages = with pkgs; [
+    emacs
+    libtool
+    sqlite
+    cmake
+    gcc
+  ];
 }

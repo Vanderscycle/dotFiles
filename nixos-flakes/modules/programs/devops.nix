@@ -10,7 +10,7 @@
     home = {
       packages = with pkgs; [
         # sql/db
-        dbeaver
+        dbeaver-bin
         # k8s
         kubernetes
         kubernetes-helm

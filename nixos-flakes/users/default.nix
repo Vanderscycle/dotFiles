@@ -9,6 +9,6 @@
 
   home-manager.users.${username} = {
     imports = [ catppuccin.homeManagerModules.catppuccin ];
-    catppuccin.flavour = "mocha";
+    catppuccin.flavor = "mocha";
   };
 }
