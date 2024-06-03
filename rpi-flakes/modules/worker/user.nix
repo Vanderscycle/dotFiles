@@ -1,7 +1,7 @@
-{hostname, pkgs,...}:
+{ hostname, pkgs, ... }:
 
 let
-  password = "root"; # temp psswd
+  password = "worker"; # temp psswd
 in
 {
 
@@ -13,7 +13,6 @@ in
   services.k3s.role = "agent";
   services.k3s.serverAddr = "https://master:6443";
 
-
   users = {
     mutableUsers = false;
     users."${hostname}" = {
@@ -21,10 +20,9 @@ in
       password = password;
       shell = pkgs.fish;
       extraGroups = [ "wheel" ];
-      # openssh.authorizedKeys.keys = [
-      #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMxe8kDCJa6xcAM9WE8c5amGG+2secXmnof7vlmAq1Da hello@haseebmajid.dev"
-      # ];
-
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCpHZBybBTCsCyW6/Q4OZ07SvUpRUvclc10u25j0B+Q hvandersleyen@gmail.com"
+      ];
     };
   };
 }

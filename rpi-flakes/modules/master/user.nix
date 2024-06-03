@@ -1,4 +1,4 @@
-{hostname, pkgs,...}:
+{ hostname, pkgs, ... }:
 
 let
   password = "root"; # temp psswd
@@ -17,10 +17,9 @@ in
       password = password;
       shell = pkgs.fish;
       extraGroups = [ "wheel" ];
-      # openssh.authorizedKeys.keys = [
-      #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMxe8kDCJa6xcAM9WE8c5amGG+2secXmnof7vlmAq1Da hello@haseebmajid.dev"
-      # ];
-
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCpHZBybBTCsCyW6/Q4OZ07SvUpRUvclc10u25j0B+Q hvandersleyen@gmail.com"
+      ];
     };
   };
 }

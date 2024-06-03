@@ -15,7 +15,9 @@
     enable = true;
     commands = {
       dragon-out = ''%${pkgs.xdragon}/bin/xdragon -a -x "$fx"'';
-      editor-open = ''$$EDITOR $f'';
+      editor-open = ''
+        emacslient "$f"
+        '';
       mkdir = ''
       ''${{
         printf "Directory Name: "
@@ -34,14 +36,13 @@
       "`" = "mark-load";
       "\\'" = "mark-load";
       "<enter>" = "open";
-      
+
       do = "dragon-out";
-      
       "g~" = "cd";
       gh = "cd";
       "g/" = "/";
 
-      ee = "editor-open";
+      e = "editor-open";
       V = ''
         bat --paging=always "$f"
       '';
@@ -57,21 +58,21 @@
       ignorecase = true;
     };
 
-    extraConfig = 
-    let 
-      previewer = 
+    extraConfig =
+    let
+      previewer =
         pkgs.writeShellScriptBin "pv.sh" ''
         file=$1
         w=$2
         h=$3
         x=$4
         y=$5
-        
+
         if [[ "$( ${pkgs.file}/bin/file -Lb --mime-type "$file")" =~ ^image ]]; then
             ${pkgs.kitty}/bin/kitty +kitten icat --silent --stdin no --transfer-mode file --place "''${w}x''${h}@''${x}x''${y}" "$file" < /dev/null > /dev/tty
             exit 1
         fi
-        
+
         ${pkgs.pistol}/bin/pistol "$file"
       '';
       cleaner = pkgs.writeShellScriptBin "clean.sh" ''

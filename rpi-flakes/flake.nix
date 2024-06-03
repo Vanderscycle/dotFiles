@@ -1,11 +1,11 @@
 # ============================================================================================
 #
-# ███╗   ██╗██╗██╗  ██╗ ██████╗ ███████╗     ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ 
-# ████╗  ██║██║╚██╗██╔╝██╔═══██╗██╔════╝    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝ 
+# ███╗   ██╗██╗██╗  ██╗ ██████╗ ███████╗     ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
+# ████╗  ██║██║╚██╗██╔╝██╔═══██╗██╔════╝    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
 # ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║███████╗    ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
 # ██║╚██╗██║██║ ██╔██╗ ██║   ██║╚════██║    ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
 # ██║ ╚████║██║██╔╝ ██╗╚██████╔╝███████║    ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
-# ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝ 
+# ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝     ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
 #
 # ============================================================================================
 {
@@ -13,7 +13,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    colmena.url = "github:zhaofengli/colmena";
+    # colmena.url = "github:zhaofengli/colmena";
     hardware.url = "github:NixOS/nixos-hardware";
   };
 
@@ -21,7 +21,7 @@
     {
       self,
       hardware,
-      colmena,
+      # colmena,
       nixpkgs,
       ...
     }@attrs:
@@ -32,34 +32,47 @@
       system = "aarch64-linux";
     in
     {
-      colmena = {
-        meta = {
-          nixpkgs = import nixpkgs { system = "x86_64-linux"; };
+      # colmena = {
+      #   meta = {
+      #     nixpkgs = import nixpkgs { system = "x86_64-linux"; };
+      #     specialArgs = {
+      #       hostname = "master";
+      #       interface = "wlan0";
+      #     } // attrs;
+      #   };
+
+      #   defaults =
+      #     { pkgs, ... }:
+      #     {
+      #       imports = [
+      #         attrs.hardware.nixosModules.raspberry-pi-4
+      #         ./.
+      #       ];
+      #     };
+      #   master = {
+      #     nixpkgs.system = "aarch64-linux";
+      #     deployment = {
+      #       buildOnTarget = true;
+      #       targetHost = "master";
+      #       targetUser = "master";
+      #       tags = [ "rpi" ];
+      #     };
+      #   };
+      # };
+      nixosConfigurations = {
+
+        kodi = nixpkgs.lib.nixosSystem {
+          system = system;
           specialArgs = {
-            hostname = "master";
+            hostname = "kodi";
             interface = "wlan0";
           } // attrs;
-        };
-
-        defaults =
-          { pkgs, ... }:
-          {
-            imports = [
-              attrs.hardware.nixosModules.raspberry-pi-4
-              ./.
-            ];
-          };
-        master = {
-          nixpkgs.system = "aarch64-linux";
-          deployment = {
-            buildOnTarget = true;
-            targetHost = "master";
-            targetUser = "master";
-            tags = [ "rpi" ];
-          };
-        };
-      };
-      nixosConfigurations = {
+          modules = [
+            attrs.hardware.nixosModules.raspberry-pi-4
+            ./.
+            ./modules/media
+          ];
+        }; # kodi
         master = nixpkgs.lib.nixosSystem {
           system = system;
           specialArgs = {

@@ -31,105 +31,82 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '()
 
    ;; List of configuration layers to load.
-    dotspacemacs-configuration-layers
-    '(
-      ;; ----------------------------------------------------------------
-      ;; Example of useful layers you may want to use right away.
-      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-      ;; `M-m f e R' (Emacs style) to install them.
-      ;; ----------------------------------------------------------------
-     (auto-completion :variables
-                      auto-completion-enable-sort-by-usage t
-                      auto-completion-enable-help-tooltip t
-                      auto-completion-enable-snippets-in-popup t) 
-
-     better-defaults  ;;enhances the default commands of Emacs
-     emacs-lisp ;;lsp for emacs-lisp do not disable
-     c-c++ ;; the language of the gods
-     git ;;maggit
-     helm ;; completion system
-     (lsp :variables
-          lsp-ui-doc-include-signature t
-          lsp-ui-doc-position 'at-point
-          lsp-ui-doc-show-with-cursor t
-          lsp-ui-sideline-show-symbol t
-          lsp-ui-sideline-show-code-actions t
-          lsp-ui-sideline-show-diagnostics t
-          lsp-ui-imenu-auto-refresh t
-          lsp-lens-enable t) ;; ide capabled
-     markdown
+   dotspacemacs-configuration-layers
+   '(
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
+     ;; `M-m f e R' (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
+     emacs-lisp
+     ;; git
+     helm
+     ;; lsp
      multiple-cursors
-     (unicode-fonts :variables
-                    unicode-fonts-enable-ligatures t)
-     (org :variables
-          org-enable-roam-protocol t
-          org-enable-roam-ui t
-          org-enable-roam-support t)
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
-     (syntax-checking :variables
-                      syntax-checking-enable-by-default t)
-     (spell-checking :variables
-                     spell-checking-enable-by-default nil
-                     enable-flyspell-auto-completion t);; spell right for once
-     syntax-checking
+     ;; spell-checking
+     ;; syntax-checking
+
+     auto-completion
+     better-defaults
      version-control
+     git ;;maggit
      (treemacs :variables
                treemacs-use-all-the-icons-theme t
                treemacs-use-git-mode 'deferred) ;; a file system is much like a tree
-
-     ;;devops
-     (docker :variables
-             docker-dockerfile-backend 'lsp) ;; containerize everythangs
+     markdown ;; write that down patrick
+     (org :variables
+          org-enable-roam-protocol t
+          org-enable-roam-ui t
+          org-enable-roam-support t) ;; ride the unicorn
+     (spell-checking :variables
+                     spell-checking-enable-by-default nil
+                     enable-flyspell-auto-completion t);; spell right for once
+     (syntax-checking :variables
+                      syntax-checking-enable-by-default nil)
+     (unicode-fonts :variables
+                    unicode-fonts-enable-ligatures t);; ligatures are non negotiable
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom) ;; my home
+     prettier ;; you are as pretty as the first day I laid eyes on you
+     (lsp :variables
+          lsp-lens-enable t
+          lsp-enable-snippet t
+          lsp-ui-doc-position 'at-point
+          lsp-ui-doc-show-with-cursor t
+          lsp-ui-doc-include-signature t)
+     react ;; frontend
+     (javascript :variables
+                 node-add-modules-path t) ;; everything that can be written in js will be written in js
+     (typescript :variables
+                 typescript-fmt-tool 'prettier
+                 typescript-linter 'eslint
+                 typescript-fmt-on-save t) ;; js but like better?
+     (json :variables
+           json-fmt-on-save t
+           json-fmt-tool 'prettier) ;; I only accept payloads in json
+     (yaml :variables
+           yaml-enable-lsp t) ;; a necessary evil
+     toml ;; what is we went beyond json/yaml
+     (terraform
+      :variables terraform-auto-format-on-save t) ;; open source was fun while it lasted
+     docker ;; what if we could run linux inside linux
+     kubernetes ;; docker but overcomplicated and resilient
      (python :variables
              python-test-runner 'pytest
              python-formatter 'black
              python-format-on-save t
-             python-sort-imports-on-save t) ;; snake language
-    (terraform :variables
-               terraform-auto-format-on-save t) ;; cloud commands are one api call away
-    kubernetes
-    (nixos :variables
-           nixos-format-on-save t) ;; declarative pain
-    (go :variables
-        go-tab-width 4
-        ;; go-tab-width nil ;; if using editorconfig
-        godoc-at-point-function 'godoc-gogetdoc
-        go-format-before-save t
-        go-use-golangci-lint t) ;; go go go
-    (yaml :variables
-          yaml-enable-lsp t)
-    (shell-scripts :variables
-                   shell-scripts-format-on-save t)
-    (sql :variables
-         sql-capitalize-keywords t
-         sql-auto-indent nil
-         sql-lsp-sqls-workspace-config-path 'workspace) ;; don't forget to add the json (sqlss2
-     ;; web develop
-    prettier
-    toml
-    (json :variables
-          json-fmt-on-save t)
-    react
-    (svelte :variables
-            node-add-modules-path t) ;; rich harris is web jesus
-    (javascript :variables
-                 js2-basic-offset 2
-                 node-add-modules-path t) ;; everything that can be written in js will be written in js
-    (typescript :variables
-                typescript-linter 'eslint)
-                ;; typescript-fmt-on-save t)
-    ;; js but safer? only took 2 decades
-     ;;misc
-    (colors :variables
-            colors-enable-nyan-cat-progress-bar t) ;; overwhelming colors
-     emoji ;; 
-     chinese
+             python-sort-imports-on-save t)  ;; snake language
+     (go :variables
+         go-tab-width 4
+         ;; go-tab-width nil ;; if using editorconfig
+         godoc-at-point-function 'godoc-gogetdoc
+         go-format-before-save t
+         go-use-golangci-lint t) ;; go go go
      themes-megapack
-     pdf
-     xkcd
+     emoji
      )
+
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -140,40 +117,14 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
-     ;; essentially a wrapper for use-package
-     pomm
+     catppuccin-theme
      exec-path-from-shell
-     calfw
-     yasnippet-snippets
-     perspective
      sqlite3
      editorconfig
-     org-wild-notifier
-     yasnippet-snippets
-;;      (use-package emmet-mode
-;;        :ensure t
-;;        :defer 2
-;;        :commands emmet-mode
-;;        :hook
-;;        ((web-mode css-mode sgml-mode rjsx-mode typescript-mode js2-mode) . emmet-mode)
-;;        :init
-;;        (setq emmet-indent-after-insert nil)
-;;        (setq emmet-indentation 2)
-;;        (setq emmet-expand-jsx-className? t) ; 设置jsx 语法
-;;        (setq emmet-move-cursor-between-quotes t)
-;;        (setq emmet-self-closing-tag-style " /")
-
-;;        :config
-;;        (add-to-list 'emmet-jsx-major-modes 'js-mode)
-;;        (add-to-list 'emmet-jsx-major-modes 'typescript-mode)
-;;        (setq emmet-jsx-className-braces? t) ; className={}
-;; )
-     ;; (lsp-tailwindcss
-     ;;   :init
-     ;;   (setq lsp-tailwindcss-add-on-mode t)
-     ;;   :config
-     ;;   (setq lsp-tailwindcss-major-modes '(react-mode svelte-mode html-mode sgml-mode mhtml-mode web-mode css-mode)))
-     )
+     emmet-mode
+     pomm
+     (lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -347,7 +298,7 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(doom-tokyo-night
-                         spacemacs-light)
+                         catppuccin)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -356,16 +307,17 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(doom spacemacs :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
 
-   ;; Default font or prioritized list of fonts. The `:size' can be specified as
+   ;; Default font or prioritized list of fonts. This setting has no effect when
+   ;; running Emacs in terminal. The font set here will be used for default and
+   ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   ;; dotspacemacs-default-font '("Source Code Pro"
    dotspacemacs-default-font '("JetBrains Mono"
                                :size 18
                                :weight normal
@@ -445,6 +397,10 @@ It should only modify the values of Spacemacs settings."
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
+   ;; It is also possible to use a posframe with the following cons cell
+   ;; `(posframe . position)' where position can be one of `center',
+   ;; `top-center', `bottom-center', `top-left-corner', `top-right-corner',
+   ;; `top-right-corner', `bottom-left-corner' or `bottom-right-corner'
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
 
@@ -511,7 +467,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Show the scroll bar while scrolling. The auto hide time can be configured
    ;; by setting this variable to a number. (default t)
-   dotspacemacs-scroll-bar-while-scrolling t
+   dotspacemacs-scroll-bar-while-scrolling nil
 
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
@@ -558,7 +514,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server nil
+   dotspacemacs-enable-server t
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
@@ -605,14 +561,14 @@ It should only modify the values of Spacemacs settings."
    ;; Color highlight trailing whitespace in all prog-mode and text-mode derived
    ;; modes such as c++-mode, python-mode, emacs-lisp, html-mode, rst-mode etc.
    ;; (default t)
-   dotspacemacs-show-trailing-whitespace nil
+   dotspacemacs-show-trailing-whitespace t
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
    ;; to aggressively delete empty line and long sequences of whitespace,
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'trailing
 
    ;; If non-nil activate `clean-aindent-mode' which tries to correct
    ;; virtual indentation of simple modes. This can interfere with mode specific
@@ -673,157 +629,61 @@ dump."
 )
 
 
-;; ========================
-;; dotspacemacs/user-config
-;; ========================
 (defun dotspacemacs/user-config ()
-
-"Configuration for user code:
+  "Configuration for user code:
 This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-
-  ;; --- layers (config)---
-  ;;; --- lsp ---
-  (setq lsp-log-io t)
-  ;;; --- tailwindcss ---
-  ;;; --- auto-completion ---
-  (custom-set-faces
-  '(company-tooltip-common
-    ((t (:inherit company-tooltip :weight bold :underline nil))))
-  '(company-tooltip-common-selection
-    ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
-    ;;; --- react/svelte/ts/js ---
-  (add-hook 'web-mode-hook  'emmet-mode)
-  (setq-default
-  web-mode-markup-indent-offset 2
-  web-mode-css-indent-offset 2
-  web-mode-code-indent-offset 2
-  web-mode-attr-indent-offset 2)
-    ;;; --- colors (hex)---
-  (add-hook 'css-mode-hook 'rainbow-mode)
-  (add-hook 'python-mode-hook 'rainbow-mode)
-  (add-hook 'json-mode-hook 'rainbow-mode)
-  (add-hook 'org-mode-hook 'rainbow-mode)
-  (add-hook 'js-mode-hook 'rainbow-mode)
-  (add-hook 'jsx-mode-hook 'rainbow-mode)
-  (add-hook 'ts-mode-hook 'rainbow-mode)
-  (add-hook 'tsx-mode-hook 'rainbow-mode)
-  (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
-  ;;; --- yasnippet ---
-  (yas-global-mode 1)
-  ;; --- perspective ---
-  (spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
-  ;; --- org-mode ---
-  (with-eval-after-load 'org
-    (defhydra hydra-org-block-insert (:color blue :hint nil)
-      "
-Insert block:
-_e_: example  _s_: source  _q_: quit
-"
-      ("e" (progn
-             (insert "#+begin_example\n\n#+end_example")
-             (forward-line -1)) "Example")
-      ("s" (progn
-             (insert "#+begin_src \n\n#+end_src")
-             (forward-line -1)) "Source")
-      ("q" nil "Quit" :color red)))
-
-  (global-set-key (kbd "C-c b") 'hydra-org-block-insert/body)
-
-  (defun org-summary-todo (n-done n-not-done)
-    "Switch entry to DONE when all subentries are done, to TODO otherwise."
-    (let (org-log-done org-todo-log-states)   ; turn off logging
-      (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-
-  (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
-  (add-hook 'org-mode-hook 'turn-on-visual-line-mode)
-
-  ;;; --- org-roam ---
-  (setq org-roam-directory (file-truename "/home/henri/Documents/zettelkasten/org-roam"))
-  (setq find-file-visit-truename t)
-  (org-roam-db-autosync-mode)
-  
-  ;; --- treemacs ---
-  (custom-set-faces
-   '(treemacs-hl-line-face ((t (:background "#e64553")))))
-
-  ;; --- tab-bar ---
-  (defun my/tab-bar-tab-name ()
-    "Return the name of the current Projectile project, or the buffer name."
-    (if (and (fboundp 'projectile-project-name)
-             (projectile-project-p))
-        (projectile-project-name)
-      (buffer-name)))
-
-  (setq tab-bar-tab-name-function #'my/tab-bar-tab-name)
-  (tab-bar-mode 1)
-  (defhydra hydra-tab-bar (:color blue :hint nil)
-    "
-Tab Bar:
-  _n_: New Tab    _>_: Next Tab   _<_: Previous Tab
-"
-    ("n" tab-bar-new-tab "new")
-    ("x" tab-bar-close-tab "close")
-    (">" tab-bar-switch-to-next-tab "next")
-    ("<" tab-bar-switch-to-prev-tab "prev")
-    ("q" nil "quit" :color red))
-
-  (spacemacs/set-leader-keys "ot" 'hydra-tab-bar/body)
-  ;;; --- custom styling ---
-  (custom-set-faces
-   '(tab-bar-tab ((t (:background "#1e1e2e" :foreground "#cba6f7"
-                                  :box (:line-width 2 :color "#7f849c" :style released-button)
-                                  :overline "#7f849c" :underline "#f38ba8"))))
-   '(tab-bar-tab-inactive ((t (:background "#1e1e2e" :foreground "#f5e0dc"
-                                           :box (:line-width 2 :color "#7f849c" :style released-button))))))
-
-  ;; --- editorconfig ---
-  (setq editorconfig-mode 1)
-
-  ;; --- maggit --
-  ;; (require 'sqlite3)
-  ;; (with-eval-after-load 'magit
-  ;;   (require 'forge))
-
-  ;; --- exec-path ---
-  ;; https://emacs.stackexchange.com/questions/17866/magit-how-to-use-systems-ssh-agent-and-dont-ask-for-password
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
-  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
-
-  ;; --- shell/eshell ---
-  (setq explicit-shell-file-name "/run/current-system/sw/bin/fish") ;; Adjust the path if Fish is located elsewhere
-  (setq shell-file-name "fish")
-
-  ;; --- projectile ---
-   (defun my/projectile-find-projects-in-directory (directory)
-     "Recursively search for Projectile projects in DIRECTORY."
-     (let (projects)
-       (dolist (dir (directory-files directory t "\\w+"))
-         (when (and (file-directory-p dir)
-                    (not (string-match-p "/\\." (file-name-nondirectory dir))))
-           (if (file-exists-p (expand-file-name ".git/" dir))
-               (push dir projects)
-             (setq projects (append projects (my/projectile-find-projects-in-directory dir))))))
-       projects))
-
-   (setq projectile-project-search-path
-         (append '(my/projectile-find-projects-in-directory "~/Documents")))
-
-  ;; --- misc ---
-  ;;(scroll-bar-mode -1) ;; disable scroll bar
-  (setq display-line-numbers t) ;; relative line numbering
-  (setf dired-kill-when-opening-new-dired-buffer t) ;; prevents dired from using new buffers
-
+  (setq-default word-wrap t)
   ;; --- pomm ---
   (setq pomm-audio-enabled t)
   ;; --- org-todo ---
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
-)
+  ;; --- tailwindcss ---
+  (add-hook 'before-save-hook 'lsp-tailwindcss-rustywind-before-save)
+  (setq lsp-tailwindcss-add-on-mode t)
+  ;; webmode
+  (setq-default
+   ;; js2-mode
+   js2-basic-offset 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
+  ;; --- emmet ---
+  (add-hook 'css-mode-hook  'emmet-mode)
+  (add-hook 'html-mode-hook  'emmet-mode)
+  (add-hook 'jsx-mode-hook  'emmet-mode)
+  (add-hook 'tsx-mode-hook  'emmet-mode)
+  ;; --- org-roam ---
+  (setq org-roam-directory (file-truename "/home/henri/Documents/zettelkasten/org-roam"))
+  (setq find-file-visit-truename t)
+  (org-roam-db-autosync-mode)
+  ;; --- perspective ---
+  (spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
+  ;; --- treemacs ---
+  (custom-set-faces
+   '(treemacs-hl-line-face ((t (:background "#e64553")))))
+  ;; --- dired ---
+  (setf dired-kill-when-opening-new-dired-buffer t)
+    ;;; --- colors (hex)---
+  ;; (add-hook 'css-mode-hook 'rainbow-mode)
+  ;; (add-hook 'python-mode-hook 'rainbow-mode)
+  ;; (add-hook 'json-mode-hook 'rainbow-mode)
+  ;; (add-hook 'org-mode-hook 'rainbow-mode)
+  ;; (add-hook 'js-mode-hook 'rainbow-mode)
+  ;; (add-hook 'jsx-mode-hook 'rainbow-mode)
+  ;; (add-hook 'ts-mode-hook 'rainbow-mode)
+  ;; (add-hook 'tsx-mode-hook 'rainbow-mode)
+  ;; (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
+  )
+
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
@@ -836,17 +696,12 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(nil nil t)
  '(package-selected-packages
-   '(ligature unicode-fonts ucs-utils font-utils persistent-soft pcache rjsx-mode lsp-tailwindcss xkcd company-emoji emoji-cheat-sheet-plus emojify color-identifiers-mode rainbow-identifiers sqlup-mode flyspell-popup treemacs-all-the-icons flycheck-golangci-lint add-node-modules-path company-quickhelp company-statistics company-shell counsel-gtags counsel swiper ivy fish-mode flycheck-bashate ggtags insert-shebang shfmt reformatter sql-indent perspective calfw emacsql-sqlite org-roam-ui websocket org-roam compat copilot key-chord package-lint closql magit yaml git-commit transient helm lsp-mode helm-core magit-section treemacs evil emacsql-sqlite-module sqlite3 dap-mode lsp-docker bui zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode ws-butler writeroom-mode winum white-sand-theme which-key web-mode web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen use-package unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toxi-theme toml-mode toc-org terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode shell-pop seti-theme scss-mode sass-mode rustic ron-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pyim-basedict pyim pyenv-mode pydoc py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pdf-view-restore pcre2el password-generator paradox pangu-spacing overseer orgit-forge organic-green-theme org-superstar org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme nix-mode naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes mmm-mode minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-python-ms lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-tramp kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jinja2-mode jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic impatient-mode hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-nixos-options helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link git-gutter-fringe gh-md gandalf-theme fuzzy flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-elsa flx-ido flatui-theme flatland-theme find-by-pinyin-dired farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emmet-mode elisp-slime-nav elisp-def editorconfig dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes dockerfile-mode docker-tramp docker django-theme dired-quick-sort diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-web company-terraform company-nixos-options company-lua company-go company-ansible company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme chinese-conv cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ansible-doc ansible ample-zen-theme ample-theme all-the-icons alect-themes aggressive-indent afternoon-theme ace-pinyin ace-link ace-jump-helm-line ac-ispell)))
+   '(ligature unicode-fonts ucs-utils font-utils persistent-soft pcache dap-mode lsp-docker bui lsp-tailwindcss zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toml-mode toc-org texfrag terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sqlite3 sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme rjsx-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pylookup pyenv-mode pydoc py-isort purple-haze-theme professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox overseer orgit-forge organic-green-theme org-superstar org-roam-ui org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic hybrid-mode hungry-delete htmlize holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-company helm-comint helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link gh-md gandalf-theme flyspell-popup flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav elisp-def editorconfig eat dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes doom-modeline dockerfile-mode docker django-theme dired-quick-sort diminish diff-hl devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-terraform company-go company-emoji company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme cherry-blossom-theme centered-cursor-mode catppuccin-theme busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme add-node-modules-path ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(tab-bar-tab ((t (:background "#1e1e2e" :foreground "#cba6f7" :box (:line-width 2 :color "#7f849c" :style released-button) :overline "#7f849c" :underline "#f38ba8"))))
- '(tab-bar-tab-inactive ((t (:background "#1e1e2e" :foreground "#f5e0dc" :box (:line-width 2 :color "#7f849c" :style released-button)))))
  '(treemacs-hl-line-face ((t (:background "#e64553")))))
 )

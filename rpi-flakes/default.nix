@@ -1,4 +1,10 @@
-{ hostname, interface, pkgs, lib, ... }:
+{
+  hostname,
+  interface,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
 
@@ -10,7 +16,11 @@
       "cgroup_enable=memory"
     ];
 
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+    ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
@@ -27,7 +37,10 @@
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
 
@@ -94,5 +107,5 @@
 
   security.sudo.wheelNeedsPassword = false;
   hardware.enableRedistributableFirmware = true;
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
