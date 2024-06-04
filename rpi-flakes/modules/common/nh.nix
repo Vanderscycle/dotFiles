@@ -1,7 +1,7 @@
-{ pkgs, username, ... }:
+{ pkgs, hostname, ... }:
 {
   environment.sessionVariables = {
-    FLAKE = "/home/${username}/Documents/dotFiles/nixos-flakes";
+    FLAKE = "/home/${hostname}/Documents/dotFiles/nixos-flakes";
   };
 
   environment.systemPackages = with pkgs; [

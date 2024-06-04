@@ -8,6 +8,7 @@
 
 {
 
+  imports = [ ./common ];
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
     kernelParams = [
@@ -66,7 +67,8 @@
   environment.systemPackages = with pkgs; [
     git
     fd
-    vim
+    ag
+    lunarvim
     raspberrypi-eeprom
     helm
     kustomize

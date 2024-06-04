@@ -1,5 +1,1 @@
-{
-  imports = [
-    # ./colmena.nix
-  ];
-}
+{ imports = [ ./nh.nix ]; }
