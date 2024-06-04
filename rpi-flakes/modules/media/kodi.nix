@@ -3,11 +3,22 @@
   environment.systemPackages = with pkgs; [
     libreelec-dvb-firmware
     kodi
-    (pkgs.kodi.passthru.withPackages (kodiPkgs: with kodiPkgs; [ jellyfin ]))
+    (pkgs.kodi.passthru.withPackages (
+      kodiPkgs: with kodiPkgs; [
+        jellyfin
+        youtube
+      ]
+    ))
   ];
   networking.firewall = {
-    allowedTCPPorts = [ 8080 ];
-    allowedUDPPorts = [ 8080 ];
+    allowedTCPPorts = [
+      22
+      8080
+    ];
+    allowedUDPPorts = [
+      22
+      8080
+    ];
   };
 
   services = {
@@ -18,8 +29,10 @@
       };
       xserver = {
         enable = true;
-        desktopManager.kodi.enable = true;
-        lightdm.autoLogin.timeout = 3;
+        desktopManager.kodi = {
+          enable = true;
+          package = pkgs.kodi;
+        };
       };
     };
   };
