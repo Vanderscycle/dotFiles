@@ -5,13 +5,13 @@
   ...
 }:
 let
-  dotfiles_dir = /home/henri/Documents/dotFiles;
+  dotfiles_dir = /home/${username}/Documents/dotFiles;
 in
 {
   home-manager.users.${username} = {
     home = {
       file = {
-        "/home/henri/SpaceVim.d/init.toml".source = "${dotfiles_dir}/.config/SpaceVim.d/init.toml";
+        "/home/${username}/SpaceVim.d/init.toml".source = "${dotfiles_dir}/.config/SpaceVim.d/init.toml";
       };
     };
   };

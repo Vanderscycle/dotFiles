@@ -4,9 +4,6 @@
   pkgs,
   ...
 }:
-let
-  dotfiles_dir = /home/henri/Documents/dotFiles;
-in
 {
 
   home-manager.users.${username} = {
@@ -78,7 +75,7 @@ in
         }
 
         #mode, #clock, #memory, #temperature, #cpu,
-        #mpd, #idle_inhibitor, #backlight, #pulseaudio, #network, 
+        #mpd, #idle_inhibitor, #backlight, #pulseaudio, #network,
         #battery, #custom-powermenu, #custom-cava-internal,
         #custom-launcher, #tray, #disk, #custom-pacman, #custom-scratchpad-indicator {
           padding-left: .6rem;
@@ -270,7 +267,7 @@ in
           disk = {
             interval = 30;
             format = " {used}";
-            path = "/home/henri/";
+            path = "/home/${username}/";
             tooltip = true;
             tooltip-format = "{used}/{total} => {path} {percentage_used}%";
           };

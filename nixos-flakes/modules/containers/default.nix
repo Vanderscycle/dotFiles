@@ -1,3 +1,4 @@
+{ username }:
 {
   virtualisation = {
     oci-containers = {
@@ -5,7 +6,7 @@
       containers = {
         prusaslicer-novnc = {
           image = "mikeah/prusaslicer-novnc:latest";
-          volumes = [ "/home/henri/Documents/3D-models:/data" ];
+          volumes = [ "/home/${username}/Documents/3D-models:/data" ];
           ports = [ "4243:8080" ];
         };
         orcaslicer = {
@@ -16,7 +17,10 @@
             PGID = "1000";
             TZ = "Etc/UTC";
           };
-          ports = [ "3000:3000" "3001:3001" ];
+          ports = [
+            "3000:3000"
+            "3001:3001"
+          ];
         };
       };
     };

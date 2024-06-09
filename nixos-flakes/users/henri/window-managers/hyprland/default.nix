@@ -5,9 +5,6 @@
   ...
 }:
 
-# let
-#   dotfiles_dir = /home/henri/Documents/dotFiles;
-# in
 {
   programs = {
     hyprland = {

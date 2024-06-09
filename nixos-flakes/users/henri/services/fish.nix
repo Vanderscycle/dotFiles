@@ -59,12 +59,12 @@
       #interactiveShellIinit = ''
       #'';
       functions = {
-lfcd =''
-      --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
-          # `command` is needed in case `lfcd` is aliased to `lf`.
-          # Quotes will cause `cd` to not change directory if `lf` prints nothing to stdout due to an error.
-          cd "$(command lf -print-last-dir $argv)"
-'';
+        lfcd = ''
+          --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
+              # `command` is needed in case `lfcd` is aliased to `lf`.
+              # Quotes will cause `cd` to not change directory if `lf` prints nothing to stdout due to an error.
+              cd "$(command lf -print-last-dir $argv)"
+        '';
         clear-trash = ''
           rm -rf ~/.local/share/Trash/*
         '';
@@ -90,7 +90,7 @@ lfcd =''
         '';
         # Docker programs
         prusa-slicer = ''
-          docker pull mikeah/prusaslicer-novnc:latest && docker run -v "/home/henri/Documents/3D-models:/data" -p 8080:8080 mikeah/prusaslicer-novnc:latest
+          docker pull mikeah/prusaslicer-novnc:latest && docker run -v "/home/${username}/Documents/3D-models:/data" -p 8080:8080 mikeah/prusaslicer-novnc:latest
         '';
         # ssh
         s-laptop = ''
@@ -109,7 +109,7 @@ lfcd =''
           ssh pi@192.168.1.243
         '';
         v-minion-save = ''
-          rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/henri/Documents/3D-models/printer_configs/v-minion/
+          rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/${username}/Documents/3D-models/printer_configs/v-minion/
         '';
         # network
         kill-port = "kill -9 $(lsof -t -i:$argv[1])";
@@ -131,7 +131,7 @@ lfcd =''
         '';
         # nix
         nixit = ''
-          set -xg SHELL_FILE (find /home/henri/Documents/houseOfNixAndPain/shells -name 'shell.nix' | fzf)
+          set -xg SHELL_FILE (find /home/${username}/Documents/houseOfNixAndPain/shells -name 'shell.nix' | fzf)
           nix-shell $SHELL_FILE
         '';
         nix-clean = "nix-store --gc";
