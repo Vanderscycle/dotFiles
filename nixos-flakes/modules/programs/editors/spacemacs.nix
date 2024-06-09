@@ -28,6 +28,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    emacs-all-the-icons-fonts
     emacs
     libtool
     sqlite

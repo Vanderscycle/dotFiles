@@ -92,6 +92,29 @@
               home-manager.nixosModules.home-manager
             ];
           }; # laptop
+
+        cloud =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              username = "cloud";
+              hostname = "homecloud";
+              palete-color = "mocha";
+              inherit system;
+              inherit inputs;
+            } // inputs;
+            modules = [
+              ./.
+              ./modules/desktop-environment/xfce
+              ./users/henri/window-managers/lightdm
+              hosts.nixosModule
+              { networking.stevenBlackHosts.enable = true; }
+              catppuccin.nixosModules.catppuccin
+              home-manager.nixosModules.home-manager
+            ];
+          }; # cloud
       }; # nixosConfigurations
 
       templates.default = {

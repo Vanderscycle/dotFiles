@@ -7,7 +7,7 @@
 }:
 
 {
-
+  environment.systemPackages = with pkgs; [ sops ];
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops.defaultSopsFile = "/home/${username}/Documents/dotFiles/nixos-flakes/secrets/secrets.yaml";
