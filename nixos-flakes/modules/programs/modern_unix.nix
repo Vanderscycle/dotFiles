@@ -19,7 +19,7 @@
     duf # df
     hyperfine # how to find the xz weakness
     lsof
-
+    sysz # systemctl + fzf
     killall
     wget
     curl
