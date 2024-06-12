@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./cloud
     ./btop.nix
     ./screenshot.nix
     ./keyboard.nix
