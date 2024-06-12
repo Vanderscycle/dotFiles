@@ -14,6 +14,6 @@
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [ fish ];
+    packages = with pkgs; [ fish google-chrome];
   };
 }
