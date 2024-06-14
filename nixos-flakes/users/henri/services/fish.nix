@@ -56,8 +56,9 @@
           src = fzf-fish.src;
         }
       ];
-      #interactiveShellIinit = ''
-      #'';
+      interactiveShellInit = ''
+        keychain --eval --agents ssh endeavourGit
+      '';
       functions = {
         lfcd = ''
           --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
