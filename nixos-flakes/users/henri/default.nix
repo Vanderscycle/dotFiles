@@ -1,10 +1,16 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  username,
+  hostname,
+  ...
+}:
 {
   imports = [
     ./languages
     ./services
     ./programs
-  ];
+  ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ]);
+
   users.users.${username} = {
     shell = pkgs.fish;
     description = "Henri Vandersleyen";
@@ -14,6 +20,6 @@
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [ fish google-chrome];
+    packages = with pkgs; [ fish ];
   };
 }
