@@ -9,6 +9,7 @@
     ./languages
     ./services
     ./programs
+    ./virtualization
   ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ]);
 
   users.users.${username} = {

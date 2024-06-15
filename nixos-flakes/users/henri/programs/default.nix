@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, hostname, ... }:
 {
   imports = [
     ./cloud
@@ -21,11 +21,11 @@
     ./rg.nix
     ./signal.nix
     ./lf
-  ];
+  ] ++ (if hostname == "desktop" then [ ./fuzzel.nix ] else [ ]);
 
   # ----------------------
   # default applications
-  # ---------------------  
+  # ---------------------
   xdg.mime = {
     defaultApplications = {
       "application/pdf" = [ "zathura.desktop" ];

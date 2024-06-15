@@ -8,7 +8,8 @@
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
-
+        # ios/android hell
+        fastlane
         # ruby
         ruby
 
@@ -28,6 +29,7 @@
         php
 
         # java
+        groovy
         jdk22
         maven
         gradle
