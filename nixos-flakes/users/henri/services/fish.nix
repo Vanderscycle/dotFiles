@@ -60,6 +60,9 @@
         keychain --eval --agents ssh endeavourGit
       '';
       functions = {
+        starsector = ''
+          steam-run bash ~Programs/starsector/starsector.sh
+        '';
         lfcd = ''
           --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
               # `command` is needed in case `lfcd` is aliased to `lf`.

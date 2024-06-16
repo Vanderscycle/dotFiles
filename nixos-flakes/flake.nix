@@ -108,7 +108,7 @@
             modules = [
               ./.
               ./modules/desktop-environment/xfce
-              ./users/henri/window-managers/lightdm
+              ./users/cloud/window-managers/lightdm
               hosts.nixosModule
               { networking.stevenBlackHosts.enable = true; }
               catppuccin.nixosModules.catppuccin
