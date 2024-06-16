@@ -100,7 +100,7 @@
           nixpkgs.lib.nixosSystem {
             specialArgs = {
               username = "cloud";
-              hostname = "homecloud";
+              hostname = "cloud";
               palete-color = "mocha";
               inherit system;
               inherit inputs;
