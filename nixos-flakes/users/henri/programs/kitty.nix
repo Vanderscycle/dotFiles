@@ -13,10 +13,8 @@
         shellIntegration.enableFishIntegration = true;
         settings = {
           allow_remote_control = "yes";
+          listen_on = "unix:/tmp/mykitty";
           # Add other Kitty settings here if needed
-        };
-        environment = {
-          KITTY_LISTEN_ON = "/tmp/mykitty";
         };
         font = {
           size = 14;
