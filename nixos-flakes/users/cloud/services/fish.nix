@@ -21,8 +21,8 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
 
-        SUDO_EDITOR = "emacslient";
-        EDITOR = "emacslient";
+        SUDO_EDITOR = "lvim";
+        EDITOR = "lvim";
         BROWSER = "firefox";
         TERMINAL = "kitty";
         NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";

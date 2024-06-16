@@ -7,6 +7,5 @@
     # db
     ./postgres.nix
     # window beautifier
-    ./picom.nix
   ];
 }

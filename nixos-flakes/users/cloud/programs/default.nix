@@ -2,14 +2,9 @@
 {
   imports = [
     ./btop.nix
-    ./screenshot.nix
-    ./keyboard.nix
     ./keychain.nix
     ./nnn.nix
-    ./printer.nix
-    ./plastic_printer.nix
     ./zathura.nix
-    ./discord.nix
     ./k9s.nix
     ./fzf.nix
     ./btop.nix
@@ -18,7 +13,6 @@
     ./starship.nix
     ./bat.nix
     ./rg.nix
-    ./signal.nix
     ./lf
   ];
 
