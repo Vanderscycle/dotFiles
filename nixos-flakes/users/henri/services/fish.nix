@@ -21,14 +21,10 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
 
-        SUDO_EDITOR = "emacslient";
-        EDITOR = "emacslient";
+        SUDO_EDITOR = "lvim";
+        EDITOR = "lvim";
         BROWSER = "firefox";
         TERMINAL = "kitty";
-        NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
-        NNN_OPTS = "Hed";
-        NNN_TMPFILE = "/tmp/nnn";
-        NNN_FIFO = "/tmp/nnn.fifo";
         TLDR_AUTO_UPDATE_DISABLED = "false";
       };
     };
@@ -61,7 +57,7 @@
       '';
       functions = {
         starsector = ''
-          steam-run bash ~Programs/starsector/starsector.sh
+          steam-run bash ~/Programs/starsector/starsector.sh
         '';
         lfcd = ''
           --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
