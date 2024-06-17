@@ -9,6 +9,8 @@
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
+        # hardrives
+        gparted
         # sql/db
         dbeaver-bin
         # k8s

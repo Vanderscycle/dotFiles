@@ -57,7 +57,7 @@
       '';
       functions = {
         starsector = ''
-          steam-run bash ~/Programs/starsector/starsector.sh
+          steam-run bash ~Programs/starsector/starsector.sh
         '';
         lfcd = ''
           --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"

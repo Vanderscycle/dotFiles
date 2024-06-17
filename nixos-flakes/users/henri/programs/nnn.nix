@@ -13,7 +13,7 @@
     };
     home = {
       sessionVariables = {
-        NNN_PLUG = "f:finder;o:fzopen;v:imgview;p:preview-tui;t:preview-tabbed";
+        NNN_PLUG = "f:finder;o:fzopen;p:preview-tui;t:preview-tabbed"; # tabbed is x only
         NNN_OPTS = "Heda";
         NNN_TMPFILE = "/tmp/nnn";
         NNN_FIFO = "/tmp/nnn.fifo";

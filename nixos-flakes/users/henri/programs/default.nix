@@ -3,6 +3,7 @@
   imports = [
     ./cloud
     ./btop.nix
+    ./ventoy.nix
     ./screenshot.nix
     ./keyboard.nix
     ./keychain.nix
