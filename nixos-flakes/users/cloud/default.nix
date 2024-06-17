@@ -4,6 +4,7 @@
     ./languages
     ./services
     ./programs
+    ./containers
   ];
   users.users.${username} = {
     shell = pkgs.fish;

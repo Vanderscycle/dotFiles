@@ -59,7 +59,6 @@
             modules = [
               ./.
               ./modules/programs/gaming
-              #./modules/containers
               ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
               ./users/henri/window-managers/hyprland
