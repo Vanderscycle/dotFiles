@@ -1,12 +1,16 @@
+let
+  true_nas_smb = "/mnt/prox-share";
+  container_name = "portainer";
+in
 {
   virtualisation = {
     oci-containers = {
       containers = {
         portainer = {
-          image = "portainer/portainer-ce:latest";
+          image = "portainer/${container_name}-ce:latest";
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
-            "/data/portainer:/data"
+            "${true_nas_smb}/${container_name}:/data"
           ];
           ports = [
             "8000:8000"
