@@ -1,1 +1,4 @@
-{ imports = [ ./virtbox.nix ]; }
+{ pkgs, ... }:
+{
+  environment.systemPackages = [ pkgs.qemu ];
+}

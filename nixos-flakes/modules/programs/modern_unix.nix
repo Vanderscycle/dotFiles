@@ -27,5 +27,6 @@
     nixpkgs-fmt
     nix-prefetch-git
     xfce.thunar
+    gnumake # makefiles
   ];
 }
