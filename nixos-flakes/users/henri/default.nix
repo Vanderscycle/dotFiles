@@ -9,7 +9,6 @@
     ./languages
     ./services
     ./programs
-    ./virtualization
     ./containers
   ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ]);
 

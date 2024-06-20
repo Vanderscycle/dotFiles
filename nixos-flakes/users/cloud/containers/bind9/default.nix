@@ -9,21 +9,19 @@ in
   home-manager.users.${username} = {
     home = {
       file = {
-        "${true_nas_smb}/${container_name}/config"=
-          {recursive = true;
+        "${true_nas_smb}/${container_name}/config" = {
+          recursive = true;
           source = "${dotfiles_dir}/config";
         };
         "${true_nas_smb}/${container_name}/cache".recursive = {
           recursive = true;
           source = "${dotfiles_dir}/cache";
         };
-          "${true_nas_smb}/${container_name}/records"=
-{
+        "${true_nas_smb}/${container_name}/records" = {
           recursive = true;
           source = "${dotfiles_dir}/records";
         };
-
-
+      };
     };
   };
   services.resolved = {
