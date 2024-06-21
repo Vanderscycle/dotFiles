@@ -10,6 +10,7 @@
       packages = with pkgs; [
         # ios/android hell
         fastlane
+        android-studio
         # ruby
         ruby
 
