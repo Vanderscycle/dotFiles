@@ -1,7 +1,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./drives.nix
+    ./fcstab.nix
   ];
   #----Host specific config ----
 }
