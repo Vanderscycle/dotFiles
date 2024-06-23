@@ -10,7 +10,7 @@ in
           image = "portainer/${container_name}-ce:latest";
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
-            "${true_nas_smb}/${container_name}:/data"
+            "${true_nas_smb}/${container_name}/data:/data"
           ];
           ports = [
             "8000:8000"

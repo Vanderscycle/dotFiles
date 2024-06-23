@@ -15,7 +15,7 @@ in
           };
           ports = [ "8123:8123" ];
           volumes = [
-            "${true_nas_smb}/${container_name}:/config" # Contains all relevant configuration files
+            "${true_nas_smb}/${container_name}/config:/config" # Contains all relevant configuration files
           ];
         };
       };
