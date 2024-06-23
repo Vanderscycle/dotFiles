@@ -6,7 +6,7 @@ in
   virtualisation = {
     oci-containers = {
       containers = {
-        portainer = {
+        nextcloud = {
           image = "lscr.io/linuxserver/${container_name}:latest";
           volumes = [
             "${true_nas_smb}/${container_name}/config:/config"

@@ -13,7 +13,7 @@ in
           recursive = true;
           source = "${dotfiles_dir}/config";
         };
-        "${true_nas_smb}/${container_name}/cache".recursive = {
+        "${true_nas_smb}/${container_name}/cache" = {
           recursive = true;
           source = "${dotfiles_dir}/cache";
         };
