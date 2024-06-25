@@ -35,22 +35,11 @@
         set -x PATH $PATH $HOME/.npm-global/bin
       '';
       plugins = with pkgs.fishPlugins; [
-        {
-          name = "done";
-          src = done.src;
-        }
-        {
-          name = "z";
-          src = z.src;
-        }
-        {
-          name = "autopair-fish";
-          src = autopair-fish.src;
-        }
-        {
-          name = "fzf-fish";
-          src = fzf-fish.src;
-        }
+        done
+        z
+        autopair-fish
+        # https://github.com/PatrickF1/fzf.fish
+        fzf-fish
       ];
       interactiveShellInit = ''
         keychain --eval --agents ssh endeavourGit
@@ -85,10 +74,6 @@
         screenshot = ''
           grim -g "$(slurp -o -r -c '#ff0000ff')" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png
         '';
-        # Docker programs
-        prusa-slicer = ''
-          docker pull mikeah/prusaslicer-novnc:latest && docker run -v "/home/${username}/Documents/3D-models:/data" -p 8080:8080 mikeah/prusaslicer-novnc:latest
-        '';
         # ssh
         s-laptop = ''
           ssh henri@192.168.1.231
@@ -98,12 +83,6 @@
         '';
         s-router = ''
           ssh root@192.168.1.1
-        '';
-        s-router-2 = ''
-          ssh root@192.168.1.2
-        '';
-        s-printer = ''
-          ssh pi@192.168.1.243
         '';
         v-minion-save = ''
           rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/${username}/Documents/3D-models/printer_configs/v-minion/

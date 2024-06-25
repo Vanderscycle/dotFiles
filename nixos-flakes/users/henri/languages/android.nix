@@ -16,15 +16,17 @@
         "$ANDROID_HOME/platform-tools"
       ];
       packages = with pkgs; [
-        # ios/android hell
+        # android hell
         fastlane
         watchman
         android-studio
+
         # ruby
-        ruby
+        ruby # for gemfiles
+
         # java
-        groovy
-        jdk22
+        groovy # linting of gradle files
+        jdk22 # java
         maven
         gradle
       ];
