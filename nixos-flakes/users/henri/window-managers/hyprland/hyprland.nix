@@ -2,6 +2,7 @@
   username,
   home-manager,
   pkgs,
+  lib,
   ...
 }:
 
@@ -126,55 +127,70 @@
           };
           "$mainMod" = "SUPER";
           # https://wiki.hyprland.org/Configuring/Keywords/
-          bind = [
-            "$mainMod, Q, exec, kitty"
-            "$mainMod, D, pseudo"
-            "$mainMod, H, togglesplit"
-            "$mainMod, h, movefocus, l"
-            "$mainMod, l, movefocus, r"
-            "$mainMod, k, movefocus, u"
-            "$mainMod, j, movefocus, d"
-            # TODO: rework
-            # "$mainMod ALT, H, movewindow, l"
-            # "$mainMod ALT, L, movewindow, r"
-            # "$mainMod ALT, K, movewindow, u"
-            # "$mainMod ALT, J, movewindow, d"
-            # bind = $mainMod SHIFT, h, resizeactive, -40 0
-            # bind = $mainMod SHIFT, l, resizeactive, 40 0
-            # bind = $mainMod SHIFT, k, resizeactive, 0 -40
-            # bind = $mainMod SHIFT, j, resizeactive, 0 40
-            "SHIFTSUPER, P, exec, fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff"
-            "SHIFTSUPER, T, exec, thunar"
-            "SHIFTSUPER, F, fullscreen,"
-            "SHIFTSUPER, minus, exec, amixer -q sset Master 1%-"
-            "SHIFTSUPER, equals, exec, amixer -q sset Master 1%+"
-            "SHIFTSUPER, E, exec, pkill fcitx5 -9;sleep 1;fcitx5 -d --replace; sleep 1;fcitx5-remote -r"
-            "$mainMod, C, killactive,"
-            "$mainMod, V, togglefloating,"
-            "$mainMod, 1, workspace, 1"
-            "$mainMod, 2, workspace, 2"
-            "$mainMod, 3, workspace, 3"
-            "$mainMod, 4, workspace, 4"
-            "$mainMod, 5, workspace, 5"
-            "$mainMod, 6, workspace, 6"
-            "$mainMod, 7, workspace, 7"
-            "$mainMod, 8, workspace, 8"
-            "$mainMod, 9, workspace, 9"
-            "$mainMod, 0, workspace, 10"
-            "$mainMod SHIFT, 1, movetoworkspace, 1"
-            "$mainMod SHIFT, 2, movetoworkspace, 2"
-            "$mainMod SHIFT, 3, movetoworkspace, 3"
-            "$mainMod SHIFT, 4, movetoworkspace, 4"
-            "$mainMod SHIFT, 5, movetoworkspace, 5"
-            "$mainMod SHIFT, 6, movetoworkspace, 6"
-            "$mainMod SHIFT, 7, movetoworkspace, 7"
-            "$mainMod SHIFT, 8, movetoworkspace, 8"
-            "$mainMod SHIFT, 9, movetoworkspace, 9"
-            "$mainMod SHIFT, 0, movetoworkspace, 10"
-          ];
+          bind =
+            let
+              myScript = pkgs.writeShellScriptBin "hallo" ''
+                ${pkgs.libnotify}/bin/notify-send "hello world"
+              '';
+            in
+            [
+              "$mainMod, h, movefocus, l"
+              "$mainMod, l, movefocus, r"
+              "$mainMod, k, movefocus, u"
+              "$mainMod, j, movefocus, d"
+              # move window
+              "$mainMod ALT, H, movewindow, l"
+              "$mainMod ALT, L, movewindow, r"
+              "$mainMod ALT, K, movewindow, u"
+              "$mainMod ALT, J, movewindow, d"
+              # resize window
+              "$mainMod SHIFT, h, resizeactive, -40 0"
+              "$mainMod SHIFT, l, resizeactive, 40 0"
+              "$mainMod SHIFT, k, resizeactive, 0 -40"
+              "$mainMod SHIFT, j, resizeactive, 0 40"
+              # launch program menu
+              "SHIFTSUPER, P, exec, fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff"
+              # dedicated programs
+              "$mainMod SHIFT, T, exec, thunar"
+              "$mainMod, Q, exec, kitty"
+              # scripts
+              "$mainMod, f, exec, ${lib.getExe myScript}"
+              # volume control
+              "$mainMod SHIFT, minus, exec, amixer -q sset Master 5%-"
+              "$mainMod CTRL, minus, exec, amixer -q sset Master 5%+"
+              # buffer manipulation
+              "$mainMod SHIFT, F, fullscreen,"
+              "$mainMod, D, pseudo"
+              "$mainMod, S, togglesplit"
+              #"$mainMod SHIFT, E, exec, pkill fcitx5 -9;sleep 1;fcitx5 -d --replace; sleep 1;fcitx5-remote -r"
+              "$mainMod, C, killactive,"
+              "$mainMod, V, togglefloating,"
+              # Workplace movement
+              "$mainMod, 1, workspace, 1"
+              "$mainMod, 2, workspace, 2"
+              "$mainMod, 3, workspace, 3"
+              "$mainMod, 4, workspace, 4"
+              "$mainMod, 5, workspace, 5"
+              "$mainMod, 6, workspace, 6"
+              "$mainMod, 7, workspace, 7"
+              "$mainMod, 8, workspace, 8"
+              "$mainMod, 9, workspace, 9"
+              "$mainMod, 0, workspace, 10"
+              # Workplace buffer changes
+              "$mainMod SHIFT, 1, movetoworkspace, 1"
+              "$mainMod SHIFT, 2, movetoworkspace, 2"
+              "$mainMod SHIFT, 3, movetoworkspace, 3"
+              "$mainMod SHIFT, 4, movetoworkspace, 4"
+              "$mainMod SHIFT, 5, movetoworkspace, 5"
+              "$mainMod SHIFT, 6, movetoworkspace, 6"
+              "$mainMod SHIFT, 7, movetoworkspace, 7"
+              "$mainMod SHIFT, 8, movetoworkspace, 8"
+              "$mainMod SHIFT, 9, movetoworkspace, 9"
+              "$mainMod SHIFT, 0, movetoworkspace, 10"
+            ];
           bindm = [
             # "$mainMod, L, movewindow"
-            "$mainMod, K, resizewindow"
+            # "$mainMod, K, resizewindow"
           ];
           bindl = [
             # media controls

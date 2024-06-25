@@ -10,6 +10,7 @@
     ./services
     ./programs
     ./containers
+    # ./scripts
   ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ]);
 
   users.users.${username} = {
