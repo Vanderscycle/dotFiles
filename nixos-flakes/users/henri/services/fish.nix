@@ -56,9 +56,6 @@
         keychain --eval --agents ssh endeavourGit
       '';
       functions = {
-        starsector = ''
-          steam-run bash ~Programs/starsector/starsector.sh
-        '';
         lfcd = ''
           --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
               # `command` is needed in case `lfcd` is aliased to `lf`.
@@ -150,10 +147,6 @@
                   rm -rf $NNN_TMPFILE
           end
         '';
-        # dotFiles
-        save = ''
-          bash $HOME/Documents/dotFiles/postInstallScripts/nixos/save.sh
-        '';
         # git
         gSquash = ''
           git reset (git merge-base "$argv" (git branch --show-current))
@@ -164,7 +157,6 @@
         usb-mount = "sudo mount /dev/sda1 /mnt/usb";
         usb-eject = "sudo umount /mnt/usb";
         nas-mount = "sudo mount.nfs 192.168.1.245:/volume1/linuxBackup /mnt/nas"; # how to allow users acces to the file?
-        nas-eject = "sudo umount /mnt/nas";
         # kitty
         new_kitty_tab = "kitty @ new-tab --cwd (pwd)";
       };

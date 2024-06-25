@@ -5,6 +5,7 @@
   ...
 }:
 {
+  imports = [ ./android.nix ];
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
