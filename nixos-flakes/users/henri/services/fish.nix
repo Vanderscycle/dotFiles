@@ -5,11 +5,12 @@
   ...
 }:
 {
-  # fishPlugins.done
-  # fishPlugins.fzf
-  # fishPlugins.autopair
-  # fishPlugins.z ? working?
-
+  environment.systemPackages = with pkgs.fishPlugins; [
+    fzf-fish # configure https://github.com/PatrickF1/fzf.fish
+    z
+    autopair
+    done
+  ];
   home-manager.users.${username} = {
     home = {
       sessionVariables = {
@@ -34,13 +35,6 @@
       shellInit = ''
         set -x PATH $PATH $HOME/.npm-global/bin
       '';
-      plugins = with pkgs.fishPlugins; [
-        done
-        z
-        autopair-fish
-        # https://github.com/PatrickF1/fzf.fish
-        fzf-fish
-      ];
       interactiveShellInit = ''
         keychain --eval --agents ssh endeavourGit
       '';

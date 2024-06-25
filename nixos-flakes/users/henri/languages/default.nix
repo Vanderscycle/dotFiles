@@ -1,17 +1,17 @@
 {
   home-manager,
+  hostname,
   username,
   pkgs,
   ...
 }:
 {
   imports = [
-    ./android.nix
     ./go.nix
     ./js-ts.nix
     ./python.nix
     ./terraform.nix
-  ];
+  ] ++ (if hostname != "cloud" then [ ./android.nix ] else [ ]);
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
