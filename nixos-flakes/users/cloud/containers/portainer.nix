@@ -5,6 +5,7 @@ in
 {
   virtualisation = {
     oci-containers = {
+      backend = "docker";
       containers = {
         portainer = {
           image = "portainer/${container_name}-ce:latest";

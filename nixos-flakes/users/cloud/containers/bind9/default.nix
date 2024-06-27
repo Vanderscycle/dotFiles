@@ -33,6 +33,7 @@ in
 
   virtualisation = {
     oci-containers = {
+      backend = "docker";
       containers = {
         bind9 = {
           image = "ubuntu/${container_name}:latest";

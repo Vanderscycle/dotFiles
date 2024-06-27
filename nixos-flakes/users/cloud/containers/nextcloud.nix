@@ -5,6 +5,7 @@ in
 {
   virtualisation = {
     oci-containers = {
+      backend = "docker";
       containers = {
         nextcloud = {
           image = "lscr.io/linuxserver/${container_name}:latest";
@@ -17,7 +18,7 @@ in
             PGID = "1000";
             TZ = "America/Vancouver";
           };
-          ports = [ "8443:443" ];
+          ports = [ "8080:80" ];
         };
       };
     };

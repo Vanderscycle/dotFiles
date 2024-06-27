@@ -5,6 +5,7 @@ in
 {
   virtualisation = {
     oci-containers = {
+      backend = "docker";
       containers = {
         transmission = {
           image = "lscr.io/linuxserver/${container_name}:latest";

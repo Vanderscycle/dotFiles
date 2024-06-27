@@ -5,6 +5,7 @@ in
 {
   virtualisation = {
     oci-containers = {
+      backend = "docker";
       containers = {
         homeassistant = {
           image = "linuxserver/${container_name}:2024.6.3";
