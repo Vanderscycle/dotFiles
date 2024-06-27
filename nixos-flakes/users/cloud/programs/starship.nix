@@ -18,7 +18,7 @@
         };
         localip = {
           ssh_only = false;
-          format = "@[$localipv4](bold red)";
+          format = "@[$localipv4](bold red) ";
           disabled = false;
         };
         sudo = {
