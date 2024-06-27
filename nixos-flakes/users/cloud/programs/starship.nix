@@ -20,7 +20,7 @@
           ssh_only = false;
           format = "@[$localipv4](bold red)";
           disabled = false;
-        }
+        };
         sudo = {
           disabled = false;
         };
