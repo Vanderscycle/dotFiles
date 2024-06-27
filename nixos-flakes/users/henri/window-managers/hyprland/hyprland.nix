@@ -212,6 +212,7 @@
             "workspace 4, steam"
             "workspace 4, Steam"
             "workspace 5, Superslicer"
+            "workspace 5, OrcaSlicer"
             "pseudo,fcitx"
           ];
 
