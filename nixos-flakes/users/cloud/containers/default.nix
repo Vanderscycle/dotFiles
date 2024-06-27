@@ -6,5 +6,6 @@
     ./home-automation.nix
     ./nextcloud.nix
     ./bind9
+    ./n8n.nix
   ];
 }

@@ -213,6 +213,7 @@
             "workspace 4, Steam"
             "workspace 5, Superslicer"
             "workspace 5, OrcaSlicer"
+            "workspace 6, Transmission"
             "pseudo,fcitx"
           ];
 
@@ -229,9 +230,6 @@
             "swww img ~/Pictures/switch.png"
             "waybar"
             "dunst"
-            "fcitx5-remote -r"
-            "fcitx5 -d --replace"
-            "fcitx5-remote -r"
             "discord"
             "spotify"
             "firefox"
