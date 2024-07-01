@@ -10,6 +10,7 @@
     ./services
     ./programs
     ./containers
+    ./sops
     # ./scripts
   ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ]);
 
