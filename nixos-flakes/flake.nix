@@ -23,9 +23,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    # optional, not necessary for the module
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    nix-scripts.url = "github:Vanderscycle/nixScripts";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -33,8 +36,10 @@
       self,
       nixpkgs,
       hosts,
+      nix-scripts,
       catppuccin,
       home-manager,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -57,14 +62,34 @@
               inherit inputs;
             } // inputs;
             modules = [
+              # local
               ./.
               ./modules/programs/gaming
               ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
               ./users/henri/window-managers/hyprland
+              # hosts
               hosts.nixosModule
-              { networking.stevenBlackHosts.enable = true; }
+              {
+                networking.stevenBlackHosts = {
+                  enable = true;
+                };
+              }
+              # own scripts
+              (
+                { config, pkgs, ... }:
+                {
+                  # Import the script as a package
+                  environment.systemPackages = with pkgs; [
+                    nix-scripts.packages.${system}.output1
+                    nix-scripts.packages.${system}.output2
+                    nix-scripts.packages.${system}.output3
+                  ];
+                }
+              )
+              # theming
               catppuccin.nixosModules.catppuccin
+              # home-manager
               home-manager.nixosModules.home-manager
             ];
           }; # desktop
@@ -82,12 +107,20 @@
               inherit inputs;
             } // inputs;
             modules = [
+              # local
               ./.
               ./modules/desktop-environment/xfce
               ./users/henri/window-managers/lightdm
+              # hosts
               hosts.nixosModule
-              { networking.stevenBlackHosts.enable = true; }
+              {
+                networking.stevenBlackHosts = {
+                  enable = true;
+                };
+              }
+              # theming
               catppuccin.nixosModules.catppuccin
+              # home-manager
               home-manager.nixosModules.home-manager
             ];
           }; # laptop

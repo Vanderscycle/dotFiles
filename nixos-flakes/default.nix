@@ -5,5 +5,6 @@
     ./hosts
     ./modules
     ./users
+    ./sops.nix
   ];
 }
