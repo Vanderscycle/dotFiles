@@ -22,8 +22,8 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
 
-        SUDO_EDITOR = "lvim";
-        EDITOR = "lvim";
+        SUDO_EDITOR = "nvim";
+        EDITOR = "nvim";
         BROWSER = "firefox";
         TERMINAL = "kitty";
         TLDR_AUTO_UPDATE_DISABLED = "false";

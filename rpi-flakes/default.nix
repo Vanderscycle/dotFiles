@@ -68,7 +68,6 @@
     git
     fd
     ag
-    lunarvim
     raspberrypi-eeprom
     helm
     kustomize

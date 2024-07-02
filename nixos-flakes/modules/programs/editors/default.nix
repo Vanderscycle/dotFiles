@@ -1,8 +1,7 @@
 {
-  imports =
-    [
-      ./vim.nix
-      ./spacemacs.nix
-      ./vscode.nix
-    ];
+  imports = [
+    ./vim.nix
+    ./spacemacs.nix
+    # ./vscode.nix
+  ];
 }

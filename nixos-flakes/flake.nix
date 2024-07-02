@@ -16,7 +16,15 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    catppuccin.url = "github:catppuccin/nix";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -39,6 +47,7 @@
       nix-scripts,
       catppuccin,
       home-manager,
+      nixvim,
       sops-nix,
       ...
     }@inputs:

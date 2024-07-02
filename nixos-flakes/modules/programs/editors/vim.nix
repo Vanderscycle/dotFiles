@@ -2,21 +2,40 @@
   home-manager,
   username,
   pkgs,
+  inputs,
   ...
 }:
-let
-  dotfiles_dir = /home/${username}/Documents/dotFiles;
-in
 {
   home-manager.users.${username} = {
-    home = {
-      file = {
-        "/home/${username}/SpaceVim.d/init.toml".source = "${dotfiles_dir}/.config/SpaceVim.d/init.toml";
+    imports = [ inputs.nixvim.homeManagerModules.nixvim ];
+    programs.nixvim = {
+      enable = true;
+      colorschemes.catppuccin.enable = true;
+      plugins = {
+        telescope = {
+          enable = true;
+        };
+        lightline.enable = true;
+        # git
+        lazygit.enable = true;
+        # languages
+        lsp = {
+          enable = true;
+
+          servers = {
+            tsserver.enable = true;
+
+            lua-ls = {
+              enable = true;
+              settings.telemetry.enable = false;
+            };
+            rust-analyzer = {
+              enable = true;
+              installCargo = true;
+            };
+          };
+        };
       };
     };
   };
-
-  environment.systemPackages = with pkgs; [
-    # lunarvim
-  ];
 }
