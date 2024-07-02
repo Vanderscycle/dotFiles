@@ -7,7 +7,6 @@
 {
   home-manager.users.${username} = {
     home = {
-
       sessionVariables = {
         ANDROID_HOME = "$HOME/Android/Sdk";
       };
@@ -23,12 +22,6 @@
 
         # ruby
         ruby # for gemfiles
-
-        # java
-        groovy # linting of gradle files
-        jdk22 # java
-        maven
-        gradle
       ];
     };
   };

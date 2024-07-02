@@ -11,6 +11,7 @@
     ./js-ts.nix
     ./python.nix
     ./terraform.nix
+    ./java.nix
   ] ++ (if hostname != "cloud" then [ ./android.nix ] else [ ]);
   home-manager.users.${username} = {
     home = {
