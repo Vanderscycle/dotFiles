@@ -7,6 +7,8 @@
 }:
 
 {
+  environment.systemPackages = [ pkgs.sops ];
+
   imports = [ inputs.sops-nix.nixosModules.sops ];
 
   sops = {
@@ -20,7 +22,7 @@
       # map them according to the file structure
       example-key = { };
       "myservice/my_subdir/my_secret" = { };
+      "yubico/u2f_keys" = { };
     };
   };
-
 }

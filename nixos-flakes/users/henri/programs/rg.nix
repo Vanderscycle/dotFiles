@@ -7,7 +7,12 @@
 # https://home-manager-options.extranix.com/?query=fzf&release=master
 {
   home-manager.users.${username} = {
-    home = { };
+
+    # home = {
+    #   sessionVariables = {
+    #     RIPGREP_CONFIG_PATH = "~/.config/ripgrep/ripgreprc";
+    #   };
+    # };
     programs.ripgrep = {
       enable = true;
       arguments = [
