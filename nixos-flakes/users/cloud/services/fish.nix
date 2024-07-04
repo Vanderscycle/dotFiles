@@ -5,11 +5,6 @@
   ...
 }:
 {
-  # fishPlugins.done
-  # fishPlugins.fzf
-  # fishPlugins.autopair
-  # fishPlugins.z ? working?
-
   home-manager.users.${username} = {
     home = {
       sessionVariables = {
@@ -21,8 +16,8 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
 
-        SUDO_EDITOR = "lvim";
-        EDITOR = "lvim";
+        SUDO_EDITOR = "nvim";
+        EDITOR = "nvim";
         TLDR_AUTO_UPDATE_DISABLED = "false";
       };
     };
@@ -112,18 +107,6 @@
           sudo nix-store --optimise
           sudo nix-env --delete-generations old
           sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
-        '';
-        # nnn
-        n = ''
-          nnn
-          if test -e $NNN_TMPFILE
-                  source $NNN_TMPFILE
-                  rm -rf $NNN_TMPFILE
-          end
-        '';
-        # dotFiles
-        save = ''
-          bash $HOME/Documents/dotFiles/postInstallScripts/nixos/save.sh
         '';
         # git
         gSquash = ''

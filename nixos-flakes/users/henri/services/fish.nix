@@ -114,7 +114,7 @@
         '';
         # nnn
         n = ''
-          nnn
+          nnn -P p
           if test -e $NNN_TMPFILE
                   source $NNN_TMPFILE
                   rm -rf $NNN_TMPFILE

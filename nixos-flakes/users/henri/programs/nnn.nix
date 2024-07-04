@@ -20,5 +20,15 @@
         NNN_BMS = "d:$HOME/Documents;D:$HOME/Downloads/;P:$HOME/Programs";
       };
     };
+
+    programs.fish.functions = {
+      n = ''
+        nnn -P p
+        if test -e $NNN_TMPFILE
+                source $NNN_TMPFILE
+                rm -rf $NNN_TMPFILE
+        end
+      '';
+    };
   };
 }

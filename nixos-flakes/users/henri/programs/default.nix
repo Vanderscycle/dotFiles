@@ -27,10 +27,12 @@
   # ----------------------
   # default applications
   # ---------------------
+  # xdg-mime query filetype <file>
   xdg.mime = {
     defaultApplications = {
       "application/pdf" = [ "zathura.desktop" ];
-      "application/json" = [ "vim.desktop" ]; # You'll need a .desktop file for Vim or your preferred editor
+      "application/json" = [ "nvim.desktop" ]; # You'll need a .desktop file for Vim or your preferred editor
+      "text/plain" = [ "nvim.desktop" ];
       # Video formats
       "video/mp4" = [ "vlc.desktop" ];
       "video/mpeg" = [ "vlc.desktop" ];
