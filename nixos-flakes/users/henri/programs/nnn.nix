@@ -14,7 +14,7 @@
     home = {
       sessionVariables = {
         NNN_PLUG = "f:finder;o:fzopen;p:preview-tui;t:preview-tabbed"; # tabbed is x only
-        NNN_OPTS = "Heda";
+        NNN_OPTS = "HedaP";
         NNN_TMPFILE = "/tmp/nnn";
         NNN_FIFO = "/tmp/nnn.fifo";
         NNN_BMS = "d:$HOME/Documents;D:$HOME/Downloads/;P:$HOME/Programs";
@@ -23,7 +23,7 @@
 
     programs.fish.functions = {
       n = ''
-        nnn -P p
+        nnn
         if test -e $NNN_TMPFILE
                 source $NNN_TMPFILE
                 rm -rf $NNN_TMPFILE

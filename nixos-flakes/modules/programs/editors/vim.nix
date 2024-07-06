@@ -9,11 +9,18 @@
   home-manager.users.${username} = {
     imports = [ inputs.nixvim.homeManagerModules.nixvim ];
     programs.nixvim = {
+      globals.mapleader = " "; # Sets the leader key to space
       enable = true;
       colorschemes.catppuccin.enable = true;
       plugins = {
         telescope = {
           enable = true;
+        };
+        which-key = {
+          enable = true;
+          registrations = {
+            "<leader>p" = "Telescope";
+          };
         };
         lightline.enable = true;
         # git
