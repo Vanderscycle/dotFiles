@@ -77,6 +77,8 @@
               ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
               ./users/henri/window-managers/hyprland
+             # ./modules/desktop-environment/xfce
+             # ./users/henri/window-managers/lightdm
               # hosts
               hosts.nixosModule
               {

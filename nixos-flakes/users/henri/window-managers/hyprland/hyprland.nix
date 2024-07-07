@@ -8,9 +8,9 @@
 
 {
   programs = {
-    hyprland = {
-      enable = true;
-    };
+    #  hyprland = {
+    #    enable = true;
+    #  };
     xwayland = {
       enable = true;
     };
@@ -24,12 +24,12 @@
     extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   };
 
-  environment.systemPackages = with pkgs; [
-    #   xdg-desktop-portal
-    xdg-desktop-portal-hyprland
-    #   xdg-desktop-portal-wlr # If you're using a wlroots-based compositor
-    #   # Other relevant applications
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   #   xdg-desktop-portal
+  #   xdg-desktop-portal-hyprland
+  #   #   xdg-desktop-portal-wlr # If you're using a wlroots-based compositor
+  #   #   # Other relevant applications
+  # ];
   environment.variables = {
     MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
     NIXOS_OZONE_WL = "1";
