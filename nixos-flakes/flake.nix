@@ -179,6 +179,7 @@
               # local
               ./.
               # ./modules/hardware/nvidia
+              ./modules/programs/gaming
               ./users/jean/window-managers/gnome
               # hosts
               hosts.nixosModule
