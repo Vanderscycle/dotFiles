@@ -8,14 +8,6 @@
   home-manager.users.${username} = {
     home = {
       sessionVariables = {
-        # FCITX input-related
-        GTK_IM_MODULE = "fcitx";
-        QT_IM_MODULE = "fcitx";
-        XMODIFIERS = "@im=fcitx";
-        GLFW_IM_MODULE = "fcitx";
-        INPUT_METHOD = "fcitx";
-        IMSETTINGS_MODULE = "fcitx";
-
         SUDO_EDITOR = "nvim";
         EDITOR = "nvim";
         TLDR_AUTO_UPDATE_DISABLED = "false";

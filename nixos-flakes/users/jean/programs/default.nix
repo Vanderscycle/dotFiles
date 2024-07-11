@@ -6,5 +6,6 @@
     ./kitty.nix
     ./starship.nix
     ./zathura.nix
+    ./keychain.nix
   ];
 }
