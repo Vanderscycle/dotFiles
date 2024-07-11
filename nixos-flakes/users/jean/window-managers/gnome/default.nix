@@ -52,7 +52,6 @@
     ])
     ++ (with pkgs.gnome; [
       gnome-music
-      epiphany # web browser
       gnome-characters
       tali # poker game
       iagno # go game
@@ -66,5 +65,6 @@
       geary # email reader
       evince # document viewer
       totem # video player
+      epiphany # web browser
     ]);
 }
