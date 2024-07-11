@@ -1,7 +1,5 @@
 {
-
   imports = [
-    ./spotify.nix
     ./brave.nix
     ./fzf.nix
     ./btop.nix

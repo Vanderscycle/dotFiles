@@ -54,7 +54,6 @@
       cheese # webcam tool
       gnome-music
       gnome-terminal
-      gedit # text editor
       epiphany # web browser
       geary # email reader
       evince # document viewer
@@ -64,5 +63,8 @@
       iagno # go game
       hitori # sudoku game
       atomix # puzzle game
-    ]);
+    ]) 
+    ++ (with pkgs; [
+      pkgs.gedit # text editor
+      ]);
 }
