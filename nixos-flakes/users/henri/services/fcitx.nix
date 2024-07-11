@@ -15,7 +15,7 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
       };
-      i18n.inputMethod.fcitx5.catppuccin = true;
+      # i18n.inputMethod.fcitx5.catppuccin = true;
     };
   };
 }

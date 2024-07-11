@@ -178,7 +178,7 @@
             modules = [
               # local
               ./.
-              ./modules/hardware/nvidia
+              # ./modules/hardware/nvidia
               ./users/jean/window-managers/gnome
               # hosts
               hosts.nixosModule
