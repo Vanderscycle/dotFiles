@@ -5,6 +5,7 @@
   ...
 }:
 {
+  # i18n.inputMethod.fcitx5.catppuccin = true;
   home-manager.users.${username} = {
     home = {
       sessionVariables = {
@@ -15,7 +16,6 @@
         INPUT_METHOD = "fcitx";
         IMSETTINGS_MODULE = "fcitx";
       };
-      # i18n.inputMethod.fcitx5.catppuccin = true;
     };
   };
 }
