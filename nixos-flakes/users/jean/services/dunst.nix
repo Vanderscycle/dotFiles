@@ -4,8 +4,6 @@
   pkgs,
   ...
 }:
-# https://mynixos.com/home-manager/options/services.dunst
-# https://github.com/dunst-project/dunst/wiki/Guides#understanding-rules
 {
   home-manager.users.${username} = {
     services.dunst = {

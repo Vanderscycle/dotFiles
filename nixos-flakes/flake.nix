@@ -14,15 +14,11 @@
   inputs = {
     hosts.url = "github:StevenBlack/hosts";
 
+    catppuccin.url = "github:catppuccin/nix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    catppuccin = {
-      url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -77,8 +73,8 @@
               ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
               ./users/henri/window-managers/hyprland
-             # ./modules/desktop-environment/xfce
-             # ./users/henri/window-managers/lightdm
+              # ./modules/desktop-environment/xfce
+              # ./users/henri/window-managers/lightdm
               # hosts
               hosts.nixosModule
               {
@@ -149,15 +145,56 @@
               inherit inputs;
             } // inputs;
             modules = [
+              # local
               ./.
               ./modules/desktop-environment/xfce
-              ./users/cloud/window-managers/lightdm
+              ./users/henri/window-managers/lightdm
+              # hosts
               hosts.nixosModule
-              { networking.stevenBlackHosts.enable = true; }
+              {
+                networking.stevenBlackHosts = {
+                  enable = true;
+                };
+              }
+              # theming
               catppuccin.nixosModules.catppuccin
+              # home-manager
               home-manager.nixosModules.home-manager
             ];
           }; # cloud
+
+        wife =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              username = "jean";
+              hostname = "wife";
+              palete-color = "mocha";
+              inherit system;
+              inherit inputs;
+            } // inputs;
+            modules = [
+              # local
+              ./.
+              ./modules/hardware/nvidia
+              ./users/jean/window-managers/gnome
+              # hosts
+              hosts.nixosModule
+              {
+                networking.stevenBlackHosts = {
+                  enable = true;
+                  blockFakenews = true;
+                  blockGambling = true;
+                };
+              }
+              # theming
+              catppuccin.nixosModules.catppuccin
+              # home-manager
+              home-manager.nixosModules.home-manager
+            ];
+          }; # wife
       }; # nixosConfigurations
 
       templates.default = {

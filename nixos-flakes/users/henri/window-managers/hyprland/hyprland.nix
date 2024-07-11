@@ -1,35 +1,36 @@
 {
   username,
   home-manager,
+  inputs,
   pkgs,
   lib,
   ...
 }:
 
 {
+  hardware = {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  };
   programs = {
-    #  hyprland = {
-    #    enable = true;
-    #  };
-    xwayland = {
+    hyprland = {
       enable = true;
+      # package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+      xwayland = {
+        enable = true;
+      };
     };
-    sway = {
-      enable = true;
-    };
+    # sway = {
+    #   enable = true;
+    # };
   };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  # };
 
-  # environment.systemPackages = with pkgs; [
-  #   #   xdg-desktop-portal
-  #   xdg-desktop-portal-hyprland
-  #   #   xdg-desktop-portal-wlr # If you're using a wlroots-based compositor
-  #   #   # Other relevant applications
-  # ];
+  # environment.systemPackages = with pkgs; [ xdg-desktop-portal-hyprland ];
   environment.variables = {
     MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
     NIXOS_OZONE_WL = "1";
@@ -57,14 +58,14 @@
       #   ".config/hypr/hyprland.conf".source = "${dotfiles_dir}/.config/hypr/hyprland.conf";
       packages = with pkgs; [
         swww
-        xdg-desktop-portal-hyprland
+        # xdg-desktop-portal-hyprland
         wl-clipboard
       ];
     };
     wayland.windowManager = {
       hyprland = {
         catppuccin.enable = true;
-        enable = true;
+        enable = true; # allow home-manager to configure hyprland
         settings = {
           input = {
             kb_layout = "us";

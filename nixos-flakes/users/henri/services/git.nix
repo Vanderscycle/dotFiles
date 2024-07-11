@@ -1,14 +1,10 @@
 {
-  themes,
   username,
   home-manager,
   pkgs,
   ...
 }:
 
-let
-  theme = import ../themes;
-in
 {
   home-manager.users.${username} = {
     programs = {
@@ -48,7 +44,6 @@ in
           enable = true;
           options = {
             features = "decorations labels";
-            syntax-theme = "none";
             zero-style = "8";
             navigate = "true";
             keep-plus-minus-markers = "true";

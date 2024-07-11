@@ -1,14 +1,10 @@
 {
-  themes,
   username,
   home-manager,
   pkgs,
   ...
 }:
 
-let
-  theme = import ../themes;
-in
 {
   home-manager.users.${username} = {
     programs = {
@@ -28,9 +24,6 @@ in
         enable = true;
         userEmail = "henri-vandersleyen@protonmail.com";
         userName = "vanderscycle";
-        # commit = {
-        #   gpgsign = true;
-        # };
         aliases = {
           sig = "status --ignored";
         };
@@ -48,17 +41,12 @@ in
           enable = true;
           options = {
             features = "decorations labels";
-            syntax-theme = "none";
             zero-style = "8";
             navigate = "true";
             keep-plus-minus-markers = "true";
             decorations = {
               file-decoration-style = "none";
               whitespace-error-style = "22 reverse";
-              # minus-style = "${themes.base03}";
-              # minus-emph-style = "${themes.base03} bold";
-              # plus-style = "${themes.base0B}";
-              # plus-emph-style = "${themes.base06} bold";
               file-style = "7 italic";
               hunk-header-style = "7";
               hunk-header-decoration-style = "8 ul";
