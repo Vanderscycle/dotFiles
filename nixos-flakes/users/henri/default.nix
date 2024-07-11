@@ -10,9 +10,7 @@
     ./services
     ./programs
     ./containers
-    ./sops
-    # ./scripts
-  ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ]);
+  ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ./security ]);
 
   users.users.${username} = {
     shell = pkgs.fish;

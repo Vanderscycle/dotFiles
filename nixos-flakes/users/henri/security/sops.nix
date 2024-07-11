@@ -15,7 +15,7 @@
     defaultSopsFile = ../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
     age = {
-      keyFile = "/home/${username}/.config/sops/age/keys.txt";
+      keyFile = "/home/${username}/.config/sops/age/keys.txt"; # TODO: how can I manage it between env?
       sshKeyPaths = [ "/home/${username}/.ssh/endeavourGit" ];
     };
     secrets = {
