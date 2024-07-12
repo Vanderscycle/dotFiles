@@ -1,5 +1,6 @@
 {
   imports = [
+    ./keychain.nix
     ./brave.nix
     ./fzf.nix
     ./btop.nix

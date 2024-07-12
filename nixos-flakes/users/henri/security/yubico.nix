@@ -21,12 +21,4 @@
     yubikey-manager
     ccid
   ];
-
-  # home-manager.users.${username} = {
-  #   home = {
-  #     file = {
-  #       "/home/${username}/config/Yubico".source = "${dotfiles_dir}/.config/SpaceVim.d/init.toml";
-  #     };
-  #   };
-  # }
 }
