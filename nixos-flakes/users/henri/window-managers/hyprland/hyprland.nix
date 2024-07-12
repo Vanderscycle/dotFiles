@@ -15,25 +15,16 @@
   programs = {
     hyprland = {
       enable = true;
-      # package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       xwayland = {
         enable = true;
       };
     };
-    # sway = {
-    #   enable = true;
-    # };
   };
 
-  # xdg.portal = {
-  #   enable = true;
-  #   extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
-  # };
-
-  # environment.systemPackages = with pkgs; [ xdg-desktop-portal-hyprland ];
   environment.variables = {
     MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
     NIXOS_OZONE_WL = "1";
+    GDK_BACKEND = "wayland";
     WLR_NO_HARDWARE_CURSORS = "1";
     #   # For Electron apps, you might need to set these in the application launch options or scripts
   };
@@ -54,11 +45,8 @@
   };
   home-manager.users.${username} = {
     home = {
-      # file = {
-      #   ".config/hypr/hyprland.conf".source = "${dotfiles_dir}/.config/hypr/hyprland.conf";
       packages = with pkgs; [
         swww
-        # xdg-desktop-portal-hyprland
         wl-clipboard
       ];
     };
@@ -119,9 +107,9 @@
             preserve_split = "yes";
           };
 
-          master = {
-            new_is_master = true; # new window become the active window
-          };
+          # master = {
+          #   new_is_master = true; # new window become the active window
+          # };
           # https://wiki.hyprland.org/Configuring/Variables/#gestures
           gestures = {
             workspace_swipe = "off";
@@ -219,12 +207,18 @@
           ];
 
           windowrulev2 = [
-            "workspace 4 silent, class:Steam$,title:Steam$"
+            # steam
+            "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$"
+            "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$"
+            "tile, class:^([Ss]team)$, title:^([Ss]team)$"
+            # orcaslicer
+            "tile, class:^([Oo]rca[Ss]licer)$, title:^([Oo]rca[Ss]licer)$"
+            # rest
             "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
             "noanim,class:^(xwaylandvideobridge)$"
             "nofocus,class:^(xwaylandvideobridge)$"
             "noinitialfocus,class:^(xwaylandvideobridge)$"
-            "float, class:^(org.fcitx.)$"
+            "float, class:^(org.fcitx5.)$"
           ];
           exec-once = [
             "swww init"
