@@ -212,7 +212,11 @@
             "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$"
             "tile, class:^([Ss]team)$, title:^([Ss]team)$"
             # orcaslicer
-            "tile, class:^([Oo]rca[Ss]licer)$, title:^([Oo]rca[Ss]licer)$"
+            # https://github.com/hyprwm/Hyprland/issues/6698
+            "float, floating:0, class:^([Oo]rca[Ss]licer)"
+            "forceinput, class:^([Oo]rca[Ss]licer)"
+            "windowdance, class:^([Oo]rca[Ss]licer)" # allows IDE to move child windows
+            "nofocus, class:^([Oo]rca[Ss]licer)"
             # rest
             "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
             "noanim,class:^(xwaylandvideobridge)$"

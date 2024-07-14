@@ -2,6 +2,7 @@
 {
   imports = [
     ./cloud
+    ./orca_slicer.nix
     ./btop.nix
     ./ventoy.nix
     ./screenshot.nix

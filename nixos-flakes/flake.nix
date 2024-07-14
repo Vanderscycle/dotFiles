@@ -16,6 +16,7 @@
 
     catppuccin.url = "github:catppuccin/nix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    stable.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -39,6 +40,7 @@
     {
       self,
       nixpkgs,
+      stable,
       hosts,
       nix-scripts,
       catppuccin,
@@ -65,12 +67,13 @@
               palete-color = "mocha";
               inherit system;
               inherit inputs;
+              inherit stable;
             } // inputs;
             modules = [
               # local
               ./.
               ./modules/programs/gaming
-              ./users/henri/programs/transmission
+              # ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
               ./users/henri/window-managers/hyprland
               # ./modules/desktop-environment/xfce
@@ -89,8 +92,9 @@
                   # Import the script as a package
                   environment.systemPackages = with pkgs; [
                     nix-scripts.packages.${system}.output1
-                    nix-scripts.packages.${system}.output2
-                    nix-scripts.packages.${system}.output3
+                    # nix-scripts.packages.${system}.output2
+                    # nix-scripts.packages.${system}.output3
+                    nix-scripts.packages.${system}.output4
                   ];
                 }
               )

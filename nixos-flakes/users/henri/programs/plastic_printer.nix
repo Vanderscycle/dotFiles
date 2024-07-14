@@ -1,7 +1,7 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
-  environment.systemPackages = with pkgs;[
+  environment.systemPackages = with pkgs; [
     super-slicer-beta
-    orca-slicer
-  ]; 
+    # orca-slicer
+  ];
 }
