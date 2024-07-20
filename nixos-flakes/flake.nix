@@ -73,7 +73,7 @@
               # local
               ./.
               ./modules/programs/gaming
-              # ./users/henri/programs/transmission
+              ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
               ./users/henri/window-managers/hyprland
               # ./modules/desktop-environment/xfce

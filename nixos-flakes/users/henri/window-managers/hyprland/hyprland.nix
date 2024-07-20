@@ -213,10 +213,10 @@
             "tile, class:^([Ss]team)$, title:^([Ss]team)$"
             # orcaslicer
             # https://github.com/hyprwm/Hyprland/issues/6698
-            "float, floating:0, class:^([Oo]rca[Ss]licer)"
-            "forceinput, class:^([Oo]rca[Ss]licer)"
-            "windowdance, class:^([Oo]rca[Ss]licer)" # allows IDE to move child windows
-            "nofocus, class:^([Oo]rca[Ss]licer)"
+            # "float, floating:0, class:^([Oo]rca[Ss]licer)"
+            # "forceinput, class:^([Oo]rca[Ss]licer)"
+            # "windowdance, class:^([Oo]rca[Ss]licer)" # allows IDE to move child windows
+            # "nofocus, class:^([Oo]rca[Ss]licer)"
             # rest
             "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
             "noanim,class:^(xwaylandvideobridge)$"
@@ -229,7 +229,7 @@
             "swww img ~/Pictures/switch.png"
             "waybar"
             "dunst"
-            "discord"
+            "discord --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             "spotify"
             "firefox"
             "emacs"
