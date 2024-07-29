@@ -17,6 +17,7 @@
     catppuccin.url = "github:catppuccin/nix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    old.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -41,6 +42,7 @@
       self,
       nixpkgs,
       stable,
+      old,
       hosts,
       nix-scripts,
       catppuccin,
@@ -67,7 +69,6 @@
               palete-color = "mocha";
               inherit system;
               inherit inputs;
-              inherit stable;
             } // inputs;
             modules = [
               # local
@@ -76,8 +77,6 @@
               ./users/henri/programs/transmission
               ./users/henri/status-bars/waybar
               ./users/henri/window-managers/hyprland
-              # ./modules/desktop-environment/xfce
-              # ./users/henri/window-managers/lightdm
               # hosts
               hosts.nixosModule
               {

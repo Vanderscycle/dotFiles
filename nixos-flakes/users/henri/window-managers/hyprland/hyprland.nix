@@ -3,18 +3,21 @@
   home-manager,
   inputs,
   pkgs,
+  old,
+  system,
   lib,
   ...
 }:
-
+let
+in
 {
   hardware = {
     opengl.enable = true;
-    nvidia.modesetting.enable = true;
   };
   programs = {
     hyprland = {
       enable = true;
+      package = old.legacyPackages.${system}.hyprland;
       xwayland = {
         enable = true;
       };
@@ -213,11 +216,6 @@
             "tile, class:^([Ss]team)$, title:^([Ss]team)$"
             # orcaslicer
             # https://github.com/hyprwm/Hyprland/issues/6698
-            # "float, floating:0, class:^([Oo]rca[Ss]licer)"
-            # "forceinput, class:^([Oo]rca[Ss]licer)"
-            # "windowdance, class:^([Oo]rca[Ss]licer)" # allows IDE to move child windows
-            # "nofocus, class:^([Oo]rca[Ss]licer)"
-            # rest
             "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
             "noanim,class:^(xwaylandvideobridge)$"
             "nofocus,class:^(xwaylandvideobridge)$"

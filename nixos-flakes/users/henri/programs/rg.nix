@@ -7,21 +7,15 @@
 # https://home-manager-options.extranix.com/?query=fzf&release=master
 {
   home-manager.users.${username} = {
-
-    # home = {
-    #   sessionVariables = {
-    #     RIPGREP_CONFIG_PATH = "~/.config/ripgrep/ripgreprc";
-    #   };
-    # };
     programs.ripgrep = {
       enable = true;
       arguments = [
         "--max-columns=150"
-        "-max-columns-preview"
+        "--max-columns-preview"
         "--smart-case"
-        "-colors=line:none"
+        "--colors=line:none"
         "--colors=line:style:bold"
-        "-glob=!git/*"
+        "--glob=!git/*"
       ];
     };
   };

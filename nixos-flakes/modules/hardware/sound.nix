@@ -4,7 +4,7 @@
     extraGroups = [ "audio" ];
   };
   # Sound settings
-  sound.enable = true;
+  # sound.enable = true;
   hardware.pulseaudio.enable = false;
   hardware.pulseaudio.support32Bit = true;
   #environment.systemPackages = with pkgs; [ pulseaudio ];
@@ -20,4 +20,3 @@
     };
   };
 }
-
