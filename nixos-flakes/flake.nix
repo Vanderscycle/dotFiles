@@ -17,7 +17,6 @@
     catppuccin.url = "github:catppuccin/nix";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     stable.url = "github:NixOS/nixpkgs/nixos-24.05";
-    old.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -42,7 +41,6 @@
       self,
       nixpkgs,
       stable,
-      old,
       hosts,
       nix-scripts,
       catppuccin,
@@ -55,150 +53,137 @@
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+      nixosVersion = "24.11";
+      system = "x86_64-linux";
     in
     {
       nixosConfigurations = {
-        desktop =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              username = "henri";
-              hostname = "desktop";
-              palete-color = "mocha";
-              inherit system;
-              inherit inputs;
-            } // inputs;
-            modules = [
-              # local
-              ./.
-              ./modules/programs/gaming
-              ./users/henri/programs/transmission
-              ./users/henri/status-bars/waybar
-              ./users/henri/window-managers/hyprland
-              # hosts
-              hosts.nixosModule
+        desktop = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            username = "henri";
+            hostname = "desktop";
+            palete-color = "mocha";
+            inherit system;
+            inherit inputs;
+            inherit nixosVersion;
+          } // inputs;
+          modules = [
+            # local
+            ./.
+            ./modules/programs/gaming
+            ./users/henri/programs/transmission
+            ./users/henri/status-bars/waybar
+            ./users/henri/window-managers/hyprland
+            # hosts
+            hosts.nixosModule
+            {
+              networking.stevenBlackHosts = {
+                enable = true;
+              };
+            }
+            # own scripts
+            (
+              { config, pkgs, ... }:
               {
-                networking.stevenBlackHosts = {
-                  enable = true;
-                };
+                # Import the script as a package
+                environment.systemPackages = with pkgs; [
+                  nix-scripts.packages.${system}.output1
+                  # nix-scripts.packages.${system}.output2
+                  # nix-scripts.packages.${system}.output3
+                  nix-scripts.packages.${system}.output4
+                ];
               }
-              # own scripts
-              (
-                { config, pkgs, ... }:
-                {
-                  # Import the script as a package
-                  environment.systemPackages = with pkgs; [
-                    nix-scripts.packages.${system}.output1
-                    # nix-scripts.packages.${system}.output2
-                    # nix-scripts.packages.${system}.output3
-                    nix-scripts.packages.${system}.output4
-                  ];
-                }
-              )
-              # theming
-              catppuccin.nixosModules.catppuccin
-              # home-manager
-              home-manager.nixosModules.home-manager
-            ];
-          }; # desktop
+            )
+            # theming
+            catppuccin.nixosModules.catppuccin
+            # home-manager
+            home-manager.nixosModules.home-manager
+          ];
+        }; # desktop
 
-        laptop =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              username = "henri";
-              hostname = "laptop";
-              palete-color = "mocha";
-              inherit system;
-              inherit inputs;
-            } // inputs;
-            modules = [
-              # local
-              ./.
-              ./modules/desktop-environment/xfce
-              ./users/henri/window-managers/lightdm
-              # hosts
-              hosts.nixosModule
-              {
-                networking.stevenBlackHosts = {
-                  enable = true;
-                };
-              }
-              # theming
-              catppuccin.nixosModules.catppuccin
-              # home-manager
-              home-manager.nixosModules.home-manager
-            ];
-          }; # laptop
+        laptop = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            username = "henri";
+            hostname = "laptop";
+            palete-color = "mocha";
+            inherit system;
+            inherit inputs;
+          } // inputs;
+          modules = [
+            # local
+            ./.
+            ./modules/desktop-environment/xfce
+            ./users/henri/window-managers/lightdm
+            # hosts
+            hosts.nixosModule
+            {
+              networking.stevenBlackHosts = {
+                enable = true;
+              };
+            }
+            # theming
+            catppuccin.nixosModules.catppuccin
+            # home-manager
+            home-manager.nixosModules.home-manager
+          ];
+        }; # laptop
 
-        cloud =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              username = "cloud";
-              hostname = "cloud";
-              palete-color = "mocha";
-              inherit system;
-              inherit inputs;
-            } // inputs;
-            modules = [
-              # local
-              ./.
-              ./modules/desktop-environment/xfce
-              ./users/henri/window-managers/lightdm
-              # hosts
-              hosts.nixosModule
-              {
-                networking.stevenBlackHosts = {
-                  enable = true;
-                };
-              }
-              # theming
-              catppuccin.nixosModules.catppuccin
-              # home-manager
-              home-manager.nixosModules.home-manager
-            ];
-          }; # cloud
+        cloud = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            username = "cloud";
+            hostname = "cloud";
+            palete-color = "mocha";
+            inherit system;
+            inherit inputs;
+          } // inputs;
+          modules = [
+            # local
+            ./.
+            ./modules/desktop-environment/xfce
+            ./users/henri/window-managers/lightdm
+            # hosts
+            hosts.nixosModule
+            {
+              networking.stevenBlackHosts = {
+                enable = true;
+              };
+            }
+            # theming
+            catppuccin.nixosModules.catppuccin
+            # home-manager
+            home-manager.nixosModules.home-manager
+          ];
+        }; # cloud
 
-        wife =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            specialArgs = {
-              username = "jean";
-              hostname = "wife";
-              palete-color = "mocha";
-              inherit system;
-              inherit inputs;
-            } // inputs;
-            modules = [
-              # local
-              ./.
-              # ./modules/hardware/nvidia
-              ./modules/programs/gaming
-              ./users/jean/window-managers/gnome
-              # hosts
-              hosts.nixosModule
-              {
-                networking.stevenBlackHosts = {
-                  enable = true;
-                  blockFakenews = true;
-                  blockGambling = true;
-                };
-              }
-              # theming
-              catppuccin.nixosModules.catppuccin
-              # home-manager
-              home-manager.nixosModules.home-manager
-            ];
-          }; # wife
+        wife = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            username = "jean";
+            hostname = "wife";
+            palete-color = "mocha";
+            inherit system;
+            inherit inputs;
+          } // inputs;
+          modules = [
+            # local
+            ./.
+            # ./modules/hardware/nvidia
+            ./modules/programs/gaming
+            ./users/jean/window-managers/gnome
+            # hosts
+            hosts.nixosModule
+            {
+              networking.stevenBlackHosts = {
+                enable = true;
+                blockFakenews = true;
+                blockGambling = true;
+              };
+            }
+            # theming
+            catppuccin.nixosModules.catppuccin
+            # home-manager
+            home-manager.nixosModules.home-manager
+          ];
+        }; # wife
       }; # nixosConfigurations
 
       templates.default = {

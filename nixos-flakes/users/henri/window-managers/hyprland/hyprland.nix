@@ -3,33 +3,33 @@
   home-manager,
   inputs,
   pkgs,
-  old,
   system,
   lib,
   ...
 }:
-let
-in
 {
-  hardware = {
-    opengl.enable = true;
-  };
   programs = {
     hyprland = {
       enable = true;
-      package = old.legacyPackages.${system}.hyprland;
+      # package = pkgs.hyprland.overrideAttrs {
+      #   src = pkgs.fetchFromGitHub {
+      #     owner = "hyprwm";
+      #     repo = "Hyprland";
+      #     fetchSubmodules = true;
+      #     rev = "9e781040d9067c2711ec2e9f5b47b76ef70762b3"; # "v0.41.1";
+      #     hash = "sha256-pYWlT7CB8F5h8Cuydsq4pKu7dKRYb1BVTq+HJfmLsoo=";
+      #   };
+      # };
       xwayland = {
         enable = true;
       };
     };
   };
-
   environment.variables = {
     MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
     NIXOS_OZONE_WL = "1";
     GDK_BACKEND = "wayland";
     WLR_NO_HARDWARE_CURSORS = "1";
-    #   # For Electron apps, you might need to set these in the application launch options or scripts
   };
   services = {
     xserver = {
@@ -60,7 +60,6 @@ in
         settings = {
           input = {
             kb_layout = "us";
-
             # focus change on cursor move
             follow_mouse = 0;
             accel_profile = "flat";
@@ -69,8 +68,6 @@ in
             gaps_in = 7;
             gaps_out = 20;
             border_size = 2;
-            # col.active_border = 0xffcba6f7;
-            # col.inactive_border = rgba(595959aa);
             layout = "dwindle";
           };
           decoration = {
@@ -214,6 +211,7 @@ in
             "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$"
             "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$"
             "tile, class:^([Ss]team)$, title:^([Ss]team)$"
+            "workspace 4 silent, class:^([Ss]team)$ title:^(notificationtoasts_.*)$"
             # orcaslicer
             # https://github.com/hyprwm/Hyprland/issues/6698
             "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
@@ -230,7 +228,7 @@ in
             "discord --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             "spotify"
             "firefox"
-            "emacs"
+            "emacs" # TODO: make it spawn out of a shell
           ];
         };
       };

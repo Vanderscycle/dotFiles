@@ -4,6 +4,6 @@
     ./nix
     ./security
     ./terminal
-    ./virtualisation.nix
+    ./docker.nix
   ];
 }
