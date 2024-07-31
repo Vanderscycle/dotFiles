@@ -15,5 +15,7 @@
   environment.systemPackages = with pkgs; [
     heroic # gog
     gamescope
+    augustus # caesar 3 mod
+    innoextract # for caesar 3
   ];
 }
