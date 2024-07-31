@@ -108,6 +108,7 @@
             palete-color = "mocha";
             inherit system;
             inherit inputs;
+            inherit nixosVersion;
           } // inputs;
           modules = [
             # local
@@ -135,6 +136,7 @@
             palete-color = "mocha";
             inherit system;
             inherit inputs;
+            inherit nixosVersion;
           } // inputs;
           modules = [
             # local
@@ -162,11 +164,12 @@
             palete-color = "mocha";
             inherit system;
             inherit inputs;
+            inherit nixosVersion;
           } // inputs;
           modules = [
             # local
             ./.
-            # ./modules/hardware/nvidia
+            ./modules/hardware/nvidia
             ./modules/programs/gaming
             ./users/jean/window-managers/gnome
             # hosts
