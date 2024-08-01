@@ -11,7 +11,7 @@
         # python311
         poetry
         pre-commit
-        nodePackages.pyright
+        pyright
         (python311.withPackages (
           ps: with ps; [
             toml
