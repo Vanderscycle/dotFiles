@@ -200,7 +200,7 @@
             "workspace 3, Slack"
             "workspace 4, steam"
             "workspace 4, Steam"
-            "workspace 5, Superslicer"
+            "workspace 5, SuperSlicer"
             "workspace 5, OrcaSlicer"
             "workspace 6, Transmission"
             "pseudo,fcitx"
