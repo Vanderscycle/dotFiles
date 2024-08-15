@@ -14,7 +14,6 @@
     # INFO used for lxappearance dark mode theme
     gtk = {
       enable = true;
-      catppuccin.enable = true;
       # iconTheme = {
       #   name = "bibata-cursors";
       #   package = pkgs.bibata-cursors;

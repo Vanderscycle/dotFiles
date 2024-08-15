@@ -29,7 +29,6 @@
         # tailwindcss
         nodePackages.tailwindcss
         tailwindcss-language-server
-        rustywind
       ];
       # file = {
       #   "npmrc".text = ''

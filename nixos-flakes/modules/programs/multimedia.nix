@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = with pkgs;[
+  environment.systemPackages = with pkgs; [
     spotify
-    ytfzf
+    # ytfzf
     playerctl
     vlc
     mpv # like vlc

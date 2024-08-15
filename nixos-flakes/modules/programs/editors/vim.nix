@@ -18,9 +18,9 @@
         };
         which-key = {
           enable = true;
-          registrations = {
-            "<leader>p" = "Telescope";
-          };
+          # settings.spec = {
+          #   "<leader>p" = "Telescope";
+          # };
         };
         lightline.enable = true;
         # git
@@ -35,10 +35,6 @@
             lua-ls = {
               enable = true;
               settings.telemetry.enable = false;
-            };
-            rust-analyzer = {
-              enable = true;
-              installCargo = true;
             };
           };
         };

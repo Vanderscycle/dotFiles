@@ -12,7 +12,7 @@
     ./python.nix
     ./terraform.nix
     ./java.nix
-  ] ++ (if hostname != "cloud" then [ ./android.nix ] else [ ]);
+  ] ++ (if hostname != "cloud" then [ ] else [ ]);
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
