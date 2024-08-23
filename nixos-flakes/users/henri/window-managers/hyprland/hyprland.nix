@@ -51,6 +51,7 @@
       packages = with pkgs; [
         swww
         wl-clipboard
+        hyprcursor
       ];
     };
     wayland.windowManager = {

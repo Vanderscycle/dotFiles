@@ -1,4 +1,10 @@
-{ stable, system, ... }:
 {
-  environment.systemPackages = with stable.legacyPackages.${system}; [ babmu-studio # orca-slicer ];
+  stable,
+  pkgs,
+  system,
+  ...
+}:
+{
+  # environment.systemPackages = with stable.legacyPackages.${system}; [ bambu-studio ];
+  environment.systemPackages = with pkgs; [ orca-slicer ];
 }
