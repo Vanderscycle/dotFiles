@@ -28,7 +28,8 @@
         set -x PATH $PATH $HOME/.npm-global/bin
       '';
       interactiveShellInit = ''
-        keychain --eval --ahoagents ssh endeavourGit
+        keychain --eval --agents ssh endeavourGit
+
       '';
       functions = {
         lfcd = ''

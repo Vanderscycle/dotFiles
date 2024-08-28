@@ -45,8 +45,8 @@
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
      multiple-cursors
      (auto-completion :variables
-                     auto-completion-minimum-prefix-length 1
-                     auto-completion-idle-delay 0.05
+                      auto-completion-minimum-prefix-length 1
+                      auto-completion-idle-delay 0.05
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t
                       auto-completion-return-key-behavior 'complete
@@ -62,12 +62,14 @@
              :nick "vancycles"
              :password "/run/current-system/sw/bin/gpg2"
              )))
+     (chinese :variables
+              chinese-enable-fcitx t)
      spotify
      better-defaults
      version-control
      git ;;maggit
      (treemacs :variables
-               treemacs-use-all-the-icons-theme t
+               treemacs-use-all-the-icons-theme t ;; don't forget to run all-the-icons-install-font
                treemacs-use-git-mode 'deferred) ;; a file system is much like a tree
      markdown ;; write that down patrick
      (org :variables
@@ -80,13 +82,13 @@
      (syntax-checking :variables
                       syntax-checking-enable-by-default t)
 
-  (shell-scripts :variables shell-scripts-format-on-save t)
+     (shell-scripts :variables shell-scripts-format-on-save t)
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom) ;; my home
      prettier ;; you are as pretty as the first day I laid eyes on you
 
-                (nixos :variables nixos-format-on-save t)
+     (nixos :variables nixos-format-on-save t)
      (lsp :variables
           lsp-lens-enable t
           lsp-enable-snippet t
@@ -99,7 +101,7 @@
      (java-mode (java-backend . lsp)) ;; corporate pain incarnate
      kotlin ;; superset of corporate pain
      (groovy :variables
-          groovy-backend 'lsp) ;; thx graddle
+             groovy-backend 'lsp) ;; thx graddle
      (javascript :variables
                  node-add-modules-path t) ;; everything that can be written in js will be written in js
      (typescript :variables
@@ -133,6 +135,8 @@
      xkcd
      (unicode-fonts :variables
                     unicode-fonts-enable-ligatures t)
+     ;; ai
+     github-copilot
      )
 
 
@@ -145,14 +149,14 @@
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
-     catppuccin-theme
-     exec-path-from-shell
-     sqlite3
-     editorconfig
-     pomm
-     (lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
-     yasnippet-snippets
-     keychain-environment
+                                      catppuccin-theme
+                                      exec-path-from-shell
+                                      sqlite3
+                                      editorconfig
+                                      pomm
+                                      (lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
+                                      yasnippet-snippets
+                                      keychain-environment
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -559,7 +563,7 @@
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("ag" "rg" "pt" "ack" "grep")
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -639,7 +643,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
-)
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -647,7 +651,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-)
+  )
 
 
 (defun dotspacemacs/user-load ()
@@ -655,7 +659,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -664,6 +668,9 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; --- maggit ---
+  ;; https://magit.vc/manual/forge/Setup-for-Githubcom.html
+  (setq auth-sources '("~/.authinfo"))
   ;; --- erc ---
   ;; ---codeium ---
   ;; --- yasnippet ---
@@ -691,6 +698,9 @@ before packages are loaded."
    web-mode-attr-indent-offset 2)
   ;; --- projectile ---
   (setq projectile-project-search-path '("~/Documents/houseOperto" "~/Documents/houseVanCylesIndustries" "~/Documents/houseVandersleyen"))
+  ;; --- org-general ---
+
+  (setq user-mail-address "henri-vandersleyen@protonmail.com")
   ;; --- org-roam ---
   (setq org-roam-directory (file-truename "/home/henri/Documents/zettelkasten/org-roam"))
   ;; --- org-journal
@@ -702,12 +712,9 @@ before packages are loaded."
   (setq find-file-visit-truename t)
   (org-roam-db-autosync-mode)
   ;; --- helm ---
-  (setq helm-follow-mode-persistent t)
-
+  ;; (setq helm-follow-mode-persistent t) ;; automatically preview files but opens them as a buffer
   ;; --- perspective ---
   (spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
-  ;; --- calculator ---
-  (spacemacs/set-leader-keys "oac" 'calculator)
   ;; --- treemacs ---
   (custom-set-faces
    '(treemacs-hl-line-face ((t (:background "#e64553")))))
@@ -744,20 +751,22 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(helm-source-names-using-follow nil)
- '(package-selected-packages
-   '(flycheck-kotlin kotlin-mode groovy-imports groovy-mode lsp-java maven-test-mode mvn keychain-environment bundler chruby minitest rake rbenv robe inf-ruby rspec-mode rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rvm seeing-is-believing xkcd shrink-path nerd-icons spaceline-all-the-icons memoize ibuffer-projectile helm-spotify-plus multi spotify erc-hl-nicks erc-image erc-social-graph erc-view-log erc-yt company-nixos-options helm-nixos-options nix-mode nixos-options company-tabnine js-react-redux-yasnippets company-statistics color-identifiers-mode rainbow-identifiers rainbow-mode company-web web-completion-data helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode toggle-term ligature unicode-fonts ucs-utils font-utils persistent-soft pcache dap-mode lsp-docker bui lsp-tailwindcss zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toml-mode toc-org texfrag terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sqlite3 sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme rjsx-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pylookup pyenv-mode pydoc py-isort purple-haze-theme professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox overseer orgit-forge organic-green-theme org-superstar org-roam-ui org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic hybrid-mode hungry-delete htmlize holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-company helm-comint helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link gh-md gandalf-theme flyspell-popup flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav elisp-def editorconfig eat dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes doom-modeline dockerfile-mode docker django-theme dired-quick-sort diminish diff-hl devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-terraform company-go company-emoji company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme cherry-blossom-theme centered-cursor-mode catppuccin-theme busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme add-node-modules-path ace-link ace-jump-helm-line)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(treemacs-hl-line-face ((t (:background "#e64553")))))
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(helm-source-names-using-follow nil)
+   '(org-agenda-files
+     '("~/Documents/zettelkasten/org-roam/20231228151805-knowlege_base.org" "/home/henri/Documents/zettelkasten/org-roam/20231228151941-3d_printing.org" "/home/henri/Documents/zettelkasten/org-roam/20231227185723-emacs.org"))
+   '(package-selected-packages
+     '(copilot ace-pinyin chinese-conv fcitx find-by-pinyin-dired pinyinlib pangu-spacing pyim xr pyim-basedict flycheck-kotlin kotlin-mode groovy-imports groovy-mode lsp-java maven-test-mode mvn keychain-environment bundler chruby minitest rake rbenv robe inf-ruby rspec-mode rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rvm seeing-is-believing xkcd shrink-path nerd-icons spaceline-all-the-icons memoize ibuffer-projectile helm-spotify-plus multi spotify erc-hl-nicks erc-image erc-social-graph erc-view-log erc-yt company-nixos-options helm-nixos-options nix-mode nixos-options company-tabnine js-react-redux-yasnippets company-statistics color-identifiers-mode rainbow-identifiers rainbow-mode company-web web-completion-data helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode toggle-term ligature unicode-fonts ucs-utils font-utils persistent-soft pcache dap-mode lsp-docker bui lsp-tailwindcss zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toml-mode toc-org texfrag terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sqlite3 sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme rjsx-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pylookup pyenv-mode pydoc py-isort purple-haze-theme professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox overseer orgit-forge organic-green-theme org-superstar org-roam-ui org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic hybrid-mode hungry-delete htmlize holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-company helm-comint helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link gh-md gandalf-theme flyspell-popup flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav elisp-def editorconfig eat dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes doom-modeline dockerfile-mode docker django-theme dired-quick-sort diminish diff-hl devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-terraform company-go company-emoji company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme cherry-blossom-theme centered-cursor-mode catppuccin-theme busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme add-node-modules-path ace-link ace-jump-helm-line)))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+   '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+   '(treemacs-hl-line-face ((t (:background "#e64553")))))
+  )

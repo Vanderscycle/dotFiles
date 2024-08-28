@@ -226,10 +226,10 @@
             "swww img ~/Pictures/switch.png"
             "waybar"
             "dunst"
-            "discord --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
+            # "discord --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime"
             "spotify"
             "firefox"
-            "emacs" # TODO: make it spawn out of a shell
+            # "emacs" # TODO: make it spawn out of a shell
           ];
         };
       };
