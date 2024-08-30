@@ -15,11 +15,14 @@ let
       makeWrapper $out/opt/dbeaver/dbeaver $out/bin/dbeaver \
         --prefix PATH : "${pkgs.openjdk17}/bin" \
         --set JAVA_HOME "${pkgs.openjdk17.home}" \
+        --prefix GIO_EXTRA_MODULES : "${pkgs.glib-networking}/lib/gio/modules" \
         --prefix LD_LIBRARY_PATH : "${
           lib.makeLibraryPath [
             pkgs.swt
             pkgs.gtk3
             pkgs.glib
+            pkgs.webkitgtk
+            pkgs.glib-networking
           ]
         }"
     '';
@@ -34,6 +37,7 @@ in
         gparted
         # sql/db
         dbeaver-bin-custom
+        # dbeaver-bin
         # k8s
         kubernetes
         kubernetes-helm

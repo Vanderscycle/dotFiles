@@ -13,7 +13,7 @@
         shellIntegration.enableFishIntegration = true;
         settings = {
           allow_remote_control = "yes";
-          listen_on = "unix:/tmp/mykitty";
+          listen_on = "unix:/tmp/kitty";
           # Add other Kitty settings here if needed
           # "alt+h" = "left";
           # "alt+j" = "own";

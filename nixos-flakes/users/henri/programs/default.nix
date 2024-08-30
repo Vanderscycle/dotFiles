@@ -8,7 +8,7 @@
     ./screenshot.nix
     ./keyboard.nix
     ./keychain.nix
-    ./nnn.nix
+    ./nnn
     ./printer.nix
     ./plastic_printer.nix
     ./zathura.nix

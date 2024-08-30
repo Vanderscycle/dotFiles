@@ -32,12 +32,6 @@
 
       '';
       functions = {
-        lfcd = ''
-          --wraps="lf" --description="lf - Terminal file manager (changing directory on exit)"
-              # `command` is needed in case `lfcd` is aliased to `lf`.
-              # Quotes will cause `cd` to not change directory if `lf` prints nothing to stdout due to an error.
-              cd "$(command lf -print-last-dir $argv)"
-        '';
         clear-trash = ''
           rm -rf ~/.local/share/Trash/*
         '';
@@ -106,13 +100,13 @@
           sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
         '';
         # nnn
-        n = ''
-          nnn -P p
-          if test -e $NNN_TMPFILE
-                  source $NNN_TMPFILE
-                  rm -rf $NNN_TMPFILE
-          end
-        '';
+        # n = ''
+        #   nnn -P p
+        #   if test -e $NNN_TMPFILE
+        #           source $NNN_TMPFILE
+        #           rm -rf $NNN_TMPFILE
+        #   end
+        # '';
         # git
         gSquash = ''
           git reset (git merge-base "$argv" (git branch --show-current))
