@@ -5,6 +5,8 @@
   ...
 }:
 {
+  # within $home/.config/nnn/plugins
+  # sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
   home-manager.users.${username} = {
     programs = {
       nnn = {
@@ -14,12 +16,12 @@
           f = "finder";
           o = "fzopen";
           p = "preview-tui";
-          t = "preview-tabbed";
         };
         bookmarks = {
           d = "/home/${username}/Documents";
           D = "/home/${username}/Downloads";
           P = "/home/${username}/Programs";
+          c = "/home/${username}/Documents/dotFiles/nixos-flakes/";
           m = "/mnt/";
         };
       };

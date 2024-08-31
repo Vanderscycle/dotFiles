@@ -2,6 +2,7 @@
 {
   imports = [
     ./languages
+    ./cron
     ./services
     ./programs
     ./containers
