@@ -7,4 +7,15 @@
     ];
   };
 
+  systemd.services."dotFiles-latest" = {
+    script = ''
+      cd $HOME/dotFiles
+      ${pkgs.git}/bin/git pull
+      ${pkgs.bash}/bin/bash -c 'nh os switch'
+    '';
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
+  };
 }
