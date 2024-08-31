@@ -37,28 +37,6 @@
             defaultBranch = "main";
           };
         };
-        delta = {
-          enable = true;
-          options = {
-            features = "decorations labels";
-            zero-style = "8";
-            navigate = "true";
-            keep-plus-minus-markers = "true";
-            decorations = {
-              file-decoration-style = "none";
-              whitespace-error-style = "22 reverse";
-              file-style = "7 italic";
-              hunk-header-style = "7";
-              hunk-header-decoration-style = "8 ul";
-            };
-            labels = {
-              file-modified-label = " MODIFIED ";
-              file-removed-label = " REMOVED ";
-              file-added-label = " ADDED ";
-              file-renamed-label = " RENAMED ";
-            };
-          };
-        };
         signing = {
           key = "AAAAC3NzaC1lZDI1NTE5AAAAIOYTNJEemZVjjyRY57nQRj4NHLL58aR1U5CyAsGtuUD3";
         };
