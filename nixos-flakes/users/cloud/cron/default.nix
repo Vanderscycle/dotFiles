@@ -7,15 +7,26 @@
     ];
   };
 
+systemd.timers."dotFiles-latest" = {
+  wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true; 
+      Unit = "dotFiles-latest.service";
+    };
+};
   systemd.services."dotFiles-latest" = {
     script = ''
-      cd $HOME/dotFiles
+      # cd "${builtins.getEnv "HOME"}/Documents/dotFiles"
+      cd "/home/${username}/Documents/dotFiles"
+      ${pkgs.git}/bin/git status
+      eval `ssh-agent -s`
       ${pkgs.git}/bin/git pull
       ${pkgs.bash}/bin/bash -c 'nh os switch'
     '';
-    timerConfig = {
-      OnCalendar = "daily";
-      Persistent = true;
-    };
+  serviceConfig = {
+    Type = "oneshot";
+    User = "${username}";
+  };
   };
 }
