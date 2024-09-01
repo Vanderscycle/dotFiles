@@ -1,4 +1,4 @@
-{ username, pkgs, ... }:
+{ username,config, pkgs, ... }:
 {
   services.cron = {
     enable = true;
@@ -18,15 +18,20 @@ systemd.timers."dotFiles-latest" = {
   systemd.services."dotFiles-latest" = {
     script = ''
       # cd "${builtins.getEnv "HOME"}/Documents/dotFiles"
-      cd "/home/${username}/Documents/dotFiles"
+      cd "/home/${username}/Documents/dotFiles/nixos-flakes"
       ${pkgs.git}/bin/git status
       eval `ssh-agent -s`
+      ssh-add ~/.ssh/endeavourGit
       ${pkgs.git}/bin/git pull
-      ${pkgs.bash}/bin/bash -c 'nh os switch'
+      # sudo nixos-rebuild switch --flake ".#cloud"
     '';
+      path = [
+        pkgs.openssh
+        pkgs.git
+      ];
   serviceConfig = {
     Type = "oneshot";
-    User = "${username}";
+    User = config.users.users.${username}.name;
   };
   };
 }
