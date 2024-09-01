@@ -28,6 +28,8 @@
           sig = "status --ignored";
         };
         extraConfig = {
+	 safe.directory = "/home/${username}/Documents/dotFiles";
+	
           user.signingkey = "~/.ssh/endeavourGit.pub";
           gpg = {
             format = "ssh";

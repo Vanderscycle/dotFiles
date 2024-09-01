@@ -6,7 +6,7 @@
       "0 0 0 * * 1       ${username} cd $HOME/dotFiles & ${pkgs.git} pull && ${pkgs.bash}/bin/bash -c 'nh os switch'"
     ];
   };
-
+# pull
 systemd.timers."dotFiles-latest" = {
   wantedBy = [ "timers.target" ];
     timerConfig = {
@@ -23,7 +23,6 @@ systemd.timers."dotFiles-latest" = {
       eval `ssh-agent -s`
       ssh-add ~/.ssh/endeavourGit
       ${pkgs.git}/bin/git pull
-      # sudo nixos-rebuild switch --flake ".#cloud"
     '';
       path = [
         pkgs.openssh
@@ -32,6 +31,31 @@ systemd.timers."dotFiles-latest" = {
   serviceConfig = {
     Type = "oneshot";
     User = config.users.users.${username}.name;
+  };
+  };
+
+# update
+# systemd.timers."update-latest" = {
+#   wantedBy = [ "timers.target" ];
+#     timerConfig = {
+#       OnCalendar = "daily";
+#       Persistent = true; 
+#       Unit = "update-latest.service";
+#     };
+# }; 
+
+  systemd.services."update-latest" = {
+    script = ''
+      cd "/home/${username}/Documents/dotFiles/nixos-flakes"
+      sudo nixos-rebuild switch --flake ".#cloud"
+    '';
+      path = [
+	pkgs.sudo
+        pkgs.nixos-rebuild
+      ];
+      # no User means root
+  serviceConfig = {
+    Type = "oneshot";
   };
   };
 }
