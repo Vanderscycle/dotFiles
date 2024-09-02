@@ -5,7 +5,6 @@ let
   dotfiles_dir = /home/${username}/Documents/dotFiles/nixos-flakes/users/${username}/containers/${container_name}; # can't we use pwd?
 in
 {
-
   home-manager.users.${username} = {
     home = {
       file = {

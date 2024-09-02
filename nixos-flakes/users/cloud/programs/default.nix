@@ -13,12 +13,11 @@
     ./starship.nix
     ./bat.nix
     ./rg.nix
-    ./lf
   ];
 
   # ----------------------
   # default applications
-  # ---------------------  
+  # ---------------------
   xdg.mime = {
     defaultApplications = {
       "application/pdf" = [ "zathura.desktop" ];
