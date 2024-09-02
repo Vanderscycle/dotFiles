@@ -1,5 +1,8 @@
 {
-  # the current one is the laptop hardware and not the other computer
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./amd.nix
+    ./nvidia.nix
+  ];
   #----Host specific config ----
 }

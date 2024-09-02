@@ -12,11 +12,12 @@
   description = "My personal computers nix configurations";
 
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+
     hosts.url = "github:StevenBlack/hosts";
 
     catppuccin.url = "github:catppuccin/nix";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/nixos-24.05";
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -34,6 +35,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-pre-commit = {
+      url = "github:jmgilman/nix-pre-commit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -47,6 +53,7 @@
       home-manager,
       nixvim,
       sops-nix,
+      nix-pre-commit,
       ...
     }@inputs:
     let
@@ -113,7 +120,7 @@
           modules = [
             # local
             ./.
-            ./modules/desktop-environment/xfce
+            ./users/henri/desktop-environment/xfce
             ./users/henri/window-managers/lightdm
             # hosts
             hosts.nixosModule
@@ -141,7 +148,7 @@
           modules = [
             # local
             ./.
-            ./modules/desktop-environment/xfce
+            ./users/henri/desktop-environment/xfce
             ./users/henri/window-managers/lightdm
             # hosts
             hosts.nixosModule
@@ -169,7 +176,6 @@
           modules = [
             # local
             ./.
-            ./modules/hardware/nvidia
             ./modules/programs/gaming
             ./users/jean/window-managers/gnome
             # hosts

@@ -3,7 +3,8 @@
   imports = [
     ./nix
     ./security
-    ./terminal
+    ./fonts.nix
+    ./shell.nix
     ./docker.nix
-  ] ++ (if hostname == "cloud" then [ ./boot/systemd/cloud.nix ] else [ ./boot/systemd ]);
+  ] ++ (if hostname == "cloud" then [ ./boot/grub-boot-cloud.nix ] else [ ./boot/systemd.nix ]);
 }
