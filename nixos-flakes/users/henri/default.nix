@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    ./languages
+    ./languages.nix
     ./services
     ./programs
     ./containers

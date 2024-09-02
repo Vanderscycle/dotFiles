@@ -6,11 +6,13 @@
 }:
 {
   home-manager.users.${username} = {
+    programs = {
+      go = {
+        enable = true;
+      };
+    };
     home = {
       packages = with pkgs; [
-        # terraform
-        terraform-ls
-
         #yaml
         nodePackages.yaml-language-server
       ];

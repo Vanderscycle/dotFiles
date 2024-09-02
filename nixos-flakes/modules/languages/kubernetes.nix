@@ -13,10 +13,15 @@
     };
     home = {
       packages = with pkgs; [
-        # go
-        gopls
-        delve
-        go-swag # swagger module for gofiber
+        # k8s
+        kubernetes
+        kubernetes-helm
+        kustomize
+        kubeseal
+        kind
+        tilt
+        ctlptl
+        argocd
       ];
     };
   };

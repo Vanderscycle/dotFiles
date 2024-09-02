@@ -1,7 +1,7 @@
 { pkgs, username, ... }:
 {
   imports = [
-    ./languages
+    ./languages.nix
     ./cron
     ./services
     ./programs

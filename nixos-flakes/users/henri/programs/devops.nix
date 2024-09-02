@@ -33,30 +33,13 @@ in
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
-        # hardrives
-        gparted
         # sql/db
         dbeaver-bin-custom
         # dbeaver-bin
-        # k8s
-        kubernetes
-        kubernetes-helm
-        kustomize
-        kubeseal
-        kind
-        tilt
-        ctlptl
-        argocd
         # github actions
         act
-        # terraform
-        terraform
-        terraform-docs
-        terragrunt
-        # docker
-        dive # dive into docker images
         # ansible
-        ansible
+        # ansible
         # backend api calls
         insomnia
         # dns
