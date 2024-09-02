@@ -3,7 +3,7 @@
   services.dnsmasq = {
     enable = true;
     extraConfig = ''
-      address=/nas.home.dev/192.168.1.243
+      address=/nas.home.dev/92.168.1.157:80
     '';
   };
 }
