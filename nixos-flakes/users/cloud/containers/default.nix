@@ -1,11 +1,11 @@
 { username, ... }:
 {
   imports = [
-    ./portainer.nix
+    # ./portainer.nix
     ./transmission.nix
     ./home-automation.nix
     ./nextcloud.nix
-    ./bind9
+    # ./bind9
     ./n8n.nix
   ];
 }
