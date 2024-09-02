@@ -77,7 +77,7 @@
           modules = [
             # local
             ./.
-            ./modules/programs/gaming
+            ./modules/gaming
             ./users/henri/programs/transmission
             ./users/henri/status-bars/waybar
             ./users/henri/window-managers/hyprland
@@ -176,7 +176,7 @@
           modules = [
             # local
             ./.
-            ./modules/programs/gaming
+            ./modules/gaming
             ./users/jean/window-managers/gnome
             # hosts
             hosts.nixosModule

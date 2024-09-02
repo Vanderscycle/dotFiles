@@ -9,8 +9,7 @@
     yq # yaml parser
     httpie
     zoxide
-    zoxide
-    tldr
+    tldr # quick tips
     unzip
     parted # remember about lslk
     usbutils
@@ -26,7 +25,7 @@
     firefox
     nixpkgs-fmt
     nix-prefetch-git
-    xfce.thunar
+    xfce.thunar # not unix but a really good
     gnumake # makefiles
   ];
 }

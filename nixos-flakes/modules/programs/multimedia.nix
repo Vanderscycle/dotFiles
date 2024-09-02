@@ -6,6 +6,6 @@
     playerctl
     vlc
     mpv # like vlc
-    wf-recorder # video recorder
+    wf-recorder # video recorder for wayland
   ];
 }
