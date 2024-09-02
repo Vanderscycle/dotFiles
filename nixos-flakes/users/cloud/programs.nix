@@ -1,19 +1,19 @@
 { pkgs, ... }:
 {
   imports = [
-    ./devops.nix
-    ./btop.nix
-    ./keychain.nix
-    ./nnn.nix
-    ./zathura.nix
-    ./k9s.nix
-    ./fzf.nix
-    ./btop.nix
-    ./kitty.nix
-    ./lazygit.nix
-    ./starship.nix
-    ./bat.nix
-    ./rg.nix
+    ../../modules/programs/devops.nix
+    ../../modules/programs/btop.nix
+    ../../modules/programs/keychain.nix
+    ../../modules/programs/nnn.nix
+    ../../modules/programs/zathura.nix
+    ../../modules/programs/k9s.nix
+    ../../modules/programs/fzf.nix
+    ../../modules/programs/btop.nix
+    ../../modules/programs/kitty.nix
+    ../../modules/programs/lazygit.nix
+    ../../modules/programs/starship.nix
+    ../../modules/programs/bat.nix
+    ../../modules/programs/rg.nix
   ];
 
   # ----------------------

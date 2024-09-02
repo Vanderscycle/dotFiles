@@ -78,9 +78,9 @@
             # local
             ./.
             ./modules/gaming
-            ./users/henri/programs/transmission
-            ./users/henri/status-bars/waybar
-            ./users/henri/window-managers/hyprland
+            ./modules/programs/transmission
+            ./modules/status-bars/waybar
+            ./modules/window-managers/hyprland
             # hosts
             hosts.nixosModule
             {
@@ -120,8 +120,8 @@
           modules = [
             # local
             ./.
-            ./users/henri/desktop-environment/xfce
-            ./users/henri/window-managers/lightdm
+            ./modules/desktop-environment/xfce
+            ./modules/window-managers/lightdm
             # hosts
             hosts.nixosModule
             {
@@ -148,8 +148,8 @@
           modules = [
             # local
             ./.
-            ./users/henri/desktop-environment/xfce
-            ./users/henri/window-managers/lightdm
+            ./modules/desktop-environment/xfce
+            ./modules/window-managers/lightdm
             # hosts
             hosts.nixosModule
             {

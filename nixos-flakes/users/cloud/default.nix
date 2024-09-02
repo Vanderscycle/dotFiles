@@ -3,9 +3,9 @@
   imports = [
     ./languages.nix
     ./cron
-    ./services
-    ./programs
-    ./containers
+    ./services.nix
+    ./programs.nix
+    ./containers.nix
   ];
   users.users.${username} = {
     shell = pkgs.fish;

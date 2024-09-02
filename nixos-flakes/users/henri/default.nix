@@ -7,9 +7,9 @@
 {
   imports = [
     ./languages.nix
-    ./services
-    ./programs
-    ./containers
+    ./services.nix
+    ./programs.nix
+    # ./container.nix
   ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ./security ]);
 
   users.users.${username} = {
