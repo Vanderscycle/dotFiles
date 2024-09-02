@@ -1,6 +1,8 @@
 { pkgs, hostname, ... }:
 {
   imports = [
+    ./devops.nix
+    ./libreoffice.nix
     ./cloud
     ./orca_slicer.nix
     ./btop.nix

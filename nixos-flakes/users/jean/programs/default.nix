@@ -1,5 +1,6 @@
 {
   imports = [
+    ./libreoffice.nix
     ./keychain.nix
     ./brave.nix
     ./fzf.nix

@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./devops.nix
     ./btop.nix
     ./keychain.nix
     ./nnn.nix
