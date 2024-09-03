@@ -5,6 +5,6 @@
     ../../modules/containers/home-automation.nix
     ../../modules/containers/nextcloud.nix
     ../../modules/containers/n8n.nix
-    ../../modules/containers/bind9
+    # ../../modules/containers/bind9.nix
   ];
 }
