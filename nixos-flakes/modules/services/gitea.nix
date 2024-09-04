@@ -13,15 +13,15 @@
     ensureUsers = [
       {
         name = config.services.gitea.database.user;
-        ensurePermissions."DATABASE ${config.services.gitea.database.name}" = "ALL PRIVILEGES";
+        # ensurePermissions."DATABASE ${config.services.gitea.database.name}" = "ALL PRIVILEGES";
       }
     ];
   };
 
-  sops.secrets."postgres/gitea_dbpass" = {
-    sopsFile = ../.secrets/postgres.yaml; # bring your own password file
-    owner = config.services.gitea.user;
-  };
+  # sops.secrets."postgres/gitea_dbpass" = {
+  #   sopsFile = ../.secrets/postgres.yaml; # bring your own password file
+  #   owner = config.services.gitea.user;
+  # };
 
   services.gitea = {
     enable = true;
