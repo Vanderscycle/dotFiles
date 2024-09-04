@@ -25,6 +25,7 @@
     ../../modules/programs/rg.nix
     ../../modules/programs/signal.nix
     ../../modules/programs/lf
+    ../../modules/programs/work.nix
   ] ++ (if hostname == "desktop" then [ ../../modules/programs/fuzzel.nix ] else [ ]);
 
   # ----------------------

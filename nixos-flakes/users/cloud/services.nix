@@ -4,5 +4,7 @@
     ../../modules/services/gnome.nix
     ../../modules/services/fish.nix
     ../../modules/services/postgres.nix
+    ../../modules/services/coredns.nix
+
   ];
 }
