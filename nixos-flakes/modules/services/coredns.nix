@@ -11,7 +11,7 @@ let
 
     h. IN NS ns.home.dev.
 
-    ns 180 IN A 192.168.1.153
+    ns 180 IN A 192.168.1.157
 
     ; hosts
     nas.home.dev. 180 IN A 192.168.1.157
