@@ -17,6 +17,8 @@
       home.dev {
           hosts {
               192.168.1.168 proxmox.home.dev
+              192.168.1.157 nas.home.dev
+              192.168.1.153 cloud.home.dev
               fallthrough
           }
       }
