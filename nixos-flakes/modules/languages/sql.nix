@@ -13,8 +13,8 @@
     };
     home = {
       packages = with pkgs; [
-        # sql
-        sqls
+        sqls # connect to the db
+        sqlint
       ];
     };
   };

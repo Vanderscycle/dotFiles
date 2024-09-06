@@ -99,14 +99,6 @@
           sudo nix-env --delete-generations old
           sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
         '';
-        # nnn
-        # n = ''
-        #   nnn -P p
-        #   if test -e $NNN_TMPFILE
-        #           source $NNN_TMPFILE
-        #           rm -rf $NNN_TMPFILE
-        #   end
-        # '';
         # git
         gSquash = ''
           git reset (git merge-base "$argv" (git branch --show-current))
@@ -126,10 +118,10 @@
       };
       shellAliases = {
         "..." = "cd ../..";
+        "...." = "cd ../../..";
         ls = "eza -al";
         ":q" = "exit";
         top = "btop";
-        kt = "new_kitty_tab";
       };
     };
   };
