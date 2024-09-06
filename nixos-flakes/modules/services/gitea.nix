@@ -1,38 +1,42 @@
-{ config, ... }:
+{ config, lib, pkgs, username, inputs, ... }:
+#let
+#domain = "test";
+#in
+#{
+#  services.gitea = {
+#    enable = true;
+#    rootUrl = "https://git.${domain}/";
+#    user = "git";
+#    appName = "Gitea";
+#    disableRegistration = true;
+#    # inherit (config.networking) domain;
+#    stateDir = "/srv/gitea";
+#    repositoryRoot = "/home/${username}/repositories";
+#    database = {
+#      type = "sqlite3";
+#      # inherit username;
+#      path = "/home/${username}/gitea.db";
+#    };
+#    enableUnixSocket = true;
+#    ssh = {
+#      clonePort = lib.head config.services.openssh.ports;
+#    };
+#    lfs = {
+#      enable = true;
+#      contentDir = "/home/${username}/lfs";
+#    };
+#};
+#}
 {
-  services.nginx.virtualHosts."git.my-domain.tld" = {
-    enableACME = true;
-    forceSSL = true;
-    locations."/" = {
-      proxyPass = "http://localhost:3001/";
-    };
-  };
-
-  services.postgresql = {
-    ensureDatabases = [ config.services.gitea.user ];
-    ensureUsers = [
-      {
-        name = config.services.gitea.database.user;
-        # ensurePermissions."DATABASE ${config.services.gitea.database.name}" = "ALL PRIVILEGES";
-      }
-    ];
-  };
-
-  # sops.secrets."postgres/gitea_dbpass" = {
-  #   sopsFile = ../.secrets/postgres.yaml; # bring your own password file
-  #   owner = config.services.gitea.user;
-  # };
-
-  services.gitea = {
-    enable = true;
-    appName = "My awesome Gitea server"; # Give the site a name
-    database = {
-      type = "postgres";
-      password = "halohalo";
-      # passwordFile = config.sops.secrets."postgres/gitea_dbpass".path;
-    };
-    domain = "git.my-domain.tld";
-    rootUrl = "https://git.my-domain.tld/";
-    httpPort = 3001;
-  };
+    services.gitea.enable = true;
+    services.gitea.httpAddress = "127.0.0.1";
+    # services.gitea.domain = "gitea.mimas.internal.nobbz.dev";
+    # services.gitea.settings.server.ROOT_URL = lib.mkForce "https://gitea.mimas.internal.nobbz.dev/";
+    services.gitea.settings."git.timeout".DEFAULT = 3600; # 1 hour
+    services.gitea.settings."git.timeout".MIGRATE = 3600; # 1 hour
+    services.gitea.settings."git.timeout".MIRROR = 3600; # 1 hour
+    services.gitea.settings."git.timeout".CLONE = 3600; # 1 hour
+    services.gitea.settings."git.timeout".PULL = 3600; # 1 hour
+    services.gitea.settings."git.timeout".GC = 3600; # 1 hour
+    systemd.services.gitea.after = ["var-lib-gitea.mount"];
 }
