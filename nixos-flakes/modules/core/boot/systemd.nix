@@ -1,8 +1,10 @@
 { pkgs, ... }:
 {
   boot.loader = {
-    systemd-boot.enable = true;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 10;
+    };
     efi.canTouchEfiVariables = true;
-    systemd-boot.configurationLimit = 10;
   };
 }
