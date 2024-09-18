@@ -16,6 +16,8 @@
       sessionVariables = {
         SUDO_EDITOR = "nvim";
         EDITOR = "nvim";
+        # SUDO_EDITOR = "emacsclient";
+        # EDITOR = "emacsclient";
         BROWSER = "firefox";
         TERMINAL = "kitty";
         TLDR_AUTO_UPDATE_DISABLED = "false";

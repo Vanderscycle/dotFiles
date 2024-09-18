@@ -21,6 +21,7 @@
           d = "/home/${username}/Documents";
           D = "/home/${username}/Downloads";
           P = "/home/${username}/Programs";
+          p = "/home/${username}/Pictures";
           c = "/home/${username}/Documents/dotFiles/nixos-flakes/";
           m = "/mnt/";
         };

@@ -177,7 +177,8 @@
             # local
             ./.
             ./modules/gaming
-            ./users/jean/window-managers/gnome
+            ./modules/desktop-environment/xfce
+            ./modules/window-managers/lightdm
             # hosts
             hosts.nixosModule
             {

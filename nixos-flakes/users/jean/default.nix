@@ -1,8 +1,8 @@
 { pkgs, username, ... }:
 {
   imports = [
-    ./programs
-    ./services
+    ./programs.nix
+    ./services.nix
   ];
 
   users.users.${username} = {
