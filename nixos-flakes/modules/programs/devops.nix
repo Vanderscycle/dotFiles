@@ -34,8 +34,8 @@ in
     home = {
       packages = with pkgs; [
         # sql/db
-        dbeaver-bin-custom
-        # dbeaver-bin
+        # dbeaver-bin-custom
+        dbeaver-bin
         # github actions
         act
         # ansible

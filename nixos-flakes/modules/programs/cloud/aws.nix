@@ -16,7 +16,8 @@ in
 {
   environment.systemPackages = with pkgs; [
     ssm-session-manager-plugin
-    customAwscli2
+    # customAwscli2
+    awscli2
     rclone
   ];
 }

@@ -13,6 +13,7 @@
       enable = true;
       colorschemes.catppuccin.enable = true;
       plugins = {
+        web-devicons.enable = true;
         telescope = {
           enable = true;
         };
@@ -30,7 +31,7 @@
           enable = true;
 
           servers = {
-            tsserver.enable = true;
+            ts-ls.enable = true;
 
             lua-ls = {
               enable = true;
