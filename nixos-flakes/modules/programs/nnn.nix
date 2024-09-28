@@ -13,9 +13,12 @@
         enable = true;
         package = pkgs.nnn.override ({ withNerdIcons = true; });
         plugins.mappings = {
+          z = "autojump";
           f = "finder";
           o = "fzopen";
           p = "preview-tui";
+          c = "fzcd";
+          m = "mimelist";
         };
         bookmarks = {
           d = "/home/${username}/Documents";

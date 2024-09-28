@@ -8,7 +8,7 @@
     jq # json parser
     yq # yaml parser
     httpie
-    zoxide
+    autojump # like zoxide
     tldr # quick tips
     unzip
     parted # remember about lslk
@@ -26,6 +26,7 @@
     nixpkgs-fmt
     nix-prefetch-git
     xfce.thunar # not unix but a really good
+    xfce.tumbler
     gnumake # makefiles
   ];
 }

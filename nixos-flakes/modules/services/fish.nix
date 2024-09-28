@@ -31,14 +31,13 @@
       '';
       interactiveShellInit = ''
         keychain --eval --agents ssh endeavourGit
-
       '';
       functions = {
         clear-trash = ''
           rm -rf ~/.local/share/Trash/*
         '';
         copy = ''
-          set selected_file (fzf)
+                set selected_file (fzf)
           if test -z "$selected_file"
                   echo "No file selected."
                   return 1
@@ -58,15 +57,6 @@
           grim -g "$(slurp -o -r -c '#ff0000ff')" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png
         '';
         # ssh
-        s-laptop = ''
-          ssh henri@192.168.1.231
-        '';
-        s-nas = ''
-          ssh sysAdminHarambe@192.168.1.246
-        '';
-        s-router = ''
-          ssh root@192.168.1.1
-        '';
         v-minion-save = ''
           rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/${username}/Documents/3D-models/printer_configs/v-minion/
         '';
@@ -89,10 +79,6 @@
           kubectl delete all --all -n "$argv[1]"
         '';
         # nix
-        nixit = ''
-          set -xg SHELL_FILE (find /home/${username}/Documents/houseOfNixAndPain/shells -name 'shell.nix' | fzf)
-          nix-shell $SHELL_FILE
-        '';
         nix-clean = "nix-store --gc";
         nix-update = "sudo nixos-rebuild switch";
         nix-purge = ''
@@ -107,12 +93,6 @@
         '';
         # bios
         bios = "systemctl reboot --firmware-setup";
-        # usb
-        usb-mount = "sudo mount /dev/sda1 /mnt/usb";
-        usb-eject = "sudo umount /mnt/usb";
-        nas-mount = "sudo mount.nfs 192.168.1.245:/volume1/linuxBackup /mnt/nas"; # how to allow users acces to the file?
-        # kitty
-        new_kitty_tab = "kitty @ new-tab --cwd (pwd)";
       };
       shellAbbrs = {
         l = "less";
@@ -124,6 +104,7 @@
         ls = "eza -al";
         ":q" = "exit";
         top = "btop";
+        z = "j";
       };
     };
   };

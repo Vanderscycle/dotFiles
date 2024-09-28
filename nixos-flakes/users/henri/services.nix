@@ -6,5 +6,7 @@
     ../../modules/services/gnome.nix
     ../../modules/services/picom.nix
     ../../modules/services/git.nix
+    # temp
+    ../../modules/services/nginx.nix
   ];
 }

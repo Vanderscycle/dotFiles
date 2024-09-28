@@ -6,14 +6,10 @@
 }:
 {
   home-manager.users.${username} = {
-    programs = {
-      go = {
-        enable = true;
-      };
-    };
     home = {
       packages = with pkgs; [
         shellcheck
+        shfmt
         nodePackages.bash-language-server
       ];
     };
