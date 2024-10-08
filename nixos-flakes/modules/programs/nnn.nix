@@ -7,6 +7,9 @@
 {
   # within $home/.config/nnn/plugins
   # sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
+  environment.systemPackages = [
+    pkgs.xdragon
+  ];
   home-manager.users.${username} = {
     programs = {
       nnn = {
@@ -14,6 +17,7 @@
         package = pkgs.nnn.override ({ withNerdIcons = true; });
         plugins.mappings = {
           z = "autojump";
+          d = "dragdrop";
           f = "finder";
           o = "fzopen";
           p = "preview-tui";

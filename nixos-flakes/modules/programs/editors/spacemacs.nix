@@ -14,6 +14,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    texliveFull # latex client
     emacs-all-the-icons-fonts
     emacs
     libtool

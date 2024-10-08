@@ -7,7 +7,7 @@
 {
   home-manager.users.${username} = {
     home = {
-      packages = with pkgs; [ electron_29-bin ];
+      packages = with pkgs; [ electron-bin ];
     };
     programs = {
       vscode = {
