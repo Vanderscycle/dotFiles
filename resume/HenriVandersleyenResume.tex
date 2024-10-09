@@ -41,21 +41,43 @@
   \renewcommand{\familydefault}{\sfdefault}
 \fi
 
-% Change the colours if you want to
-\definecolor{SlateGrey}{HTML}{2E2E2E}
-\definecolor{LightGrey}{HTML}{666666}
-\definecolor{DarkPastelRed}{HTML}{450808}
-\definecolor{PastelRed}{HTML}{8F0D0D}
-\definecolor{GoldenEarth}{HTML}{E7D192}
-\colorlet{name}{black}
-\colorlet{tagline}{PastelRed}
-\colorlet{heading}{DarkPastelRed}
-\colorlet{headingrule}{GoldenEarth}
-\colorlet{subheading}{PastelRed}
-\colorlet{accent}{PastelRed}
-\colorlet{emphasis}{SlateGrey}
-\colorlet{body}{LightGrey}
+% catppuccin mocha
+\definecolor{Rosewater}{HTML}{f5e0dc}
+\definecolor{Flamingo}{HTML}{f2cdcd}
+\definecolor{Pink}{HTML}{f5c2e7}
+\definecolor{Mauve}{HTML}{cba6f7}
+\definecolor{Red}{HTML}{f38ba8}
+\definecolor{Maroon}{HTML}{eba0ac}
+\definecolor{Peach}{HTML}{fab387}
+\definecolor{Yellow}{HTML}{f9e2af}
+\definecolor{Green}{HTML}{a6e3a1}
+\definecolor{Teal}{HTML}{94e2d5}
+\definecolor{Sky}{HTML}{89dceb}
+\definecolor{Sapphire}{HTML}{74c7ec}
+\definecolor{Blue}{HTML}{89b4fa}
+\definecolor{Lavender}{HTML}{b4befe}
+\definecolor{Text}{HTML}{cdd6f4}
+\definecolor{Subtext1}{HTML}{bac2de}
+\definecolor{Subtext0}{HTML}{a6adc8}
+\definecolor{Overlay2}{HTML}{9399b2}
+\definecolor{Overlay1}{HTML}{7f849c}
+\definecolor{Overlay0}{HTML}{6c7086}
+\definecolor{Surface2}{HTML}{585b70}
+\definecolor{Surface1}{HTML}{45475a}
+\definecolor{Surface0}{HTML}{313244}
+\definecolor{Base}{HTML}{1e1e2e}
+\definecolor{Mantle}{HTML}{181825}
+\definecolor{Crust}{HTML}{11111b}
 
+\colorlet{name}{Text}          % For the primary text color (light tone)
+\colorlet{tagline}{Red}        % A vibrant red tone for taglines
+\colorlet{heading}{Maroon}     % A darker red, for headings
+\colorlet{headingrule}{Peach}  % A warm accent for the heading rule, replacing GoldenEarth
+\colorlet{subheading}{Red}     % A softer red for subheadings
+\colorlet{accent}{Sapphire}    % A cool accent, bright but not overpowering
+\colorlet{emphasis}{Overlay1}  % A subdued grey for emphasis, not too bold
+\colorlet{body}{Subtext1}      % A soft, neutral tone for the body text
+\pagecolor{Base}
 % Change some fonts, if necessary
 \renewcommand{\namefont}{\Huge\rmfamily\bfseries}
 \renewcommand{\personalinfofont}{\footnotesize}
@@ -95,24 +117,24 @@
 \addbibresource{sample.bib}
 
 \begin{document}
-\name{Your Name Here}
-\tagline{Your Position or Tagline Here}
+\name{Henri Vandersleyen}
+\tagline{Software Engineer}
 %% You can add multiple photos on the left or right
 %%\photoR{2.8cm}{Globe_High}
 % \photoL{2.5cm}{Yacht_High,Suitcase_High}
 
 \personalinfo{%
   % Not all of these are required!
-  \email{your_name@email.com}
-  \phone{000-00-0000}
-  \mailaddress{Åddrésş, Street, 00000 Cóuntry}
-  \location{Location, COUNTRY}
-  \homepage{www.homepage.com}
+  \email{henri-vandersleyen@protonmail.com}
+  % \phone{000-00-0000}
+  % \mailaddress{Åddrésş, Street, 00000 Cóuntry}
+  \location{Victoria, BC, Canada}
+  \homepage{me.vandersleyen.dev}
   % \twitter{@twitterhandle}
-  \xtwitter{@x-handle}
-  \linkedin{your_id}
-  \github{your_id}
-  \orcid{0000-0000-0000-0000}
+  % \xtwitter{@x-handle}
+  \linkedin{/henri-vandersleyen-a25a8312b}
+  \github{vanderscycle}
+  % \orcid{0000-0000-0000-0000}
   %% You can add your own arbitrary detail with
   %% \printinfo{symbol}{detail}[optional hyperlink prefix]
   % \printinfo{\faPaw}{Hey ho!}[https://example.com/]
@@ -145,118 +167,114 @@
 % break across pages if things get too long.
 \begin{paracol}{2}
 \cvsection{Experience}
-
-\cvevent{Job Title 1}{Company 1}{Month 20XX -- Ongoing}{Location}
+\cvevent{DevOps Engineer}{Operto Guest Technologies}{July 2023 --
+  Ongoing}{Vancouver, BC}
 \begin{itemize}
-\item Job description 1
-\item Job description 2
+Migrated legacy java applications; increased application reliability and
+visibility. Used IaC to control our AWS accounts; reduced costs, and increased
+performance. Performed Security audit of our accounts; cloud infrastructure
+inline with AWS Startup Security Baseline (SSB)
 \end{itemize}
+\cvtag{AWS}
+\cvtag{Terraform}
+\cvtag{Java}
 
 \divider
 
-\cvevent{Job Title 2}{Company 2}{Month 20XX -- Ongoing}{Location}
+\cvevent{DevOps Engineer}{Atreides}{Apr 2022 -- Jul 2023}{Victoria, BC}
 \begin{itemize}
-\item Job description 1
-\item Job description 2
+Assisted the Senior DevOps Engineer with managing, adding and deploying
+Kubernetes applications to AWS EKS using GitOps pattern. Created and updated
+Github CICD pipelines to manage processes.
 \end{itemize}
-
-\cvsection{Projects}
-
-\cvevent{Project 1}{Funding agency/institution}{}{}
-\begin{itemize}
-\item Details
-\end{itemize}
+\cvtag{Kubernetse}
+\cvtag{Helm}
+\cvtag{ArgoCD}
+\cvtag{GitOps}
+\cvtag{AWS}
+\cvtag{Terraform}
 
 \divider
 
-\cvevent{Project 2}{Funding agency/institution}{Project duration}{}
-A short abstract would also work.
+\cvevent{Jr. FullStack Software Developer}{Aviary Tech}{Jul 2021 -- Feb 2022}{Victoria, BC}
+\begin{itemize}
+As a Jr. Fullstack Software Developer at a startup, I created, tested, and
+deployed several blockchain focused fullstack applications following Test-Driven
+Development (TDD). Designed smart UI/UX features to enhance user engagement and
+increased reliability of backend REST APIs.
+\end{itemize}
 
-\medskip
+\cvtag{NextJs}
+\cvtag{Svelte}
+\cvtag{Jest}
 
-\cvsection{A Day of My Life}
+\divider
+
+\cvevent{Marine Engineering Officer}{Royal Canadian Navy}{2007 -- September 2020}{Canada}
+\begin{itemize}
+I was Responsible for the readiness, operation and maintenance of propulsion
+  and ancillary systems, power generation and distribution, hull structure,
+  ship’s stability, and damage control. Advised the ship's captain on technical
+  readiness and repairs. While in port, routinely held charge of the ship's
+  operation and safety as the Officer Of the Day.
+\end{itemize}
+
+\cvtag{leadership}
+\cvtag{management}
+\cvtag{maintenance}
+\cvtag{fitness}
+
+
+%\cvsection{A Day of My Life}
 
 % Adapted from @Jake's answer from http://tex.stackexchange.com/a/82729/226
 % \wheelchart{outer radius}{inner radius}{
 % comma-separated list of value/text width/color/detail}
-\wheelchart{1.5cm}{0.5cm}{%
-  6/8em/accent!30/{Sleep,\\beautiful sleep},
-  3/8em/accent!40/Hopeful novelist by night,
-  8/8em/accent!60/Daytime job,
-  2/10em/accent/Sports and relaxation,
-  5/6em/accent!20/Spending time with family
-}
+% \wheelchart{1.5cm}{0.5cm}{%
+%   6/8em/accent!30/{Sleep,\\beautiful sleep},
+%   3/8em/accent!40/Hopeful novelist by night,
+%   8/8em/accent!60/Daytime job,
+%   2/10em/accent/Sports and relaxation,
+%   5/6em/accent!20/Spending time with family
+% }
 
 % use ONLY \newpage if you want to force a page break for
 % ONLY the current column
-\newpage
-
-\cvsection{Publications}
-
-%% Specify your last name(s) and first name(s) as given in the .bib to automatically bold your own name in the publications list.
-%% One caveat: You need to write \bibnamedelima where there's a space in your name for this to work properly; or write \bibnamedelimi if you use initials in the .bib
-%% You can specify multiple names, especially if you have changed your name or if you need to highlight multiple authors.
-\mynames{Lim/Lian\bibnamedelima Tze,
-  Wong/Lian\bibnamedelima Tze,
-  Lim/Tracy,
-  Lim/L.\bibnamedelimi T.}
-%% MAKE SURE THERE IS NO SPACE AFTER THE FINAL NAME IN YOUR \mynames LIST
+%\newpage
 
 \nocite{*}
-
-\printbibliography[heading=pubtype,title={\printinfo{\faBook}{Books}},type=book]
-
-\divider
-
-\printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Journal Articles}},type=article]
-
-\divider
-
-\printbibliography[heading=pubtype,title={\printinfo{\faUsers}{Conference Proceedings}},type=inproceedings]
 
 %% Switch to the right column. This will now automatically move to the second
 %% page if the content is too long.
 \switchcolumn
 
-\cvsection{My Life Philosophy}
-
-\begin{quote}
-``Something smart or heartfelt, preferably in one sentence.''
-\end{quote}
-
-\cvsection{Most Proud of}
-
-\cvachievement{\faTrophy}{Fantastic Achievement}{and some details about it}
+\cvsection{Skills}
+\cvtag{python}
+\cvtag{go}
+\cvtag{SvelteKit}
+\cvtag{TypeScript}
 
 \divider
 
-\cvachievement{\faHeartbeat}{Another achievement}{more details about it of course}
+\cvtag{Terraform}
+\cvtag{Nix}
+\cvtag{bash}
 
 \divider
 
-\cvachievement{\faHeartbeat}{Another achievement}{more details about it of course}
+\cvtag{Git}
+\cvtag{Emacs}
+\cvtag{Linux}
 
-\cvsection{Strengths}
-
-\cvtag{Hard-working}
-\cvtag{Eye for detail}\\
-\cvtag{Motivator \& Leader}
-
-\divider\smallskip
-
-\cvtag{C++}
-\cvtag{Embedded Systems}\\
-\cvtag{Statistical Analysis}
-
-\cvsection{Languages}
+\cvsection{Spoken Languages}
 
 \cvskill{English}{5}
 \divider
 
-\cvskill{Spanish}{4}
+\cvskill{French}{5}
 \divider
 
-\cvskill{German}{3.5} %% Supports X.5 values.
+\cvskill{Chinese}{3.5} %% Supports X.5 values.
 
 %% Yeah I didn't spend too much time making all the
 %% spacing consistent... sorry. Use \smallskip, \medskip,
@@ -265,30 +283,34 @@ A short abstract would also work.
 
 \cvsection{Education}
 
-\cvevent{Ph.D.\ in Your Discipline}{Your University}{Sept 2002 -- June 2006}{}
-Thesis title: Wonderful Research
+\cvevent{Diploma Data Science}{Lighthouse Labs}{Sept 2002 -- Dec 2020}{}
 
 \divider
 
-\cvevent{M.Sc.\ in Your Discipline}{Your University}{Sept 2001 -- June 2002}{}
+\cvevent{B.eng.\ Electrical Engineering}{Royal Military College of Canada}{Sept 2007 -- Apr 2012}{}
+
+\cvsection{Achievements}
+
+\cvachievements{\faCertificate}
+Earned Head of department certification
 
 \divider
 
-\cvevent{B.Sc.\ in Your Discipline}{Stanford University}{Sept 1998 -- June 2001}{}
-
-% \divider
-
-\cvsection{Referees}
-
-% \cvref{name}{email}{mailing address}
-\cvref{Prof.\ Alpha Beta}{Institute}{a.beta@university.edu}
-{Address Line 1\\Address line 2}
+\cvachievements{\faCertificate}
+Earned P.eng Certification: 221232
 
 \divider
 
-\cvref{Prof.\ Gamma Delta}{Institute}{g.delta@university.edu}
-{Address Line 1\\Address line 2}
+\cvachievements{\faCertificate}
+Qualified as Naval diving supervisor and Firefighting team attack leader
 
+\cvsection{Projects}
+
+\cvevent{Infrastructure}{}{ongoing}{}
+\begin{itemize}
+\item Linode cloud, kubernetes hosted infrastructure.
+\item \faGithub Vanderscycle/infrastructure
+\end{itemize}
 
 \end{paracol}
 
