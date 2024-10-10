@@ -9,7 +9,7 @@
     ./languages.nix
     ./services.nix
     ./programs.nix
-    # ./container.nix
+    ./container.nix
   ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ./security ]);
 
   users.users.${username} = {
@@ -23,4 +23,5 @@
     ];
     packages = with pkgs; [ fish ];
   };
+
 }
