@@ -40,8 +40,7 @@
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      emacs-lisp
-     ;; git
-     helm
+     helm ;; sail through this sea of files
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
      multiple-cursors
      (auto-completion :variables
@@ -51,9 +50,7 @@
                       auto-completion-enable-help-tooltip t
                       auto-completion-return-key-behavior 'complete
                       spacemacs-default-company-backends '(company-files company-capf)
-                      )
-
-
+                      );; intellisense
      (erc :variables
           erc-server-list
           '(("irc.libera.chat"
@@ -61,7 +58,7 @@
              :ssl t
              :nick "vancycles"
              :password "/run/current-system/sw/bin/gpg2"
-             )))
+             ))) ;; we back to the 1980s babyyyy
      (chinese :variables
               chinese-enable-fcitx t)
      spotify ;; cool gimmick
@@ -72,6 +69,8 @@
                treemacs-use-all-the-icons-theme t ;; don't forget to run all-the-icons-install-font
                treemacs-use-git-mode 'deferred) ;; a file system is much like a tree
      markdown ;; write that down patrick
+     latex ;; oh baby its time to go even beyond
+     pdf ;; refusing to pay adobe is morally right
      (org :variables
           org-enable-roam-protocol t
           org-enable-roam-ui t
@@ -80,8 +79,7 @@
                      spell-checking-enable-by-default nil
                      enable-flyspell-auto-completion t);; spell right for once
      (syntax-checking :variables
-                      syntax-checking-enable-by-default t)
-
+                      syntax-checking-enable-by-default t) ;; like spelling proprely
      (shell-scripts :variables shell-scripts-format-on-save t)
      (shell :variables
             shell-default-height 30
@@ -94,7 +92,8 @@
           lsp-enable-snippet t
           lsp-ui-doc-position 'at-point
           lsp-ui-doc-show-with-cursor t
-          lsp-ui-doc-include-signature t)
+          lsp-ui-doc-include-signature t) ;; share the love between editors
+     nginx ;; of course there's a layer for that
      html ;; og-frontend
      react ;; frontend-for-corporated-tech
      svelte ;; frontend-for-hipsters
@@ -102,10 +101,11 @@
      (sql :variables sql-capitalize-keywords t) ;; you will never replace me
      ruby ;; why must we slave in javascript
      (java (java-backend . lsp)) ;; corporate pain incarnate
-     csharp ;; spirit of programming forgive my sins
      kotlin ;; superset of corporate pain
+     csharp ;; spirit of programming forgive my sins
+     nim ;; step aside old men
      (groovy :variables
-             groovy-backend 'lsp) ;; thx graddle
+             groovy-backend 'lsp) ;; thx graddle and java
      (javascript :variables
                  node-add-modules-path t) ;; everything that can be written in js will be written in js
      (typescript :variables
@@ -151,6 +151,7 @@
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
+                                      ob-typescript
                                       (sops
                                        :recipe (:type git :host github :repo "djgoku/sops"))
                                       catppuccin-theme
@@ -729,6 +730,12 @@ before packages are loaded."
   (add-hook 'org-mode-hook
             (lambda ()
               (toggle-truncate-lines nil) ))
+  ;; --- babel ---
+  (define-derived-mode ts-mode typescript-mode "ts"
+    "Major mode for editing typescipt src blocks in org mode.")
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((typescript . t)))  ;; Enable TypeScript support
   ;; --- org-roam ---
   (setq org-roam-directory (file-truename "/home/henri/Documents/zettelkasten/org-roam"))
   ;;(setq org-roam-db-autosync-mode t)
@@ -784,9 +791,10 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(helm-source-names-using-follow nil)
-   '(org-agenda-files '("/home/henri/Documents/zettelkasten/org-roam/"))
+   '(org-agenda-files
+     '("/home/henri/Documents/zettelkasten/org-roam/20231228151941-3d_printing.org" "/home/henri/Documents/zettelkasten/org-roam/20231228153323-chinese.org" "/home/henri/Documents/zettelkasten/org-roam/20231228160947-chinese_radicals.org" "/home/henri/Documents/zettelkasten/org-roam/20231228161027-chinese_basic_patterns.org" "/home/henri/Documents/zettelkasten/org-roam/20231228161212-chinese_sentences.org" "/home/henri/Documents/zettelkasten/org-roam/20231228161242-chinese_often_forgotten_words.org" "/home/henri/Documents/zettelkasten/org-roam/20231228162309-chinese_class_notes.org" "/home/henri/Documents/zettelkasten/org-roam/20240101164825-chinese_words_group.org" "/home/henri/Documents/zettelkasten/org-roam/20240109111240-programming.org" "/home/henri/Documents/zettelkasten/org-roam/20240117183030-comtemporary_chinese_vol_3.org" "/home/henri/Documents/zettelkasten/org-roam/20240201095349-openwrt.org" "/home/henri/Documents/zettelkasten/org-roam/20240201132007-rpi_k3s_cluster.org" "/home/henri/Documents/zettelkasten/org-roam/20240328185905-db_mariadb.org" "/home/henri/Documents/zettelkasten/org-roam/20240409213406-mandarin_corner_drinking_culture.org" "/home/henri/Documents/zettelkasten/org-roam/20240415080027-programming_go.org" "/home/henri/Documents/zettelkasten/org-roam/20240419141132-programming_bash.org" "/home/henri/Documents/zettelkasten/org-roam/20240423204241-mandarin_corner_white_skin.org" "/home/henri/Documents/zettelkasten/org-roam/20240423204705-mandarin_corner_walk_around_a_fishing_village.org" "/home/henri/Documents/zettelkasten/org-roam/20240423204946-mandarin_corner_lying_flat.org" "/home/henri/Documents/zettelkasten/org-roam/20240424144809-programming_github_actions_workflows.org" "/home/henri/Documents/zettelkasten/org-roam/20240425140202-programming_docker.org" "/home/henri/Documents/zettelkasten/org-roam/20240427172817-programming_nextjs.org" "/home/henri/Documents/zettelkasten/org-roam/20240429195948-mandarin_corner_work_cultural_aspects.org" "/home/henri/Documents/zettelkasten/org-roam/20240513203801-mandarin_corner_chinese_men_so_feminine.org" "/home/henri/Documents/zettelkasten/org-roam/20240624213227-hsk_4_part_1.org" "/home/henri/Documents/zettelkasten/org-roam/20240702185623-programming_sops.org" "/home/henri/Documents/zettelkasten/org-roam/20240722213733-chinese_summer_2024_review.org" "/home/henri/Documents/zettelkasten/org-roam/20240723210041-mandarin_corner_leftover_men.org" "/home/henri/Documents/zettelkasten/org-roam/20240731212533-mandarin_corner_why_girls_mei_you_jie_hun.org" "/home/henri/Documents/zettelkasten/org-roam/20240827191742-emacs.org" "/home/henri/Documents/zettelkasten/org-roam/20240828204250-knowlege_base.org" "/home/henri/Documents/zettelkasten/org-roam/20240830214805-zsa_moonlander.org" "/home/henri/Documents/zettelkasten/org-roam/20240901150838-programming_nix.org" "/home/henri/Documents/zettelkasten/org-roam/20240905210105-chinese_class_wrap_up_and_learn.org" "/home/henri/Documents/zettelkasten/org-roam/20240924205652-cert_ckad.org" "/home/henri/Documents/zettelkasten/org-roam/20240924213459-mastery.org" "/home/henri/Documents/zettelkasten/org-roam/20240930100436-maintenance_home.org" "/home/henri/Documents/zettelkasten/org-roam/20241002120519-work_house_operto.org"))
    '(package-selected-packages
-     '(omnisharp csharp-mode auto-complete sops sqlup-mode sql-indent copilot ace-pinyin chinese-conv fcitx find-by-pinyin-dired pinyinlib pangu-spacing pyim xr pyim-basedict flycheck-kotlin kotlin-mode groovy-imports groovy-mode lsp-java maven-test-mode mvn keychain-environment bundler chruby minitest rake rbenv robe inf-ruby rspec-mode rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rvm seeing-is-believing xkcd shrink-path nerd-icons spaceline-all-the-icons memoize ibuffer-projectile helm-spotify-plus multi spotify erc-hl-nicks erc-image erc-social-graph erc-view-log erc-yt company-nixos-options helm-nixos-options nix-mode nixos-options company-tabnine js-react-redux-yasnippets company-statistics color-identifiers-mode rainbow-identifiers rainbow-mode company-web web-completion-data helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode toggle-term ligature unicode-fonts ucs-utils font-utils persistent-soft pcache dap-mode lsp-docker bui lsp-tailwindcss zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toml-mode toc-org texfrag terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sqlite3 sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme rjsx-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pylookup pyenv-mode pydoc py-isort purple-haze-theme professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox overseer orgit-forge organic-green-theme org-superstar org-roam-ui org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic hybrid-mode hungry-delete htmlize holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-company helm-comint helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link gh-md gandalf-theme flyspell-popup flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav elisp-def editorconfig eat dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes doom-modeline dockerfile-mode docker django-theme dired-quick-sort diminish diff-hl devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-terraform company-go company-emoji company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme cherry-blossom-theme centered-cursor-mode catppuccin-theme busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme add-node-modules-path ace-link ace-jump-helm-line)))
+     '(ob-typescript nginx-mode pdf-view-restore pdf-tools company-auctex company-math company-reftex evil-tex auctex lsp-latex consult math-symbol-lists omnisharp csharp-mode auto-complete sops sqlup-mode sql-indent copilot ace-pinyin chinese-conv fcitx find-by-pinyin-dired pinyinlib pangu-spacing pyim xr pyim-basedict flycheck-kotlin kotlin-mode groovy-imports groovy-mode lsp-java maven-test-mode mvn keychain-environment bundler chruby minitest rake rbenv robe inf-ruby rspec-mode rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rvm seeing-is-believing xkcd shrink-path nerd-icons spaceline-all-the-icons memoize ibuffer-projectile helm-spotify-plus multi spotify erc-hl-nicks erc-image erc-social-graph erc-view-log erc-yt company-nixos-options helm-nixos-options nix-mode nixos-options company-tabnine js-react-redux-yasnippets company-statistics color-identifiers-mode rainbow-identifiers rainbow-mode company-web web-completion-data helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode toggle-term ligature unicode-fonts ucs-utils font-utils persistent-soft pcache dap-mode lsp-docker bui lsp-tailwindcss zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toml-mode toc-org texfrag terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sqlite3 sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme rjsx-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pylookup pyenv-mode pydoc py-isort purple-haze-theme professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox overseer orgit-forge organic-green-theme org-superstar org-roam-ui org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic hybrid-mode hungry-delete htmlize holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-company helm-comint helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link gh-md gandalf-theme flyspell-popup flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav elisp-def editorconfig eat dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes doom-modeline dockerfile-mode docker django-theme dired-quick-sort diminish diff-hl devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-terraform company-go company-emoji company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme cherry-blossom-theme centered-cursor-mode catppuccin-theme busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme add-node-modules-path ace-link ace-jump-helm-line)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.

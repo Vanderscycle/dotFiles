@@ -17,5 +17,6 @@
     ../../modules/languages/kubernetes.nix
     ../../modules/languages/yaml.nix
     ../../modules/languages/sql.nix
+    ../../modules/languages/nim.nix
   ];
 }

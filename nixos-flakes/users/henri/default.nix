@@ -9,7 +9,8 @@
     ./languages.nix
     ./services.nix
     ./programs.nix
-    ./container.nix
+    ./containers.nix
+    # ./secrets.nix
   ] ++ (if hostname == "laptop" then [ ./laptop-only ] else [ ./security ]);
 
   users.users.${username} = {

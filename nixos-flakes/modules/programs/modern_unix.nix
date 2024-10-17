@@ -7,6 +7,7 @@
     silver-searcher # also known as ag
     jq # json parser
     yq # yaml parser
+    zip
     httpie
     autojump # like zoxide
     tldr # quick tips
