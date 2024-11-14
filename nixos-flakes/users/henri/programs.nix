@@ -26,8 +26,8 @@
     ../../modules/programs/signal.nix
     ../../modules/programs/lf
     ../../modules/programs/work.nix
+    ../../modules/programs/spicetify.nix
   ] ++ (if hostname == "desktop" then [ ../../modules/programs/fuzzel.nix ] else [ ]);
-
   # ----------------------
   # default applications
   # ---------------------

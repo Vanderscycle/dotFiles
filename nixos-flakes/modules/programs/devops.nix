@@ -34,11 +34,9 @@ in
     home = {
       packages = with pkgs; [
         # sql/db
-        # dbeaver-bin-custom
-        dbeaver-bin
+        beekeeper-studio
         # github actions
         act
-        # ansible
         # ansible
         # backend api calls
         insomnia

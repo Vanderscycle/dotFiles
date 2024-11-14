@@ -7,9 +7,12 @@
 let
   dotfiles_dir = /home/${username}/Documents/dotFiles;
 in
+
 {
   environment.systemPackages = [ pkgs.webcord-vencord ];
 
+  # to install betterdiscord
+  #  nix run nixpkgs#betterdiscordctl install
   home-manager.users.${username} = {
     home = {
       file.".config/discord/settings.json" = {
