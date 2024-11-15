@@ -31,9 +31,12 @@
           enable = true;
 
           servers = {
-            ts-ls.enable = true;
 
-            lua-ls = {
+            ts_ls = {
+              enable = true;
+            };
+
+            lua_ls = {
               enable = true;
               settings.telemetry.enable = false;
             };

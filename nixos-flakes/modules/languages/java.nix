@@ -10,7 +10,7 @@
       packages = with pkgs; [
         # java
         groovy # linting of gradle files
-        jdk22 # java
+        jdk # java
         maven
         gradle
       ];
