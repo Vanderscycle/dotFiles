@@ -7,6 +7,6 @@
     ../../modules/services/picom.nix
     ../../modules/services/git.nix
     # temp
-    ../../modules/services/nginx.nix
+    # ../../modules/services/nginx.nix
   ];
 }

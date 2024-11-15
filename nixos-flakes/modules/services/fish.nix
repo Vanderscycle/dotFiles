@@ -14,11 +14,8 @@
   home-manager.users.${username} = {
     home = {
       sessionVariables = {
-        SUDO_EDITOR = "nvim";
-        EDITOR = "nvim";
-        # SUDO_EDITOR = "emacsclient";
-        # EDITOR = "emacsclient";
-        BROWSER = "firefox";
+        SUDO_EDITOR = "emacsclient";
+        EDITOR = "emacsclient";
         TERMINAL = "kitty";
         TLDR_AUTO_UPDATE_DISABLED = "false";
       };
@@ -37,12 +34,11 @@
           rm -rf ~/.local/share/Trash/*
         '';
         copy = ''
-                set selected_file (fzf)
+          set selected_file (fzf)
           if test -z "$selected_file"
-                  echo "No file selected."
-                  return 1
-              end
-
+             echo "No file selected."
+             return 1
+          end
           cat "$selected_file" | wl-copy
           echo "Contents of $selected_file copied to clipboard."
         '';
@@ -53,13 +49,14 @@
             echo "Exported key $item[1]"
           end
         '';
-        screenshot = ''
-          grim -g "$(slurp -o -r -c '#ff0000ff')" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png
-        '';
+        # there has to be a betteway (flameshot)
+        # screenshot = ''
+        #   grim -g "$(slurp -o -r -c '#ff0000ff')" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png
+        # '';
         # ssh
-        v-minion-save = ''
-          rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/${username}/Documents/3D-models/printer_configs/v-minion/
-        '';
+        # v-minion-save = ''
+        #   rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/${username}/Documents/3D-models/printer_configs/v-minion/
+        # '';
         # network
         kill-port = "kill -9 $(lsof -t -i:$argv[1])";
         # cloud access
@@ -96,7 +93,7 @@
       };
       shellAbbrs = {
         l = "less";
-        k = "kubectl";
+        kb = "kubectl";
       };
       shellAliases = {
         "..." = "cd ../..";

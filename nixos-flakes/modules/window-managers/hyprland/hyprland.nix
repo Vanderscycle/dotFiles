@@ -142,6 +142,7 @@
               "$mainMod SHIFT, j, resizeactive, 0 40"
               # launch program menu
               "SHIFTSUPER, P, exec, fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff"
+              "SHIFTSUPER, O, exec, flameshot gui --clipboard"
               # dedicated programs
               "$mainMod SHIFT, T, exec, thunar"
               "$mainMod, Q, exec, kitty"
@@ -224,7 +225,6 @@
             "float, class:^(org.fcitx5.)$"
           ];
           exec-once = [
-            "swww init"
             "swww img ~/Pictures/switch.png"
             "waybar"
             "dunst"
@@ -232,6 +232,7 @@
             "spotify"
             "firefox"
             "kitty"
+            "flameshot"
             # "emacs" # TODO: make it spawn out of a shell
           ];
         };

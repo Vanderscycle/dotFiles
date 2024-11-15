@@ -41,10 +41,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # check usage!
     nix-pre-commit = {
       url = "github:jmgilman/nix-pre-commit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # also flake-utils?
+    # https://github.com/numtide/flake-utils
   };
 
   outputs =
@@ -63,11 +66,18 @@
       ...
     }@inputs:
     let
+      # TODO: what does it even do?
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
+
       nixosVersion = "24.11";
       system = "x86_64-linux";
+      nodes = [
+        "homelab-0"
+        "homelab-1"
+        "homelab-2"
+      ];
     in
     {
       nixosConfigurations = {

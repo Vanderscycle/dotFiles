@@ -6,6 +6,11 @@
 }:
 {
   home-manager.users.${username} = {
+    home = {
+      sessionVariables = {
+        TERMINAL = "kitty";
+      };
+    };
     programs = {
       kitty = {
         enable = true;

@@ -11,7 +11,7 @@
 
   users.users.${username} = {
     shell = pkgs.fish;
-    description = "Henri Vandersleyen";
+    description = "cloud user";
     isNormalUser = true;
     initialPassword = "temp123";
     extraGroups = [

@@ -29,6 +29,8 @@
     ../../modules/programs/work.nix
     ../../modules/programs/spicetify.nix
     ../../modules/programs/rpi-imager.nix
+    ../../modules/programs/firefox.nix
+
   ] ++ (if hostname == "desktop" then [ ../../modules/programs/fuzzel.nix ] else [ ]);
   # ----------------------
   # default applications
