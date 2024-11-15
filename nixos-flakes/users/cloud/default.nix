@@ -21,6 +21,7 @@
     }
     # local
     ./services.nix
+    ./sops.nix
     ../../hosts
     ../../modules
   ];

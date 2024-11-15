@@ -2,7 +2,7 @@
 {
   imports = [
     ./${hostname}
-    ../../hosts/internationalisation
-    ../../hosts/hardware
+    ../../../hosts/internationalisation
+    ../../../hosts/hardware
   ];
 }

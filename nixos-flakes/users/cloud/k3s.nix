@@ -1,4 +1,9 @@
-{ hostname, pkgs, ... }:
+{
+  hostname,
+  pkgs,
+  config,
+  ...
+}:
 {
   environment.systemPackages = with pkgs; [
     k3s
@@ -6,7 +11,7 @@
   services.k3s = {
     enable = true;
     role = "server";
-    tokenFile = /var/lib/rancher/k3s/server/token;
+    token = config.sops.secrets."k3_token".path;
     extraFlags = toString (
       [
         "--write-kubeconfig-mode \"0644\""
