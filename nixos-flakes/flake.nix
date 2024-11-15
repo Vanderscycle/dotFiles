@@ -117,20 +117,6 @@
           # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix
         }; # laptop
 
-        cloud = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            username = "cloud";
-            hostname = "cloud";
-            palete-color = "mocha";
-            inherit system;
-            inherit inputs;
-            inherit nixosVersion;
-          } // inputs;
-          modules = [
-            ./.
-          ];
-        }; # cloud
-
         wife = nixpkgs.lib.nixosSystem {
           specialArgs = {
             username = "jean";

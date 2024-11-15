@@ -54,9 +54,6 @@
     }@inputs:
     let
       # TODO: what does it even do?
-      supportedSystems = [ "x86_64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
 
       nixosVersion = "24.11";
       system = "x86_64-linux";
@@ -71,20 +68,18 @@
         map (name: {
           name = name;
           value = nixpkgs.lib.nixosSystem {
+
+            system = "x86_64-linux";
             specialArgs = {
               username = "cloud";
               hostname = name;
               palete-color = "mocha";
-              inherit system;
               inherit inputs;
               inherit nixosVersion;
             } // inputs;
             modules = [
               ./.
-              # Modules
               disko.nixosModules.disko
-              ./disko-config.nix
-              ./configuration.nix
             ];
           };
         }) nodes

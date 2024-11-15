@@ -22,7 +22,7 @@
     };
     programs.fish = {
       enable = true;
-      catppuccin.enable = true;
+      #  catppuccin.enable = true;
       shellInit = ''
         set -x PATH $PATH $HOME/.npm-global/bin
       '';

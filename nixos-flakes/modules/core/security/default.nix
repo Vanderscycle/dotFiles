@@ -3,7 +3,6 @@
     ./ssh.nix
     ./gnupg.nix
     ./polkit.nix
-    ./firewall.nix
   ];
   security = {
     rtkit.enable = true;

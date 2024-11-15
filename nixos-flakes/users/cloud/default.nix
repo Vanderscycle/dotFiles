@@ -22,7 +22,11 @@
     # local
     ./services.nix
     ./sops.nix
-    ../../hosts
+    ./k3s.nix
+    ./disko.nix
+
+    ../../hosts/hardware
+    ../../hosts/internationalisation
     ../../modules
   ];
 
