@@ -1,4 +1,4 @@
-{ meta, pkgs, ... }:
+{ hostname, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     k3s
@@ -16,7 +16,7 @@
         "--disable local-storage"
       ]
       ++ (
-        if meta.hostname == "homelab-0" then
+        if hostname == "homelab-0" then
           [ ]
         else
           [
@@ -24,12 +24,12 @@
           ]
       )
     );
-    clusterInit = (meta.hostname == "homelab-0");
+    clusterInit = (hostname == "homelab-0");
   };
 
   services.openiscsi = {
     enable = true;
-    name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
+    name = "iqn.2016-04.com.open-iscsi:${hostname}";
   };
 
 }

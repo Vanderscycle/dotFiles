@@ -2,12 +2,27 @@
   pkgs,
   username,
   hostname,
+  hosts,
+  catppuccin,
+  home-manager,
   ...
 }:
 {
   imports = [
-    # ./secrets.nix
+    catppuccin.nixosModules.catppuccin
+    home-manager.nixosModules.home-manager
+    hosts.nixosModule
+    {
+      networking.stevenBlackHosts = {
+        enable = true;
+        blockFakenews = true;
+        blockGambling = true;
+      };
+    }
+    # local
     ./services.nix
+    ../../hosts
+    ../../modules
   ];
 
   users.users.${username} = {
