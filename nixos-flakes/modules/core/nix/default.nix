@@ -22,10 +22,12 @@
   # Enable Flakes and nix-commands, enable removing channels
   nix = {
     nixPath = [ "nixpkgs=/run/current-system/nixpkgs" ];
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
   };
 
   home-manager.users.${username} = {

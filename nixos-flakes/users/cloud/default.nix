@@ -7,6 +7,7 @@
 {
   imports = [
     # ./secrets.nix
+    ./services.nix
   ];
 
   users.users.${username} = {
@@ -20,4 +21,11 @@
     ];
   };
 
+  # Fixes for longhorn
+  systemd.tmpfiles.rules = [
+    "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
+  ];
+  virtualisation.docker.logDriver = "json-file";
+
+  networking.firewall.enable = false;
 }

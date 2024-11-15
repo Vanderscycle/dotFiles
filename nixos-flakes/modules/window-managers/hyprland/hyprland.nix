@@ -48,12 +48,14 @@
       };
     };
   };
+
   home-manager.users.${username} = {
     home = {
       packages = with pkgs; [
         swww
         wl-clipboard
         hyprcursor
+        flameshot
       ];
     };
     wayland.windowManager = {

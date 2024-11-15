@@ -9,7 +9,8 @@
     ./nix
     ./security
     ./fonts.nix
-  ] ++ (if hostname == "cloud" then [ ./boot/grub-cloud.nix ] else [ ./boot/systemd.nix ]);
+    ./boot/systemd.nix
+  ];
 
   # shell
   programs.fish = {
@@ -24,7 +25,6 @@
   virtualisation = {
     docker = {
       enable = true;
-      # storageDriver = "btrfs";
       rootless = {
         setSocketVariable = true;
         enable = true;
