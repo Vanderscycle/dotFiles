@@ -8,6 +8,5 @@
   imports = [
     ./editors
     ./modern_unix.nix
-    ./multimedia.nix
   ];
 }

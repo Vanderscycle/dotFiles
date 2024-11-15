@@ -114,32 +114,9 @@
           ];
         }; # desktop
 
-        laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            username = "henri";
-            hostname = "laptop";
-            palete-color = "mocha";
-            inherit system;
-            inherit inputs;
-            inherit nixosVersion;
-          } // inputs;
-          modules = [
-            # local
-            ./.
-            ./modules/desktop-environment/xfce
-            ./modules/window-managers/lightdm
-            # hosts
-            hosts.nixosModule
-            {
-              networking.stevenBlackHosts = {
-                enable = true;
-              };
-            }
-            # theming
-            catppuccin.nixosModules.catppuccin
-            # home-manager
-            home-manager.nixosModules.home-manager
-          ];
+        laptop = {
+          # update using this example
+          # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix
         }; # laptop
 
         cloud = nixpkgs.lib.nixosSystem {

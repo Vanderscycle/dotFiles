@@ -6,13 +6,15 @@
 }:
 {
   home-manager.users.${username} = {
-    programs = {
-      go = {
-        enable = true;
+    programs =
+      {
       };
-    };
     home = {
-      packages = with pkgs; [ nodePackages.vscode-json-languageserver ];
+      packages = with pkgs; [
+        nixos-anywhere
+        nil
+        nixfmt-rfc-style
+      ];
     };
   };
 }

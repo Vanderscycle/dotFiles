@@ -1,21 +1,23 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  username,
+  hostname,
+  ...
+}:
 {
   imports = [
-    ./languages.nix
-    ./cron
-    ./services.nix
-    ./programs.nix
-    ./containers.nix
+    # ./secrets.nix
   ];
+
   users.users.${username} = {
     shell = pkgs.fish;
-    description = "cloud";
+    description = "Henri Vandersleyen";
     isNormalUser = true;
     initialPassword = "temp123";
     extraGroups = [
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [ fish ];
   };
+
 }

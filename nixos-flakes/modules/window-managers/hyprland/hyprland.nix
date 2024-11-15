@@ -32,13 +32,15 @@
     WLR_NO_HARDWARE_CURSORS = "1";
   };
   services = {
+    displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "${username}";
+      };
+    };
     xserver = {
       enable = true;
       displayManager = {
-        autoLogin = {
-          enable = true;
-          user = "${username}";
-        };
         gdm = {
           enable = true;
           wayland = true;
@@ -79,9 +81,9 @@
               new_optimizations = true;
             };
             rounding = 10;
-            drop_shadow = "yes";
-            shadow_range = 2;
-            shadow_render_power = 2;
+            # drop_shadow = "yes";
+            # shadow_range = 2;
+            # shadow_render_power = 2;
             # col.shadow = "rgb (21 ce07)";
           };
           animations = {

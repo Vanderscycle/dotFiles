@@ -3,6 +3,7 @@
   users.users.${username} = {
     extraGroups = [ "audio" ];
   };
+
   # Sound settings
   # sound.enable = true;
   hardware.pulseaudio.enable = false;

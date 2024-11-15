@@ -6,17 +6,14 @@
 }:
 {
   home-manager.users.${username} = {
-    programs = {
-      go = {
-        enable = true;
+    programs =
+      {
       };
-    };
     home = {
-      packages = with pkgs; [
-        node2nix
-        nil
-        nixfmt-rfc-style
-      ];
+      packages =
+        with pkgs;
+        [
+        ];
     };
   };
 }

@@ -2,6 +2,7 @@
 {
   imports = [
     ../../modules/programs/devops.nix
+    ../../modules/programs/multimedia.nix
     ../../modules/programs/libreoffice.nix
     ../../modules/programs/cloud
     ../../modules/programs/orca_slicer.nix
@@ -27,6 +28,7 @@
     ../../modules/programs/lf
     ../../modules/programs/work.nix
     ../../modules/programs/spicetify.nix
+    ../../modules/programs/rpi-imager.nix
   ] ++ (if hostname == "desktop" then [ ../../modules/programs/fuzzel.nix ] else [ ]);
   # ----------------------
   # default applications
@@ -55,4 +57,13 @@
       "audio/flac" = [ "vlc.desktop" ];
     };
   };
+  # emacs
+  environment.systemPackages = with pkgs; [
+    texliveFull # latex client
+    emacs-all-the-icons-fonts
+    libtool
+    sqlite
+    cmake
+    gcc
+  ];
 }

@@ -14,6 +14,5 @@
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [ fish ];
   };
 }

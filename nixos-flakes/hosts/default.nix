@@ -3,5 +3,6 @@
   imports = [
     ./${hostname}
     ./internationalisation
+    ./hardware
   ];
 }

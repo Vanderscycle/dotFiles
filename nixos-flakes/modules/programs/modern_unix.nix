@@ -23,7 +23,6 @@
     killall
     wget
     curl
-    firefox
     nixpkgs-fmt
     nix-prefetch-git
     xfce.thunar # not unix but a really good
