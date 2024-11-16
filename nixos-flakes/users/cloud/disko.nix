@@ -1,9 +1,10 @@
+{ username, ... }:
 {
   disko.devices = {
     disk = {
       vdb = {
         type = "disk";
-        device = "/dev/sda1";
+        device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
@@ -12,33 +13,27 @@
               name = "ESP";
               start = "1M";
               end = "128M";
-              type = "EF00";
+              type = "EF00"; # EFI System Partition
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/boot";
+                mountpoint = "/boot"; # Adjust this if required
               };
             };
             root = {
-              size = "100%";
+              size = "100%"; # Use remaining space for root
               content = {
                 type = "btrfs";
-                extraArgs = [ "-f" ]; # Override existing partition
-                # Subvolumes must set a mountpoint in order to be mounted,
-                # unless their parent is mounted
+                extraArgs = [ "-f" ]; # Force overwrite if necessary
                 subvolumes = {
-                  # Subvolume name is different from mountpoint
                   "/rootfs" = {
                     mountpoint = "/";
                   };
-                  # Subvolume name is the same as the mountpoint
                   "/home" = {
                     mountOptions = [ "compress=zstd" ];
                     mountpoint = "/home";
                   };
-                  # Sub(sub)volume doesn't need a mountpoint as its parent is mounted
-                  "/home/elliott" = { };
-                  # Parent is not mounted so the mountpoint must be set
+                  "/home/${username}" = { }; # Subvolume for the user's home
                   "/nix" = {
                     mountOptions = [
                       "compress=zstd"
@@ -47,7 +42,6 @@
                     mountpoint = "/nix";
                   };
                 };
-
                 mountpoint = "/partition-root";
               };
             };
