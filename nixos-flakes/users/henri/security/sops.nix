@@ -45,10 +45,10 @@ in
 
   systemd.services."smbcreds_fam" = {
     script = ''
-      echo 'user=$(cat ${config.sops.secrets."home-server/rice/user".path}' > /root/${trueNasFamilyUser}
-      echo 'password=$(cat ${
+      echo "user=$(cat ${config.sops.secrets."home-server/rice/user".path})" > /root/${trueNasFamilyUser}
+      echo "password=$(cat ${
         config.sops.secrets."home-server/rice/password".path
-      }' >> /root/${trueNasFamilyUser}
+      })" >> /root/${trueNasFamilyUser}
     '';
     serviceConfig = {
       Type = "oneshot";

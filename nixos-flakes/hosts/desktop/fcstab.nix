@@ -14,7 +14,7 @@
   };
   fileSystems."/mnt/rice" = {
     device = "//192.168.1.138/rice";
-    fsType = "smb3";
+    fsType = "cifs";
     options = [
       "credentials=/root/smbcreds_fam"
       "dir_mode=0770"
