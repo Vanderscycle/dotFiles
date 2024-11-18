@@ -9,31 +9,18 @@
 #
 # ============================================================================================
 {
-  description = "My personal computers nix configurations";
+  description = "Homelab NixOS Flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    stable.url = "github:NixOS/nixpkgs/nixos-24.05";
-
-    nix-scripts.url = "github:Vanderscycle/nixScripts";
-
-    hosts.url = "github:StevenBlack/hosts";
-    catppuccin.url = "github:catppuccin/nix";
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    # Disko
     disko = {
       url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # sops
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -42,48 +29,37 @@
     {
       self,
       nixpkgs,
-      stable,
-      hosts,
-      nix-scripts,
-      catppuccin,
-      home-manager,
       disko,
-      nixvim,
-      sops-nix,
       ...
     }@inputs:
     let
-      # TODO: what does it even do?
-
-      nixosVersion = "24.11";
-      system = "x86_64-linux";
       nodes = [
         "homelab-0"
         "homelab-1"
         "homelab-2"
       ];
+      nixosVersion = "24.11";
     in
     {
       nixosConfigurations = builtins.listToAttrs (
         map (name: {
           name = name;
           value = nixpkgs.lib.nixosSystem {
-
-            system = "x86_64-linux";
             specialArgs = {
-              username = "cloud";
-              hostname = name;
-              palete-color = "mocha";
-              inherit inputs;
-              inherit nixosVersion;
-            } // inputs;
+              meta = {
+                hostname = name;
+                nixosVersion = nixosVersion;
+              };
+            };
+            system = "x86_64-linux";
             modules = [
-              ./.
+              # Modules
               disko.nixosModules.disko
+              ./disko.nix
+              ./configuration.nix
             ];
           };
         }) nodes
       );
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
     };
 }
