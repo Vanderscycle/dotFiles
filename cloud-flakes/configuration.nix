@@ -13,9 +13,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
-    ./sops.nix
   ];
-  system.nixos.variant_id = lib.mkDefault "installer";
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
@@ -62,8 +60,8 @@
   services.k3s = {
     enable = true;
     role = "server";
-    # token = "test";
-    token = config.sops.secrets."k3_token".path;
+    token = "test";
+    #token = config.sops.secrets."k3_token".path;
     extraFlags = toString (
       [
         "--write-kubeconfig-mode \"0644\""

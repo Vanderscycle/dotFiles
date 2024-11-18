@@ -30,6 +30,7 @@
       self,
       nixpkgs,
       disko,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -50,13 +51,16 @@
                 hostname = name;
                 nixosVersion = nixosVersion;
               };
+              inherit inputs;
             };
             system = "x86_64-linux";
             modules = [
               # Modules
               disko.nixosModules.disko
+              ./sops.nix
               ./disko.nix
               ./configuration.nix
+              # ./hardware-configuration.nix
             ];
           };
         }) nodes
