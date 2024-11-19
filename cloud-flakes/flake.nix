@@ -57,10 +57,10 @@
             modules = [
               # Modules
               disko.nixosModules.disko
-              ./sops.nix
-              ./disko.nix
+              # ./sops.nix
+              # ./disko-config.nix
               ./configuration.nix
-              # ./hardware-configuration.nix
+              ./hardware-configuration.nix
             ];
           };
         }) nodes

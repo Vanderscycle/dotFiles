@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
+  modulesPath,
   config,
   lib,
   pkgs,
@@ -13,6 +14,7 @@
 {
   imports = [
     # Include the results of the hardware scan.
+    (modulesPath + "/profiles/qemu-guest.nix")
   ];
   nix = {
     package = pkgs.nixFlakes;
@@ -21,9 +23,10 @@
     '';
   };
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    devices = [ "/dev/sda" ];
+  };
 
   networking.hostName = meta.hostname; # Define your hostname.
   # Pick only one of the below networking options.
