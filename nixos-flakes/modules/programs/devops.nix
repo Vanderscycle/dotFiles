@@ -42,7 +42,6 @@ in
         insomnia
         # dns
         dogdns
-        nssmdns # for local rpi cluster
       ];
     };
   };

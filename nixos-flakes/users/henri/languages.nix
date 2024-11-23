@@ -3,9 +3,7 @@
     ../../modules/languages/go.nix
     ../../modules/languages/js-ts.nix
     ../../modules/languages/python.nix
-    ../../modules/languages/terraform.nix
     ../../modules/languages/java.nix
-    ../../modules/languages/csharp.nix
     ../../modules/languages/bash.nix
     ../../modules/languages/docker.nix
     ../../modules/languages/json.nix

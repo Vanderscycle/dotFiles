@@ -10,7 +10,6 @@
     ../../modules/programs/zathura.nix
     ../../modules/programs/discord.nix
     ../../modules/programs/fzf.nix
-    ../../modules/programs/btop.nix
     ../../modules/programs/kitty.nix
     ../../modules/programs/lazygit.nix
     ../../modules/programs/starship.nix

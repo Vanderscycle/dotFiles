@@ -5,6 +5,7 @@
     ../../modules/programs/multimedia.nix
     ../../modules/programs/libreoffice.nix
     ../../modules/programs/cloud
+    ../../modules/programs/thunar
     ../../modules/programs/orca_slicer.nix
     ../../modules/programs/btop.nix
     ../../modules/programs/ventoy.nix

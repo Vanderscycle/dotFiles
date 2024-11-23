@@ -14,6 +14,8 @@
         nixos-anywhere
         nil
         nixfmt-rfc-style
+        nixpkgs-fmt
+        nix-prefetch-git
       ];
     };
   };

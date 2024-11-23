@@ -40,11 +40,17 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # check usage!
     nix-pre-commit = {
       url = "github:jmgilman/nix-pre-commit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # also flake-utils?
     # https://github.com/numtide/flake-utils
   };
@@ -61,7 +67,8 @@
       home-manager,
       nixvim,
       sops-nix,
-      nix-pre-commit,
+      darwin,
+      # nix-pre-commit,
       ...
     }@inputs:
     let
@@ -79,6 +86,28 @@
       ];
     in
     {
+
+      darwinConfigurations.macM1 = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        pkgs = import nixpkgs { system = "aarch64-darwin"; };
+        modules = [
+          ./modules/darwin
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { };
+              users.demo.imports = [ ./modules/home-manager ];
+            };
+          }
+        ];
+        # update using this example
+        # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix
+        # https://github.com/zmre/mac-nix-simple-example/blob/master/flake.nix
+        # https://github.com/MatthiasBenaets/nix-config
+      }; # laptop
+
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
@@ -111,11 +140,6 @@
             )
           ];
         }; # desktop
-
-        laptop = {
-          # update using this example
-          # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix
-        }; # laptop
 
         wife = nixpkgs.lib.nixosSystem {
           specialArgs = {

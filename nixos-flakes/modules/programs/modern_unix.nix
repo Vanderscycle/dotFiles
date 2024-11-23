@@ -23,10 +23,6 @@
     killall
     wget
     curl
-    nixpkgs-fmt
-    nix-prefetch-git
-    xfce.thunar # not unix but a really good
-    xfce.tumbler
     gnumake # makefiles
   ];
 }
