@@ -92,6 +92,7 @@
         modules = [
           ./users
           ./hosts/hardware/network.nix
+          ./modules/core/nix
           home-manager.darwinModules.home-manager
         ];
         # update using this example
