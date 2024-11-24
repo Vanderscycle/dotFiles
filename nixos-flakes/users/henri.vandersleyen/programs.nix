@@ -10,6 +10,7 @@
     ../../modules/programs/bat.nix
     ../../modules/programs/rg.nix
     ../../modules/programs/starship.nix
+    ../../modules/programs/editors
   ];
   homebrew = {
     enable = true;
