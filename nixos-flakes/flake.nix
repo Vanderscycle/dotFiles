@@ -91,16 +91,6 @@
         system = "aarch64-darwin";
         pkgs = import nixpkgs { system = "aarch64-darwin"; };
         modules = [
-          ./modules/darwin
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { };
-              users.demo.imports = [ ./modules/home-manager ];
-            };
-          }
         ];
         # update using this example
         # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix

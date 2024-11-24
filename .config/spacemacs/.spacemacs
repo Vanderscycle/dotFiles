@@ -51,17 +51,17 @@
                       auto-completion-return-key-behavior 'complete
                       spacemacs-default-company-backends '(company-files company-capf)
                       );; intellisense
-     (erc :variables
-          erc-server-list
-          '(("irc.libera.chat"
-             :port "6697"
-             :ssl t
-             :nick "vancycles"
-             :password "/run/current-system/sw/bin/gpg2"
-             ))) ;; we back to the 1980s babyyyy
+     ;;(erc :variables
+     ;;     erc-server-list
+     ;;     '(("irc.libera.chat"
+     ;;        :port "6697"
+     ;;        :ssl t
+     ;;        :nick "vancycles"
+     ;;        :password "/run/current-system/sw/bin/gpg2"
+     ;;        ))) ;; we back to the 1980s babyyyy
      (chinese :variables
               chinese-enable-fcitx t)
-     spotify ;; cool gimmick
+     ;; spotify ;; cool gimmick
      better-defaults
      version-control
      git ;;maggit
@@ -86,7 +86,9 @@
             shell-default-position 'bottom) ;; my home
      prettier ;; you are as pretty as the first day I laid eyes on you
 
-     (nixos :variables nixos-format-on-save t) ;; I DECLARE LINUX!!!
+     (nixos :variables
+            nix-backend 'nil
+            nixos-format-on-save t) ;; I DECLARE LINUX!!!
      (lsp :variables
           lsp-lens-enable t
           lsp-enable-snippet t
@@ -97,12 +99,13 @@
      html ;; og-frontend
      react ;; frontend-for-corporated-tech
      svelte ;; frontend-for-hipsters
+     vue ;; vite vite vite vue
      node ;; i am inescapable
      (sql :variables sql-capitalize-keywords t) ;; you will never replace me
      ruby ;; why must we slave in javascript
-     (java (java-backend . lsp)) ;; corporate pain incarnate
+     ;; (java (java-backend . lsp)) ;; corporate pain incarnate
      kotlin ;; superset of corporate pain
-     csharp ;; spirit of programming forgive my sins
+     ;; csharp ;; spirit of programming forgive my sins
      nim ;; step aside old men
      (groovy :variables
              groovy-backend 'lsp) ;; thx graddle and java
@@ -159,7 +162,11 @@
                                       sqlite3
                                       editorconfig
                                       pomm
-                                      (lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss"))
+                                      (lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss")
+                                                       :init
+                                                       (setq lsp-tailwindcss-add-on-mode t
+                                                             lsp-log-io t)
+                                                       )
                                       yasnippet-snippets
                                       keychain-environment
                                       )
