@@ -40,7 +40,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    darwin = {
+    nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -67,12 +67,11 @@
       home-manager,
       nixvim,
       sops-nix,
-      darwin,
+      nix-darwin,
       # nix-pre-commit,
       ...
     }@inputs:
     let
-      # TODO: what does it even do?
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
@@ -82,25 +81,25 @@
     in
     {
 
-      darwinConfigurations.macM1 = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        pkgs = import nixpkgs { system = "aarch64-darwin"; };
-        specialArgs = {
-          palete-color = "mocha";
-          username = "henri.vandersleyen";
-        };
-        modules = [
-          ./users
-          ./hosts/hardware/network.nix
-          ./modules/core/nix
-          home-manager.darwinModules.home-manager
-        ];
-        # update using this example
-        # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix
-        # https://github.com/zmre/mac-nix-simple-example/blob/master/flake.nix
-        # https://github.com/MatthiasBenaets/nix-config
-      }; # laptop
-
+      darwinConfigurations = {
+        macM2 = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          pkgs = import nixpkgs { system = "aarch64-darwin"; };
+          specialArgs = {
+            palete-color = "mocha";
+            username = "henri.vandersleyen";
+          };
+          modules = [
+            ./users
+            # ./hosts/hardware/network.nix
+            home-manager.darwinModules.home-manager
+          ];
+          # update using this example
+          # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix
+          # https://github.com/zmre/mac-nix-simple-example/blob/master/flake.nix
+          # https://github.com/MatthiasBenaets/nix-config
+        }; # laptop
+      };
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
