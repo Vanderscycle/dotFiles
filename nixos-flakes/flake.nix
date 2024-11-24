@@ -90,7 +90,7 @@
           username = "henri.vandersleyen";
         };
         modules = [
-          ./users/work
+          ./users/
           ./hosts/hardware/network.nix
           home-manager.darwinModules.home-manager
         ];
