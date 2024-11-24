@@ -79,18 +79,20 @@
 
       nixosVersion = "24.11";
       system = "x86_64-linux";
-      nodes = [
-        "homelab-0"
-        "homelab-1"
-        "homelab-2"
-      ];
     in
     {
 
       darwinConfigurations.macM1 = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         pkgs = import nixpkgs { system = "aarch64-darwin"; };
+        specialArgs = {
+          palete-color = "mocha";
+          username = "henri.vandersleyen";
+        };
         modules = [
+          ./users/work
+          ./hosts/hardware/network.nix
+          home-manager.darwinModules.home-manager
         ];
         # update using this example
         # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix
