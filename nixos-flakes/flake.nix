@@ -154,11 +154,11 @@
         }; # wife
       }; # nixosConfigurations
 
-      templates.default = {
-        path = ./.;
-        description = "The default template for common nixflakes.";
-      }; # templates
+      #  templates.default = {
+      #    path = ./.;
+      #    description = "The default template for common nixflakes.";
+      #  }; # templates
 
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      # formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
     };
 }
