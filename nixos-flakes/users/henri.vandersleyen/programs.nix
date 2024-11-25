@@ -6,11 +6,11 @@
     ../../modules/programs/fzf.nix
     ../../modules/programs/kitty.nix
     ../../modules/programs/lazygit.nix
-    ../../modules/programs/starship.nix
     ../../modules/programs/bat.nix
     ../../modules/programs/rg.nix
     ../../modules/programs/starship.nix
     ../../modules/programs/editors
+    ../../modules/programs/modern_unix.nix
   ];
   homebrew = {
     enable = true;

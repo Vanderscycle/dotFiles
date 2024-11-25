@@ -31,7 +31,8 @@
     ../../modules/programs/spicetify.nix
     ../../modules/programs/rpi-imager.nix
     ../../modules/programs/firefox.nix
-
+    ../../modules/programs/editors
+    ../../modules/programs/modern_unix.nix
   ] ++ (if hostname == "desktop" then [ ../../modules/programs/fuzzel.nix ] else [ ]);
   # ----------------------
   # default applications

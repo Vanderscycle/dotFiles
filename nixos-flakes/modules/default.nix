@@ -1,6 +1,5 @@
 {
   imports = [
     ./core
-    ./programs
   ];
 }

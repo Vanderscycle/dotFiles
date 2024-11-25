@@ -72,12 +72,14 @@
       ...
     }@inputs:
     let
-      supportedSystems = [ "x86_64-linux" ];
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
 
       nixosVersion = "24.11";
-      system = "x86_64-linux";
     in
     {
 
@@ -86,27 +88,28 @@
           system = "aarch64-darwin";
           pkgs = import nixpkgs { system = "aarch64-darwin"; };
           specialArgs = {
-            palete-color = "mocha";
             username = "henri.vandersleyen";
+            inherit inputs;
+            inherit nixosVersion;
+            inherit catppuccin;
           };
           modules = [
             ./users
-            # ./hosts/hardware/network.nix
             home-manager.darwinModules.home-manager
+            {
+              home-manager.users."henri.vandersleyen".home.stateVersion = "24.11";
+              home-manager.users."henri.vandersleyen".home.homeDirectory = "/Users/henri.vandersleyen";
+            }
           ];
-          # update using this example
-          # https://github.com/zhaofengli/nix-homebrew/blob/main/flake.nix
-          # https://github.com/zmre/mac-nix-simple-example/blob/master/flake.nix
-          # https://github.com/MatthiasBenaets/nix-config
         }; # laptop
       };
+
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
             username = "henri";
             hostname = "desktop";
-            palete-color = "mocha";
-            inherit system;
+            system = "x86_64-linux";
             inherit inputs;
             inherit nixosVersion;
           } // inputs;
@@ -137,8 +140,7 @@
           specialArgs = {
             username = "jean";
             hostname = "wife";
-            palete-color = "mocha";
-            inherit system;
+            system = "x86_64-linux";
             inherit inputs;
             inherit nixosVersion;
           } // inputs;
