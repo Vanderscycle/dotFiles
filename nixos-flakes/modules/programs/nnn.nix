@@ -10,6 +10,7 @@
   environment.systemPackages = [
     pkgs.xdragon
   ];
+
   home-manager.users.${username} = {
     programs = {
       nnn = {

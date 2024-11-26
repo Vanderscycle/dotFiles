@@ -82,28 +82,6 @@
       nixosVersion = "24.11";
     in
     {
-
-      darwinConfigurations = {
-        macM2 = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          pkgs = import nixpkgs { system = "aarch64-darwin"; };
-          specialArgs = {
-            username = "henri.vandersleyen";
-            inherit inputs;
-            inherit nixosVersion;
-            inherit catppuccin;
-          };
-          modules = [
-            ./users
-            home-manager.darwinModules.home-manager
-            {
-              home-manager.users."henri.vandersleyen".home.stateVersion = "24.11";
-              home-manager.users."henri.vandersleyen".home.homeDirectory = "/Users/henri.vandersleyen";
-            }
-          ];
-        }; # laptop
-      };
-
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
