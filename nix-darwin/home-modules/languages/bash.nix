@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    bash-language-server
+    bash-language-server # npm i -g bash-language-server
     shellcheck
     shfmt
   ];

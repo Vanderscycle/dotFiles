@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    hyperfine # how xz was discovered
+    curlie # curl + httpie baby
+  ];
   programs = {
     eza = {
       enable = true;

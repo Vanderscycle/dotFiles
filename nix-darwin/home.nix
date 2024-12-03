@@ -19,7 +19,6 @@
     ./home-modules/programs/spacemacs.nix
     ./home-modules/programs/git.nix
     ./home-modules/programs/vim.nix
-    ./home-modules/programs/yaml.nix
     ./home-modules/programs/devops.nix
     ./home-modules/programs/spotify.nix
     ./home-modules/programs/nh.nix
@@ -43,7 +42,7 @@
 
   home.sessionVariables = {
 
-    # for nh 
+    # for nh
     FLAKE = "~/Documents/dotFiles/nix-darwin";
   };
 

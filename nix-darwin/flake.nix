@@ -30,7 +30,6 @@
       home-manager,
       darwin,
       catppuccin,
-      spicetify-nix,
       nixvim,
       ...
     }:
@@ -39,7 +38,7 @@
     in
     {
       darwinConfigurations = {
-        #nix run nix-darwin -- switch --flake ./nix-darwin 
+        #nix run nix-darwin -- switch --flake ./nix-darwin
         Henris-MacBook-Pro = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
@@ -66,6 +65,42 @@
             }
           ];
         };
+      };
+
+      nixosConfigurations = {
+        desktop = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            username = "henri";
+            hostname = "desktop";
+            system = "x86_64-linux";
+            inherit inputs;
+            inherit nixosVersion;
+          } // inputs;
+          modules = [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+              };
+              home-manager.users."henri" = {
+                imports = [
+                  nixvim.homeManagerModules.nixvim
+                  catppuccin.homeManagerModules.catppuccin
+                  # ./home.nix
+                ];
+              };
+            }
+            # local
+            # ./.
+            # ./modules/gaming
+            # ./modules/programs/transmission
+            # ./modules/status-bars/waybar
+            # ./modules/window-managers/hyprland
+            # # own scripts
+          ];
+        }; # desktop
       };
     };
 }
