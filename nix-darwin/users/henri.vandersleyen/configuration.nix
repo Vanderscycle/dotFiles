@@ -18,10 +18,11 @@
   };
   # system.configurationRevision = self.rev or self.dirtyRev or null;
   system.stateVersion = 5;
-  nixpkgs.hostPlatform = "x86_64-linux";
+  nixpkgs.hostPlatform = "aarch64-darwin";
   nixpkgs.config.allowUnfree = true;
-  users.users."henri".home = "/home/henri";
-  users.users."henri".shell = pkgs.fish;
+
+  users.users."henri.vandersleyen".home = "/Users/henri.vandersleyen";
+  users.users."henri.vandersleyen".shell = pkgs.nushell;
   home-manager.backupFileExtension = "backup";
   nix.configureBuildUsers = true;
   nix.useDaemon = true;
