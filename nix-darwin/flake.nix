@@ -34,7 +34,6 @@
       ...
     }:
     let
-      nixosVersion = "24.11";
     in
     {
       darwinConfigurations = {
@@ -43,10 +42,9 @@
           system = "aarch64-darwin";
           specialArgs = {
             inherit inputs;
-            inherit nixosVersion;
           };
           modules = [
-            ./configuration.nix
+            ./users/henri.vandersleyen/configuration.nix
             home-manager.darwinModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -59,7 +57,7 @@
 
                   nixvim.homeManagerModules.nixvim
                   catppuccin.homeManagerModules.catppuccin
-                  ./home.nix
+                  ./users/henri.vandersleyen/home.nix
                 ];
               };
             }
@@ -70,13 +68,12 @@
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            username = "henri";
             hostname = "desktop";
-            system = "x86_64-linux";
             inherit inputs;
-            inherit nixosVersion;
           } // inputs;
           modules = [
+            ./users/henri/configuration.nix
+            ./users/henri/sops.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -88,7 +85,7 @@
                 imports = [
                   nixvim.homeManagerModules.nixvim
                   catppuccin.homeManagerModules.catppuccin
-                  # ./home.nix
+                  ./users/henri/home.nix
                 ];
               };
             }

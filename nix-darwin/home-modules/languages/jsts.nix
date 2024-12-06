@@ -10,5 +10,7 @@
     nodePackages.prettier # still have to install globally npm i -g prettier
     nodePackages.eslint
     emacsPackages.import-js
+    vue-language-server # npm install -g volar
+    svelte-language-server # npm install -g svelte-language-server
   ];
 }

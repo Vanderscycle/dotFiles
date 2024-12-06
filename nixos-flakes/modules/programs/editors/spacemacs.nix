@@ -18,5 +18,6 @@
     sqlite
     cmake
     gcc
+    libgccjit
   ];
 }

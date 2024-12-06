@@ -2,10 +2,10 @@
 {
   users.users."henri.vandersleyen" = {
     openssh.authorizedKeys.keysFiles = [
-      ~/.ssh/knak
+      /Users/henri.vandersleyen/.ssh/knak
     ];
   };
-  # allows for remote login of the machine. 
+  # allows for remote login of the machine.
   # TODO: create options that its not enabled  for work laptop
   services.openssh = {
     enable = false;

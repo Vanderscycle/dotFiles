@@ -31,8 +31,8 @@
     # ./home-modules/services/appleTouchId.nix
 
   ];
-  home.username = "henri";
-  home.homeDirectory = "/home/henri";
+  home.username = "henri.vandersleyen";
+  home.homeDirectory = "/Users/henri.vandersleyen";
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   # Makes sense for user specific applications that shouldn't be available system-wide
@@ -41,6 +41,7 @@
   home.file = { };
 
   home.sessionVariables = {
+
     # for nh
     FLAKE = "~/Documents/dotFiles/nix-darwin";
   };

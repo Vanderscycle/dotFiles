@@ -11,6 +11,7 @@
       sqlite
       cmake
       gcc
+      libgccjit
     ];
   };
   services = {
