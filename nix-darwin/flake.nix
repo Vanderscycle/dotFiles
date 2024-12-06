@@ -22,6 +22,11 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -31,6 +36,7 @@
       darwin,
       catppuccin,
       nixvim,
+      sops-nix,
       ...
     }:
     let
@@ -69,6 +75,7 @@
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
             hostname = "desktop";
+            username = "henri";
             inherit inputs;
           } // inputs;
           modules = [

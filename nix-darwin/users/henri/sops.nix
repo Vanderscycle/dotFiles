@@ -15,7 +15,7 @@ in
   environment.systemPackages = [
     pkgs.sops
   ];
-  sops.defaultSopsFile = ../secrets/secrets.yaml;
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
 
   sops.age.keyFile = "/home/henri/.config/sops/age/keys.txt";

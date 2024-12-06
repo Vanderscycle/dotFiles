@@ -263,7 +263,7 @@
         disk = {
           interval = 30;
           format = " {used}";
-          path = "/home/${username}/";
+          path = "~";
           tooltip = true;
           tooltip-format = "{used}/{total} => {path} {percentage_used}%";
         };

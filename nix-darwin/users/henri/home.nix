@@ -27,13 +27,21 @@
     ../../home-modules/languages/python.nix
     ../../home-modules/languages/jsts.nix
     ../../home-modules/languages/bash.nix
+    ../../home-modules/languages/go.nix
+    ../../home-modules/languages/latex.nix
+    ../../home-modules/languages/kubernetes.nix
     # services
-    # ./home-modules/services/appleTouchId.nix
-
+    ../../home-modules/services/fcitx.nix
+    ../../home-modules/services/ssh.nix
+    ../../home-modules/services/dunst.nix
+    # wm
+    ../../home-modules/window-managers/hyprland
+    # bar
+    ../../home-modules/status-bars/waybar
   ];
   home.username = "henri";
   home.homeDirectory = "/home/henri";
-  home.stateVersion = "23.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 
   # Makes sense for user specific applications that shouldn't be available system-wide
   home.packages = [ ];

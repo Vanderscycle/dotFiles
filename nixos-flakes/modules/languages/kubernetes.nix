@@ -6,11 +6,6 @@
 }:
 {
   home-manager.users.${username} = {
-    programs = {
-      go = {
-        enable = true;
-      };
-    };
     home = {
       packages = with pkgs; [
         # k8s

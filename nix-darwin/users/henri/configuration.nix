@@ -1,7 +1,11 @@
-{ pkgs, inputs, ... }:
 {
-  imports =
-    [
+  pkgs,
+  inputs,
+  username,
+  ...
+}:
+{
+  imports = [
     ../../hosts
     # programs
     ../../nix-modules/programs/gaming.nix
@@ -10,8 +14,7 @@
     ../../nix-modules/services/sound.nix
     ../../nix-modules/services/docker.nix
     ../../nix-modules/services/internationalisation.nix
-    ];
-  services.nix-daemon.enable = true;
+  ];
   nix.settings.experimental-features = "nix-command flakes";
   # Optimize storage and automatic scheduled GC running
   # If you want to run GC manually, use commands:
@@ -25,14 +28,31 @@
     options = "--delete-older-than 14d";
   };
   # system.configurationRevision = self.rev or self.dirtyRev or null;
-  system.stateVersion = 5;
+  # system.stateVersion = 5;
   nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config.allowUnfree = true;
-  users.users."henri".home = "/home/henri";
-  users.users."henri".shell = pkgs.fish;
+
+  programs.fish.enable = true;
+
+  services.openssh = {
+    enable = false;
+  };
+  users.users.${username} = {
+    home = "/home/henri";
+    shell = pkgs.fish;
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
+  };
+
   home-manager.backupFileExtension = "backup";
-  nix.configureBuildUsers = true;
-  nix.useDaemon = true;
+
+  # nix.configureBuildUsers = true;
+  # nix.useDaemon = true;
+  # services.nix-daemon.enable = true;
+
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
   # fonts.enableFontDir = true;
   fonts.packages = with pkgs; [
@@ -70,4 +90,5 @@
       "audio/mpeg" = [ "vlc.desktop" ];
       "audio/flac" = [ "vlc.desktop" ];
     };
+  };
 }
