@@ -17,13 +17,12 @@
             toml
             python-lsp-server
             isort
-            python-lsp-server
             black
             flake8
             boto3
             pyyaml
             awscli
-          ]
+          ];
         ))
       ];
     };

@@ -1,0 +1,34 @@
+
+* Nix/mac
+
+Video tutorial
+https://www.youtube.com/watch?v=k9yKm_k5cVA
+
+** how to use
+
+First install nix from either of the options bellow. I recommend the following
+
+#+begin_src bash
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix -o install-nix.sh
+sh install-nix.sh install
+#end_src
+
+https://github.com/LnL7/nix-darwin
+
+Then set the flake
+
+** Configuring
+Home manager options 
+https://home-manager-options.extranix.com/?query=fish&release=master
+Nix available packages + options
+https://search.nixos.org/packages
+** About nix
+
+Nix is a functional language that is lazy loaded. There are quite a couple of very powerful builting functions
+
+https://teu5us.github.io/nix-lib.html#builtins.fetchurl
+
+
+** Uninstalling nix
+
+https://nix.dev/manual/nix/2.18/installation/uninstall

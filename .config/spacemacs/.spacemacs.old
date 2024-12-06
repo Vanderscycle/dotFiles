@@ -2,9 +2,10 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+
 (defun dotspacemacs/layers ()
   "Layer configuration:
-This function should only modify configuration layer settings."
+  This function should only modify configuration layer settings."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -38,13 +39,55 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
-     better-defaults
      emacs-lisp
-     git ;; maggit
-     helm
+     helm ;; sail through this sea of files
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     multiple-cursors
+     (auto-completion :variables
+                      auto-completion-minimum-prefix-length 1
+                      auto-completion-idle-delay 0.05
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-return-key-behavior 'complete
+                      spacemacs-default-company-backends '(company-files company-capf)
+                      );; intellisense
+     ;;(erc :variables
+     ;;     erc-server-list
+     ;;     '(("irc.libera.chat"
+     ;;        :port "6697"
+     ;;        :ssl t
+     ;;        :nick "vancycles"
+     ;;        :password "/run/current-system/sw/bin/gpg2"
+     ;;        ))) ;; we back to the 1980s babyyyy
+     (chinese :variables
+              chinese-enable-fcitx t)
+     ;; spotify ;; cool gimmick
+     better-defaults
+     version-control
+     git ;;maggit
+     (treemacs :variables
+               treemacs-use-all-the-icons-theme t ;; don't forget to run all-the-icons-install-font
+               treemacs-use-git-mode 'deferred) ;; a file system is much like a tree
+     markdown ;; write that down patrick
+     latex ;; oh baby its time to go even beyond
+     pdf ;; refusing to pay adobe is morally right
+     (org :variables
+          org-enable-roam-protocol t
+          org-enable-roam-ui t
+          org-enable-roam-support t) ;; ride the unicorn
+     (spell-checking :variables
+                     spell-checking-enable-by-default nil
+                     enable-flyspell-auto-completion t);; spell right for once
+     (syntax-checking :variables
+                      syntax-checking-enable-by-default t) ;; like spelling proprely
+     (shell-scripts :variables shell-scripts-format-on-save t)
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom) ;; my home
+     prettier ;; you are as pretty as the first day I laid eyes on you
+
      (nixos :variables
-            nix-backend 'lsp
+            nix-backend 'nil
             nixos-format-on-save t) ;; I DECLARE LINUX!!!
      (lsp :variables
           lsp-lens-enable t
@@ -52,50 +95,54 @@ This function should only modify configuration layer settings."
           lsp-ui-doc-position 'at-point
           lsp-ui-doc-show-with-cursor t
           lsp-ui-doc-include-signature t) ;; share the love between editors
-     prettier ;; you are as pretty as the first day I laid eyes on you
+     nginx ;; of course there's a layer for that
+     html ;; og-frontend
+     react ;; frontend-for-corporated-tech
+     svelte ;; frontend-for-hipsters
+     vue ;; vite vite vite vue
+     node ;; i am inescapable
+     (sql :variables sql-capitalize-keywords t) ;; you will never replace me
+     ruby ;; why must we slave in javascript
+     ;; (java (java-backend . lsp)) ;; corporate pain incarnate
+     kotlin ;; superset of corporate pain
+     ;; csharp ;; spirit of programming forgive my sins
+     nim ;; step aside old men
+     (groovy :variables
+             groovy-backend 'lsp) ;; thx graddle and java
      (javascript :variables
-                 javascript 'prettier
                  node-add-modules-path t) ;; everything that can be written in js will be written in js
      (typescript :variables
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
                  typescript-fmt-on-save t) ;; js but like better?
-     (python :variables
-             python-backend 'lsp) ;;
-     (org :variables
-          org-enable-roam-protocol t
-          org-enable-roam-ui t
-          org-enable-roam-support t) ;; ride the unicorn
-     (treemacs :variables
-               treemacs-use-all-the-icons-theme t ;; don't forget to run all-the-icons-install-font
-               treemacs-use-git-mode 'deferred) ;; a file system is much like a tree
-     markdown ;; mark that down Patrick!
-     pdf ;; refusing to pay adobe is morally right
-     svelte ;; frontend-for-hipsters
-     vue ;; vite vite vite vue
-     github-copilot ;; ai is thou
-     (yaml :variables
-           yaml-enable-lsp t) ;;
      (json :variables
            json-fmt-on-save t
-           json-fmt-tool 'prettier) ;; the prefered backend/frontend love letter format
-     multiple-cursors
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom) ;; my home
-     (shell-scripts :variables
-                    shell-scripts-backend 'lsp) ;; shellcheck it
-     version-control
-     (spell-checking :variables
-                     spell-checking-enable-by-default nil
-                     enable-flyspell-auto-completion t);; spell right for once
-     (syntax-checking :variables
-                      syntax-checking-enable-by-default t) ;; like spelling proprely
+           json-fmt-tool 'prettier) ;; I only accept payloads in json
+     (yaml :variables
+           yaml-enable-lsp t) ;; a necessary evil
+     toml ;; what if we went beyond json/yaml
+     (terraform
+      :variables terraform-auto-format-on-save t) ;; open source was fun while it lasted
+     docker ;; what if we could run linux inside linux
+     kubernetes ;; docker but overcomplicated and resilient
+     (python :variables
+             python-test-runner 'pytest
+             python-formatter 'black
+             python-format-on-save t
+             python-sort-imports-on-save t)  ;; snake language
+     (go :variables
+         go-tab-width 4
+         ;; go-tab-width nil ;; if using editorconfig
+         godoc-at-point-function 'godoc-gogetdoc
+         go-format-before-save t
+         go-use-golangci-lint t) ;; go go go
+     themes-megapack
+     emoji ;; the forbidden variable
      colors
      xkcd ;; a touch of humour
      (unicode-fonts :variables
                     unicode-fonts-enable-ligatures t) ;; ascii is so o 1970
-     treemacs)
+     )
 
 
    ;; List of additional packages that will be installed without being wrapped
@@ -107,21 +154,21 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
-                                      ob-typescript ;; for org babel
-                                      (nix-ts-mode
-                                       :mode "\\.nix\\'"
-                                       :config
-                                       (setq lsp-nix-nixd-home-manager-options-expr "(builtins.getFlake "/Users/henri.vandersleyen/Documents/dotFiles/nix-darwin").darwinConfigurations."henri-MacBook-Pro".options.home-manager")
-                                       (setq lsp-nix-nixd-nixos-options-expr "(builtins.getFlake "/Users/henri.vandersleyen/Documents/dotFiles/nix-darwin").darwinConfigurations."henri-MacBook-Pro".options")
-                                       (setq lsp-nix-nixd-nixpkgs-expr "import <nixpkgs> { }")) ;; declaring linux isn't enough
+                                      ob-typescript
                                       (sops
                                        :recipe (:type git :host github :repo "djgoku/sops"))
                                       catppuccin-theme
+                                      exec-path-from-shell
                                       sqlite3
-                                      (exec-path-from-shell
-                                       :ensure t
-                                       :config
-                                       (exec-path-from-shell-initialize))
+                                      editorconfig
+                                      pomm
+                                      (lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss")
+                                                       :init
+                                                       (setq lsp-tailwindcss-add-on-mode t
+                                                             lsp-log-io t)
+                                                       )
+                                      yasnippet-snippets
+                                      keychain-environment
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -141,9 +188,9 @@ This function should only modify configuration layer settings."
 
 (defun dotspacemacs/init ()
   "Initialization:
-This function is called at the very beginning of Spacemacs startup,
-before layer configuration.
-It should only modify the values of Spacemacs settings."
+  This function is called at the very beginning of Spacemacs startup,
+  before layer configuration.
+  It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
@@ -169,6 +216,14 @@ It should only modify the values of Spacemacs settings."
    ;;   ./emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs-27.1.pdmp
    ;; (default (format "spacemacs-%s.pdmp" emacs-version))
    dotspacemacs-emacs-dumper-dump-file (format "spacemacs-%s.pdmp" emacs-version)
+
+   ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
+   ;; possible. Set it to nil if you have no way to use HTTPS in your
+   ;; environment, otherwise it is strongly recommended to let it set to t.
+   ;; This variable has no effect if Emacs is launched with the parameter
+   ;; `--insecure' which forces the value of this variable to nil.
+   ;; (default t)
+   dotspacemacs-elpa-https t
 
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
@@ -401,20 +456,6 @@ It should only modify the values of Spacemacs settings."
    ;; displayed in the current window. (default nil)
    dotspacemacs-switch-to-buffer-prefers-purpose nil
 
-   ;; Whether side windows (such as those created by treemacs or neotree)
-   ;; are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m).
-   ;; (default t)
-   dotspacemacs-maximize-window-keep-side-windows t
-
-   ;; If nil, no load-hints enabled. If t, enable the `load-hints' which will
-   ;; put the most likely path on the top of `load-path' to reduce walking
-   ;; through the whole `load-path'.
-   dotspacemacs-enable-load-hints nil
-
-   ;; If t, enable the `package-quickstart' feature to avoid full package
-   ;; loading, otherwise do not try the `package-quickstart' (default nil).
-   dotspacemacs-enable-package-quickstart nil
-
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
@@ -471,7 +512,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Show the scroll bar while scrolling. The auto hide time can be configured
    ;; by setting this variable to a number. (default t)
-   dotspacemacs-scroll-bar-while-scrolling t
+   dotspacemacs-scroll-bar-while-scrolling nil
 
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
@@ -534,14 +575,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
-
-   ;; The backend used for undo/redo functionality. Possible values are
-   ;; `undo-fu', `undo-redo' and `undo-tree' see also `evil-undo-system'.
-   ;; Note that saved undo history does not get transferred when changing
-   ;; your undo system. The default is currently `undo-fu' as `undo-tree'
-   ;; is not maintained anymore and `undo-redo' is very basic."
-   dotspacemacs-undo-system 'undo-fu
+   dotspacemacs-search-tools '("ag" "rg" "pt" "ack" "grep")
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -578,9 +612,6 @@ It should only modify the values of Spacemacs settings."
    ;; to aggressively delete empty line and long sequences of whitespace,
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
-   ;; The variable `global-spacemacs-whitespace-cleanup-modes' controls
-   ;; which major modes have whitespace cleanup enabled or disabled
-   ;; by default.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup 'trailing
 
@@ -649,11 +680,24 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-  ;;INFO: in macos, you can increase the repeat rate of keys
-  ;; M-x nerd-icons-install-fonts to fix doom-emacs status line
-  (add-to-list 'exec-path "/etc/profiles/per-user/henri.vandersleyen/bin")
+  ;; IMPORTANT if you emacs config is mega doo doo and you don't know why check async-native-compile results
+  ;; --- general ---
+  ;; --- maggit ---
+  ;; https://magit.vc/manual/forge/Setup-for-Githubcom.html
+  (setq auth-sources '("~/.authinfo"))
+  ;; --- erc ---
+  ;; ---codeium ---
+  ;; --- yasnippet ---
+  (setq global-company-mode t)
+  ;; --- misc ---
+  (setq-default word-wrap t)
+  (spacemacs/set-leader-keys "obs" 'scratch-buffer)
+  ;; --- pomm ---
+  (setq pomm-audio-enabled t)
+  ;; --- tailwindcss ---
+  (setq lsp-tailwindcss-add-on-mode t)
+  ;; webmode
 
-  ;; --- js/ts ---
   (setq-default
    ;; js2-mode
    js2-basic-offset 2
@@ -663,26 +707,11 @@ before packages are loaded."
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
-
   ;; --- projectile ---
-  (setq projectile-project-search-path '("~/knak/packages/" "~/Documents/"))
-  (spacemacs/set-leader-keys "ps" 'projectile-discover-projects-in-search-path)
 
-  ;; --- babel ---
-  (define-derived-mode ts-mode typescript-mode "ts"
-    "Major mode for editing typescipt src blocks in org mode.")
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((typescript . t)))  ;; Enable TypeScript support
-
-  ;; --- org-general ---
-  (setq user-mail-address "henri-vandersleyen@protonmail.com")
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (toggle-truncate-lines nil) ))
-
-  (spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
+  (setq projectile-project-search-path '("~/Documents/houseOperto" "~/Documents/houseVanCylesIndustries" "~/Documents/houseVandersleyen"))
   ;; --- org-keybindings ---
+
   (defun my/org-add-checkbox-counter ()
     "Append `[/]` at the end of the current TODO item."
     (interactive)
@@ -703,11 +732,29 @@ before packages are loaded."
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
+  ;; --- org-general ---
+  (setq user-mail-address "henri-vandersleyen@protonmail.com")
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (toggle-truncate-lines nil) ))
+  ;; --- babel ---
+  (define-derived-mode ts-mode typescript-mode "ts"
+    "Major mode for editing typescipt src blocks in org mode.")
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((typescript . t)))  ;; Enable TypeScript support
   ;; --- org-roam ---
-  (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
-  (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
-  (setq org-directory "~/Documents/zettelkasten/org")
+  (setq org-roam-directory (file-truename "/home/henri/Documents/zettelkasten/org-roam"))
+  ;;(setq org-roam-db-autosync-mode t)
+  (org-roam-db-autosync-mode)
+
+  ;; --- org-journal ---
+  (setq org-journal-dir "/home/henri/Documents/zettelkasten/org/journal")
+  (setq org-directory "/home/henri/Documents/zettelkasten/org")
   (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
+  (setq find-file-visit-truename t)
+  ;; --- org-agenda ---
+  (setq org-agenda-files '("/home/henri/Documents/zettelkasten/org-roam/"))
   ;; --- helm ---
   ;; (setq helm-follow-mode-persistent t) ;; automatically preview files but opens them as a buffer
   ;; --- perspective ---
@@ -724,10 +771,22 @@ before packages are loaded."
    '(treemacs-hl-line-face ((t (:background "#e64553")))))
   ;; --- dired ---
   (setq dired-kill-when-opening-new-dired-buffer t)
-  ;; Do not write anything past this comment. This is where Emacs will
-  ;; auto-generate custom variable definitions.
-  )
 
+  ;; --- emmet ---
+  ;; https://github.com/smihica/emmet-mode/issues/136#issuecomment-1086645529
+  ((web-mode css-mode sgml-mode rjsx-mode typescript-mode js2-mode) . emmet-mode)
+  (setq emmet-preview-mode t)
+  (setq emmet-preview-default t)
+  (setq emmet-indent-after-insert nil)
+  ;;(setq emmet-indentation 2)
+  (setq emmet-expand-jsx-className? t) ; 设置jsx 语法
+  (setq emmet-move-cursor-between-quotes t)
+  (setq emmet-self-closing-tag-style " /")
+  ;; --- ssh ---
+  (setq tramp-default-method "ssh")
+  )
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -738,12 +797,17 @@ This function is called at the very end of Spacemacs initialization."
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
+   '(helm-source-names-using-follow nil)
+   '(org-agenda-files
+     '("/home/henri/Documents/zettelkasten/org-roam/20231228151941-3d_printing.org" "/home/henri/Documents/zettelkasten/org-roam/20231228153323-chinese.org" "/home/henri/Documents/zettelkasten/org-roam/20231228160947-chinese_radicals.org" "/home/henri/Documents/zettelkasten/org-roam/20231228161027-chinese_basic_patterns.org" "/home/henri/Documents/zettelkasten/org-roam/20231228161212-chinese_sentences.org" "/home/henri/Documents/zettelkasten/org-roam/20231228161242-chinese_often_forgotten_words.org" "/home/henri/Documents/zettelkasten/org-roam/20231228162309-chinese_class_notes.org" "/home/henri/Documents/zettelkasten/org-roam/20240101164825-chinese_words_group.org" "/home/henri/Documents/zettelkasten/org-roam/20240109111240-programming.org" "/home/henri/Documents/zettelkasten/org-roam/20240117183030-comtemporary_chinese_vol_3.org" "/home/henri/Documents/zettelkasten/org-roam/20240201095349-openwrt.org" "/home/henri/Documents/zettelkasten/org-roam/20240201132007-rpi_k3s_cluster.org" "/home/henri/Documents/zettelkasten/org-roam/20240328185905-db_mariadb.org" "/home/henri/Documents/zettelkasten/org-roam/20240409213406-mandarin_corner_drinking_culture.org" "/home/henri/Documents/zettelkasten/org-roam/20240415080027-programming_go.org" "/home/henri/Documents/zettelkasten/org-roam/20240419141132-programming_bash.org" "/home/henri/Documents/zettelkasten/org-roam/20240423204241-mandarin_corner_white_skin.org" "/home/henri/Documents/zettelkasten/org-roam/20240423204705-mandarin_corner_walk_around_a_fishing_village.org" "/home/henri/Documents/zettelkasten/org-roam/20240423204946-mandarin_corner_lying_flat.org" "/home/henri/Documents/zettelkasten/org-roam/20240424144809-programming_github_actions_workflows.org" "/home/henri/Documents/zettelkasten/org-roam/20240425140202-programming_docker.org" "/home/henri/Documents/zettelkasten/org-roam/20240427172817-programming_nextjs.org" "/home/henri/Documents/zettelkasten/org-roam/20240429195948-mandarin_corner_work_cultural_aspects.org" "/home/henri/Documents/zettelkasten/org-roam/20240513203801-mandarin_corner_chinese_men_so_feminine.org" "/home/henri/Documents/zettelkasten/org-roam/20240624213227-hsk_4_part_1.org" "/home/henri/Documents/zettelkasten/org-roam/20240702185623-programming_sops.org" "/home/henri/Documents/zettelkasten/org-roam/20240722213733-chinese_summer_2024_review.org" "/home/henri/Documents/zettelkasten/org-roam/20240723210041-mandarin_corner_leftover_men.org" "/home/henri/Documents/zettelkasten/org-roam/20240731212533-mandarin_corner_why_girls_mei_you_jie_hun.org" "/home/henri/Documents/zettelkasten/org-roam/20240827191742-emacs.org" "/home/henri/Documents/zettelkasten/org-roam/20240828204250-knowlege_base.org" "/home/henri/Documents/zettelkasten/org-roam/20240830214805-zsa_moonlander.org" "/home/henri/Documents/zettelkasten/org-roam/20240901150838-programming_nix.org" "/home/henri/Documents/zettelkasten/org-roam/20240905210105-chinese_class_wrap_up_and_learn.org" "/home/henri/Documents/zettelkasten/org-roam/20240924205652-cert_ckad.org" "/home/henri/Documents/zettelkasten/org-roam/20240924213459-mastery.org" "/home/henri/Documents/zettelkasten/org-roam/20240930100436-maintenance_home.org" "/home/henri/Documents/zettelkasten/org-roam/20241002120519-work_house_operto.org"))
    '(package-selected-packages
-     '(ob-typescript web-mode nix-ts-mode blacken code-cells company-anaconda anaconda-mode cython-mode dap-mode lsp-docker bui helm-pydoc importmagic epc ctable concurrent live-py-mode lsp-pyright pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc yapfify company-shell fish-mode flycheck-bashate insert-shebang shfmt reformatter exec-path-from-shell yaml-mode doom-modeline shrink-path nerd-icons treemacs-all-the-icons add-node-modules-path auto-dictionary auto-yasnippet browse-at-remote catppuccin-theme code-review emojify deferred a color-identifiers-mode company-nixos-options diff-hl doom-themes eat esh-help eshell-prompt-extras eshell-z evil-org flycheck-pos-tip pos-tip flyspell-correct-helm flyspell-correct flyspell-popup git-link git-messenger git-modes git-timemachine gitignore-templates gnuplot helm-c-yasnippet helm-company helm-git-grep helm-ls-git helm-lsp helm-nixos-options helm-org-rifle htmlize js-doc js2-refactor multiple-cursors json-mode json-navigator json-reformat json-snatcher ligature livid-mode lsp-origami origami lsp-treemacs lsp-ui lsp-mode multi-term multi-vterm xref nix-mode nixos-options nodejs-repl npm-mode nyan-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank org-roam-ui websocket org-roam orgit-forge orgit forge yaml ghub closql emacsql treepy org prettier-js rainbow-identifiers rainbow-mode shell-pop skewer-mode js2-mode simple-httpd smeargle sops sqlite3 terminal-here treemacs-magit magit with-editor transient magit-section typescript-mode unicode-fonts ucs-utils font-utils persistent-soft pcache vterm web-beautify xkcd yasnippet-snippets yasnippet company-emoji company emoji-cheat-sheet-plus gh-md markdown-toc markdown-mode valign vmd-mode ws-butler writeroom-mode winum which-key vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+     '(ob-typescript nginx-mode pdf-view-restore pdf-tools company-auctex company-math company-reftex evil-tex auctex lsp-latex consult math-symbol-lists omnisharp csharp-mode auto-complete sops sqlup-mode sql-indent copilot ace-pinyin chinese-conv fcitx find-by-pinyin-dired pinyinlib pangu-spacing pyim xr pyim-basedict flycheck-kotlin kotlin-mode groovy-imports groovy-mode lsp-java maven-test-mode mvn keychain-environment bundler chruby minitest rake rbenv robe inf-ruby rspec-mode rubocop rubocopfmt ruby-hash-syntax ruby-refactor ruby-test-mode ruby-tools rvm seeing-is-believing xkcd shrink-path nerd-icons spaceline-all-the-icons memoize ibuffer-projectile helm-spotify-plus multi spotify erc-hl-nicks erc-image erc-social-graph erc-view-log erc-yt company-nixos-options helm-nixos-options nix-mode nixos-options company-tabnine js-react-redux-yasnippets company-statistics color-identifiers-mode rainbow-identifiers rainbow-mode company-web web-completion-data helm-css-scss impatient-mode pug-mode sass-mode haml-mode scss-mode slim-mode tagedit web-mode toggle-term ligature unicode-fonts ucs-utils font-utils persistent-soft pcache dap-mode lsp-docker bui lsp-tailwindcss zonokai-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-beautify volatile-highlights vim-powerline vi-tilde-fringe uuidgen unfill undo-tree underwater-theme ujelly-theme typescript-mode twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil treemacs-all-the-icons toxi-theme toml-mode toc-org texfrag terminal-here term-cursor tao-theme tangotango-theme tango-plus-theme tango-2-theme symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection string-edit-at-point sqlite3 sphinx-doc spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline spacegray-theme space-doc soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle shell-pop seti-theme rjsx-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme quickrun pytest pylookup pyenv-mode pydoc py-isort purple-haze-theme professional-theme prettier-js popwin poetry planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator paradox overseer orgit-forge organic-green-theme org-superstar org-roam-ui org-rich-yank org-projectile org-present org-pomodoro org-mime org-download org-contrib org-cliplink open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme npm-mode nose nodejs-repl noctilux-theme naquadah-theme nameless mwim mustang-theme multi-vterm multi-term multi-line monokai-theme monochrome-theme molokai-theme moe-theme modus-themes minimal-theme material-theme markdown-toc majapahit-themes madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-pyright lsp-origami lorem-ipsum livid-mode live-py-mode link-hint light-soap-theme kubernetes-evil kaolin-themes json-reformat json-navigator json-mode js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme inspector inkpot-theme info+ indent-guide importmagic hybrid-mode hungry-delete htmlize holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt heroku-theme hemisu-theme helm-xref helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-ls-git helm-git-grep helm-descbinds helm-company helm-comint helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates git-timemachine git-modes git-messenger git-link gh-md gandalf-theme flyspell-popup flyspell-correct-helm flycheck-pos-tip flycheck-package flycheck-golangci-lint flycheck-elsa flx-ido flatui-theme flatland-theme farmhouse-themes fancy-battery eziam-themes eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help emr emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav elisp-def editorconfig eat dumb-jump drag-stuff dracula-theme dotenv-mode doom-themes doom-modeline dockerfile-mode docker django-theme dired-quick-sort diminish diff-hl devdocs define-word darktooth-theme darkokai-theme darkmine-theme dakrone-theme cython-mode cyberpunk-theme company-terraform company-go company-emoji company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized code-cells clues-theme clean-aindent-mode chocolate-theme cherry-blossom-theme centered-cursor-mode catppuccin-theme busybee-theme bubbleberry-theme browse-at-remote blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme add-node-modules-path ace-link ace-jump-helm-line)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   )
+   '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+   '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+   '(treemacs-hl-line-face ((t (:background "#e64553")))))
   )
