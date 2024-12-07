@@ -12,6 +12,7 @@
       cmake
       gcc
       libgccjit
+      editorconfig-core-c
     ];
   };
   services = {
