@@ -2,46 +2,41 @@
   username,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
-  # TODO: these should be the user specific
-  services = {
-    displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "${username}";
-      };
-    };
-    xserver = {
-      enable = true;
-      displayManager = {
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
-      };
-    };
-  };
 
   home = {
-    environment.variables = {
-      MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
-      NIXOS_OZONE_WL = "1";
-      GDK_BACKEND = "wayland";
-      WLR_NO_HARDWARE_CURSORS = "1";
-    };
     packages = with pkgs; [
-      swww
+      inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
       wl-clipboard
       hyprcursor
       flameshot
+      wf-recorder # video recorder for wayland
+      waypaper
     ];
+  };
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [
+        "~/Pictures/switch.png"
+      ];
+      wallpaper = [
+        " , ~/Pictures/switch.png"
+      ];
+    };
   };
   wayland.windowManager = {
     hyprland = {
       catppuccin.enable = true;
       enable = true; # allow home-manager to configure hyprland
+      extraConfig = ''
+        env = HYPRCURSOR_THEME,rose-pine-hyprcursor
+        env = XCURSOR_THEME,rose-pine-hyprcursor
+        env = HYPRCURSOR_SIZE,32
+      '';
       settings = {
         input = {
           kb_layout = "us";
@@ -63,10 +58,6 @@
             new_optimizations = true;
           };
           rounding = 10;
-          # drop_shadow = "yes";
-          # shadow_range = 2;
-          # shadow_render_power = 2;
-          # col.shadow = "rgb (21 ce07)";
         };
         animations = {
           enabled = "yes";
@@ -77,14 +68,6 @@
             "windows, 1, 3, default, popin 80%"
             "workspaces, 1, 2, default, slide"
           ];
-          # animation = [
-          #   "windows = 1, 7, myBezier"
-          #   "windowsOut = 1, 7, default, popin 80%"
-          #   "border = 1, 10, default"
-          #   "borderangle = 1, 8, default"
-          #   "fade = 1, 7, default"
-          #   "workspaces = 1, 6, default"
-          # ];
         };
         # https://wiki.hyprland.org/Configuring/Dwindle-Layout/
         dwindle = {
@@ -129,7 +112,7 @@
             "$mainMod SHIFT, T, exec, thunar"
             "$mainMod, Q, exec, kitty"
             # scripts
-            "$mainMod, f, exec, ${lib.getExe myScript}"
+            # "$mainMod, f, exec, ${lib.getExe myScript}"
             # volume control
             "$mainMod SHIFT, minus, exec, amixer -q sset Master 5%-"
             "$mainMod CTRL, minus, exec, amixer -q sset Master 5%+"
@@ -207,7 +190,6 @@
           "float, class:^(org.fcitx5.)$"
         ];
         exec-once = [
-          "swww img ~/Pictures/switch.png"
           "waybar"
           "dunst"
           "discord --enable-wayland-ime"

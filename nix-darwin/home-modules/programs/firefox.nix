@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 # https://home-manager-options.extranix.com/?query=btop&release=master
 {
   programs.firefox = {
@@ -45,7 +50,7 @@
         "signon.rememberSignons" = false;
       };
 
-      extensions = with inputs.firefox-addons.packages."aarch64-darwin"; [
+      extensions = with inputs.firefox-addons.packages.${system}; [
         ublock-origin
         sponsorblock
         darkreader

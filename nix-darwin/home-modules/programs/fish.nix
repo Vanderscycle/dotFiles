@@ -23,6 +23,7 @@
     '';
     interactiveShellInit = ''
       keychain --eval --agents ssh knak
+      keychain --eval --agents ssh endeavourGit
     '';
     functions = {
       clear-trash = ''

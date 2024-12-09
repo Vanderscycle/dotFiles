@@ -2,18 +2,24 @@
   pkgs,
   inputs,
   username,
+  hostname,
+  hosts,
   ...
 }:
 {
   imports = [
+    hosts.nixosModule
     ../../hosts
     # programs
     ../../nix-modules/programs/gaming.nix
     ../../nix-modules/programs/thunar.nix
     # services
     ../../nix-modules/services/sound.nix
+    ../../nix-modules/services/transmission.nix
     ../../nix-modules/services/docker.nix
     ../../nix-modules/services/internationalisation.nix
+    # local
+    ./sops.nix
   ];
   nix.settings.experimental-features = "nix-command flakes";
   # Optimize storage and automatic scheduled GC running
@@ -34,17 +40,36 @@
 
   programs.fish.enable = true;
 
-  services.openssh = {
-    enable = false;
+  networking = {
+    networkmanager.enable = true;
+    hostName = "${hostname}"; # because we use nh os switch ensure the flakes +
+
+    stevenBlackHosts = {
+      enable = true;
+      blockFakenews = true;
+      blockGambling = true;
+    };
   };
   users.users.${username} = {
     home = "/home/henri";
     shell = pkgs.fish;
     isNormalUser = true;
     extraGroups = [
+      "networkmanager"
       "wheel"
       "docker"
+      "audio"
     ];
+  };
+
+  environment.systemPackages = with pkgs; [
+    cachix
+    spotify
+  ];
+
+  nix.settings = {
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
   home-manager.backupFileExtension = "backup";
@@ -59,10 +84,42 @@
     jetbrains-mono
     nerd-font-patcher
     recursive
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
+
   environment.variables = {
+    MOZ_ENABLE_WAYLAND = "1"; # For Firefox, similar for other apps
+    NIXOS_OZONE_WL = "1";
+    GDK_BACKEND = "wayland";
+    WLR_NO_HARDWARE_CURSORS = "1";
     # XDG_CONFIG_HOME = "/users/henri.vandersleyen"; # issue with nushell
+  };
+  programs.hyprland = {
+    enable = true;
+    # set the flake package
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
+  services = {
+    openssh = {
+      enable = false;
+    };
+    displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "${username}";
+      };
+    };
+    xserver = {
+      enable = true;
+      displayManager = {
+        gdm = {
+          enable = true;
+          wayland = true;
+        };
+      };
+    };
   };
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=3600

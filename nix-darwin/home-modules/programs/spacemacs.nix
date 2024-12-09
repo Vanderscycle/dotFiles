@@ -15,9 +15,16 @@
       editorconfig-core-c
     ];
   };
+
+  programs = {
+    emacs = {
+      enable = true;
+    };
+  };
   services = {
     emacs = {
       enable = true;
+      package = pkgs.emacs;
     };
   };
 }

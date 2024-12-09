@@ -2,13 +2,11 @@
   pkgs,
   ...
 }:
-let
-  dotfiles_dir = ~/Documents/dotFiles;
-in
+# let
+#   dotfiles_dir = ~/Documents/dotFiles;
+# in
 
 {
-  environment.systemPackages = [ pkgs.webcord-vencord ];
-
   #  nix run nixpkgs#betterdiscordctl install
   home = {
     # file.".config/discord/settings.json" = {
