@@ -8,7 +8,7 @@
     packages = with pkgs; [
       emacs-all-the-icons-fonts
       libtool
-      sqlite
+      # sqlite
       cmake
       gcc
       libgccjit

@@ -1,11 +1,21 @@
-{ pkgs, ... }:
-# https://home-manager-options.extranix.com/?query=btop&release=master
 {
-  programs.btop = {
-    enable = true;
-    catppuccin.enable = true;
-    settings = {
-      theme_background = true;
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+
+  options = {
+    btop.enable = lib.mkEnableOption "enables btop";
+  };
+  config = lib.mkIf config.btop.enable {
+    programs.btop = {
+      enable = true;
+      catppuccin.enable = true;
+      settings = {
+        theme_background = true;
+      };
     };
   };
 }
