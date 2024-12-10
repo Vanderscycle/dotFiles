@@ -12,19 +12,16 @@
 
   config = {
     # Merge the packages conditionally
-    home.packages =
-      with pkgs;
-      [
-        (lib.mkIf config.awscli.enable [
-          ssm-session-manager-plugin
-          awscli2
-          rclone
-        ])
+    home.packages = with pkgs; [
+      (lib.mkIf config.awscli.enable [
+        ssm-session-manager-plugin
+        awscli2
+        rclone
+      ])
 
-        (lib.mkIf config.linode.enable [
-          linode-cli
-        ])
-      ]
-      // [ ];
+      (lib.mkIf config.linode.enable [
+        linode-cli
+      ])
+    ];
   };
 }

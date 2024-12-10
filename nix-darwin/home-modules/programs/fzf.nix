@@ -5,7 +5,6 @@
   ...
 }:
 {
-
   options = {
     fzf.enable = lib.mkEnableOption "enables fzf completion";
   };

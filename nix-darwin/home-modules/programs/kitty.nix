@@ -1,27 +1,37 @@
-{ pkgs, ... }:
 {
-  # C-r history
-  # C-l clear
-  home = {
-    sessionVariables = {
-      TERMINAL = "kitty";
-    };
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  options = {
+    kitty.enable = lib.mkEnableOption "enables kitty shell";
   };
-  programs = {
-    kitty = {
-      enable = true;
-      catppuccin.enable = true;
-      shellIntegration.enableFishIntegration = true;
-      shellIntegration.enableZshIntegration = true;
-      settings = {
-        allow_remote_control = "yes";
-        listen_on = "unix:/tmp/kitty";
-        disable_ligatures = "never";
+  config = lib.mkIf config.kitty.enable {
+    # C-r history
+    # C-l clear
+    home = {
+      sessionVariables = {
+        TERMINAL = "kitty";
       };
-      font = {
-        size = 16;
-        name = "JetBrainsMono";
-        package = pkgs.nerd-fonts.jetbrains-mono;
+    };
+    programs = {
+      kitty = {
+        enable = true;
+        catppuccin.enable = true;
+        shellIntegration.enableFishIntegration = true;
+        shellIntegration.enableZshIntegration = true;
+        settings = {
+          allow_remote_control = "yes";
+          listen_on = "unix:/tmp/kitty";
+          disable_ligatures = "never";
+        };
+        font = {
+          size = 16;
+          name = "JetBrainsMono";
+          package = pkgs.nerd-fonts.jetbrains-mono;
+        };
       };
     };
   };

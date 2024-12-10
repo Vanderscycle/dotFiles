@@ -1,11 +1,14 @@
 {
   pkgs,
+  lib,
+  config,
   ...
 }:
-# https://home-manager-options.extranix.com/?query=k9s&release=master
 {
-  programs.k9s = {
-    enable = true;
-    catppuccin.enable = true;
+  config = lib.mkIf config.kubernetes.enable {
+    programs.k9s = {
+      enable = true;
+      catppuccin.enable = true;
+    };
   };
 }

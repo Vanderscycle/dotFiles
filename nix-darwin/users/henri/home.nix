@@ -14,20 +14,16 @@
     #
     ../../home-modules/programs
     ../../home-modules/programs/nnn.nix
-    ../../home-modules/programs/kitty.nix
     ../../home-modules/programs/starship.nix
-    ../../home-modules/programs/lazygit.nix
     ../../home-modules/programs/modern_unix.nix
     ../../home-modules/programs/zsh.nix
     ../../home-modules/programs/nushell.nix
     ../../home-modules/programs/keychain.nix
     ../../home-modules/programs/spacemacs.nix
     ../../home-modules/programs/spotify.nix
-    ../../home-modules/programs/git.nix
     ../../home-modules/programs/vim.nix
     ../../home-modules/programs/devops.nix
     ../../home-modules/programs/nh.nix
-    ../../home-modules/programs/k9s.nix
     ../../home-modules/programs/libreoffice.nix
     ../../home-modules/programs/multimedia.nix
     ../../home-modules/programs/plastic_printer.nix
@@ -39,7 +35,6 @@
     ../../home-modules/languages/bash.nix
     ../../home-modules/languages/go.nix
     ../../home-modules/languages/latex.nix
-    ../../home-modules/languages/kubernetes.nix
     # services
     ../../home-modules/services/fcitx.nix
     ../../home-modules/services/ssh.nix
@@ -51,8 +46,13 @@
     ../../home-modules/status-bars/waybar
   ];
 
+  kubernetes.enable = true;
   discord.enable = true;
   fish.enable = true;
+  fuzzel.enable = true;
+  git.userEmail = "henri-vandersleyen@protonmail.com";
+  git.userName = "vanderscycle";
+  git.signingKey = "~/.ssh/endeavourGit.pub";
   # cowsay.enable = lib.mkForce true;
 
   home.username = username;
