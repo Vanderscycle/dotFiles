@@ -14,8 +14,8 @@
     };
   };
 
+  imports = [ inputs.spicetify-nix.homeManagerModules.default ];
   config = lib.mkIf config.spotify.enable {
-    imports = [ inputs.spicetify-nix.homeManagerModules.default ];
     nixpkgs.config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [

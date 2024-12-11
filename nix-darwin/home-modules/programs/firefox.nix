@@ -1,7 +1,8 @@
 {
   pkgs,
   inputs,
-  system,
+  system ? builtins.currentSystem,
+  username,
   lib,
   config,
   ...
@@ -18,8 +19,9 @@
   config = lib.mkIf config.firefox.enable {
     programs.firefox = {
       enable = true;
-      profiles.henri = {
+      profiles.${username} = {
 
+        search.default = "DuckDuckGo";
         search.engines = {
           "Nix Packages" = {
             urls = [

@@ -11,17 +11,11 @@
 
 {
   imports = [
-    #
     ../../home-modules/programs
     # languages
-    ../../home-modules/languages/nix.nix
-    ../../home-modules/languages/python.nix
-    ../../home-modules/languages/jsts.nix
-    ../../home-modules/languages/bash.nix
-    ../../home-modules/languages/go.nix
-    ../../home-modules/languages/latex.nix
+    ../../home-modules/languages
     # services
-    ../../home-modules/services/fcitx.nix
+    ../../home-modules/services/fcitx.nix # fix not working
     ../../home-modules/services/ssh.nix
     ../../home-modules/services/dunst.nix
     ../../home-modules/services/gnome.nix
@@ -31,6 +25,15 @@
     ../../home-modules/status-bars/waybar
   ];
 
+  # languages
+  go.lsp.enable = true;
+  python.lsp.enable = true;
+  jsts.lsp.enable = true;
+  latex.lsp.enable = true;
+  yaml.lsp.enable = true;
+  json.lsp.enable = true;
+
+  # programs
   signal.enable = true;
   zathura.enable = true;
   nh.flakeLocation = "/home/${username}/Documents/dotFiles/nix-darwin";
