@@ -6,8 +6,13 @@
 }:
 {
   options = {
-    kitty.enable = lib.mkEnableOption "enables kitty shell";
+    kitty.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables kitty shell";
+      default = true;
+    };
   };
+
   config = lib.mkIf config.kitty.enable {
     # C-r history
     # C-l clear

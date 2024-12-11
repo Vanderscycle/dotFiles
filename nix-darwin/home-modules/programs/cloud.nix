@@ -6,8 +6,16 @@
 }:
 {
   options = {
-    awscli.enable = lib.mkEnableOption "enables aws cli v2";
-    linode.enable = lib.mkEnableOption "enables linode cli";
+    awscli.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables aws cli v2";
+      default = false;
+    };
+    linode.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables linode cli";
+      default = false;
+    };
   };
 
   config = {

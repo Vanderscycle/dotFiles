@@ -5,10 +5,14 @@
   ...
 }:
 {
-
   options = {
-    fish.enable = lib.mkEnableOption "enables fish shell config";
+    fish.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables fish shell";
+      default = true;
+    };
   };
+
   config = lib.mkIf config.fish.enable {
     home = {
       sessionVariables = { };

@@ -7,7 +7,11 @@
 {
 
   options = {
-    btop.enable = lib.mkEnableOption "enables btop";
+    btop.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables btop";
+      default = true;
+    };
   };
   config = lib.mkIf config.btop.enable {
     programs.btop = {

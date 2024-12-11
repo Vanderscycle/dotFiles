@@ -6,7 +6,11 @@
 }:
 {
   options = {
-    cowsay.enable = lib.mkEnableOption "enables cowsay";
+    cowsay.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "moo moo";
+      default = false;
+    };
   };
 
   config = lib.mkIf config.cowsay.enable {

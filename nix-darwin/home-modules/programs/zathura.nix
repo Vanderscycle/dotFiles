@@ -1,6 +1,20 @@
-{ pkgs, ... }:
-
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  options = {
+    zathura.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables zathura pdf viewer";
+      default = false;
+    };
+  };
+
+  config = lib.mkIf config.zathura.enable {
+
   programs = {
     zathura = {
       enable = true;

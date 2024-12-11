@@ -7,7 +7,11 @@
 {
 
   options = {
-    discord.enable = lib.mkEnableOption "enables discord";
+    discord.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "enables discord";
+      default = false;
+    };
   };
 
   # let

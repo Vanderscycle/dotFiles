@@ -6,17 +6,17 @@
 }:
 {
   options = {
-    microcontrollers.enable = lib.mkOption {
+    signal.enable = lib.mkOption {
       type = lib.types.bool;
-      description = "Enables work with rpi chips";
+      description = "Enables ghost communication";
       default = false;
     };
   };
 
-  config = lib.mkIf config.microcontrollers.enable {
+  config = lib.mkIf config.signal.enable {
     home = {
       packages = with pkgs; [
-        rpi-imager
+        signal-desktop
       ];
     };
   };

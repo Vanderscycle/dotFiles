@@ -6,8 +6,13 @@
 }:
 {
   options = {
-    kubernetes.enable = lib.mkEnableOption "enables kubernetes";
+    kubernetes.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables kubernetes";
+      default = false;
+    };
   };
+
   config = lib.mkIf config.kubernetes.enable {
     home = {
       packages = with pkgs; [

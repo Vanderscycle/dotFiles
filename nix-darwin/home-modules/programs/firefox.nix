@@ -8,7 +8,11 @@
 }:
 {
   options = {
-    firefox.enable = lib.mkEnableOption "enables firefox";
+    firefox.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables firefox";
+      default = true;
+    };
   };
 
   config = lib.mkIf config.firefox.enable {

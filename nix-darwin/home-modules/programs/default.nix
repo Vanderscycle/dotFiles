@@ -5,31 +5,32 @@
     ./btop.nix
     ./cloud.nix
     ./cowsay.nix
-    #TODO: devops.nix
+    ./devops.nix
     ./discord.nix
     ./firefox.nix
-    ./fish.nix
+    ./fish.nix # TODO: add an option to pass to shellInit
     ./fuzzel.nix
     ./fzf.nix
-    ./git.nix # TODO: add an option
+    ./git.nix
     ./k9s.nix
+    ./keychain.nix
     ./kitty.nix
     ./kubernetes.nix
     ./lazygit.nix
-    # TODO: keychain.nix
+    ./libreoffice.nix
+    ./microcontrollers.nix
+    ./modern_unix.nix
+    ./multimedia.nix
+    ./nh.nix
+    ./nnn.nix # TODO: add more options e.g. bookmarks
+    ./nushell.nix # TODO: add more options for shell init once you learn more about it
+    ./plastic_printer.nix
+    ./signal.nix
+    ./spacemacs.nix
+    ./spotify.nix
+    ./starship.nix
+    ./vim.nix
+    ./zathura.nix
+    ./zsh.nix # TODO: add an option like shellinit
   ];
-
-  # TODO: refactor above like ./git.nix
-  kitty.enable = lib.mkDefault true;
-  kubernetes.enable = lib.mkDefault false;
-  fzf.enable = lib.mkDefault true;
-  fuzzel.enable = lib.mkDefault false;
-  fish.enable = lib.mkDefault false;
-  discord.enable = lib.mkDefault false;
-  firefox.enable = lib.mkDefault true;
-  bat.enable = lib.mkDefault true;
-  btop.enable = lib.mkDefault true;
-  awscli.enable = lib.mkDefault false;
-  linode.enable = lib.mkDefault false;
-  cowsay.enable = lib.mkDefault false;
 }
