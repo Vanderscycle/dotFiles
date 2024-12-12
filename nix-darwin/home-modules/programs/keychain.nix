@@ -27,6 +27,7 @@
         config.keychain.keys
         # "/users/henri.vandersleyen/.ssh/knak"
       ];
+      # make it x86_64-linux compliant too
     };
   };
 }

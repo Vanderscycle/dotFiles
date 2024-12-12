@@ -15,16 +15,19 @@
     # languages
     ../../home-modules/languages
     # services
-    ../../home-modules/services/fcitx.nix # fix not working
-    ../../home-modules/services/ssh.nix
-    ../../home-modules/services/dunst.nix
-    ../../home-modules/services/gnome.nix
+    ../../home-modules/services
     # wm
     ../../home-modules/window-managers/hyprland
     # bar
     ../../home-modules/status-bars/waybar
   ];
 
+  # services
+  dunst.enable = true;
+  fcitx.enable = true; # chinese fonts are super pixels
+  gnome.enable = true;
+  ssh.enable = true;
+  # ssh.authorizedSshKeys = /home/henri/.ssh/endeavourGit; # TODO: move to nix-modules
   # languages
   go.lsp.enable = true;
   python.lsp.enable = true;
