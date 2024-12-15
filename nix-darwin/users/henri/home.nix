@@ -37,6 +37,8 @@
   json.lsp.enable = true;
 
   # programs
+
+  thunar.enable = true;
   signal.enable = true;
   zathura.enable = true;
   nh.flakeLocation = "/home/${username}/Documents/dotFiles/nix-darwin";

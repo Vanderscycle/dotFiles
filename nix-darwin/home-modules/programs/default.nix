@@ -29,6 +29,7 @@
     ./spacemacs.nix
     ./spotify.nix
     ./starship.nix
+    ./thunar.nix
     ./vim.nix
     ./zathura.nix
     ./zsh.nix # TODO: add an option like shellinit

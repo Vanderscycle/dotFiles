@@ -11,16 +11,19 @@
     hosts.nixosModule
     ../../hosts
     # programs
-    ../../nix-modules/programs/gaming.nix
-    ../../nix-modules/programs/thunar.nix
+    ../../nix-modules/programs
     # services
+    ../../nix-modules/services
     ../../nix-modules/services/sound.nix
-    ../../nix-modules/services/transmission.nix
-    ../../nix-modules/services/docker.nix
     ../../nix-modules/services/internationalisation.nix
     # local
     ./sops.nix
   ];
+  docker.enable = true;
+  transmission.enable = true;
+  gaming.enable = true;
+  yubico.enable = true;
+  yubico.keyID = "24978052"; # TODO: add in nix-sops
   nix.settings.experimental-features = "nix-command flakes";
   # Optimize storage and automatic scheduled GC running
   # If you want to run GC manually, use commands:

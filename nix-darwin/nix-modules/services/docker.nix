@@ -1,16 +1,30 @@
-{ pkgs, ... }:
-
 {
-  environment.systemPackages = with pkgs; [
-    docker
-  ];
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  options = {
+    docker.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "enables docker";
+      default = false;
+    };
+  };
 
-  virtualisation = {
-    docker = {
-      enable = true;
-      rootless = {
-        setSocketVariable = true;
+  config = lib.mkIf config.docker.enable {
+    environment.systemPackages = with pkgs; [
+      docker
+    ];
+
+    virtualisation = {
+      docker = {
         enable = true;
+        rootless = {
+          setSocketVariable = true;
+          enable = true;
+        };
       };
     };
   };
