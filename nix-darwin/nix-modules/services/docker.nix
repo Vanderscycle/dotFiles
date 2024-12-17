@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  username,
   ...
 }:
 {
@@ -14,6 +15,12 @@
   };
 
   config = lib.mkIf config.docker.enable {
+
+    users.users.${username} = {
+      extraGroups = [
+        "docker"
+      ];
+    };
     environment.systemPackages = with pkgs; [
       docker
     ];

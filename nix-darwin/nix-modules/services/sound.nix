@@ -1,23 +1,40 @@
-{ pkgs, username, ... }:
 {
-  users.users.${username} = {
-    extraGroups = [ "audio" ];
+  pkgs,
+  lib,
+  config,
+  username,
+  ...
+}:
+{
+  options = {
+    audio.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "enables audio";
+      default = true;
+    };
   };
 
-  # Sound settings
-  # sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.support32Bit = true;
-  #environment.systemPackages = with pkgs; [ pulseaudio ];
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
+  config = lib.mkIf config.audio.enable {
+    users.users.${username} = {
+      extraGroups = [ "audio" ];
+    };
+
+    # Sound settings
+    # sound.enable = true;
+    hardware.pulseaudio = {
+      enable = false;
       support32Bit = true;
     };
-    pulse.enable = true;
-    wireplumber = {
+    services.pipewire = {
       enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+      wireplumber = {
+        enable = true;
+      };
     };
   };
 }

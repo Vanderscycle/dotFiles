@@ -1,8 +1,0 @@
-* Editors
-
-** Vim
-
-Make use of Nixvim to control neovim version
-[[https://nix-community.github.io/nixvim/user-guide/install.html][Installation - nixvim docs]]
-
-** Emacs (SpaceMacs)

@@ -14,11 +14,11 @@
     ../../nix-modules/programs
     # services
     ../../nix-modules/services
-    ../../nix-modules/services/sound.nix
-    ../../nix-modules/services/internationalisation.nix
     # local
     ./sops.nix
   ];
+
+  internationalisation.enable = true;
   docker.enable = true;
   transmission.enable = true;
   gaming.enable = true;
@@ -43,25 +43,12 @@
 
   programs.fish.enable = true;
 
-  networking = {
-    networkmanager.enable = true;
-    hostName = "${hostname}"; # because we use nh os switch ensure the flakes +
-
-    stevenBlackHosts = {
-      enable = true;
-      blockFakenews = true;
-      blockGambling = true;
-    };
-  };
   users.users.${username} = {
     home = "/home/henri";
     shell = pkgs.fish;
     isNormalUser = true;
     extraGroups = [
-      "networkmanager"
       "wheel"
-      "docker"
-      "audio"
     ];
   };
 
@@ -76,12 +63,8 @@
   };
 
   home-manager.backupFileExtension = "backup";
-
-  # nix.configureBuildUsers = true;
-  # nix.useDaemon = true;
-  # services.nix-daemon.enable = true;
-
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
+
   # fonts.enableFontDir = true;
   fonts.packages = with pkgs; [
     jetbrains-mono

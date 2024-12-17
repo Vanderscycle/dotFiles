@@ -23,7 +23,7 @@
   ];
 
   # services
-  dunst.enable = true;
+  dunst.enable = lib.mkForce false;
   fcitx.enable = true; # chinese fonts are super pixels
   gnome.enable = true;
   ssh.enable = true;
@@ -37,7 +37,7 @@
   json.lsp.enable = true;
 
   # programs
-
+  plastic_printer.enable = true;
   thunar.enable = true;
   signal.enable = true;
   zathura.enable = true;

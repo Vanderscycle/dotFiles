@@ -1,7 +1,0 @@
-** Orgarnization
-*** hosts 
-hardware specific
-*** Modules
-Combined capabilities between any configuration
-*** users
-Home-manager further declarative configuration

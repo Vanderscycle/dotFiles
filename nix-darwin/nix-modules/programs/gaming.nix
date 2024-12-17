@@ -27,6 +27,7 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
     environment.systemPackages = with pkgs; [
+      starsector
       heroic # gog
       gamescope
       augustus # caesar 3 mod
