@@ -18,6 +18,7 @@
   ];
 
   firefox.enable = false;
+  spotify.enable = false;
   # Makes sense for user specific applications that shouldn't be available system-wide
   home = {
     username = username;
