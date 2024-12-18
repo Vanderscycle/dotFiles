@@ -16,7 +16,7 @@
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       hosts,
@@ -26,7 +26,12 @@
     {
       nixosConfigurations = {
         pve1 = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
+          specialArgs = {
+            hostname = "pve1";
+            username = "proxmox";
+            system = "x86_64-linux";
+            inherit inputs;
+          } // inputs;
           modules = [
 
             proxmox-nixos.nixosModules.proxmox-ve
@@ -51,7 +56,7 @@
                 };
 
                 nixpkgs.overlays = [
-                  proxmox-nixos.overlays.${system}
+                  proxmox-nixos.overlays."x86_64-linux"
                 ];
 
                 boot.loader = {
