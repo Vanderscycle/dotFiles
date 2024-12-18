@@ -19,6 +19,7 @@
     # languages
     ../../home-modules/languages
     # services
+    ../../home-modules/services
   ];
 
   # Makes sense for user specific applications that shouldn't be available system-wide
@@ -37,6 +38,6 @@
   programs.home-manager.enable = true;
 
   # theme
-  # catppuccin.flavor = "mocha";
-  # catppuccin.enable = true;
+  catppuccin.flavor = "mocha";
+  catppuccin.enable = true;
 }

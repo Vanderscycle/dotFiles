@@ -64,7 +64,6 @@
               {
                 imports = [
                   ../../users/proxmox/configuration.nix
-                  ../../users/proxmox/home.nix
                   ../../hosts
                 ];
 
