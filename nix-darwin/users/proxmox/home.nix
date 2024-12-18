@@ -5,20 +5,23 @@
   username,
   pkgs,
   lib,
+  catppuccin,
   ...
 }:
 
 {
   imports = [
-    ../../home-modules/programs
+    ../../home-modules/programs/bat.nix
+    ../../home-modules/programs/btop.nix
+    ../../home-modules/programs/modern_unix.nix
+    ../../home-modules/programs/nnn.nix
+    ../../home-modules/programs/fish.nix
     # languages
     ../../home-modules/languages
     # services
     ../../home-modules/services
   ];
 
-  firefox.enable = false;
-  spotify.enable = false;
   # Makes sense for user specific applications that shouldn't be available system-wide
   home = {
     username = username;

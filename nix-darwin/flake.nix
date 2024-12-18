@@ -93,7 +93,7 @@
               };
             }
           ];
-        };
+        }; # Henris-MacBook-Pro
       };
 
       nixosConfigurations = {
@@ -125,13 +125,6 @@
                 ];
               };
             }
-            # local
-            # ./.
-            # ./modules/gaming
-            # ./modules/programs/transmission
-            # ./modules/status-bars/waybar
-            # ./modules/window-managers/hyprland
-            # # own scripts
           ];
         }; # desktop
       };
