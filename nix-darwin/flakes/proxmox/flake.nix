@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    catppuccin.url = "github:catppuccin/nix";
 
     proxmox-nixos = {
       url = "github:SaumonNet/proxmox-nixos";
@@ -27,6 +28,7 @@
       hosts,
       proxmox-nixos,
       home-manager,
+      catppuccin,
       ...
     }:
     {
@@ -39,19 +41,45 @@
             inherit inputs;
           } // inputs;
           modules = [
-
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                username = "proxmox";
+                hostname = "pve1";
+                system = "x86_64-linux";
+              };
+              home-manager.users."proxmox" = {
+                imports = [
+                  catppuccin.homeManagerModules.catppuccin
+                  ./users/henri/home.nix
+                ];
+              };
+            }
             proxmox-nixos.nixosModules.proxmox-ve
             (
               { pkgs, lib, ... }:
               {
                 imports = [
-                  ../../users/proxmox
+                  ../../users/proxmox/configuration.nix
+                  ../../users/proxmox/home.nix
                   ../../hosts
                 ];
 
                 services.proxmox-ve = {
                   enable = true;
                   ipAddress = "192.168.1.168";
+                };
+
+                networking.interfaces.enp10s0 = {
+                  ipv4.addresses = [
+                    {
+                      address = "191.168.1.168";
+                      netmask = "255.255.255.0";
+                    }
+                  ];
                 };
 
                 users.users.root = {
@@ -66,6 +94,7 @@
                 ];
 
                 services.openssh.enable = true;
+
               }
             )
           ];
