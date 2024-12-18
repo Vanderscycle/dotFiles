@@ -38,6 +38,6 @@
   programs.home-manager.enable = true;
 
   # theme
-  catppuccin.flavor = "mocha";
-  catppuccin.enable = true;
+  # catppuccin.flavor = "mocha";
+  # catppuccin.enable = true;
 }
