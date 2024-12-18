@@ -6,7 +6,7 @@
 
     proxmox-nixos = {
       url = "github:SaumonNet/proxmox-nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs"; # existing override
     };
 
     hosts = {
@@ -39,8 +39,8 @@
               { pkgs, lib, ... }:
               {
                 imports = [
-                  ./hardware-configuration.nix
                   ../../users/proxmox
+                  ../../hosts
                 ];
 
                 services.proxmox-ve = {
@@ -59,10 +59,6 @@
                   proxmox-nixos.overlays."x86_64-linux"
                 ];
 
-                boot.loader = {
-                  systemd-boot.enable = true;
-                  efi.canTouchEfiVariables = true;
-                };
                 services.openssh.enable = true;
               }
             )
