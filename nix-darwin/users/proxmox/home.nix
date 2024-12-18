@@ -19,7 +19,6 @@
     # languages
     ../../home-modules/languages
     # services
-    ../../home-modules/services
   ];
 
   # Makes sense for user specific applications that shouldn't be available system-wide
