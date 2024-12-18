@@ -76,7 +76,7 @@
                   ipv4.addresses = [
                     {
                       address = "191.168.1.168";
-                      netmask = "255.255.255.0";
+                      prefixLength = 24;
                     }
                   ];
                 };
