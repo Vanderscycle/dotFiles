@@ -54,7 +54,7 @@
               home-manager.users."proxmox" = {
                 imports = [
                   catppuccin.homeManagerModules.catppuccin
-                  ./users/henri/home.nix
+                  ../../users/proxmox/home.nix
                 ];
               };
             }
