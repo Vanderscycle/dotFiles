@@ -1,10 +1,12 @@
 {
   pkgs,
   inputs,
+  hosts,
   ...
 }:
 {
   imports = [
+    hosts.nixosModule
     # services
     ../../nix-modules/services/networking.nix
   ];
