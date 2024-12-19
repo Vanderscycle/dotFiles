@@ -37,6 +37,7 @@
   json.lsp.enable = true;
 
   # programs
+  flameshot.enable = true;
   plastic_printer.enable = true;
   thunar.enable = true;
   signal.enable = true;

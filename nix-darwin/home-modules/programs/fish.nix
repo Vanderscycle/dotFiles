@@ -35,10 +35,7 @@
         end
 
       '';
-      interactiveShellInit = ''
-        keychain --eval --agents ssh knak
-        keychain --eval --agents ssh endeavourGit
-      '';
+      interactiveShellInit = '''';
       functions = {
         clear-trash = ''
           rm -rf ~/.local/share/Trash/*

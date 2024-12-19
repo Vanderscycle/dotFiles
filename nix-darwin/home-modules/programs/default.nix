@@ -9,6 +9,7 @@
     ./discord.nix
     ./firefox.nix
     ./fish.nix # TODO: add an option to pass to shellInit
+    ./flameshot.nix
     ./fuzzel.nix
     ./fzf.nix
     ./git.nix

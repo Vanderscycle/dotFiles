@@ -25,11 +25,14 @@
   yubico.enable = true;
   yubico.keyID = "24978052"; # TODO: add in nix-sops
 
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+  nix = {
     optimise.automatic = true;
+    settings = {
+      experimental-features = "nix-command flakes";
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    };
+
     gc = {
       automatic = true;
       # interval = "weekly";
@@ -71,6 +74,7 @@
     NIXOS_OZONE_WL = "1";
     GDK_BACKEND = "wayland";
     WLR_NO_HARDWARE_CURSORS = "1";
+    USE_WAYLAND_GRIM = "1";
     # XDG_CONFIG_HOME = "/users/henri.vandersleyen"; # issue with nushell
   };
   programs.hyprland = {
