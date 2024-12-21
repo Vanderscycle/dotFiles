@@ -34,5 +34,6 @@
     ./vim.nix
     ./zathura.nix
     ./zsh.nix # TODO: add an option like shellinit
+    ./zulip.nix
   ];
 }

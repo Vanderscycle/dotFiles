@@ -41,6 +41,7 @@
   plastic_printer.enable = true;
   thunar.enable = true;
   signal.enable = true;
+  zulip.enable = true;
   zathura.enable = true;
   nh.flakeLocation = "/home/${username}/Documents/dotFiles/nix-darwin";
   microcontrollers.enable = true;
