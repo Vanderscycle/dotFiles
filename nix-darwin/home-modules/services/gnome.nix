@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 {
@@ -14,6 +15,9 @@
   };
 
   config = lib.mkIf config.gnome.enable {
+    xdg.dataFile."icons/rose-pine-hyprcursor".source = "${
+      inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+    }/share/icons/rose-pine-hyprcursor";
     home = {
       packages = with pkgs; [
         lxappearance
@@ -26,7 +30,7 @@
     gtk = {
       enable = true;
       iconTheme = {
-        name = "rose-pine-cursor";
+        name = "rose-pine-hyprcursor";
         package = pkgs.rose-pine-cursor;
       };
       gtk3 = {
@@ -43,6 +47,7 @@
         package = pkgs.adwaita-qt;
         name = "adwaita-dark";
       };
+
     };
   };
 }
