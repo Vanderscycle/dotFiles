@@ -1,7 +1,12 @@
 # home.nix
 # home-manager switch
 
-{ config, pkgs, ... }:
+{
+  config,
+  username,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -34,6 +39,25 @@
   home.username = "henri.vandersleyen";
   home.homeDirectory = "/Users/henri.vandersleyen";
   home.stateVersion = "23.05"; # Please read the comment before changing.
+  # languages
+  python.lsp.enable = true;
+  jsts.lsp.enable = true;
+
+  fish.enable = true;
+  zsh.enable = true;
+  nh.flakeLocation = "/home/${username}/Documents/dotFiles/nix-darwin";
+  keychain.enable = true;
+  keychain.keys = "/home/henri/.ssh/knak";
+
+  git.userEmail = "henri-vandersleyen@protonmail.com";
+  git.userName = "vanderscycle";
+  git.signingKey = "~/.ssh/knak.pub";
+
+  home = {
+    username = "henri.vandersleyen";
+    homeDirectory = "/Users/henri.vandersleyen";
+    stateVersion = "23.05"; # Please read the comment before changing.
+  };
 
   # Makes sense for user specific applications that shouldn't be available system-wide
   home.packages = [ ];
@@ -41,7 +65,6 @@
   home.file = { };
 
   home.sessionVariables = {
-
     # for nh
     FLAKE = "~/Documents/dotFiles/nix-darwin";
   };
@@ -51,7 +74,6 @@
     "$HOME/.nix-profile/bin"
   ];
   programs.home-manager.enable = true;
-  # shells
 
   # theme
   catppuccin.flavor = "mocha";
