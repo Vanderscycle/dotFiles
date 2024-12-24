@@ -72,6 +72,7 @@
         Henris-MacBook-Pro = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
+            username = "henri.vandersleyen";
             inherit inputs;
           };
           modules = [
@@ -81,6 +82,8 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
+                username = "henri.vandersleyen";
+                system = "aarch64-darwin";
                 inherit inputs;
               };
               home-manager.users."henri.vandersleyen" = {
