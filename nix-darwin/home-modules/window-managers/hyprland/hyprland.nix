@@ -13,18 +13,43 @@
         env = HYPRCURSOR_SIZE,32
       '';
       settings = {
+        ###################
+        ### MY PROGRAMS ###
+        ###################
+
+        # See https://wiki.hyprland.org/Configuring/Keywords/
+
+        # Set programs that you use
+
+        "$mainMod" = "SUPER";
+        "$terminal" = "kitty";
+        "$filemanager" = "thunar";
+        "$menu" = "fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff";
+        "$emacs" = "emacsclient -c -a 'emacs' "; # The space at the end is IMPORTANT!
+        "$reset" = "hyprctl dispatch submap reset &&"; # use a variable to keep things more readable
+
         input = {
           kb_layout = "us";
-          # focus change on cursor move
-          follow_mouse = 0;
+
+          follow_mouse = 0; # focus change on cursor move
           accel_profile = "flat";
         };
+
+        #####################
+        ### LOOK AND FEEL ###
+        #####################
+
+        # Refer to https://wiki.hyprland.org/Configuring/Variables/
+
+        # https://wiki.hyprland.org/Configuring/Variables/#general
+
         general = {
           gaps_in = 7;
           gaps_out = 20;
           border_size = 2;
           layout = "dwindle";
         };
+        # https://wiki.hyprland.org/Configuring/Variables/#decoration
         decoration = {
           blur = {
             enabled = true;
@@ -57,8 +82,12 @@
         gestures = {
           workspace_swipe = "off";
         };
-        "$mainMod" = "SUPER";
         # https://wiki.hyprland.org/Configuring/Keywords/
+
+        ###################
+        ### KEYBINDINGS ###
+        ###################
+
         bind =
           let
             myScript = pkgs.writeShellScriptBin "hallo" ''
@@ -70,7 +99,7 @@
             "$mainMod, l, movefocus, r"
             "$mainMod, k, movefocus, u"
             "$mainMod, j, movefocus, d"
-            # move window
+            # Move window around the stack with SUPER + ALT + h/j/k/l
             "$mainMod ALT, H, movewindow, l"
             "$mainMod ALT, L, movewindow, r"
             "$mainMod ALT, K, movewindow, u"
@@ -81,11 +110,11 @@
             "$mainMod SHIFT, k, resizeactive, 0 -40"
             "$mainMod SHIFT, j, resizeactive, 0 40"
             # launch program menu
-            "SHIFTSUPER, P, exec, fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff"
+            "SHIFTSUPER, P, exec, $menu"
             "SHIFTSUPER, O, exec, flameshot gui --clipboard"
             # dedicated programs
-            "$mainMod SHIFT, T, exec, thunar"
-            "$mainMod, Q, exec, kitty"
+            "$mainMod SHIFT, T, exec, $filemanager"
+            "$mainMod, Q, exec, $terminal"
             # scripts
             # "$mainMod, f, exec, ${lib.getExe myScript}"
             # volume control
@@ -95,10 +124,9 @@
             "$mainMod SHIFT, F, fullscreen,"
             "$mainMod, D, pseudo"
             "$mainMod, S, togglesplit"
-            #"$mainMod SHIFT, E, exec, pkill fcitx5 -9;sleep 1;fcitx5 -d --replace; sleep 1;fcitx5-remote -r"
             "$mainMod, C, killactive,"
             "$mainMod, V, togglefloating,"
-            # Workplace movement
+            # Switch workspaces with mainMod + [0-9]
             "$mainMod, 1, workspace, 1"
             "$mainMod, 2, workspace, 2"
             "$mainMod, 3, workspace, 3"
@@ -109,7 +137,7 @@
             "$mainMod, 8, workspace, 8"
             "$mainMod, 9, workspace, 9"
             "$mainMod, 0, workspace, 10"
-            # Workplace buffer changes
+            # Move active window to a workspace with mainMod + SHIFT + [0-9]
             "$mainMod SHIFT, 1, movetoworkspace, 1"
             "$mainMod SHIFT, 2, movetoworkspace, 2"
             "$mainMod SHIFT, 3, movetoworkspace, 3"
@@ -122,8 +150,9 @@
             "$mainMod SHIFT, 0, movetoworkspace, 10"
           ];
         bindm = [
-          # "$mainMod, L, movewindow"
-          # "$mainMod, K, resizewindow"
+          # Move/resize windows with mainMod + LMB/RMB and dragging
+          "$mainMod, mouse:272, movewindow"
+          "$mainMod, mouse:273, resizewindow"
         ];
         bindl = [
           # media controls
@@ -164,15 +193,22 @@
           "noinitialfocus,class:^(xwaylandvideobridge)$"
           "float, class:^(org.fcitx5.)$"
         ];
+        #################
+        ### AUTOSTART ###
+        #################
+
+        # Autostart necessary processes (like notifications daemons, status bars, etc.)
+        # Or execute your favorite apps at launch like this:
+
         exec-once = [
-          "waybar"
+          "waybar & hyprpaper"
+          "/etc/profiles/per-user/henri/bin/emacs --daemon &"
           "swaync"
-          # "dunst"
           "discord --enable-wayland-ime"
           "spotify"
           "firefox"
           "kitty"
-          "flameshot"
+          "flameshot &"
           # "emacs" # TODO: make it spawn out of a shell
         ];
       };

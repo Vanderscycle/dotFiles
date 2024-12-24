@@ -20,8 +20,11 @@
 
   internationalisation.enable = true;
   docker.enable = true;
-  transmission.enable = true;
-  gaming.enable = true;
+  transmission.enable = false;
+  gaming = {
+    enable = true;
+    mangohud.enable = true;
+  };
   yubico.enable = true;
   yubico.keyID = "24978052"; # TODO: add in nix-sops
 

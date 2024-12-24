@@ -13,7 +13,7 @@
     ];
   };
   fileSystems."/mnt/rice" = {
-    device = "//192.168.1.138/rice";
+    device = "//192.168.1.224/rice";
     fsType = "cifs";
     options = [
       "credentials=/root/smbcreds_fam"

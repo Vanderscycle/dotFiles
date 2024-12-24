@@ -24,6 +24,7 @@
         nh
         nvd
         nix-output-monitor
+        nixos-anywhere
       ];
       sessionVariables = {
         FLAKE = config.nh.flakeLocation;
