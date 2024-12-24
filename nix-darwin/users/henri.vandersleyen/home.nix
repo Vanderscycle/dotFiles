@@ -36,9 +36,6 @@
     # ./home-modules/services/appleTouchId.nix
 
   ];
-  home.username = "henri.vandersleyen";
-  home.homeDirectory = "/Users/henri.vandersleyen";
-  home.stateVersion = "23.05"; # Please read the comment before changing.
   # languages
   python.lsp.enable = true;
   jsts.lsp.enable = true;
@@ -65,8 +62,6 @@
   home.file = { };
 
   home.sessionVariables = {
-    # for nh
-    FLAKE = "~/Documents/dotFiles/nix-darwin";
   };
 
   home.sessionPath = [
