@@ -64,6 +64,9 @@
       "iterm2"
       "nikitabobko/tap/aerospace"
     ];
-    brews = [ ];
+    brews = [
+      "koekeishiya/formulae/yabai"
+      "koekeishiya/formulae/skhd"
+    ];
   };
 }
