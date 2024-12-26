@@ -27,22 +27,35 @@
     ../../home-modules/programs/devops.nix
     ../../home-modules/programs/spotify.nix
     ../../home-modules/programs/nh.nix
+
     # languages
     ../../home-modules/languages/nix.nix
     ../../home-modules/languages/python.nix
     ../../home-modules/languages/jsts.nix
     ../../home-modules/languages/bash.nix
+
     # services
     # ./home-modules/services/appleTouchId.nix
 
+    # Window-manager
+    ../../home-modules/window-managers/aerospace
+
+    # starus-bars
+    # ../../home-modules/status-bars/sketchybar
   ];
+  # wm
+  wm.aerospace = {
+    enable = true;
+    configPath = Users/${username}/Documents/dotfiles/.config/aerospace;
+  };
   # languages
   python.lsp.enable = true;
   jsts.lsp.enable = true;
 
+  # programs
   fish.enable = true;
   zsh.enable = true;
-  nh.flakeLocation = "/home/${username}/Documents/dotFiles/nix-darwin";
+  nh.flakeLocation = "/Users/${username}/Documents/dotFiles/nix-darwin";
   keychain.enable = true;
   keychain.keys = "/home/henri/.ssh/knak";
 
