@@ -14,13 +14,19 @@
     ../../nix-modules/programs
     # services
     ../../nix-modules/services
+    # systemd/cron
+    ../../nix-modules/cron
     # local
     ./sops.nix
   ];
 
+  # cron
+  cron.downloadFolderOrganizer.enable = true;
+  # services
   internationalisation.enable = true;
   docker.enable = true;
   transmission.enable = false;
+  # programming
   gaming = {
     enable = true;
     mangohud.enable = true;

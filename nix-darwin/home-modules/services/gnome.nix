@@ -29,9 +29,13 @@
     # INFO used for lxappearance dark mode theme
     gtk = {
       enable = true;
-      iconTheme = {
+      cursorTheme = {
         name = "rose-pine-hyprcursor";
         package = pkgs.rose-pine-cursor;
+      };
+      font = {
+        name = "JetBrainsMono";
+        package = pkgs.nerd-fonts.jetbrains-mono;
       };
       gtk3 = {
         extraConfig = {

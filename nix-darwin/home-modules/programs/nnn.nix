@@ -31,11 +31,12 @@
         };
         bookmarks = {
           d = "~/Documents";
+          P = "~/Documents/pdfs";
+          k = "~/Documents/3d-printing";
           D = "~/Downloads";
-          # P = "/home/${username}/Programs";
-          # p = "/home/${username}/Pictures";
-          # c = "/home/${username}/Documents/dotFiles/nixos-flakes/";
-          # m = "/mnt/";
+          v = "~/Videos";
+          p = "~/Pictures";
+          m = "/mnt/";
         };
       };
     };

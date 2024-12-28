@@ -17,6 +17,7 @@
   };
 
   config = lib.mkIf config.firefox.enable {
+    imports = [ ./bookmarks.nix ];
     programs.firefox = {
       enable = true;
       profiles.${username} = {
@@ -45,54 +46,6 @@
           };
         };
         search.force = true;
-
-        bookmarks = [
-          {
-            name = "wikipedia";
-            tags = [ "wiki" ];
-            keyword = "wiki";
-            url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
-          }
-          {
-            name = "home-manager";
-            tags = [
-              "docs"
-              "nixos"
-            ];
-            keyword = "docs";
-            url = "https://nix-community.github.io/home-manager/options.xhtml";
-          }
-          {
-            name = "nix packages";
-            tags = [ "nixos" ];
-            keyword = "nixos";
-            url = "https://search.nixos.org/packages";
-          }
-          {
-            name = "GitHub";
-            tags = [ "coding" ];
-            keyword = "coding";
-            url = "https://github.com/Vanderscycle";
-          }
-          {
-            name = "yt-dreamsOfAutonomy";
-            tags = [
-              "yt"
-              "coding"
-            ];
-            keyword = "yt";
-            url = "https://www.youtube.com/@dreamsofautonomy";
-          }
-          {
-            name = "yt-dreamsOfAutonomy";
-            tags = [
-              "yt"
-              "coding"
-            ];
-            keyword = "yt";
-            url = "https://www.youtube.com/@dreamsofautonomy";
-          }
-        ];
 
         settings = {
           "dom.security.https_only_mode" = true;
