@@ -61,7 +61,7 @@
   services.k3s = {
     enable = true;
     role = "server";
-    token = "superSecret";
+    token = config.sops.secrets."kubernetes/k3_token";
     # tokenFile = /var/lib/rancher/k3s/server/token;
     extraFlags = toString (
       [

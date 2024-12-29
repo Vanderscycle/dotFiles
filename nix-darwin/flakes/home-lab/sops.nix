@@ -21,6 +21,7 @@ in
   sops.age.keyFile = "/home/henri/.config/sops/age/keys.txt";
 
   # INFO: for values to be available throughout the config your must declare them
-  sops.secrets."yubico/u2f_keys" = {
+  sops.secrets."kubernetes/k3_token" = {
+    owner = "proxmox";
   };
 }

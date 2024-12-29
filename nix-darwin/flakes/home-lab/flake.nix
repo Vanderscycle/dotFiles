@@ -24,9 +24,10 @@
     }@inputs:
     let
       nodes = [
-        "node-1"
+        "node-0"
         "node-1"
         "node-2"
+        "node-3"
       ];
     in
     {
@@ -54,8 +55,8 @@
             modules = [
               # Modules
               disko.nixosModules.disko
-              ./hardware-configuration.nix
-              ./disko-config.nix
+              # ./hardware-configuration.nix
+              # ./disko-config.nix
               ./configuration.nix
             ];
           };

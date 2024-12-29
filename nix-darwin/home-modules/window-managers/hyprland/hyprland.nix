@@ -9,26 +9,26 @@
       enable = true; # allow home-manager to configure hyprland
       # https://github.com/nix-community/home-manager/issues/6062
       extraConfig = ''
-        env = HYPRCURSOR_THEME,rose-pine-hyprcursor
-        env = XCURSOR_THEME,rose-pine-hyprcursor
-        env = HYPRCURSOR_SIZE,32
+                env = HYPRCURSOR_THEME,rose-pine-hyprcursor
+                env = XCURSOR_THEME,rose-pine-hyprcursor
+                env = HYPRCURSOR_SIZE,32
 
-        # Emacs programs launched using the key chord SUPER+e followed by 'key'
-        bind = $mainMod, E, submap, emacs # will switch to a submap called 'emacs'
-        submap = emacs # will start a submap called "emacs"
-        # sets repeatable binds for resizing the active window
-        binde = , E, exec, $reset $emacs
-        binde = , A, exec, $reset $emacs --eval '(dired "~/Documents/dotFiles")'
-        binde = , B, exec, $reset $emacs --eval '(ibuffer)'
-        binde = , D, exec, $reset $emacs --eval '(dired nil)'
-        binde = , I, exec, $reset $emacs --eval '(erc)'
-        binde = , S, exec, $reset $emacs --eval '(eshell)'
-        binde = , V, exec, $reset $emacs --eval '(vterm)'
-        binde = , F4, exec, $reset killall emacs
-        # use reset to go back to the global submap
-        bind = , escape, submap, reset
-        # will reset the submap, which will return to the global submap
-        submap = reset
+                # Emacs programs launched using the key chord SUPER+e followed by 'key'
+                bind = $mainMod, E, submap, emacs # will switch to a submap called 'emacs'
+                submap = emacs # will start a submap called "emacs"
+                # sets repeatable binds for resizing the active window
+                binde = , E, exec, $reset $emacs
+                binde = , D, exec, $reset $emacs --eval '(dired "~/Documents/dotFiles/nix-darwin")'
+        binde = , N, exec, $reset $emacs --eval '(find-file "~/Documents/zettelkasten/org-roam/20240828204250-knowlege_base.org")'
+                binde = , B, exec, $reset $emacs --eval '(ibuffer)'
+                binde = , H, exec, $reset $emacs --eval '(dired nil)'
+                binde = , S, exec, $reset $emacs --eval '(eshell)'
+                binde = , V, exec, $reset $emacs --eval '(vterm)'
+                binde = , F4, exec, $reset killall emacs
+                # use reset to go back to the global submap
+                bind = , escape, submap, reset
+                # will reset the submap, which will return to the global submap
+                submap = reset
 
       '';
       settings = {
