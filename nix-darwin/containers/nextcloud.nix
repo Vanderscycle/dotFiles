@@ -1,8 +1,25 @@
+{
+  pkgs,
+  inputs,
+  system ? builtins.currentSystem,
+  username,
+  lib,
+  config,
+  ...
+}:
 let
-  true_nas_smb = "/mnt/prox-share";
+  true_nas_smb = "/mnt/rice/docker";
   container_name = "nextcloud";
 in
 {
+  options = {
+    container.nextcloud.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables nextcloud container";
+      default = false;
+    };
+
+    config = lib.mkIf config.container.nextcloud.enable {
   virtualisation = {
     oci-containers = {
       backend = "docker";
@@ -20,6 +37,7 @@ in
           };
           ports = [ "8080:80" ];
         };
+      };
       };
     };
   };
