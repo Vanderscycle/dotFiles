@@ -31,8 +31,8 @@
     enable = true;
     mangohud.enable = true;
   };
-  yubico.enable = true;
-  yubico.keyID = "24978052"; # TODO: add in nix-sops
+  # yubico.enable = true;
+  # yubico.keyID = "24978052"; # TODO: add in nix-sops
 
   nix = {
     optimise.automatic = true;

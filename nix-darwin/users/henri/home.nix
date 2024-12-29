@@ -38,7 +38,7 @@
 
   # programs
   flameshot.enable = true;
-  plastic_printer.enable = true;
+  # plastic_printer.enable = true;
   thunar.enable = true;
   signal.enable = true;
   zulip.enable = true;
