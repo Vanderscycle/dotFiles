@@ -76,6 +76,15 @@
           keyword = "homelab";
           url = "https://community-scripts.github.io/ProxmoxVE/scripts";
         }
+        {
+          name = "docker hub";
+          tags = [
+            "docker"
+            "homelab"
+          ];
+          keyword = "docker";
+          url = "https://hub.docker.com/";
+        }
       ];
     };
   };
