@@ -23,8 +23,12 @@
   };
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "/dev/sda"; # Install GRUB to the MBR
+  boot.loader.efi.canTouchEfiVariables = false; # Disable EFI settings since you're using legacy boot.
 
   networking.hostName = meta.hostname; # Define your hostname.
   # Pick only one of the below networking options.

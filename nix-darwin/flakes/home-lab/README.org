@@ -16,5 +16,6 @@ Ensure the desire ssh key is present
 *** Install
 #+begin_src bash
   cd dotFiles/nix-darwin/flakes/home-lab/
-  sudo nixos-rebuild switch --flake ".#node-0"
+  cp /etc/nixos/hardware-configuration.nix .
+  sudo nixos-rebuild switch --flake ".#node-1"
 #+end_src
