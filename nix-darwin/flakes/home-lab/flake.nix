@@ -2,10 +2,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # disko = {
+    # url = "github:nix-community/disko";
+    # inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     sops-nix = {
@@ -47,6 +48,7 @@
           name = name;
           value = nixpkgs.lib.nixosSystem {
             specialArgs = {
+              inherit inputs;
               meta = {
                 hostname = name;
               };
@@ -54,10 +56,11 @@
             system = "x86_64-linux";
             modules = [
               # Modules
-              disko.nixosModules.disko
-              # ./hardware-configuration.nix
+              # disko.nixosModules.disko
               # ./disko-config.nix
+              ./hardware-configuration.nix
               ./configuration.nix
+              ./sops.nix
             ];
           };
         }) nodes

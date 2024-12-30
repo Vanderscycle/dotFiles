@@ -109,7 +109,6 @@
           } // inputs;
           modules = [
             ./users/henri/configuration.nix
-            ./users/henri/sops.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

@@ -61,7 +61,7 @@
   services.k3s = {
     enable = true;
     role = "server";
-    token = config.sops.secrets."kubernetes/k3_token";
+    token = config.sops.secrets."kubernetes/k3_token".path;
     # tokenFile = /var/lib/rancher/k3s/server/token;
     extraFlags = toString (
       [
@@ -72,15 +72,15 @@
         "--disable local-storage"
       ]
       ++ (
-        if meta.hostname == "homelab-0" then
+        if meta.hostname == "node-0" then
           [ ]
         else
           [
-            "--server https://homelab-0:6443"
+            "--server https://node-0:6443"
           ]
       )
     );
-    clusterInit = (meta.hostname == "homelab-0");
+    clusterInit = (meta.hostname == "node-0");
   };
 
   services.openiscsi = {
