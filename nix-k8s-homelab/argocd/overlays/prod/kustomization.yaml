@@ -38,6 +38,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: argocd/apps/servers/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: application-servers
@@ -45,6 +48,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: argocd/apps/websites/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: application-websites
@@ -52,6 +58,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: argocd/apps/secrets/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: application-secrets
@@ -59,6 +68,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: argocd/apps/support/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: application-support
@@ -66,6 +78,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: argocd/apps/monitoring/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: application-monitoring
@@ -73,6 +88,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: argocd/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: application-root

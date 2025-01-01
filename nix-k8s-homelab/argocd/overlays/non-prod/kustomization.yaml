@@ -6,14 +6,73 @@ namespace: argocd
 resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml # ArgoCD installation
   - ../../base
-  # - ../../projects
 
-# kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
-# patches:
-#   - patch: |-
-#       - op: replace
-#         path: /spec/source/targetRevision
-#         value: main
-#     target:
-#       kind: Application
-#       name: .*
+patchesStrategicMerge:
+  - |
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: argocd-cm
+    data:
+      kustomize.buildOptions: --enable-alpha-plugins --enable-helm --load-restrictor LoadRestrictionsNone
+
+patches:
+  # argocd
+  - patch: |-
+      - op: add
+        path: /data
+        value:
+          kustomize.buildOptions: --enable-alpha-plugins --enable-helm --load-restrictor LoadRestrictionsNone
+    target:
+      kind: ConfigMap
+      name: argocd-cm
+  - patch: |-
+      - op: replace
+        path: /spec/type
+        value: LoadBalancer
+    target:
+      kind: Service
+      name: argocd-server
+  # apps
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: application-servers
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: application-websites
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: application-secrets
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: application-support
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: application-monitoring
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: application-root
