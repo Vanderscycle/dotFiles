@@ -30,6 +30,17 @@
                 # will reset the submap, which will return to the global submap
                 submap = reset
 
+
+                bind = $mainMod, P, submap, emacs # will switch to a submap called 'emacs'
+                submap = emacs # will start a submap called "emacs"
+                # sets repeatable binds for resizing the active window
+                binde = , T, exec, $reset $filemanager
+                binde = , Q, exec, $reset $terminal
+                # use reset to go back to the global submap
+                bind = , escape, submap, reset
+                # will reset the submap, which will return to the global submap
+                submap = reset
+
       '';
       settings = {
         ###################
@@ -124,16 +135,13 @@
             "$mainMod ALT, K, movewindow, u"
             "$mainMod ALT, J, movewindow, d"
             # resize window
-            "$mainMod SHIFT, h, resizeactive, -40 0"
-            "$mainMod SHIFT, l, resizeactive, 40 0"
-            "$mainMod SHIFT, k, resizeactive, 0 -40"
-            "$mainMod SHIFT, j, resizeactive, 0 40"
+            "$mainMod SHIFT, h, resizeactive, -120 0"
+            "$mainMod SHIFT, l, resizeactive, 120 0"
+            "$mainMod SHIFT, k, resizeactive, 0 -120"
+            "$mainMod SHIFT, j, resizeactive, 0 120"
             # launch program menu
             "SHIFTSUPER, P, exec, $menu"
             "SHIFTSUPER, O, exec, flameshot gui --clipboard"
-            # dedicated programs
-            "$mainMod SHIFT, T, exec, $filemanager"
-            "$mainMod, Q, exec, $terminal"
             # scripts
             # "$mainMod, f, exec, ${lib.getExe myScript}"
             # volume control
