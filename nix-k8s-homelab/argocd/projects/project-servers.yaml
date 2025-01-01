@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: servers
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: A game server project
+  destinations:
+    - namespace: "*"
+      server: "*"
+    # - namespace: factorio-space
+    #   server: https://kubernetes.default.svc
+    # - namespace: factorio-vanilla
+    #   server: https://kubernetes.default.svc
+    # - namespace: kube-system
+    #   server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  sourceRepos:
+    - "git@github.com:vancycles-industries/infrastructure.git"

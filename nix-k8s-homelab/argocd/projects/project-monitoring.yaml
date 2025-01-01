@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: monitoring
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Infrastructure declarative config for monitoring
+  destinations:
+    - namespace: uptimekuma
+      server: https://kubernetes.default.svc
+    - namespace: datadog
+      server: https://kubernetes.default.svc
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
+  sourceRepos:
+    - "git@github.com:vancycles-industries/infrastructure.git"
+  sourceNamespaces:
+    - "uptimekuma"
+    - "datadog"
+    - "kube-system"

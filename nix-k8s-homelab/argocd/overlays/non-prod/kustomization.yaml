@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: argocd
+
+resources:
+  - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml # ArgoCD installation
+  - ../../base
+  # - ../../projects
+
+# kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+# patches:
+#   - patch: |-
+#       - op: replace
+#         path: /spec/source/targetRevision
+#         value: main
+#     target:
+#       kind: Application
+#       name: .*

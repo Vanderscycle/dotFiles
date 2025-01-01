@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  app.kubernetes.io/instance: application-of-applications
+
+namespace: argocd
+
+resources:
+  - application-root.yaml
+  # - application-monitoring.yaml
+  # - application-secrets.yaml
+  # - application-projects.yaml
+  # - application-support.yaml
+  # - application-websites.yaml
+  # - application-servers.yaml
+  - namespace.yaml
+  - argocd-repo.yaml
+
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/source/targetRevision
+        value: main
+    target:
+      kind: Application
+      name: .*

@@ -1,0 +1,55 @@
+.env
+secret.yaml
+*-kubeconfig.yaml
+
+charts/**/charts/
+# no you are not getting my secrets
+monitoring/**/charts/
+
+**/tls/*.pem
+**/tls/*.csr
+
+**/roles/geerlingguy.*
+
+*.log
+node_modules
+# nix flake
+**/result
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Exclude all .tfvars files, which might contain sensitive data, such as
+# password, private keys, and other secrets. These should not be part of version control
+*.tfvars
+*.tfvars.json
+
+# Ignore override files as they are usually used locally
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Ignore Terragrunt cache
+**/.terragrunt-cache/
+
+
+# Javascripts
+**/dist
+
+# other
+encryption.py
+**/*secrets.yml
+charts/support/cert-manager/base/secrets/secret.yaml
+charts/support/external-dns/base/secrets/secret.yaml

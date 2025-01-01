@@ -1,0 +1,14 @@
+## Default values for external-dns
+## This is a YAML-formatted file.
+## Declare variables to be passed into your templates.
+
+## Linode configuration to be set via arguments/env. variables
+##
+linode:
+  ## @param linode.apiToken When using the Linode provider, `LINODE_TOKEN` to set (optional)
+  ##
+  apiToken: ""
+  ## @param linode.secretName Use an existing secret with key "linode_api_token" defined.
+  ## This ignores linode.apiToken
+  ##
+  secretName: "external-dns-secret"
