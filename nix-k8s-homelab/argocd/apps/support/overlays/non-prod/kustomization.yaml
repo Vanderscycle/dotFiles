@@ -5,3 +5,33 @@ namespace: argocd
 
 resources:
   - ../../base
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/external-dns/overlays/non-prod
+    target:
+      kind: Application
+      name: external-dns
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/cert-manager/overlays/non-prod
+    target:
+      kind: Application
+      name: cert-manager
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/keel/overlays/non-prod
+    target:
+      kind: Application
+      name: keel
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: .*

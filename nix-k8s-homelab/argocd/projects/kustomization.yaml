@@ -7,6 +7,4 @@ resources:
   - project-secrets.yaml
   - project-applications.yaml
   - project-support.yaml
-  - project-websites.yaml
-  - project-monitoring.yaml
-  - project-servers.yaml
+  - project-services.yaml

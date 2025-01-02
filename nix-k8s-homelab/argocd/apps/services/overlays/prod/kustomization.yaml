@@ -10,14 +10,7 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/source/path
-        value: nix-k8s-homelab/charts/secrets/kubeseal/overlays/non-prod
-    target:
-      kind: Application
-      name: kubeseal
-  - patch: |-
-      - op: replace
-        path: /spec/source/path
-        value: nix-k8s-homelab/charts/support/external-dns/overlays/non-prod
+        value: nix-k8s-homelab/charts/services/nextcloud/overlays/prod
     target:
       kind: Application
       name: external-dns

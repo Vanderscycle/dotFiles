@@ -126,6 +126,7 @@
     git
     helm
     kustomize
+    k9s
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

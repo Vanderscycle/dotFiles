@@ -17,6 +17,14 @@ patchesStrategicMerge:
       kustomize.buildOptions: --enable-alpha-plugins --enable-helm --load-restrictor LoadRestrictionsNone
 
 patches:
+# branch
+  - patch: |-
+      - op: replace
+        path: /spec/source/targetRevision
+        value: main
+    target:
+      kind: Application
+      name: .*
   # argocd
   - patch: |-
       - op: add
@@ -40,20 +48,6 @@ patches:
         value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
-      name: application-servers
-  - patch: |-
-      - op: replace
-        path: /spec/source/repoURL
-        value: git@github.com:Vanderscycle/dotFiles.git
-    target:
-      kind: Application
-      name: application-websites
-  - patch: |-
-      - op: replace
-        path: /spec/source/repoURL
-        value: git@github.com:Vanderscycle/dotFiles.git
-    target:
-      kind: Application
       name: application-secrets
   - patch: |-
       - op: replace
@@ -61,14 +55,14 @@ patches:
         value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
-      name: application-support
+      name: application-services
   - patch: |-
       - op: replace
         path: /spec/source/repoURL
         value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
-      name: application-monitoring
+      name: application-support
   - patch: |-
       - op: replace
         path: /spec/source/repoURL

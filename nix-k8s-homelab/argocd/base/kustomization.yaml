@@ -8,21 +8,7 @@ namespace: argocd
 
 resources:
   - application-root.yaml
-  # - application-monitoring.yaml
-  # - application-secrets.yaml
-  # - application-projects.yaml
-  # - application-support.yaml
-  # - application-websites.yaml
-  # - application-servers.yaml
+  - application-support.yaml
+  - application-services.yaml
   - namespace.yaml
-  - argocd-repo.yaml
-
-
-patches:
-  - patch: |-
-      - op: replace
-        path: /spec/source/targetRevision
-        value: main
-    target:
-      kind: Application
-      name: .*
+  # - argocd-repo.yaml

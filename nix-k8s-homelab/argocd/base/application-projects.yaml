@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: applications
   source:
-    path: argocd/projects
+    path: nix-k8s-homelab/argocd/projects
     repoURL: git@github.com:vancycles-industries/infrastructure.git
     targetRevision: main
   syncPolicy:
