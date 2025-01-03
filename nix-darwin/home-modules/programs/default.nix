@@ -1,6 +1,7 @@
 { lib, ... }:
 {
   imports = [
+    ./alacritty.nix
     ./bat.nix
     ./btop.nix
     ./cloud.nix

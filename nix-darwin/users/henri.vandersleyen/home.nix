@@ -45,7 +45,7 @@
   ];
   # wm
   wm.aerospace = {
-    enable = true;
+    enable = false;
     configPath = Users/${username}/Documents/dotfiles/.config/aerospace;
   };
   # languages
