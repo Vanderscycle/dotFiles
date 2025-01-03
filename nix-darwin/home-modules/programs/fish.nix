@@ -20,7 +20,6 @@
     programs.fish = {
       plugins = [ ];
       enable = true;
-      #  catppuccin.enable = true;
       shellInit = ''
                  # set -x PATH $PATH $HOME/.npm-global/bin
         set ENTERPRISE_REPO_PATH ~/knak
@@ -110,5 +109,6 @@
         top = "btop";
       };
     };
+    catppuccin.fish.enable = true;
   };
 }

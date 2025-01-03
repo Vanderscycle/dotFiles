@@ -23,7 +23,6 @@
       '';
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      syntaxHighlighting.catppuccin.enable = true;
       oh-my-zsh.enable = false;
       shellAliases = {
         ls = "eza -al";
@@ -32,5 +31,6 @@
         "...." = "cd ../../..";
       };
     };
+    catppuccin.zsh-syntax-highlighting.enable = true;
   };
 }

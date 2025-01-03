@@ -16,6 +16,7 @@
     ../../home-modules/programs/lazygit.nix
     ../../home-modules/programs/modern_unix.nix
     ../../home-modules/programs/fzf.nix
+    # ../../home-modules/programs/ghostty.nix # INFO:broken
     ../../home-modules/programs/btop.nix
     ../../home-modules/programs/fish.nix
     ../../home-modules/programs/zsh.nix

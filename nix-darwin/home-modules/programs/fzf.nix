@@ -17,8 +17,8 @@
     programs = {
       fzf = {
         enable = true;
-        catppuccin.enable = true;
       };
     };
+    catppuccin.fzf.enable = true;
   };
 }

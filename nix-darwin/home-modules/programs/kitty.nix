@@ -24,7 +24,6 @@
     programs = {
       kitty = {
         enable = true;
-        catppuccin.enable = true;
         shellIntegration.enableFishIntegration = true;
         shellIntegration.enableZshIntegration = true;
         settings = {
@@ -39,5 +38,6 @@
         };
       };
     };
+    catppuccin.kitty.enable = true;
   };
 }
