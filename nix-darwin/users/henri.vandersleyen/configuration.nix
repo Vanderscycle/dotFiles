@@ -62,11 +62,11 @@
     casks = [
       "rectangle"
       "iterm2"
-      "nikitabobko/tap/aerospace"
+      # "nikitabobko/tap/aerospace" # not vetted on work laptop
     ];
     brews = [
-      "koekeishiya/formulae/yabai"
-      "koekeishiya/formulae/skhd"
+      # "koekeishiya/formulae/yabai"
+      # "koekeishiya/formulae/skhd"
     ];
   };
 }
