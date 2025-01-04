@@ -29,7 +29,7 @@ stringData:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: dotFiles-repo
+  name: dotfiles-repo
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
