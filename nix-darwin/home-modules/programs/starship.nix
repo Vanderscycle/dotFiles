@@ -16,7 +16,6 @@
   config = lib.mkIf config.starship.enable {
     programs.starship = {
       enable = true;
-      catppuccin.enable = true;
       enableFishIntegration = true;
       enableZshIntegration = true;
       enableNushellIntegration = true;
@@ -50,5 +49,6 @@
         format = "$all"; # Remove this line to disable the default prompt format
       };
     };
+    catppuccin.starship.enable = true;
   };
 }
