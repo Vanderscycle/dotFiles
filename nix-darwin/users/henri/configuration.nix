@@ -19,8 +19,6 @@
     # local
     ./sops.nix
   ];
-
-  hardware.opengl.enable = true;
   # cron
   cron.downloadFolderOrganizer.enable = true;
   # services
