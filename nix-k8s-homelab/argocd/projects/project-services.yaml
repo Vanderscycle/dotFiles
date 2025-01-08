@@ -18,6 +18,5 @@ spec:
       kind: "*"
   sourceRepos:
     - "*"
-    # - "git@github.com:vancycles-industries/infrastructure.git"
   sourceNamespaces:
     - "*"
