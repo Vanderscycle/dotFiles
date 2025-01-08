@@ -13,7 +13,11 @@
 {
   imports = [
     # Include the results of the hardware scan.
+    ../../nix-modules/cron
   ];
+
+  cron.configSync.enable = true;
+  cron.dotFile.path = "/home/proxmox/dotFiles";
 
   nix = {
     package = pkgs.nixFlakes;
@@ -56,12 +60,6 @@
   ];
   virtualisation.docker.logDriver = "json-file";
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
   services.k3s = {
     enable = true;
     role = "server";
@@ -92,17 +90,6 @@
     name = "iqn.2016-04.com.open-iscsi:${meta.hostname}";
   };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.proxmox = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -116,8 +103,6 @@
     ];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
     k3s
@@ -128,16 +113,6 @@
     kustomize
     k9s
   ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;

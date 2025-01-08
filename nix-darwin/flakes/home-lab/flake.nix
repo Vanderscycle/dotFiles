@@ -24,6 +24,7 @@
       ...
     }@inputs:
     let
+      # sudo nixos-rebuild switch --flake ".#node-0"
       nodes = [
         "node-0"
         "node-1"
@@ -48,6 +49,7 @@
           name = name;
           value = nixpkgs.lib.nixosSystem {
             specialArgs = {
+              username = "proxmox";
               inherit inputs;
               meta = {
                 hostname = name;

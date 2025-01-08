@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nextcloud
+  name: homepage
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   destination:
-    namespace: nextcloud
+    namespace: homepage
     server: https://kubernetes.default.svc
   project: services
   source:
-    path: charts/secrets/nextcloud/overlays/non-prod
+    path: charts/secrets/homepage/overlays/non-prod
     repoURL: git@github.com:vancycles-industries/infrastructure.git
     targetRevision: main
   syncPolicy:

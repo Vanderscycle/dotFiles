@@ -13,7 +13,14 @@ patches:
         value: nix-k8s-homelab/charts/services/nextcloud/overlays/prod
     target:
       kind: Application
-      name: external-dns
+      name: nextcloud
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/services/homepage/overlays/prod
+    target:
+      kind: Application
+      name: homepage
   - patch: |-
       - op: replace
         path: /spec/source/repoURL

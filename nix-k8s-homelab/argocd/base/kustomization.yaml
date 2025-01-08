@@ -8,6 +8,7 @@ namespace: argocd
 
 resources:
   - application-root.yaml
+  - application-projects.yaml
   - application-support.yaml
   - application-services.yaml
   - namespace.yaml
