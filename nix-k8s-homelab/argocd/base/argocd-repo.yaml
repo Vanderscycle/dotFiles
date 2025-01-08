@@ -21,7 +21,7 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: git@github.com:Vanderscycle/Professional-website.git
+  url: git@github.com:Vanderscycle/dotFiles.git
   sshPrivateKey: |
     -----BEGIN OPENSSH PRIVATE KEY-----
     -----END OPENSSH PRIVATE KEY-----

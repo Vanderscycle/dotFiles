@@ -28,6 +28,7 @@ spec:
       kind: "*"
   sourceRepos:
     - "git@github.com:vancycles-industries/infrastructure.git"
+    - "git@github.com:Vanderscycle/dotFiles.git"
   sourceNamespaces:
     - "argocd"
     - "kube-system"
