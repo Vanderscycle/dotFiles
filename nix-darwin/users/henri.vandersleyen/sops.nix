@@ -1,5 +1,4 @@
 {
-  pkgs,
   inputs,
   username,
   config,
@@ -7,23 +6,24 @@
 }:
 {
   imports = [
-    inputs.sops-nix.homeManagerModule.sops
+    inputs.sops-nix.homeManagerModules.sops
   ];
-  environment.systemPackages = [
-    pkgs.sops
-  ];
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
+  sops = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
 
-  sops.age.keyFile = "/User/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "/Users/${username}/.config/sops/age/keys.txt";
+    secrets = {
+      "knak/email" = {
+        # owner = username;
+      };
+      "knak/git/userName" = {
+        # owner = username;
+      };
+      "knak/git/keyName" = {
+        # owner = username;
+      };
+    };
+  };
 
-  sops.secrets."knak/email" = {
-    owner = username;
-  };
-  sops.secrets."knak/git/userName" = {
-    owner = username;
-  };
-  sops.secrets."knak/git/keyName" = {
-    owner = username;
-  };
 }
