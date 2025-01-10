@@ -13,6 +13,8 @@
     };
   };
 
+  # common issue on MacOs when getting ="Creating pipe" "too many open files"=
+  # https://gist.github.com/tombigel/d503800a282fcadbee14b537735d202c
   config = lib.mkIf config.spacemacs.enable {
     home = {
       sessionVariables = {

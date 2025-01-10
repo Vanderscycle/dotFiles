@@ -43,7 +43,11 @@
 
     # starus-bars
     # ../../home-modules/status-bars/sketchybar
+
+    # secrets (home-manager)
+    ./sops.nix
   ];
+
   # wm
   wm.aerospace = {
     enable = false;
@@ -60,8 +64,8 @@
   keychain.enable = true;
   keychain.keys = "/home/henri/.ssh/knak";
 
-  git.userEmail = "henri-vandersleyen@protonmail.com";
-  git.userName = "vanderscycle";
+  git.userEmail = "henri.vandersleyen@knak.com";
+  git.userName = "vancycles-knak";
   git.signingKey = "~/.ssh/knak.pub";
 
   home = {
