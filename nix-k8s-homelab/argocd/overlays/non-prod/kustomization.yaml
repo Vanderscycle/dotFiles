@@ -7,15 +7,6 @@ resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml # ArgoCD installation
   - ../../base
 
-patchesStrategicMerge:
-  - |
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: argocd-cm
-    data:
-      kustomize.buildOptions: --enable-alpha-plugins --enable-helm --load-restrictor LoadRestrictionsNone
-
 patches:
 # branch
   - patch: |-
@@ -70,3 +61,10 @@ patches:
     target:
       kind: Application
       name: application-root
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: application-projects

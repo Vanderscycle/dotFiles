@@ -21,6 +21,11 @@
       default = false;
     };
 
+    cron.dotFile.path = lib.mkOption {
+      type = lib.types.str;
+      description = "where the dotFiles are located";
+      default = "/home/${username}/Documents/dotFiles";
+    };
     cron.sshKey = lib.mkOption {
       type = lib.types.str;
       description = "details ssh key to use";
@@ -41,7 +46,7 @@
     systemd.services."dotFiles-latest" = lib.mkIf config.cron.configSync.enable {
       script = ''
         # cd "${builtins.getEnv "HOME"}/Documents/dotFiles"
-        cd "/home/${username}/Documents/dotFiles"
+        cd ${config.cron.dotFile.path}
         ${pkgs.git}/bin/git status
         eval `ssh-agent -s`
         ssh-add ${config.cron.sshKey}

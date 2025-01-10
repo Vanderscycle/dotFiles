@@ -19,7 +19,6 @@
     # local
     ./sops.nix
   ];
-
   # cron
   cron.downloadFolderOrganizer.enable = true;
   # services
