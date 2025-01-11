@@ -16,14 +16,30 @@ in
   environment.systemPackages = [
     pkgs.sops
   ];
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
+  sops = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
 
-  sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    secrets = {
+      # Maggit Forge
+      "emacs/forge/gh_api" = {
+        owner = "henri";
+      };
 
-  # Maggit Forge
-  sops.secrets."emacs/forge/gh_api" = {
-    owner = "henri";
+      # INFO: for values to be available throughout the config your must declare them
+      "yubico/u2f_keys" = {
+      };
+
+      # TruNas SMB access
+      "home-server/rice/password" = {
+        owner = "root";
+      };
+
+      "home-server/rice/user" = {
+        owner = "root";
+      };
+    };
   };
 
   systemd.services."authinfo" = {
@@ -39,18 +55,6 @@ in
     wantedBy = [ "multi-user.target" ];
   };
 
-  # INFO: for values to be available throughout the config your must declare them
-  sops.secrets."yubico/u2f_keys" = {
-  };
-
-  # TruNas SMB access
-  sops.secrets."home-server/rice/password" = {
-    owner = "root";
-  };
-
-  sops.secrets."home-server/rice/user" = {
-    owner = "root";
-  };
   systemd.services."smbcreds_fam" = {
     script = ''
       echo "user=$(cat ${config.sops.secrets."home-server/rice/user".path})" > /root/${trueNasFamilyUser}
