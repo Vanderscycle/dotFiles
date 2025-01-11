@@ -65,7 +65,8 @@
   keychain.keys = "/home/henri/.ssh/knak";
 
   git = {
-    userEmail = config.sops.secrets."knak/email".path;
+    # userEmail = config.sops.secrets."knak/email".path;
+    userEmail = "henri.vandersleyen@knak.com";
     userName = config.sops.secrets."knak/git/userName".path;
     signingKey = config.sops.secrets."knak/git/keyName".path;
   };
