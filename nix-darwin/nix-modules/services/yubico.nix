@@ -31,7 +31,6 @@ in
           enable = true;
           settings = {
             cue = true; # tell users to push button
-            # authFile = "${homeDirectory}/.config/Yubico/u2f_keys";
             authFile = config.sops.secrets."yubico/u2f_keys".path;
           };
         };

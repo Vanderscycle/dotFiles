@@ -64,17 +64,17 @@
   keychain.enable = true;
   keychain.keys = "/home/henri/.ssh/knak";
 
-  git = {
-    userEmail = "henri.vandersleyen@knak.com";
-    userName = "vancycles-knak";
-    signingKey = "~/.ssh/knak.pub";
-  };
-
   # git = {
-  #   userEmail = config.sops.secrets."knak/email".path;
-  #   userName = config.sops.secrets."knak/git/userName".path;
-  #   signingKey = config.sops.secrets."knak/git/keyName".path;
+  #   userEmail = "henri.vandersleyen@knak.com";
+  #   userName = "vancycles-knak";
+  #   signingKey = "~/.ssh/knak.pub";
   # };
+
+  git = {
+    userEmail = config.sops.secrets."knak/email".path;
+    userName = config.sops.secrets."knak/git/userName".path;
+    signingKey = config.sops.secrets."knak/git/keyName".path;
+  };
 
   home = {
     username = username;
