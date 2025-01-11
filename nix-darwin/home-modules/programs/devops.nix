@@ -20,6 +20,7 @@ let
         insomnia # not supported on aarch64-darwin
         # dns
         dogdns
+        dive
       ];
     }
     // lib.mkIf (currentSystem == "aarch64-linux") {
@@ -29,6 +30,7 @@ let
         postman
         # dns
         dogdns
+        dive
       ];
     };
 in

@@ -5,7 +5,6 @@
   ...
 }:
 {
-
   options = {
     bat.enable = lib.mkOption {
       type = lib.types.bool;

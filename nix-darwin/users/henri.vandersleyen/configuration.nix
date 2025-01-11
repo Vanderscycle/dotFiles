@@ -50,9 +50,16 @@
     # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  environment.variables = {
-    # XDG_CONFIG_HOME = "/users/henri.vandersleyen"; # issue with nushell
+  environment = {
+    systemPackages = [
+      pkgs.sops
+    ];
+    variables = {
+      # XDG_CONFIG_HOME = "/Users/henri.vandersleyen"; # issue with nushell
+      SOPS_AGE_KEY_FILE = "/Users/${username}/.config/sops/age/keys.txt";
+    };
   };
+
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=3600
   '';

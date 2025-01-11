@@ -43,7 +43,11 @@
 
     # starus-bars
     # ../../home-modules/status-bars/sketchybar
+
+    # secrets (home-manager)
+    ./sops.nix
   ];
+
   # wm
   wm.aerospace = {
     enable = false;
@@ -60,28 +64,31 @@
   keychain.enable = true;
   keychain.keys = "/home/henri/.ssh/knak";
 
-  git.userEmail = "henri-vandersleyen@protonmail.com";
-  git.userName = "vanderscycle";
-  git.signingKey = "~/.ssh/knak.pub";
+  git = {
+    # userEmail = config.sops.secrets."knak/email".path;
+    userEmail = "henri.vandersleyen@knak.com";
+    userName = config.sops.secrets."knak/git/userName".path;
+    signingKey = config.sops.secrets."knak/git/keyName".path;
+  };
 
   home = {
-    username = "henri.vandersleyen";
-    homeDirectory = "/Users/henri.vandersleyen";
+    username = username;
+    homeDirectory = "/Users/${username}";
     stateVersion = "23.05"; # Please read the comment before changing.
+
+    # Makes sense for user specific applications that shouldn't be available system-wide
+    packages = [ ];
+
+    file = { };
+
+    sessionVariables = { };
+
+    sessionPath = [
+      "/run/current-system/sw/bin"
+      "$HOME/.nix-profile/bin"
+    ];
   };
 
-  # Makes sense for user specific applications that shouldn't be available system-wide
-  home.packages = [ ];
-
-  home.file = { };
-
-  home.sessionVariables = {
-  };
-
-  home.sessionPath = [
-    "/run/current-system/sw/bin"
-    "$HOME/.nix-profile/bin"
-  ];
   programs.home-manager.enable = true;
 
   # theme
