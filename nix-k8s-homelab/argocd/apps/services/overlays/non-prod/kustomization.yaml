@@ -22,10 +22,18 @@ patches:
     target:
       kind: Application
       name: homepage
+  # repo
   - patch: |-
       - op: replace
         path: /spec/source/repoURL
         value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
-      name: "^(?!nextcloud$|homepage$).*"
+      name: homepage
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: nextcloud
