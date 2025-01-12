@@ -3,4 +3,5 @@ kind: Kustomization
 
 resources:
   - nextcloud.yaml
+  - n8n.yaml
   - homepage.yaml

@@ -3,8 +3,8 @@ kind: Kustomization
 
 namespace: externaldns
 
-resources:
-  - secrets
+# resources:
+#   - secrets
 
 helmCharts:
   - name: external-dns

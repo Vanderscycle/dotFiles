@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  destination:
+    namespace: n8n
+    server: https://kubernetes.default.svc
+  project: services
+  source:
+    chart: n8n
+    repoURL: 8gears.container-registry.com/library/n8n  # note: the oci:// syntax is not included.
+    targetRevision: 0.25.2
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 1
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m
