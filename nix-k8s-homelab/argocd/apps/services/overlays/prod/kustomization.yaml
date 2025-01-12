@@ -21,6 +21,13 @@ patches:
     target:
       kind: Application
       name: homepage
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/services/paperless/overlays/prod
+    target:
+      kind: Application
+      name: paperless
   # repo
   - patch: |-
       - op: replace
@@ -36,3 +43,10 @@ patches:
     target:
       kind: Application
       name: nextcloud
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: paperless

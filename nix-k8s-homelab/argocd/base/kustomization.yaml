@@ -12,5 +12,6 @@ resources:
   - application-support.yaml
   - application-services.yaml
   - application-secrets.yaml
+  - application-servers.yaml
   - namespace.yaml
   # - argocd-repo.yaml
