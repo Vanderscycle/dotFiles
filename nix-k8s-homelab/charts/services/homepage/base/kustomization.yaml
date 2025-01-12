@@ -6,7 +6,7 @@ namespace: homepage
 #   - secrets
 
 helmCharts:
-  - name: homepage
+  - name: flame
     version: 0.6.0
     repo: https://charts.gabe565.com
     valuesFile: values.yaml

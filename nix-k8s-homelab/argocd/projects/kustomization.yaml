@@ -8,3 +8,4 @@ resources:
   - project-applications.yaml
   - project-support.yaml
   - project-services.yaml
+  - project-secrets.yaml
