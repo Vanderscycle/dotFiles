@@ -28,4 +28,4 @@ patches:
         value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
-      name: .*
+      name: "^(?!nextcloud$|homepage$).*"
