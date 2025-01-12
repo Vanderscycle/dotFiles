@@ -4,11 +4,11 @@
 
 ## Linode configuration to be set via arguments/env. variables
 ##
-linode:
+# linode:
   ## @param linode.apiToken When using the Linode provider, `LINODE_TOKEN` to set (optional)
   ##
-  apiToken: ""
+  # apiToken: ""
   ## @param linode.secretName Use an existing secret with key "linode_api_token" defined.
   ## This ignores linode.apiToken
   ##
-  secretName: "external-dns-secret"
+  # secretName: "external-dns-secret"
