@@ -3,9 +3,10 @@
   ...
 }:
 {
+
+  catppuccin.hyprland.enable = true;
   wayland.windowManager = {
     hyprland = {
-      catppuccin.enable = true;
       enable = true; # allow home-manager to configure hyprland
       # https://github.com/nix-community/home-manager/issues/6062
       extraConfig = ''

@@ -46,13 +46,20 @@
   nh.flakeLocation = "/home/${username}/Documents/dotFiles/nix-darwin";
   microcontrollers.enable = true;
   office.enable = true;
-  kubernetes.enable = true;
+  kubernetes = {
+    enable = true;
+    kubeconfig = {
+      KUBECONFIG = "$HOME/.kube/homelab-kubeconfig.yaml";
+    };
+  };
   discord.enable = true;
   fish.enable = true;
   fuzzel.enable = true;
-  git.userEmail = "henri-vandersleyen@protonmail.com";
-  git.userName = "vanderscycle";
-  git.signingKey = "~/.ssh/endeavourGit.pub";
+  git = {
+    userEmail = "henri-vandersleyen@protonmail.com";
+    userName = "vanderscycle";
+    signingKey = "~/.ssh/endeavourGit.pub";
+  };
   keychain.enable = true;
   keychain.keys = "/home/henri/.ssh/endeavourGit";
   # cowsay.enable = lib.mkForce true;
@@ -62,11 +69,15 @@
     username = username;
     homeDirectory = "/home/${username}";
     stateVersion = "25.05"; # Please read the comment before changing.
+
     packages = with pkgs; [
       sysz
     ];
+
     file = { };
+
     sessionVariables = { };
+
     sessionPath = [ ];
   };
 

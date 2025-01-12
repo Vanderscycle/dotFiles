@@ -21,7 +21,7 @@
 
     # Sound settings
     # sound.enable = true;
-    hardware.pulseaudio = {
+    services.pulseaudio = {
       enable = false;
       support32Bit = true;
     };

@@ -16,6 +16,8 @@
   # search under cn in fctix5-configtool
   # {slack/discord/steam} --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
   config = lib.mkIf config.fcitx.enable {
+
+    catppuccin.fcitx5.apply = true; # Ensure the theme is applied
     i18n.inputMethod = {
       enabled = "fcitx5";
       uim.toolbar = "gtk";
@@ -26,9 +28,6 @@
           fcitx5-with-addons
           fcitx5-gtk
         ];
-        catppuccin = {
-          apply = true; # Ensure the theme is applied
-        };
       };
     };
     home = {

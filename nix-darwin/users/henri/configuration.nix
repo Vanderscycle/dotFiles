@@ -30,8 +30,8 @@
     enable = true;
     mangohud.enable = true;
   };
-  # yubico.enable = true;
-  # yubico.keyID = "24978052"; # TODO: add in nix-sops
+  yubico.enable = true;
+  yubico.keyID = "24978052"; # TODO: add in nix-sops
 
   nix = {
     optimise.automatic = true;
@@ -46,10 +46,14 @@
       # interval = "weekly";
       options = "--delete-older-than 14d";
     };
+
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
   };
 
-  nixpkgs.hostPlatform = "x86_64-linux";
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    hostPlatform = "x86_64-linux";
+    config.allowUnfree = true;
+  };
 
   programs.fish.enable = true;
 
@@ -68,7 +72,6 @@
   ];
 
   home-manager.backupFileExtension = "backup";
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
 
   # fonts.enableFontDir = true;
   fonts.packages = with pkgs; [

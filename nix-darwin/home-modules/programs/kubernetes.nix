@@ -11,6 +11,12 @@
       description = "Enables kubernetes";
       default = false;
     };
+
+    kubernetes.kubeconfig = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      description = "The default kubeconfig";
+      default = { };
+    };
   };
 
   config = lib.mkIf config.kubernetes.enable {
@@ -26,6 +32,7 @@
         ctlptl
         argocd
       ];
+      sessionVariables = config.kubernetes.kubeconfig;
     };
   };
 }

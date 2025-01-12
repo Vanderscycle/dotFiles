@@ -18,7 +18,6 @@
     programs = {
       zathura = {
         enable = true;
-        catppuccin.enable = true;
         options = {
           font = "JetBrainsMono 14";
           render-loading = true;
@@ -36,5 +35,6 @@
         };
       };
     };
+    catppuccin.zathura.enable = true;
   };
 }

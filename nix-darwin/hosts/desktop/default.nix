@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -5,8 +6,23 @@
   ];
   # --- Host specific hardware ---
   hardware.cpu.amd.updateMicrocode = true;
-  hardware.opengl.enable = true;
   hardware.keyboard.zsa.enable = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      mesa.drivers
+      amdvlk
+    ];
+    extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+
+    ## radv: an open-source Vulkan driver from freedesktop
+
+  };
+
+  environment.variables = {
+    LD_LIBRARY_PATH = "/run/opengl-driver/lib";
+  };
   # --- ++ [ ./keyboard.nix ];
 
   boot.loader = {
