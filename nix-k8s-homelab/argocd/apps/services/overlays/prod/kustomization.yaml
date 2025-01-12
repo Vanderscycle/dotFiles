@@ -10,43 +10,40 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/source/path
-        value: nix-k8s-homelab/charts/services/nextcloud/overlays/prod
-    target:
-      kind: Application
-      name: nextcloud
-  - patch: |-
-      - op: replace
-        path: /spec/source/path
         value: nix-k8s-homelab/charts/services/homepage/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: homepage
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/services/nextcloud/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: nextcloud
   - patch: |-
       - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/services/paperless/overlays/prod
-    target:
-      kind: Application
-      name: paperless
-  # repo
-  - patch: |-
-      - op: replace
-        path: /spec/source/repoURL
-        value: git@github.com:Vanderscycle/dotFiles.git
-    target:
-      kind: Application
-      name: homepage
-  - patch: |-
-      - op: replace
-        path: /spec/source/repoURL
-        value: git@github.com:Vanderscycle/dotFiles.git
-    target:
-      kind: Application
-      name: nextcloud
-  - patch: |-
       - op: replace
         path: /spec/source/repoURL
         value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: paperless
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/services/gitea/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: gitea
