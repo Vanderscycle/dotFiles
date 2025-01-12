@@ -11,7 +11,7 @@ spec:
   project: services
   source:
     chart: n8n
-    repoURL: 8gears.container-registry.com/library/n8n  # note: the oci:// syntax is not included.
+    repoURL: 8gears.container-registry.com/library  # note: the oci:// syntax is not included.
     targetRevision: 0.25.2
   syncPolicy:
     automated:
