@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   destination:
-    namespace: factorio
+    namespace: factorio-vanilla
     server: https://kubernetes.default.svc
   project: servers
   source:
