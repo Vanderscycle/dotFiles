@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: vanilla-factorio-server-charts-datadir-pv
+  labels:
+    app: vanilla-factorio-server-charts-2.1.0
+    app.kubernetes.io/instance: factorio-vanilla
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: "/data/factorio-vanilla/datadir" # Adjust to your storage path
+  claimRef:
+    namespace: factorio-vanilla
+    name: vanilla-factorio-server-charts-datadir
