@@ -13,7 +13,7 @@ patches:
         value: git@github.com:Vanderscycle/dotFiles.git
       - op: replace
         path: /spec/source/path
-        value: nix-k8s-homelab/charts/servers/factorio-vanilla/overlays/non-prod
+        value: nix-k8s-homelab/charts/servers/factorioVanilla/overlays/non-prod
     target:
       kind: Application
       name: factorio-vanilla
@@ -23,7 +23,7 @@ patches:
         value: git@github.com:Vanderscycle/dotFiles.git
       - op: replace
         path: /spec/source/path
-        value: nix-k8s-homelab/charts/servers/factorio-space-ex/overlays/non-prod
+        value: nix-k8s-homelab/charts/servers/factorioSpaceEx/overlays/non-prod
     target:
       kind: Application
       name: factorio-space-ex
