@@ -1,18 +1,20 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: vanilla-factorio-server-charts-datadir-pv
+  name: gitea-shared-storage-pv
+  annotations:
+    helm.sh/resource-policy: keep
   labels:
-    app: vanilla-factorio-server-charts-2.1.0
-    app.kubernetes.io/instance: factorio-vanilla
+    app.kubernetes.io/instance: gitea
 spec:
   capacity:
-    storage: 1Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
   hostPath:
-    path: "/data/factorio-vanilla/datadir" # Adjust to your storage path
+    path: "/data/gitea/shared-storage" # Adjust to your storage path
   claimRef:
-    namespace: factorio-vanilla
-    name: vanilla-factorio-server-charts-datadir
+    namespace: gitea
+    name: gitea-shared-storage
