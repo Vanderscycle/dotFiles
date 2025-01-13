@@ -4,12 +4,13 @@ kind: Kustomization
 namespace: factorio-vanilla
 
 resources:
-  - namespace.yaml
   - secrets
+  - pv.yaml
+
 
 helmCharts:
   - name: factorio-server-charts
-    version: 2.1.0
+    version: 2.5.2
     repo: https://sqljames.github.io/factorio-server-charts/
     valuesFile: values.yaml
     namespace: factorio-vanilla

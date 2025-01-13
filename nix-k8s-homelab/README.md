@@ -16,7 +16,7 @@ set -xg KUBECONFIG $HOME/.kube/infrastructure-kubeconfig.yaml
 ```
 6. reseal all the secrets :
 ```
-kubeseal --format yaml --cert='../../../../../kubeseal-public.pem' < secret.yaml > sealed-secret.yaml
+kubeseal --format yaml --cert='../../../../../kubeseal-public.pem' < secret.yaml > sealed-secret.yaml -n <namespace>
 ```
 
 ##

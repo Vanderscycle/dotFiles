@@ -5,7 +5,6 @@ namespace: factorio-space
 # make sure namespace exists
 
 resources:
-  - namespace.yaml
   - secrets
 
 helmCharts:
