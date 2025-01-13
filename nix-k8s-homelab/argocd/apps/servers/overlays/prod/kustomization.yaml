@@ -9,6 +9,9 @@ resources:
 patches:
   - patch: |-
       - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/servers/factorio-vanilla/overlays/prod
     target:
@@ -16,16 +19,11 @@ patches:
       name: factorio-vanilla
   - patch: |-
       - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/servers/factorio-space-ex/overlays/prod
     target:
       kind: Application
       name: factorio-space-ex
-  # repo
-  - patch: |-
-      - op: replace
-        path: /spec/source/repoURL
-        value: git@github.com:Vanderscycle/dotFiles.git
-    target:
-      kind: Application
-      name: .*
