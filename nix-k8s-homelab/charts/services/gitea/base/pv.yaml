@@ -14,7 +14,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
   hostPath:
-    path: "/data/gitea/shared-storage" # Adjust to your storage path
+    path: "/data/git" # Adjust to your storage path
   claimRef:
     namespace: gitea
     name: gitea-shared-storage
