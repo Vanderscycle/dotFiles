@@ -14,7 +14,8 @@ spec:
   persistentVolumeReclaimPolicy: Delete # Updated to 'Delete' for automatic cleanup
   volumeMode: Filesystem
   hostPath:
-    path: "/data/gitea/shared-storage" # Ensure this matches the correct path on the host
+    path: "/data/git"
+    # path: "/data/gitea/shared-storage"
   claimRef:
     namespace: gitea
     name: gitea-shared-storage
