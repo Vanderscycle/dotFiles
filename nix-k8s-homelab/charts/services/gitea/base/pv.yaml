@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   name: gitea-shared-storage-pv
   annotations:
-    helm.sh/resource-policy: keep
+    helm.sh/resource-policy: delete # Changed to 'delete' to clean up automatically if necessary
   labels:
     app.kubernetes.io/instance: gitea
 spec:
@@ -11,10 +11,10 @@ spec:
     storage: 10Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Delete # Updated to 'Delete' for automatic cleanup
   volumeMode: Filesystem
   hostPath:
-    path: "/data/gitea"
+    path: "/data/gitea/shared-storage" # Ensure this matches the correct path on the host
   claimRef:
     namespace: gitea
     name: gitea-shared-storage
