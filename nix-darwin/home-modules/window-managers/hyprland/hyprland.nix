@@ -33,7 +33,7 @@
 
 
                 bind = $mainMod, P, submap, emacs # will switch to a submap called 'emacs'
-                submap = emacs # will start a submap called "emacs"
+                submap = programs # will start a submap called "emacs"
                 # sets repeatable binds for resizing the active window
                 binde = , T, exec, $reset $filemanager
                 binde = , Q, exec, $reset $terminal
