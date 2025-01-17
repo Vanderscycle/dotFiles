@@ -20,7 +20,8 @@
     }/share/icons/rose-pine-hyprcursor";
     home = {
       packages = with pkgs; [
-        lxappearance
+        # lxappearance
+        nwg-look # lxappearance but for wayland
         rose-pine-cursor
       ];
     };

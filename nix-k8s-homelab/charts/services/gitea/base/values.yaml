@@ -41,18 +41,8 @@ gitea:
     repository.pull-request:
       WORK_IN_PROGRESS_PREFIXES: "WIP:,[WIP]:"
 
-persistence:
-  enabled: true
-  create: true
-  mount: true
-  claimName: gitea-shared-storage
-  size: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  labels: {}
-  storageClass: microk8s-hosthpath
-  subPath:
-  hostPath: "data"
-  volumeName: "gitea-pv"
-  annotations:
-    helm.sh/resource-policy: keep
+## @param extraVolumes Additional volumes to mount to the Gitea deployment
+# extraVolumes:
+#   - name: gitea-shared-storage-pv
+#     secret:
+#       secretName: gitea-postgres-ssl
