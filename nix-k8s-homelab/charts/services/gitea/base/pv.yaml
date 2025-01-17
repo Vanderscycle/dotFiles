@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   name: gitea-shared-storage-pv
   annotations:
-    helm.sh/resource-policy: delete # Changed to 'delete' to clean up automatically if necessary
+    helm.sh/resource-policy: Delete # Changed to 'delete' to clean up automatically if necessary
   labels:
     app.kubernetes.io/instance: gitea
 spec:

@@ -32,8 +32,8 @@
                 submap = reset
 
 
-                bind = $mainMod, P, submap, emacs # will switch to a submap called 'emacs'
-                submap = programs # will start a submap called "emacs"
+                bind = $mainMod, P, submap, programs
+                submap = programs
                 # sets repeatable binds for resizing the active window
                 binde = , T, exec, $reset $filemanager
                 binde = , Q, exec, $reset $terminal
