@@ -48,3 +48,13 @@ patches:
     target:
       kind: Application
       name: gitea
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/services/gitlab/overlays/non-prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: gitlab
