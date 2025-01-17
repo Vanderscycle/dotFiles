@@ -1,3 +1,9 @@
-## Default values for kubeseal 
+## Default values for kubeseal
 ## This is a YAML-formatted file.
 ## Declare variables to be passed into your templates.
+
+## Settings to for the Let's Encrypt ACME Issuer
+certmanager-issuer:
+  # The email address to register certificates requested from Let's Encrypt.
+  # Required if using Let's Encrypt.
+  email: henri-vandersleyen@protonmail.com
