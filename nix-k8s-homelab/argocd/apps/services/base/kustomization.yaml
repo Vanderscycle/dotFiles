@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - nextcloud.yaml
-  # - gitea.yaml
-  - gitlab.yaml
+  - gitea.yaml
+  # - gitlab.yaml
   - n8n.yaml
   - homepage.yaml

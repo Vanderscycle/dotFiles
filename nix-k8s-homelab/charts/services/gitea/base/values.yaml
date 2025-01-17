@@ -1,3 +1,42 @@
 ## Default values for kubeseal
 ## This is a YAML-formatted file.
 ## Declare variables to be passed into your templates.
+
+## @section Image
+## @param image.registry image registry, e.g. gcr.io,docker.io
+## @param image.repository Image to start for this pod
+## @param image.tag Visit: [Image tag](https://hub.docker.com/r/gitea/gitea/tags?page=1&ordering=last_updated). Defaults to `appVersion` within Chart.yaml.
+## @param image.digest Image digest. Allows to pin the given image tag. Useful for having control over mutable tags like `latest`
+## @param image.pullPolicy Image pull policy
+## @param image.rootless Wether or not to pull the rootless version of Gitea, only works on Gitea 1.14.x or higher
+## @param image.fullOverride Completely overrides the image registry, path/image, tag and digest. **Adjust `image.rootless` accordingly and review [Rootless defaults](#rootless-defaults).**
+image:
+  registry: ""
+  repository: gitea/gitea
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+  digest: ""
+  pullPolicy: Always
+  rootless: true
+  fullOverride: ""
+
+gitea:
+  ## @param gitea.admin.username Username for the Gitea admin user
+  ## @param gitea.admin.existingSecret Use an existing secret to store admin user credentials
+  ## @param gitea.admin.password Password for the Gitea admin user
+  ## @param gitea.admin.email Email for the Gitea admin user
+  ## @param gitea.admin.passwordMode Mode for how to set/update the admin user password. Options are: initialOnlyNoReset, initialOnlyRequireReset, and keepUpdated
+  admin:
+    # existingSecret: gitea-admin-secret
+    existingSecret:
+    username: gitea_admin
+    password: r8sA8CPHD9!bt6d
+    email: "henri-vandersleyen@protonmail.com"
+    passwordMode: keepUpdated
+
+  config:
+    APP_NAME: "Gitea: With a cup of tea."
+    repository:
+      ROOT: "~/gitea-repositories"
+    repository.pull-request:
+      WORK_IN_PROGRESS_PREFIXES: "WIP:,[WIP]:"
