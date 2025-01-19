@@ -10,9 +10,13 @@ spec:
     server: https://kubernetes.default.svc
   project: support
   source:
-    path: charts/support/external-dns/overlays/non-prod
-    repoURL: git@github.com:vancycles-industries/infrastructure.git
-    targetRevision: main
+  helm:
+    valueFiles:
+    - external-dns-values.yaml
+    ignoreMissingValueFiles: true
+    chart: external-dns
+    repoURL: registry-1.docker.io/bitnamicharts/external-dns  # note: the oci:// syntax is not included.
+    targetRevision: 8.7.2
   syncPolicy:
     automated:
       prune: true

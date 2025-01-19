@@ -1,0 +1,30 @@
+## Default values for external-dns
+## This is a YAML-formatted file.
+## Declare variables to be passed into your templates.
+
+## Linode configuration to be set via arguments/env. variables
+##
+# linode:
+  ## @param linode.apiToken When using the Linode provider, `LINODE_TOKEN` to set (optional)
+  ##
+  # apiToken: ""
+  ## @param linode.secretName Use an existing secret with key "linode_api_token" defined.
+  ## This ignores linode.apiToken
+  ##
+  # secretName: "external-dns-secret"
+
+## Pi-hole configuration to be set via arguments/env. variables
+##
+pihole:
+  ## @param pihole.server When using the Pi-hole provider, specify The address of the Pi-hole web server
+  ##
+  server: "http://192.168.1.152/"
+  ## @param pihole.tlsSkipVerify When using the Pi-hole provider, specify wheter to skip verification of any TLS certificates served by the Pi-hole web server
+  ##
+  tlsSkipVerify: ""
+  ## @param pihole.password When using the Pi-hole provider, specify a password to use
+  ##
+  password: ""
+  ## @param pihole.secretName Use an existing secret with key "pihole_password" defined.
+  ##
+  secretName: "external-dns-secret"

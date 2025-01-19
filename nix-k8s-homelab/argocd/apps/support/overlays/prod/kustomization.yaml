@@ -9,12 +9,8 @@ resources:
 patches:
   - patch: |-
       - op: replace
-        path: /spec/source/path
-        value: nix-k8s-homelab/charts/support/external-dns/overlays/prod
-    target:
-      kind: Application
-      name: external-dns
-  - patch: |-
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
       - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/support/cert-manager/overlays/prod
@@ -23,6 +19,9 @@ patches:
       name: cert-manager
   - patch: |-
       - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/support/keel/overlays/prod
     target:
@@ -30,15 +29,11 @@ patches:
       name: keel
   - patch: |-
       - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/support/coredns/overlays/prod
     target:
       kind: Application
       name: coredns
-  - patch: |-
-      - op: replace
-        path: /spec/source/repoURL
-        value: git@github.com:Vanderscycle/dotFiles.git
-    target:
-      kind: Application
-      name: .*
