@@ -16,8 +16,8 @@ spec:
     targetRevision: 8.7.2
     helm:
       valueFiles:
-      - ./external-dns-values.yaml
-      ignoreMissingValueFiles: true
+      - external-dns-values.yaml
+      # ignoreMissingValueFiles: true
   syncPolicy:
     automated:
       prune: true
