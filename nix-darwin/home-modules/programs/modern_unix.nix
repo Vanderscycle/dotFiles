@@ -27,6 +27,7 @@
       jq.enable = true;
       fd.enable = true;
       ripgrep.enable = true;
+      broot.enable = true;
     };
   };
 }

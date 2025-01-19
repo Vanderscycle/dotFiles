@@ -10,13 +10,13 @@ spec:
     server: https://kubernetes.default.svc
   project: support
   source:
-  helm:
-    valueFiles:
-    - external-dns-values.yaml
     ignoreMissingValueFiles: true
     chart: external-dns
     repoURL: registry-1.docker.io/bitnamicharts/external-dns  # note: the oci:// syntax is not included.
     targetRevision: 8.7.2
+    helm:
+      valueFiles:
+      - external-dns-values.yaml
   syncPolicy:
     automated:
       prune: true
