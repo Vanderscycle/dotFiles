@@ -14,9 +14,10 @@ spec:
     chart: external-dns
     repoURL: registry-1.docker.io/bitnamicharts  # note: the oci:// syntax is not included.
     targetRevision: 8.7.2
-    # helm:
-    #   valueFiles:
-    #   - ./external-dns-values.yaml
+    helm:
+      valueFiles:
+      - ./external-dns-values.yaml
+      ignoreMissingValueFiles: true
   syncPolicy:
     automated:
       prune: true
