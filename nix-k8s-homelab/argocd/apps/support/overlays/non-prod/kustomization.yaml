@@ -30,6 +30,13 @@ patches:
       name: keel
   - patch: |-
       - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/coredns/overlays/non-prod
+    target:
+      kind: Application
+      name: coredns
+  - patch: |-
+      - op: replace
         path: /spec/source/repoURL
         value: git@github.com:Vanderscycle/dotFiles.git
     target:

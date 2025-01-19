@@ -3,13 +3,13 @@ kind: Kustomization
 
 namespace: externaldns
 
-resources:
-  - secrets
+# resources:
+#   - secrets
 
 helmCharts:
-  - name: external-dns
-    version: 8.7.1
-    repo: https://charts.bitnami.com/bitnami
+  - name: coredns
+    version: 1.37.1
+    repo: https://coredns.github.io/helm
     valuesFile: values.yaml
-    namespace: external-dns
+    namespace: coredns
     releaseName: support
