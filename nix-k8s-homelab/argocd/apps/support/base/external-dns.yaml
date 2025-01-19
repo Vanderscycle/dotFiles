@@ -12,7 +12,7 @@ spec:
   source:
     ignoreMissingValueFiles: true
     chart: external-dns
-    repoURL: registry-1.docker.io/bitnamicharts/external-dns  # note: the oci:// syntax is not included.
+    repoURL: registry-1.docker.io/bitnamicharts  # note: the oci:// syntax is not included.
     targetRevision: 8.7.2
     helm:
       valueFiles:
