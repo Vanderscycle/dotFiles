@@ -11,7 +11,7 @@ spec:
   project: support
   source:
     ignoreMissingValueFiles: true
-    chart: containeroo
+    chart: containeroo/local-path-provisioner
     repoURL: https://charts.containeroo.ch
     targetRevision: 0.0.31
     # helm:
