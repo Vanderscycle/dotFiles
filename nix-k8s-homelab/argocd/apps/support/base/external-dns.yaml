@@ -16,6 +16,7 @@ spec:
     targetRevision: 8.7.2
     helm:
       values: |
+        provider: pihole
         pihole:
           ## @param pihole.server When using the Pi-hole provider, specify The address of the Pi-hole web server
           ##
