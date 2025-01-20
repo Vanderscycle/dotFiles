@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   project: support
   source:
-    path: charts/support/local-path-provisioner/overlays/non-prod
+    path: nix-k8s-homelab/charts/support/lpp/overlays/non-prod
     repoURL: git@github.com:vancycles-industries/infrastructure.git
     targetRevision: main
   syncPolicy:
