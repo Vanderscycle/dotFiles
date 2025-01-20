@@ -7,3 +7,4 @@ resources:
   # - coredns.yaml
   - keel.yaml
   # - secrets
+  - external-dns-values.yaml
