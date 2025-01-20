@@ -5,6 +5,7 @@ resources:
   - external-dns.yaml
   - cert-manager.yaml
   # - coredns.yaml
+  - local-path-provisioner.yaml
   - harbor.yaml
   - keel.yaml
   # - secrets
