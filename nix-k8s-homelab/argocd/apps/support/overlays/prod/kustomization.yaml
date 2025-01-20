@@ -53,7 +53,7 @@ patches:
         value: git@github.com:Vanderscycle/dotFiles.git
       - op: replace
         path: /spec/source/path
-        value: nix-k8s-homelab/charts/support/local-path-provisioner/overlays/prod
+        value: nix-k8s-homelab/charts/support/lpp/overlays/prod
     target:
       kind: Application
       name: local-path-provisioner.yaml
