@@ -3,6 +3,9 @@ kind: Kustomization
 
 namespace: harbor
 
+resources:
+  - storageClass.yaml
+
 helmCharts:
   - name: harbor
     version: 1.16.1
