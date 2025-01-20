@@ -10,12 +10,9 @@ spec:
     server: https://kubernetes.default.svc
   project: support
   source:
-    ignoreMissingValueFiles: true
-    chart: containeroo/local-path-provisioner
-    repoURL: https://charts.containeroo.ch
-    targetRevision: 0.0.31
-    # helm:
-    #   values: |
+    path: charts/support/local-path-provisioner/overlays/non-prod
+    repoURL: git@github.com:vancycles-industries/infrastructure.git
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true

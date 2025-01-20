@@ -57,3 +57,13 @@ patches:
     target:
       kind: Application
       name: coredns
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/local-path-provisioner/overlays/non-prod
+    target:
+      kind: Application
+      name: local-path-provisioner.yaml
