@@ -23,6 +23,16 @@ patches:
         value: git@github.com:Vanderscycle/dotFiles.git
       - op: replace
         path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/harbor/overlays/prod
+    target:
+      kind: Application
+      name: harbor
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
+        path: /spec/source/path
         value: nix-k8s-homelab/charts/support/keel/overlays/prod
     target:
       kind: Application
