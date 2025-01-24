@@ -10,37 +10,38 @@
       enable = true; # allow home-manager to configure hyprland
       # https://github.com/nix-community/home-manager/issues/6062
       extraConfig = ''
-                env = HYPRCURSOR_THEME,rose-pine-hyprcursor
-                env = XCURSOR_THEME,rose-pine-hyprcursor
-                env = HYPRCURSOR_SIZE,32
+        env = HYPRCURSOR_THEME,rose-pine-hyprcursor
+        env = XCURSOR_THEME,rose-pine-hyprcursor
+        env = HYPRCURSOR_SIZE,32
 
-                # Emacs programs launched using the key chord SUPER+e followed by 'key'
-                bind = $mainMod, E, submap, emacs # will switch to a submap called 'emacs'
-                submap = emacs # will start a submap called "emacs"
-                # sets repeatable binds for resizing the active window
-                binde = , E, exec, $reset $emacs
-                binde = , D, exec, $reset $emacs --eval '(dired "~/Documents/dotFiles/nix-darwin")'
+        # Emacs programs launched using the key chord SUPER+e followed by 'key'
+        bind = $mainMod, E, submap, emacs # will switch to a submap called 'emacs'
+        submap = emacs # will start a submap called "emacs"
+        # sets repeatable binds for resizing the active window
+        binde = , E, exec, $reset $emacs
+        binde = , D, exec, $reset $emacs --eval '(dired "~/Documents/dotFiles/nix-darwin")'
+        # binde = , P, exec, $reset $emacs --eval '(progn (require "\"'projectile) (projectile-add-known-project "~/Documents/dotFiles/nix-darwin") (projectile-switch-project-by-name "~/Documents/dotFiles/nix-darwin"))'
         binde = , N, exec, $reset $emacs --eval '(find-file "~/Documents/zettelkasten/org-roam/20240828204250-knowlege_base.org")'
-                binde = , B, exec, $reset $emacs --eval '(ibuffer)'
-                binde = , H, exec, $reset $emacs --eval '(dired nil)'
-                binde = , S, exec, $reset $emacs --eval '(eshell)'
-                binde = , V, exec, $reset $emacs --eval '(vterm)'
-                binde = , F4, exec, $reset killall emacs
-                # use reset to go back to the global submap
-                bind = , escape, submap, reset
-                # will reset the submap, which will return to the global submap
-                submap = reset
+        binde = , B, exec, $reset $emacs --eval '(ibuffer)'
+        binde = , H, exec, $reset $emacs --eval '(dired nil)'
+        binde = , S, exec, $reset $emacs --eval '(eshell)'
+        binde = , V, exec, $reset $emacs --eval '(vterm)'
+        binde = , F4, exec, $reset killall emacs
+        # use reset to go back to the global submap
+        bind = , escape, submap, reset
+        # will reset the submap, which will return to the global submap
+        submap = reset
 
 
-                bind = $mainMod, P, submap, programs
-                submap = programs
-                # sets repeatable binds for resizing the active window
-                binde = , T, exec, $reset $filemanager
-                binde = , Q, exec, $reset $terminal
-                # use reset to go back to the global submap
-                bind = , escape, submap, reset
-                # will reset the submap, which will return to the global submap
-                submap = reset
+        bind = $mainMod, P, submap, programs
+        submap = programs
+        # sets repeatable binds for resizing the active window
+        binde = , T, exec, $reset $filemanager
+        binde = , Q, exec, $reset $terminal
+        # use reset to go back to the global submap
+        bind = , escape, submap, reset
+        # will reset the submap, which will return to the global submap
+        submap = reset
 
       '';
       settings = {
@@ -143,6 +144,8 @@
             # launch program menu
             "SHIFTSUPER, P, exec, $menu"
             "SHIFTSUPER, O, exec, flameshot gui --clipboard"
+            "SHIFTSUPER, Q, exec, $emacs --eval '(vterm)'"
+
             # scripts
             # "$mainMod, f, exec, ${lib.getExe myScript}"
             # volume control
