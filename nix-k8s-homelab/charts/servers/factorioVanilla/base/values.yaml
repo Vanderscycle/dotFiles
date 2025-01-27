@@ -6,7 +6,7 @@ rcon:
     ## If you have an existing claim, set your name here
     # existingClaim: "existing-claim-name"
   ## If you like to use a specific storageClassName, set the name. Leave it blank for the default class
-  storageClassName: "local-storage"
+  storageClassName: "local-path"
   ## If you have annotations to spin up a PV i.e. the location. Remove the curly braces
   annotations: {}
   ## If you have additional labels to apply to the volume
