@@ -8,4 +8,5 @@ resources:
   - local-path-provisioner.yaml
   - harbor.yaml
   - keel.yaml
+  - lpp.yaml
   # - secrets
