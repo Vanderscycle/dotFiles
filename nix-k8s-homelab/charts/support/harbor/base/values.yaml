@@ -16,7 +16,7 @@ persistence:
       # Specify the "storageClass" used to provision the volume. Or the default
       # StorageClass will be used (the default).
       # Set it to "-" to disable dynamic provisioning
-      storageClass: "local-storage"
+      storageClass: "local-path"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
@@ -24,7 +24,7 @@ persistence:
     jobservice:
       jobLog:
         existingClaim: ""
-        storageClass: "local-storage"
+        storageClass: "local-path"
         subPath: ""
         accessMode: ReadWriteOnce
         size: 1Gi
@@ -33,7 +33,7 @@ persistence:
     # be ignored
     database:
       existingClaim: ""
-      storageClass: "local-storage"
+      storageClass: "local-path"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
@@ -42,14 +42,14 @@ persistence:
     # be ignored
     redis:
       existingClaim: ""
-      storageClass: "local-storage"
+      storageClass: "local-path"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 1Gi
       annotations: {}
     trivy:
       existingClaim: ""
-      storageClass: "local-storage"
+      storageClass: "local-path"
       subPath: ""
       accessMode: ReadWriteOnce
       size: 5Gi
