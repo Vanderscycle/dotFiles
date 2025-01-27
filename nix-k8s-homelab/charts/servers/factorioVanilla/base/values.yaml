@@ -1,7 +1,16 @@
 rcon:
   external: false
   # passwordSecret: 'factorio-admin-secret'
-
+  dataDir:
+    Size: "1Gi"
+    ## If you have an existing claim, set your name here
+    # existingClaim: "existing-claim-name"
+  ## If you like to use a specific storageClassName, set the name. Leave it blank for the default class
+  storageClassName: "local-storage"
+  ## If you have annotations to spin up a PV i.e. the location. Remove the curly braces
+  annotations: {}
+  ## If you have additional labels to apply to the volume
+  labels: {}
 resources:
   requests:
     cpu: 1.5
