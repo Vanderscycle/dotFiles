@@ -288,7 +288,7 @@ server_settings:
     lan: true
 
   # When set to true, the server will only allow clients that have a valid Factorio.com account
-  require_user_verification: false
+  require_user_verification: true
   # optional, default value is 0. 0 means unlimited.
   max_upload_in_kilobytes_per_second: 0
   # optional, default value is 5. 0 means unlimited.
