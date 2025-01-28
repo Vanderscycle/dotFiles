@@ -15,6 +15,9 @@
 
 ## Pi-hole configuration to be set via arguments/env. variables
 ##
+logLevel: "debug"
+provider: "pihole"
+registry: "noop"
 pihole:
   ## @param pihole.server When using the Pi-hole provider, specify The address of the Pi-hole web server
   ##
