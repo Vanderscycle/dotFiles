@@ -143,7 +143,8 @@
             "$mainMod SHIFT, j, resizeactive, 0 120"
             # launch program menu
             "SHIFTSUPER, P, exec, $menu"
-            "SHIFTSUPER, O, exec, flameshot gui --clipboard"
+            "SHIFTSUPER, O, exec, grim -g '$(slurp)' ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png"
+            # "SHIFTSUPER, O, exec, flameshot gui --clipboard"
             "SHIFTSUPER, Q, exec, $emacs --eval '(vterm)'"
 
             # scripts
