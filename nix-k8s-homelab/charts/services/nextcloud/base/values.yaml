@@ -78,7 +78,7 @@ nextcloud:
   ## Use an existing secret
   existingSecret:
     enabled: true
-    secretName: nextcloud-secret
+    secretName: nextcloud
     usernameKey: nextcloud-username
     passwordKey: nextcloud-password
     # tokenKey: nextcloud-token
