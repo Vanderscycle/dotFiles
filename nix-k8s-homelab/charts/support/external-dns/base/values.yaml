@@ -30,4 +30,4 @@ pihole:
   password: "replaceme"
   ## @param pihole.secretName Use an existing secret with key "pihole_password" defined.
   ##
-  secretName: "support-external-dns"
+  # secretName: "support-external-dns"
