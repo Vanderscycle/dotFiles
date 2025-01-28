@@ -10,33 +10,9 @@ spec:
     server: https://kubernetes.default.svc
   project: support
   source:
-    ignoreMissingValueFiles: true
-    chart: external-dns
-    repoURL: registry-1.docker.io/bitnamicharts  # note: the oci:// syntax is not included.
-    targetRevision: 8.7.2
-    helm:
-      values: |
-        logLevel: "debug"
-        provider: "pihole"
-        registry: "noop"
-        pihole:
-          ## @param pihole.server When using the Pi-hole provider, specify The address of the Pi-hole web server
-          ##
-          server: "http://192.168.1.152"
-          ## @param pihole.tlsSkipVerify When using the Pi-hole provider, specify wheter to skip verification of any TLS certificates served by the Pi-hole web server
-          ##
-          tlsSkipVerify: ""
-          ## @param pihole.password When using the Pi-hole provider, specify a password to use
-          ##
-          password: ""
-          ## @param pihole.secretName Use an existing secret with key "pihole_password" defined.
-          ##
-          secretName: "external-dns"
-
-      # INFO: does not work
-      # valueFiles:
-      # - external-dns-values.yaml
-      # ignoreMissingValueFiles: true
+    path: charts/support/external-dns/overlays/non-prod
+    repoURL: git@github.com:vancycles-industries/infrastructure.git
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true

@@ -7,9 +7,9 @@ resources:
   - secrets
 
 helmCharts:
-  - name: bitnami/external-dns
-    version: 8.7.2
-    repo: https://charts.bitnami.com/bitnami
+  - name: external-dns
+    version: 8.7.3
+    repo: oci://registry-1.docker.io/bitnamicharts
     valuesFile: values.yaml
     namespace: external-dns
     releaseName: support

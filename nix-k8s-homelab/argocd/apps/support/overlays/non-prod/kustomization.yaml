@@ -13,6 +13,16 @@ patches:
         value: git@github.com:Vanderscycle/dotFiles.git
       - op: replace
         path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/external-dns/overlays/non-prod
+    target:
+      kind: Application
+      name: external-dns
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
+        path: /spec/source/path
         value: nix-k8s-homelab/charts/support/lpp/overlays/non-prod
     target:
       kind: Application
