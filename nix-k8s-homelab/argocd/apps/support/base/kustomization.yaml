@@ -8,4 +8,3 @@ resources:
   - harbor.yaml
   - keel.yaml
   - lpp.yaml
-  - secrets
