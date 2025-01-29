@@ -8,10 +8,9 @@ servers:
     port: 53
     plugins:
       - name: kubernetes
-        parameters: cluster.local in-addr.arpa ip6.arpa
+        parameters: cluster.local
         configBlock: |
-          pods insecure
-          fallthrough in-addr.arpa ip6.arpa
+          kubernetes cluster.local
           ttl 30
       - name: forward
         parameters: ". 192.168.1.152"
