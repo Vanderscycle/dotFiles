@@ -41,6 +41,7 @@
 
   plastic_printer = {
     enable = true;
+    orcaslicer.enable = true;
     # bambustudio.enable = true;
     # superslicer.enable = true;
   };
