@@ -4,6 +4,7 @@
   inputs,
   ...
 }:
+# https://daiderd.com/nix-darwin/manual/index.html
 {
   imports = [
     # ./modules/services/appleTouchId.nix
@@ -42,12 +43,8 @@
     shell = pkgs.nushell;
   };
   home-manager.backupFileExtension = "backup";
-  # fonts.enableFontDir = true;
   fonts.packages = with pkgs; [
     jetbrains-mono
-    # nerd-font-patcher
-    # recursive
-    # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   environment = {
@@ -63,6 +60,7 @@
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=3600
   '';
+
   # Homebrew needs to be installed on its own!
   homebrew = {
     enable = true;
