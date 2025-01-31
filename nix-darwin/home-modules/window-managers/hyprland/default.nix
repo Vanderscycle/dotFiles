@@ -21,6 +21,9 @@
       flameshot
       wf-recorder # video recorder for wayland
       waypaper
+      # screenshot since flameshot isn't working
+      grim
+      slurp
     ];
   };
 }

@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-dns
+  name: local-path-provisioner
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   destination:
-    namespace: external-dns
+    namespace: lpp
     server: https://kubernetes.default.svc
   project: support
   source:
-    path: charts/support/external-dns/overlays/non-prod
+    path: charts/support/lpp/overlays/non-prod
     repoURL: git@github.com:vancycles-industries/infrastructure.git
     targetRevision: main
   syncPolicy:
