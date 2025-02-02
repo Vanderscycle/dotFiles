@@ -17,6 +17,7 @@
     home.packages = with pkgs; [
       hyperfine # how xz was discovered
       curlie # curl + httpie baby
+      unzip
     ];
     programs = {
       eza = {

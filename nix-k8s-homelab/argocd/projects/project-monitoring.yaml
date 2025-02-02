@@ -9,12 +9,12 @@ metadata:
 spec:
   description: Infrastructure declarative config for monitoring
   destinations:
-    - namespace: uptimekuma
-      server: https://kubernetes.default.svc
-    - namespace: datadog
-      server: https://kubernetes.default.svc
-    - namespace: kube-system
-      server: https://kubernetes.default.svc
+    - namespace: "*"
+      server: "*"
+    # - namespace: uptimekuma
+    #   server: https://kubernetes.default.svc
+    # - namespace: kube-system
+    #   server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
@@ -23,7 +23,6 @@ spec:
       kind: "*"
   sourceRepos:
     - "git@github.com:vancycles-industries/infrastructure.git"
+    - "git@github.com:Vanderscycle/dotFiles.git"
   sourceNamespaces:
-    - "uptimekuma"
-    - "datadog"
-    - "kube-system"
+    - "*"

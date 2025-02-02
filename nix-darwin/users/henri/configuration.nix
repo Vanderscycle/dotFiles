@@ -22,6 +22,7 @@
   # cron
   cron.downloadFolderOrganizer.enable = true;
   # services
+  bluetooth.enable = true;
   internationalisation.enable = true;
   docker.enable = true;
   transmission.enable = false;

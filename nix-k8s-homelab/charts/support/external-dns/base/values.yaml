@@ -27,7 +27,7 @@ pihole:
   tlsSkipVerify: ""
   ## @param pihole.password When using the Pi-hole provider, specify a password to use
   ##
-  password: "replaceme"
+  password: "replaceme" # has to be the api key from pihole
   ## @param pihole.secretName Use an existing secret with key "pihole_password" defined.
   ##
   # secretName: "support-external-dns"

@@ -102,3 +102,13 @@ patches:
     target:
       kind: Application
       name: application-projects
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: argocd/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: application-monitoring

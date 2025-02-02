@@ -9,3 +9,4 @@ resources:
   - project-support.yaml
   - project-services.yaml
   - project-servers.yaml
+  - project-monitoring.yaml
