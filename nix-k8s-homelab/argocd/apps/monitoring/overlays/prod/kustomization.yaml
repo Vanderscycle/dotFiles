@@ -10,21 +10,21 @@ patches:
   - patch: |-
       - op: replace
         path: /spec/source/path
-        value: nix-k8s-homelab/monitoring/prometheus-graphana/overlays/prod
+        value: nix-k8s-homelab/charts/monitoring/prometheus-graphana/overlays/prod
     target:
       kind: Application
       name: prometheus-graphana
   - patch: |-
       - op: replace
         path: /spec/source/path
-        value: nix-k8s-homelab/monitoring/loki/overlays/prod
+        value: nix-k8s-homelab/charts/monitoring/loki/overlays/prod
     target:
       kind: Application
       name: loki
   - patch: |-
       - op: replace
         path: /spec/source/path
-        value: nix-k8s-homelab/monitoring/tempo/overlays/prod
+        value: nix-k8s-homelab/charts/monitoring/tempo/overlays/prod
     target:
       kind: Application
       name: tempo
