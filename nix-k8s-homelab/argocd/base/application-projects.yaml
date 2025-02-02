@@ -10,7 +10,7 @@ spec:
   project: applications
   source:
     path: nix-k8s-homelab/argocd/projects
-    repoURL: git@github.com:vancycles-industries/infrastructure.git
+    repoURL: git@github.com:Vanderscycle/dotFiles.git
     targetRevision: main
   syncPolicy:
     automated:
