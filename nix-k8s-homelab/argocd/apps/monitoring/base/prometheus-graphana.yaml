@@ -11,11 +11,11 @@ spec:
     namespace: monitoring
   project: default
   source:
-    repoURL: https://github.com/prometheus-community/helm-charts.git
-    path: charts/kube-prometheus-stack/crds/
-    targetRevision: main
-    directory:
-      recurse: true
+    chart: prometheus-operator-crds
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 17.0.2
+    # helm:
+    #   values: |
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
