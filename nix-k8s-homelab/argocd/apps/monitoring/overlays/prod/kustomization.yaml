@@ -11,6 +11,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/monitoring/prometheus-graphana/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: prometheus-graphana
@@ -18,6 +21,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/monitoring/loki/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
       name: loki
@@ -25,13 +31,9 @@ patches:
       - op: replace
         path: /spec/source/path
         value: nix-k8s-homelab/charts/monitoring/tempo/overlays/prod
-    target:
-      kind: Application
-      name: tempo
-  - patch: |-
       - op: replace
         path: /spec/source/repoURL
         value: git@github.com:Vanderscycle/dotFiles.git
     target:
       kind: Application
-      name: .*
+      name: tempo
