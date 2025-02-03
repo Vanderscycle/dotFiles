@@ -9,12 +9,14 @@ metadata:
 spec:
   description: Infrastructure declarative config for monitoring
   destinations:
-    - namespace: "*"
-      server: "*"
-    # - namespace: uptimekuma
-    #   server: https://kubernetes.default.svc
-    # - namespace: kube-system
-    #   server: https://kubernetes.default.svc
+    - namespace: loki
+      server: https://kubernetes.default.svc
+    - namespace: prometheus-graphana
+      server: https://kubernetes.default.svc
+    - namespace: tempo
+      server: https://kubernetes.default.svc
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
@@ -24,5 +26,6 @@ spec:
   sourceRepos:
     - "git@github.com:vancycles-industries/infrastructure.git"
     - "git@github.com:Vanderscycle/dotFiles.git"
+    - "https://prometheus-community.github.io/helm-charts"
   sourceNamespaces:
     - "*"
