@@ -8,8 +8,8 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
-  project: default
+    namespace: prometheus-graphana
+  project: monitoring
   source:
     chart: prometheus-operator-crds
     repoURL: https://prometheus-community.github.io/helm-charts
