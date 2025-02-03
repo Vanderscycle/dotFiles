@@ -10,7 +10,7 @@
 ##
 ingress:
   enabled: true
-  # className: nginx
+  className: nginx
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     # nginx.ingress.kubernetes.io/ssl-passthrough: true
@@ -55,10 +55,6 @@ ingress:
 
 service:
   type: LoadBalancer
-
-phpClientHttpsFix:
-  enabled: false
-  protocol: https
 
 nextcloud:
   host: nextcloud.vandersleyen.dev
