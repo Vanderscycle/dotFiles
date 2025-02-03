@@ -5,14 +5,6 @@
 ## ref: https://hub.docker.com/r/library/nextcloud/tags/
 ##
 
-image:
-  repository: nextcloud
-  # tag: 24.0.3-apache
-  pullPolicy: IfNotPresent
-  # pullSecrets:
-  #   - myRegistrKeySecretName
-
-
 ## Allowing use of ingress controllers
 ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ##
@@ -61,12 +53,8 @@ ingress:
   path: /
   pathType: Prefix
 
-# Allow configuration of lifecycle hooks
-# ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
-lifecycle:
-  {}
-  # postStartCommand: []
-  # preStopCommand: []
+service:
+  type: LoadBalancer
 
 phpClientHttpsFix:
   enabled: false
