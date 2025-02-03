@@ -96,4 +96,4 @@ patches:
         value: nix-k8s-homelab/charts/support/metallb/overlays/non-prod
     target:
       kind: Application
-      name: ingress-nginx
+      name: metallb
