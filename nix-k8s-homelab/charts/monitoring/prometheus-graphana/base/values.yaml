@@ -3,40 +3,6 @@
 ## Declare variables to be passed into your templates.
 ## Install Prometheus Operator CRDs
 ##
-crds:
-  enabled: true
-  ## The CRD upgrade job mitigates the limitation of helm not being able to upgrade CRDs.
-  ## The job will apply the CRDs to the cluster before the operator is deployed, using helm hooks.
-  ## It deploy a corresponding clusterrole, clusterrolebinding and serviceaccount to apply the CRDs.
-  ## This feature is in preview, off by default and may change in the future.
-  upgradeJob:
-    enabled: false
-    image:
-      busybox:
-        registry: docker.io
-        repository: busybox
-        tag: "latest"
-        sha: ""
-        pullPolicy: IfNotPresent
-      kubectl:
-        registry: registry.k8s.io
-        repository: kubectl
-        tag: ""  # defaults to the Kubernetes version
-        sha: ""
-        pullPolicy: IfNotPresent
-
 prometheusOperator:
   admissionWebhooks:
-    enabled: true
-    patch:
-      enabled: true
-    serviceAccount:
-      create: true
-      name: monitoring-kube-prometheus-admission
-      automountServiceAccountToken: true
-    rbac:
-      create: true
-      rules:
-        - apiGroups: [""]
-          resources: ["secrets"]
-          verbs: ["get", "list", "watch"]
+    enabled: false
