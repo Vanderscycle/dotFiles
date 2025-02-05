@@ -16,7 +16,7 @@
     # programs
     ../../nix-modules/programs
     # services
-    ../../nix-modules/services
+    # ../../nix-modules/services
     # cron
     ../../nix-modules/cron
 
