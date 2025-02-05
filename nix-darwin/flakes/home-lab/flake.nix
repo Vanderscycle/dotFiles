@@ -10,6 +10,11 @@
 
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
+    hosts = {
+      url = "github:StevenBlack/hosts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +33,7 @@
 
   outputs =
     {
+      hosts,
       nixpkgs,
       disko,
       nixos-facter-modules,
