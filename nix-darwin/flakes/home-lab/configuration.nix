@@ -4,7 +4,6 @@
 
 {
   inputs,
-  system,
   config,
   lib,
   pkgs,
@@ -45,7 +44,7 @@
   };
 
   nixpkgs = {
-    hostPlatform = system;
+    hostPlatform = "x86_64-linux";
     config.allowUnfree = true;
   };
   # Use the systemd-boot EFI boot loader.
