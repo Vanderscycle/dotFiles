@@ -84,6 +84,7 @@
             system = "x86_64-linux";
             modules = [
               # Modules
+              hosts.nixosModule
               # disko.nixosModules.disko
               # ./disko-config.nix
               ./configuration.nix
