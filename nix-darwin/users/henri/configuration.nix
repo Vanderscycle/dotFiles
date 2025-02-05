@@ -4,6 +4,7 @@
   username,
   hostname,
   hosts,
+  system,
   ...
 }:
 {

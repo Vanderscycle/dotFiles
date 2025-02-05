@@ -3,6 +3,8 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
+  inputs,
+  system,
   config,
   lib,
   pkgs,
@@ -12,20 +14,40 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
+    # programs
+    ../../nix-modules/programs
+    # services
+    ../../nix-modules/services
+    # cron
     ../../nix-modules/cron
+
+    ./hardware-configuration.nix
   ];
 
   cron.configSync.enable = true;
   cron.dotFile.path = "/home/proxmox/dotFiles";
 
   nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+    optimise.automatic = true;
+    settings = {
+      experimental-features = "nix-command flakes";
+      substituters = [ "https://hyprland.cachix.org" ];
+      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    };
+
+    gc = {
+      automatic = true;
+      # interval = "weekly";
+      options = "--delete-older-than 14d";
+    };
+
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
   };
 
+  nixpkgs = {
+    hostPlatform = system;
+    config.allowUnfree = true;
+  };
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
