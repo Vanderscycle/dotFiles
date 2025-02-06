@@ -3,3 +3,12 @@ kind: Kustomization
 
 resources:
   - ../../base
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/type
+        value: LoadBalancer
+    target:
+      kind: Service
+      name: services-flame
