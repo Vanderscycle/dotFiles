@@ -10,3 +10,4 @@ spec:
   issuerRef:
     name: letsencrypt-cluster-issuer-non-prod
     kind: ClusterIssuer
+    group: cert-manager.io
