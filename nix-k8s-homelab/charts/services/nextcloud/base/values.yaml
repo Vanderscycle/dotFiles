@@ -52,6 +52,9 @@ ingress:
   path: /
   pathType: Prefix
 
+service:
+  type: LoadBalancer
+
 nextcloud:
   host: nextcloud.vandersleyen.dev
   # username: admin
