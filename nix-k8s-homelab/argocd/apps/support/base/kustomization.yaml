@@ -3,8 +3,8 @@ kind: Kustomization
 
 resources:
   # - external-dns.yaml
-  - cert-manager.yaml
-  - ingress-nginx.yaml
+  # - cert-manager.yaml
+  # - ingress-nginx.yaml
   - metallb.yaml
   # - coredns.yaml
   - harbor.yaml
