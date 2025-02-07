@@ -6,4 +6,4 @@ resources:
 
 patches:
 - path: ../patches/patch-leases-permission.yaml
-- path: ../patch-leases-permission-cain.yaml
+- path: ../patches/patch-leases-permission-cain.yaml
