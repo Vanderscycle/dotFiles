@@ -9,9 +9,11 @@ metadata:
 spec:
   description: Infrastructure declarative config for monitoring
   destinations:
-    - namespace: uptimekuma
+    - namespace: loki
       server: https://kubernetes.default.svc
-    - namespace: datadog
+    - namespace: prometheus-graphana
+      server: https://kubernetes.default.svc
+    - namespace: tempo
       server: https://kubernetes.default.svc
     - namespace: kube-system
       server: https://kubernetes.default.svc
@@ -23,7 +25,7 @@ spec:
       kind: "*"
   sourceRepos:
     - "git@github.com:vancycles-industries/infrastructure.git"
+    - "git@github.com:Vanderscycle/dotFiles.git"
+    - "https://prometheus-community.github.io/helm-charts"
   sourceNamespaces:
-    - "uptimekuma"
-    - "datadog"
-    - "kube-system"
+    - "*"

@@ -20,6 +20,9 @@ spec:
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
+  namespaceResourceWhitelist:
+    - group: "*"
+      kind: "*"
   sourceRepos:
     - "git@github.com:vancycles-industries/infrastructure.git"
     - "git@github.com:Vanderscycle/dotFiles.git"

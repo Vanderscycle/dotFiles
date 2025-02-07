@@ -5,29 +5,21 @@
 ## ref: https://hub.docker.com/r/library/nextcloud/tags/
 ##
 
-image:
-  repository: nextcloud
-  # tag: 24.0.3-apache
-  pullPolicy: IfNotPresent
-  # pullSecrets:
-  #   - myRegistrKeySecretName
-
-
 ## Allowing use of ingress controllers
 ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ##
 ingress:
   enabled: true
-  # className: nginx
+  className: nginx
   annotations:
-    # nginx.ingress.kubernetes.io/ssl-passthrough: true
-    # nginx.ingress.kubernetes.io/force-ssl-redirect: true
-    # kubernetes.io/ingress.class: nginx
-    # cert-manager.io/cluster-issuer: "letsencrypt-non-prod"
+    nginx.ingress.kubernetes.io/ssl-passthrough: true
+    nginx.ingress.kubernetes.io/force-ssl-redirect: true
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer-non-prod"
+    # nginx.ingress.kubernetes.io/rewrite-target: /
 
   #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
-  #  kubernetes.io/tls-acme: "true"
-  #  cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
   #  nginx.ingress.kubernetes.io/server-snippet: |-
   #    server_tokens off;
   #    proxy_hide_header X-Powered-By;
@@ -60,16 +52,8 @@ ingress:
   path: /
   pathType: Prefix
 
-# Allow configuration of lifecycle hooks
-# ref: https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/
-lifecycle:
-  {}
-  # postStartCommand: []
-  # preStopCommand: []
-
-phpClientHttpsFix:
-  enabled: false
-  protocol: https
+service:
+  type: LoadBalancer
 
 nextcloud:
   host: nextcloud.vandersleyen.dev

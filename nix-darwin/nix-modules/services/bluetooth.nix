@@ -16,7 +16,7 @@
   config = lib.mkIf config.bluetooth.enable {
     # Enable Bluetooth
     hardware.bluetooth.enable = true;
-    hardware.bluetooth.powerOnBoot = false;
+    hardware.bluetooth.powerOnBoot = true;
     services.blueman.enable = true;
   };
 }

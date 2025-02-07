@@ -1,3 +1,17 @@
-## Default values for kubeseal 
+## Default values for kubeseal
 ## This is a YAML-formatted file.
 ## Declare variables to be passed into your templates.
+
+ingress:
+  # -- Enable and configure ingress settings for the chart under this key.
+  # @default -- See [values.yaml](./values.yaml)
+  main:
+    enabled: false
+    # hosts:
+    #   - host: chart-example.local
+    #     paths:
+    #       - path: /
+    # tls:
+    #   - secretName: chart-example.local-tls
+    #     hosts:
+    #       - chart-example.local

@@ -13,7 +13,7 @@
     ./flameshot.nix
     ./fuzzel.nix
     ./fzf.nix
-    ./ghostty.nix
+    # ./ghostty.nix
     ./git.nix
     ./k9s.nix
     ./keychain.nix

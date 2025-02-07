@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: metallb
+
+resources:
+  - metallb-config.yaml
+  # - secrets
+
+helmCharts:
+  - name: metallb
+    version: 6.4.4
+    repo: oci://registry-1.docker.io/bitnamicharts
+    valuesFile: values.yaml
+    namespace: metallb
+    releaseName: support

@@ -77,3 +77,23 @@ patches:
     target:
       kind: Application
       name: local-path-provisioner.yaml
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/ingress-nginx/overlays/prod
+    target:
+      kind: Application
+      name: ingress-nginx
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/metallb/overlays/non-prod
+    target:
+      kind: Application
+      name: metallb

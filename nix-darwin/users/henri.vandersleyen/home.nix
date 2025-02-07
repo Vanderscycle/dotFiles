@@ -10,6 +10,8 @@
 
 {
   imports = [
+
+    # programs
     ../../home-modules/programs/nnn.nix
     ../../home-modules/programs/kitty.nix
     ../../home-modules/programs/starship.nix

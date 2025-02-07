@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    catppuccin.url = "github:catppuccin/nix";
 
     # disko = {
     # url = "github:nix-community/disko";
@@ -8,6 +9,21 @@
     # };
 
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+
+    hosts = {
+      url = "github:StevenBlack/hosts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -17,10 +33,14 @@
 
   outputs =
     {
+      hosts,
       nixpkgs,
       disko,
       nixos-facter-modules,
       sops-nix,
+      nixvim,
+      catppuccin,
+      home-manager,
       ...
     }@inputs:
     let
@@ -58,11 +78,29 @@
             system = "x86_64-linux";
             modules = [
               # Modules
+              hosts.nixosModule
               # disko.nixosModules.disko
               # ./disko-config.nix
-              ./hardware-configuration.nix
               ./configuration.nix
               ./sops.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                  username = "proxmox";
+                  hostname = name;
+                  system = "x86_64-linux";
+                };
+                home-manager.users."proxmox" = {
+                  imports = [
+                    nixvim.homeManagerModules.nixvim
+                    catppuccin.homeManagerModules.catppuccin
+                    ./home.nix
+                  ];
+                };
+              }
             ];
           };
         }) nodes
