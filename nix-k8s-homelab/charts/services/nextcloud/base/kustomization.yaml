@@ -5,7 +5,7 @@ namespace: nextcloud
 
 resources:
   - secrets
-  # - certificate.yaml
+  - certificate.yaml
 
 helmCharts:
   - name: nextcloud
