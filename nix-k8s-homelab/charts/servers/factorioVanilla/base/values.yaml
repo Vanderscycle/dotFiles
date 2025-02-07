@@ -271,7 +271,7 @@ serverPassword:
 ## @param server_settings.maximum_segment_size_peer_count Minimum network messages segment count
 server_settings:
   # Your Instance Name
-  name: "[BETA] helm-kubernetes-argocd-vanilla"
+  name: "[k3s] helm-kubernetes-argocd-vanilla"
   # Your Instance Description
   description: "Factorio running on Kubernetes"
   tags:
