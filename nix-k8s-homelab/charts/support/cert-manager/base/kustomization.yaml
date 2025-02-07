@@ -3,13 +3,13 @@ kind: Kustomization
 
 namespace: certmanager
 resources:
-  - https://github.com/cert-manager/cert-manager/releases/download/v1.16.3/cert-manager.crds.yaml
+  - https://github.com/cert-manager/cert-manager/releases/download/v1.17.0/cert-manager.crds.yaml
   # - secrets
   - clusterIssuer.yaml
 
 helmCharts:
   - name: cert-manager
-    version: 1.16.3
+    version: 1.17.0
     repo: https://charts.jetstack.io
     valuesFile: values.yaml
     namespace: certmanager
