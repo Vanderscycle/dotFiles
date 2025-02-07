@@ -5,6 +5,8 @@ namespace: certmanager
 resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.17.0/cert-manager.crds.yaml
   - secrets
+  - cert-manager-leases-role.yaml
+  - cert-manager-leases-rolebinding.yaml
   # - clusterIssuer.yaml
 
 helmCharts:
