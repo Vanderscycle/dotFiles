@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - ../../base
 
-patches:
-- path: ../patches/patch-leases-permission.yaml
-- path: ../patches/patch-leases-permission-cain.yaml
+# patches:
+# - path: ../patches/patch-leases-permission.yaml
+# - path: ../patches/patch-leases-permission-cain.yaml
