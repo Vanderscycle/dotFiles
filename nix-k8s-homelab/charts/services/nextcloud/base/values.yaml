@@ -10,7 +10,7 @@
 ##
 ingress:
   enabled: true
-  className: nginx
+  # className: nginx
   annotations:
     nginx.ingress.kubernetes.io/ssl-passthrough: true
     nginx.ingress.kubernetes.io/force-ssl-redirect: true
@@ -51,9 +51,6 @@ ingress:
   labels: {}
   path: /
   pathType: Prefix
-
-service:
-  type: LoadBalancer
 
 nextcloud:
   host: nextcloud.vandersleyen.dev

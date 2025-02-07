@@ -9,11 +9,11 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-secret-non-prod
     solvers:
-      - dns01:
-          cloudflare:
-            apiTokenSecretRef:
-              name: cert-manager-secret
-              key: api-token
-      # - http01:
-      #     ingress:
-      #       class: nginx
+      # - dns01:
+      #     cloudflare:
+      #       apiTokenSecretRef:
+      #         name: cert-manager-secret
+      #         key: api-token
+      - http01:
+          ingress:
+            class: nginx
