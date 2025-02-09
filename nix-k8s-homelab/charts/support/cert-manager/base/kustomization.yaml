@@ -8,6 +8,8 @@ resources:
   # kube-system
   # - cert-manager-leases-role.yaml
   # - cert-manager-leases-rolebinding.yaml
+  # - cert-manager-leases-clusterrole.yaml
+  # - cert-manager-cainjector-leases-clusterrolebinding.yaml
   # - clusterIssuer.yaml
 
 helmCharts:

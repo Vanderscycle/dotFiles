@@ -3,7 +3,8 @@ kind: Kustomization
 
 namespace: ingress-nginx
 
-# resources:
+resources:
+  - certificate.yaml
 #   - secrets
 
 helmCharts:
