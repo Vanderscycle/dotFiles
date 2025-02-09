@@ -19,3 +19,9 @@ helmCharts:
     valuesFile: values.yaml
     namespace: certmanager
     releaseName: support
+  - name: cert-manager-webhook-namecheap
+    version: 0.1.2
+    repo: http://zvonimirbedi.github.io/cert-manager-webhook-namecheap/
+    valuesFile: values-namecheap.yaml
+    namespace: certmanager
+    releaseName: support
