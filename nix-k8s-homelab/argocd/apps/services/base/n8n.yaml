@@ -20,15 +20,17 @@ spec:
         ingress:
           enabled: false
           annotations:
+            # nginx.ingress.kubernetes.io/ssl-passthrough: true
+            nginx.ingress.kubernetes.io/force-ssl-redirect: true
             kubernetes.io/ingress.class: nginx
-            kubernetes.io/tls-acme: "true"
+            cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer-non-prod"
           hosts:
-            - host: chart-example.local
-              paths: []
+            - n8n.vandersleyen.dev
           tls: []
+          # tls:
+          #   - secretName: n8n-tls
           #  - secretName: chart-example-tls
-          #    hosts:
-          #      - chart-example.local
+
   syncPolicy:
     automated:
       prune: true

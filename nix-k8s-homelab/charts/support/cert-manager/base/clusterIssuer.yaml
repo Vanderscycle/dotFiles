@@ -21,17 +21,18 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-namecheap
+  name: letsencrypt-cluster-issuer-non-prod # letsencrypt-namecheap
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: your-email@example.com
+    email: henri-vandersleyen@protonmail.com
     privateKeySecretRef:
-      name: namecheap-credentials
+      name: support-cert-manager-webhook-namecheap-webhook-tls
     solvers:
     - dns01:
         webhook:
-          groupName: acme.vandersleyen.dev
+          # groupName: acme.vandersleyen.dev
+          groupName: acme.namecheap.com
           solverName: namecheap
           config:
             apiKeySecretRef:
@@ -43,4 +44,4 @@ spec:
             clientIpSecretRef:
               name: namecheap-credentials
               key: clientIp
-            # production: true
+            production: true
