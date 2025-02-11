@@ -38,6 +38,7 @@
 
   # programs
   flameshot.enable = true;
+  brave.enable = true;
 
   plastic_printer = {
     enable = true;
@@ -67,7 +68,7 @@
     signingKey = "~/.ssh/endeavourGit.pub";
   };
   keychain.enable = true;
-  keychain.keys = "/home/henri/.ssh/endeavourGit";
+  keychain.keys = "/home/${username}/.ssh/endeavourGit";
   # cowsay.enable = lib.mkForce true;
 
   # Makes sense for user specific applications that shouldn't be available system-wide
