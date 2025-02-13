@@ -221,7 +221,7 @@ service:
   ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
   ipFamilies:
     - IPv4
-  port: 31497
+  port: 31498
   ## If you are able to map an external IP, set it here
   # externalIPs:
   #  - "192.168.0.1"
