@@ -423,7 +423,7 @@ rconAPI:
   grpcPort: 30111
 
   ingress:
-    enabled: true
+    enabled: false
     hostname: "factorio.example.com"
     className: "nginx"
     annotations:

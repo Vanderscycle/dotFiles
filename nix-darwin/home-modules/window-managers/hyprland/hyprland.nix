@@ -199,6 +199,7 @@
         windowrule = [
           "workspace 1, Emacs"
           "workspace 2, firefox"
+          "workspace 2, brave"
           "workspace 3, discord"
           "workspace 3, Spotify"
           "workspace 3, spotify"
@@ -238,7 +239,7 @@
           "swaync"
           "discord --enable-wayland-ime"
           "spotify"
-          "firefox"
+          "Brave"
           "kitty"
           "flameshot &"
           # "emacs" # TODO: make it spawn out of a shell
