@@ -23,6 +23,18 @@
     ./hardware-configuration.nix
   ];
 
+  # networking
+  # https://nixos.org/manual/nixos/stable/index.html#sec-ipv4
+  networking = {
+    defaultGateway = "192.168.2.1";
+    nameservers = [ "9.9.9.9" ];
+    interfaces.eth0.ipv4.addresses = [
+      {
+        address = "192.168.2.1${meta.index}";
+        prefixLength = 24;
+      }
+    ];
+  };
   cron.configSync.enable = true;
   cron.dotFile.path = "/home/proxmox/dotFiles";
 
@@ -30,8 +42,6 @@
     optimise.automatic = true;
     settings = {
       experimental-features = "nix-command flakes";
-      substituters = [ "https://hyprland.cachix.org" ];
-      trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
 
     gc = {
