@@ -6,9 +6,9 @@ namespace: transmission
 #   - secrets
 
 helmCharts:
-  - name: qbittorrent
-    version: 0.4.1
-    repo: https://charts.gabe565.com
+  - name: transmission
+    version: 1.5.0
+    repo: https://ryuunosukeds3.github.io/helm-charts
     valuesFile: values.yaml
     namespace: transmission
     releaseName: services
