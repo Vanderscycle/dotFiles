@@ -7,3 +7,4 @@ resources:
   # - gitlab.yaml
   - n8n.yaml
   - homepage.yaml
+  - transmission.yaml
