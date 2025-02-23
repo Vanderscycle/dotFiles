@@ -9,7 +9,7 @@
 ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ##
 ingress:
-  enabled: true
+  enabled: false
   # className: nginx
   annotations:
     # nginx.ingress.kubernetes.io/ssl-passthrough: true
