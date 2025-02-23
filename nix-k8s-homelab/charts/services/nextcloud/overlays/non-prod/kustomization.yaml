@@ -3,3 +3,22 @@ kind: Kustomization
 
 resources:
   - ../../base
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/volumeMounts/-
+        value:
+          mountPath: "/Audiobooks"
+          readOnly: false
+          name: smb
+          subPath: Audiobooks
+      - op: add
+        path: /spec/template/spec/volumes/-
+        value:
+          name: smb
+          persistentVolumeClaim:
+            claimName: pvc-nextcloud-smb
+    target:
+      kind: Deployment
+      name: services-nextcloud
