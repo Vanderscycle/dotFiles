@@ -12,7 +12,7 @@
     firefox.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables firefox";
-      default = true;
+      default = false; # ever since they now gather all of your data its not better than chromium based
     };
   };
 
