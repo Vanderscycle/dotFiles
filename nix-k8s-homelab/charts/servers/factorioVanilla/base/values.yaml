@@ -11,7 +11,28 @@ resources:
   #   memory: 1024Mi
   #   cpu: 1000m
 
-
+## @section Port-Fixer Parameters
+## @param port_fixer.enabled Enable the Factorio Port Fixer
+## @param image.repository Factorio port-fixer image repository
+## @param image.tag Factorio port fixer image tag (immutable tags are recommended)
+## @param image.pullPolicy Factorio port fixer image pull policy
+## @param image.port Factorio port to announce via port-fixer, defaults to service.port
+port_fixer:
+  # Adds an extra container that tries to help with connection issues via the public server browser.
+  # This is especially useful when you can’t set up outgoing static port mappings and see log messages like these:
+  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:19296}), expected IP ADDR:({<ip>:58037}))
+  # > Warning ServerMultiplayerManager.cpp:651: Determining own address has failed. Best guess: IP ADDR:({<ip>:58037})
+  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:19297}), expected IP ADDR:({<ip>:58037}))
+  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:24105}), expected IP ADDR:({<ip>:58037}))
+  # Note: Port forwarding for incoming traffic still needs to be set up properly for this to work.
+  # For more info, check out:
+  #   - https://github.com/SQLJames/factorio-server-charts/issues/15
+  enabled: true
+  image:
+    repository: "ghcr.io/zcube/factorio-port-fixer"
+    pullPolicy: Always
+    tag: latest
+  port: ''
 #### Persistence Configuration ####
 ## @section Persistence Configuration
 ## @param persistence.enabled Enable persistence using Persistent Volume Claims
