@@ -64,7 +64,7 @@
   zsh.enable = true;
   nh.flakeLocation = "/Users/${username}/Documents/dotFiles/nix-darwin";
   keychain.enable = true;
-  keychain.keys = "/home/henri/.ssh/knak";
+  keychain.keys = "/home/${username}/.ssh/knak";
 
   git = {
     # userEmail = config.sops.secrets."knak/email".path;

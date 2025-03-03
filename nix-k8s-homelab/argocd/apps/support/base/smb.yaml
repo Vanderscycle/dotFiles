@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gitlab
+  name: smb
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   destination:
-    namespace: gitlab
+    namespace: smb
     server: https://kubernetes.default.svc
-  project: services
+  project: support
   source:
-    path: charts/services/gitlab/overlays/non-prod
+    path: charts/support/smb/overlays/non-prod
     repoURL: git@github.com:vancycles-industries/infrastructure.git
     targetRevision: main
   syncPolicy:

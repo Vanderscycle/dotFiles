@@ -97,3 +97,13 @@ patches:
     target:
       kind: Application
       name: metallb
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/support/smb/overlays/non-prod
+    target:
+      kind: Application
+      name: smb

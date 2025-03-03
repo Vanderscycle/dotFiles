@@ -1,5 +1,6 @@
 .env
 secret.yaml
+secret-*.yaml
 *-kubeconfig.yaml
 
 charts/**/charts/

@@ -46,10 +46,10 @@
     let
       # sudo nixos-rebuild switch --flake ".#node-0"
       nodes = [
-        "node-0"
-        "node-1"
-        "node-2"
-        "node-3"
+        "0"
+        "1"
+        "2"
+        "3"
       ];
     in
     {
@@ -65,14 +65,15 @@
       #   ];
       # };
       nixosConfigurations = builtins.listToAttrs (
-        map (name: {
-          name = name;
+        map (index: {
+          name = "node-${index}";
           value = nixpkgs.lib.nixosSystem {
             specialArgs = {
               username = "proxmox";
               inherit inputs;
               meta = {
-                hostname = name;
+                hostname = "node-${index}";
+                index = index;
               };
             };
             system = "x86_64-linux";
@@ -90,7 +91,7 @@
                 home-manager.extraSpecialArgs = {
                   inherit inputs;
                   username = "proxmox";
-                  hostname = name;
+                  hostname = "node-${index}";
                   system = "x86_64-linux";
                 };
                 home-manager.users."proxmox" = {

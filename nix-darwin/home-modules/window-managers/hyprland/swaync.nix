@@ -13,7 +13,7 @@ in
   services = {
     swaync = {
       enable = true;
-      # style = builtins.readFile themeFile;
+      style = builtins.readFile themeFile;
       settings = {
         font-family = "JetBrainsMono";
       };

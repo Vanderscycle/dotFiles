@@ -3,6 +3,7 @@
   imports = [
     ./alacritty.nix
     ./bat.nix
+    ./brave.nix
     ./btop.nix
     ./cloud.nix
     ./cowsay.nix

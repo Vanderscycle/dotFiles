@@ -1,98 +1,9 @@
-#### K8s configuration ####
-## @section Kubernetes Parameters
-## @param replicaCount Number of replicas to create (only 1 is supported)
-## @param nodeSelector Node labels for pod assignment
-## @param resources.requests.cpu The requested cpu for the Factorio containers
-## @param resources.requests.memory The requested memory for the Factorio containers
-## @param resources.limits If you like to limit Factorio resources
-## @param strategy.type Strategy used to replace old pods
-## @param tolerations Tolerations for pod assignment
-## @param affinity Affinity rules for pod assignment
-## @param securityContext Useful for fixing file permissions. See official [docs](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
-
-replicaCount: 1
-
-hostNetworkEnabled: true
-
-# https://github.com/factoriotools/factorio-docker/blob/master/docker/Dockerfile
-securityContext:
-  fsGroup: 845
-
-podSecurityContext:
-  runAsUser: 845
-  runAsGroup: 845
-
-#### Image Configuration ####
-## @section Image Parameters
-## @param image.repository Factorio image repository
-## @param image.tag Factorio image tag (immutable tags are recommended)
-## @param image.pullPolicy Factorio image pull policy
-image:
-  repository: "factoriotools/factorio"
-  ## Container image pull policy
-  pullPolicy: Always
-  ## Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
-  ## You should set an fix version, i.e.:
-  # tag: "1.1.37"
-
-nodeSelector: {}
-#  beta.kubernetes.io/os: linux
-#  beta.kubernetes.io/arch: amd64
-#  kubernetes.io/hostname: your-cool-hostname
-
-#### Service Configuration ####
-## @section Service Parameters
-## @param service.type Factorio service type
-## @param service.port Factorio service port
-## @extra service.externalIPs [array] If you are able to map an external IP, set it here
-## @extra service.nodePort If you use "type: NodePort" set the port to a value you like in the range of 30000-32767. Leave it blank for a random port
-## @param service.annotations Additional custom annotations for Factorio service
-## The service is a kind tricky, so factorio uses UDP, but not every cloud provider is able to route UDP traffic.
-## I.e. your cloud provider has LoadBalancers without the ability for UDP protocol. Furthermore kubectl ist not able to route UDP Traffic
-## ref: https://github.com/kubernetes/kubernetes/issues/47862
-## You have to expose factorio on a NodePort and map a port between 30000 and 32767, but the native port is 34197. So you have always to specify the port in factorio.
-## The best way ist to define a ClusterIP service and define one or more externalIPs. Of course this IPs must be available on the node the factorio pod runs on!
-service:
-  type: NodePort
-  ## Represents the dual-stack-ness requested or required by this Service. Possible values are
-  ## SingleStack, PreferDualStack or RequireDualStack.
-  ## The ipFamilies and clusterIPs fields depend on the value of this field.
-  ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-  ipFamilyPolicy: "SingleStack"
-
-  ## List of IP families (e.g. IPv4, IPv6) assigned to the service. This field is usually assigned automatically
-  ## based on cluster configuration and the ipFamilyPolicy field.
-  ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-  ipFamilies:
-    - IPv4
-  port: 31497
-  ## If you are able to map an external IP, set it here
-  # externalIPs:
-  #  - "192.168.0.1"
-  #  - "192.168.0.2"
-  #
-  #
-  ## If you use "type: NodePort" set the port to a value you like in the range of 30000-32767. Leave it blank for a random port
-  # nodePort: ""
-  ## Examples:
-  ## NodePort setup
-
-  ## ClusterIp setup
-  # ClusterIP:
-  #   port: 34197
-  ## LoadBalancer setup
-  # type: LoadBalancer
-  # externalTrafficPolicy: Cluster
-  annotations: {}
-
-
 ## Compute Resources required by the operator container
 resources:
   ## We have to ensure that factorio have enough computing resources avaiable. We set here an absolute minimum
   ## Keep in mind that big factorio base can consume a lot of memory and cpu
   requests:
-    memory: 3.5Gi
+    memory: 3Gi
     cpu: 1500m
   ## If you like to limit factiorio resources
   limits: {}
@@ -100,23 +11,28 @@ resources:
   #   memory: 1024Mi
   #   cpu: 1000m
 
-
-## Strategy used to replace old pods
-## IMPORTANT: use with care, it is suggested to leave as that for upgrade purposes
-## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
-strategy:
-  type: Recreate
-  # type: RollingUpdate
-  # rollingUpdate:
-  #   maxSurge: 1
-  #   maxUnavailable: 0
-
-# Tolerations for pod assignment
-tolerations: []
-
-# Affinity rules for pod assignment
-affinity: {}
-
+## @section Port-Fixer Parameters
+## @param port_fixer.enabled Enable the Factorio Port Fixer
+## @param image.repository Factorio port-fixer image repository
+## @param image.tag Factorio port fixer image tag (immutable tags are recommended)
+## @param image.pullPolicy Factorio port fixer image pull policy
+## @param image.port Factorio port to announce via port-fixer, defaults to service.port
+port_fixer:
+  # Adds an extra container that tries to help with connection issues via the public server browser.
+  # This is especially useful when you can’t set up outgoing static port mappings and see log messages like these:
+  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:19296}), expected IP ADDR:({<ip>:58037}))
+  # > Warning ServerMultiplayerManager.cpp:651: Determining own address has failed. Best guess: IP ADDR:({<ip>:58037})
+  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:19297}), expected IP ADDR:({<ip>:58037}))
+  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:24105}), expected IP ADDR:({<ip>:58037}))
+  # Note: Port forwarding for incoming traffic still needs to be set up properly for this to work.
+  # For more info, check out:
+  #   - https://github.com/SQLJames/factorio-server-charts/issues/15
+  enabled: true
+  image:
+    repository: "ghcr.io/zcube/factorio-port-fixer"
+    pullPolicy: Always
+    tag: latest
+  port: ''
 #### Persistence Configuration ####
 ## @section Persistence Configuration
 ## @param persistence.enabled Enable persistence using Persistent Volume Claims
@@ -139,35 +55,6 @@ persistence:
   annotations: {}
   ## If you have additional labels to apply to the volume
   labels: {}
-
-
-#### Factorio application configuration ####
-## @section Factorio Parameters
-## @param mods.enabled Enable mods
-## @param mods.portal List of official mods to be downloaded from Factorio Mod Portal
-## @param mods.unofficial List of unofficial mods name and url to download into the mods folder
-mods:
-  image:
-    repository: "ghcr.io/sqljames/factorio-mod-downloader"
-    ## Container image pull policy
-    pullPolicy: Always
-    ## Overrides the image tag whose default is the chart appVersion.
-    tag: "1.0.1"
-    ## You should set an fix version, i.e.:
-    # tag: "1.1.37"
-  enabled: false
-# in order to use the mods portal you will need to specify the username and token in the server_settings.
-  portal: []
-#  - name: factorissimo-2-notnotmelon
-#    version: 3.5.11
-# unofficial section is meant to just allow you to download and place folders into the mods folder.
-# we will not check version compatibility automatically with these downloads.
-# you can encounter an error if the file names dont match what the mod is expecting for example
-# Error Util.cpp:83: Failed to load mod "Squeak-Through": Filename of mod
-# /factorio/mods/Squeak-Through.zip doesn't match the expected Squeak Through_1.8.2.zip (case sensitive!)
-  unofficial: []
-#     - url: "https://github.com/Suprcheese/Squeak-Through/archive/refs/tags/1.8.2.zip"
-#       name: "Squeak Through_1.8.2.zip"
 
 ## @param factorioServer.save_name Factorio save name
 ## @param factorioServer.generate_new_save Generate a new save if `save_name` is not found
@@ -200,17 +87,6 @@ factorioServer:
   env: {}
     # - name: MY_VAR
     #   value: "my_value"
-
-import_save:
-  # enable save importer
-  enabled: true
-  # url to download save from (http or https only).
-  # if no url is specified, saves can still be manually imported by placing the file in "/factorio/save-importer/import"
-  source_url: ""
-  # reimport from the source_url if the checksum of the file changes
-  reimport_on_change: false
-  # reimport from the source_url AND OVERWRITE PREVIOUS SAVE every time pod is initialized. good for demos or testing
-  reimport_every_time: false
 
 ## @param account.accountSecret Existing secret containing a valid factorio.com username and either a password or a token (or both)
 ## @param account.username Factorio.com username, ignored if `account.accountSecret` is set
@@ -271,7 +147,7 @@ serverPassword:
 ## @param server_settings.maximum_segment_size_peer_count Minimum network messages segment count
 server_settings:
   # Your Instance Name
-  name: "[BETA] helm-kubernetes-argocd-vanilla"
+  name: "[k3s] helm-kubernetes-argocd-vanilla"
   # Your Instance Description
   description: "Factorio running on Kubernetes"
   tags:
@@ -331,329 +207,3 @@ server_settings:
   minimum_segment_size_peer_count: 20
   maximum_segment_size: 100
   maximum_segment_size_peer_count: 10
-
-## @section Port-Fixer Parameters
-## @param port_fixer.enabled Enable the Factorio Port Fixer
-## @param image.repository Factorio port-fixer image repository
-## @param image.tag Factorio port fixer image tag (immutable tags are recommended)
-## @param image.pullPolicy Factorio port fixer image pull policy
-## @param image.port Factorio port to announce via port-fixer, defaults to service.port
-port_fixer:
-  # Adds an extra container that tries to help with connection issues via the public server browser.
-  # This is especially useful when you can’t set up outgoing static port mappings and see log messages like these:
-  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:19296}), expected IP ADDR:({<ip>:58037}))
-  # > Warning ServerMultiplayerManager.cpp:651: Determining own address has failed. Best guess: IP ADDR:({<ip>:58037})
-  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:19297}), expected IP ADDR:({<ip>:58037}))
-  # > Warning ServerRouter.cpp:541: Received own address message reply with conflicting address (got IP ADDR:({<ip>:24105}), expected IP ADDR:({<ip>:58037}))
-  # Note: Port forwarding for incoming traffic still needs to be set up properly for this to work.
-  # For more info, check out:
-  #   - https://github.com/SQLJames/factorio-server-charts/issues/15
-  enabled: false
-  image:
-    repository: "ghcr.io/zcube/factorio-port-fixer"
-    pullPolicy: Always
-    tag: latest
-  port: ''
-
-## @param rcon.external Enable RCON external access (deploy RCON service)
-## @param rcon.type RCON service type
-## @param rcon.serviceAnnotations RCON service annotations
-## @param rcon.passwordSecret Existing secret containing a `rconpw` data field
-## @param rcon.password Password for RCON, ignored if `rcon.passwordSecret` is set
-## @param rcon.port RCON service external port
-# Password and port for the rcon service
-rcon:
-  ## Represents the dual-stack-ness requested or required by this Service. Possible values are
-  ## SingleStack, PreferDualStack or RequireDualStack.
-  ## The ipFamilies and clusterIPs fields depend on the value of this field.
-  ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-  ipFamilyPolicy: "SingleStack"
-
-  ## List of IP families (e.g. IPv4, IPv6) assigned to the service. This field is usually assigned automatically
-  ## based on cluster configuration and the ipFamilyPolicy field.
-  ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-  ipFamilies:
-    - IPv4
-  external: false
-  type: LoadBalancer
-  serviceAnnotations: {}
-  # Existing secret containing a `rconpw` data field
-  passwordSecret: ""
-
-  # Password for rcon
-  password: "CHANGEMECHANGEME"
-
-  # rcon port
-  port: 30100
-
-## @param rconAPI.enabled Enable or disable the RCON API service
-## @param rconAPI.image.repository RCON-API image repository
-## @param rconAPI.image.tag RCON-API image tag (immutable tags are recommended)
-## @param rconAPI.image.pullPolicy RCON-API image pull policy
-## @param rconAPI.type Kubernetes service type for the RCON API (e.g., ClusterIP, NodePort, LoadBalancer)
-## @param rconAPI.serviceAnnotations Annotations to add to the RCON API service
-## @param rconAPI.httpPort Internal port on which the HTTP API for RCON is exposed
-## @param rconAPI.grpcPort Internal port on which the gRPC API for RCON is exposed
-## @param rconAPI.ingress.enabled Enable or disable the Ingress for the RCON API service
-## @param rconAPI.ingress.hostname Hostname for the RCON API Ingress
-## @param rconAPI.ingress.className Ingress class name for selecting the Ingress controller (e.g., nginx, cilium)
-## @param rconAPI.ingress.annotations Additional annotations for the Ingress resource
-## @param rconAPI.ingress.tls.enabled Enable or disable TLS for the Ingress
-## @param rconAPI.ingress.tls.secretName Kubernetes Secret name for TLS certificates used by the Ingress
-rconAPI:
-  ## Represents the dual-stack-ness requested or required by this Service. Possible values are
-  ## SingleStack, PreferDualStack or RequireDualStack.
-  ## The ipFamilies and clusterIPs fields depend on the value of this field.
-  ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-  ipFamilyPolicy: "SingleStack"
-
-  ## List of IP families (e.g. IPv4, IPv6) assigned to the service. This field is usually assigned automatically
-  ## based on cluster configuration and the ipFamilyPolicy field.
-  ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
-  ipFamilies:
-    - IPv4
-  enabled: false
-  image:
-    repository: "ghcr.io/nekomeowww/factorio-rcon-api"
-    pullPolicy: Always
-    tag: latest
-  type: ClusterIP
-  serviceAnnotations: {}
-  httpPort: 30110
-  grpcPort: 30111
-
-  ingress:
-    enabled: true
-    hostname: "factorio.example.com"
-    className: "nginx"
-    annotations:
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
-    tls:
-      enabled: false
-      secretName: "cert-factorio.example.com"
-
-## @param map_gen_settings.width Map width in tiles; 0 means infinite
-## @param map_gen_settings.height Map height in tiles; 0 means infinite
-## @param map_gen_settings.starting_area Multiplier for biter free zone radius
-## @param map_gen_settings.peaceful_mode Enable Peaceful mode
-## @param map_gen_settings.autoplace_controls Override default ore, trees and enemy bases frequency, size and richness. Leave empty for default values. Supports including modded ores
-## @param map_gen_settings.cliff_settings.name Override default cliff prototype name
-## @param map_gen_settings.cliff_settings.cliff_elevation_0 Override elevation of first row of cliffs
-## @param map_gen_settings.cliff_settings.cliff_elevation_interval Override elevation difference between successive rows of cliffs
-## @param map_gen_settings.cliff_settings.richness Called cliff continuity in the map generator GUI. 0 will result in no cliffs, 10 will make all cliff rows completely solid
-## @skip map_gen_settings.property_expression_names
-## @extra map_gen_settings.property_expression_names [object] Overrides for property value generators (map type)
-## @skip map_gen_settings.starting_points
-## @extra map_gen_settings.starting_points [array] List of starting points for the map
-## @param map_gen_settings.seed Map RNG Seed
-map_gen_settings:
-  # Width and height of map, in tiles; 0 means infinite
-  width: 0
-  # Width and height of map, in tiles; 0 means infinite
-  height: 0
-  # Multiplier for biter free zone radius
-  starting_area: 1
-  peaceful_mode: false
-  autoplace_controls: {}
-#    water:
-#      frequency: 1
-#      size: 1
-#    coal:
-#      frequency: 1
-#      size: 1
-#      richness: 1
-#    stone:
-#      frequency: 1
-#      size: 1
-#      richness: 1
-#    copper-ore:
-#      frequency: 1
-#      size: 1
-#      richness: 1
-#    iron-ore:
-#      frequency: 1
-#      size: 1
-#      richness: 1
-#    uranium-ore:
-#      frequency: 1
-#      size: 1
-#      richness: 1
-#    crude-oil:
-#      frequency: 1
-#      size: 1
-#      richness: 1
-#    trees:
-#      frequency: 1
-#      size: 1
-#    enemy-base:
-#      frequency: 1
-#      size: 1
-  cliff_settings:
-    # Name of the cliff prototype
-    name: cliff
-    # Elevation of first row of cliffs
-    cliff_elevation_0: 10
-    # Elevation difference between successive rows of cliffs.
-    # This is inversely proportional to frequency in the map generation GUI. Specifically, when set from the GUI the value is 40 / frequency.
-    cliff_elevation_interval: 40
-    # Called cliff continuity in the map generator GUI. 0 will result in no cliffs, 10 will make all cliff rows completely solid
-    richness: 1
-  # Overrides for property value generators (map type)
-  # Leave elevation blank to get normal terrain.
-  # Use 'elevation': 'elevation_island' to get an island.
-  # Moisture and terrain type are also controlled via this.
-  # "control:moisture:frequency is the inverse of the moisture scale in the map generator GUI."
-  # "control:moisture:bias is the moisture bias in the map generator GUI."
-  # "control:aux:frequency is the inverse of the terrain type scale in the map generator GUI."
-  # "control:aux:bias is the teraain type bias in the map generator GUI."
-  property_expression_names:
-    control:moisture:frequency: '1'
-    control:moisture:bias: '0'
-    control:aux:frequency: '1'
-    control:aux:bias: '0'
-  starting_points:
-  - "x": 0
-    "y": 0
-  # Use null for a random seed, number for a specific seed.
-  seed: null
-
-## @param map_settings.difficulty_settings.technology_price_multiplier Research cost multiplier
-## @param map_settings.difficulty_settings.spoil_time_modifier
-## @param map_settings.asteroids.spawning_rate Asteroid Spawing rate
-## @param map_settings.asteroids.max_ray_portals_expanded_per_tick
-## @skip map_settings.pollution
-## @extra map_settings.pollution.enabled Enable pollution. Check values.yaml to know what pollution values you can override
-## @skip map_settings.enemy_evolution
-## @extra map_settings.enemy_evolution.enabled Enable enemy evolution. Check values.yaml to know what enemy evolution values you can override
-## @skip map_settings.enemy_expansion
-## @extra map_settings.enemy_expansion.enabled Enable enemy expansion. Check values.yaml to know what enemy expansion values you can override
-## @skip map_settings.unit_group
-## @extra map_settings.unit_group [object] Override default unit group values. Check values.yaml to know what values you can override
-## @skip map_settings.steering
-## @extra map_settings.steering [object] Override default steering values. Check values.yaml to know what values you can override
-## @skip map_settings.path_finder
-## @extra map_settings.path_finder [object] Override default pathfinder values. Check values.yaml to know what values you can override
-## @param map_settings.max_failed_behavior_count If a behavior fails this many times, the enemy (or enemy group) is destroyed. This solves biters stuck within their own base.
-map_settings:
-  difficulty_settings:
-    technology_price_multiplier: 1
-    spoil_time_modifier: 1
-  asteroids:
-    max_ray_portals_expanded_per_tick: 100
-    spawning_rate: 1
-  pollution:
-    enabled: true
-    # these are values for 60 ticks (1 simulated second)
-    # amount that is diffused to neighboring chunk
-    diffusion_ratio: 0.02
-    min_to_diffuse: 15
-    ageing: 1
-    expected_max_per_chunk: 150
-    min_to_show_per_chunk: 50
-    min_pollution_to_damage_trees: 60
-    pollution_with_max_forest_damage: 150
-    pollution_per_tree_damage: 50
-    pollution_restored_per_tree_damage: 10
-    max_pollution_to_restore_trees: 20
-    enemy_attack_pollution_consumption_modifier: 1
-  enemy_evolution:
-    enabled: true
-    time_factor: 0.000004
-    destroy_factor: 0.002
-    pollution_factor: 0.0000009
-  enemy_expansion:
-    enabled: true
-    max_expansion_distance: 7
-    friendly_base_influence_radius: 2
-    enemy_building_influence_radius: 2
-    building_coefficient: 0.1
-    other_base_coefficient: 2
-    neighbouring_chunk_coefficient: 0.5
-    neighbouring_base_chunk_coefficient: 0.4
-    max_colliding_tiles_coefficient: 0.9
-    settler_group_min_size: 5
-    settler_group_max_size: 20
-    min_expansion_cooldown: 14400
-    max_expansion_cooldown: 216000
-  unit_group:
-    min_group_gathering_time: 3600
-    max_group_gathering_time: 36000
-    max_wait_time_for_late_members: 7200
-    max_group_radius: 30
-    min_group_radius: 5
-    max_member_speedup_when_behind: 1.4
-    max_member_slowdown_when_ahead: 0.6
-    max_group_slowdown_factor: 0.3
-    max_group_member_fallback_factor: 3
-    member_disown_distance: 10
-    tick_tolerance_when_member_arrives: 60
-    max_gathering_unit_groups: 30
-    max_unit_group_size: 200
-  steering:
-    default:
-      radius: 1.2
-      separation_force: 0.005
-      separation_factor: 1.2
-      force_unit_fuzzy_goto_behavior: false
-    moving:
-      radius: 3
-      separation_force: 0.01
-      separation_factor: 3
-      force_unit_fuzzy_goto_behavior: false
-  path_finder:
-    fwd2bwd_ratio: 5
-    goal_pressure_ratio: 2
-    max_steps_worked_per_tick: 1000
-    max_work_done_per_tick: 8000
-    use_path_cache: true
-    short_cache_size: 5
-    long_cache_size: 25
-    short_cache_min_cacheable_distance: 10
-    short_cache_min_algo_steps_to_cache: 50
-    long_cache_min_cacheable_distance: 30
-    cache_max_connect_to_cache_steps_multiplier: 100
-    cache_accept_path_start_distance_ratio: 0.2
-    cache_accept_path_end_distance_ratio: 0.15
-    negative_cache_accept_path_start_distance_ratio: 0.3
-    negative_cache_accept_path_end_distance_ratio: 0.3
-    cache_path_start_distance_rating_multiplier: 10
-    cache_path_end_distance_rating_multiplier: 20
-    stale_enemy_with_same_destination_collision_penalty: 30
-    ignore_moving_enemy_collision_distance: 5
-    enemy_with_different_destination_collision_penalty: 30
-    general_entity_collision_penalty: 10
-    general_entity_subsequent_collision_penalty: 3
-    extended_collision_penalty: 3
-    max_clients_to_accept_any_new_request: 10
-    max_clients_to_accept_short_new_request: 100
-    direct_distance_to_consider_short_request: 100
-    short_request_max_steps: 1000
-    short_request_ratio: 0.5
-    min_steps_to_check_path_find_termination: 2000
-    start_to_goal_cost_multiplier_to_terminate_path_find: 2000.0
-    overload_levels:
-    - 0
-    - 100
-    - 500
-    overload_multipliers:
-    - 2
-    - 3
-    - 4
-    negative_path_cache_delay_interval: 20
-  max_failed_behavior_count: 3
-
-## @param admin_list Admin list
-## @param white_list Whitelist
-## @param ban_list Ban list
-admin_list: []
-  # - "john_doe"
-  # - "jane_doe"
-
-white_list: []
-  # - "john_doe"
-  # - "jane_doe"
-
-ban_list: []
-  # - "john_doe"
-  # - "jane_doe"

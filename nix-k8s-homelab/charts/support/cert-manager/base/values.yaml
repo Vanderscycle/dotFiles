@@ -12,3 +12,12 @@ crds:
   # WARNING: when the CRDs are removed, all cert-manager custom resources
   # (Certificates, Issuers, ...) will be removed too by the garbage collector.
   keep: true
+
+# extraArgs:
+#   - --dns01-recursive-nameservers=1.1.1.1:53,9.9.9.9:53
+#   - --dns01-recursive-nameservers-only
+# podDnsPolicy: None
+# podDnsConfig:
+#   nameservers:
+#     - 1.1.1.1
+#     - 9.9.9.9

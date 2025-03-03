@@ -5,6 +5,11 @@ namespace: certmanager
 resources:
   - https://github.com/cert-manager/cert-manager/releases/download/v1.17.0/cert-manager.crds.yaml
   - secrets
+  # kube-system
+  # - cert-manager-leases-role.yaml
+  # - cert-manager-leases-rolebinding.yaml
+  # - cert-manager-leases-clusterrole.yaml
+  # - cert-manager-cainjector-leases-clusterrolebinding.yaml
   # - clusterIssuer.yaml
 
 helmCharts:
@@ -12,5 +17,11 @@ helmCharts:
     version: 1.17.0
     repo: https://charts.jetstack.io
     valuesFile: values.yaml
+    namespace: certmanager
+    releaseName: support
+  - name: cert-manager-webhook-namecheap
+    version: 0.1.2
+    repo: http://zvonimirbedi.github.io/cert-manager-webhook-namecheap/
+    # valuesFile: values-namecheap.yaml
     namespace: certmanager
     releaseName: support
