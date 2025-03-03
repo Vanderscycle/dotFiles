@@ -69,7 +69,8 @@
   git = {
     # userEmail = config.sops.secrets."knak/email".path;
     userEmail = "henri.vandersleyen@knak.com";
-    userName = config.sops.secrets."knak/git/userName".path;
+    # userName = config.sops.secrets."knak/git/userName".path;
+    userName = "vancycles-knak";
     signingKey = config.sops.secrets."knak/git/keyName".path;
   };
 

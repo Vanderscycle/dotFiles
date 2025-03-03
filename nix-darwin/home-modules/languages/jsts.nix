@@ -11,20 +11,36 @@
       description = "Enables js and ts lsp";
       default = false;
     };
+
+    jsts.vue.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables vue/nuxt framework";
+      default = false;
+    };
+
+    jsts.svelte.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables svelte framework";
+      default = false;
+    };
   };
 
   config = lib.mkIf config.jsts.lsp.enable {
-    home.packages = with pkgs; [
-      nodejs_18
-      yarn
-      corepack
-      nodePackages.typescript-language-server
-      nodePackages.typescript
-      nodePackages.prettier # still have to install globally npm i -g prettier
-      nodePackages.eslint
-      emacsPackages.import-js
-      vue-language-server # npm install -g volar
-      svelte-language-server # npm install -g svelte-language-server
-    ];
+    home.packages =
+      with pkgs;
+      [
+        nodejs_18
+        yarn
+        corepack
+        nodePackages.typescript-language-server
+        nodePackages.typescript
+        nodePackages.prettier # still have to install globally npm i -g prettier
+        nodePackages.eslint
+        emacsPackages.import-js
+        vue-language-server # npm install -g volar
+        svelte-language-server # npm install -g svelte-language-server
+      ]
+      ++ (if config.jsts.vue.enable then [ nodePackages_latest.vls ] else [ ])
+      ++ (if config.jsts.svelte.enable then [ svelte-language-server ] else [ ]);
   };
 }
