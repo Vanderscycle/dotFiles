@@ -67,6 +67,9 @@
     casks = [
       "rectangle"
       "iterm2"
+      "dive"
+      "postman"
+      "aws-sam-cli"
       # "nikitabobko/tap/aerospace" # not vetted on work laptop
     ];
     brews = [
