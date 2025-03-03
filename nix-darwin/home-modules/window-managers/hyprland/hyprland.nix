@@ -198,17 +198,18 @@
         ];
         windowrule = [
           "workspace 1, Emacs"
+          "workspace 1, emacs"
           "workspace 2, firefox"
           "workspace 2, Brave"
           "workspace 3, discord"
           "workspace 3, Spotify"
           "workspace 3, spotify"
-          "workspace 3, Slack"
           "workspace 4, steam"
           "workspace 4, Steam"
           "workspace 5, SuperSlicer"
           "workspace 5, OrcaSlicer"
           "workspace 6, Transmission"
+          "workspace 6, transmission"
           "pseudo,fcitx"
         ];
 
@@ -234,7 +235,9 @@
         # Or execute your favorite apps at launch like this:
 
         exec-once = [
-          "waybar & hyprpaper"
+          "waybar"
+          "hyprpaper"
+          "blueman-applet"
           "/etc/profiles/per-user/henri/bin/emacs --daemon &"
           "swaync"
           "discord --enable-wayland-ime"
