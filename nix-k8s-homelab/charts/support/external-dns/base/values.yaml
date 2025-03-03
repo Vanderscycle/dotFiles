@@ -2,32 +2,42 @@
 ## This is a YAML-formatted file.
 ## Declare variables to be passed into your templates.
 
-## Linode configuration to be set via arguments/env. variables
-##
-# linode:
-  ## @param linode.apiToken When using the Linode provider, `LINODE_TOKEN` to set (optional)
-  ##
-  # apiToken: ""
-  ## @param linode.secretName Use an existing secret with key "linode_api_token" defined.
-  ## This ignores linode.apiToken
-  ##
-  # secretName: "external-dns-secret"
-
-## Pi-hole configuration to be set via arguments/env. variables
-##
-logLevel: "debug"
-provider: "pihole"
-registry: "noop"
-pihole:
-  ## @param pihole.server When using the Pi-hole provider, specify The address of the Pi-hole web server
-  ##
-  server: "http://192.168.1.152"
-  ## @param pihole.tlsSkipVerify When using the Pi-hole provider, specify wheter to skip verification of any TLS certificates served by the Pi-hole web server
-  ##
-  tlsSkipVerify: ""
-  ## @param pihole.password When using the Pi-hole provider, specify a password to use
-  ##
-  # password: "replaceme" # has to be the api key from pihole
-  ## @param pihole.secretName Use an existing secret with key "pihole_password" defined.
-  ##
-  secretName: "support-external-dns"
+fullnameOverride: external-dns-unifi
+logLevel: &logLevel debug
+provider:
+  name: webhook
+  webhook:
+    image:
+      repository: ghcr.io/kashalls/external-dns-unifi-webhook
+      tag: main # replace with a versioned release tag
+    env:
+      - name: UNIFI_HOST
+        value: https://192.168.1.1 # replace with the address to your UniFi router/controller
+      - name: UNIFI_EXTERNAL_CONTROLLER
+        value: "false"
+      - name: UNIFI_API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: support-external-dns
+            key: unifi_api_key
+      - name: LOG_LEVEL
+        value: *logLevel
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: http-webhook
+      initialDelaySeconds: 10
+      timeoutSeconds: 5
+    readinessProbe:
+      httpGet:
+        path: /readyz
+        port: http-webhook
+      initialDelaySeconds: 10
+      timeoutSeconds: 5
+extraArgs:
+  - --ignore-ingress-tls-spec
+policy: sync
+sources: ["ingress", "service"]
+txtOwnerId: default
+txtPrefix: k8s.
+domainFilters: ["homelab.com"] # replace with your domain
