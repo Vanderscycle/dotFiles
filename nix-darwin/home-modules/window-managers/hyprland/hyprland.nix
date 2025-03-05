@@ -200,7 +200,7 @@
           "workspace 1, Emacs"
           "workspace 1, emacs"
           "workspace 2, firefox"
-          "workspace 2, Brave"
+          "workspace 2, Brave-browser" # Updated to match the class name for Brave
           "workspace 3, discord"
           "workspace 3, Spotify"
           "workspace 3, spotify"
@@ -208,17 +208,18 @@
           "workspace 4, Steam"
           "workspace 5, SuperSlicer"
           "workspace 5, OrcaSlicer"
-          "workspace 6, Transmission"
-          "workspace 6, transmission"
+          "workspace 6, transmission-gtk" # Updated to match the class name for Transmission
           "pseudo,fcitx"
         ];
 
         windowrulev2 = [
-          # steam
-          "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$"
-          "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$"
-          "tile, class:^([Ss]team)$, title:^([Ss]team)$"
-          "workspace 4 silent, class:^([Ss]team)$ title:^(notificationtoasts_.*)$"
+          # Steam rules
+          "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Float non-Steam windows (e.g., game launchers)
+          "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$" # Move Steam to workspace 4
+          "tile, class:^([Ss]team)$, title:^([Ss]team)$" # Tile the main Steam window
+          "workspace 4 silent, class:^([Ss]team)$, title:^(notificationtoasts_.*)$" # Move Steam notifications to workspace 4
+          "nofocus, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Prevent non-Steam windows from stealing focus
+          "noblur, class:^([Ss]team)$" # Ensure Steam window remains visible
           # orcaslicer
           # https://github.com/hyprwm/Hyprland/issues/6698
           "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
