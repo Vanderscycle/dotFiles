@@ -9,7 +9,7 @@
 ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ##
 ingress:
-  enabled: false
+  enabled: true
   # className: nginx
   annotations:
     # nginx.ingress.kubernetes.io/ssl-passthrough: true
@@ -44,10 +44,10 @@ ingress:
   #    location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
   #      deny all;
   #    }
-  tls:
-    - secretName: nextcloud-tls
-      hosts:
-        - nextcloud.homelab.com
+  # tls:
+  #   - secretName: nextcloud-tls
+  #     hosts:
+  #       - nextcloud.homelab.com
   labels: {}
   path: /
   pathType: Prefix
