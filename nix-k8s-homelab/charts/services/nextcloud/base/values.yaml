@@ -13,7 +13,7 @@ ingress:
   # className: nginx
   annotations:
     # nginx.ingress.kubernetes.io/ssl-passthrough: true
-    nginx.ingress.kubernetes.io/force-ssl-redirect: true
+    # nginx.ingress.kubernetes.io/force-ssl-redirect: true
     kubernetes.io/ingress.class: nginx
     # cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer-non-prod"
     # nginx.ingress.kubernetes.io/rewrite-target: /
@@ -54,6 +54,8 @@ ingress:
 
 service:
   type: LoadBalancer
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: nextcloud.homelab.com
 nextcloud:
   trustedDomains:
     - nextcloud.homelab.com
