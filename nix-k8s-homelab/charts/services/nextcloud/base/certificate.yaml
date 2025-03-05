@@ -5,7 +5,7 @@ metadata:
   namespace: nextcloud
 spec:
   dnsNames:
-    - nextcloud.homecloud.com
+    - nextcloud.vandersleyen.dev
   secretName: nextcloud-tls
   issuerRef:
     name: letsencrypt-cluster-issuer-non-prod

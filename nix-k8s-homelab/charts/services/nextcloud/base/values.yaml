@@ -55,12 +55,12 @@ ingress:
 service:
   type: LoadBalancer
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: nextcloud.homelab.com
+    external-dns.alpha.kubernetes.io/hostname: nextcloud.vandersleyen.dev
 nextcloud:
   trustedDomains:
-    - nextcloud.homelab.com
+    - nextcloud.vandersleyen.dev
     - 192.168.2.202
-  host: nextcloud.homelab.com
+  host: nextcloud.vandersleyen.dev
   # username: admin
   # password: changeme
   ## Use an existing secret

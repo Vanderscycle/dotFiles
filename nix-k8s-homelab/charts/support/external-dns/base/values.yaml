@@ -40,4 +40,4 @@ policy: sync
 sources: ["ingress", "service"]
 txtOwnerId: default
 txtPrefix: k8s.
-domainFilters: ["homelab.com"] # replace with your domain
+domainFilters: ["vandersleyen.dev"] # replace with your domain
