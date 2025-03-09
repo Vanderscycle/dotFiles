@@ -9,13 +9,13 @@
 ## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ##
 ingress:
-  enabled: false
+  enabled: true
   # className: nginx
   annotations:
     # nginx.ingress.kubernetes.io/ssl-passthrough: true
-    nginx.ingress.kubernetes.io/force-ssl-redirect: true
+    # nginx.ingress.kubernetes.io/force-ssl-redirect: true
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer-non-prod"
+    # cert-manager.io/cluster-issuer: "letsencrypt-cluster-issuer-non-prod"
     # nginx.ingress.kubernetes.io/rewrite-target: /
 
   #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
@@ -44,16 +44,18 @@ ingress:
   #    location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
   #      deny all;
   #    }
-  tls:
-    - secretName: nextcloud-tls
-      hosts:
-        - nextcloud.vandersleyen.dev
+  # tls:
+  #   - secretName: nextcloud-tls
+  #     hosts:
+  #       - nextcloud.homelab.com
   labels: {}
   path: /
   pathType: Prefix
 
 service:
   type: LoadBalancer
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: nextcloud.vandersleyen.dev
 nextcloud:
   trustedDomains:
     - nextcloud.vandersleyen.dev

@@ -12,7 +12,7 @@ resources:
   - application-support.yaml
   - application-services.yaml
   - application-secrets.yaml
-  - application-servers.yaml
+  # - application-servers.yaml
   - application-monitoring.yaml
   - namespace.yaml
   # - argocd-repo.yaml

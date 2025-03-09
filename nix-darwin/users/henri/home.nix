@@ -39,7 +39,7 @@
   # programs
   flameshot.enable = true;
   brave.enable = true;
-  firefox.enable = lib.mkForce false;
+  firefox.enable = true; # lib.mkForce false;
 
   plastic_printer = {
     enable = true;
