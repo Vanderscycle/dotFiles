@@ -20,6 +20,7 @@
     # local
     ./sops.nix
   ];
+  boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   # cron
   cron.downloadFolderOrganizer.enable = true;
   # services

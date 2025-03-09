@@ -36,7 +36,7 @@
       with pkgs;
       [
         starsector
-        # heroic # gog
+        heroic # gog
         gamescope
         augustus # caesar 3 mod
         innoextract # for caesar 3

@@ -198,7 +198,6 @@
         ];
         windowrule = [
           "workspace 1, Emacs"
-          "workspace 1, emacs"
           "workspace 2, firefox"
           "workspace 2, Brave-browser" # Updated to match the class name for Brave
           "workspace 3, discord"
@@ -206,6 +205,7 @@
           "workspace 3, spotify"
           "workspace 4, steam"
           "workspace 4, Steam"
+          "workspace 4, heroic"
           "workspace 5, SuperSlicer"
           "workspace 5, OrcaSlicer"
           "workspace 6, transmission-gtk" # Updated to match the class name for Transmission
@@ -214,10 +214,11 @@
 
         windowrulev2 = [
           # Steam rules
-          "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Float non-Steam windows (e.g., game launchers)
-          "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$" # Move Steam to workspace 4
-          "tile, class:^([Ss]team)$, title:^([Ss]team)$" # Tile the main Steam window
-          "workspace 4 silent, class:^([Ss]team)$, title:^(notificationtoasts_.*)$" # Move Steam notifications to workspace 4
+          "stayfocused, title:^()$,class:^(steam)$" # otherwise it closes post launching a game
+          # "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Float non-Steam windows (e.g., game launchers)
+          # "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$" # Move Steam to workspace 4
+          # "tile, class:^([Ss]team)$, title:^([Ss]team)$" # Tile the main Steam window
+          # "workspace 4 silent, class:^([Ss]team)$, title:^(notificationtoasts_.*)$" # Move Steam notifications to workspace 4
           "nofocus, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Prevent non-Steam windows from stealing focus
           "noblur, class:^([Ss]team)$" # Ensure Steam window remains visible
           # orcaslicer
@@ -236,7 +237,7 @@
         # Or execute your favorite apps at launch like this:
 
         exec-once = [
-          "waybar"
+          "sleep 1 && waybar"
           "hyprpaper"
           "blueman-applet"
           "/etc/profiles/per-user/henri/bin/emacs --daemon &"
