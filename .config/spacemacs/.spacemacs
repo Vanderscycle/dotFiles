@@ -43,6 +43,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      git ;; maggit
      helm
+     docker
      (nixos :variables
             nix-backend 'lsp
             nixos-format-on-save t) ;; I DECLARE LINUX!!!
@@ -59,7 +60,8 @@ This function should only modify configuration layer settings."
      (typescript :variables
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
-                 typescript-fmt-on-save t) ;; js but like better?
+                 ;;typescript-fmt-on-save t
+                 ) ;; js but like better?
      (python :variables
              python-backend 'lsp) ;;
      (org :variables
@@ -73,9 +75,10 @@ This function should only modify configuration layer settings."
      pdf ;; refusing to pay adobe is morally right
      svelte ;; frontend-for-hipsters
      vue ;; vite vite vite vue
-     github-copilot ;; ai is thou
+     ;; github-copilot ;; ai is thou
      (yaml :variables
-           yaml-enable-lsp t) ;;
+           yaml-enable-lsp t) ;; evil clearly fomatted
+     toml  ;; what if we tried yet another std
      (json :variables
            json-fmt-on-save t
            json-fmt-tool 'prettier) ;; the prefered backend/frontend love letter format
@@ -652,7 +655,21 @@ before packages are loaded."
   ;;INFO: in macos, you can increase the repeat rate of keys
   ;; M-x nerd-icons-install-fonts to fix doom-emacs status line
   (add-to-list 'exec-path "/etc/profiles/per-user/henri.vandersleyen/bin")
+  ;; --- misc problems ---
+  (electric-indent-mode 0) ;; removes the extra tab being added after copy pasting
+  ;; --- ai ---
+  (with-eval-after-load 'company
+    ;; disable inline previews
+    (delq 'company-preview-if-just-one-frontend company-frontends))
 
+  ;; (with-eval-after-load 'copilot (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  ;;   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
+  ;;   (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
+  ;;   (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
+
+  ;; (add-hook 'prog-mode-hook 'copilot-mode)
+  ;; --- editorconfig ---
+  (editorconfig-mode 1)
   ;; --- js/ts ---
   (setq-default
    ;; js2-mode
@@ -692,6 +709,7 @@ before packages are loaded."
       (insert " [/]")
       ))
 
+
   ;; keybinding will only be available in org mode
   (add-hook 'org-mode-hook
             (lambda ()
@@ -702,7 +720,15 @@ before packages are loaded."
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
-
+  ;; --- lsp ---
+  ;; Enable lsp-mode for Python
+  (add-hook 'python-mode-hook #'lsp)
+  ;; Enable lsp-mode for TypeScript
+  (add-hook 'typescript-mode-hook #'lsp)
+  ;; Enable lsp-mode for JavaScript
+  (add-hook 'js-mode-hook #'lsp)
+  ;; prevents refactor move
+  (setq lsp-auto-execute-action nil)
   ;; --- org-roam ---
   (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
   (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
@@ -739,11 +765,11 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(ob-typescript web-mode nix-ts-mode blacken code-cells company-anaconda anaconda-mode cython-mode dap-mode lsp-docker bui helm-pydoc importmagic epc ctable concurrent live-py-mode lsp-pyright pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc yapfify company-shell fish-mode flycheck-bashate insert-shebang shfmt reformatter exec-path-from-shell yaml-mode doom-modeline shrink-path nerd-icons treemacs-all-the-icons add-node-modules-path auto-dictionary auto-yasnippet browse-at-remote catppuccin-theme code-review emojify deferred a color-identifiers-mode company-nixos-options diff-hl doom-themes eat esh-help eshell-prompt-extras eshell-z evil-org flycheck-pos-tip pos-tip flyspell-correct-helm flyspell-correct flyspell-popup git-link git-messenger git-modes git-timemachine gitignore-templates gnuplot helm-c-yasnippet helm-company helm-git-grep helm-ls-git helm-lsp helm-nixos-options helm-org-rifle htmlize js-doc js2-refactor multiple-cursors json-mode json-navigator json-reformat json-snatcher ligature livid-mode lsp-origami origami lsp-treemacs lsp-ui lsp-mode multi-term multi-vterm xref nix-mode nixos-options nodejs-repl npm-mode nyan-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank org-roam-ui websocket org-roam orgit-forge orgit forge yaml ghub closql emacsql treepy org prettier-js rainbow-identifiers rainbow-mode shell-pop skewer-mode js2-mode simple-httpd smeargle sops sqlite3 terminal-here treemacs-magit magit with-editor transient magit-section typescript-mode unicode-fonts ucs-utils font-utils persistent-soft pcache vterm web-beautify xkcd yasnippet-snippets yasnippet company-emoji company emoji-cheat-sheet-plus gh-md markdown-toc markdown-mode valign vmd-mode ws-butler writeroom-mode winum which-key vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+     '(toml-mode docker aio dockerfile-mode ob-typescript web-mode nix-ts-mode blacken code-cells company-anaconda anaconda-mode cython-mode dap-mode lsp-docker bui helm-pydoc importmagic epc ctable concurrent live-py-mode lsp-pyright pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc yapfify company-shell fish-mode flycheck-bashate insert-shebang shfmt reformatter exec-path-from-shell yaml-mode doom-modeline shrink-path nerd-icons treemacs-all-the-icons add-node-modules-path auto-dictionary auto-yasnippet browse-at-remote catppuccin-theme code-review emojify deferred a color-identifiers-mode company-nixos-options diff-hl doom-themes eat esh-help eshell-prompt-extras eshell-z evil-org flycheck-pos-tip pos-tip flyspell-correct-helm flyspell-correct flyspell-popup git-link git-messenger git-modes git-timemachine gitignore-templates gnuplot helm-c-yasnippet helm-company helm-git-grep helm-ls-git helm-lsp helm-nixos-options helm-org-rifle htmlize js-doc js2-refactor multiple-cursors json-mode json-navigator json-reformat json-snatcher ligature livid-mode lsp-origami origami lsp-treemacs lsp-ui lsp-mode multi-term multi-vterm xref nix-mode nixos-options nodejs-repl npm-mode nyan-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank org-roam-ui websocket org-roam orgit-forge orgit forge yaml ghub closql emacsql treepy org prettier-js rainbow-identifiers rainbow-mode shell-pop skewer-mode js2-mode simple-httpd smeargle sops sqlite3 terminal-here treemacs-magit magit with-editor transient magit-section typescript-mode unicode-fonts ucs-utils font-utils persistent-soft pcache vterm web-beautify xkcd yasnippet-snippets yasnippet company-emoji company emoji-cheat-sheet-plus gh-md markdown-toc markdown-mode valign vmd-mode ws-butler writeroom-mode winum which-key vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   )
+   '(treemacs-hl-line-face ((t (:background "#e64553")))))
   )
