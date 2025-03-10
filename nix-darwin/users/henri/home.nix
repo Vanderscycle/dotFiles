@@ -31,7 +31,10 @@
   # languages
   go.lsp.enable = true;
   python.lsp.enable = true;
-  jsts.lsp.enable = true;
+  jsts = {
+    vue.enable = false;
+    lsp.enable = true;
+  };
   latex.lsp.enable = true;
   yaml.lsp.enable = true;
   json.lsp.enable = true;

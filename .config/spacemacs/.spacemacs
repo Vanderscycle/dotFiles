@@ -72,10 +72,10 @@ This function should only modify configuration layer settings."
                treemacs-use-all-the-icons-theme t ;; don't forget to run all-the-icons-install-font
                treemacs-use-git-mode 'deferred) ;; a file system is much like a tree
      markdown ;; mark that down Patrick!
+     latex ;; oh baby its time to go even beyond
      pdf ;; refusing to pay adobe is morally right
      svelte ;; frontend-for-hipsters
      vue ;; vite vite vite vue
-     ;; github-copilot ;; ai is thou
      (yaml :variables
            yaml-enable-lsp t) ;; evil clearly fomatted
      toml  ;; what if we tried yet another std
@@ -125,6 +125,12 @@ This function should only modify configuration layer settings."
                                        :ensure t
                                        :config
                                        (exec-path-from-shell-initialize))
+                                      pomm ;; pommodero
+                                      (lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss")
+                                                       :init
+                                                       (setq lsp-tailwindcss-add-on-mode t
+                                                             lsp-log-io t)
+                                                       )
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -656,20 +662,15 @@ before packages are loaded."
   ;; M-x nerd-icons-install-fonts to fix doom-emacs status line
   (add-to-list 'exec-path "/etc/profiles/per-user/henri.vandersleyen/bin")
   ;; --- misc problems ---
-  (electric-indent-mode 0) ;; removes the extra tab being added after copy pasting
+  (setq-default word-wrap t)
+  (spacemacs/set-leader-keys "obs" 'scratch-buffer)
+  ;; --- pomm ---
+  (setq pomm-audio-enabled t)
   ;; --- ai ---
-  (with-eval-after-load 'company
-    ;; disable inline previews
-    (delq 'company-preview-if-just-one-frontend company-frontends))
-
-  ;; (with-eval-after-load 'copilot (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  ;;   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-  ;;   (define-key copilot-completion-map (kbd "C-TAB") 'copilot-accept-completion-by-word)
-  ;;   (define-key copilot-completion-map (kbd "C-<tab>") 'copilot-accept-completion-by-word))
-
-  ;; (add-hook 'prog-mode-hook 'copilot-mode)
   ;; --- editorconfig ---
   (editorconfig-mode 1)
+  ;; --- tailwindcss ---
+  (setq lsp-tailwindcss-add-on-mode t)
   ;; --- js/ts ---
   (setq-default
    ;; js2-mode
@@ -708,8 +709,6 @@ before packages are loaded."
       (end-of-line)
       (insert " [/]")
       ))
-
-
   ;; keybinding will only be available in org mode
   (add-hook 'org-mode-hook
             (lambda ()
@@ -720,6 +719,18 @@ before packages are loaded."
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+  ;; --- org-journal ---
+  (setq org-journal-dir "/home/henri/Documents/zettelkasten/org/journal")
+  (setq org-directory "/home/henri/Documents/zettelkasten/org")
+  (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
+  (setq find-file-visit-truename t)
+  ;; --- org-agenda ---
+  (setq org-agenda-files '("~/Documents/zettelkasten/org-roam/"))
+  ;; --- org-roam ---
+  (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
+  (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
+  (setq org-directory "~/Documents/zettelkasten/org")
+  (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
   ;; --- lsp ---
   ;; Enable lsp-mode for Python
   (add-hook 'python-mode-hook #'lsp)
@@ -729,11 +740,6 @@ before packages are loaded."
   (add-hook 'js-mode-hook #'lsp)
   ;; prevents refactor move
   (setq lsp-auto-execute-action nil)
-  ;; --- org-roam ---
-  (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
-  (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
-  (setq org-directory "~/Documents/zettelkasten/org")
-  (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
   ;; --- helm ---
   ;; (setq helm-follow-mode-persistent t) ;; automatically preview files but opens them as a buffer
   ;; --- perspective ---
