@@ -30,6 +30,7 @@
     ../../home-modules/programs/devops.nix
     ../../home-modules/programs/spotify.nix
     ../../home-modules/programs/nh.nix
+    ../../home-modules/programs/bat.nix
 
     # languages
     ../../home-modules/languages/nix.nix

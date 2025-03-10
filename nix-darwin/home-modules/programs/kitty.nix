@@ -22,7 +22,12 @@
       };
     };
     programs = {
+
       kitty = {
+        package = pkgs.kitty.overrideAttrs (oldAttrs: {
+          # https://github.com/NixOS/nixpkgs/issues/388020
+          doInstallCheck = false;
+        });
         enable = true;
         shellIntegration.enableFishIntegration = true;
         shellIntegration.enableZshIntegration = true;
