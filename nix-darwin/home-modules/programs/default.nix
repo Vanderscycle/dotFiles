@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./arc_browser.nix
     ./bat.nix
     ./brave.nix
     ./btop.nix

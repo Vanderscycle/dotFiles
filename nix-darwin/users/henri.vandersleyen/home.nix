@@ -4,7 +4,6 @@
 {
   config,
   username,
-  pkgs,
   ...
 }:
 
@@ -12,6 +11,7 @@
   imports = [
 
     # programs
+    ../../home-modules/programs/arc_browser.nix
     ../../home-modules/programs/nnn.nix
     ../../home-modules/programs/kitty.nix
     ../../home-modules/programs/starship.nix
@@ -61,6 +61,7 @@
   jsts.lsp.enable = true;
 
   # programs
+  arc-browser = true;
   fish.enable = true;
   zsh.enable = true;
   nh.flakeLocation = "/Users/${username}/Documents/dotFiles/nix-darwin";
