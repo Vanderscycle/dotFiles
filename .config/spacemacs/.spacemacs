@@ -57,14 +57,16 @@ This function should only modify configuration layer settings."
      html
      (javascript :variables
                  javascript-backend 'lsp
-                 javascript 'prettier
+                 javascript-fmt-tool 'prettier
+                 javascript-lsp-linter 'esling
+                 javascript-import-tool 'import-js
+                 javascript-fmt-on-save t
                  node-add-modules-path t) ;; everything that can be written in js will be written in js
      (typescript :variables
-
                  typescript-backend 'lsp
                  typescript-fmt-tool 'prettier
                  typescript-linter 'eslint
-                 ;;typescript-fmt-on-save t
+                 typescript-fmt-on-save t
                  ) ;; js but like better?
      (python :variables
              python-backend 'lsp) ;;
@@ -116,6 +118,8 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
+                                      ag
+                                      rg
                                       ob-typescript ;; for org babel
                                       (nix-ts-mode
                                        :mode "\\.nix\\'"
@@ -132,11 +136,6 @@ This function should only modify configuration layer settings."
                                        :config
                                        (exec-path-from-shell-initialize))
                                       pomm ;; pommodero
-                                      (lsp-tailwindcss :recipe (:host github :repo "merrickluo/lsp-tailwindcss")
-                                                       :init
-                                                       (setq lsp-tailwindcss-add-on-mode t
-                                                             lsp-log-io t)
-                                                       )
                                       )
 
    ;; A list of packages that cannot be updated.
