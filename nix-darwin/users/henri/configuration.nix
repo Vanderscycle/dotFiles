@@ -72,6 +72,7 @@
   environment.systemPackages = with pkgs; [
     gnumake
     cachix
+    lsof
     spotify
   ];
 

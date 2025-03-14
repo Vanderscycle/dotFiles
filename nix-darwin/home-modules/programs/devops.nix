@@ -21,16 +21,15 @@ let
         # dns
         dogdns
         dive
+        lsof
       ];
     }
     // lib.mkIf (currentSystem == "aarch64-linux") {
       # packages specific to aarch64-linux
       packages = with pkgs; [
         # backend api calls
-        postman
         # dns
         dogdns
-        dive
       ];
     };
 in
