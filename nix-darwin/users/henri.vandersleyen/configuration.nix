@@ -11,6 +11,7 @@
   ];
 
   nix = {
+    enable = true;
     settings.experimental-features = "nix-command flakes";
     # Optimize storage and automatic scheduled GC running
     # If you want to run GC manually, use commands:
@@ -23,8 +24,6 @@
       # interval = "weekly";
       options = "--delete-older-than 14d";
     };
-    configureBuildUsers = true;
-    useDaemon = true;
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
   };
 
@@ -34,7 +33,6 @@
     config.allowUnsupportedSystem = true;
   };
 
-  services.nix-daemon.enable = true;
   # system.configurationRevision = self.rev or self.dirtyRev or null;
   system.stateVersion = 5;
 
@@ -67,12 +65,12 @@
     casks = [
       "rectangle"
       "iterm2"
-      "dive"
       "postman"
-      "aws-sam-cli"
       # "nikitabobko/tap/aerospace" # not vetted on work laptop
     ];
     brews = [
+      "dive"
+      "aws-sam-cli"
       # "koekeishiya/formulae/yabai"
       # "koekeishiya/formulae/skhd"
     ];
