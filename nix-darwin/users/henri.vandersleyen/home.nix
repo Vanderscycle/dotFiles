@@ -61,7 +61,7 @@
   jsts.lsp.enable = true;
 
   # programs
-  arc-browser = true;
+  arc-browser.enable = true;
   fish.enable = true;
   zsh.enable = true;
   nh.flakeLocation = "/Users/${username}/Documents/dotFiles/nix-darwin";
