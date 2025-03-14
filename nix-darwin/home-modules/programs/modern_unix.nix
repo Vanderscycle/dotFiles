@@ -18,6 +18,8 @@
       hyperfine # how xz was discovered
       curlie # curl + httpie baby
       unzip
+      silver-searcher # ag
+      platinum-searcher # pt
     ];
     programs = {
       eza = {

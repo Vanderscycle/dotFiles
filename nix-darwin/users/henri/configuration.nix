@@ -56,6 +56,9 @@
   nixpkgs = {
     hostPlatform = "x86_64-linux";
     config.allowUnfree = true;
+    config.permittedInsecurePackages = [
+      "electron-32.3.3"
+    ];
   };
 
   programs.fish.enable = true;
