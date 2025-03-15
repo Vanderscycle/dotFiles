@@ -692,7 +692,7 @@ before packages are loaded."
   ;; --- projectile ---
   (setq projectile-project-search-path '("~/knak/packages/" "~/Documents/"))
   (spacemacs/set-leader-keys "ps" 'projectile-discover-projects-in-search-path)
-
+  (spacemacs/set-leader-keys "p/" 'projectile-ag)
   ;; --- babel ---
   (define-derived-mode ts-mode typescript-mode "ts"
     "Major mode for editing typescipt src blocks in org mode.")
