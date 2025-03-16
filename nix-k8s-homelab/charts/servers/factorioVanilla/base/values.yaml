@@ -42,7 +42,7 @@ port_fixer:
   # Note: Port forwarding for incoming traffic still needs to be set up properly for this to work.
   # For more info, check out:
   #   - https://github.com/SQLJames/factorio-server-charts/issues/15
-  enabled: true
+  enabled: false
   image:
     repository: "ghcr.io/zcube/factorio-port-fixer"
     pullPolicy: Always
@@ -70,6 +70,37 @@ persistence:
   annotations: {}
   ## If you have additional labels to apply to the volume
   labels: {}
+
+## @param rcon.external Enable RCON external access (deploy RCON service)
+## @param rcon.type RCON service type
+## @param rcon.serviceAnnotations RCON service annotations
+## @param rcon.passwordSecret Existing secret containing a `rconpw` data field
+## @param rcon.password Password for RCON, ignored if `rcon.passwordSecret` is set
+## @param rcon.port RCON service external port
+# Password and port for the rcon service
+rcon:
+  ## Represents the dual-stack-ness requested or required by this Service. Possible values are
+  ## SingleStack, PreferDualStack or RequireDualStack.
+  ## The ipFamilies and clusterIPs fields depend on the value of this field.
+  ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilyPolicy: "SingleStack"
+
+  ## List of IP families (e.g. IPv4, IPv6) assigned to the service. This field is usually assigned automatically
+  ## based on cluster configuration and the ipFamilyPolicy field.
+  ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+  ipFamilies:
+    - IPv4
+  external: false
+  type: LoadBalancer
+  serviceAnnotations: {}
+  # Existing secret containing a `rconpw` data field
+  passwordSecret: ""
+
+  # Password for rcon
+  password: "CHANGEMECHANGEME"
+
+  # rcon port
+  port: 30100
 
 ## @param factorioServer.save_name Factorio save name
 ## @param factorioServer.generate_new_save Generate a new save if `save_name` is not found
