@@ -144,8 +144,8 @@
             # launch program menu
             "SHIFTSUPER, P, exec, $menu"
             "SHIFTSUPER, O, exec, grim -g '$(slurp)' ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png"
-            # "SHIFTSUPER, O, exec, flameshot gui --clipboard"
-            "SHIFTSUPER, Q, exec, $emacs --eval '(vterm)'"
+            "SHIFTSUPER, O, exec, flameshot gui --clipboard"
+            # "SHIFTSUPER, Q, exec, $emacs --eval '(vterm)'"
 
             # scripts
             # "$mainMod, f, exec, ${lib.getExe myScript}"
@@ -196,6 +196,7 @@
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
         ];
+        # hyprctl clients
         windowrule = [
           "workspace 1, Emacs"
           "workspace 2, firefox"
@@ -215,9 +216,9 @@
         windowrulev2 = [
           # Steam rules
           "stayfocused, title:^()$,class:^(steam)$" # otherwise it closes post launching a game
-          # "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Float non-Steam windows (e.g., game launchers)
-          # "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$" # Move Steam to workspace 4
-          # "tile, class:^([Ss]team)$, title:^([Ss]team)$" # Tile the main Steam window
+          "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Float non-Steam windows (e.g., game launchers)
+          "workspace 4 silent, class:^([Ss]team)$, title:^([Ss]team)$" # Move Steam to workspace 4
+          "tile, class:^([Ss]team)$, title:^([Ss]team)$" # Tile the main Steam window
           # "workspace 4 silent, class:^([Ss]team)$, title:^(notificationtoasts_.*)$" # Move Steam notifications to workspace 4
           "nofocus, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Prevent non-Steam windows from stealing focus
           "noblur, class:^([Ss]team)$" # Ensure Steam window remains visible
@@ -239,14 +240,15 @@
         exec-once = [
           "sleep 1 && waybar"
           "hyprpaper"
+          "Emacs"
           "blueman-applet"
-          "/etc/profiles/per-user/henri/bin/emacs --daemon &"
+          # "/etc/profiles/per-user/henri/bin/emacs --daemon &"
           "swaync"
           "discord --enable-wayland-ime"
           "spotify"
-          "Brave"
+          "Brave --enable-wayland-ime"
           "kitty"
-          "flameshot &"
+          "flameshot"
           "fcitx5"
           # "emacs" # TODO: make it spawn out of a shell
         ];

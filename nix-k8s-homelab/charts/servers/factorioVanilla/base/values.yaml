@@ -11,6 +11,21 @@ resources:
   #   memory: 1024Mi
   #   cpu: 1000m
 
+#### Service Configuration ####
+## @section Service Parameters
+## @param service.type Factorio service type
+## @param service.port Factorio service port
+## @extra service.externalIPs [array] If you are able to map an external IP, set it here
+## @extra service.nodePort If you use "type: NodePort" set the port to a value you like in the range of 30000-32767. Leave it blank for a random port
+## @param service.annotations Additional custom annotations for Factorio service
+## The service is a kind tricky, so factorio uses UDP, but not every cloud provider is able to route UDP traffic.
+## I.e. your cloud provider has LoadBalancers without the ability for UDP protocol. Furthermore kubectl ist not able to route UDP Traffic
+## ref: https://github.com/kubernetes/kubernetes/issues/47862
+## You have to expose factorio on a NodePort and map a port between 30000 and 32767, but the native port is 34197. So you have always to specify the port in factorio.
+## The best way ist to define a ClusterIP service and define one or more externalIPs. Of course this IPs must be available on the node the factorio pod runs on!
+service:
+  type: LoadBalancer
+
 ## @section Port-Fixer Parameters
 ## @param port_fixer.enabled Enable the Factorio Port Fixer
 ## @param image.repository Factorio port-fixer image repository
