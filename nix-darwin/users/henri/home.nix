@@ -39,7 +39,6 @@
         hostname = "192.168.2.10";
         user = "proxmox";
       };
-
       knode2 = {
         hostname = "192.168.2.11";
         user = "proxmox";
@@ -47,6 +46,10 @@
       knode3 = {
         hostname = "192.168.2.12";
         user = "proxmox";
+      };
+      livingRoomPi = {
+        hostname = "192.168.1.100";
+        user = "admin";
       };
     };
   };
