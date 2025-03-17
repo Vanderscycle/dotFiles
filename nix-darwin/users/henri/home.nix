@@ -26,7 +26,33 @@
   dunst.enable = lib.mkForce false;
   fcitx.enable = true; # chinese fonts are super pixels
   gnome.enable = true;
-  ssh.enable = true;
+  ssh = {
+    enable = true;
+    hosts = {
+      factorio = {
+        # ssh factorio
+        hostname = "192.168.4.250";
+        user = "root";
+      };
+      knode1 = {
+        # ssh knode1
+        hostname = "192.168.2.10";
+        user = "proxmox";
+      };
+      knode2 = {
+        hostname = "192.168.2.11";
+        user = "proxmox";
+      };
+      knode3 = {
+        hostname = "192.168.2.12";
+        user = "proxmox";
+      };
+      livingRoomPi = {
+        hostname = "192.168.1.100";
+        user = "admin";
+      };
+    };
+  };
   # ssh.authorizedSshKeys = /home/henri/.ssh/endeavourGit; # TODO: move to nix-modules
   # languages
   go.lsp.enable = true;
@@ -40,7 +66,7 @@
   json.lsp.enable = true;
 
   # programs
-  flameshot.enable = true;
+  flameshot.enable = false; # enabled by hyprland
   brave.enable = true;
   firefox.enable = true; # lib.mkForce false;
 

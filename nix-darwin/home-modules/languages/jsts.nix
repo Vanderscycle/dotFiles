@@ -39,7 +39,15 @@
         emacsPackages.import-js
         svelte-language-server # npm install -g svelte-language-server
       ]
-      ++ (if config.jsts.vue.enable then [ vue-language-server ] else [ ])
+      ++ (
+        if config.jsts.vue.enable then
+          [
+            vue-language-server
+            vscode-extensions.vue.volar
+          ]
+        else
+          [ ]
+      )
       ++ (if config.jsts.svelte.enable then [ svelte-language-server ] else [ ]);
   };
 }
