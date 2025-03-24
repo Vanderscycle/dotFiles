@@ -66,6 +66,7 @@
   json.lsp.enable = true;
 
   # programs
+  devops.enable = true;
   flameshot.enable = false; # enabled by hyprland
   brave.enable = true;
   firefox.enable = true; # lib.mkForce false;
