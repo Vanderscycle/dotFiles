@@ -118,6 +118,8 @@ This function should only modify configuration layer settings."
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
+                                      (popper
+                                       :ensure t)
                                       ag
                                       rg
                                       ob-typescript ;; for org babel
@@ -667,9 +669,59 @@ before packages are loaded."
   ;; M-x nerd-icons-install-fonts to fix doom-emacs status line
   (add-to-list 'exec-path "/etc/profiles/per-user/henri.vandersleyen/bin")
   ;; --- misc problems ---
+  (when (fboundp 'electric-indent-mode) (electric-indent-mode -1)) ;; disables auto indent on new lines
   (setq-default spacemacs-yank-indent-threshold 0) ;; disables auto indent on pasting
   (setq-default word-wrap t)
   (spacemacs/set-leader-keys "obs" 'scratch-buffer)
+  ;; --- popper ---
+  (popper-mode +1)
+  (spacemacs/set-leader-keys "opt" 'popper-toggle)
+  (spacemacs/set-leader-keys "opc" 'popper-cycle)
+  (spacemacs/set-leader-keys "opm" 'popper-toggle-type)
+
+  ;;(vterm--internal popper-display-function)
+
+  ;; doesn't quite work
+  (setq popper-reference-buffers
+        '("\\*eshell.*\\*$" eshell-mode
+          "\\*shell.*\\*$"  shell-mode
+          "\\*term.*\\*$"   term-mode
+          "\\*vterm.*\\*$"  vterm-mode
+          "\\*Messages.*\\*$"
+          ))
+  ;; --- maggit ---
+  ;; smerge
+  (defhydra hydra/smerge
+    (:color pink :hint nil :post (smerge-auto-leave))
+    "
+^Move^       ^Keep^               ^Diff^                 ^Other^
+^^-----------^^-------------------^^---------------------^^-------
+_n_ext       _b_ase               _<_: upper/base        _C_ombine
+_p_rev       _u_pper              _=_: upper/lower       _r_esolve
+^^           _l_ower              _>_: base/lower        _k_ill current
+^^           _a_ll                _R_efine
+^^           _RET_: current       _E_diff
+"
+    ("n" smerge-next :color blue)
+    ("p" smerge-prev :color blue)
+    ("b" smerge-keep-base :color blue)
+    ("u" smerge-keep-upper :color blue)
+    ("l" smerge-keep-lower :color blue)
+    ("a" smerge-keep-all :color blue)
+    ("RET" smerge-keep-current :color blue)
+    ("\C-m" smerge-keep-current :color blue)
+    ("<" smerge-diff-base-upper :color blue)
+    ("=" smerge-diff-upper-lower :color blue)
+    (">" smerge-diff-base-lower :color blue)
+    ("R" smerge-refine :color blue)
+    ("E" smerge-ediff :color blue)
+    ("C" smerge-combine-with-next :color blue)
+    ("r" smerge-resolve :color blue)
+    ("k" smerge-kill-current :color blue)
+    ("q" nil "cancel" :color blue))
+
+  (spacemacs/set-leader-keys "ogm" 'hydra/smerge/body)
+
   ;; --- pomm ---
   (setq pomm-audio-enabled t)
   (setq pomm-audio-player-executable "aplay")
@@ -783,7 +835,7 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(fic-mode company-auctex company-math company-reftex evil-tex auctex lsp-latex consult lsp-tailwindcss math-symbol-lists pomm toml-mode docker aio dockerfile-mode ob-typescript web-mode nix-ts-mode blacken code-cells company-anaconda anaconda-mode cython-mode dap-mode lsp-docker bui helm-pydoc importmagic epc ctable concurrent live-py-mode lsp-pyright pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc yapfify company-shell fish-mode flycheck-bashate insert-shebang shfmt reformatter exec-path-from-shell yaml-mode doom-modeline shrink-path nerd-icons treemacs-all-the-icons add-node-modules-path auto-dictionary auto-yasnippet browse-at-remote catppuccin-theme code-review emojify deferred a color-identifiers-mode company-nixos-options diff-hl doom-themes eat esh-help eshell-prompt-extras eshell-z evil-org flycheck-pos-tip pos-tip flyspell-correct-helm flyspell-correct flyspell-popup git-link git-messenger git-modes git-timemachine gitignore-templates gnuplot helm-c-yasnippet helm-company helm-git-grep helm-ls-git helm-lsp helm-nixos-options helm-org-rifle htmlize js-doc js2-refactor multiple-cursors json-mode json-navigator json-reformat json-snatcher ligature livid-mode lsp-origami origami lsp-treemacs lsp-ui lsp-mode multi-term multi-vterm xref nix-mode nixos-options nodejs-repl npm-mode nyan-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank org-roam-ui websocket org-roam orgit-forge orgit forge yaml ghub closql emacsql treepy org prettier-js rainbow-identifiers rainbow-mode shell-pop skewer-mode js2-mode simple-httpd smeargle sops sqlite3 terminal-here treemacs-magit magit with-editor transient magit-section typescript-mode unicode-fonts ucs-utils font-utils persistent-soft pcache vterm web-beautify xkcd yasnippet-snippets yasnippet company-emoji company emoji-cheat-sheet-plus gh-md markdown-toc markdown-mode valign vmd-mode ws-butler writeroom-mode winum which-key vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+     '(popper fic-mode company-auctex company-math company-reftex evil-tex auctex lsp-latex consult lsp-tailwindcss math-symbol-lists pomm toml-mode docker aio dockerfile-mode ob-typescript web-mode nix-ts-mode blacken code-cells company-anaconda anaconda-mode cython-mode dap-mode lsp-docker bui helm-pydoc importmagic epc ctable concurrent live-py-mode lsp-pyright pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc yapfify company-shell fish-mode flycheck-bashate insert-shebang shfmt reformatter exec-path-from-shell yaml-mode doom-modeline shrink-path nerd-icons treemacs-all-the-icons add-node-modules-path auto-dictionary auto-yasnippet browse-at-remote catppuccin-theme code-review emojify deferred a color-identifiers-mode company-nixos-options diff-hl doom-themes eat esh-help eshell-prompt-extras eshell-z evil-org flycheck-pos-tip pos-tip flyspell-correct-helm flyspell-correct flyspell-popup git-link git-messenger git-modes git-timemachine gitignore-templates gnuplot helm-c-yasnippet helm-company helm-git-grep helm-ls-git helm-lsp helm-nixos-options helm-org-rifle htmlize js-doc js2-refactor multiple-cursors json-mode json-navigator json-reformat json-snatcher ligature livid-mode lsp-origami origami lsp-treemacs lsp-ui lsp-mode multi-term multi-vterm xref nix-mode nixos-options nodejs-repl npm-mode nyan-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank org-roam-ui websocket org-roam orgit-forge orgit forge yaml ghub closql emacsql treepy org prettier-js rainbow-identifiers rainbow-mode shell-pop skewer-mode js2-mode simple-httpd smeargle sops sqlite3 terminal-here treemacs-magit magit with-editor transient magit-section typescript-mode unicode-fonts ucs-utils font-utils persistent-soft pcache vterm web-beautify xkcd yasnippet-snippets yasnippet company-emoji company emoji-cheat-sheet-plus gh-md markdown-toc markdown-mode valign vmd-mode ws-butler writeroom-mode winum which-key vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
