@@ -2,9 +2,7 @@
   pkgs,
   inputs,
   username,
-  hostname,
   hosts,
-  system,
   ...
 }:
 {

@@ -20,6 +20,7 @@
     ../../home-modules/programs/fzf.nix
     # ../../home-modules/programs/ghostty.nix # INFO:broken
     ../../home-modules/programs/btop.nix
+    ../../home-modules/programs/codium.nix
     ../../home-modules/programs/fish.nix
     ../../home-modules/programs/zsh.nix
     ../../home-modules/programs/nushell.nix
@@ -56,11 +57,13 @@
     enable = false;
     configPath = Users/${username}/Documents/dotfiles/.config/aerospace;
   };
+
   # languages
   python.lsp.enable = true;
   jsts.lsp.enable = true;
 
   # programs
+  codium.enable = true;
   arc-browser.enable = true;
   fish.enable = true;
   zsh.enable = true;

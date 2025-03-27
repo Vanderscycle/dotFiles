@@ -126,9 +126,23 @@ This function should only modify configuration layer settings."
                                       (nix-ts-mode
                                        :mode "\\.nix\\'"
                                        :config
-                                       (setq lsp-nix-nixd-home-manager-options-expr "(builtins.getFlake "/Users/henri.vandersleyen/Documents/dotFiles/nix-darwin").darwinConfigurations."henri-MacBook-Pro".options.home-manager")
-                                       (setq lsp-nix-nixd-nixos-options-expr "(builtins.getFlake "/Users/henri.vandersleyen/Documents/dotFiles/nix-darwin").darwinConfigurations."henri-MacBook-Pro".options")
-                                       (setq lsp-nix-nixd-nixpkgs-expr "import <nixpkgs> { }")) ;; declaring linux isn't enough
+                                       (let ((system-name (if (eq system-type 'darwin)
+                                                              "henri-MacBook-Pro"
+                                                            "desktop"))
+                                             (config-type (if (eq system-type 'darwin)
+                                                              "darwinConfigurations"
+                                                            "nixosConfigurations")))
+                                         (setq lsp-nix-nixd-home-manager-options-expr
+                                               (format "(builtins.getFlake \"%s/Documents/dotFiles/nix-darwin\").%s.\"%s\".options.home-manager"
+                                                       (getenv "HOME")
+                                                       config-type
+                                                       system-name))
+                                         (setq lsp-nix-nixd-nixos-options-expr
+                                               (format "(builtins.getFlake \"%s/Documents/dotFiles/nix-darwin\").%s.\"%s\".options"
+                                                       (getenv "HOME")
+                                                       config-type
+                                                       system-name)))
+                                       (setq lsp-nix-nixd-nixpkgs-expr "import <nixpkgs> { }"))
                                       (sops
                                        :recipe (:type git :host github :repo "djgoku/sops"))
                                       catppuccin-theme
@@ -689,6 +703,7 @@ before packages are loaded."
           "\\*vterm.*\\*$"  vterm-mode
           "\\*Messages.*\\*$"
           ))
+  ;; --- vue ---
   ;; --- maggit ---
   ;; smerge
   (defhydra hydra/smerge
@@ -702,22 +717,22 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 ^^           _a_ll                _R_efine
 ^^           _RET_: current       _E_diff
 "
-    ("n" smerge-next :color blue)
-    ("p" smerge-prev :color blue)
-    ("b" smerge-keep-base :color blue)
-    ("u" smerge-keep-upper :color blue)
-    ("l" smerge-keep-lower :color blue)
-    ("a" smerge-keep-all :color blue)
-    ("RET" smerge-keep-current :color blue)
-    ("\C-m" smerge-keep-current :color blue)
-    ("<" smerge-diff-base-upper :color blue)
-    ("=" smerge-diff-upper-lower :color blue)
-    (">" smerge-diff-base-lower :color blue)
-    ("R" smerge-refine :color blue)
-    ("E" smerge-ediff :color blue)
-    ("C" smerge-combine-with-next :color blue)
-    ("r" smerge-resolve :color blue)
-    ("k" smerge-kill-current :color blue)
+    ("n" smerge-next :red)
+    ("p" smerge-prev :red)
+    ("b" smerge-keep-base)
+    ("u" smerge-keep-upper)
+    ("l" smerge-keep-lower)
+    ("a" smerge-keep-all)
+    ("RET" smerge-keep-current)
+    ("\C-m" smerge-keep-current)
+    ("<" smerge-diff-base-upper)
+    ("=" smerge-diff-upper-lower)
+    (">" smerge-diff-base-lower)
+    ("R" smerge-refine)
+    ("E" smerge-ediff)
+    ("C" smerge-combine-with-next)
+    ("r" smerge-resolve)
+    ("k" smerge-kill-current)
     ("q" nil "cancel" :color blue))
 
   (spacemacs/set-leader-keys "ogm" 'hydra/smerge/body)
