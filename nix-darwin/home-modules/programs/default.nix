@@ -7,6 +7,7 @@
     ./brave.nix
     ./btop.nix
     ./cloud.nix
+    ./codium.nix
     ./cowsay.nix
     ./devops.nix
     ./discord.nix

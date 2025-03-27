@@ -55,6 +55,7 @@
   };
   # ssh.authorizedSshKeys = /home/henri/.ssh/endeavourGit; # TODO: move to nix-modules
   # languages
+  codium.enable = true;
   go.lsp.enable = true;
   python.lsp.enable = true;
   jsts = {
