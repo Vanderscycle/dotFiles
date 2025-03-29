@@ -42,7 +42,7 @@ port_fixer:
   # Note: Port forwarding for incoming traffic still needs to be set up properly for this to work.
   # For more info, check out:
   #   - https://github.com/SQLJames/factorio-server-charts/issues/15
-  enabled: false
+  enabled: true
   image:
     repository: "ghcr.io/zcube/factorio-port-fixer"
     pullPolicy: Always
