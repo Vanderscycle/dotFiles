@@ -56,6 +56,7 @@
     config.allowUnfree = true;
     config.permittedInsecurePackages = [
       "electron-32.3.3"
+      "beekeeper-studio-5.1.5"
     ];
   };
 

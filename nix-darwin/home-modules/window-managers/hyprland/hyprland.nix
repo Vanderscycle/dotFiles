@@ -155,7 +155,7 @@
             # buffer manipulation
             "$mainMod SHIFT, F, fullscreen,"
             "$mainMod, D, pseudo"
-            "$mainMod, S, togglesplit"
+            "$mainMod, -, togglesplit"
             "$mainMod, C, killactive,"
             "$mainMod, V, togglefloating,"
             # Switch workspaces with mainMod + [0-9]

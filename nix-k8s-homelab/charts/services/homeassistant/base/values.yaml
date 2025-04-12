@@ -1,0 +1,9 @@
+## Default values for home assistant
+## This is a YAML-formatted file.
+## Declare variables to be passed into your templates.
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 5Gi
+  storageClass: "local-path"

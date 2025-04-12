@@ -47,3 +47,13 @@ patches:
     target:
       kind: Application
       name: gitea
+  - patch: |-
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/services/homeassistant/overlays/prod
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+    target:
+      kind: Application
+      name: homeassistant

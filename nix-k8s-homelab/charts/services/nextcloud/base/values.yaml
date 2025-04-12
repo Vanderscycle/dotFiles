@@ -19,7 +19,7 @@ ingress:
     # nginx.ingress.kubernetes.io/rewrite-target: /
 
   #  nginx.ingress.kubernetes.io/proxy-body-size: 4G
-    kubernetes.io/tls-acme: "true"
+  # kubernetes.io/tls-acme: "true"
   #  nginx.ingress.kubernetes.io/server-snippet: |-
   #    server_tokens off;
   #    proxy_hide_header X-Powered-By;
@@ -54,8 +54,8 @@ ingress:
 
 service:
   type: LoadBalancer
-  annotations:
-    external-dns.alpha.kubernetes.io/hostname: nextcloud.vandersleyen.dev
+  # annotations:
+  #   external-dns.alpha.kubernetes.io/hostname: nextcloud.vandersleyen.dev
 nextcloud:
   trustedDomains:
     - nextcloud.vandersleyen.dev

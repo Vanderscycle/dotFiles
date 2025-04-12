@@ -10,7 +10,7 @@
   imports = [
     ./hyprland.nix
     ./hyprpaper.nix
-    ./swaync.nix
+    # ./swaync.nix
   ];
 
   home = {
