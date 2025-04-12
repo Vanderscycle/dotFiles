@@ -7,3 +7,15 @@ persistence:
   accessMode: ReadWriteOnce
   size: 5Gi
   storageClass: "local-path"
+ingress:
+  # Enable ingress for home assistant
+  enabled: true
+  # Enable external ingress (cannot be true when ingress.enabled is true)
+  external: false
+service:
+  # Service type (ClusterIP, NodePort, LoadBalancer, or ExternalName)
+  type: LoadBalancer
+  # Service port
+  port: 8080
+  # Annotations to add to the service
+  annotations: {}
