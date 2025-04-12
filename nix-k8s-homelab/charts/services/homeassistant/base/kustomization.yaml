@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 # https://artifacthub.io/packages/helm/gabe565/paperless-ngx
-namespace: paperless
+namespace: homeassistant
 # resources:
   # - secrets
 
