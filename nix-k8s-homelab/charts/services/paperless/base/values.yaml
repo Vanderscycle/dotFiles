@@ -1,3 +1,41 @@
-## Default values for kubeseal 
+## Default values for paperless
 ## This is a YAML-formatted file.
 ## Declare variables to be passed into your templates.
+
+persistence:
+  # -- Configure data volume settings for the chart under this key.
+  # @default -- See [values.yaml](./values.yaml)
+  data:
+    enabled: true
+    retain: true
+    mountPath: /usr/src/paperless/data
+    storageClass: "local-path"
+    accessMode: ReadWriteOnce
+    size: 2Gi
+  # -- Configure media volume settings for the chart under this key.
+  # @default -- See [values.yaml](./values.yaml)
+  media:
+    enabled: true
+    retain: true
+    mountPath: /usr/src/paperless/media
+    storageClass: "local-path"
+    accessMode: ReadWriteOnce
+    size: 4Gi
+  # -- Configure export volume settings for the chart under this key.
+  # @default -- See [values.yaml](./values.yaml)
+  export:
+    enabled: true
+    retain: true
+    mountPath: /usr/src/paperless/export
+    storageClass: "local-path"
+    accessMode: ReadWriteOnce
+    size: 1Gi
+  # -- Configure consume volume settings for the chart under this key.
+  # @default -- See [values.yaml](./values.yaml)
+  consume:
+    enabled: true
+    retain: true
+    mountPath: /usr/src/paperless/consume
+    storageClass: "local-path"
+    accessMode: ReadWriteOnce
+    size: 4Gi

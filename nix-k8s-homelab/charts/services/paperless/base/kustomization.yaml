@@ -3,13 +3,11 @@ kind: Kustomization
 
 # https://artifacthub.io/packages/helm/gabe565/paperless-ngx
 namespace: paperless
-# resources:
-  # - secrets
 
 helmCharts:
   - name: paperless-ngx
-    version: 0.22.0
-    repo: https://charts.gabe565.com
+    version: 0.24.1
+    repo: oci://ghcr.io/gabe565/charts/paperless-ngx
     valuesFile: values.yaml
     namespace: paperless
     releaseName: services
