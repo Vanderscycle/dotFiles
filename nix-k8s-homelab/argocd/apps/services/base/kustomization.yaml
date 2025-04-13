@@ -7,4 +7,4 @@ resources:
   - n8n.yaml
   - homepage.yaml
   - homeassistant.yaml
-  - paperless.yaml
+  - paperless-ngx.yaml
