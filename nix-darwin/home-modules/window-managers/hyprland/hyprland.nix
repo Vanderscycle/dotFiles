@@ -61,8 +61,8 @@
         "$reset" = "hyprctl dispatch submap reset &&"; # use a variable to keep things more readable
 
         input = {
-          kb_layout = "us";
-
+          kb_layout = "us,fr";
+          kb_options = "grp:caps_toggle";
           follow_mouse = 0; # focus change on cursor move
           accel_profile = "flat";
         };
@@ -198,22 +198,16 @@
         ];
         # hyprctl clients
         windowrule = [
-          "workspace 1, Emacs"
-          "workspace 2, firefox"
-          "workspace 2, Brave-browser" # Updated to match the class name for Brave
-          "workspace 3, discord"
-          "workspace 3, Spotify"
-          "workspace 3, spotify"
-          "workspace 4, steam"
-          "workspace 4, Steam"
-          "workspace 4, heroic"
-          "workspace 5, SuperSlicer"
-          "workspace 5, OrcaSlicer"
-          "workspace 6, transmission-gtk" # Updated to match the class name for Transmission
-          "pseudo,fcitx"
         ];
 
         windowrulev2 = [
+          # Workspace rules
+          "workspace 1, class:^(Emacs)$"
+          "workspace 2, class:^(firefox|Brave-browser)$"
+          "workspace 3, class:^(discord|Spotify|spotify)$"
+          "workspace 4, class:^(?i)steam|heroic$" # Case-insensitive match
+          "workspace 5, class:^(SuperSlicer|OrcaSlicer)$"
+          "workspace 6, class:^(transmission-gtk)$"
           # Steam rules
           "stayfocused, title:^()$,class:^(steam)$" # otherwise it closes post launching a game
           "float, class:^([Ss]team)$, title:^((?![Ss]team).*)$" # Float non-Steam windows (e.g., game launchers)
@@ -228,7 +222,9 @@
           "noanim,class:^(xwaylandvideobridge)$"
           "nofocus,class:^(xwaylandvideobridge)$"
           "noinitialfocus,class:^(xwaylandvideobridge)$"
-          "float, class:^(org.fcitx5.)$"
+          # fcitx
+          "float, class:^(org\\.fcitx5\\..*)$"
+          "pseudo, class:^(fcitx)$"
         ];
         #################
         ### AUTOSTART ###

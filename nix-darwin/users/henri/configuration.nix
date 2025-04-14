@@ -9,6 +9,8 @@
   imports = [
     hosts.nixosModule
     ../../hosts
+    # hardware related
+    ../../nix-modules/hardware
     # programs
     ../../nix-modules/programs
     # services
