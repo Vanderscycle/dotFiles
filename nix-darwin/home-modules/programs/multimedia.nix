@@ -17,7 +17,8 @@
     home = {
       packages = with pkgs; [
         ytfzf
-        vlc
+        vlc # videos
+        feh # images
       ];
     };
   };

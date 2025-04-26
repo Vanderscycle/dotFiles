@@ -17,6 +17,7 @@
     home.packages = with pkgs; [
       libreoffice-qt
       hunspell
+      xournalpp # allows for pdf form filling
       hunspellDicts.en_CA
       hunspellDicts.en_US
     ];

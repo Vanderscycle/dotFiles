@@ -90,7 +90,7 @@
                 imports = [
 
                   nixvim.homeManagerModules.nixvim
-                  catppuccin.homeManagerModules.catppuccin
+                  catppuccin.homeModules.catppuccin
                   ./users/henri.vandersleyen/home.nix
                 ];
               };

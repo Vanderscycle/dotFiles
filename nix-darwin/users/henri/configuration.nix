@@ -130,6 +130,7 @@
   '';
 
   xdg.mime = {
+    # xdg-mime query default application/pdf
     defaultApplications = {
       "application/pdf" = [ "zathura.desktop" ];
       "application/json" = [ "nvim.desktop" ]; # You'll need a .desktop file for Vim or your preferred editor
@@ -144,9 +145,10 @@
       # Directories
       "inode/directory" = [ "thunar.desktop" ];
       # Images
-      # "image/jpeg" = [ "feh.desktop" ];
-      # "image/png" = [ "feh.desktop" ];
-      # "image/gif" = [ "feh.desktop" ];
+      "image/jpeg" = [ "feh.desktop" ];
+      "image/png" = [ "feh.desktop" ];
+      "image/gif" = [ "feh.desktop" ];
+      "image/webp" = [ "feh.desktop" ];
       # audio
       "audio/mpeg" = [ "vlc.desktop" ];
       "audio/flac" = [ "vlc.desktop" ];
