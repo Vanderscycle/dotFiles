@@ -13,8 +13,9 @@
     };
   };
   config = lib.mkIf config.moonlander.enable {
-    environment.systemPackages = [
-      pkgs.wally-cli
+    environment.systemPackages = with pkgs; [
+      wally-cli
+      keymapp
     ];
   };
 }

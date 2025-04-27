@@ -69,7 +69,10 @@ This function should only modify configuration layer settings."
                  typescript-fmt-on-save t
                  ) ;; js but like better?
      (python :variables
-             python-backend 'lsp) ;;
+             python-format-on-save t
+             python-formatter 'black
+             python-sort-imports-on-save t
+             python-backend 'lsp) ;; ai slop fest enabler
      (org :variables
           org-enable-roam-protocol t
           org-enable-roam-ui t
@@ -126,6 +129,7 @@ This function should only modify configuration layer settings."
                                       (nix-ts-mode
                                        :mode "\\.nix\\'"
                                        :config
+                                       (setq lsp-nix-nixd-server-path "/home/henri/.nix-profile/bin/nixd")
                                        (let ((system-name (if (eq system-type 'darwin)
                                                               "henri-MacBook-Pro"
                                                             "desktop"))
@@ -688,21 +692,19 @@ before packages are loaded."
   (setq-default word-wrap t)
   (spacemacs/set-leader-keys "obs" 'scratch-buffer)
   ;; --- popper ---
-  (popper-mode +1)
   (spacemacs/set-leader-keys "opt" 'popper-toggle)
   (spacemacs/set-leader-keys "opc" 'popper-cycle)
   (spacemacs/set-leader-keys "opm" 'popper-toggle-type)
-
-  ;;(vterm--internal popper-display-function)
-
-  ;; doesn't quite work
+  (popper-mode +1)
+  (popper-echo-mode +1)
   (setq popper-reference-buffers
-        '("\\*eshell.*\\*$" eshell-mode
-          "\\*shell.*\\*$"  shell-mode
-          "\\*term.*\\*$"   term-mode
-          "\\*vterm.*\\*$"  vterm-mode
-          "\\*Messages.*\\*$"
-          ))
+        (append popper-reference-buffers
+                '("^\\*eshell.*\\*$" eshell-mode ;eshell as a popup
+                  "^\\*shell.*\\*$"  shell-mode  ;shell as a popup
+                  "^\\*term.*\\*$"   term-mode   ;term as a popup
+                  "^\\*vterm.*\\*$"  vterm-mode  ;vterm as a popup
+                  )))
+  (setq popper-window-height 0.33)
   ;; --- vue ---
   ;; --- maggit ---
   ;; smerge
@@ -796,6 +798,32 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
           (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+
+  (setq org-todo-keyword-faces
+        '(("TODO"      :inherit (org-todo region) :foreground "#A6E3A1" :weight bold)  ; Green
+          ("NEXT"      :inherit (org-todo region) :foreground "#F9E2AF" :weight bold)  ; Yellow
+          ("DONE"      :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (Subtext0)
+
+          ;; Second workflow keywords
+          ("BACKLOG"   :inherit (org-todo region) :foreground "#B4BEFE" :weight bold)  ; Lavender
+          ("PLAN"      :inherit (org-todo region) :foreground "#74C7EC" :weight bold)  ; Sapphire
+          ("READY"     :inherit (org-todo region) :foreground "#89B4FA" :weight bold)  ; Blue
+          ("ACTIVE"    :inherit (org-todo region) :foreground "#F38BA8" :weight bold)  ; Red
+          ("REVIEW"    :inherit (org-todo region) :foreground "#F5C2E7" :weight bold)  ; Pink
+          ("WAIT"      :inherit (org-todo region) :foreground "#EBA0AC" :weight bold)  ; Maroon
+          ("HOLD"      :inherit (org-todo region) :foreground "#CBA6F7" :weight bold)  ; Mauve
+          ("COMPLETED" :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (same as DONE)
+          ("CANC"      :inherit (org-todo region) :foreground "#FAB387" :weight bold)  ; Peach
+          ))
+  ;; --- org-modern ---
+  (setq org-adapt-indentation t
+        org-hide-leading-stars t
+        org-hide-emphasis-markers t
+        org-pretty-entities t
+        org-ellipsis "  ·")
+  (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-edit-src-content-indentation 0)
   ;; --- org-journal ---
   (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
   (setq org-directory "~/Documents/zettelkasten/org")

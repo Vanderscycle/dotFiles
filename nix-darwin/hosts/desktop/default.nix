@@ -17,7 +17,6 @@
     extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
 
     ## radv: an open-source Vulkan driver from freedesktop
-
   };
 
   environment.variables = {
