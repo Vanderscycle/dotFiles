@@ -13,13 +13,20 @@ We will install what's called ~Nix-Darwin~
 But first we must install nix, so we will do so using, not the nix official repo, but from our friends at determinate systems.
 [[https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer][GitHub - DeterminateSystems/nix-installer: Install Nix and flakes with the fa...]]
 #+begin_src zsh
+# When asked if you want to use the determinate version say no, as we want to use the NixOS official version.
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
-  sh -s -- install --determinate
+  sh -s -- install
 #+end_src
 
+From that point on, nix is on your system and you can already use it (if you open a new shell)
+#+begin_src zsh
+nix shell nixpkgs#cowsay
+#+end_src
+
+
+***** Configuring system
 We will be using flakes as they are the nix equivalent of a ~Dockerfile~ and can provide multiple outputs.
 
-For a quick template to get started we can ask nix to generate a config for us
 #+begin_src zsh
 # To use Nixpkgs unstable:
 nix flake init -t nix-darwin/master
@@ -38,43 +45,28 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 #+end_src
 
 #+begin_src zsh
-nix flake init # creates a basic flake
+nix flake init # creates a basic flake (hello world)
 #+end_src
 
-now let's replace the content w/ something usefull
-#+begin_src nix
-{
-  description = "Sample Nix Flake";
+***** Configuring system
+We can only use home-manager to configure our
+That being said we will be using the following flake [[file:rocky-linux/flake.nix][rocky-nix flake]]
 
-  inputs = {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  };
-
-  outputs = { self, nixpkgs }:
-  let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-  in
-  {
-      devShells.${system}.default  =
-      pkgs.mkShell
-        {
-          buildInputs = [
-            pkgs.neovim
-            pkgs.vim
-            pkgs.nodejs_18
-          ];
-
-          shellHook = ''
-            echo "Hello World"
-          '';
-        };
-  };
-}
+In the aforementioned file we will
+#+begin_src zsh
+sudo nix run .#create-user-script
+sudo passwd rocky  # Set password interactively
+home-manager switch --flake .#rocky
 #+end_src
 
 **** Linux (Nixos)
-Its already installed, you can modify your =/etc/nixos/configuration.nix= file and then run =sudo nixos =
+Its already installed, you can modify your =/etc/nixos/configuration.nix= file and then run =sudo nixos-rebuild switch=
+
+***** Configuring system
+To run [[file:nixos/flake.nix][basic nixos flake.nix config]]
+#+begin_src zsh
+sudo nixos-rebuild switch --flake .#nixos
+#+end_src
 
 *** Searching/using packages
 Nixos has an extensive package manager repository
