@@ -1,0 +1,99 @@
+* Nix for all
+
+** Nix
+
+Nix allows for declarative machine configuration, similar to Docker. Its learning curve is adrupt, its documentation poor, and its users are zany.
+This is going to be incomplete and confusing, but I hope it plants the seeds of learning and encourages you to try it. For it at first tastes bitter, but gives you such control the longer you try.
+
+*** Installation
+**** Macos
+We will install what's called ~Nix-Darwin~
+[[https://github.com/nix-darwin/nix-darwin][GitHub - nix-darwin/nix-darwin: nix modules for darwin]]
+
+But first we must install nix, so we will do so using, not the nix official repo, but from our friends at determinate systems.
+[[https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer][GitHub - DeterminateSystems/nix-installer: Install Nix and flakes with the fa...]]
+#+begin_src zsh
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
+  sh -s -- install --determinate
+#+end_src
+
+We will be using flakes as they are the nix equivalent of a ~Dockerfile~ and can provide multiple outputs.
+
+For a quick template to get started we can ask nix to generate a config for us
+#+begin_src zsh
+# To use Nixpkgs unstable:
+nix flake init -t nix-darwin/master
+#+end_src
+
+To apply the configuration
+#+begin_src
+nix run nix-darwin/master#darwin-rebuild -- switch
+#+end_src
+
+**** Linux (non-NixOS)
+Very similar to Macos except the template is different
+#+begin_src zsh
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
+  sh -s -- install --determinate
+#+end_src
+
+#+begin_src zsh
+nix flake init # creates a basic flake
+#+end_src
+
+now let's replace the content w/ something usefull
+#+begin_src nix
+{
+  description = "Sample Nix Flake";
+
+  inputs = {
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  };
+
+  outputs = { self, nixpkgs }:
+  let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+  in
+  {
+      devShells.${system}.default  =
+      pkgs.mkShell
+        {
+          buildInputs = [
+            pkgs.neovim
+            pkgs.vim
+            pkgs.nodejs_18
+          ];
+
+          shellHook = ''
+            echo "Hello World"
+          '';
+        };
+  };
+}
+#+end_src
+
+**** Linux (Nixos)
+Its already installed, you can modify your =/etc/nixos/configuration.nix= file and then run =sudo nixos =
+
+*** Searching/using packages
+Nixos has an extensive package manager repository
+[[https://search.nixos.org/packages][NixOS Search]]
+
+*** Going Beyond
+Split configuration into smaller files instead of a single massive configuration.nix
+[[https://www.youtube.com/watch?v=vYc6IzKvAJQ][Modularize NixOS and Home Manager | Great Practices - YouTube]]
+
+Configuring your dotfiles using home manager directly
+[[https://www.youtube.com/watch?v=FcC2dzecovw][Nix home-manager tutorial: Declare your entire home directory - YouTube]]
+
+Refences:
+[[https://nix-community.github.io/home-manager/nixos-options.xhtml][Appendix B. NixOS Configuration Options]]
+[[https://nix-community.github.io/home-manager/nix-darwin-options.xhtml][Appendix C. nix-darwin Configuration Options]]
+
+***** TODO show how to use determinate system flakes and use the outputs
+***** TODO show how you can use nix to sync your dotfiles across macos/linux
+Using the vms located
+***** TODO show how you can revert back previous generation
+***** TODO show you can have multiple version of certain programs
+     [[https://flakehub.com/flakes][FlakeHub]]

@@ -24,6 +24,9 @@ in
 
   config = lib.mkIf config.devops.enable {
     home.packages = with pkgs; [
+      # crypt
+      openssl
+      pwgen
       # sql/db
       beekeeper-studio # not supported on aarch64-darwin
       # mysql-workbench # not supported on aarch64-darwin
