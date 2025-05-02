@@ -50,16 +50,19 @@ Let's use the example we created
  #+end_src
 
 #+begin_src zsh
-darwin-rebuild switch flake
-# or
-nix run --flake ".#simple"
+nix run nix-darwin -- switch --flake .
 #+end_src
 
 To rollback
 #+begin_src zsh
 nix profile history --profile /nix/var/nix/profiles/system
+# or
+
+darwin-rebuild switch --list-generations
 # to undo latest
-sudo darwin-rebuild switch --rollback
+darwin-rebuild switch --rollback
+# or revert to a specific version
+darwin-rebuild switch --switch-generation 1
 #+end_src
 ***** Video references
 [[https://www.youtube.com/watch?v=Z8BL8mdzWHI][Nix is my favorite package manager to use on macOS - YouTube]]
