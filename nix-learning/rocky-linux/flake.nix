@@ -9,7 +9,7 @@
       self,
       nixpkgs,
       home-manager,
-    }:
+    }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -18,8 +18,7 @@
       # Package to create the system user (run as root)
       packages.${system}.create-user-script = pkgs.writeShellScriptBin "create-user" ''
         #!/bin/sh
-        useradd -m -s ${pkgs.bash}/bin/bash rocky || echo "User exists"
-        usermod -aG nix-users rocky
+        useradd -m -s /bin/bash rocky
         echo "User 'rocky' created. Run 'passwd rocky' to set password"
       '';
 
@@ -32,7 +31,7 @@
             {
               home.username = "root";
               home.homeDirectory = "/root";
-              home.stateVersion = "24.11";
+              home.stateVersion = "25.05";
               home.packages = with pkgs; [
                 htop
                 neovim
@@ -45,16 +44,22 @@
         "rocky" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            ./home.nix
             {
               home.username = "rocky";
               home.homeDirectory = "/home/rocky";
-              home.stateVersion = "24.11";
+              home.stateVersion = "25.05";
               home.packages = with pkgs; [
                 git
                 tmux
                 starship
               ];
-
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                username = "rocky";
+                hostname = "rocky-nix";
+                system = "x86_64-linux";
+              };
               programs.bash = {
                 enable = true;
                 shellAliases = {
@@ -67,7 +72,7 @@
                 add_newline = false
               '';
             }
-          ]
+          ];
         };
       };
     };

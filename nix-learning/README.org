@@ -34,8 +34,36 @@ nix flake init -t nix-darwin/master
 
 To apply the configuration
 #+begin_src
-nix run nix-darwin/master#darwin-rebuild -- switch
+nix run nix-darwin -- switch --flake .
 #+end_src
+
+You see the list of what nix-darwin allows you to configure
+[[https://nix-darwin.github.io/nix-darwin/manual/index.html][nix-darwin Configuration Options]]
+For futher customization you can use home-manager to configure your dotfiles
+https://nix-community.github.io/home-manager/nix-darwin-options.xhtml
+
+***** Demo
+Let's use the example we created
+ #+begin_src zsh
+ ssh macos@192.168.4.245
+ rsync -avz ~/Documents/dotFiles/nix-learning/macos/ macos@192.168.4.245:~/Documents/
+ #+end_src
+
+#+begin_src zsh
+darwin-rebuild switch flake
+# or
+nix run --flake ".#simple"
+#+end_src
+
+To rollback
+#+begin_src zsh
+nix profile history --profile /nix/var/nix/profiles/system
+# to undo latest
+sudo darwin-rebuild switch --rollback
+#+end_src
+***** Video references
+[[https://www.youtube.com/watch?v=Z8BL8mdzWHI][Nix is my favorite package manager to use on macOS - YouTube]]
+[[https://www.youtube.com/watch?v=iU7B76NTr2I][Nix Darwin Turned My Mac into a Fully Automated Machine - YouTube]]
 
 **** Linux (non-NixOS)
 Very similar to Macos except the template is different
@@ -48,8 +76,11 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 nix flake init # creates a basic flake (hello world)
 #+end_src
 
+
 ***** Configuring system
-We can only use home-manager to configure our
+We can only use home-manager to configure our computer. To do so we can must install it.
+[[https://nix-community.github.io/home-manager/#sec-install-standalone][Home Manager Manual]]
+
 That being said we will be using the following flake [[file:rocky-linux/flake.nix][rocky-nix flake]]
 
 In the aforementioned file we will
@@ -59,6 +90,20 @@ sudo passwd rocky  # Set password interactively
 home-manager switch --flake .#rocky
 #+end_src
 
+***** Demo
+
+ #+begin_src zsh
+  ssh rocky@192.168.4.245
+  # ensure that it has rsync on the machine
+  rsync -avz ~/Documents/dotFiles/nix-learning/rocky-linux/ rocky@192.168.4.215:~/Documents/
+
+ # applying the config
+ nix shell nixpkgs#home-manager
+ home-manager switch --flake .#rocky
+ # rollback
+home-manager generations
+home-manager switch --generation N
+ #+end_src
 **** Linux (Nixos)
 Its already installed, you can modify your =/etc/nixos/configuration.nix= file and then run =sudo nixos-rebuild switch=
 

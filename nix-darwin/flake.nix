@@ -64,8 +64,6 @@
       hosts,
       ...
     }:
-    let
-    in
     {
       darwinConfigurations = {
         #nix run nix-darwin -- switch --flake ./nix-darwin
@@ -88,7 +86,6 @@
               };
               home-manager.users."henri.vandersleyen" = {
                 imports = [
-
                   nixvim.homeManagerModules.nixvim
                   catppuccin.homeModules.catppuccin
                   ./users/henri.vandersleyen/home.nix
