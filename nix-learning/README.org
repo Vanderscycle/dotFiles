@@ -84,6 +84,8 @@ nix flake init # creates a basic flake (hello world)
 We can only use home-manager to configure our computer. To do so we can must install it.
 [[https://nix-community.github.io/home-manager/#sec-install-standalone][Home Manager Manual]]
 
+If the nix bug infected you, I can only recommend that you move to NixOS
+
 That being said we will be using the following flake [[file:rocky-linux/flake.nix][rocky-nix flake]]
 
 In the aforementioned file we will
@@ -96,25 +98,17 @@ home-manager switch --flake .#rocky
 ***** Demo
 
  #+begin_src zsh
-  ssh rocky@192.168.4.245
-  # ensure that it has rsync on the machine
-  rsync -avz ~/Documents/dotFiles/nix-learning/rocky-linux/ rocky@192.168.4.215:~/Documents/
+   ssh rocky@192.168.4.245
+   # ensure that it has rsync on the machine
+   rsync -avz ~/Documents/dotFiles/nix-learning/rocky-linux/ rocky@192.168.4.215:~/Documents/
 
- # applying the config
- nix shell nixpkgs#home-manager
- home-manager switch --flake .#rocky
- # rollback
-home-manager generations
-home-manager switch --generation N
+  # applying the config
+  home-manager switch --flake .#rocky
+
+  # rollback
+ home-manager generations # list all generations
+ # I actually don't know how to do this
  #+end_src
-**** Linux (Nixos)
-Its already installed, you can modify your =/etc/nixos/configuration.nix= file and then run =sudo nixos-rebuild switch=
-
-***** Configuring system
-To run [[file:nixos/flake.nix][basic nixos flake.nix config]]
-#+begin_src zsh
-sudo nixos-rebuild switch --flake .#nixos
-#+end_src
 
 *** Searching/using packages
 Nixos has an extensive package manager repository
@@ -134,6 +128,9 @@ Refences:
 ***** TODO show how to use determinate system flakes and use the outputs
 ***** TODO show how you can use nix to sync your dotfiles across macos/linux
 Using the vms located
-***** TODO show how you can revert back previous generation
-***** TODO show you can have multiple version of certain programs
+***** DONE show how you can revert back previous generation
+      CLOSED: [2025-05-02 Fri 07:59]
+***** DONE show you can have multiple version of certain programs
+      CLOSED: [2025-05-02 Fri 07:59]
+      - State "DONE"       from "TODO"       [2025-05-02 Fri 07:59]
      [[https://flakehub.com/flakes][FlakeHub]]
