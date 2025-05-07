@@ -20,6 +20,7 @@
     # local
     ./sops.nix
   ];
+  system.stateVersion = "25.05";
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   # cron
   cron.downloadFolderOrganizer.enable = true;

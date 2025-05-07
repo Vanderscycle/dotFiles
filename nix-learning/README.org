@@ -67,7 +67,10 @@ darwin-rebuild switch --switch-generation 1
 ***** Video references
 [[https://www.youtube.com/watch?v=Z8BL8mdzWHI][Nix is my favorite package manager to use on macOS - YouTube]]
 [[https://www.youtube.com/watch?v=iU7B76NTr2I][Nix Darwin Turned My Mac into a Fully Automated Machine - YouTube]]
-
+***** Update
+#+begin_src bash
+nix flake update
+#+end_src
 **** Linux (non-NixOS)
 Very similar to Macos except the template is different
 #+begin_src zsh
@@ -109,6 +112,12 @@ home-manager switch --flake .#rocky
  home-manager generations # list all generations
  # I actually don't know how to do this
  #+end_src
+
+One more quick demo of the on the fly pattern
+#+begin_src zsh
+nix shell nixpkgs#fzf nixpkgs#neovim
+nvim "$(fzf)"
+#+end_src
 
 *** Searching/using packages
 Nixos has an extensive package manager repository

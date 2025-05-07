@@ -96,6 +96,7 @@
         }; # Henris-MacBook-Pro
       };
 
+      # sudo nixos-rebuild switch --flake ".#desktop" --impure
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
@@ -119,7 +120,7 @@
               home-manager.users."henri" = {
                 imports = [
                   nixvim.homeManagerModules.nixvim
-                  catppuccin.homeManagerModules.catppuccin
+                  catppuccin.homeModules.catppuccin
                   ./users/henri/home.nix
                 ];
               };

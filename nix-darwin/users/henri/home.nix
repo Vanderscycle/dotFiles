@@ -70,7 +70,7 @@
   devops.enable = true;
   flameshot.enable = false; # enabled by hyprland
   brave.enable = true;
-  firefox.enable = true; # lib.mkForce false;
+  firefox.enable = false; # lib.mkForce false;
 
   plastic_printer = {
     enable = true;
@@ -123,6 +123,9 @@
   programs.home-manager.enable = true;
 
   # theme
-  catppuccin.flavor = "mocha";
-  catppuccin.enable = true;
+  catppuccin = {
+    flavor = "mocha";
+    enable = true;
+    mako.enable = false;
+  };
 }
