@@ -44,6 +44,11 @@ This function should only modify configuration layer settings."
      git ;; maggit
      helm
      docker
+     ;; (chinese :variables
+     ;;          chinese-default-input-method 'pinyin
+     ;;          chinese-use-fcitx5 t
+     ;;          chinese-enable-fcitx t
+     ;;          chinese-enable-youdao-dict t)
      (nixos :variables
             nix-backend 'lsp
             nixos-format-on-save t) ;; I DECLARE LINUX!!!
@@ -107,6 +112,8 @@ This function should only modify configuration layer settings."
                       syntax-checking-enable-by-default t) ;; like spelling proprely
      colors
      xkcd ;; a touch of humour
+     (llm-client :variables
+                 llm-client-enable-gptel t) ;; ai client
      (unicode-fonts :variables
                     unicode-fonts-enable-ligatures t) ;; ascii is so o 1970
      treemacs)
@@ -757,11 +764,15 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
-
+  ;; --- llm/ai ---
+  (gptel-make-deepseek "DeepSeek"
+    :stream t
+    :key "your-api-key")
   ;; --- projectile ---
   (setq projectile-project-search-path '("~/knak/packages/" "~/Documents/"))
   (spacemacs/set-leader-keys "ps" 'projectile-discover-projects-in-search-path)
   (spacemacs/set-leader-keys "p/" 'projectile-ag)
+  (spacemacs/set-leader-keys "pk" 'projectile-remove-known-project)
   ;; --- babel ---
   (define-derived-mode ts-mode typescript-mode "ts"
     "Major mode for editing typescipt src blocks in org mode.")
@@ -794,6 +805,9 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
               (spacemacs/set-leader-keys-for-major-mode 'org-mode "T/" 'my/org-add-checkbox-counter)
               (spacemacs/set-leader-keys-for-major-mode 'org-mode "iDc" 'org-download-clipboard)
               ))
+
+  (define-key org-mode-map (kbd "C-c k") 'org-priority-up)
+  (define-key org-mode-map (kbd "C-c j") 'org-priority-down)
   ;; --- org-todo ---
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
@@ -802,18 +816,67 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (setq org-todo-keyword-faces
         '(("TODO"      :inherit (org-todo region) :foreground "#A6E3A1" :weight bold)  ; Green
           ("NEXT"      :inherit (org-todo region) :foreground "#F9E2AF" :weight bold)  ; Yellow
-          ("DONE"      :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (Subtext0)
-
-          ;; Second workflow keywords
-          ("BACKLOG"   :inherit (org-todo region) :foreground "#B4BEFE" :weight bold)  ; Lavender
           ("PLAN"      :inherit (org-todo region) :foreground "#74C7EC" :weight bold)  ; Sapphire
           ("READY"     :inherit (org-todo region) :foreground "#89B4FA" :weight bold)  ; Blue
           ("ACTIVE"    :inherit (org-todo region) :foreground "#F38BA8" :weight bold)  ; Red
           ("REVIEW"    :inherit (org-todo region) :foreground "#F5C2E7" :weight bold)  ; Pink
           ("WAIT"      :inherit (org-todo region) :foreground "#EBA0AC" :weight bold)  ; Maroon
+          ("BACKLOG"   :inherit (org-todo region) :foreground "#B4BEFE" :weight bold)  ; Lavender
           ("HOLD"      :inherit (org-todo region) :foreground "#CBA6F7" :weight bold)  ; Mauve
+          ("DONE"      :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (Subtext0)
           ("COMPLETED" :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (same as DONE)
           ("CANC"      :inherit (org-todo region) :foreground "#FAB387" :weight bold)  ; Peach
+          ))
+  ;; --- org-tags ---
+  (setq org-tag-alist
+        '(
+          ;; Ticket types
+          (:startgroup . nil)
+          ("@bug" . ?b)
+          ("@feature" . ?u)
+          ("@spike" . ?j)
+          (:endgroup . nil)
+
+          ;; Ticket flags
+          ("@write_future_ticket" . ?w)
+          ("@emergency" . ?e)
+          ("@research" . ?r)
+
+          ;; Meeting types
+          (:startgroup . nil)
+          ("sprint_planning" . ?i)
+          ("sprint_retro" . ?s)
+          (:endgroup . nil)
+
+          ;; Code TODOs tags
+          ("QA" . ?q)
+          ("backend" . ?k)
+          ("broken_code" . ?c)
+          ("frontend" . ?f)
+          ("devops" . ?d)
+
+          ;; Special tags
+          ("CRITICAL" . ?x)
+          ("obstacle" . ?o)
+
+          ;; Meeting tags
+          ("HR" . ?h)
+          ("general" . ?l)
+          ("meeting" . ?m)
+          ("misc" . ?z)
+          ("planning" . ?p)
+
+          ;; Work Log Tags
+          ("accomplishment" . ?a)
+          ))
+  (setq org-tag-faces
+        '(
+          ("planning"  . (:foreground "#cba6f7" :weight bold))  ; Mauve
+          ("backend"   . (:foreground "#89b4fa" :weight bold))  ; Blue
+          ("frontend"  . (:foreground "#a6e3a1" :weight bold))  ; Green
+          ("QA"        . (:foreground "#fab387" :weight bold))  ; Peach
+          ("meeting"   . (:foreground "#f9e2af" :weight bold))  ; Yellow
+          ("CRITICAL"  . (:foreground "#f38ba8" :weight bold))  ; Red
           ))
   ;; --- org-modern ---
   (setq org-adapt-indentation t
@@ -829,8 +892,29 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (setq org-directory "~/Documents/zettelkasten/org")
   (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
   (setq find-file-visit-truename t)
+  ;; --- org-templates ---
+  (setq org-capture-templates
+        '(
+          ("j" "Work Log Entry"
+           entry (file+datetree "~/Documents/zettelkasten/org-roam/work-log.org")
+           "* %?"
+           :empty-lines 0)
+          ("g" "General To-Do"
+           entry (file "~/Documents/zettelkasten/org-roam/todo.org")
+           "* TODO [#B] %?\n:Created: %T\n "
+           :empty-lines 0)
+          ("m" "Meeting"
+           entry (file+datetree "~/Documents/zettelkasten/org-roam/meetings.org")
+           "* %? :meeting:%^g \n:Created: %T\n** Attendees\n*** \n** Notes\n** Action Items\n*** TODO [#A] "
+           :tree-type week
+           :clock-in t
+           :clock-resume t
+           :empty-lines 0)
+          ))
   ;; --- org-agenda ---
   (setq org-agenda-files '("~/Documents/zettelkasten/org-roam/"))
+  (setq org-agenda-skip-deadline-if-done t)
+
   ;; --- org-roam ---
   (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
   (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
@@ -878,7 +962,63 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(popper fic-mode company-auctex company-math company-reftex evil-tex auctex lsp-latex consult lsp-tailwindcss math-symbol-lists pomm toml-mode docker aio dockerfile-mode ob-typescript web-mode nix-ts-mode blacken code-cells company-anaconda anaconda-mode cython-mode dap-mode lsp-docker bui helm-pydoc importmagic epc ctable concurrent live-py-mode lsp-pyright pip-requirements pipenv load-env-vars pippel poetry py-isort pydoc pyenv-mode pythonic pylookup pytest pyvenv sphinx-doc yapfify company-shell fish-mode flycheck-bashate insert-shebang shfmt reformatter exec-path-from-shell yaml-mode doom-modeline shrink-path nerd-icons treemacs-all-the-icons add-node-modules-path auto-dictionary auto-yasnippet browse-at-remote catppuccin-theme code-review emojify deferred a color-identifiers-mode company-nixos-options diff-hl doom-themes eat esh-help eshell-prompt-extras eshell-z evil-org flycheck-pos-tip pos-tip flyspell-correct-helm flyspell-correct flyspell-popup git-link git-messenger git-modes git-timemachine gitignore-templates gnuplot helm-c-yasnippet helm-company helm-git-grep helm-ls-git helm-lsp helm-nixos-options helm-org-rifle htmlize js-doc js2-refactor multiple-cursors json-mode json-navigator json-reformat json-snatcher ligature livid-mode lsp-origami origami lsp-treemacs lsp-ui lsp-mode multi-term multi-vterm xref nix-mode nixos-options nodejs-repl npm-mode nyan-mode org-cliplink org-contrib org-download org-mime org-pomodoro alert log4e gntp org-present org-projectile org-project-capture org-category-capture org-rich-yank org-roam-ui websocket org-roam orgit-forge orgit forge yaml ghub closql emacsql treepy org prettier-js rainbow-identifiers rainbow-mode shell-pop skewer-mode js2-mode simple-httpd smeargle sops sqlite3 terminal-here treemacs-magit magit with-editor transient magit-section typescript-mode unicode-fonts ucs-utils font-utils persistent-soft pcache vterm web-beautify xkcd yasnippet-snippets yasnippet company-emoji company emoji-cheat-sheet-plus gh-md markdown-toc markdown-mode valign vmd-mode ws-butler writeroom-mode winum which-key vundo volatile-highlights vim-powerline vi-tilde-fringe uuidgen undo-fu-session undo-fu treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org term-cursor symon symbol-overlay string-inflection string-edit-at-point spacemacs-whitespace-cleanup spacemacs-purpose-popwin spaceline space-doc restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-descbinds helm-comint helm-ag google-translate golden-ratio flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-evilified-state evil-escape evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav elisp-demos elisp-def editorconfig dumb-jump drag-stuff dotenv-mode disable-mouse dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile all-the-icons aggressive-indent ace-link ace-jump-helm-line)))
+     '(a ace-jump-helm-line ace-link ace-pinyin add-node-modules-path
+         aggressive-indent aio alert all-the-icons anaconda-mode auctex
+         auto-compile auto-dictionary auto-highlight-symbol auto-yasnippet blacken
+         browse-at-remote bui catppuccin-theme centered-cursor-mode chinese-conv
+         chinese-word-at-point clean-aindent-mode closql code-cells code-review
+         color-identifiers-mode column-enforce-mode company company-anaconda
+         company-auctex company-emoji company-math company-nixos-options
+         company-reftex company-shell concurrent consult ctable cython-mode
+         dap-mode deferred define-word devdocs diff-hl diminish dired-quick-sort
+         disable-mouse docker dockerfile-mode doom-modeline doom-themes
+         dotenv-mode drag-stuff dumb-jump eat editorconfig elisp-def elisp-demos
+         elisp-slime-nav ellama emacsql emoji-cheat-sheet-plus emojify emr epc
+         esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu evil-args
+         evil-cleverparens evil-collection evil-easymotion evil-escape
+         evil-evilified-state evil-exchange evil-goggles evil-iedit-state
+         evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc
+         evil-nerd-commenter evil-numbers evil-org evil-surround evil-tex
+         evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode
+         evil-visualstar exec-path-from-shell expand-region eyebrowse
+         fancy-battery fcitx fic-mode find-by-pinyin-dired fish-mode flx-ido
+         flycheck-bashate flycheck-elsa flycheck-package flycheck-pos-tip
+         flyspell-correct flyspell-correct-helm flyspell-popup font-utils forge
+         gh-md ghub git-link git-messenger git-modes git-timemachine
+         gitignore-templates gntp gnuplot golden-ratio google-translate gptel
+         helm-ag helm-c-yasnippet helm-comint helm-company helm-descbinds
+         helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager
+         helm-nixos-options helm-org helm-org-rifle helm-projectile helm-purpose
+         helm-pydoc helm-swoop helm-themes helm-xref hide-comnt
+         highlight-indentation highlight-numbers highlight-parentheses hl-todo
+         holy-mode htmlize hungry-delete hybrid-mode importmagic indent-guide
+         info+ insert-shebang inspector js-doc js2-mode js2-refactor json-mode
+         json-navigator json-reformat json-snatcher ligature link-hint
+         live-py-mode livid-mode llm load-env-vars log4e lorem-ipsum lsp-docker
+         lsp-latex lsp-mode lsp-origami lsp-pyright lsp-tailwindcss lsp-treemacs
+         lsp-ui macrostep magit magit-section markdown-mode markdown-toc
+         math-symbol-lists multi-line multi-term multi-vterm multiple-cursors
+         nameless names nerd-icons nix-mode nix-ts-mode nixos-options nodejs-repl
+         npm-mode nyan-mode ob-typescript open-junk-file org org-category-capture
+         org-cliplink org-contrib org-download org-mime org-pomodoro org-present
+         org-project-capture org-projectile org-rich-yank org-roam org-roam-ui
+         org-superstar orgit orgit-forge origami overseer pangu-spacing paradox
+         password-generator pcache pcre2el persistent-soft pinyinlib
+         pip-requirements pipenv pippel plz plz-event-source plz-media-type poetry
+         pomm popper popwin pos-tip prettier-js py-isort pydoc pyenv-mode pyim
+         pyim-basedict pylookup pytest pythonic pyvenv quickrun rainbow-delimiters
+         rainbow-identifiers rainbow-mode reformatter request restart-emacs
+         shell-pop shfmt shrink-path simple-httpd skewer-mode smeargle sops
+         space-doc spaceline spacemacs-purpose-popwin spacemacs-whitespace-cleanup
+         sphinx-doc sqlite3 string-edit-at-point string-inflection symbol-overlay
+         symon term-cursor terminal-here toc-org toml-mode transient
+         treemacs-all-the-icons treemacs-evil treemacs-icons-dired treemacs-magit
+         treemacs-persp treemacs-projectile treepy typescript-mode ucs-utils
+         undo-fu undo-fu-session unicode-fonts uuidgen valign vi-tilde-fringe
+         vim-powerline vmd-mode volatile-highlights vterm vundo web-beautify
+         web-mode websocket which-key winum with-editor writeroom-mode ws-butler
+         xkcd xr xref yaml yaml-mode yapfify yasnippet yasnippet-snippets
+         youdao-dictionary)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.

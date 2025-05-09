@@ -27,7 +27,7 @@
         nixos-anywhere
       ];
       sessionVariables = {
-        FLAKE = config.nh.flakeLocation;
+        NH_FLAKE = config.nh.flakeLocation;
       };
     };
   };

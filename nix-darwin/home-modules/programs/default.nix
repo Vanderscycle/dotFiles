@@ -6,6 +6,7 @@
     ./bat.nix
     ./brave.nix
     ./btop.nix
+    ./bottles.nix
     ./cloud.nix
     ./codium.nix
     ./cowsay.nix
