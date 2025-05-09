@@ -67,7 +67,7 @@
   json.lsp.enable = true;
 
   # programs
-  bottles.enable = true;
+  bottles.enable = false;
   devops.enable = true;
   flameshot.enable = false; # enabled by hyprland
   brave.enable = true;

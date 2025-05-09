@@ -805,9 +805,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
               (spacemacs/set-leader-keys-for-major-mode 'org-mode "T/" 'my/org-add-checkbox-counter)
               (spacemacs/set-leader-keys-for-major-mode 'org-mode "iDc" 'org-download-clipboard)
               ))
-
-  (define-key org-mode-map (kbd "C-c k") 'org-priority-up)
-  (define-key org-mode-map (kbd "C-c j") 'org-priority-down)
   ;; --- org-todo ---
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
@@ -826,6 +823,26 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
           ("DONE"      :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (Subtext0)
           ("COMPLETED" :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (same as DONE)
           ("CANC"      :inherit (org-todo region) :foreground "#FAB387" :weight bold)  ; Peach
+          ))
+  ;; --- org-priority
+  ;; ~spc m p~ will allow you to set the priority
+  (setq org-lowest-priority  ?F) ;; Gives us priorities A through F
+  (setq org-default-priority ?E) ;; If an item has no priority, it is considered [#E].
+
+  (setq org-priority-faces
+        '(
+          ;; Priority A (highest) - Red
+          (65 . (:foreground "#f38ba8" :weight bold))
+          ;; Priority B - Peach
+          (66 . (:foreground "#fab387" :weight bold))
+          ;; Priority C - Mauve
+          (67 . (:foreground "#cba6f7" :weight bold))
+          ;; Priority D - Blue
+          (68 . (:foreground "#89b4fa" :weight bold))
+          ;; Priority E - Sapphire
+          (69 . (:foreground "#74c7ec" :weight bold))
+          ;; Priority F (lowest) - Overlay2
+          (70 . (:foreground "#9399b2" :weight bold))
           ))
   ;; --- org-tags ---
   (setq org-tag-alist
@@ -860,7 +877,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
           ("obstacle" . ?o)
 
           ;; Meeting tags
-          ("HR" . ?h)
           ("general" . ?l)
           ("meeting" . ?m)
           ("misc" . ?z)
@@ -901,7 +917,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
            :empty-lines 0)
           ("g" "General To-Do"
            entry (file "~/Documents/zettelkasten/org-roam/todo.org")
-           "* TODO [#B] %?\n:Created: %T\n "
+           "* TODO [#E] %?\n:Created: %T\n "
            :empty-lines 0)
           ("m" "Meeting"
            entry (file+datetree "~/Documents/zettelkasten/org-roam/meetings.org")
