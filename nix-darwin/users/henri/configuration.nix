@@ -29,7 +29,9 @@
   internationalisation.enable = true;
   docker.enable = true;
   transmission.enable = true;
+
   # programming
+  android.enable = false; # for adb
   gaming = {
     enable = true;
     mangohud.enable = true;
