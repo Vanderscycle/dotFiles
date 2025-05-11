@@ -2,7 +2,7 @@
 
 ** Nix
 
-Nix allows for declarative machine configuration, similar to Docker. Its learning curve is adrupt, its documentation poor, and its users are zany.
+Nix allows for declarative machine configuration, similar to Docker. Its learning curve is abrupt, its documentation poor, and its users are zany.
 This is going to be incomplete and confusing, but I hope it plants the seeds of learning and encourages you to try it. For it at first tastes bitter, but gives you such control the longer you try.
 
 *** Installation
@@ -37,9 +37,9 @@ To apply the configuration
 nix run nix-darwin -- switch --flake .
 #+end_src
 
-You see the list of what nix-darwin allows you to configure
+You see the list of what nix-Darwin allows you to configure
 [[https://nix-darwin.github.io/nix-darwin/manual/index.html][nix-darwin Configuration Options]]
-For futher customization you can use home-manager to configure your dotfiles
+For further customization you can use home-manager to configure your dotfiles
 https://nix-community.github.io/home-manager/nix-darwin-options.xhtml
 
 ***** Demo
@@ -87,7 +87,7 @@ nix flake init # creates a basic flake (hello world)
 We can only use home-manager to configure our computer. To do so we can must install it.
 [[https://nix-community.github.io/home-manager/#sec-install-standalone][Home Manager Manual]]
 
-If the nix bug infected you, I can only recommend that you move to NixOS
+If the nix bug infected you, I can only recommend that you move to Nix-OS
 
 That being said we will be using the following flake [[file:rocky-linux/flake.nix][rocky-nix flake]]
 
@@ -130,12 +130,12 @@ Split configuration into smaller files instead of a single massive configuration
 Configuring your dotfiles using home manager directly
 [[https://www.youtube.com/watch?v=FcC2dzecovw][Nix home-manager tutorial: Declare your entire home directory - YouTube]]
 
-Refences:
+References:
 [[https://nix-community.github.io/home-manager/nixos-options.xhtml][Appendix B. NixOS Configuration Options]]
 [[https://nix-community.github.io/home-manager/nix-darwin-options.xhtml][Appendix C. nix-darwin Configuration Options]]
 
 ***** TODO show how to use determinate system flakes and use the outputs
-***** TODO show how you can use nix to sync your dotfiles across macos/linux
+***** TODO show how you can use nix to sync your dotfiles across macos/Linux
 Using the vms located
 ***** DONE show how you can revert back previous generation
       CLOSED: [2025-05-02 Fri 07:59]

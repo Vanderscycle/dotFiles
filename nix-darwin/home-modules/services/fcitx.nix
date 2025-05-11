@@ -19,7 +19,8 @@
 
     catppuccin.fcitx5.apply = true; # Ensure the theme is applied
     i18n.inputMethod = {
-      enabled = "fcitx5";
+      enable = true;
+      type = "fcitx5";
       uim.toolbar = "gtk";
       fcitx5 = {
         addons = with pkgs; [

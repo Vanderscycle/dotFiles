@@ -49,6 +49,9 @@ This function should only modify configuration layer settings."
      ;;          chinese-use-fcitx5 t
      ;;          chinese-enable-fcitx t
      ;;          chinese-enable-youdao-dict t)
+     spotify ;; of course there's a plugin for that
+     ;; (mu4e :variables
+     ;;       mu4e-installation-path (executable-find "mu")) ;; email client
      (nixos :variables
             nix-backend 'lsp
             nixos-format-on-save t) ;; I DECLARE LINUX!!!
@@ -1003,9 +1006,9 @@ This function is called at the very end of Spacemacs initialization."
          gh-md ghub git-link git-messenger git-modes git-timemachine
          gitignore-templates gntp gnuplot golden-ratio google-translate gptel
          helm-ag helm-c-yasnippet helm-comint helm-company helm-descbinds
-         helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager
+         helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager helm-mu
          helm-nixos-options helm-org helm-org-rifle helm-projectile helm-purpose
-         helm-pydoc helm-swoop helm-themes helm-xref hide-comnt
+         helm-pydoc helm-spotify-plus helm-swoop helm-themes helm-xref hide-comnt
          highlight-indentation highlight-numbers highlight-parentheses hl-todo
          holy-mode htmlize hungry-delete hybrid-mode importmagic indent-guide
          info+ insert-shebang inspector js-doc js2-mode js2-refactor json-mode
@@ -1013,24 +1016,25 @@ This function is called at the very end of Spacemacs initialization."
          live-py-mode livid-mode llm load-env-vars log4e lorem-ipsum lsp-docker
          lsp-latex lsp-mode lsp-origami lsp-pyright lsp-tailwindcss lsp-treemacs
          lsp-ui macrostep magit magit-section markdown-mode markdown-toc
-         math-symbol-lists multi-line multi-term multi-vterm multiple-cursors
-         nameless names nerd-icons nix-mode nix-ts-mode nixos-options nodejs-repl
-         npm-mode nyan-mode ob-typescript open-junk-file org org-category-capture
-         org-cliplink org-contrib org-download org-mime org-pomodoro org-present
-         org-project-capture org-projectile org-rich-yank org-roam org-roam-ui
-         org-superstar orgit orgit-forge origami overseer pangu-spacing paradox
-         password-generator pcache pcre2el persistent-soft pinyinlib
-         pip-requirements pipenv pippel plz plz-event-source plz-media-type poetry
-         pomm popper popwin pos-tip prettier-js py-isort pydoc pyenv-mode pyim
-         pyim-basedict pylookup pytest pythonic pyvenv quickrun rainbow-delimiters
-         rainbow-identifiers rainbow-mode reformatter request restart-emacs
-         shell-pop shfmt shrink-path simple-httpd skewer-mode smeargle sops
-         space-doc spaceline spacemacs-purpose-popwin spacemacs-whitespace-cleanup
-         sphinx-doc sqlite3 string-edit-at-point string-inflection symbol-overlay
-         symon term-cursor terminal-here toc-org toml-mode transient
-         treemacs-all-the-icons treemacs-evil treemacs-icons-dired treemacs-magit
-         treemacs-persp treemacs-projectile treepy typescript-mode ucs-utils
-         undo-fu undo-fu-session unicode-fonts uuidgen valign vi-tilde-fringe
+         math-symbol-lists multi multi-line multi-term multi-vterm
+         multiple-cursors nameless names nerd-icons nix-mode nix-ts-mode
+         nixos-options nodejs-repl npm-mode nyan-mode ob-typescript open-junk-file
+         org org-category-capture org-cliplink org-contrib org-download org-mime
+         org-pomodoro org-present org-project-capture org-projectile org-rich-yank
+         org-roam org-roam-ui org-superstar orgit orgit-forge origami overseer
+         pangu-spacing paradox password-generator pcache pcre2el persistent-soft
+         pinyinlib pip-requirements pipenv pippel plz plz-event-source
+         plz-media-type poetry pomm popper popwin pos-tip prettier-js py-isort
+         pydoc pyenv-mode pyim pyim-basedict pylookup pytest pythonic pyvenv
+         quickrun rainbow-delimiters rainbow-identifiers rainbow-mode reformatter
+         request restart-emacs shell-pop shfmt shrink-path simple-httpd
+         skewer-mode smeargle sops space-doc spaceline spacemacs-purpose-popwin
+         spacemacs-whitespace-cleanup sphinx-doc spotify sqlite3
+         string-edit-at-point string-inflection symbol-overlay symon term-cursor
+         terminal-here toc-org toml-mode transient treemacs-all-the-icons
+         treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp
+         treemacs-projectile treepy typescript-mode ucs-utils undo-fu
+         undo-fu-session unicode-fonts uuidgen valign vi-tilde-fringe
          vim-powerline vmd-mode volatile-highlights vterm vundo web-beautify
          web-mode websocket which-key winum with-editor writeroom-mode ws-butler
          xkcd xr xref yaml yaml-mode yapfify yasnippet yasnippet-snippets

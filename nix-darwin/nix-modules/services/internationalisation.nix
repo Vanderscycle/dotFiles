@@ -36,7 +36,8 @@
       };
 
       inputMethod = {
-        enabled = "fcitx5";
+        enable = true;
+        type = "fcitx5";
         uim.toolbar = "gtk"; # gtk-systray
         fcitx5.addons = with pkgs; [
           # fcitx-keyboard-us

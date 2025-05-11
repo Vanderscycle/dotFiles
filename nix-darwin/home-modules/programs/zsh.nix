@@ -17,7 +17,7 @@
     catppuccin.zsh-syntax-highlighting.enable = true;
     programs.zsh = {
       enable = true;
-      initExtra = ''
+      initContent = ''
         export ENTERPRISE_REPO_PATH=~/knak
         if [[ -f $ENTERPRISE_REPO_PATH/scripts/mfa-token-loader.sh ]]; then source $ENTERPRISE_REPO_PATH/scripts/mfa-token-loader.sh; fi
         [[ -f $ENTERPRISE_REPO_PATH/scripts/aliases ]] && source $ENTERPRISE_REPO_PATH/scripts/aliases

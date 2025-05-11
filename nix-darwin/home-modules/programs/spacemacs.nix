@@ -30,10 +30,16 @@
         gcc
         libgccjit
         editorconfig-core-c
+        proton-pass
+        protonmail-bridge # for email
       ];
     };
 
     programs = {
+      # don't forget mu init --maildir ~/.maildir
+      mu.enable = true; # email
+      msmtp.enable = true; # email
+      mbsync.enable = true; # email
       emacs = {
         enable = true;
       };

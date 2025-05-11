@@ -246,6 +246,7 @@
           "kitty"
           "flameshot"
           "fcitx5"
+          "proton-pass"
           # "emacs" # TODO: make it spawn out of a shell
         ];
       };
