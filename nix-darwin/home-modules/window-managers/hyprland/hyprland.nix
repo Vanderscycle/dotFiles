@@ -127,6 +127,7 @@
             '';
           in
           [
+            ", 9, pass, ^discord$"
             "$mainMod, h, movefocus, l"
             "$mainMod, l, movefocus, r"
             "$mainMod, k, movefocus, u"

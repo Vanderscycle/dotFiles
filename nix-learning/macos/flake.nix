@@ -44,6 +44,12 @@
                 imports = [
                   ./home.nix
                 ];
+
+                # INFO: you can define the packages/config of home module here
+                # but its cleaner to have them in ./home.nix
+                # packages = with pkgs; [];
+                # prograsm = {}
+                # [...]
               };
             }
           ];

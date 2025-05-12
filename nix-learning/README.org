@@ -51,6 +51,8 @@ Let's use the example we created
 
 #+begin_src zsh
 nix run nix-darwin -- switch --flake .
+# once ran once
+darwin-rebuild switch --flake . # --dry-run
 #+end_src
 
 To rollback

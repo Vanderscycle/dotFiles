@@ -24,6 +24,7 @@
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   # cron
   cron.downloadFolderOrganizer.enable = true;
+  cron.factorioSave.enable = true;
   # services
   bluetooth.enable = true;
   internationalisation.enable = true;

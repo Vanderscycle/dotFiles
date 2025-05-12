@@ -22,7 +22,6 @@
       };
     };
     programs = {
-
       kitty = {
         package = pkgs.kitty.overrideAttrs (oldAttrs: {
           # https://github.com/NixOS/nixpkgs/issues/388020

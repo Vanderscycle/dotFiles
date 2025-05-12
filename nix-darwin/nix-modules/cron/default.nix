@@ -1,4 +1,7 @@
 {
-  imports = [ ./download.nix ];
+  imports = [
+    ./download.nix
+    ./factorioSave.nix
+  ];
 
 }
