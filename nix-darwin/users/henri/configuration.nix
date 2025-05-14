@@ -32,7 +32,7 @@
   transmission.enable = true;
 
   # programming
-  android.enable = false; # for adb
+  android.enable = true; # for adb
   gaming = {
     enable = true;
     mangohud.enable = true;

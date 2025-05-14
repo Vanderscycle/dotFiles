@@ -89,7 +89,14 @@ This function should only modify configuration layer settings."
                treemacs-use-all-the-icons-theme t ;; don't forget to run all-the-icons-install-font
                treemacs-use-git-mode 'deferred) ;; a file system is much like a tree
      markdown ;; mark that down Patrick!
-     latex ;; oh baby its time to go even beyond
+     (latex :variables
+            latex-enable-auto-fill t
+            latex-enable-folding t
+            latex-view-pdf-in-split-window t
+            latex-backend 'lsp
+            latex-refresh-preview t
+            lsp-latex-build-on-save t
+            latex-build-command "LaTeX") ;; oh baby its time to go even beyond
      pdf ;; refusing to pay adobe is morally right
      svelte ;; frontend-for-hipsters
      (vue :variables
@@ -964,6 +971,10 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
     (defun treemacs-ignore-node-modules (folder _)
       (string= folder "node_modules"))
     (push #'treemacs-ignore-node-modules treemacs-ignored-file-predicates))
+  ;; --- latex ---
+  (add-hook 'LaTeX-mode-hook
+            (defun fn/latex-compile-on-save ()
+              (add-hook 'after-save-hook (lambda () (TeX-command-run-all nil)) nil t)))
   ;; --- dired ---
   (setq dired-kill-when-opening-new-dired-buffer t)
   ;; Do not write anything past this comment. This is where Emacs will
