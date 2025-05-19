@@ -19,6 +19,13 @@
       nixpkgs,
       home-manager,
     }:
+    let
+      system = "x86_64-darwin";
+      pkgs = import nixpkgs {
+        system = system;
+        config.allowUnfree = true;
+      };
+    in
     {
       # Build darwin flake using:
       # nix run nix-darwin -- switch --flake .
@@ -53,6 +60,34 @@
               };
             }
           ];
+        };
+      };
+
+      devShells.${system} = {
+        # nix develop .#default
+        default = (
+          import ./shell.nix {
+            inherit pkgs;
+            inherit inputs;
+          }
+        );
+        # nix develop .#anotherEnv
+        anotherEnv = pkgs.mkShell {
+          name = "localhost-shell";
+          # desired packages
+          nativeBuildInputs = with pkgs; [
+            kubernetes
+          ];
+
+          shellHook = ''
+             ${pkgs.neofetch}/bin/neofetch
+             echo -e "localhost shell activated" | ${pkgs.lolcat}/bin/lolcat
+             echo "Available commands:"
+             echo "  setup_cluster     - Create local Kubernetes cluster"
+             echo "  generate_secrets  - Generate Kubernetes secrets"
+             echo "  deploy_tilt        - Start Tilt development environment"
+            echo "  all        - Run all previous commands"
+          '';
         };
       };
     };
