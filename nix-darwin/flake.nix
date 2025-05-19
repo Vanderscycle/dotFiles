@@ -58,10 +58,6 @@
       darwin,
       catppuccin,
       nixvim,
-      sops-nix,
-      firefox-addons,
-      rose-pine-hyprcursor,
-      hosts,
       ...
     }:
     {

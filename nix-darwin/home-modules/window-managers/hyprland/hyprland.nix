@@ -204,7 +204,7 @@
           # Workspace rules
           "workspace 1, class:^(Emacs)$"
           "workspace 2, class:^(firefox|Brave-browser)$"
-          "workspace 3, class:^(discord|Spotify|spotify)$"
+          "workspace 3, class:^(discord|Spotify|spotify|Proton Pass)$"
           "workspace 4, class:^(?i)steam|heroic$" # Case-insensitive match
           "workspace 5, class:^(SuperSlicer|OrcaSlicer)$"
           "workspace 6, class:^(transmission-gtk)$"
@@ -229,7 +229,6 @@
         #################
         ### AUTOSTART ###
         #################
-
         # Autostart necessary processes (like notifications daemons, status bars, etc.)
         # Or execute your favorite apps at launch like this:
 

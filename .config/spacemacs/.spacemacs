@@ -146,7 +146,7 @@ This function should only modify configuration layer settings."
                                       (nix-ts-mode
                                        :mode "\\.nix\\'"
                                        :config
-                                       (setq lsp-nix-nixd-server-path "/home/henri/.nix-profile/bin/nixd")
+                                       ;; (setq lsp-nix-nixd-server-path "/home/henri/.nix-profile/bin/nixd")
                                        (let ((system-name (if (eq system-type 'darwin)
                                                               "henri-MacBook-Pro"
                                                             "desktop"))
@@ -841,18 +841,12 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 
   (setq org-priority-faces
         '(
-          ;; Priority A (highest) - Red
-          (65 . (:foreground "#f38ba8" :weight bold))
-          ;; Priority B - Peach
-          (66 . (:foreground "#fab387" :weight bold))
-          ;; Priority C - Mauve
-          (67 . (:foreground "#cba6f7" :weight bold))
-          ;; Priority D - Blue
-          (68 . (:foreground "#89b4fa" :weight bold))
-          ;; Priority E - Sapphire
-          (69 . (:foreground "#74c7ec" :weight bold))
-          ;; Priority F (lowest) - Overlay2
-          (70 . (:foreground "#9399b2" :weight bold))
+          (65 . (:foreground "#f38ba8" :weight bold)) ;; Priority A (highest) - Red
+          (66 . (:foreground "#fab387" :weight bold)) ;; Priority B - Peach
+          (67 . (:foreground "#cba6f7" :weight bold)) ;; Priority C - Mauve
+          (68 . (:foreground "#89b4fa" :weight bold)) ;; Priority D - Blue
+          (69 . (:foreground "#74c7ec" :weight bold)) ;; Priority E - Sapphire
+          (70 . (:foreground "#9399b2" :weight bold)) ;; Priority F (lowest) - Overlay2
           ))
   ;; --- org-tags ---
   (setq org-tag-alist
@@ -914,23 +908,34 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
         org-src-tab-acts-natively t
         org-edit-src-content-indentation 0)
   ;; --- org-journal ---
-  (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
-  (setq org-directory "~/Documents/zettelkasten/org")
+  (setq org-journal-dir "~/Documents/zettelkasten/org-roam/org/journal")
+  (setq org-directory "~/Documents/zettelkasten/org-roam/org")
   (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
   (setq find-file-visit-truename t)
+  ;; --- org-clock ---
+
+  (setq org-clocktable-defaults '(:maxlevel 4 :lang "en" :scope file :block nil :wstart 1 :mstart 1 :tstart nil
+                                            :tend nil :step nil :stepskip0 nil :fileskip0 nil :tags nil :match
+                                            nil :emphasize nil :link nil :narrow 40! :indent t :filetitle nil
+                                            :hidefiles nil :formula nil :timestamp nil :level nil :tcolumns nil
+                                            :formatter nil))
   ;; --- org-templates ---
   (setq org-capture-templates
         '(
           ("j" "Work Log Entry"
-           entry (file+datetree "~/Documents/zettelkasten/org-roam/work-log.org")
+           entry (file+datetree "~/Documents/zettelkasten/org-roam/org/work-log.org")
            "* %?"
            :empty-lines 0)
+          ("c" "Code To-Do"
+           entry (file+headline "~/Documents/zettelkasten/org-roam/org/work/todo.org" "Code Related Tasks")
+           "* TODO [#C] %?\nDEADLINE: %^T\n:Created: %T\n%i\n%a\nShortcut Ticket: \nProposed Solution: \n"
+           :empty-lines 0)
           ("g" "General To-Do"
-           entry (file "~/Documents/zettelkasten/org-roam/todo.org")
+           entry (file+headline "~/Documents/zettelkasten/org-roam/org/home/todo.org" "General TODOS")
            "* TODO [#E] %?\n:Created: %T\n "
            :empty-lines 0)
           ("m" "Meeting"
-           entry (file+datetree "~/Documents/zettelkasten/org-roam/meetings.org")
+           entry (file+datetree "~/Documents/zettelkasten/org-roam/org/work/meetings.org")
            "* %? :meeting:%^g \n:Created: %T\n** Attendees\n*** \n** Notes\n** Action Items\n*** TODO [#A] "
            :tree-type week
            :clock-in t
@@ -942,10 +947,37 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (setq org-agenda-skip-deadline-if-done t)
 
   ;; --- org-roam ---
+  ;; don't forget to org-roam-db-sync
   (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
   (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
   (setq org-directory "~/Documents/zettelkasten/org")
   (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
+  ;; https://systemcrafters.net/build-a-second-brain-in-emacs/capturing-notes-efficiently/
+  (setq org-roam-capture-templates
+        '(
+          ("d" "default" plain "%?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
+           :unnarrowed t)
+          ("c" "chinese" plain
+           "\n* ${title}\n** Words\n** Patterns\n** Radicals\n** Forgotten Words\n"
+           :target (file+head "notes/chinese/%<%Y%m%d>-${slug}.org"
+                              "#+title: ${title}\n#+filetags: :chinese:\n\n* ${title}\nRoot Parent: [[id:31c43342-c4dd-4fff-bef5-a4ee1cd04f42][chinese]]\n")
+           :unnarrowed t
+           :immediate-finish nil)
+          ("b" "book child" plain
+           "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
+           :target (file+head "notes/books/%<%Y%m%d>-${slug}.org"
+                              "#+title: ${title}\n#+filetags: :book:\n\n* ${title}\nRoot Parent: [[id:eb639da8-b533-46df-a0ab-3a7135e4349b][books]]\n")
+           :unnarrowed t
+           :immediate-finish nil)
+          ("l" "programming language" plain
+           "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+           :if-new (file+head "programming/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
+          ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+           :if-new (file+head "projects/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
+           :unnarrowed t)
+          ))
   ;; --- lsp ---
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'typescript-mode-hook #'lsp)

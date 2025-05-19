@@ -1,39 +1,51 @@
 {
-  pkgs,
-  inputs,
-  system ? builtins.currentSystem,
-  username,
   lib,
   config,
   ...
 }:
 let
-  true_nas_smb = "/mnt/rice/docker";
-  container_name = "redis";
+  inherit (lib.options) mkOption mkEnableOption;
+  inherit (lib.modules) mkIf;
+  inherit (lib.types) str;
+  inherit (lib.types) listOf;
+  cfg = config.container.redis;
 in
 {
   options = {
-    container.redis.enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "Enables a Redis container";
-      default = false;
+    container.redis = {
+      enable = mkEnableOption "redis container";
+      name = mkOption {
+        type = str;
+        default = "redis";
+      };
+      mountPoint = mkOption {
+        type = str;
+        default = "/mnt/rice/docker";
+      };
+      timezone = mkOption {
+        type = str;
+        default = "America/Vancouver";
+      };
+      ports = mkOption {
+        type = listOf str;
+        default = [ "6379:6379" ];
+      };
     };
+
   };
 
-  config = lib.mkIf config.container.redis.enable {
+  config = mkIf cfg.enable {
     virtualisation = {
       oci-containers = {
         backend = "docker";
         containers = {
           redis = {
-            image = "redis:latest";
-            volumes = [
-              "${true_nas_smb}/${container_name}/data:/data"
-            ];
+            image = "${cfg.name}:latest";
+            volumes = [ "${cfg.mountPoint}/${cfg.name}/data:/data" ];
             environment = {
-              TZ = "America/Vancouver";
+              TZ = cfg.timezone;
             };
-            ports = [ "6379:6379" ];
+            ports = cfg.ports;
           };
         };
       };
