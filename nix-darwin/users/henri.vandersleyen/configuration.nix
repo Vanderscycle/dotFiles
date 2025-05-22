@@ -9,7 +9,6 @@
   imports = [
     # ./modules/services/appleTouchId.nix
   ];
-
   nix = {
     enable = true;
     settings.experimental-features = "nix-command flakes";
