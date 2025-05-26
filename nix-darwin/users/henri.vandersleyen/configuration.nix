@@ -68,6 +68,8 @@
       # "nikitabobko/tap/aerospace" # not vetted on work laptop
     ];
     brews = [
+      "yarn"
+      "nvm"
       "dive"
       "aws-sam-cli"
       # "koekeishiya/formulae/yabai"

@@ -29,8 +29,7 @@
     home.packages =
       with pkgs;
       [
-        nodejs_22
-        yarn
+        nodejs-slim_22
         corepack
         nodePackages.typescript-language-server
         nodePackages.typescript
