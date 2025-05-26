@@ -97,7 +97,7 @@
     "C /var/lib/factorio/saves/save1.zip - - - - ${builtins.path { path = ./save1.zip; }}"
   ];
   services.factorio = {
-    # bind = "";
+    bind = "192.168.4.129";
     enable = true;
     public = true;
     username = builtins.readFile config.sops.secrets."admin".path;
@@ -106,15 +106,15 @@
     stateDirName = "factorio";
     extraSettingsFile = pkgs.writeText "server-settings.json" (
       builtins.toJSON {
-        game-password = config.sops.secrets."game-password".path;
+        game-password = builtins.readFile config.sops.secrets."game-password".path;
       }
     );
     extraSettings = {
-      max_players = 64;
+      max_players = 16;
     };
-    autosave-interval = 15;
+    autosave-interval = 20;
     # When not present in /var/lib/${config.services.factorio.stateDirName}/saves, a new map with default settings will be generated before starting the service.
-    saveName = "save1.zip";
+    saveName = "save1";
     game-name = "[NixOs] factorio";
     description = "Factorio on nixos";
     admins = [
@@ -125,11 +125,11 @@
   # networking
   networking = {
     defaultGateway = "192.168.4.1"; # Point to Proxmox
-    nameservers = [ "8.8.8.8" ]; # Ensure DNS resolution
+    nameservers = [ "192.168.1.1" ]; # Ensure DNS resolution
     hostName = meta.hostname; # Define your hostname.
     networkmanager.enable = true; # Easiest to use and most distros use this by default.
     firewall = {
-      enable = true;
+      enable = false;
       allowedUDPPorts = [ 34197 ]; # Explicitly open Factorio port
       allowedTCPPorts = [ 27015 ];
     };
