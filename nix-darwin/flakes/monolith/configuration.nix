@@ -104,7 +104,7 @@
         url = "https://factorio.com/get-download/${version}/headless/linux64";
       in
       {
-        factorio = prev.factorio.override {
+        factorio-headless = prev.factorio-headless.override {
           inherit version sha256 url;
         };
       }
@@ -113,7 +113,7 @@
 
   services.factorio = {
     bind = "192.168.4.129";
-    package = pkgs.factorio;
+    package = pkgs.factorio-headless;
     enable = true;
     public = true;
     username = builtins.readFile config.sops.secrets."admin".path;
@@ -136,6 +136,7 @@
       (builtins.readFile config.sops.secrets."admin".path)
     ];
   };
+
   # networking
   networking = {
     defaultGateway = "192.168.4.1"; # Point to Proxmox
