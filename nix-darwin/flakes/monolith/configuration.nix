@@ -69,7 +69,6 @@
     git
     vim
     iptables
-    sysz
   ];
 
   sops = {
@@ -106,39 +105,37 @@
       in
       {
         factorio = prev.factorio.override {
-          version = version;
-          sha256 = sha256;
-          url = url;
-        };
-
-        services.factorio = {
-          bind = "192.168.4.129";
-          package = final.factorio;
-          enable = true;
-          public = true;
-          username = builtins.readFile config.sops.secrets."admin".path;
-          token = builtins.readFile config.sops.secrets."token".path;
-          openFirewall = true;
-          stateDirName = "factorio";
-          extraSettingsFile = pkgs.writeText "server-settings.json" (
-            builtins.toJSON {
-              game-password = builtins.readFile config.sops.secrets."game-password".path;
-            }
-          );
-          extraSettings = {
-            max_players = 16;
-          };
-          autosave-interval = 20;
-          saveName = "save1";
-          game-name = "[NixOs] factorio";
-          description = "Factorio on nixos";
-          admins = [
-            (builtins.readFile config.sops.secrets."admin".path)
-          ];
+          inherit version sha256 url;
         };
       }
     )
   ];
+
+  services.factorio = {
+    bind = "192.168.4.129";
+    package = pkgs.factorio;
+    enable = true;
+    public = true;
+    username = builtins.readFile config.sops.secrets."admin".path;
+    token = builtins.readFile config.sops.secrets."token".path;
+    openFirewall = true;
+    stateDirName = "factorio";
+    extraSettingsFile = pkgs.writeText "server-settings.json" (
+      builtins.toJSON {
+        game-password = builtins.readFile config.sops.secrets."game-password".path;
+      }
+    );
+    extraSettings = {
+      max_players = 16;
+    };
+    autosave-interval = 20;
+    saveName = "save1";
+    game-name = "[NixOs] factorio";
+    description = "Factorio on nixos";
+    admins = [
+      (builtins.readFile config.sops.secrets."admin".path)
+    ];
+  };
   # networking
   networking = {
     defaultGateway = "192.168.4.1"; # Point to Proxmox
