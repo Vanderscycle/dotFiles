@@ -6,6 +6,7 @@
   config,
   inputs,
   pkgs,
+  lib,
   meta,
   ...
 }:
@@ -94,27 +95,31 @@
     # Copy/Link the save file (use either C or L)
     "C /var/lib/factorio/saves/save1.zip - - - - ${builtins.path { path = ./save1.zip; }}"
   ];
-  nixpkgs.overlays = [
-    (
-      final: prev:
-      let
-        version = "2.0.47";
-        sha256 = "09lsyilaf81jb5v34qx484qqy42pnmq7lqzb4x17k90nfv3j1wzh";
-        url = "https://factorio.com/get-download/${version}/headless/linux64";
-      in
-      {
-        factorio-headless = prev.factorio-headless.override {
-          inherit version sha256 url;
-          username = builtins.readFile config.sops.secrets."admin".path;
-          token = builtins.readFile config.sops.secrets."token".path;
-        };
-      }
-    )
-  ];
+  # nixpkgs.overlays = [
+  #   (
+  #     final: prev:
+  #     let
+  #       version = "2.0.47";
+  #       sha256 = "09lsyilaf81jb5v34qx484qqy42pnmq7lqzb4x17k90nfv3j1wzh";
+  #       url = "https://factorio.com/get-download/${version}/headless/linux64";
+  #     in
+  #     {
+  #       factorio-headless = prev.factorio-headless.override {
+  #         inherit version sha256 url;
+  #         username = builtins.readFile config.sops.secrets."admin".path;
+  #         token = builtins.readFile config.sops.secrets."token".path;
+  #       };
+  #     }
+  #   )
+  # ];
   services.openssh.enable = true;
   services.factorio = {
     bind = "192.168.4.129";
-    package = pkgs.factorio-headless;
+    package = pkgs.factorio-headless.override (oldAttrs: {
+      versionsJson = ./versions.json;
+      username = builtins.readFile config.sops.secrets."admin".path;
+      token = builtins.readFile config.sops.secrets."token".path;
+    });
     enable = true;
     public = true;
     username = builtins.readFile config.sops.secrets."admin".path;
