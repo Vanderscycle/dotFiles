@@ -68,7 +68,7 @@
     sops
     git
     vim
-    iptables
+    sysz
   ];
 
   sops = {
@@ -90,7 +90,6 @@
   };
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
   systemd.tmpfiles.rules = [
     # Copy/Link the save file (use either C or L)
     "C /var/lib/factorio/saves/save1.zip - - - - ${builtins.path { path = ./save1.zip; }}"
@@ -106,11 +105,13 @@
       {
         factorio-headless = prev.factorio-headless.override {
           inherit version sha256 url;
+          username = builtins.readFile config.sops.secrets."admin".path;
+          token = builtins.readFile config.sops.secrets."token".path;
         };
       }
     )
   ];
-
+  services.openssh.enable = true;
   services.factorio = {
     bind = "192.168.4.129";
     package = pkgs.factorio-headless;
@@ -136,7 +137,21 @@
       (builtins.readFile config.sops.secrets."admin".path)
     ];
   };
-
+  services.paperless = {
+    enable = true;
+  };
+  services.n8n = {
+    enable = false;
+    openFirewall = true;
+  };
+  services.nextcloud = {
+    enable = false;
+    hostName = meta.hostname;
+    # config.adminpassFile
+  };
+  services.gitea = {
+    enable = true;
+  };
   # networking
   networking = {
     defaultGateway = "192.168.4.1"; # Point to Proxmox
