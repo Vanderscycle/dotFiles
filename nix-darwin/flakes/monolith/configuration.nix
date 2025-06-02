@@ -111,7 +111,7 @@
     stateDirName = "factorio";
     extraSettingsFile = pkgs.writeText "server-settings.json" (
       builtins.toJSON {
-        game-password = builtins.readFile config.sops.secrets."game-password".path;
+        game_password = builtins.readFile config.sops.secrets."game-password".path;
       }
     );
     extraSettings = {
@@ -125,12 +125,72 @@
       (builtins.readFile config.sops.secrets."admin".path)
     ];
   };
+  services.traefik = {
+    enable = true;
+    staticConfigOptions = {
+      entryPoints = {
+        web = {
+          address = ":80";
+          # Enable redirect if needed
+          # http.redirections.entryPoint = {
+          #   to = "websecure";
+          #   scheme = "https";
+          # };
+        };
+        # websecure = {
+        #   address = ":443";
+        # };
+      };
+    };
+
+    dynamicConfigOptions = {
+      http = {
+        routers = {
+          n8n-router = {
+            rule = "PathPrefix(`/n8n`)";
+            service = "n8n-service";
+            entryPoints = [ "web" ];
+            # middlewares = [ "strip-n8n-prefix" ];
+          };
+        };
+
+        services = {
+          n8n-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:5678"; }
+            ];
+          };
+        };
+        # middlewares = {
+        #   strip-n8n-prefix = {
+        #     stripPrefix.prefixes = [ "/n8n" ];
+        #   };
+        # };
+      };
+    };
+  };
+  systemd.services.traefik.serviceConfig = {
+    ReadWritePaths = [ "/var/lib/traefik" ];
+  };
   services.paperless = {
     enable = true;
   };
-  services.n8n = {
+  services.home-assistant = {
     enable = false;
+    config = { };
+  };
+  services.n8n = {
+    enable = true;
     openFirewall = true;
+    settings = {
+      # N8N_LISTEN_ADDRESS= "0.0.0.0";
+      # N8N_SECURE_COOKIE = false;
+    };
+  };
+  #INFO: a way to set env vars for services
+  systemd.services.n8n.environment = {
+    N8N_SECURE_COOKIE = "false";
+    N8N_LISTEN_ADDRESS = "0.0.0.0";
   };
   services.nextcloud = {
     enable = false;
@@ -149,7 +209,12 @@
     firewall = {
       enable = false;
       allowedUDPPorts = [ 34197 ]; # Explicitly open Factorio port
-      allowedTCPPorts = [ 27015 ];
+      allowedTCPPorts = [
+        80
+        5678 # n8n
+        3000 # gitea
+        27015
+      ];
     };
   };
   # Configure network proxy if necessary
