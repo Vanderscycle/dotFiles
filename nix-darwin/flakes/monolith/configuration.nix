@@ -64,7 +64,9 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCpHZBybBTCsCyW6/Q4OZ07SvUpRUvclc10u25j0B+Q hvandersleyen@gmail.com"
     ];
   };
-
+  security.sudo.extraConfig = ''
+    Defaults        timestamp_timeout=3600
+  '';
   environment.systemPackages = with pkgs; [
     sops
     git
@@ -137,8 +139,11 @@
           #   scheme = "https";
           # };
         };
-        # websecure = {
-        #   address = ":443";
+        websecure = {
+          address = ":443";
+        };
+        # log = {
+        #   level = "DEBUG";
         # };
       };
     };
@@ -150,7 +155,22 @@
             rule = "PathPrefix(`/n8n`)";
             service = "n8n-service";
             entryPoints = [ "web" ];
-            # middlewares = [ "strip-n8n-prefix" ];
+            middlewares = [ "strip-n8n-prefix" ];
+          };
+
+          gitea-router = {
+            rule = "PathPrefix(`/gitea`)";
+            service = "gitea-service";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-gitea-prefix" ];
+          };
+
+          nextcloud-router = {
+            #rule = "Host(`nextcloud.local`)";
+            rule = "PathPrefix(`/nextcloud`)";
+            service = "nextcloud-service";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-nextcloud-prefix" ];
           };
         };
 
@@ -160,24 +180,38 @@
               { url = "http://0.0.0.0:5678"; }
             ];
           };
+
+          gitea-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:3000"; }
+            ];
+          };
+
+          nextcloud-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:8081"; }
+            ];
+          };
         };
-        # middlewares = {
-        #   strip-n8n-prefix = {
-        #     stripPrefix.prefixes = [ "/n8n" ];
-        #   };
-        # };
+        middlewares = {
+          strip-n8n-prefix = {
+            stripPrefix.prefixes = [ "/n8n" ];
+          };
+
+          strip-gitea-prefix = {
+            stripPrefix.prefixes = [ "/gitea" ];
+          };
+
+          strip-nextcloud-prefix = {
+            stripPrefix.prefixes = [ "/nextcloud" ];
+          };
+        };
       };
     };
   };
+
   systemd.services.traefik.serviceConfig = {
     ReadWritePaths = [ "/var/lib/traefik" ];
-  };
-  services.paperless = {
-    enable = true;
-  };
-  services.home-assistant = {
-    enable = false;
-    config = { };
   };
   services.n8n = {
     enable = true;
@@ -191,17 +225,54 @@
   systemd.services.n8n.environment = {
     N8N_SECURE_COOKIE = "false";
     N8N_LISTEN_ADDRESS = "0.0.0.0";
-  };
-  services.nextcloud = {
-    enable = false;
-    hostName = meta.hostname;
-    # config.adminpassFile
+    N8N_PATH = "/n8n";
   };
   services.gitea = {
     enable = true;
+    settings = {
+      server.ROOT_URL = "http://0.0.0.0/gitea/";
+    };
+  };
+  environment.etc."nextcloud-admin-pass".text = "thisisnotsecure";
+  services.nextcloud = {
+    enable = false;
+    hostName = meta.hostname;
+    config = {
+      adminpassFile = "/etc/nextcloud-admin-pass";
+      dbtype = "sqlite";
+    };
+    settings = {
+      trusted_domains = [ "192.168.4.129" ];
+    };
+    # phpOptions = {
+    #   "listen.port" = 8081;
+    # };
+    extraApps = {
+      inherit (config.services.nextcloud.package.packages.apps)
+        news
+        contacts
+        calendar
+        tasks
+        ;
+    };
+    extraAppsEnable = true;
+  };
+  services.paperless = {
+    enable = true;
+  };
+  services.home-assistant = {
+    enable = false;
+    config = { };
   };
   # networking
   networking = {
+    hosts = {
+      "192.168.4.129" = [
+        "nextcloud.local"
+        "gitea.local"
+        "n8n.local"
+      ];
+    };
     defaultGateway = "192.168.4.1"; # Point to Proxmox
     nameservers = [ "192.168.1.1" ]; # Ensure DNS resolution
     hostName = meta.hostname; # Define your hostname.
@@ -211,8 +282,9 @@
       allowedUDPPorts = [ 34197 ]; # Explicitly open Factorio port
       allowedTCPPorts = [
         80
-        5678 # n8n
-        3000 # gitea
+        # 8081
+        # 5678 # n8n
+        # 3000 # gitea
         27015
       ];
     };
