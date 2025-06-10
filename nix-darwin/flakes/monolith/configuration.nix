@@ -130,10 +130,17 @@
   services.traefik = {
     enable = true;
     staticConfigOptions = {
+      api = {
+        dashboard = true;
+        insecure = true;
+      };
+      log = {
+        level = "DEBUG";
+        format = "json";
+      };
       entryPoints = {
         web = {
           address = ":80";
-          # Enable redirect if needed
           # http.redirections.entryPoint = {
           #   to = "websecure";
           #   scheme = "https";
@@ -142,15 +149,21 @@
         websecure = {
           address = ":443";
         };
-        # log = {
-        #   level = "DEBUG";
-        # };
+        traefik = {
+          address = ":8080";
+        };
       };
     };
 
     dynamicConfigOptions = {
       http = {
         routers = {
+          traefik-dashboard = {
+            rule = "PathPrefix(`/api`) || PathPrefix(`/dashboard`)";
+            service = "api@internal";
+            entryPoints = [ "traefik" ];
+            priority = 100;
+          };
           n8n-router = {
             rule = "PathPrefix(`/n8n`)";
             service = "n8n-service";
@@ -165,13 +178,20 @@
             middlewares = [ "strip-gitea-prefix" ];
           };
 
-          nextcloud-router = {
-            #rule = "Host(`nextcloud.local`)";
-            rule = "PathPrefix(`/nextcloud`)";
-            service = "nextcloud-service";
+          home-assistant-router = {
+            rule = "PathPrefix(`/home`)";
+            service = "home-assistant-service";
             entryPoints = [ "web" ];
-            middlewares = [ "strip-nextcloud-prefix" ];
+            middlewares = [ "strip-home-assistant-prefix" ];
           };
+
+          # nextcloud-router = {
+          #   #rule = "Host(`nextcloud.local`)";
+          #   rule = "PathPrefix(`/nextcloud`)";
+          #   service = "nextcloud-service";
+          #   entryPoints = [ "web" ];
+          #   middlewares = [ "strip-nextcloud-prefix" ];
+          # };
         };
 
         services = {
@@ -187,9 +207,9 @@
             ];
           };
 
-          nextcloud-service = {
+          home-assistant-service = {
             loadBalancer.servers = [
-              { url = "http://0.0.0.0:8081"; }
+              { url = "http://0.0.0.0:8123"; }
             ];
           };
         };
@@ -202,8 +222,8 @@
             stripPrefix.prefixes = [ "/gitea" ];
           };
 
-          strip-nextcloud-prefix = {
-            stripPrefix.prefixes = [ "/nextcloud" ];
+          strip-home-assistant-prefix = {
+            stripPrefix.prefixes = [ "/home" ];
           };
         };
       };
@@ -261,8 +281,17 @@
     enable = true;
   };
   services.home-assistant = {
-    enable = false;
-    config = { };
+    enable = true;
+    openFirewall = true;
+    config = {
+      use_x_forwarded_for = true;
+      trusted_proxies = [
+        "127.0.0.1"
+        "0.0.0.0"
+      ];
+      http.server_host = "0.0.0.0";
+      http.server_port = 8123;
+    };
   };
   # networking
   networking = {
@@ -282,9 +311,10 @@
       allowedUDPPorts = [ 34197 ]; # Explicitly open Factorio port
       allowedTCPPorts = [
         80
-        # 8081
-        # 5678 # n8n
-        # 3000 # gitea
+        8080 # traefik dashboard
+        8123 # home
+        5678 # n8n
+        3000 # gitea
         27015
       ];
     };

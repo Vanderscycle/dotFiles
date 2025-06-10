@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    quadlet-nix = {
-      url = "github:SEIAROTg/quadlet-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +13,6 @@
   outputs =
     inputs@{
       self,
-      quadlet-nix,
       nixpkgs,
       sops-nix,
       ...
@@ -36,7 +30,6 @@
           } // inputs;
           modules = [
             ./configuration.nix
-            quadlet-nix.nixosModules.quadlet
           ];
         };
       };

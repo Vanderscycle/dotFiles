@@ -54,8 +54,8 @@
       };
       factorio = {
         # ssh factorio
-        hostname = "192.168.4.250";
-        user = "root";
+        hostname = "192.168.4.129";
+        user = "monolith";
       };
       knode1 = {
         # ssh knode1
