@@ -30,6 +30,7 @@
         gcc
         libgccjit
         editorconfig-core-c
+        ispell
         proton-pass
         protonmail-bridge # for email
       ];
