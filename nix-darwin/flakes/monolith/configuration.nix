@@ -14,6 +14,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./fstab.nix
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -89,7 +90,27 @@
       "admin" = {
         owner = meta.username;
       };
+      # TruNas SMB access
+      "home-server/rice/password" = {
+        owner = "root";
+      };
+      "home-server/rice/user" = {
+        owner = "root";
+      };
     };
+  };
+  systemd.services."smbcreds_fam" = {
+    script = ''
+      echo "user=$(cat ${config.sops.secrets."home-server/rice/user".path})" > /root/smbcreds_fam
+      echo "password=$(cat ${config.sops.secrets."home-server/rice/password".path})" >> /root/smbcreds_fam
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      WorkingDirectory = "/root/";
+    };
+    # Make it run immediately after each system rebuild
+    wantedBy = [ "multi-user.target" ];
   };
 
   # Enable the OpenSSH daemon.
@@ -185,13 +206,12 @@
             middlewares = [ "strip-home-assistant-prefix" ];
           };
 
-          # nextcloud-router = {
-          #   #rule = "Host(`nextcloud.local`)";
-          #   rule = "PathPrefix(`/nextcloud`)";
-          #   service = "nextcloud-service";
-          #   entryPoints = [ "web" ];
-          #   middlewares = [ "strip-nextcloud-prefix" ];
-          # };
+          nextcloud-router = {
+            rule = "PathPrefix(`/nextcloud`)";
+            service = "nextcloud-service";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-nextcloud-prefix" ];
+          };
         };
 
         services = {
@@ -212,6 +232,12 @@
               { url = "http://0.0.0.0:8123"; }
             ];
           };
+
+          nextcloud-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:9999"; }
+            ];
+          };
         };
         middlewares = {
           strip-n8n-prefix = {
@@ -224,6 +250,10 @@
 
           strip-home-assistant-prefix = {
             stripPrefix.prefixes = [ "/home" ];
+          };
+
+          strip-nextcloud-prefix = {
+            stripPrefix.prefixes = [ "/nextcloud" ];
           };
         };
       };
@@ -254,15 +284,24 @@
     };
   };
   environment.etc."nextcloud-admin-pass".text = "thisisnotsecure";
+  services.nginx.virtualHosts."${meta.hostname}".listen = [
+    {
+      addr = "0.0.0.0";
+      port = 9999;
+    }
+  ];
   services.nextcloud = {
-    enable = false;
+    enable = true;
     hostName = meta.hostname;
     config = {
       adminpassFile = "/etc/nextcloud-admin-pass";
+      # dbtype = "pgsql";
       dbtype = "sqlite";
     };
     settings = {
       trusted_domains = [ "192.168.4.129" ];
+      overwrite.cli.url = "http://192.168.4.129/nextcloud";
+      overwritewebroot = "/nextcloud";
     };
     # phpOptions = {
     #   "listen.port" = 8081;
