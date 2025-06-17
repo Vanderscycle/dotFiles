@@ -143,9 +143,10 @@
             "$mainMod SHIFT, j, resizeactive, 0 120"
             # launch program menu
             "SHIFTSUPER, P, exec, $menu"
-            "SHIFTSUPER, O, exec, grim -g '$(slurp)' ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png"
+            "SHIFTSUPER, O, exec, grim -g '$(slurp)' ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png" # idk, flameshot doesn't work wihtout this
+
+            "SHIFTSUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
             "SHIFTSUPER, O, exec, flameshot gui --clipboard"
-            # "SHIFTSUPER, Q, exec, $emacs --eval '(vterm)'"
 
             # scripts
             # "$mainMod, f, exec, ${lib.getExe myScript}"
@@ -241,11 +242,14 @@
           "swaync"
           # "discord --enable-wayland-ime"
           "spotify"
-          "brave --enable-wayland-ime"
+          # "brave --enable-wayland-ime"
+          "brave"
           "kitty"
           "flameshot"
           "fcitx5"
           "proton-pass"
+          "copyq --start-server"
+          "wl-paste --watch cliphist store" # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/
           # "emacs" # TODO: make it spawn out of a shell
         ];
       };

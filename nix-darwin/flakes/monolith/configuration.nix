@@ -52,10 +52,21 @@
     keyMap = "us";
     #useXkbConfig = true; # use xkb.options in tty.
   };
-
+  users.groups.smbaccess = { };
+  users.users.nextcloud = {
+    isNormalUser = false;
+    extraGroups = [ "smbaccess" ];
+  };
+  users.users.transmission = {
+    isNormalUser = false;
+    extraGroups = [ "smbaccess" ];
+  };
   users.users.${meta.username} = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "smbaccess"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
@@ -73,21 +84,23 @@
     git
     vim
     sysz
+    samba
   ];
 
+  # secrets
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
 
     age.keyFile = "/home/${meta.username}/.config/sops/age/keys.txt";
     secrets = {
-      "game-password" = {
+      "factorio/game-password" = {
         owner = meta.username;
       };
-      "token" = {
+      "factorio/token" = {
         owner = meta.username;
       };
-      "admin" = {
+      "factorio/admin" = {
         owner = meta.username;
       };
       # TruNas SMB access
@@ -95,6 +108,9 @@
         owner = "root";
       };
       "home-server/rice/user" = {
+        owner = "root";
+      };
+      "nextcloud/admin/password" = {
         owner = "root";
       };
     };
@@ -117,24 +133,51 @@
   systemd.tmpfiles.rules = [
     # Copy/Link the save file (use either C or L)
     "C /var/lib/factorio/saves/save1.zip - - - - ${builtins.path { path = ./save1.zip; }}"
+    # d (directory)
+    "d /home/monolith/Saves 0755 monolith users -"
+    "d /mnt/rice/famjam/nextcloud 0750 nextcloud nextcloud -"
   ];
+  # id monolith ( get details on the user )
   services.openssh.enable = true;
+  systemd.timers."factorioSaves" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+      Unit = "factorioSaves.service";
+    };
+  };
+  systemd.services."factorioSaves" = {
+    script = ''
+      cd "/var/lib/factorio/saves/"
+      DATE=$(date +%F)
+      ${pkgs.rsync}/bin/rsync -avz save1.zip "/home/${meta.username}/Saves/save1-$DATE.zip"
+    '';
+    path = [
+      pkgs.rsync
+      pkgs.coreutils # for `date`
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+  };
   services.factorio = {
     bind = "192.168.4.129";
     package = pkgs.factorio-headless.override (oldAttrs: {
       versionsJson = ./versions.json;
-      username = builtins.readFile config.sops.secrets."admin".path;
-      token = builtins.readFile config.sops.secrets."token".path;
+      username = builtins.readFile config.sops.secrets."factorio/admin".path;
+      token = builtins.readFile config.sops.secrets."factorio/token".path;
     });
     enable = true;
     public = true;
-    username = builtins.readFile config.sops.secrets."admin".path;
-    token = builtins.readFile config.sops.secrets."token".path;
+    username = builtins.readFile config.sops.secrets."factorio/admin".path;
+    token = builtins.readFile config.sops.secrets."factorio/token".path;
     openFirewall = true;
     stateDirName = "factorio";
     extraSettingsFile = pkgs.writeText "server-settings.json" (
       builtins.toJSON {
-        game_password = builtins.readFile config.sops.secrets."game-password".path;
+        game_password = builtins.readFile config.sops.secrets."factorio/game-password".path;
       }
     );
     extraSettings = {
@@ -145,14 +188,14 @@
     game-name = "[NixOs] factorio";
     description = "Factorio on nixos";
     admins = [
-      (builtins.readFile config.sops.secrets."admin".path)
+      (builtins.readFile config.sops.secrets."factorio/admin".path)
     ];
   };
   services.traefik = {
     enable = true;
     staticConfigOptions = {
       api = {
-        dashboard = true;
+        dashboard = true; # ip:8080
         insecure = true;
       };
       log = {
@@ -179,12 +222,6 @@
     dynamicConfigOptions = {
       http = {
         routers = {
-          traefik-dashboard = {
-            rule = "PathPrefix(`/api`) || PathPrefix(`/dashboard`)";
-            service = "api@internal";
-            entryPoints = [ "traefik" ];
-            priority = 100;
-          };
           n8n-router = {
             rule = "PathPrefix(`/n8n`)";
             service = "n8n-service";
@@ -283,7 +320,9 @@
       server.ROOT_URL = "http://0.0.0.0/gitea/";
     };
   };
-  environment.etc."nextcloud-admin-pass".text = "thisisnotsecure";
+  environment.etc."nextcloud-admin-pass".text =
+    builtins.readFile
+      config.sops.secrets."factorio/admin".path;
   services.nginx.virtualHosts."${meta.hostname}".listen = [
     {
       addr = "0.0.0.0";
@@ -293,6 +332,7 @@
   services.nextcloud = {
     enable = true;
     hostName = meta.hostname;
+    # datadir = "/mnt/nextcloud/nextcloud";
     config = {
       adminpassFile = "/etc/nextcloud-admin-pass";
       # dbtype = "pgsql";
@@ -303,9 +343,6 @@
       overwrite.cli.url = "http://192.168.4.129/nextcloud";
       overwritewebroot = "/nextcloud";
     };
-    # phpOptions = {
-    #   "listen.port" = 8081;
-    # };
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps)
         news
@@ -319,6 +356,15 @@
   services.paperless = {
     enable = true;
   };
+
+  services.transmission = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      "download-dir" = "/mnt/rice/famjam/transmission";
+    };
+  };
+
   services.home-assistant = {
     enable = true;
     openFirewall = true;
@@ -354,7 +400,7 @@
         8123 # home
         5678 # n8n
         3000 # gitea
-        27015
+        27015 # factorio
       ];
     };
   };
