@@ -989,6 +989,12 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   ;; (setq helm-follow-mode-persistent t) ;; automatically preview files but opens them as a buffer
   ;; --- perspective ---
   (spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
+  ;; --- tramp/ssh ---
+  ;; --- make it a hydra to select which one to connect to
+  (defun connect-factorio ()
+    "Open a remote folder using TRAMP in Dired."
+    (interactive)
+    (dired "/ssh:monolith@192.168.4.129:/"))
   ;; --- sops --
   ;; https://github.com/djgoku/sops
   (which-key-add-key-based-replacements "os" "+sops")
