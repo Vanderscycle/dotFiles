@@ -28,10 +28,10 @@
     };
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
   };
-
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
     config.allowUnfree = true;
+    config.allowBroken = true; # temporary
     config.allowUnsupportedSystem = true;
   };
 
@@ -62,6 +62,7 @@
   '';
 
   # Homebrew needs to be installed on its own!
+  system.primaryUser = username;
   homebrew = {
     enable = true;
     casks = [

@@ -88,6 +88,7 @@
   ];
 
   # secrets
+  # if you change the secret strucutre you must first create the new secret and then rebuild and then change its reference in the config
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
