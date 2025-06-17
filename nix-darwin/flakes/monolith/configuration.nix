@@ -322,7 +322,7 @@
   };
   environment.etc."nextcloud-admin-pass".text =
     builtins.readFile
-      config.sops.secrets."factorio/admin".path;
+      config.sops.secrets."nextcloud/admin/password".path;
   services.nginx.virtualHosts."${meta.hostname}".listen = [
     {
       addr = "0.0.0.0";

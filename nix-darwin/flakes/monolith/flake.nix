@@ -24,6 +24,7 @@
       ...
     }:
     {
+      # sudo nixos-rebuild switch --flake ".#monolith" --impure
       nixosConfigurations = {
         monolith = nixpkgs.lib.nixosSystem rec {
           specialArgs = {
