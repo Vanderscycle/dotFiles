@@ -76,6 +76,7 @@ This function should only modify configuration layer settings."
                  typescript-linter 'eslint
                  typescript-fmt-on-save t
                  ) ;; js but like better?
+     (php :variables php-backend 'lsp) ;; personal home programming says what?
      (python :variables
              python-format-on-save t
              python-formatter 'black
@@ -106,8 +107,8 @@ This function should only modify configuration layer settings."
            yaml-enable-lsp t) ;; evil clearly fomatted
      toml  ;; what if we tried yet another std
      (json :variables
-           json-fmt-on-save t
-           json-fmt-tool 'prettier) ;; the prefered backend/frontend love letter format
+           json-fmt-tool 'prettier
+           json-fmt-on-save t) ;; the prefered backend/frontend love letter format
      multiple-cursors
      (shell :variables
             shell-default-height 30
@@ -146,24 +147,14 @@ This function should only modify configuration layer settings."
                                       (nix-ts-mode
                                        :mode "\\.nix\\'"
                                        :config
-                                       ;; (setq lsp-nix-nixd-server-path "/home/henri/.nix-profile/bin/nixd")
-                                       (let ((system-name (if (eq system-type 'darwin)
-                                                              "henri-MacBook-Pro"
-                                                            "desktop"))
-                                             (config-type (if (eq system-type 'darwin)
-                                                              "darwinConfigurations"
-                                                            "nixosConfigurations")))
+                                       (let ((home-dir (if (eq system-type 'gnu/linux)
+                                                           "/home/henri/Documents"
+                                                         "/Users/henri.vandersleyen/Documents")))
                                          (setq lsp-nix-nixd-home-manager-options-expr
-                                               (format "(builtins.getFlake \"%s/Documents/dotFiles/nix-darwin\").%s.\"%s\".options.home-manager"
-                                                       (getenv "HOME")
-                                                       config-type
-                                                       system-name))
+                                               (format "(builtins.getFlake \"%s/dotFiles/nix-darwin\").darwinConfigurations.\"henri-MacBook-Pro\".options.home-manager" home-dir))
                                          (setq lsp-nix-nixd-nixos-options-expr
-                                               (format "(builtins.getFlake \"%s/Documents/dotFiles/nix-darwin\").%s.\"%s\".options"
-                                                       (getenv "HOME")
-                                                       config-type
-                                                       system-name)))
-                                       (setq lsp-nix-nixd-nixpkgs-expr "import <nixpkgs> { }"))
+                                               (format "(builtins.getFlake \"%s/dotFiles/nix-darwin\").darwinConfigurations.\"henri-MacBook-Pro\".options" home-dir))
+                                         (setq lsp-nix-nixd-nixpkgs-expr "import <nixpkgs> { }")))
                                       (sops
                                        :recipe (:type git :host github :repo "djgoku/sops"))
                                       catppuccin-theme
@@ -703,11 +694,38 @@ before packages are loaded."
   ;;INFO: in macos, you can increase the repeat rate of keys
   ;; M-x nerd-icons-install-fonts to fix doom-emacs status line
   (add-to-list 'exec-path "/etc/profiles/per-user/henri.vandersleyen/bin")
+  ;; --- elisp ---
+  (defun mp-elisp-mode-eval-buffer ()
+    (interactive)
+    (message "--- Evaluated buffer ---\n")
+    (eval-buffer))
+
+  (define-key emacs-lisp-mode-map (kbd "C-c C-c") #'mp-elisp-mode-eval-buffer)
+  (define-key lisp-interaction-mode-map (kbd "C-c C-c") #'mp-elisp-mode-eval-buffer)
+
+  (defun run-elisp-in-vterm ()
+    "Run the current elisp buffer and display the output in a vterm terminal."
+    (interactive)
+    (save-buffer)
+    (let ((file-path (buffer-file-name))
+          (vterm-buffer-name "*elisp-vterm*"))
+      (if (not file-path)
+          (message "Buffer is not visiting a file")
+        (if (fboundp 'vterm)
+            (progn
+              (if (get-buffer vterm-buffer-name)
+                  (switch-to-buffer-other-window vterm-buffer-name)
+                (vterm vterm-buffer-name))
+              (vterm-send-string
+               (format "emacs --batch -l %s && echo \"\\nElisP execution completed.\"\n"
+                       (shell-quote-argument file-path))))
+          (message "vterm is not available. Make sure vterm is installed.")))))
+  ;; --- shell ---
+  (spacemacs/set-leader-keys "obs" 'vterm)
   ;; --- misc problems ---
   (when (fboundp 'electric-indent-mode) (electric-indent-mode -1)) ;; disables auto indent on new lines
   (setq-default spacemacs-yank-indent-threshold 0) ;; disables auto indent on pasting
   (setq-default word-wrap t)
-  (spacemacs/set-leader-keys "obs" 'scratch-buffer)
   ;; --- popper ---
   (spacemacs/set-leader-keys "opt" 'popper-toggle)
   (spacemacs/set-leader-keys "opc" 'popper-cycle)
@@ -775,9 +793,12 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
    web-mode-code-indent-offset 2
    web-mode-attr-indent-offset 2)
   ;; --- llm/ai ---
-  (gptel-make-deepseek "DeepSeek"
-    :stream t
-    :key "your-api-key")
+  ;; (gptel-make-deepseek "DeepSeek"
+  ;;   :stream t
+  ;;   :key "your-api-key")
+  (gptel-make-gh-copilot "Copilot")
+  (setq gptel-model 'claude-3.7-sonnet
+        gptel-backend (gptel-make-gh-copilot "Copilot"))
   ;; --- projectile ---
   (setq projectile-project-search-path '("~/knak/packages/" "~/Documents/"))
   (spacemacs/set-leader-keys "ps" 'projectile-discover-projects-in-search-path)
@@ -792,7 +813,9 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 
   ;; --- hl-todo ---
   (with-eval-after-load 'hl-todo
-    (add-to-list 'hl-todo-keyword-faces '("WARN" . "#FFA500")))
+    (add-to-list 'hl-todo-keyword-faces '("WARN" . "#FAB387"))  ;; Catppuccin Peach
+    (add-to-list 'hl-todo-keyword-faces '("FIX" . "#F38BA8"))  ;; Catppuccin Red
+    (add-to-list 'hl-todo-keyword-faces '("INFO" . "#89DCEB"))) ;; Catppuccin Sky
   ;; --- org-general ---
   (setq user-mail-address "henri-vandersleyen@protonmail.com")
   (add-hook 'org-mode-hook
@@ -818,7 +841,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   ;; --- org-todo ---
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
-          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+          (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "CANC(k@)")))
 
   (setq org-todo-keyword-faces
         '(("TODO"      :inherit (org-todo region) :foreground "#A6E3A1" :weight bold)  ; Green
@@ -831,7 +854,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
           ("BACKLOG"   :inherit (org-todo region) :foreground "#B4BEFE" :weight bold)  ; Lavender
           ("HOLD"      :inherit (org-todo region) :foreground "#CBA6F7" :weight bold)  ; Mauve
           ("DONE"      :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (Subtext0)
-          ("COMPLETED" :inherit (org-todo region) :foreground "#6C7086" :weight bold)  ; Gray (same as DONE)
           ("CANC"      :inherit (org-todo region) :foreground "#FAB387" :weight bold)  ; Peach
           ))
   ;; --- org-priority
@@ -920,19 +942,24 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
                                             :hidefiles nil :formula nil :timestamp nil :level nil :tcolumns nil
                                             :formatter nil))
   ;; --- org-templates ---
+  ;; TODO:
   (setq org-capture-templates
         '(
           ("j" "Work Log Entry"
-           entry (file+datetree "~/Documents/zettelkasten/org-roam/org/work-log.org")
-           "* %?"
+           entry (file+datetree "~/Documents/zettelkasten/org-roam/org/work/work-log.org")
+           "* %^{Task} \n:PROPERTIES:\n:END:\n"
            :empty-lines 0)
           ("c" "Code To-Do"
            entry (file+headline "~/Documents/zettelkasten/org-roam/org/work/todo.org" "Code Related Tasks")
-           "* TODO [#C] %?\nDEADLINE: %^T\n:Created: %T\n%i\n%a\nShortcut Ticket: \nProposed Solution: \n"
+           "* TODO [#C] %?\n:PROPERTIES:\n:Effort: $^{Effort}\n:Weight: $^{Weight}\n:END:\nDEADLINE: %^T\n:Created: %T\n%i\n%a\nShortcut Ticket: \nProposed Solution: \n"
            :empty-lines 0)
           ("g" "General To-Do"
            entry (file+headline "~/Documents/zettelkasten/org-roam/org/home/todo.org" "General TODOS")
            "* TODO [#E] %?\n:Created: %T\n "
+           :empty-lines 0)
+          ("l" "Learning note"
+           entry (file+headline "~/Documents/zettelkasten/org-roam/org/home/learning.org" "Learning Notes")
+           "* %^{Subject} \n:PROPERTIES:\n:END:\n** %?"
            :empty-lines 0)
           ("m" "Meeting"
            entry (file+datetree "~/Documents/zettelkasten/org-roam/org/work/meetings.org")
@@ -978,6 +1005,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
            :if-new (file+head "projects/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
            :unnarrowed t)
           ))
+  ;; --- date prettier (svg)---
   ;; --- lsp ---
   (add-hook 'python-mode-hook #'lsp)
   (add-hook 'typescript-mode-hook #'lsp)
@@ -1030,64 +1058,7 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(a ace-jump-helm-line ace-link ace-pinyin add-node-modules-path
-         aggressive-indent aio alert all-the-icons anaconda-mode auctex
-         auto-compile auto-dictionary auto-highlight-symbol auto-yasnippet blacken
-         browse-at-remote bui catppuccin-theme centered-cursor-mode chinese-conv
-         chinese-word-at-point clean-aindent-mode closql code-cells code-review
-         color-identifiers-mode column-enforce-mode company company-anaconda
-         company-auctex company-emoji company-math company-nixos-options
-         company-reftex company-shell concurrent consult ctable cython-mode
-         dap-mode deferred define-word devdocs diff-hl diminish dired-quick-sort
-         disable-mouse docker dockerfile-mode doom-modeline doom-themes
-         dotenv-mode drag-stuff dumb-jump eat editorconfig elisp-def elisp-demos
-         elisp-slime-nav ellama emacsql emoji-cheat-sheet-plus emojify emr epc
-         esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu evil-args
-         evil-cleverparens evil-collection evil-easymotion evil-escape
-         evil-evilified-state evil-exchange evil-goggles evil-iedit-state
-         evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc
-         evil-nerd-commenter evil-numbers evil-org evil-surround evil-tex
-         evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode
-         evil-visualstar exec-path-from-shell expand-region eyebrowse
-         fancy-battery fcitx fic-mode find-by-pinyin-dired fish-mode flx-ido
-         flycheck-bashate flycheck-elsa flycheck-package flycheck-pos-tip
-         flyspell-correct flyspell-correct-helm flyspell-popup font-utils forge
-         gh-md ghub git-link git-messenger git-modes git-timemachine
-         gitignore-templates gntp gnuplot golden-ratio google-translate gptel
-         helm-ag helm-c-yasnippet helm-comint helm-company helm-descbinds
-         helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager helm-mu
-         helm-nixos-options helm-org helm-org-rifle helm-projectile helm-purpose
-         helm-pydoc helm-spotify-plus helm-swoop helm-themes helm-xref hide-comnt
-         highlight-indentation highlight-numbers highlight-parentheses hl-todo
-         holy-mode htmlize hungry-delete hybrid-mode importmagic indent-guide
-         info+ insert-shebang inspector js-doc js2-mode js2-refactor json-mode
-         json-navigator json-reformat json-snatcher ligature link-hint
-         live-py-mode livid-mode llm load-env-vars log4e lorem-ipsum lsp-docker
-         lsp-latex lsp-mode lsp-origami lsp-pyright lsp-tailwindcss lsp-treemacs
-         lsp-ui macrostep magit magit-section markdown-mode markdown-toc
-         math-symbol-lists multi multi-line multi-term multi-vterm
-         multiple-cursors nameless names nerd-icons nix-mode nix-ts-mode
-         nixos-options nodejs-repl npm-mode nyan-mode ob-typescript open-junk-file
-         org org-category-capture org-cliplink org-contrib org-download org-mime
-         org-pomodoro org-present org-project-capture org-projectile org-rich-yank
-         org-roam org-roam-ui org-superstar orgit orgit-forge origami overseer
-         pangu-spacing paradox password-generator pcache pcre2el persistent-soft
-         pinyinlib pip-requirements pipenv pippel plz plz-event-source
-         plz-media-type poetry pomm popper popwin pos-tip prettier-js py-isort
-         pydoc pyenv-mode pyim pyim-basedict pylookup pytest pythonic pyvenv
-         quickrun rainbow-delimiters rainbow-identifiers rainbow-mode reformatter
-         request restart-emacs shell-pop shfmt shrink-path simple-httpd
-         skewer-mode smeargle sops space-doc spaceline spacemacs-purpose-popwin
-         spacemacs-whitespace-cleanup sphinx-doc spotify sqlite3
-         string-edit-at-point string-inflection symbol-overlay symon term-cursor
-         terminal-here toc-org toml-mode transient treemacs-all-the-icons
-         treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp
-         treemacs-projectile treepy typescript-mode ucs-utils undo-fu
-         undo-fu-session unicode-fonts uuidgen valign vi-tilde-fringe
-         vim-powerline vmd-mode volatile-highlights vterm vundo web-beautify
-         web-mode websocket which-key winum with-editor writeroom-mode ws-butler
-         xkcd xr xref yaml yaml-mode yapfify yasnippet yasnippet-snippets
-         youdao-dictionary)))
+     '(svg-tag-mode svg-lib drupal-mode php-auto-yasnippets php-mode phpunit a ace-jump-helm-line ace-link ace-pinyin add-node-modules-path aggressive-indent aio alert all-the-icons anaconda-mode auctex auto-compile auto-dictionary auto-highlight-symbol auto-yasnippet blacken browse-at-remote bui catppuccin-theme centered-cursor-mode chinese-conv chinese-word-at-point clean-aindent-mode closql code-cells code-review color-identifiers-mode column-enforce-mode company company-anaconda company-auctex company-emoji company-math company-nixos-options company-reftex company-shell concurrent consult ctable cython-mode dap-mode deferred define-word devdocs diff-hl diminish dired-quick-sort disable-mouse docker dockerfile-mode doom-modeline doom-themes dotenv-mode drag-stuff dumb-jump eat editorconfig elisp-def elisp-demos elisp-slime-nav ellama emacsql emoji-cheat-sheet-plus emojify emr epc esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil-anzu evil-args evil-cleverparens evil-collection evil-easymotion evil-escape evil-evilified-state evil-exchange evil-goggles evil-iedit-state evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-org evil-surround evil-tex evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar exec-path-from-shell expand-region eyebrowse fancy-battery fcitx fic-mode find-by-pinyin-dired fish-mode flx-ido flycheck-bashate flycheck-elsa flycheck-package flycheck-pos-tip flyspell-correct flyspell-correct-helm flyspell-popup font-utils forge gh-md ghub git-link git-messenger git-modes git-timemachine gitignore-templates gntp gnuplot golden-ratio google-translate gptel helm-ag helm-c-yasnippet helm-comint helm-company helm-descbinds helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager helm-mu helm-nixos-options helm-org helm-org-rifle helm-projectile helm-purpose helm-pydoc helm-spotify-plus helm-swoop helm-themes helm-xref hide-comnt highlight-indentation highlight-numbers highlight-parentheses hl-todo holy-mode htmlize hungry-delete hybrid-mode importmagic indent-guide info+ insert-shebang inspector js-doc js2-mode js2-refactor json-mode json-navigator json-reformat json-snatcher ligature link-hint live-py-mode livid-mode llm load-env-vars log4e lorem-ipsum lsp-docker lsp-latex lsp-mode lsp-origami lsp-pyright lsp-tailwindcss lsp-treemacs lsp-ui macrostep magit magit-section markdown-mode markdown-toc math-symbol-lists multi multi-line multi-term multi-vterm multiple-cursors nameless names nerd-icons nix-mode nix-ts-mode nixos-options nodejs-repl npm-mode nyan-mode ob-typescript open-junk-file org org-category-capture org-cliplink org-contrib org-download org-mime org-pomodoro org-present org-project-capture org-projectile org-rich-yank org-roam org-roam-ui org-superstar orgit orgit-forge origami overseer pangu-spacing paradox password-generator pcache pcre2el persistent-soft pinyinlib pip-requirements pipenv pippel plz plz-event-source plz-media-type poetry pomm popper popwin pos-tip prettier-js py-isort pydoc pyenv-mode pyim pyim-basedict pylookup pytest pythonic pyvenv quickrun rainbow-delimiters rainbow-identifiers rainbow-mode reformatter request restart-emacs shell-pop shfmt shrink-path simple-httpd skewer-mode smeargle sops space-doc spaceline spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc spotify sqlite3 string-edit-at-point string-inflection symbol-overlay symon term-cursor terminal-here toc-org toml-mode transient treemacs-all-the-icons treemacs-evil treemacs-icons-dired treemacs-magit treemacs-persp treemacs-projectile treepy typescript-mode ucs-utils undo-fu undo-fu-session unicode-fonts uuidgen valign vi-tilde-fringe vim-powerline vmd-mode volatile-highlights vterm vundo web-beautify web-mode websocket which-key winum with-editor writeroom-mode ws-butler xkcd xr xref yaml yaml-mode yapfify yasnippet yasnippet-snippets youdao-dictionary)))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
