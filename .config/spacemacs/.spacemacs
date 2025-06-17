@@ -1018,11 +1018,35 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   ;; --- perspective ---
   (spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
   ;; --- tramp/ssh ---
-  ;; --- make it a hydra to select which one to connect to
-  (defun connect-factorio ()
+  (defun connect-monolith ()
     "Open a remote folder using TRAMP in Dired."
     (interactive)
     (dired "/ssh:monolith@192.168.4.129:/"))
+
+  (defun connect-macos()
+    "Open a remote folder using TRAMP in Dired."
+    (interactive)
+    (dired "/ssh:macos@192.168.4.245:/"))
+
+  (defun connect-pi ()
+    "Open a remote folder using TRAMP in Dired."
+    (interactive)
+    (dired "/ssh:admin@192.168.1.100:/"))
+
+  (defhydra hydra/diredssh (:hint nil :color blue)
+    "
+SSH Connections
+--------------------------
+_f_: factorio/monolith
+_p_: Pi
+_m_: Macos
+_q_: Cancel
+"
+    ("f" connect-factorio :color yellow)
+    ("p" connect-pi :color yellow)
+    ("m" connect-macos :color yellow)
+    ("q" nil "cancel" :color blue))
+  (spacemacs/set-leader-keys "ods" 'hydra/diredssh/body)
   ;; --- sops --
   ;; https://github.com/djgoku/sops
   (which-key-add-key-based-replacements "os" "+sops")
@@ -1030,6 +1054,12 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (spacemacs/set-leader-keys "oss" 'sops-save-file)
   (spacemacs/set-leader-keys "osc" 'sops-cancel)
   (global-sops-mode 1)
+  ;; --- which-key --
+  (which-key-add-key-based-replacements
+    "SPC o a" "git"
+    "SPC o s" "sops"
+    "SPC o d" "dired"
+    "SPC o l" "persp")
   ;; --- treemacs ---
   (custom-set-faces
    '(treemacs-hl-line-face ((t (:background "#e64553")))))
