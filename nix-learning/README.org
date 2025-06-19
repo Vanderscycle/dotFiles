@@ -23,7 +23,6 @@ From that point on, nix is on your system and you can already use it (if you ope
 nix shell nixpkgs#cowsay
 #+end_src
 
-
 ***** Configuring system
 We will be using flakes as they are the nix equivalent of a ~Dockerfile~ and can provide multiple outputs.
 
@@ -55,71 +54,41 @@ nix run nix-darwin -- switch --flake .
 darwin-rebuild switch --flake . # --dry-run
 #+end_src
 
+One more quick demo of the on the fly pattern
+#+begin_src zsh
+nix shell nixpkgs#fzf nixpkgs#neovim
+nvim "$(fzf)"
+#+end_src
+
+You can use nix like a devcontainer
+#+begin_src zsh
+nix develop
+nix develop .#anotherEnv
+#+end_src
+
 To rollback
 #+begin_src zsh
 nix profile history --profile /nix/var/nix/profiles/system
 # or
-
 darwin-rebuild switch --list-generations
 # to undo latest
 darwin-rebuild switch --rollback
 # or revert to a specific version
 darwin-rebuild switch --switch-generation 1
 #+end_src
-***** Video references
-[[https://www.youtube.com/watch?v=Z8BL8mdzWHI][Nix is my favorite package manager to use on macOS - YouTube]]
-[[https://www.youtube.com/watch?v=iU7B76NTr2I][Nix Darwin Turned My Mac into a Fully Automated Machine - YouTube]]
+
 ***** Update
 #+begin_src bash
 nix flake update
 #+end_src
-**** Linux (non-NixOS)
-Very similar to Macos except the template is different
-#+begin_src zsh
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
-  sh -s -- install --determinate
-#+end_src
+*** limitation
+- not able to declare containers using ~virtualisation~ like nixos
+- not all packages are compatibles with x86_64-darwin or aarch_64-darwin
+- no systemd which is a big bummer
 
-#+begin_src zsh
-nix flake init # creates a basic flake (hello world)
-#+end_src
-
-
-***** Configuring system
-We can only use home-manager to configure our computer. To do so we can must install it.
-[[https://nix-community.github.io/home-manager/#sec-install-standalone][Home Manager Manual]]
-
-If the nix bug infected you, I can only recommend that you move to Nix-OS
-
-That being said we will be using the following flake [[file:rocky-linux/flake.nix][rocky-nix flake]]
-
-In the aforementioned file we will
-#+begin_src zsh
-sudo nix run .#create-user-script
-sudo passwd rocky  # Set password interactively
-home-manager switch --flake .#rocky
-#+end_src
-
-***** Demo
-
- #+begin_src zsh
-   ssh rocky@192.168.4.245
-   # ensure that it has rsync on the machine
-   rsync -avz ~/Documents/dotFiles/nix-learning/rocky-linux/ rocky@192.168.4.215:~/Documents/
-
-  # applying the config
-  home-manager switch --flake .#rocky
-
-  # rollback
- home-manager generations # list all generations
- # I actually don't know how to do this
- #+end_src
-
-One more quick demo of the on the fly pattern
-#+begin_src zsh
-nix shell nixpkgs#fzf nixpkgs#neovim
-nvim "$(fzf)"
-#+end_src
+**** Video references
+[[https://www.youtube.com/watch?v=Z8BL8mdzWHI][Nix is my favorite package manager to use on macOS - YouTube]]
+[[https://www.youtube.com/watch?v=iU7B76NTr2I][Nix Darwin Turned My Mac into a Fully Automated Machine - YouTube]]
 
 *** Searching/using packages
 Nixos has an extensive package manager repository

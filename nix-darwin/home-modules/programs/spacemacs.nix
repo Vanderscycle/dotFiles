@@ -33,6 +33,7 @@
         ispell
         proton-pass
         protonmail-bridge # for email
+        devcontainer
       ];
     };
 

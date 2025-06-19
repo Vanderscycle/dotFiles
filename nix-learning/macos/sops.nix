@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   config,
+  username,
   ...
 }:
 {
@@ -17,10 +18,13 @@
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
 
-    age.keyFile = "/home/${meta.username}/.config/sops/age/keys.txt";
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     secrets = {
-      "nextcloud/admin/password" = {
-        owner = "root";
+      "program1/category1/password" = {
+        owner = username;
+      };
+      "program1/category1/username" = {
+        owner = username;
       };
     };
   };

@@ -12,6 +12,7 @@ pkgs.mkShell {
   shellHook = ''
     ${pkgs.neofetch}/bin/neofetch
     echo -e "You are now in a dev shell in $(pwd)" | ${pkgs.lolcat}/bin/lolcat
+    ${pkgs.figlet}/bin/figlet "node version:"
     node -v
   '';
 }

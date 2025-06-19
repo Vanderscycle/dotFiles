@@ -61,6 +61,10 @@
     isNormalUser = false;
     extraGroups = [ "smbaccess" ];
   };
+  users.users.paperless = {
+    isNormalUser = false;
+    extraGroups = [ "smbaccess" ];
+  };
   users.users.${meta.username} = {
     isNormalUser = true;
     extraGroups = [
@@ -250,6 +254,26 @@
             entryPoints = [ "web" ];
             middlewares = [ "strip-nextcloud-prefix" ];
           };
+
+          paperless-router = {
+            rule = "PathPrefix(`/paperless`)";
+            service = "paperless-service";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-paperless-prefix" ];
+          };
+
+          transmission-router = {
+            rule = "PathPrefix(`/transmission`)";
+            service = "transmission-service";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-transmission-prefix" ];
+          };
+          homepage-router = {
+            rule = "PathPrefix(`/homepage`)";
+            service = "homepage-service";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-homepage-prefix" ];
+          };
         };
 
         services = {
@@ -276,6 +300,24 @@
               { url = "http://0.0.0.0:9999"; }
             ];
           };
+
+          paperless-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:28981"; }
+            ];
+          };
+
+          transmission-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:9091"; }
+            ];
+          };
+
+          homepage-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:8082"; }
+            ];
+          };
         };
         middlewares = {
           strip-n8n-prefix = {
@@ -293,6 +335,19 @@
           strip-nextcloud-prefix = {
             stripPrefix.prefixes = [ "/nextcloud" ];
           };
+
+          strip-paperless-prefix = {
+            stripPrefix.prefixes = [ "/paperless" ];
+          };
+
+          strip-transmission-prefix = {
+            stripPrefix.prefixes = [ "/torrent" ];
+          };
+
+          # not working
+          strip-homepage-prefix = {
+            stripPrefix.prefixes = [ "/homepage" ];
+          };
         };
       };
     };
@@ -305,8 +360,6 @@
     enable = true;
     openFirewall = true;
     settings = {
-      # N8N_LISTEN_ADDRESS= "0.0.0.0";
-      # N8N_SECURE_COOKIE = false;
     };
   };
   #INFO: a way to set env vars for services
@@ -356,13 +409,37 @@
   };
   services.paperless = {
     enable = true;
+    port = 28981;
+    address = "0.0.0.0";
+    settings = {
+      # https://docs.paperless-ngx.com/configuration/
+      PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
+      PAPERLESS_STATIC_URL = "/paperless";
+      PAPERLESS_CONSUMPTION_DIR = "/mnt/rice/paperless/consume";
+      PAPERLESS_DATA_DIR = "/mnt/rice/paperless/data";
+      PAPERLESS_MEDIA_ROOT = "/mnt/rice/paperless/media";
+      PAPERLESS_STATICDIR = "/mnt/rice/paperless/static";
+      # PAPERLESS_ADMIN_USER=<username>
+      # PAPERLESS_ADMIN_MAIL=<email>
+      # PAPERLESS_ADMIN_PASSWORD=<password>
+    };
   };
-
+  services.homepage-dashboard = {
+    enable = true;
+    listenPort = 8082;
+    openFirewall = true;
+    settings = {
+      "base" = "http://0.0.0.0/homepage";
+    };
+  };
   services.transmission = {
     enable = true;
     openFirewall = true;
+    openPeerPorts = true;
     settings = {
-      "download-dir" = "/mnt/rice/famjam/transmission";
+      download-dir = "/mnt/rice/transmission";
+      rpc-port = 9091;
+      rpc-url = "/torrent/";
     };
   };
 
