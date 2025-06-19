@@ -1,0 +1,10 @@
+# careful when changing keys
+keys:
+  - &primary age1df2u7xvze6rq5utz74ckx059wr3z97j484wc04063437h6hn4v6s9auec3
+  - &work age17jgvjp9u4wa6799e3utfqxfrq9mgkfhxxed02cpp642tm6cna9gqg4yafw
+creation_rules:
+  - path_regex: secrets/.*\.yaml$
+    key_groups:
+      - age:
+        - *primary
+        - *work

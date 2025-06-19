@@ -3,11 +3,19 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # my own packages
+    nix-scripts = {
+      url = "github:vancycles-knak/nixScripts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -17,10 +25,12 @@
       self,
       nix-darwin,
       nixpkgs,
+      nix-scripts,
       home-manager,
     }:
     let
-      system = "x86_64-darwin";
+      # system = "x86_64-darwin";
+      system = "aarch64-darwin";
       pkgs = import nixpkgs {
         system = system;
         config.allowUnfree = true;
@@ -71,22 +81,22 @@
             inherit inputs;
           }
         );
+
         # nix develop .#anotherEnv
         anotherEnv = pkgs.mkShell {
           name = "localhost-shell";
-          # desired packages
+          # desired packages, notice how lolcat/neofetch isn't present
           nativeBuildInputs = with pkgs; [
-            kubernetes
+            sl
+            nix-scripts.packages.${system}.output2
           ];
 
           shellHook = ''
-             ${pkgs.neofetch}/bin/neofetch
-             echo -e "localhost shell activated" | ${pkgs.lolcat}/bin/lolcat
-             echo "Available commands:"
-             echo "  setup_cluster     - Create local Kubernetes cluster"
-             echo "  generate_secrets  - Generate Kubernetes secrets"
-             echo "  deploy_tilt        - Start Tilt development environment"
-            echo "  all        - Run all previous commands"
+            ${pkgs.neofetch}/bin/neofetch
+            echo -e "localhost shell activated" | ${pkgs.lolcat}/bin/lolcat
+            echo "Available commands:"
+            echo "sl        - choo choo"
+            echo "myscript2 - a small bash script packaged with nix"
           '';
         };
       };
