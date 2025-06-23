@@ -1,3 +1,5 @@
+{ meta, ... }:
+
 # ----------------------
 # File system and drives
 # ---------------------
@@ -14,17 +16,28 @@
       "defaults"
     ];
   };
-  fileSystems."/mnt/rice/paperless" = {
+  fileSystems."/mnt/paperless" = {
     device = "//192.168.4.223/rice/paperless";
     fsType = "cifs";
     options = [
-      "credentials=/root/smbcreds_fam"
+      "credentials=/home/${meta.username}/smbcreds_fam_user"
       "dir_mode=0770"
       "file_mode=0770"
-      "uid=paperless" # Set paperless as the owner
-      "gid=smbaccess"
-      "rw"
-      "nofail" # Don't fail boot if mount fails
+      "uid=paperless"
+      "gid=paperless"
+      "defaults"
+    ];
+  };
+  fileSystems."/mnt/transmission" = {
+    device = "//192.168.4.223/rice/transmission";
+    fsType = "cifs";
+    options = [
+      "credentials=/home/${meta.username}/smbcreds_fam_user"
+      "dir_mode=0770"
+      "file_mode=0770"
+      "uid=transmission"
+      "gid=transmission"
+      "defaults"
     ];
   };
   # create user for read only/

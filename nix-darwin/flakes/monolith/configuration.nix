@@ -99,6 +99,7 @@
 
     age.keyFile = "/home/${meta.username}/.config/sops/age/keys.txt";
     secrets = {
+      # factorio
       "factorio/game-password" = {
         owner = meta.username;
       };
@@ -108,19 +109,37 @@
       "factorio/admin" = {
         owner = meta.username;
       };
-      # TruNas SMB access
+      # paperless
+      "paperless/admin/password" = {
+        owner = meta.username;
+      };
+      "paperless/admin/username" = {
+        owner = meta.username;
+      };
+      "paperless/admin/email" = {
+        owner = meta.username;
+      };
+      # smb root user
       "home-server/rice/password" = {
         owner = "root";
       };
       "home-server/rice/user" = {
         owner = "root";
       };
+      # smb systemd user
+      "home-server/systemd/password" = {
+        owner = meta.username;
+      };
+      "home-server/systemd/user" = {
+        owner = meta.username;
+      };
+      # nextcloud
       "nextcloud/admin/password" = {
         owner = "root";
       };
     };
   };
-  systemd.services."smbcreds_fam" = {
+  systemd.services."smbcreds_fam_root" = {
     script = ''
       echo "user=$(cat ${config.sops.secrets."home-server/rice/user".path})" > /root/smbcreds_fam
       echo "password=$(cat ${config.sops.secrets."home-server/rice/password".path})" >> /root/smbcreds_fam
@@ -134,7 +153,25 @@
     wantedBy = [ "multi-user.target" ];
   };
 
-  # Enable the OpenSSH daemon.
+  # TODO: change the user
+  systemd.services."smbcreds_fam_general" = {
+    script = ''
+      echo "user=$(cat ${
+        config.sops.secrets."home-server/systemd/user".path
+      })" > "/home/${meta.username}/smbcreds_fam_user"
+      echo "password=$(cat ${
+        config.sops.secrets."home-server/systemd/password".path
+      })" >> "/home/${meta.username}/smbcreds_fam_user"
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = meta.username;
+      WorkingDirectory = "/home/${meta.username}";
+    };
+    # Make it run immediately after each system rebuild
+    wantedBy = [ "multi-user.target" ];
+  };
+
   systemd.tmpfiles.rules = [
     # Copy/Link the save file (use either C or L)
     "C /var/lib/factorio/saves/save1.zip - - - - ${builtins.path { path = ./save1.zip; }}"
@@ -266,7 +303,7 @@
             rule = "PathPrefix(`/transmission`)";
             service = "transmission-service";
             entryPoints = [ "web" ];
-            middlewares = [ "strip-transmission-prefix" ];
+            # middlewares = [ "strip-transmission-prefix" ];
           };
           homepage-router = {
             rule = "PathPrefix(`/homepage`)";
@@ -336,15 +373,16 @@
             stripPrefix.prefixes = [ "/nextcloud" ];
           };
 
+          #WARN: smb issues
           strip-paperless-prefix = {
             stripPrefix.prefixes = [ "/paperless" ];
           };
 
           strip-transmission-prefix = {
-            stripPrefix.prefixes = [ "/torrent" ];
+            stripPrefix.prefixes = [ "/transmission" ];
           };
 
-          # not working
+          #WARN: not working
           strip-homepage-prefix = {
             stripPrefix.prefixes = [ "/homepage" ];
           };
@@ -407,6 +445,20 @@
     };
     extraAppsEnable = true;
   };
+
+  systemd.services.paperless = {
+    wants = [ "mnt-paperless.mount" ];
+    after = [ "mnt-paperless.mount" ];
+    serviceConfig = {
+      ProtectSystem = "no";
+      ProtectHome = false;
+      PrivateTmp = false;
+      PrivateDevices = false;
+      ReadOnlyPaths = [ ];
+      ReadWritePaths = [ "/mnt/paperless" ];
+    };
+  };
+
   services.paperless = {
     enable = true;
     port = 28981;
@@ -415,31 +467,33 @@
       # https://docs.paperless-ngx.com/configuration/
       PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
       PAPERLESS_STATIC_URL = "/paperless";
-      PAPERLESS_CONSUMPTION_DIR = "/mnt/rice/paperless/consume";
-      PAPERLESS_DATA_DIR = "/mnt/rice/paperless/data";
-      PAPERLESS_MEDIA_ROOT = "/mnt/rice/paperless/media";
-      PAPERLESS_STATICDIR = "/mnt/rice/paperless/static";
-      # PAPERLESS_ADMIN_USER=<username>
-      # PAPERLESS_ADMIN_MAIL=<email>
-      # PAPERLESS_ADMIN_PASSWORD=<password>
+
+      PAPERLESS_CONSUMPTION_DIR = "/mnt/paperless/consume";
+      PAPERLESS_DATA_DIR = "/mnt/paperless/data";
+      PAPERLESS_MEDIA_ROOT = "/mnt/paperless/media";
+      PAPERLESS_STATICDIR = "/mnt/paperless/static";
+
+      PAPERLESS_ADMIN_USER = builtins.readFile config.sops.secrets."paperless/admin/username".path;
+      PAPERLESS_ADMIN_MAIL = builtins.readFile config.sops.secrets."paperless/admin/email".path;
+      PAPERLESS_ADMIN_PASSWORD = builtins.readFile config.sops.secrets."paperless/admin/password".path;
     };
   };
   services.homepage-dashboard = {
     enable = true;
     listenPort = 8082;
-    openFirewall = true;
+    # openFirewall = true;
     settings = {
       "base" = "http://0.0.0.0/homepage";
     };
   };
   services.transmission = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true; #INFO: we use traefik
     openPeerPorts = true;
     settings = {
-      download-dir = "/mnt/rice/transmission";
       rpc-port = 9091;
-      rpc-url = "/torrent/";
+      rpc-bind-addres = "0.0.0.0";
+      download-dir = "/mnt/transmission";
     };
   };
 
@@ -475,9 +529,6 @@
       allowedTCPPorts = [
         80
         8080 # traefik dashboard
-        8123 # home
-        5678 # n8n
-        3000 # gitea
         27015 # factorio
       ];
     };
