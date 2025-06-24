@@ -28,6 +28,18 @@
       "defaults"
     ];
   };
+  fileSystems."/mnt/nextcloud" = {
+    device = "//192.168.4.223/rice/nextcloud";
+    fsType = "cifs";
+    options = [
+      "credentials=/home/${meta.username}/smbcreds_fam_user"
+      "dir_mode=0770"
+      "file_mode=0770"
+      "uid=nextcloud"
+      "gid=nextcloud"
+      "defaults"
+    ];
+  };
   fileSystems."/mnt/transmission" = {
     device = "//192.168.4.223/rice/transmission";
     fsType = "cifs";

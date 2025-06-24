@@ -11,6 +11,9 @@
   ...
 }:
 
+# STATUS:
+# Nextcloud works but I do want it to use /mnt/nextcloud
+# paperless works but I do want it ot user /mnt/paperless
 {
   imports = [
     ./hardware-configuration.nix
@@ -54,14 +57,6 @@
   };
   users.groups.smbaccess = { };
   users.users.nextcloud = {
-    isNormalUser = false;
-    extraGroups = [ "smbaccess" ];
-  };
-  users.users.transmission = {
-    isNormalUser = false;
-    extraGroups = [ "smbaccess" ];
-  };
-  users.users.paperless = {
     isNormalUser = false;
     extraGroups = [ "smbaccess" ];
   };
@@ -124,6 +119,10 @@
         owner = "root";
       };
       "home-server/rice/user" = {
+        owner = "root";
+      };
+      # docker
+      "docker/homarr/enc_key" = {
         owner = "root";
       };
       # smb systemd user
@@ -233,6 +232,30 @@
       (builtins.readFile config.sops.secrets."factorio/admin".path)
     ];
   };
+  # docker
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      # https://search.nixos.org/options?channel=24.11&from=0&size=50&sort=relevance&type=packages&query=oci-containers.containers
+      hello-world = {
+        image = "hello-world:latest";
+        autoStart = false;
+      };
+      homarr = {
+        image = "ghcr.io/homarr-labs/homarr:latest";
+        ports = [ "7575:7575" ];
+        extraOptions = [ "--network=host" ]; # TODO: check for traefik
+        environment = {
+          SECRET_ENCRYPTION_KEY = builtins.readFile config.sops.secrets."docker/homarr/enc_key".path;
+        };
+        volumes = [
+          "/var/run/docker.sock:/var/run/docker.sock"
+          "/home/${meta.username}/docker/homarr:/appdata"
+        ];
+      };
+    };
+  };
+  # reverse proxy
   services.traefik = {
     enable = true;
     staticConfigOptions = {
@@ -352,7 +375,7 @@
 
           homepage-service = {
             loadBalancer.servers = [
-              { url = "http://0.0.0.0:8082"; }
+              { url = "http://0.0.0.0:7575"; }
             ];
           };
         };
@@ -446,46 +469,100 @@
     extraAppsEnable = true;
   };
 
-  systemd.services.paperless = {
-    wants = [ "mnt-paperless.mount" ];
-    after = [ "mnt-paperless.mount" ];
-    serviceConfig = {
-      ProtectSystem = "no";
-      ProtectHome = false;
-      PrivateTmp = false;
-      PrivateDevices = false;
-      ReadOnlyPaths = [ ];
-      ReadWritePaths = [ "/mnt/paperless" ];
-    };
+  # media org tool (movies)
+  services.radarr = {
+    enable = true;
+    openFirewall = true;
+    # dataDir = "";
   };
+
+  # media org tool (tv shows)
+  services.sonarr = {
+    enable = true;
+    openFirewall = true;
+    # dataDir = "";
+  };
+
+  # subtitles
+  services.bazarr = {
+    enable = true;
+    openFirewall = true;
+    listenPort = 6767;
+  };
+
+  # media org tool (music)
+  services.lidarr = {
+    enable = true;
+    openFirewall = true;
+    # dataDir = "";
+  };
+
+  # usenet management tool
+  services.prowlarr = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  # goodles photos like
+  services.immich = {
+    enable = true;
+    openFirewall = true;
+    port = 2283;
+    settings = { };
+    # mediaLocation = "";
+  };
+
+  # dashboard
+  services.grafana = {
+    enable = true;
+    # openFirewall = true;
+  };
+
+  # metric gathering
+  services.prometheus = {
+    enable = true;
+    # openFirewall = true;
+  };
+  # systemd.services.paperless = {
+  #   wants = [ "mnt-paperless.mount" ];
+  #   after = [ "mnt-paperless.mount" ];
+  #   serviceConfig = {
+  #     ProtectSystem = "no";
+  #     ProtectHome = false;
+  #     PrivateTmp = false;
+  #     PrivateDevices = false;
+  #     ReadOnlyPaths = [ ];
+  #     ReadWritePaths = [ "/mnt/paperless" ];
+  #   };
+  # };
 
   services.paperless = {
     enable = true;
     port = 28981;
-    address = "0.0.0.0";
+    address = "localhost";
     settings = {
       # https://docs.paperless-ngx.com/configuration/
       PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
-      PAPERLESS_STATIC_URL = "/paperless";
+      PAPERLESS_STATIC_URL = "/paperless/";
 
-      PAPERLESS_CONSUMPTION_DIR = "/mnt/paperless/consume";
-      PAPERLESS_DATA_DIR = "/mnt/paperless/data";
-      PAPERLESS_MEDIA_ROOT = "/mnt/paperless/media";
-      PAPERLESS_STATICDIR = "/mnt/paperless/static";
+      # PAPERLESS_CONSUMPTION_DIR = "/mnt/paperless/consume";
+      # PAPERLESS_DATA_DIR = "/mnt/paperless/data";
+      # PAPERLESS_MEDIA_ROOT = "/mnt/paperless/media";
+      # PAPERLESS_STATICDIR = "/mnt/paperless/static";
 
       PAPERLESS_ADMIN_USER = builtins.readFile config.sops.secrets."paperless/admin/username".path;
       PAPERLESS_ADMIN_MAIL = builtins.readFile config.sops.secrets."paperless/admin/email".path;
       PAPERLESS_ADMIN_PASSWORD = builtins.readFile config.sops.secrets."paperless/admin/password".path;
     };
   };
-  services.homepage-dashboard = {
-    enable = true;
-    listenPort = 8082;
-    # openFirewall = true;
-    settings = {
-      "base" = "http://0.0.0.0/homepage";
-    };
-  };
+  # services.homepage-dashboard = {
+  #   enable = true;
+  #   listenPort = 8082;
+  #   # openFirewall = true;
+  #   settings = {
+  #     "base" = "http://0.0.0.0/homepage";
+  #   };
+  # };
   services.transmission = {
     enable = true;
     # openFirewall = true; #INFO: we use traefik
