@@ -257,6 +257,7 @@
   };
   # reverse proxy
   services.traefik = {
+    # enable = false;
     enable = true;
     staticConfigOptions = {
       api = {
@@ -322,17 +323,23 @@
             middlewares = [ "strip-paperless-prefix" ];
           };
 
+          sonarr-router = {
+            rule = "PathPrefix(`/sonarr`)";
+            service = "sonarr-service";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-sonarr-prefix" ];
+          };
+
           transmission-router = {
             rule = "PathPrefix(`/transmission`)";
             service = "transmission-service";
             entryPoints = [ "web" ];
-            # middlewares = [ "strip-transmission-prefix" ];
           };
-          homepage-router = {
-            rule = "PathPrefix(`/homepage`)";
-            service = "homepage-service";
+          homarr-router = {
+            rule = "PathPrefix(`/homarr')";
+            service = "homarr-service";
             entryPoints = [ "web" ];
-            middlewares = [ "strip-homepage-prefix" ];
+            # middlewares = [ "strip-homarr-prefix" ];
           };
         };
 
@@ -367,13 +374,18 @@
             ];
           };
 
+          sonarr-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:8989"; }
+            ];
+          };
           transmission-service = {
             loadBalancer.servers = [
               { url = "http://0.0.0.0:9091"; }
             ];
           };
 
-          homepage-service = {
+          homarr-service = {
             loadBalancer.servers = [
               { url = "http://0.0.0.0:7575"; }
             ];
@@ -401,13 +413,17 @@
             stripPrefix.prefixes = [ "/paperless" ];
           };
 
+          strip-sonarr-prefix = {
+            stripPrefix.prefixes = [ "/sonarr" ];
+          };
+
           strip-transmission-prefix = {
             stripPrefix.prefixes = [ "/transmission" ];
           };
 
           #WARN: not working
-          strip-homepage-prefix = {
-            stripPrefix.prefixes = [ "/homepage" ];
+          strip-homarr-prefix = {
+            stripPrefix.prefixes = [ "/homarr" ];
           };
         };
       };
@@ -444,6 +460,7 @@
       port = 9999;
     }
   ];
+
   services.nextcloud = {
     enable = true;
     hostName = meta.hostname;
@@ -470,6 +487,7 @@
   };
 
   # media org tool (movies)
+  # 7878
   services.radarr = {
     enable = true;
     openFirewall = true;
@@ -477,6 +495,7 @@
   };
 
   # media org tool (tv shows)
+  # port 8989
   services.sonarr = {
     enable = true;
     openFirewall = true;
@@ -491,6 +510,7 @@
   };
 
   # media org tool (music)
+  # 8686
   services.lidarr = {
     enable = true;
     openFirewall = true;
@@ -498,6 +518,7 @@
   };
 
   # usenet management tool
+  # 9696
   services.prowlarr = {
     enable = true;
     openFirewall = true;
@@ -607,6 +628,7 @@
         80
         8080 # traefik dashboard
         27015 # factorio
+        7575 # homarr
       ];
     };
   };
