@@ -355,9 +355,22 @@
             service = "prowlarr-service";
             entryPoints = [ "web" ];
           };
+
           immich-router = {
             rule = "Host(`immich.homecloud.lan`)";
             service = "immich-service";
+            entryPoints = [ "web" ];
+          };
+
+          grafana-router = {
+            rule = "Host(`grafana.homecloud.lan`)";
+            service = "grafana-service";
+            entryPoints = [ "web" ];
+          };
+
+          prometheus-router = {
+            rule = "Host(`prometheus.homecloud.lan`)";
+            service = "prometheus-service";
             entryPoints = [ "web" ];
           };
         };
@@ -371,7 +384,7 @@
 
           gitea-service = {
             loadBalancer.servers = [
-              { url = "http://0.0.0.0:3000"; }
+              { url = "http://0.0.0.0:3001"; }
             ];
           };
 
@@ -432,6 +445,18 @@
               { url = "http://0.0.0.0:2283"; }
             ];
           };
+
+          grafana-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:4010"; }
+            ];
+          };
+
+          prometheus-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:4011"; }
+            ];
+          };
         };
 
         middlewares = {
@@ -467,6 +492,7 @@
     enable = true;
     settings = {
       # server.ROOT_URL = "http://0.0.0.0/gitea/";
+      server.HTTP_PORT = 3001;
     };
   };
   environment.etc."nextcloud-admin-pass".text =
@@ -554,13 +580,16 @@
   # dashboard
   services.grafana = {
     enable = true;
+    settings.server = {
+      http_port = 4010;
+    };
     # openFirewall = true;
   };
 
   # metric gathering
   services.prometheus = {
     enable = true;
-    # openFirewall = true;
+    port = 4011;
   };
   # systemd.services.paperless = {
   #   wants = [ "mnt-paperless.mount" ];
