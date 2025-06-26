@@ -244,7 +244,7 @@
       homarr = {
         image = "ghcr.io/homarr-labs/homarr:latest";
         ports = [ "7575:7575" ];
-        extraOptions = [ "--network=host" ]; # TODO: check for traefik
+        # extraOptions = [ "--network=host" ]; # TODO: check for traefik
         environment = {
           SECRET_ENCRYPTION_KEY = builtins.readFile config.sops.secrets."docker/homarr/enc_key".path;
         };
@@ -289,24 +289,22 @@
       http = {
         routers = {
           n8n-router = {
-            rule = "PathPrefix(`/n8n`)";
+            rule = "Host(`n8n.homecloud.lan`)";
             service = "n8n-service";
             entryPoints = [ "web" ];
-            middlewares = [ "strip-n8n-prefix" ];
           };
 
           gitea-router = {
-            rule = "PathPrefix(`/gitea`)";
+            rule = "Host(`gitea.homecloud.lan`)";
             service = "gitea-service";
             entryPoints = [ "web" ];
-            middlewares = [ "strip-gitea-prefix" ];
           };
 
           home-assistant-router = {
-            rule = "PathPrefix(`/home`)";
+            rule = "Host(`/ha.homecloud.lan`)";
             service = "home-assistant-service";
             entryPoints = [ "web" ];
-            middlewares = [ "strip-home-assistant-prefix" ];
+            # middlewares = [ "strip-home-assistant-prefix" ];
           };
 
           nextcloud-router = {
@@ -317,29 +315,50 @@
           };
 
           paperless-router = {
-            rule = "PathPrefix(`/paperless`)";
+            rule = "Host(`paperless.homecloud.lan`)";
             service = "paperless-service";
             entryPoints = [ "web" ];
-            middlewares = [ "strip-paperless-prefix" ];
-          };
-
-          sonarr-router = {
-            rule = "PathPrefix(`/sonarr`)";
-            service = "sonarr-service";
-            entryPoints = [ "web" ];
-            middlewares = [ "strip-sonarr-prefix" ];
           };
 
           transmission-router = {
-            rule = "PathPrefix(`/transmission`)";
+            rule = "Host(`transmission.homecloud.lan`)";
             service = "transmission-service";
             entryPoints = [ "web" ];
           };
+
+          sonarr-router = {
+            rule = "Host(`sonarr.homecloud.lan`)";
+            service = "sonarr-service";
+            entryPoints = [ "web" ];
+          };
+
+          radarr-router = {
+            rule = "Host(`radarr.homecloud.lan`)";
+            service = "radarr-service";
+            entryPoints = [ "web" ];
+          };
+
           homarr-router = {
-            rule = "PathPrefix(`/homarr')";
+            rule = "Host(`homarr.homecloud.lan`)";
             service = "homarr-service";
             entryPoints = [ "web" ];
-            # middlewares = [ "strip-homarr-prefix" ];
+          };
+
+          bazarr-router = {
+            rule = "Host(`bazarr.homecloud.lan`)";
+            service = "bazarr-service";
+            entryPoints = [ "web" ];
+          };
+
+          prowlarr-router = {
+            rule = "Host(`prowlarr.homecloud.lan`)";
+            service = "prowlarr-service";
+            entryPoints = [ "web" ];
+          };
+          immich-router = {
+            rule = "Host(`immich.homecloud.lan`)";
+            service = "immich-service";
+            entryPoints = [ "web" ];
           };
         };
 
@@ -379,6 +398,11 @@
               { url = "http://0.0.0.0:8989"; }
             ];
           };
+          radarr-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:7878"; }
+            ];
+          };
           transmission-service = {
             loadBalancer.servers = [
               { url = "http://0.0.0.0:9091"; }
@@ -390,41 +414,35 @@
               { url = "http://0.0.0.0:7575"; }
             ];
           };
+
+          bazarr-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:6767"; }
+            ];
+          };
+
+          prowlarr-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:9696"; }
+            ];
+          };
+
+          immich-service = {
+            loadBalancer.servers = [
+              { url = "http://0.0.0.0:2283"; }
+            ];
+          };
         };
+
         middlewares = {
-          strip-n8n-prefix = {
-            stripPrefix.prefixes = [ "/n8n" ];
-          };
-
-          strip-gitea-prefix = {
-            stripPrefix.prefixes = [ "/gitea" ];
-          };
-
-          strip-home-assistant-prefix = {
-            stripPrefix.prefixes = [ "/home" ];
-          };
 
           strip-nextcloud-prefix = {
             stripPrefix.prefixes = [ "/nextcloud" ];
           };
 
-          #WARN: smb issues
-          strip-paperless-prefix = {
-            stripPrefix.prefixes = [ "/paperless" ];
-          };
-
-          strip-sonarr-prefix = {
-            stripPrefix.prefixes = [ "/sonarr" ];
-          };
-
-          strip-transmission-prefix = {
-            stripPrefix.prefixes = [ "/transmission" ];
-          };
-
-          #WARN: not working
-          strip-homarr-prefix = {
-            stripPrefix.prefixes = [ "/homarr" ];
-          };
+          #   strip-transmission-prefix = {
+          #     stripPrefix.prefixes = [ "/transmission" ];
+          #   };
         };
       };
     };
@@ -443,12 +461,12 @@
   systemd.services.n8n.environment = {
     N8N_SECURE_COOKIE = "false";
     N8N_LISTEN_ADDRESS = "0.0.0.0";
-    N8N_PATH = "/n8n";
+    # N8N_PATH = "/n8n";
   };
   services.gitea = {
     enable = true;
     settings = {
-      server.ROOT_URL = "http://0.0.0.0/gitea/";
+      # server.ROOT_URL = "http://0.0.0.0/gitea/";
     };
   };
   environment.etc."nextcloud-admin-pass".text =
@@ -490,7 +508,7 @@
   # 7878
   services.radarr = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false;
     # dataDir = "";
   };
 
@@ -498,14 +516,14 @@
   # port 8989
   services.sonarr = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false;
     # dataDir = "";
   };
 
   # subtitles
   services.bazarr = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false;
     listenPort = 6767;
   };
 
@@ -513,7 +531,7 @@
   # 8686
   services.lidarr = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false;
     # dataDir = "";
   };
 
@@ -521,13 +539,13 @@
   # 9696
   services.prowlarr = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false;
   };
 
   # goodles photos like
   services.immich = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false;
     port = 2283;
     settings = { };
     # mediaLocation = "";
@@ -563,8 +581,8 @@
     address = "localhost";
     settings = {
       # https://docs.paperless-ngx.com/configuration/
-      PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
-      PAPERLESS_STATIC_URL = "/paperless/";
+      # PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
+      # PAPERLESS_STATIC_URL = "/paperless/";
 
       # PAPERLESS_CONSUMPTION_DIR = "/mnt/paperless/consume";
       # PAPERLESS_DATA_DIR = "/mnt/paperless/data";
@@ -576,17 +594,10 @@
       PAPERLESS_ADMIN_PASSWORD = builtins.readFile config.sops.secrets."paperless/admin/password".path;
     };
   };
-  # services.homepage-dashboard = {
-  #   enable = true;
-  #   listenPort = 8082;
-  #   # openFirewall = true;
-  #   settings = {
-  #     "base" = "http://0.0.0.0/homepage";
-  #   };
-  # };
+
   services.transmission = {
     enable = true;
-    # openFirewall = true; #INFO: we use traefik
+    openFirewall = false; # INFO: we use traefik
     openPeerPorts = true;
     settings = {
       rpc-port = 9091;
@@ -628,7 +639,6 @@
         80
         8080 # traefik dashboard
         27015 # factorio
-        7575 # homarr
       ];
     };
   };
