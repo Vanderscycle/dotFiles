@@ -18,6 +18,7 @@
   imports = [
     ./hardware-configuration.nix
     ./fstab.nix
+    ./traefik.nix
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -84,6 +85,7 @@
     vim
     sysz
     samba
+    openssl
   ];
 
   # secrets
@@ -256,222 +258,6 @@
     };
   };
   # reverse proxy
-  services.traefik = {
-    # enable = false;
-    enable = true;
-    staticConfigOptions = {
-      api = {
-        dashboard = true; # ip:8080
-        insecure = true;
-      };
-      log = {
-        level = "DEBUG";
-        format = "json";
-      };
-      entryPoints = {
-        web = {
-          address = ":80";
-          # http.redirections.entryPoint = {
-          #   to = "websecure";
-          #   scheme = "https";
-          # };
-        };
-        websecure = {
-          address = ":443";
-        };
-        traefik = {
-          address = ":8080";
-        };
-      };
-    };
-
-    dynamicConfigOptions = {
-      http = {
-        routers = {
-          n8n-router = {
-            rule = "Host(`n8n.homecloud.lan`)";
-            service = "n8n-service";
-            entryPoints = [ "web" ];
-          };
-
-          gitea-router = {
-            rule = "Host(`gitea.homecloud.lan`)";
-            service = "gitea-service";
-            entryPoints = [ "web" ];
-          };
-
-          home-assistant-router = {
-            rule = "Host(`/ha.homecloud.lan`)";
-            service = "home-assistant-service";
-            entryPoints = [ "web" ];
-            # middlewares = [ "strip-home-assistant-prefix" ];
-          };
-
-          nextcloud-router = {
-            rule = "PathPrefix(`/nextcloud`)";
-            service = "nextcloud-service";
-            entryPoints = [ "web" ];
-            middlewares = [ "strip-nextcloud-prefix" ];
-          };
-
-          paperless-router = {
-            rule = "Host(`paperless.homecloud.lan`)";
-            service = "paperless-service";
-            entryPoints = [ "web" ];
-          };
-
-          transmission-router = {
-            rule = "Host(`transmission.homecloud.lan`)";
-            service = "transmission-service";
-            entryPoints = [ "web" ];
-          };
-
-          sonarr-router = {
-            rule = "Host(`sonarr.homecloud.lan`)";
-            service = "sonarr-service";
-            entryPoints = [ "web" ];
-          };
-
-          radarr-router = {
-            rule = "Host(`radarr.homecloud.lan`)";
-            service = "radarr-service";
-            entryPoints = [ "web" ];
-          };
-
-          homarr-router = {
-            rule = "Host(`homarr.homecloud.lan`)";
-            service = "homarr-service";
-            entryPoints = [ "web" ];
-          };
-
-          bazarr-router = {
-            rule = "Host(`bazarr.homecloud.lan`)";
-            service = "bazarr-service";
-            entryPoints = [ "web" ];
-          };
-
-          prowlarr-router = {
-            rule = "Host(`prowlarr.homecloud.lan`)";
-            service = "prowlarr-service";
-            entryPoints = [ "web" ];
-          };
-
-          immich-router = {
-            rule = "Host(`immich.homecloud.lan`)";
-            service = "immich-service";
-            entryPoints = [ "web" ];
-          };
-
-          grafana-router = {
-            rule = "Host(`grafana.homecloud.lan`)";
-            service = "grafana-service";
-            entryPoints = [ "web" ];
-          };
-
-          prometheus-router = {
-            rule = "Host(`prometheus.homecloud.lan`)";
-            service = "prometheus-service";
-            entryPoints = [ "web" ];
-          };
-        };
-
-        services = {
-          n8n-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:5678"; }
-            ];
-          };
-
-          gitea-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:3001"; }
-            ];
-          };
-
-          home-assistant-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:8123"; }
-            ];
-          };
-
-          nextcloud-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:9999"; }
-            ];
-          };
-
-          paperless-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:28981"; }
-            ];
-          };
-
-          sonarr-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:8989"; }
-            ];
-          };
-          radarr-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:7878"; }
-            ];
-          };
-          transmission-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:9091"; }
-            ];
-          };
-
-          homarr-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:7575"; }
-            ];
-          };
-
-          bazarr-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:6767"; }
-            ];
-          };
-
-          prowlarr-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:9696"; }
-            ];
-          };
-
-          immich-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:2283"; }
-            ];
-          };
-
-          grafana-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:4010"; }
-            ];
-          };
-
-          prometheus-service = {
-            loadBalancer.servers = [
-              { url = "http://0.0.0.0:4011"; }
-            ];
-          };
-        };
-
-        middlewares = {
-
-          strip-nextcloud-prefix = {
-            stripPrefix.prefixes = [ "/nextcloud" ];
-          };
-
-          #   strip-transmission-prefix = {
-          #     stripPrefix.prefixes = [ "/transmission" ];
-          #   };
-        };
-      };
-    };
-  };
 
   systemd.services.traefik.serviceConfig = {
     ReadWritePaths = [ "/var/lib/traefik" ];
@@ -515,9 +301,12 @@
       dbtype = "sqlite";
     };
     settings = {
-      trusted_domains = [ "192.168.4.129" ];
-      overwrite.cli.url = "http://192.168.4.129/nextcloud";
-      overwritewebroot = "/nextcloud";
+      trusted_domains = [
+        "192.168.4.129"
+        "nextcloud.homecloud.lan"
+      ];
+      # overwrite.cli.url = "http://192.168.4.129/nextcloud";
+      # overwritewebroot = "/nextcloud";
     };
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps)
@@ -530,6 +319,13 @@
     extraAppsEnable = true;
   };
 
+  services.uptime-kuma = {
+    enable = true;
+    appriseSupport = true;
+    settings = {
+      PORT = "4100";
+    };
+  };
   # media org tool (movies)
   # 7878
   services.radarr = {
@@ -637,7 +433,7 @@
 
   services.home-assistant = {
     enable = true;
-    openFirewall = true;
+    openFirewall = false;
     config = {
       use_x_forwarded_for = true;
       trusted_proxies = [
