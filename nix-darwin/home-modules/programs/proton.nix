@@ -19,6 +19,7 @@
         proton-pass
         protonmail-bridge # for email
         pass-wayland
+        protonvpn-gui
       ];
     };
   };

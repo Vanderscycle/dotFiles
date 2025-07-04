@@ -59,12 +59,13 @@
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
   };
 
+  # evaluation warning: henri profile: You have set either `nixpkgs.config` or `nixpkgs.overlays` while using `home-manager.useGlobalPkgs`.
   nixpkgs = {
     hostPlatform = "x86_64-linux";
     config.allowUnfree = true;
     config.permittedInsecurePackages = [
       "electron-32.3.3"
-      "beekeeper-studio-5.2.9"
+      "beekeeper-studio-5.2.12"
     ];
   };
 
@@ -120,15 +121,13 @@
         enable = true;
         user = "${username}";
       };
+      gdm = {
+        enable = true;
+        wayland = true;
+      };
     };
     xserver = {
       enable = true;
-      displayManager = {
-        gdm = {
-          enable = true;
-          wayland = true;
-        };
-      };
     };
   };
   security.sudo.extraConfig = ''

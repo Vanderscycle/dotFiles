@@ -6,8 +6,8 @@
     staticConfigOptions = {
       tls.certificates = [
         {
-          certFile = "/etc/ssl/traefik/selfsigned.crt";
-          keyFile = "/etc/ssl/traefik/selfsigned.key";
+          certFile = "${builtins.path { path = ./cert-key.pem; }}";
+          keyFile = "${builtins.path { path = ./fullchain.pem; }}";
         }
       ];
       api = {

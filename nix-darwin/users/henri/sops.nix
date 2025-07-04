@@ -29,6 +29,9 @@ in
       "emacs/llm/closedai" = {
         owner = "henri";
       };
+      "certs/ca_pem_base64" = {
+        owner = "root";
+      };
       # INFO: for values to be available throughout the config your must declare them
       "yubico/u2f_keys" = {
       };

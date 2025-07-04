@@ -49,11 +49,6 @@
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    quadlet-nix = {
-      url = "github:SEIAROTg/quadlet-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -63,7 +58,6 @@
       darwin,
       catppuccin,
       nixvim,
-      quadlet-nix,
       ...
     }:
     {
@@ -109,10 +103,9 @@
           } // inputs;
           modules = [
             ./users/henri/configuration.nix
-            quadlet-nix.nixosModules.quadlet
             home-manager.nixosModules.home-manager
             {
-              # home-manager.useGlobalPkgs = true;
+              home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 inherit inputs;

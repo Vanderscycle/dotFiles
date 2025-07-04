@@ -379,7 +379,6 @@
     settings.server = {
       http_port = 4010;
     };
-    # openFirewall = true;
   };
 
   # metric gathering

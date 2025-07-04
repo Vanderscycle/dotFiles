@@ -21,25 +21,9 @@
     ../../home-modules/window-managers/hyprland
     # bar
     ../../home-modules/status-bars/waybar
-    inputs.quadlet-nix.homeManagerModules.quadlet
   ];
 
   # TODO: move this to a vm called homelab monolith add factorio, nextcloud
-  systemd.user.startServices = "sd-switch";
-  virtualisation.quadlet.containers = {
-    echo-server = {
-      autoStart = true;
-      serviceConfig = {
-        RestartSec = "10";
-        Restart = "always";
-      };
-      containerConfig = {
-        image = "docker.io/mendhak/http-https-echo:31";
-        publishPorts = [ "127.0.0.1:8080:8080" ];
-        userns = "keep-id";
-      };
-    };
-  };
   # services
   dunst.enable = lib.mkForce false;
   fcitx.enable = true; # chinese fonts are super pixels
@@ -120,7 +104,7 @@
       KUBECONFIG = "$HOME/.kube/homelab-kubeconfig.yaml";
     };
   };
-  discord.enable = true;
+  # discord.enable = true;
   fish.enable = true;
   fuzzel.enable = true;
   git = {
