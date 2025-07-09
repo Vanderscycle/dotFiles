@@ -104,7 +104,7 @@
       KUBECONFIG = "$HOME/.kube/homelab-kubeconfig.yaml";
     };
   };
-  # discord.enable = true;
+  discord.enable = true;
   fish.enable = true;
   fuzzel.enable = true;
   git = {

@@ -19,7 +19,8 @@
     ./hardware-configuration.nix
     ./fstab.nix
     ./traefik.nix
-    inputs.sops-nix.nixosModules.sops
+    ./sops.nix
+    ./services
   ];
 
   nix = {
@@ -83,95 +84,11 @@
     sops
     git
     vim
+    tree
     sysz
     samba
     openssl
   ];
-
-  # secrets
-  # if you change the secret strucutre you must first create the new secret and then rebuild and then change its reference in the config
-  sops = {
-    defaultSopsFile = ./secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-
-    age.keyFile = "/home/${meta.username}/.config/sops/age/keys.txt";
-    secrets = {
-      # factorio
-      "factorio/game-password" = {
-        owner = meta.username;
-      };
-      "factorio/token" = {
-        owner = meta.username;
-      };
-      "factorio/admin" = {
-        owner = meta.username;
-      };
-      # paperless
-      "paperless/admin/password" = {
-        owner = meta.username;
-      };
-      "paperless/admin/username" = {
-        owner = meta.username;
-      };
-      "paperless/admin/email" = {
-        owner = meta.username;
-      };
-      # smb root user
-      "home-server/rice/password" = {
-        owner = "root";
-      };
-      "home-server/rice/user" = {
-        owner = "root";
-      };
-      # docker
-      "docker/homarr/enc_key" = {
-        owner = "root";
-      };
-      # smb systemd user
-      "home-server/systemd/password" = {
-        owner = meta.username;
-      };
-      "home-server/systemd/user" = {
-        owner = meta.username;
-      };
-      # nextcloud
-      "nextcloud/admin/password" = {
-        owner = "root";
-      };
-    };
-  };
-  systemd.services."smbcreds_fam_root" = {
-    script = ''
-      echo "user=$(cat ${config.sops.secrets."home-server/rice/user".path})" > /root/smbcreds_fam
-      echo "password=$(cat ${config.sops.secrets."home-server/rice/password".path})" >> /root/smbcreds_fam
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      WorkingDirectory = "/root/";
-    };
-    # Make it run immediately after each system rebuild
-    wantedBy = [ "multi-user.target" ];
-  };
-
-  # TODO: change the user
-  systemd.services."smbcreds_fam_general" = {
-    script = ''
-      echo "user=$(cat ${
-        config.sops.secrets."home-server/systemd/user".path
-      })" > "/home/${meta.username}/smbcreds_fam_user"
-      echo "password=$(cat ${
-        config.sops.secrets."home-server/systemd/password".path
-      })" >> "/home/${meta.username}/smbcreds_fam_user"
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      User = meta.username;
-      WorkingDirectory = "/home/${meta.username}";
-    };
-    # Make it run immediately after each system rebuild
-    wantedBy = [ "multi-user.target" ];
-  };
 
   systemd.tmpfiles.rules = [
     # Copy/Link the save file (use either C or L)
@@ -272,13 +189,17 @@
   systemd.services.n8n.environment = {
     N8N_SECURE_COOKIE = "false";
     N8N_LISTEN_ADDRESS = "0.0.0.0";
-    # N8N_PATH = "/n8n";
+    N8N_METRICS = "true"; # prometheus
+    # N8N_PATH = "/n8n"; # base url
   };
   services.gitea = {
     enable = true;
     settings = {
       # server.ROOT_URL = "http://0.0.0.0/gitea/";
       server.HTTP_PORT = 3001;
+      metrics = {
+        ENABLED = true;
+      };
     };
   };
   environment.etc."nextcloud-admin-pass".text =
@@ -385,38 +306,27 @@
   services.prometheus = {
     enable = true;
     port = 4011;
-  };
-  # systemd.services.paperless = {
-  #   wants = [ "mnt-paperless.mount" ];
-  #   after = [ "mnt-paperless.mount" ];
-  #   serviceConfig = {
-  #     ProtectSystem = "no";
-  #     ProtectHome = false;
-  #     PrivateTmp = false;
-  #     PrivateDevices = false;
-  #     ReadOnlyPaths = [ ];
-  #     ReadWritePaths = [ "/mnt/paperless" ];
-  #   };
-  # };
-
-  services.paperless = {
-    enable = true;
-    port = 28981;
-    address = "localhost";
-    settings = {
-      # https://docs.paperless-ngx.com/configuration/
-      # PAPERLESS_FORCE_SCRIPT_NAME = "/paperless";
-      # PAPERLESS_STATIC_URL = "/paperless/";
-
-      # PAPERLESS_CONSUMPTION_DIR = "/mnt/paperless/consume";
-      # PAPERLESS_DATA_DIR = "/mnt/paperless/data";
-      # PAPERLESS_MEDIA_ROOT = "/mnt/paperless/media";
-      # PAPERLESS_STATICDIR = "/mnt/paperless/static";
-
-      PAPERLESS_ADMIN_USER = builtins.readFile config.sops.secrets."paperless/admin/username".path;
-      PAPERLESS_ADMIN_MAIL = builtins.readFile config.sops.secrets."paperless/admin/email".path;
-      PAPERLESS_ADMIN_PASSWORD = builtins.readFile config.sops.secrets."paperless/admin/password".path;
+    exporters.node = {
+      enable = true;
     };
+    scrapeConfigs = [
+      {
+        job_name = "n8n";
+        static_configs = [
+          {
+            targets = [ "n8n.homecloud.lan" ];
+          }
+        ];
+      }
+      {
+        job_name = "gitea";
+        static_configs = [
+          {
+            targets = [ "gitea.homecloud.lan" ];
+          }
+        ];
+      }
+    ];
   };
 
   services.transmission = {
@@ -447,9 +357,6 @@
   networking = {
     hosts = {
       "192.168.4.129" = [
-        "nextcloud.local"
-        "gitea.local"
-        "n8n.local"
       ];
     };
     defaultGateway = "192.168.4.1"; # Point to Proxmox
