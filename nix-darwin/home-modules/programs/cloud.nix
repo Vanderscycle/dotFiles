@@ -24,6 +24,7 @@
       (lib.mkIf config.awscli.enable [
         ssm-session-manager-plugin
         awscli2
+        aws-sam-cli
         rclone
       ])
 
