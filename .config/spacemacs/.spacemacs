@@ -878,47 +878,46 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
           ("@bug" . ?b)
           ("@feature" . ?u)
           ("@spike" . ?j)
-          (:endgroup . nil)
-
-          ;; Ticket flags
-          ("@write_future_ticket" . ?w)
           ("@emergency" . ?e)
-          ("@research" . ?r)
-
-          ;; Meeting types
-          (:startgroup . nil)
-          ("sprint_planning" . ?i)
-          ("sprint_retro" . ?s)
           (:endgroup . nil)
 
           ;; Code TODOs tags
-          ("QA" . ?q)
           ("backend" . ?k)
-          ("broken_code" . ?c)
           ("frontend" . ?f)
           ("devops" . ?d)
 
-          ;; Special tags
-          ("CRITICAL" . ?x)
-          ("obstacle" . ?o)
-
-          ;; Meeting tags
-          ("general" . ?l)
-          ("meeting" . ?m)
-          ("misc" . ?z)
+          ;; tasks TODOs
+          (:startgroup . nil)
+          ("homelab" . ?h)
+          ("3d_printer" . ?3)
+          ("maintenance" . ?m)
           ("planning" . ?p)
+          ("workout" . ?w)
+          (:endgroup . nil)
 
-          ;; Work Log Tags
-          ("accomplishment" . ?a)
+          ;; chinese tags
+          (:startgroup . nil)
+          ("noun" . ?n)
+          ("verb" . ?v)
+          ("adjective" . ?a)
+          ("adverb" . ?z)
+          (:endgroup . nil)
+
           ))
   (setq org-tag-faces
         '(
-          ("planning"  . (:foreground "#cba6f7" :weight bold))  ; Mauve
-          ("backend"   . (:foreground "#89b4fa" :weight bold))  ; Blue
-          ("frontend"  . (:foreground "#a6e3a1" :weight bold))  ; Green
-          ("QA"        . (:foreground "#fab387" :weight bold))  ; Peach
-          ("meeting"   . (:foreground "#f9e2af" :weight bold))  ; Yellow
-          ("CRITICAL"  . (:foreground "#f38ba8" :weight bold))  ; Red
+          ("@bug"        . (:foreground "#f38ba8" :background "#313244" :weight bold))  ; Red on surface0
+          ("@feature"    . (:foreground "#a6e3a1" :background "#313244" :weight bold))  ; Green on surface0
+          ("@spike"      . (:foreground "#cba6f7" :background "#313244" :weight bold))  ; Mauve on surface0
+          ("@emergency"  . (:foreground "#fab387" :background "#45475a" :weight bold :box t))  ; Peach on surface1 with box
+          ("homelab"     . (:foreground "#89b4fa" :weight bold))  ; Blue
+          ("3d_printer"  . (:foreground "#a6e3a1" :weight bold))  ; Green
+          ("maintenance" . (:foreground "#f9e2af" :weight bold))  ; Yellow
+          ("planning"    . (:foreground "#f38ba8" :weight bold))  ; Red
+          ("noun"        . (:foreground "#fab387" :weight bold))  ; Peach
+          ("verb"        . (:foreground "#cba6f7" :weight bold))  ; Mauve
+          ("adjective"   . (:foreground "#94e2d5" :weight bold))  ; Teal
+          ("adverb"      . (:foreground "#f5c2e7" :weight bold))  ; Pink
           ))
   ;; --- org-modern ---
   (setq org-adapt-indentation t
@@ -1026,7 +1025,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (defun connect-macos()
     "Open a remote folder using TRAMP in Dired."
     (interactive)
-    (dired "/ssh:macos@192.168.4.245:/"))
+    (dired "/ssh:mac@192.168.4.167:/"))
 
   (defun connect-pi ()
     "Open a remote folder using TRAMP in Dired."

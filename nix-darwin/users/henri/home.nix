@@ -38,8 +38,8 @@
       };
       macos = {
         # ssh macos
-        hostname = "192.168.4.245";
-        user = "macos";
+        hostname = "192.168.4.167";
+        user = "mac";
       };
       factorio = {
         # ssh factorio
