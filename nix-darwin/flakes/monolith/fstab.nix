@@ -48,7 +48,7 @@
       "dir_mode=0770"
       "file_mode=0770"
       "uid=transmission"
-      "gid=transmission"
+      "gid=smbaccess"
       "defaults"
     ];
   };

@@ -58,6 +58,11 @@
     #useXkbConfig = true; # use xkb.options in tty.
   };
   users.groups.smbaccess = { };
+
+  users.users.radarr = {
+    isNormalUser = false;
+    extraGroups = [ "smbaccess" ];
+  };
   users.users.nextcloud = {
     isNormalUser = false;
     extraGroups = [ "smbaccess" ];
@@ -335,7 +340,9 @@
     openPeerPorts = true;
     settings = {
       rpc-port = 9091;
-      rpc-bind-addres = "0.0.0.0";
+      rpc-bind-address = "0.0.0.0"; # fix typo: rpc-bind-addres -> rpc-bind-address
+      rpc-host-whitelist = "transmission.homecloud.lan,localhost,127.0.0.1";
+      rpc-host-whitelist-enabled = true;
       download-dir = "/mnt/transmission";
     };
   };
