@@ -1,0 +1,116 @@
+* Nix for all
+
+** Nix
+
+Nix allows for declarative machine configuration, similar to Docker. Its learning curve is abrupt, its documentation poor, and its users are zany.
+This is going to be incomplete and confusing, but I hope it plants the seeds of learning and encourages you to try it. For it at first tastes bitter, but gives you such control the longer you try.
+
+*** Installation
+**** Macos
+We will install what's called ~Nix-Darwin~
+[[https://github.com/nix-darwin/nix-darwin][GitHub - nix-darwin/nix-darwin: nix modules for darwin]]
+
+But first we must install nix, so we will do so using, not the nix official repo, but from our friends at determinate systems.
+[[https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#determinate-nix-installer][GitHub - DeterminateSystems/nix-installer: Install Nix and flakes with the fa...]]
+#+begin_src zsh
+# When asked if you want to use the determinate version say no, as we want to use the NixOS official version.
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
+  sh -s -- install
+#+end_src
+
+From that point on, nix is on your system and you can already use it (if you open a new shell)
+#+begin_src zsh
+nix shell nixpkgs#cowsay
+#+end_src
+
+***** Configuring system
+We will be using flakes as they are the nix equivalent of a ~Dockerfile~ and can provide multiple outputs.
+
+#+begin_src zsh
+# To use Nixpkgs unstable:
+nix flake init -t nix-darwin/master
+#+end_src
+
+To apply the configuration
+#+begin_src
+nix run nix-darwin -- switch --flake .
+#+end_src
+
+You see the list of what nix-Darwin allows you to configure
+[[https://nix-darwin.github.io/nix-darwin/manual/index.html][nix-darwin Configuration Options]]
+For further customization you can use home-manager to configure your dotfiles
+https://nix-community.github.io/home-manager/nix-darwin-options.xhtml
+
+***** Demo
+Let's use the example we created
+ #+begin_src zsh
+ ssh macos@192.168.4.245
+ rsync -avz ~/Documents/dotFiles/nix-learning/macos/ macos@192.168.4.245:~/Documents/
+ #+end_src
+
+#+begin_src zsh
+nix run nix-darwin -- switch --flake .
+# once ran once
+darwin-rebuild switch --flake . # --dry-run
+#+end_src
+
+One more quick demo of the on the fly pattern
+#+begin_src zsh
+nix shell nixpkgs#fzf nixpkgs#neovim
+nvim "$(fzf)"
+#+end_src
+
+You can use nix like a devcontainer
+#+begin_src zsh
+nix develop
+nix develop .#anotherEnv
+#+end_src
+
+To rollback
+#+begin_src zsh
+nix profile history --profile /nix/var/nix/profiles/system
+# or
+darwin-rebuild switch --list-generations
+# to undo latest
+darwin-rebuild switch --rollback
+# or revert to a specific version
+darwin-rebuild switch --switch-generation 1
+#+end_src
+
+***** Update
+#+begin_src bash
+nix flake update
+#+end_src
+*** limitation
+- not able to declare containers using ~virtualisation~ like nixos
+- not all packages are compatibles with x86_64-darwin or aarch_64-darwin
+- no systemd which is a big bummer
+
+**** Video references
+[[https://www.youtube.com/watch?v=Z8BL8mdzWHI][Nix is my favorite package manager to use on macOS - YouTube]]
+[[https://www.youtube.com/watch?v=iU7B76NTr2I][Nix Darwin Turned My Mac into a Fully Automated Machine - YouTube]]
+
+*** Searching/using packages
+Nixos has an extensive package manager repository
+[[https://search.nixos.org/packages][NixOS Search]]
+
+*** Going Beyond
+Split configuration into smaller files instead of a single massive configuration.nix
+[[https://www.youtube.com/watch?v=vYc6IzKvAJQ][Modularize NixOS and Home Manager | Great Practices - YouTube]]
+
+Configuring your dotfiles using home manager directly
+[[https://www.youtube.com/watch?v=FcC2dzecovw][Nix home-manager tutorial: Declare your entire home directory - YouTube]]
+
+References:
+[[https://nix-community.github.io/home-manager/nixos-options.xhtml][Appendix B. NixOS Configuration Options]]
+[[https://nix-community.github.io/home-manager/nix-darwin-options.xhtml][Appendix C. nix-darwin Configuration Options]]
+
+***** TODO show how to use determinate system flakes and use the outputs
+***** TODO show how you can use nix to sync your dotfiles across macos/Linux
+Using the vms located
+***** DONE show how you can revert back previous generation
+      CLOSED: [2025-05-02 Fri 07:59]
+***** DONE show you can have multiple version of certain programs
+      CLOSED: [2025-05-02 Fri 07:59]
+      - State "DONE"       from "TODO"       [2025-05-02 Fri 07:59]
+     [[https://flakehub.com/flakes][FlakeHub]]

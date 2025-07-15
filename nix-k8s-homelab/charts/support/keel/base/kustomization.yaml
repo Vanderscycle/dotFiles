@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: keel
+
+helmCharts:
+  - name: keel
+    version: 1.0.3
+    repo: https://charts.keel.sh
+    valuesFile: values.yaml
+    namespace: keel
+    releaseName: support

@@ -1,0 +1,134 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+title: solution-architect-playbook
+#+date: <2024-08-04 Sun>
+#+author: Henri Vandersleyen
+#+email: henri-vandersleyen@protonmail.com
+#+language: en
+#+select_tags: export
+#+exclude_tags: noexport
+#+creator: Emacs 29.4 (Org mode 9.6.15)
+#+cite_export:
+
+* AWS - Terraform playbook
+** VPC
+[[../../terraform/modules/aws/vpc][vpc terraform]]
+*** Terraform module
+[[https://github.com/terraform-aws-modules/terraform-aws-vpc][GitHub - terraform-aws-modules/terraform-aws-vpc: Terraform module to create ...]]
+*** References
+[[https://start.jcolemorrison.com/aws-vpc-core-concepts-analogy-guide/][AWS VPC Core Concepts in an Analogy and Guide]]
+[[https://www.freecodecamp.org/news/subnet-cheat-sheet-24-subnet-mask-30-26-27-29-and-other-ip-address-cidr-network-references/][Subnet Cheat Sheet – 24 Subnet Mask, 30, 26, 27, 29, and other IP Address CID...]]
+*** Route Tables
+A route table contains a set of rules, called routes, that determine where network traffic from your subnet or gateway is directed.
+*** Network ACL
+Filter traffic entering and leaving a subnet, are stateless firewalls so rules must be be for both inbound/outbound, and doesn't filter traffic within a subnet.
+Every subnet within a VPC must be assicuated with a NACL however a NACL can be associated with multiple subnets
+*** Security Group
+Act as statefull firewall for individual AWS resources. Unless SG rules are specified they are denied by default.
+More than one SG can be applied to a resources and will be merged at evaluation time.
+** S3
+** Lambda
+** RDS
+** EKS
+** EC2
+***
+** CloudFormation
+** CloudFront
+
+* Terraform addendum
+** Complex variables + dynamic blocks
+
+The input variable
+#+begin_src terraform
+  variable "dynamodb_tables" {
+    default = {}
+    type = map(object({
+      name      = string
+      hash_key  = string
+      range_key = optional(string)
+      attributes = list(object({
+        name = string
+        type = string
+      }))
+      ttl = optional(object({
+        attribute_name = string
+        enabled        = bool
+      }))
+      point_in_time_recovery = bool
+      gsis = optional(list(object({
+        name            = string
+        hash_key        = string
+        range_key       = optional(string)
+        projection_type = optional(string)
+      })), [])
+      deletion_protection_enabled = bool
+    }))
+
+    # INFO: example
+    # dynamodb_tables = {
+    # scheduledMessages = {
+    #   name     = "scheduledMessages"
+    #   hash_key = "id"
+    #   attributes = [
+    #     { name = "id", type = "S" },
+    #     { name = "scheduledFor", type = "N" }
+    #   ]
+    #   ttl = {
+    #     attribute_name = "ttl"
+    #     enabled        = true
+    #   }
+    #   point_in_time_recovery = true
+    #   gsis = [
+    #     { name = "scheduledFor", range_key = "scheduledFor", hash_key = "id", projection_type = "ALL" }
+    #   ]
+    #   deletion_protection_enabled = true
+    # }
+    # }
+    description = "The dynamo table configuration"
+  }
+#+end_src
+
+#+begin_src terraform
+resource "aws_dynamodb_table" "dynamodb_tables" {
+  for_each = local.dynamodb_tables
+
+  name         = each.value.name
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = each.value.hash_key
+  range_key    = try(each.value.range_key, null)
+
+  dynamic "attribute" {
+    for_each = each.value.attributes
+    content { # do not forget the content
+      name = attribute.value.name
+      type = attribute.value.type
+    }
+  }
+
+  dynamic "ttl" {
+    for_each = try(each.value.ttl != null ? [each.value.ttl] : [])
+    content {
+      attribute_name = ttl.value.attribute_name
+      enabled        = ttl.value.enabled
+    }
+  }
+
+  point_in_time_recovery {
+    enabled = each.value.point_in_time_recovery
+  }
+
+  dynamic "global_secondary_index" {
+    for_each = each.value.gsis
+    content {
+      name            = global_secondary_index.value.name
+      hash_key        = global_secondary_index.value.hash_key
+      range_key       = try(global_secondary_index.value.range_key, null)
+      projection_type = global_secondary_index.value.projection_type
+    }
+  }
+
+  deletion_protection_enabled = each.value.deletion_protection_enabled
+}
+#+end_src
