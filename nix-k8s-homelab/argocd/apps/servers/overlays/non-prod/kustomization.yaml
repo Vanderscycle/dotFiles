@@ -1,0 +1,29 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: argocd
+
+resources:
+  - ../../base
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/servers/factorioVanilla/overlays/non-prod
+    target:
+      kind: Application
+      name: factorio-vanilla
+  - patch: |-
+      - op: replace
+        path: /spec/source/repoURL
+        value: git@github.com:Vanderscycle/dotFiles.git
+      - op: replace
+        path: /spec/source/path
+        value: nix-k8s-homelab/charts/servers/factorioSpaceEx/overlays/non-prod
+    target:
+      kind: Application
+      name: factorio-space-ex

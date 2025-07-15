@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# https://artifacthub.io/packages/helm/gabe565/paperless-ngx
+namespace: homeassistant
+# resources:
+  # - secrets
+
+helmCharts:
+  - name: home-assistant
+    version: 0.2.117
+    repo: http://pajikos.github.io/home-assistant-helm-chart
+    valuesFile: values.yaml
+    namespace: homeassistant
+    releaseName: services

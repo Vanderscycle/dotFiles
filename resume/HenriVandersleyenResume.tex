@@ -1,0 +1,325 @@
+%%%%%%%%%%%%%%%%%
+% This is an sample CV template created using altacv.cls
+% (v1.7.2, 28 August 2024) written by LianTze Lim (liantze@gmail.com). Compiles with pdfLaTeX, XeLaTeX and LuaLaTeX.
+%
+%% It may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%%%%%%%%%%%%%%%%
+
+%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
+% \documentclass[10pt,a4paper,normalphoto]{altacv}
+
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+%% AltaCV uses the fontawesome5 and simpleicons packages.
+%% See http://texdoc.net/pkg/fontawesome5 and http://texdoc.net/pkg/simpleicons for full list of symbols.
+
+% Change the page layout if you need to
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+
+% The paracol package lets you typeset columns of text in parallel
+\usepackage{paracol}
+
+% Change the font if you want to, depending on whether
+% you're using pdflatex or xelatex/lualatex
+% WHEN COMPILING WITH XELATEX PLEASE USE
+% xelatex -shell-escape -output-driver="xdvipdfmx -z 0" sample.tex
+\ifxetexorluatex
+  % If using xelatex or lualatex:
+  \setmainfont{Roboto Slab}
+  \setsansfont{Lato}
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  % If using pdflatex:
+  \usepackage[rm]{roboto}
+  \usepackage[defaultsans]{lato}
+  % \usepackage{sourcesanspro}
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
+
+% catppuccin mocha
+\definecolor{Rosewater}{HTML}{f5e0dc}
+\definecolor{Flamingo}{HTML}{f2cdcd}
+\definecolor{Pink}{HTML}{f5c2e7}
+\definecolor{Mauve}{HTML}{cba6f7}
+\definecolor{Red}{HTML}{f38ba8}
+\definecolor{Maroon}{HTML}{eba0ac}
+\definecolor{Peach}{HTML}{fab387}
+\definecolor{Yellow}{HTML}{f9e2af}
+\definecolor{Green}{HTML}{a6e3a1}
+\definecolor{Teal}{HTML}{94e2d5}
+\definecolor{Sky}{HTML}{89dceb}
+\definecolor{Sapphire}{HTML}{74c7ec}
+\definecolor{Blue}{HTML}{89b4fa}
+\definecolor{Lavender}{HTML}{b4befe}
+\definecolor{Text}{HTML}{cdd6f4}
+\definecolor{Subtext1}{HTML}{bac2de}
+\definecolor{Subtext0}{HTML}{a6adc8}
+\definecolor{Overlay2}{HTML}{9399b2}
+\definecolor{Overlay1}{HTML}{7f849c}
+\definecolor{Overlay0}{HTML}{6c7086}
+\definecolor{Surface2}{HTML}{585b70}
+\definecolor{Surface1}{HTML}{45475a}
+\definecolor{Surface0}{HTML}{313244}
+\definecolor{Base}{HTML}{1e1e2e}
+\definecolor{Mantle}{HTML}{181825}
+\definecolor{Crust}{HTML}{11111b}
+
+\colorlet{name}{Text}          % For the primary text color (light tone)
+\colorlet{tagline}{Red}        % A vibrant red tone for taglines
+\colorlet{heading}{Maroon}     % A darker red, for headings
+\colorlet{headingrule}{Peach}  % A warm accent for the heading rule, replacing GoldenEarth
+\colorlet{subheading}{Red}     % A softer red for subheadings
+\colorlet{accent}{Sapphire}    % A cool accent, bright but not overpowering
+\colorlet{emphasis}{Overlay1}  % A subdued grey for emphasis, not too bold
+\colorlet{body}{Subtext1}      % A soft, neutral tone for the body text
+\pagecolor{Base}
+% Change some fonts, if necessary
+\renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+\renewcommand{\personalinfofont}{\footnotesize}
+\renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+\renewcommand{\cvsubsectionfont}{\large\bfseries}
+
+
+% Change the bullets for itemize and rating marker
+% for \cvskill if you want to
+\renewcommand{\cvItemMarker}{{\small\textbullet}}
+\renewcommand{\cvRatingMarker}{\faCircle}
+% ...and the markers for the date/location for \cvevent
+% \renewcommand{\cvDateMarker}{\faCalendar*[regular]}
+% \renewcommand{\cvLocationMarker}{\faMapMarker*}
+
+
+% If your CV/résumé is in a language other than English,
+% then you probably want to change these so that when you
+% copy-paste from the PDF or run pdftotext, the location
+% and date marker icons for \cvevent will paste as correct
+% translations. For example Spanish:
+% \renewcommand{\locationname}{Ubicación}
+% \renewcommand{\datename}{Fecha}
+
+
+%% Use (and optionally edit if necessary) this .tex if you
+%% want to use an author-year reference style like APA(6)
+%% for your publication list
+% \input{pubs-authoryear.cfg}
+
+%% Use (and optionally edit if necessary) this .tex if you
+%% want an originally numerical reference style like IEEE
+%% for your publication list
+\input{pubs-num.cfg}
+
+%% sample.bib contains your publications
+\addbibresource{sample.bib}
+
+\begin{document}
+\name{Henri Vandersleyen}
+\tagline{Software Engineer}
+%% You can add multiple photos on the left or right
+%%\photoR{2.8cm}{Globe_High}
+% \photoL{2.5cm}{Yacht_High,Suitcase_High}
+
+\personalinfo{%
+  % Not all of these are required!
+  \email{henri-vandersleyen@protonmail.com}
+  % \phone{000-00-0000}
+  % \mailaddress{Åddrésş, Street, 00000 Cóuntry}
+  \location{Victoria, BC, Canada}
+  \homepage{me.vandersleyen.dev}
+  % \twitter{@twitterhandle}
+  % \xtwitter{@x-handle}
+  \linkedin{/henri-vandersleyen-a25a8312b}
+  \github{vanderscycle}
+  % \orcid{0000-0000-0000-0000}
+  %% You can add your own arbitrary detail with
+  %% \printinfo{symbol}{detail}[optional hyperlink prefix]
+  % \printinfo{\faPaw}{Hey ho!}[https://example.com/]
+
+  %% Or you can declare your own field with
+  %% \NewInfoFiled{fieldname}{symbol}[optional hyperlink prefix] and use it:
+  % \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
+  % \gitlab{your_id}
+  %%
+  %% For services and platforms like Mastodon where there isn't a
+  %% straightforward relation between the user ID/nickname and the hyperlink,
+  %% you can use \printinfo directly e.g.
+  % \printinfo{\faMastodon}{@username@instace}[https://instance.url/@username]
+  %% But if you absolutely want to create new dedicated info fields for
+  %% such platforms, then use \NewInfoField* with a star:
+  % \NewInfoField*{mastodon}{\faMastodon}
+  %% then you can use \mastodon, with TWO arguments where the 2nd argument is
+  %% the full hyperlink.
+  % \mastodon{@username@instance}{https://instance.url/@username}
+}
+
+\makecvheader
+%% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
+% \AtBeginEnvironment{itemize}{\small}
+
+%% Set the left/right column width ratio to 6:4.
+\columnratio{0.6}
+
+% Start a 2-column paracol. Both the left and right columns will automatically
+% break across pages if things get too long.
+\begin{paracol}{2}
+\cvsection{Experience}
+\cvevent{DevOps Engineer}{Operto Guest Technologies}{Jul 2023 --
+  Ongoing}{Vancouver, BC}
+\begin{itemize}
+Migrated legacy java applications; increased application reliability and
+visibility. Used IaC to control our AWS accounts; reduced costs, and increased
+performance. Performed Security audit of our accounts; cloud infrastructure
+inline with AWS Startup Security Baseline (SSB)
+\end{itemize}
+\cvtag{AWS}
+\cvtag{Terraform}
+\cvtag{Java}
+
+\divider
+
+\cvevent{DevOps Engineer}{Atreides}{Apr 2022 -- Jul 2023}{Victoria, BC}
+\begin{itemize}
+Assisted the Senior DevOps Engineer with managing, adding and deploying
+Kubernetes applications to AWS EKS using GitOps pattern. Created and updated
+Github CICD pipelines to manage processes.
+\end{itemize}
+\cvtag{Kubernetse}
+\cvtag{Helm}
+\cvtag{ArgoCD}
+\cvtag{GitOps}
+\cvtag{AWS}
+\cvtag{Terraform}
+
+\divider
+
+\cvevent{Jr. FullStack Software Developer}{Aviary Tech}{Jul 2021 -- Feb 2022}{Victoria, BC}
+\begin{itemize}
+As a Jr. Fullstack Software Developer at a startup, I created, tested, and
+deployed several blockchain focused fullstack applications following Test-Driven
+Development (TDD). Designed smart UI/UX features to enhance user engagement and
+increased reliability of backend REST APIs.
+\end{itemize}
+
+\cvtag{NextJs}
+\cvtag{Svelte}
+\cvtag{Jest}
+
+\divider
+
+\cvevent{Marine Engineering Officer}{Royal Canadian Navy}{Apr 2012 -- Sept 2020}{Canada}
+\begin{itemize}
+I was Responsible for the readiness, operation and maintenance of propulsion
+  and ancillary systems, power generation and distribution, hull structure,
+  ship’s stability, and damage control. Advised the ship's captain on technical
+  readiness and repairs. While in port, routinely held charge of the ship's
+  operation and safety as the Officer Of the Day.
+\end{itemize}
+
+\cvtag{leadership}
+\cvtag{management}
+\cvtag{maintenance}
+\cvtag{fitness}
+
+
+%\cvsection{A Day of My Life}
+
+% Adapted from @Jake's answer from http://tex.stackexchange.com/a/82729/226
+% \wheelchart{outer radius}{inner radius}{
+% comma-separated list of value/text width/color/detail}
+% \wheelchart{1.5cm}{0.5cm}{%
+%   6/8em/accent!30/{Sleep,\\beautiful sleep},
+%   3/8em/accent!40/Hopeful novelist by night,
+%   8/8em/accent!60/Daytime job,
+%   2/10em/accent/Sports and relaxation,
+%   5/6em/accent!20/Spending time with family
+% }
+
+% use ONLY \newpage if you want to force a page break for
+% ONLY the current column
+%\newpage
+
+\nocite{*}
+
+%% Switch to the right column. This will now automatically move to the second
+%% page if the content is too long.
+\switchcolumn
+
+\cvsection{Skills}
+\cvtag{python}
+\cvtag{go}
+\cvtag{SvelteKit}
+\cvtag{TypeScript}
+
+\divider
+
+\cvtag{Terraform}
+\cvtag{Nix}
+\cvtag{bash}
+
+\divider
+
+\cvtag{Git}
+\cvtag{Emacs}
+\cvtag{Linux}
+
+\divider
+
+\cvtag{French}
+\cvtag{English}
+\cvtag{Chinese}
+%% Yeah I didn't spend too much time making all the
+%% spacing consistent... sorry. Use \smallskip, \medskip,
+%% \bigskip, \vspace etc to make adjustments.
+\medskip
+
+\cvsection{Education}
+
+\cvevent{Diploma Data Science}{Lighthouse Labs}{Sept 2002 -- Dec 2020}{}
+
+\divider
+
+\cvevent{B.eng.\ Electrical Engineering}{Royal Military College of Canada}{Sept 2007 -- Apr 2012}{}
+
+\cvsection{Achievements}
+
+\cvachievements{\faCertificate}
+\href{https://www.credly.com/badges/e700b2d0-dd6a-474c-bb99-25676eb2bf5b/linked_in_profile}{AWS Certified Solutions Architect – Associate}
+
+\divider
+
+\cvachievements{\faCertificate}
+P.eng: 221232
+
+\divider
+
+\cvachievements{\faCertificate}
+Head of department (Navy)
+
+\cvachievements{\faCertificate}
+Naval diving supervisor
+
+\cvachievements{\faCertificate}
+Firefighting team attack leader
+
+\cvsection{Projects}
+
+\cvevent{Infrastructure}{}{ongoing}{}
+\begin{itemize}
+\item Linode cloud, kubernetes hosted infrastructure using Helm, Kustomize and
+  ArgoCD.
+\item \faGithub Vanderscycle/infrastructure
+\end{itemize}
+
+\cvevent{Professional website}{}{ongoing}{}
+\begin{itemize}
+\item Simple SvelteKit website hosted on my kubernetes cluster.
+\item \faGithub Vanderscycle/Professional-website
+\end{itemize}
+\end{paracol}
+
+
+\end{document}
