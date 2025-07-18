@@ -12,6 +12,7 @@
 
 {
   imports = [
+    # programs
     ../../home-modules/programs
     # languages
     ../../home-modules/languages
@@ -31,23 +32,28 @@
   ssh = {
     enable = true;
     hosts = {
+      gitea = {
+        hostname = "gitea.homecloud.lan";
+        user = "git";
+        identityFile = "/home/${username}/.ssh/gitea";
+      };
+      medialab = {
+        hostname = "192.168.1.194";
+        user = "medialab";
+      };
       monolith = {
-        # ssh monolith
         hostname = "192.168.4.129";
         user = "henri";
       };
       macos = {
-        # ssh macos
         hostname = "192.168.4.167";
         user = "mac";
       };
       factorio = {
-        # ssh factorio
         hostname = "192.168.4.129";
         user = "monolith";
       };
       knode1 = {
-        # ssh knode1
         hostname = "192.168.2.10";
         user = "proxmox";
       };
@@ -113,7 +119,10 @@
     signingKey = "~/.ssh/endeavourGit.pub";
   };
   keychain.enable = true;
-  keychain.keys = "/home/${username}/.ssh/endeavourGit";
+  keychain.keys = [
+    "/home/${username}/.ssh/endeavourGit"
+    "/home/${username}/.ssh/gitea"
+  ];
   # cowsay.enable = lib.mkForce true;
 
   # Makes sense for user specific applications that shouldn't be available system-wide

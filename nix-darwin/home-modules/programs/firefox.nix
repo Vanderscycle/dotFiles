@@ -12,7 +12,7 @@
     firefox.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables firefox";
-      default = true;
+      default = false;
     };
   };
 

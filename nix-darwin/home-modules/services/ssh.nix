@@ -3,7 +3,6 @@
   lib,
   config,
   username,
-  hostname,
   ...
 }:
 {
@@ -15,10 +14,11 @@
     };
 
     ssh.authorizedSshKeys = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       description = "ssh key authorized to log with";
       default = null;
     };
+
     ssh.hosts = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule {
@@ -30,7 +30,7 @@
             user = lib.mkOption {
               type = lib.types.str;
               description = "The username to use for the SSH connection";
-              default = username; # Default to the current user
+              default = username;
             };
             port = lib.mkOption {
               type = lib.types.nullOr lib.types.int;
@@ -38,7 +38,7 @@
               default = null;
             };
             identityFile = lib.mkOption {
-              type = lib.types.nullOr lib.types.path;
+              type = lib.types.nullOr lib.types.string;
               description = "The path to the SSH private key file";
               default = null;
             };
@@ -53,22 +53,17 @@
   config = lib.mkIf config.ssh.enable {
     programs.ssh = {
       enable = true;
-      matchBlocks = lib.mapAttrs (name: host: {
-        inherit (host)
-          hostname
-          user
-          port
-          identityFile
-          ;
-      }) config.ssh.hosts;
-
+      matchBlocks = config.ssh.hosts;
     };
+
     home = {
       packages = with pkgs; [
         ssh-copy-id
       ];
     };
-    # openssh.authorizedKeys.keysFiles = [
+
+    # Uncomment and adjust if you want to set authorized keys for OpenSSH
+    # openssh.authorizedKeys.keysFiles = lib.optionals (config.ssh.authorizedSshKeys != null) [
     #   config.ssh.authorizedSshKeys
     # ];
   };

@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  meta,
   username,
   hosts,
   ...
@@ -25,7 +26,7 @@
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   # cron
   cron.downloadFolderOrganizer.enable = true;
-  cron.factorioSave.enable = true;
+  cron.factorioSave.enable = false;
   # services
   bluetooth.enable = true;
   internationalisation.enable = true;
@@ -52,7 +53,6 @@
 
     gc = {
       automatic = true;
-      # interval = "weekly";
       options = "--delete-older-than 14d";
     };
 
@@ -61,7 +61,7 @@
 
   # evaluation warning: henri profile: You have set either `nixpkgs.config` or `nixpkgs.overlays` while using `home-manager.useGlobalPkgs`.
   nixpkgs = {
-    hostPlatform = "x86_64-linux";
+    hostPlatform = meta.system;
     config.allowUnfree = true;
     config.permittedInsecurePackages = [
       "electron-32.3.3"
@@ -114,7 +114,7 @@
   };
   services = {
     openssh = {
-      enable = false;
+      enable = true;
     };
     displayManager = {
       autoLogin = {

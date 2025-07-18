@@ -1,8 +1,6 @@
 {
-  pkgs,
   lib,
   config,
-  hostname,
   ...
 }:
 {
@@ -14,7 +12,7 @@
     };
 
     keychain.keys = lib.mkOption {
-      type = lib.types.str;
+      type = with lib.types; listOf str;
       description = "ssh key file";
       default = null;
     };
@@ -23,11 +21,7 @@
   config = lib.mkIf config.keychain.enable {
     programs.keychain = {
       enable = true;
-      keys = [
-        config.keychain.keys
-        # "/users/henri.vandersleyen/.ssh/knak"
-      ];
-      # make it x86_64-linux compliant too
+      keys = config.keychain.keys;
     };
   };
 }

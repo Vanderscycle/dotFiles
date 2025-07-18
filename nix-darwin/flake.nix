@@ -98,7 +98,9 @@
           specialArgs = {
             hostname = "desktop";
             username = "henri";
-            system = "x86_64-linux";
+            meta = {
+              system = "x86_64-linux";
+            };
             inherit inputs;
           } // inputs;
           modules = [
@@ -111,13 +113,54 @@
                 inherit inputs;
                 username = "henri";
                 hostname = "desktop";
-                system = "x86_64-linux";
+                meta = {
+                  system = "x86_64-linux";
+                };
               };
               home-manager.users."henri" = {
                 imports = [
                   nixvim.homeManagerModules.nixvim
                   catppuccin.homeModules.catppuccin
                   ./users/henri/home.nix
+                ];
+              };
+            }
+          ];
+        }; # desktop
+      };
+
+      # sudo nixos-rebuild switch --flake ".#medialab" --impure
+      nixosConfigurations = {
+        medialab = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            meta = {
+              hostname = "medialab";
+              username = "medialab";
+              system = "x86_64-linux";
+            };
+            inherit inputs;
+          } // inputs;
+          modules = [
+            ./users/medialab/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {
+                inherit inputs;
+                hostname = "medialab"; # because of hosts
+                username = "medialab";
+                meta = {
+                  hostname = "medialab";
+                  username = "medialab";
+                  system = "x86_64-linux";
+                };
+              };
+              home-manager.users."medialab" = {
+                imports = [
+                  nixvim.homeManagerModules.nixvim
+                  catppuccin.homeModules.catppuccin
+                  ./users/medialab/home.nix
                 ];
               };
             }
