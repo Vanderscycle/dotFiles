@@ -2,7 +2,7 @@
   pkgs,
   lib,
   config,
-  username,
+  meta,
   ...
 }:
 {
@@ -16,7 +16,7 @@
 
   config = lib.mkIf config.docker.enable {
 
-    users.users.${username} = {
+    users.users.${meta.username} = {
       extraGroups = [
         "docker"
       ];

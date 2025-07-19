@@ -2,7 +2,7 @@
   pkgs,
   lib,
   config,
-  username,
+  meta,
   ...
 }:
 {
@@ -15,7 +15,7 @@
   };
 
   config = lib.mkIf config.audio.enable {
-    users.users.${username} = {
+    users.users.${meta.username} = {
       extraGroups = [ "audio" ];
     };
 

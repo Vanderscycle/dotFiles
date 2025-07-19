@@ -1,5 +1,6 @@
 {
   inputs,
+  username,
   meta,
   config,
   hosts,
@@ -13,7 +14,9 @@
     # programs
     ../../nix-modules/programs
     # services
-    ../../nix-modules/services
+    ../../nix-modules/services/internationalisation.nix
+    ../../nix-modules/services/sound.nix
+    ../../nix-modules/services/bluetooth.nix
     # local
     ./sops.nix
   ];
@@ -22,7 +25,6 @@
   # services
   bluetooth.enable = true;
   internationalisation.enable = true;
-  docker.enable = true;
   system.stateVersion = "25.05";
   nix = {
     optimise.automatic = true;

@@ -27,6 +27,7 @@ in
       # crypt
       openssl
       pwgen
+      parted
       # sql/db
       beekeeper-studio # not supported on aarch64-darwin
       # mysql-workbench # not supported on aarch64-darwin
