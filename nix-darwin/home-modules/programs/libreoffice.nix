@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    office.enable = lib.mkOption {
+    program.office.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables libreoffice";
       default = false;
     };
   };
 
-  config = lib.mkIf config.office.enable {
+  config = lib.mkIf config.program.office.enable {
     home.packages = with pkgs; [
       libreoffice-qt
       hunspell

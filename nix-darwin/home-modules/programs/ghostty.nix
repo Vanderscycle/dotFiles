@@ -1,19 +1,18 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    ghostty.enable = lib.mkOption {
+    program.ghostty.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables ghostty shell";
       default = true;
     };
   };
 
-  config = lib.mkIf config.ghostty.enable {
+  config = lib.mkIf config.program.ghostty.enable {
     home = {
       sessionVariables = {
         # TERMINAL = "kitty";

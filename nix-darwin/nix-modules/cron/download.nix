@@ -1,8 +1,6 @@
 {
   pkgs,
-  inputs,
-  system ? builtins.currentSystem,
-  username,
+  meta,
   lib,
   config,
   ...
@@ -24,7 +22,7 @@
     cron.dotFile.path = lib.mkOption {
       type = lib.types.str;
       description = "where the dotFiles are located";
-      default = "/home/${username}/Documents/dotFiles";
+      default = "/home/${meta.username}/Documents/dotFiles";
     };
     cron.sshKey = lib.mkOption {
       type = lib.types.str;
@@ -58,7 +56,7 @@
       ];
       serviceConfig = {
         Type = "oneshot";
-        User = config.users.users.${username}.name;
+        User = config.users.users.${meta.username}.name;
       };
     };
 
@@ -73,7 +71,7 @@
     };
     systemd.services."downloadFolderOrganizer" = lib.mkIf config.cron.downloadFolderOrganizer.enable {
       script = ''
-        cd "/home/${username}/Downloads"
+        cd "/home/${meta.username}/Downloads"
         ${pkgs.rsync}/bin/rsync -avz --ignore-existing --remove-source-files *.mkv *.webm *.mp4 ~/Videos/
         ${pkgs.rsync}/bin/rsync -avz --ignore-existing --remove-source-files *.pdf ~/Documents/pdfs
         ${pkgs.rsync}/bin/rsync -avz --ignore-existing --remove-source-files *.png *.jpeg *.webp *.jpg ~/Pictures/
@@ -84,7 +82,7 @@
       ];
       serviceConfig = {
         Type = "oneshot";
-        User = config.users.users.${username}.name;
+        User = config.users.users.${meta.username}.name;
       };
     };
   };

@@ -1,19 +1,18 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    zsh.enable = lib.mkOption {
+    program.zsh.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables zsh shell";
       default = true;
     };
   };
 
-  config = lib.mkIf config.zsh.enable {
+  config = lib.mkIf config.program.zsh.enable {
     catppuccin.zsh-syntax-highlighting.enable = true;
     programs.zsh = {
       enable = true;

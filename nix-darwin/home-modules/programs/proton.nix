@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    proton.enable = lib.mkOption {
+    program.proton.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables the proton services";
       default = true;
     };
   };
 
-  config = lib.mkIf config.proton.enable {
+  config = lib.mkIf config.program.proton.enable {
     home = {
       packages = with pkgs; [
         proton-pass

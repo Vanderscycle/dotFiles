@@ -7,7 +7,7 @@
 }:
 {
   options = {
-    spotify.enable = lib.mkOption {
+    program.spotify.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables paid music";
       default = true;
@@ -15,7 +15,7 @@
   };
 
   imports = [ inputs.spicetify-nix.homeManagerModules.default ];
-  config = lib.mkIf config.spotify.enable {
+  config = lib.mkIf config.program.spotify.enable {
     nixpkgs.config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [

@@ -1,7 +1,6 @@
 {
-  pkgs,
   lib,
-  username,
+  meta,
   config,
   ...
 }:
@@ -16,6 +15,6 @@
 
   config = lib.mkIf config.android.enable {
     programs.adb.enable = true;
-    users.users.${username}.extraGroups = [ "adbusers" ];
+    users.users.${meta.username}.extraGroups = [ "adbusers" ];
   };
 }

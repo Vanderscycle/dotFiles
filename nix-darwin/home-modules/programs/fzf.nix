@@ -1,19 +1,18 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    fzf.enable = lib.mkOption {
+    program.fzf.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables fzf completion";
       default = true;
     };
   };
 
-  config = lib.mkIf config.fzf.enable {
+  config = lib.mkIf config.program.fzf.enable {
     programs = {
       fzf = {
         enable = true;

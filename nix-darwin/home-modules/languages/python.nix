@@ -7,14 +7,14 @@
 {
 
   options = {
-    python.lsp.enable = lib.mkOption {
+    languages.python.lsp.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables python lsp";
       default = true;
     };
   };
 
-  config = lib.mkIf config.python.lsp.enable {
+  config = lib.mkIf config.languages.python.lsp.enable {
     home = {
       packages = with pkgs; [
         # python311

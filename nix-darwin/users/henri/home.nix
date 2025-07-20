@@ -4,7 +4,7 @@
 {
   config,
   inputs,
-  username,
+  meta,
   pkgs,
   lib,
   ...
@@ -35,7 +35,7 @@
       gitea = {
         hostname = "gitea.homecloud.lan";
         user = "git";
-        identityFile = "/home/${username}/.ssh/gitea";
+        identityFile = "/home/${meta.username}/.ssh/gitea";
       };
       medialab = {
         hostname = "192.168.1.194";
@@ -71,64 +71,65 @@
       };
     };
   };
-  # ssh.authorizedSshKeys = /home/henri/.ssh/endeavourGit; # TODO: move to nix-modules
+
   # languages
-  codium.enable = true;
-  go.lsp.enable = true;
-  python.lsp.enable = true;
-  jsts = {
-    vue.enable = false;
-    lsp.enable = true;
+  languages = {
+    go.lsp.enable = true;
+    python.lsp.enable = true;
+    jsts = {
+      vue.enable = false;
+      lsp.enable = true;
+    };
+    latex.lsp.enable = true;
+    yaml.lsp.enable = true;
+    json.lsp.enable = true;
   };
-  latex.lsp.enable = true;
-  yaml.lsp.enable = true;
-  json.lsp.enable = true;
 
   # programs
-  bottles.enable = false;
-  devops.enable = true;
-  flameshot.enable = false; # enabled by hyprland
-  brave.enable = true;
-  firefox.enable = false; # lib.mkForce false;
-
-  plastic_printer = {
-    enable = true;
-    orcaslicer.enable = true;
-    # bambustudio.enable = true;
-    # superslicer.enable = true;
-  };
-  thunar.enable = true;
-  signal.enable = true;
-  zulip.enable = true;
-  zathura.enable = true;
-  nh.flakeLocation = "/home/${username}/Documents/dotFiles/nix-darwin";
-  microcontrollers.enable = true;
-  office.enable = true;
-  kubernetes = {
-    enable = true;
-    kubeconfig = {
-      KUBECONFIG = "$HOME/.kube/homelab-kubeconfig.yaml";
+  program = {
+    beekeeper.enable = true;
+    codium.enable = true;
+    bottles.enable = false;
+    devops.enable = true;
+    flameshot.enable = false; # enabled by hyprland
+    brave.enable = true;
+    plastic_printer = {
+      enable = true;
+      orcaslicer.enable = true;
+    };
+    thunar.enable = true;
+    signal.enable = true;
+    zulip.enable = true;
+    zathura.enable = true;
+    nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin";
+    microcontrollers.enable = true;
+    office.enable = true;
+    kubernetes = {
+      enable = true;
+      kubeconfig = {
+        KUBECONFIG = "$HOME/.kube/homelab-kubeconfig.yaml";
+      };
+    };
+    discord.enable = true;
+    fish.enable = true;
+    fuzzel.enable = true;
+    git = {
+      userEmail = "henri-vandersleyen@protonmail.com";
+      userName = "vanderscycle";
+      signingKey = "~/.ssh/endeavourGit.pub";
+    };
+    keychain = {
+      enable = true;
+      keys = [
+        "/home/${meta.username}/.ssh/endeavourGit"
+        "/home/${meta.username}/.ssh/gitea"
+      ];
     };
   };
-  discord.enable = true;
-  fish.enable = true;
-  fuzzel.enable = true;
-  git = {
-    userEmail = "henri-vandersleyen@protonmail.com";
-    userName = "vanderscycle";
-    signingKey = "~/.ssh/endeavourGit.pub";
-  };
-  keychain.enable = true;
-  keychain.keys = [
-    "/home/${username}/.ssh/endeavourGit"
-    "/home/${username}/.ssh/gitea"
-  ];
-  # cowsay.enable = lib.mkForce true;
 
-  # Makes sense for user specific applications that shouldn't be available system-wide
   home = {
-    username = username;
-    homeDirectory = "/home/${username}";
+    username = meta.username;
+    homeDirectory = "/home/${meta.username}";
     stateVersion = "25.05"; # Please read the comment before changing.
 
     packages = with pkgs; [

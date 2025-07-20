@@ -1,11 +1,10 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
-  config = lib.mkIf config.git.enable {
+  config = lib.mkIf config.program.git.enable {
     programs.lazygit = {
       enable = true;
     };

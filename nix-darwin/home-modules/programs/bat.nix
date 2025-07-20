@@ -1,18 +1,17 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    bat.enable = lib.mkOption {
+    program.bat.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables bat";
       default = true;
     };
   };
-  config = lib.mkIf config.bat.enable {
+  config = lib.mkIf config.program.bat.enable {
     programs.bat = {
       enable = true;
     };

@@ -1,19 +1,18 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    fish.enable = lib.mkOption {
+    program.fish.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables fish shell";
       default = true;
     };
   };
 
-  config = lib.mkIf config.fish.enable {
+  config = lib.mkIf config.program.fish.enable {
     home = {
       sessionVariables = { };
     };

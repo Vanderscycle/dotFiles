@@ -2,7 +2,6 @@
   pkgs,
   inputs,
   meta,
-  username,
   hosts,
   ...
 }:
@@ -50,28 +49,16 @@
       substituters = [ "https://hyprland.cachix.org" ];
       trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
-
     gc = {
       automatic = true;
       options = "--delete-older-than 14d";
     };
-
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
-  };
-
-  # evaluation warning: henri profile: You have set either `nixpkgs.config` or `nixpkgs.overlays` while using `home-manager.useGlobalPkgs`.
-  nixpkgs = {
-    hostPlatform = meta.system;
-    config.allowUnfree = true;
-    config.permittedInsecurePackages = [
-      "electron-32.3.3"
-      "beekeeper-studio-5.2.12"
-    ];
   };
 
   programs.fish.enable = true;
 
-  users.users.${username} = {
+  users.users.${meta.username} = {
     home = "/home/henri";
     shell = pkgs.fish;
     isNormalUser = true;
@@ -119,7 +106,7 @@
     displayManager = {
       autoLogin = {
         enable = true;
-        user = "${username}";
+        user = "${meta.username}";
       };
       gdm = {
         enable = true;

@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    multimedia.enable = lib.mkOption {
+    program.multimedia.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables multimedia";
       default = true;
     };
   };
 
-  config = lib.mkIf config.multimedia.enable {
+  config = lib.mkIf config.program.multimedia.enable {
     home = {
       packages = with pkgs; [
         ytfzf

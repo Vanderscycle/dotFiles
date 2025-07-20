@@ -6,19 +6,19 @@
 }:
 {
   options = {
-    nh.enable = lib.mkOption {
+    program.nh.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables comfier nix experience";
       default = true;
     };
-    nh.flakeLocation = lib.mkOption {
+    program.nh.flakeLocation = lib.mkOption {
       type = lib.types.str;
       description = "where the config flake is";
       default = null;
     };
   };
 
-  config = lib.mkIf config.nh.enable {
+  config = lib.mkIf config.program.nh.enable {
     home = {
       packages = with pkgs; [
         nh
@@ -27,7 +27,7 @@
         nixos-anywhere
       ];
       sessionVariables = {
-        NH_FLAKE = config.nh.flakeLocation;
+        NH_FLAKE = config.program.nh.flakeLocation;
       };
     };
   };

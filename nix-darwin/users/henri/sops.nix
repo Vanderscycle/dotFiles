@@ -2,7 +2,7 @@
   pkgs,
   inputs,
   config,
-  username,
+  meta,
   ...
 }:
 
@@ -20,7 +20,7 @@ in
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
 
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "/home/${meta.username}/.config/sops/age/keys.txt";
     secrets = {
       # Maggit Forge
       "emacs/forge/gh_api" = {

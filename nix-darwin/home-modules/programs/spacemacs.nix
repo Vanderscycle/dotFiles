@@ -6,7 +6,7 @@
 }:
 {
   options = {
-    spacemacs.enable = lib.mkOption {
+    program.spacemacs.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables the cooler vim";
       default = true;
@@ -15,7 +15,7 @@
 
   # common issue on MacOs when getting ="Creating pipe" "too many open files"=
   # https://gist.github.com/tombigel/d503800a282fcadbee14b537735d202c
-  config = lib.mkIf config.spacemacs.enable {
+  config = lib.mkIf config.program.spacemacs.enable {
     home = {
       sessionVariables = {
         EDITOR = "emacs";

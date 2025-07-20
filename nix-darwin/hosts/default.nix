@@ -1,6 +1,9 @@
-{ hostname, ... }:
+{
+  meta,
+  ...
+}:
 {
   imports = [
-    ./${hostname}
+    ./${meta.hostname}
   ];
 }

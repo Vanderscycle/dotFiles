@@ -4,6 +4,7 @@
     ./alacritty.nix
     ./arc_browser.nix
     ./bat.nix
+    ./beekeeper.nix
     ./brave.nix
     ./btop.nix
     ./bottles.nix
@@ -12,7 +13,6 @@
     ./cowsay.nix
     ./devops.nix
     ./discord.nix
-    ./firefox.nix
     ./fish.nix # TODO: add an option to pass to shellInit
     ./flameshot.nix
     ./fuzzel.nix

@@ -1,18 +1,17 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    btop.enable = lib.mkOption {
+    program.btop.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables btop";
       default = true;
     };
   };
-  config = lib.mkIf config.btop.enable {
+  config = lib.mkIf config.program.btop.enable {
     programs.btop = {
       enable = true;
       settings = {

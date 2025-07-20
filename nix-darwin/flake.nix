@@ -60,14 +60,33 @@
       nixvim,
       ...
     }:
+    let
+      darwinMeta = {
+        system = "aarch64-darwin";
+        username = "henri.vandersleyen";
+        hostname = "Henris-MacBook-Pro";
+      };
+
+      linuxMeta = {
+        system = "x86_64-linux";
+        username = "henri";
+        hostname = "desktop";
+      };
+
+      mediaMeta = {
+        system = "x86_64-linux";
+        username = "medialab";
+        hostname = "medialab";
+      };
+    in
     {
       darwinConfigurations = {
         #nix run nix-darwin -- switch --flake ./nix-darwin
         Henris-MacBook-Pro = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
-            username = "henri.vandersleyen";
             inherit inputs;
+            meta = darwinMeta;
           };
           modules = [
             ./users/henri.vandersleyen/configuration.nix
@@ -76,9 +95,8 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
-                username = "henri.vandersleyen";
-                system = "aarch64-darwin";
                 inherit inputs;
+                meta = darwinMeta;
               };
               home-manager.users."henri.vandersleyen" = {
                 imports = [
@@ -96,26 +114,29 @@
       nixosConfigurations = {
         desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            hostname = "desktop";
-            username = "henri";
-            meta = {
-              system = "x86_64-linux";
-            };
             inherit inputs;
+            meta = linuxMeta;
           } // inputs;
           modules = [
+            {
+              nixpkgs = {
+                config = {
+                  allowUnfree = true;
+                  permittedInsecurePackages = [
+                    "electron-32.3.3"
+                    "beekeeper-studio-5.2.12"
+                  ];
+                };
+              };
+            }
             ./users/henri/configuration.nix
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
+              #home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 inherit inputs;
-                username = "henri";
-                hostname = "desktop";
-                meta = {
-                  system = "x86_64-linux";
-                };
+                meta = linuxMeta;
               };
               home-manager.users."henri" = {
                 imports = [
@@ -133,12 +154,8 @@
       nixosConfigurations = {
         medialab = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            meta = {
-              hostname = "medialab";
-              username = "medialab";
-              system = "x86_64-linux";
-            };
             inherit inputs;
+            meta = mediaMeta;
           } // inputs;
           modules = [
             ./users/medialab/configuration.nix
@@ -148,13 +165,7 @@
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 inherit inputs;
-                hostname = "medialab"; # because of hosts
-                username = "medialab";
-                meta = {
-                  hostname = "medialab";
-                  username = "medialab";
-                  system = "x86_64-linux";
-                };
+                meta = mediaMeta;
               };
               home-manager.users."medialab" = {
                 imports = [
@@ -165,7 +176,7 @@
               };
             }
           ];
-        }; # desktop
+        }; # medialab
       };
     };
 }

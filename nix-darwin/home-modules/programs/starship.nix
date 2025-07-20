@@ -1,19 +1,18 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    starship.enable = lib.mkOption {
+    program.starship.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables the best cli";
       default = true;
     };
   };
 
-  config = lib.mkIf config.starship.enable {
+  config = lib.mkIf config.program.starship.enable {
     programs.starship = {
       enable = true;
       enableFishIntegration = true;

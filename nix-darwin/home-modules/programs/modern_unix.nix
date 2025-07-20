@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    modern_unix.enable = lib.mkOption {
+    program.modern_unix.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables better unix commands";
       default = true;
     };
   };
 
-  config = lib.mkIf config.modern_unix.enable {
+  config = lib.mkIf config.program.modern_unix.enable {
     home.packages = with pkgs; [
       hyperfine # how xz was discovered
       curlie # curl + httpie baby

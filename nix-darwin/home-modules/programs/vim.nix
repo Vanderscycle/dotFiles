@@ -1,19 +1,18 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    vim.enable = lib.mkOption {
+    program.vim.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables the backup editor";
       default = true;
     };
   };
 
-  config = lib.mkIf config.vim.enable {
+  config = lib.mkIf config.program.vim.enable {
     #https://nix-community.github.io/nixvim/NeovimOptions/index.html
     programs.nixvim = {
       globals.mapleader = " "; # Sets the leader key to space

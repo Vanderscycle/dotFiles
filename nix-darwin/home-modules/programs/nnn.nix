@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    nnn.enable = lib.mkOption {
+    program.nnn.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables comfier nnn file navigator";
       default = true;
     };
   };
 
-  config = lib.mkIf config.nnn.enable {
+  config = lib.mkIf config.program.nnn.enable {
     # within $home/.config/nnn/plugins
     # sh -c "$(curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs)"
     programs = {

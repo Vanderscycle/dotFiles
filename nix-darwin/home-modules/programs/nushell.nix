@@ -1,19 +1,18 @@
 {
-  pkgs,
   lib,
   config,
   ...
 }:
 {
   options = {
-    nushell.enable = lib.mkOption {
+    program.nushell.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables nushell";
       default = true;
     };
   };
 
-  config = lib.mkIf config.nushell.enable {
+  config = lib.mkIf config.program.nushell.enable {
     programs.nushell = {
       enable = true;
       environmentVariables = {
