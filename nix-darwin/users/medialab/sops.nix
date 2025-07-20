@@ -24,6 +24,10 @@ in
     secrets = {
       # Maggit Forge
       # TruNas SMB access
+      "home-server/wifi/password" = {
+        owner = "root";
+      };
+
       "home-server/rice/password" = {
         owner = "root";
       };

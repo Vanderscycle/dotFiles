@@ -1,6 +1,5 @@
 {
   inputs,
-  username,
   meta,
   config,
   hosts,
@@ -19,6 +18,7 @@
     ../../nix-modules/services/bluetooth.nix
     # local
     ./sops.nix
+    ./nix.nix
   ];
 
   programs.fish.enable = true;
@@ -26,27 +26,6 @@
   bluetooth.enable = true;
   internationalisation.enable = true;
   system.stateVersion = "25.05";
-  nix = {
-    optimise.automatic = true;
-    settings = {
-      warn-dirty = false;
-      experimental-features = "nix-command flakes";
-      substituters = [ ];
-      trusted-public-keys = [ ];
-    };
-
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 14d";
-    };
-
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
-  };
-
-  nixpkgs = {
-    hostPlatform = meta.system;
-    config.allowUnfree = true;
-  };
 
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=3600
@@ -69,7 +48,14 @@
     };
   };
 
-  networking.wireless.enable = true;
+  networking.wireless = {
+    enable = true;
+    networks = {
+      "Linksys00356_24GHz" = {
+        psk = config.sops.secrets."home-server/wifi/password".path;
+      };
+    };
+  };
   users.users.${meta.username} = {
     home = "/home/${meta.username}";
     shell = pkgs.fish;

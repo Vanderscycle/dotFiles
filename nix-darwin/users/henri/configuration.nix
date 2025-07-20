@@ -64,6 +64,7 @@
     isNormalUser = true;
     extraGroups = [
       "wheel"
+      "input"
     ];
   };
 
