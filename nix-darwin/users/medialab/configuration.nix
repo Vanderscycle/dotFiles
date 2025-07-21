@@ -67,7 +67,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    jellyfin
   ];
 
   home-manager.backupFileExtension = "backup";
