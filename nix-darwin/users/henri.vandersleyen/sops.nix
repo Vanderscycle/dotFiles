@@ -1,6 +1,6 @@
 {
   inputs,
-  username,
+  meta,
   config,
   ...
 }:
@@ -12,7 +12,7 @@
     defaultSopsFile = ./secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
 
-    age.keyFile = "/Users/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "/Users/${meta.username}/.config/sops/age/keys.txt";
     secrets = {
       "knak/email" = {
         # owner = username;
