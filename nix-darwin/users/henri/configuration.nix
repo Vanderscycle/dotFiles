@@ -17,6 +17,8 @@
     ../../nix-modules/services
     # systemd/cron
     ../../nix-modules/cron
+    # scripts
+    # ../../nix-modules/writerScripts
     # local
     ./sops.nix
   ];
