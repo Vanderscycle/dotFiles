@@ -13,7 +13,8 @@
       default = false;
     };
   };
-  config = lib.mkIf (config.program.discord.enable && pkgs.config.allowUnfree or false) {
+  config = lib.mkIf config.program.discord.enable {
+    nixpkgs.config.allowUnfree = true;
     home = {
       packages = with pkgs; [ discord ];
     };
