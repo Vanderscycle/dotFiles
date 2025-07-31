@@ -123,7 +123,7 @@
                 config = {
                   allowUnfree = true;
                   permittedInsecurePackages = [
-                    "electron-32.3.3"
+                    "electron-35.7.1"
                     "beekeeper-studio-5.2.12"
                   ];
                 };

@@ -59,24 +59,29 @@
   };
 
   # languages
-  python.lsp.enable = true;
-  jsts.lsp.enable = true;
+  languages = {
+    python.lsp.enable = true;
+    jsts.lsp.enable = true;
+  };
 
   # programs
-  codium.enable = true;
-  arc-browser.enable = true;
-  fish.enable = true;
-  zsh.enable = true;
-  nh.flakeLocation = "/Users/${meta.username}/Documents/dotFiles/nix-darwin";
-  keychain.enable = true;
-  keychain.keys = "/home/${meta.username}/.ssh/knak";
-
-  git = {
-    # userEmail = config.sops.secrets."knak/email".path;
-    userEmail = "henri.vandersleyen@knak.com";
-    # userName = config.sops.secrets."knak/git/userName".path;
-    userName = "vancycles-knak";
-    signingKey = config.sops.secrets."knak/git/keyName".path;
+  program = {
+    arc-browser.enable = true;
+    codium.enable = false;
+    fish.enable = true;
+    zsh.enable = true;
+    nh.flakeLocation = "/Users/${meta.username}/Documents/dotFiles/nix-darwin";
+    keychain = {
+      enable = true;
+      keys = [ "/home/${meta.username}/.ssh/knak" ];
+    };
+    git = {
+      # userEmail = config.sops.secrets."knak/email".path;
+      userEmail = "henri.vandersleyen@knak.com";
+      # userName = config.sops.secrets."knak/git/userName".path;
+      userName = "vancycles-knak";
+      signingKey = config.sops.secrets."knak/git/keyName".path;
+    };
   };
 
   home = {
