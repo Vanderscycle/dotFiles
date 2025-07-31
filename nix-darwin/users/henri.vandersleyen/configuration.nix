@@ -28,6 +28,7 @@
     };
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
   };
+
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
     config.allowUnfree = true;
