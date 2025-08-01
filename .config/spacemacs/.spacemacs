@@ -881,11 +881,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
           ("@emergency" . ?e)
           (:endgroup . nil)
 
-          ;; Code TODOs tags
-          ("backend" . ?k)
-          ("frontend" . ?f)
-          ("devops" . ?d)
-
           ;; tasks TODOs
           (:startgroup . nil)
           ("homelab" . ?h)
@@ -893,6 +888,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
           ("maintenance" . ?m)
           ("planning" . ?p)
           ("workout" . ?w)
+          ("linux" . ?l)
           (:endgroup . nil)
 
           ;; chinese tags
@@ -911,6 +907,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
           ("@spike"      . (:foreground "#cba6f7" :background "#313244" :weight bold))  ; Mauve on surface0
           ("@emergency"  . (:foreground "#fab387" :background "#45475a" :weight bold :box t))  ; Peach on surface1 with box
           ("homelab"     . (:foreground "#89b4fa" :weight bold))  ; Blue
+          ("linux"     . (:foreground "#89b4fa" :weight bold))  ; Blue
           ("3d_printer"  . (:foreground "#a6e3a1" :weight bold))  ; Green
           ("maintenance" . (:foreground "#f9e2af" :weight bold))  ; Yellow
           ("planning"    . (:foreground "#f38ba8" :weight bold))  ; Red
@@ -945,24 +942,28 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (setq org-capture-templates
         '(
           ("j" "Work Log Entry"
-           entry (file+datetree "~/Documents/zettelkasten/org-roam/org/work/work-log.org")
+           entry (file+datetree "~/Documents/zettelkasten/org/work/work-log.org")
            "* %^{Task} \n:PROPERTIES:\n:END:\n"
            :empty-lines 0)
           ("c" "Code To-Do"
-           entry (file+headline "~/Documents/zettelkasten/org-roam/org/work/todo.org" "Code Related Tasks")
+           entry (file+headline "~/Documents/zettelkasten/org/work/todo.org" "Code Related Tasks")
            "* TODO [#C] %?\n:PROPERTIES:\n:Effort: $^{Effort}\n:Weight: $^{Weight}\n:END:\nDEADLINE: %^T\n:Created: %T\n%i\n%a\nShortcut Ticket: \nProposed Solution: \n"
            :empty-lines 0)
           ("g" "General To-Do"
-           entry (file+headline "~/Documents/zettelkasten/org-roam/org/home/todo.org" "General TODOS")
+           entry (file+headline "~/Documents/zettelkasten/org/home/todo.org" "General TODOS")
            "* TODO [#E] %?\n:Created: %T\n "
            :empty-lines 0)
           ("l" "Learning note"
-           entry (file+headline "~/Documents/zettelkasten/org-roam/org/home/learning.org" "Learning Notes")
+           entry (file+headline "~/Documents/zettelkasten/org/home/learning.org" "Learning Notes")
            "* %^{Subject} \n:PROPERTIES:\n:END:\n** %?"
            :empty-lines 0)
+          ("b" "Book note"
+           entry (file+headline "~/Documents/zettelkasten/org/home/books.org" "Book Notes")
+           "* %^{Subject}\n:PROPERTIES:\n:Title: %^{Title}\n:Author: %^{Author}\n:END:\n** Notes\n%?"
+           :empty-lines 0)
           ("m" "Meeting"
-           entry (file+datetree "~/Documents/zettelkasten/org-roam/org/work/meetings.org")
-           "* %? :meeting:%^g \n:Created: %T\n** Attendees\n*** \n** Notes\n** Action Items\n*** TODO [#A] "
+           entry (file+datetree "~/Documents/zettelkasten/org/work/meetings.org")
+           "* %^{meeting} :meeting:%^g\n:PROPERTIES:\n:Created: %T\n:END:\n** Attendees\n*** \n** Notes\n** Action Items\n*** TODO [#A] "
            :tree-type week
            :clock-in t
            :clock-resume t

@@ -1,6 +1,6 @@
 {
   pkgs,
-  username,
+  meta,
   inputs,
   ...
 }:
@@ -28,6 +28,7 @@
     };
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ]; # for nix.nix
   };
+
   nixpkgs = {
     hostPlatform = "aarch64-darwin";
     config.allowUnfree = true;
@@ -38,8 +39,8 @@
   # system.configurationRevision = self.rev or self.dirtyRev or null;
   system.stateVersion = 5;
 
-  users.users.${username} = {
-    home = "/Users/${username}";
+  users.users.${meta.username} = {
+    home = "/Users/${meta.username}";
     shell = pkgs.nushell;
   };
   home-manager.backupFileExtension = "backup";
@@ -53,7 +54,7 @@
     ];
     variables = {
       # XDG_CONFIG_HOME = "/Users/henri.vandersleyen"; # issue with nushell
-      SOPS_AGE_KEY_FILE = "/Users/${username}/.config/sops/age/keys.txt";
+      SOPS_AGE_KEY_FILE = "/Users/${meta.username}/.config/sops/age/keys.txt";
     };
   };
 
@@ -62,7 +63,7 @@
   '';
 
   # Homebrew needs to be installed on its own!
-  system.primaryUser = username;
+  system.primaryUser = meta.username;
   homebrew = {
     enable = true;
     casks = [

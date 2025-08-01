@@ -30,6 +30,13 @@
         "..." = "cd ../..";
         "...." = "cd ../../..";
       };
+      shellGlobalAliases = {
+        docker-crmAll = "docker rm -f (docker ps -aq)";
+        docker-irmAll = "docker rmi -f (docker images  -aq)";
+        docker-vrmAll = "docker volume prune";
+        docker-prmAll = "docker builder prune -af";
+        docker-clean = "docker system prune -af"; # remove all containers, images, volumes, and networks without destroying running containers/images
+      };
     };
   };
 }
