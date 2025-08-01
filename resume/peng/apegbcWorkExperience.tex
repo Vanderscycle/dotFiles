@@ -4,7 +4,13 @@
 % \usepackage{caption}
 % \usepackage{float}
 % \usepackage{hyperref}
-
+\usepackage{tabularx}
+\usepackage[
+  top=2cm,
+  bottom=2.5cm,
+  left=3cm,
+  right=3cm
+]{geometry}
 % variables
 \def\fullname{Henri Charles Edouard Vandersleyen}
 
@@ -24,13 +30,14 @@
 I, \fullname, request to reinstate my P.eng license. While I do not require a
 P.eng license to practice software engineering in its many facets; I do believe
 that with the rise of Artificial Intelligence, and the ever increase velocity of
-programming that, now more than ever, the human value. \\
+code being produced and shipped
+, now more than ever, the human value of a trained and certified engineer adds
+tremendous stability to software. \\
 I previously served the Royal Canadian navy as a Naval Engineering Officer
 where, while onboard a warship advised the commanding officer on the machinery,
-technical readiness of the systems and the men under my care and responsability  \\
-sdfdsfsdsdfjsadjsdaj
-
-sdjsdfksjskjsdf
+technical readiness of the systems and the men under my care and responsability.
+Having change career to Software Engineering in 2020 I gave up my license
+as retooling to my new field was time consuming and expensive.\\
 
 
 \begin{abstract}
@@ -58,4 +65,41 @@ sdjsdfksjskjsdf
 \end{table}
 \end{Applicant Information}
 
+\begin{Employment}
+\section{Employment Overview}
+\begin{tabularx}{\textwidth}{|C|X|X|C|X|X|}
+  \hline
+    Id &  From (MMYY) & To (MMYY) & Employer & Supervisor & Location \\ % Column rows are separated by &
+    \hline % a horizontal line
+    1 & 07/12 & 07/20 & Royal Canadian Navy & LtCdr Matt Webb & Various, Canada \\
+    2 & 07/21 & 02/22 & Aviary Tech & Brian Richter & Victoria, BC \\
+    3 & 04/22 & 07/23 & Atreides & Shaun Bathgate & Victoria, BC \\
+    4 & 07/23 & 07/23 & Operto Guest Technologies & Jef King &  Vancouver, BC \\
+    5 & 11/24 & Now & Knak & Calvin Smith & Victoria, BC \\
+  \hline
+\end{tabularx}
+\end{Employment Overview}
+\section*{Employment Record}
+
+Include an employment record for each employer and position you have listed above. Note that you will need to duplicate this section to create multiple periods of employment.
+
+\section{Employment Detailed}
+\addcontentsline{toc}{subsection}{Period of Employment 1}
+\subsection*{Period of Employment 1}
+\textbf{Employer name:} Royal Canadian Navy\\
+\textbf{Company description:} Defence of Canadian nation and international interests\\
+\textbf{Address of company:} Ottawa \\
+\textbf{Supervisor name and title:} (various) Matt Webb \\
+\textbf{Supervisor email and telephone number:} \\
+\textbf{Dates of employment (MM/YYYY)} \\
+From: 07/2012\hspace{5em} To: 07/2020\hspace{5em} \\
+\vspace{1em}
+\textbf{Job title:} Marine System Engineering Officer\\
+\vspace{1.5em}
+\textbf{Summary of responsibilities and activities:} \\
+
+\vspace{6em}
+
+\end{Employment Detailed}
+\end{Period of Employment}
 \end{document}

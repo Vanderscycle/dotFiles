@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   config,
   ...
@@ -13,16 +14,14 @@
   };
 
   config = lib.mkIf config.bluetooth.enable {
+    environment.systemPackages = [
+      pkgs.bluez
+    ];
     hardware.bluetooth.enable = true;
+    hardware.xpadneo.enable = true;
     hardware.bluetooth.powerOnBoot = true;
 
-    boot.extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
     services.blueman.enable = true;
 
-    services.udev.extraRules = ''
-      # Enable Xbox controller support via Bluetooth
-      SUBSYSTEM=="input", GROUP="input", MODE="0660"
-      KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
-    '';
   };
 }
