@@ -123,6 +123,7 @@
                 config = {
                   allowUnfree = true;
                   permittedInsecurePackages = [
+                    "libsoup-2.74.3"
                     "electron-35.7.1"
                     "beekeeper-studio-5.2.12"
                   ];
