@@ -26,8 +26,11 @@
   system.stateVersion = "25.05";
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   # cron
-  cron.downloadFolderOrganizer.enable = true;
-  cron.factorioSave.enable = false;
+  cron = {
+    nasBackup.photos.enable = true;
+    # TODO: update to send pdf to cloud for paperless-ngx
+    downloadFolderOrganizer.enable = false;
+  };
   # services
   bluetooth.enable = true;
   internationalisation.enable = true;
