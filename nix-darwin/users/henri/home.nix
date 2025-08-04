@@ -95,7 +95,7 @@
     brave.enable = true;
     plastic_printer = {
       enable = true;
-      orcaslicer.enable = true;
+      orcaslicer.enable = false; # INFO: temp
     };
     thunar.enable = true;
     signal.enable = true;
