@@ -23,6 +23,15 @@
     ./sops.nix
   ];
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "libsoup-2.74.3"
+        "beekeeper-studio-5.2.12"
+      ];
+    };
+  };
   system.stateVersion = "25.05";
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   # cron

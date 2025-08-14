@@ -13,11 +13,12 @@
       default = false;
     };
   };
-  config =
-    lib.mkIf (config.program.beekeeper.enable && pkgs.config.permittedInsecurePackages or false)
-      {
-        home = {
-          packages = with pkgs; [ beekeeper-studio ];
-        };
-      };
+  config = lib.mkIf config.program.beekeeper.enable {
+    nixpkgs.config.permittedInsecurePackages = [
+      "beekeeper-studio-5.2.12"
+    ];
+    home = {
+      packages = with pkgs; [ beekeeper-studio ];
+    };
+  };
 }

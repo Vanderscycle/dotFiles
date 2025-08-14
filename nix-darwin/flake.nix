@@ -116,20 +116,9 @@
           specialArgs = {
             inherit inputs;
             meta = linuxMeta;
-          } // inputs;
+          }
+          // inputs;
           modules = [
-            {
-              nixpkgs = {
-                config = {
-                  allowUnfree = true;
-                  permittedInsecurePackages = [
-                    "libsoup-2.74.3"
-                    "electron-35.7.1"
-                    "beekeeper-studio-5.2.12"
-                  ];
-                };
-              };
-            }
             ./users/henri/configuration.nix
             home-manager.nixosModules.home-manager
             {
@@ -157,7 +146,8 @@
           specialArgs = {
             inherit inputs;
             meta = mediaMeta;
-          } // inputs;
+          }
+          // inputs;
           modules = [
             ./users/medialab/configuration.nix
             home-manager.nixosModules.home-manager
