@@ -119,6 +119,17 @@
           }
           // inputs;
           modules = [
+            {
+              nixpkgs = {
+                config = {
+                  allowUnfree = true;
+                  permittedInsecurePackages = [
+                    "electron-35.7.1"
+                    "beekeeper-studio-5.2.12"
+                  ];
+                };
+              };
+            }
             ./users/henri/configuration.nix
             home-manager.nixosModules.home-manager
             {
