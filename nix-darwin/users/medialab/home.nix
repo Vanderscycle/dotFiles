@@ -15,6 +15,7 @@
     ../../home-modules/services
   ];
   program = {
+    proton.enable = true;
     brave.enable = true;
     fish.enable = true;
     git = {
@@ -29,7 +30,7 @@
       ];
     };
     thunar.enable = true;
-    nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin";
+    nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin#medialab";
   };
 
   home = {

@@ -17,15 +17,29 @@
     ../../nix-modules/services
     # systemd/cron
     ../../nix-modules/cron
+    # scripts
+    # ../../nix-modules/writerScripts
     # local
     ./sops.nix
   ];
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "libsoup-2.74.3"
+        "beekeeper-studio-5.2.12"
+      ];
+    };
+  };
   system.stateVersion = "25.05";
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   # cron
-  cron.downloadFolderOrganizer.enable = true;
-  cron.factorioSave.enable = false;
+  cron = {
+    nasBackup.photos.enable = true;
+    # TODO: update to send pdf to cloud for paperless-ngx
+    downloadFolderOrganizer.enable = false;
+  };
   # services
   bluetooth.enable = true;
   internationalisation.enable = true;

@@ -116,7 +116,8 @@
           specialArgs = {
             inherit inputs;
             meta = linuxMeta;
-          } // inputs;
+          }
+          // inputs;
           modules = [
             {
               nixpkgs = {
@@ -156,7 +157,8 @@
           specialArgs = {
             inherit inputs;
             meta = mediaMeta;
-          } // inputs;
+          }
+          // inputs;
           modules = [
             ./users/medialab/configuration.nix
             home-manager.nixosModules.home-manager
