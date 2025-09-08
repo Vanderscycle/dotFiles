@@ -12,6 +12,11 @@
       description = "Enables paid music";
       default = true;
     };
+    program.spicetify.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "pretty";
+      default = true;
+    };
   };
 
   imports = [ inputs.spicetify-nix.homeManagerModules.default ];
@@ -23,9 +28,9 @@
       ];
     programs.spicetify =
       let
-        spicetifyPkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+        spicetifyPkgs = inputs.spicetify-nix.homeManager.${pkgs.system};
       in
-      {
+      lib.mkIf config.program.spicetify.enable {
         theme = spicetifyPkgs.themes.catppuccin;
         colorScheme = "mocha";
         enable = true;
