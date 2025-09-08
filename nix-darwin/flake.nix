@@ -82,6 +82,7 @@
     {
       darwinConfigurations = {
         #nix run nix-darwin -- switch --flake ./nix-darwin
+        #nh darwin switch
         Henris-MacBook-Pro = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           specialArgs = {
@@ -89,6 +90,16 @@
             meta = darwinMeta;
           };
           modules = [
+            {
+              nixpkgs = {
+                config = {
+                  allowUnfree = true;
+                  permittedInsecurePackages = [
+                    "arc-browser-1.109.0-67185"
+                  ];
+                };
+              };
+            }
             ./users/henri.vandersleyen/configuration.nix
             home-manager.darwinModules.home-manager
             {
@@ -116,8 +127,7 @@
           specialArgs = {
             inherit inputs;
             meta = linuxMeta;
-          }
-          // inputs;
+          } // inputs;
           modules = [
             {
               nixpkgs = {
@@ -157,8 +167,7 @@
           specialArgs = {
             inherit inputs;
             meta = mediaMeta;
-          }
-          // inputs;
+          } // inputs;
           modules = [
             ./users/medialab/configuration.nix
             home-manager.nixosModules.home-manager

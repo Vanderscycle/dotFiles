@@ -45,7 +45,7 @@
   };
   home-manager.backupFileExtension = "backup";
   fonts.packages = with pkgs; [
-    jetbrains-mono
+    # jetbrains-mono
   ];
 
   environment = {
@@ -70,6 +70,7 @@
       "rectangle"
       "iterm2"
       "postman"
+      "arc"
       # "nikitabobko/tap/aerospace" # not vetted on work laptop
     ];
     brews = [

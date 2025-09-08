@@ -60,13 +60,14 @@
 
   # languages
   languages = {
-    python.lsp.enable = true;
+    python.lsp.enable = false;
     jsts.lsp.enable = true;
   };
 
   # programs
   program = {
-    arc-browser.enable = true;
+    spicetify.enable = false;
+    arc-browser.enable = false; # INFO unmaintained
     codium.enable = false;
     fish.enable = true;
     zsh.enable = true;
