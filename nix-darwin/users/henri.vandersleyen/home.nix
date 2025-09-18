@@ -4,6 +4,7 @@
 {
   config,
   meta,
+  pkgs,
   ...
 }:
 
@@ -20,6 +21,7 @@
     ../../home-modules/programs/fzf.nix
     # ../../home-modules/programs/ghostty.nix # INFO:broken
     ../../home-modules/programs/btop.nix
+    ../../home-modules/programs/cloud.nix
     ../../home-modules/programs/codium.nix
     ../../home-modules/programs/fish.nix
     ../../home-modules/programs/zsh.nix
@@ -32,16 +34,18 @@
     ../../home-modules/programs/spotify.nix
     ../../home-modules/programs/nh.nix
     ../../home-modules/programs/bat.nix
+    ../../home-modules/programs/codium.nix
 
     # languages
     ../../home-modules/languages/nix.nix
     ../../home-modules/languages/python.nix
     ../../home-modules/languages/jsts.nix
     ../../home-modules/languages/bash.nix
+    ../../home-modules/languages/json.nix
+    ../../home-modules/languages/yaml.nix
 
     # services
     # ./home-modules/services/appleTouchId.nix
-
     # Window-manager
     ../../home-modules/window-managers/aerospace
 
@@ -62,13 +66,17 @@
   languages = {
     python.lsp.enable = false;
     jsts.lsp.enable = true;
+    yaml.lsp.enable = true;
+    json.lsp.enable = true;
   };
 
   # programs
   program = {
+    awscli.enable = true;
+    spotify.enable = false; # issues using brew
     spicetify.enable = false;
     arc-browser.enable = false; # INFO unmaintained
-    codium.enable = false;
+    codium.enable = true;
     fish.enable = true;
     zsh.enable = true;
     nh.flakeLocation = "/Users/${meta.username}/Documents/dotFiles/nix-darwin";
@@ -84,14 +92,15 @@
       signingKey = config.sops.secrets."knak/git/keyName".path;
     };
   };
-
+  fonts.fontconfig.enable = true;
   home = {
     username = meta.username;
     homeDirectory = "/Users/${meta.username}";
     stateVersion = "23.05"; # Please read the comment before changing.
 
     # Makes sense for user specific applications that shouldn't be available system-wide
-    packages = [ ];
+    packages = with pkgs; [
+    ];
 
     file = { };
 
