@@ -111,7 +111,7 @@
               };
               home-manager.users."henri.vandersleyen" = {
                 imports = [
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                   catppuccin.homeModules.catppuccin
                   ./users/henri.vandersleyen/home.nix
                 ];
@@ -127,7 +127,8 @@
           specialArgs = {
             inherit inputs;
             meta = linuxMeta;
-          } // inputs;
+          }
+          // inputs;
           modules = [
             {
               nixpkgs = {
@@ -151,7 +152,7 @@
               };
               home-manager.users."henri" = {
                 imports = [
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                   catppuccin.homeModules.catppuccin
                   ./users/henri/home.nix
                 ];
@@ -167,7 +168,8 @@
           specialArgs = {
             inherit inputs;
             meta = mediaMeta;
-          } // inputs;
+          }
+          // inputs;
           modules = [
             ./users/medialab/configuration.nix
             home-manager.nixosModules.home-manager
@@ -180,7 +182,7 @@
               };
               home-manager.users."medialab" = {
                 imports = [
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                   catppuccin.homeModules.catppuccin
                   ./users/medialab/home.nix
                 ];

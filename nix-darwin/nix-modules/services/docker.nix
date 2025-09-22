@@ -7,14 +7,14 @@
 }:
 {
   options = {
-    docker.enable = lib.mkOption {
+    services.docker.enable = lib.mkOption {
       type = lib.types.bool;
       description = "enables docker";
       default = false;
     };
   };
 
-  config = lib.mkIf config.docker.enable {
+  config = lib.mkIf config.services.docker.enable {
 
     users.users.${meta.username} = {
       extraGroups = [

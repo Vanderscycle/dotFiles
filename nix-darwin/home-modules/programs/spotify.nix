@@ -26,6 +26,9 @@
       builtins.elem (lib.getName pkg) [
         "spotify"
       ];
+    home.packages = with pkgs; [
+      spotify
+    ];
     programs.spicetify =
       let
         spicetifyPkgs = inputs.spicetify-nix.homeManager.${pkgs.system};

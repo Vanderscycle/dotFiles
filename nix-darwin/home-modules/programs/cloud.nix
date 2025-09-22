@@ -20,17 +20,16 @@
 
   config = {
     # Merge the packages conditionally
-    home.packages = with pkgs; [
-      (lib.mkIf config.program.awscli.enable [
+    home.packages =
+      with pkgs;
+      (lib.optionals config.program.awscli.enable [
         ssm-session-manager-plugin
         awscli2
         aws-sam-cli
         rclone
       ])
-
-      (lib.mkIf config.program.linode.enable [
+      ++ (lib.optionals config.program.linode.enable [
         linode-cli
-      ])
-    ];
+      ]);
   };
 }
