@@ -19,6 +19,7 @@
   };
 
   config = lib.mkIf config.program.keychain.enable {
+    # TODO: Deperecated (update)
     programs.keychain = {
       enable = true;
       keys = config.program.keychain.keys;

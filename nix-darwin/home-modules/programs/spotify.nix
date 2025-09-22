@@ -31,7 +31,7 @@
     ];
     programs.spicetify =
       let
-        spicetifyPkgs = inputs.spicetify-nix.homeManager.${pkgs.system};
+        spicetifyPkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
       in
       lib.mkIf config.program.spicetify.enable {
         theme = spicetifyPkgs.themes.catppuccin;
