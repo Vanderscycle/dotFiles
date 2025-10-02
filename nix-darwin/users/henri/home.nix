@@ -87,6 +87,7 @@
 
   # programs
   program = {
+    spicetify.enable = false;
     beekeeper.enable = true;
     codium.enable = true;
     bottles.enable = false;

@@ -43,7 +43,7 @@
   # services
   bluetooth.enable = true;
   internationalisation.enable = true;
-  docker.enable = true;
+  services.docker.enable = true;
   transmission.enable = false; # home server
 
   # programming

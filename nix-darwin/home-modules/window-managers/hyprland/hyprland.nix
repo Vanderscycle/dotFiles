@@ -20,6 +20,7 @@
         # sets repeatable binds for resizing the active window
         binde = , E, exec, $reset $emacs
         binde = , D, exec, $reset $emacs --eval '(dired "~/Documents/dotFiles/nix-darwin")'
+        binde = , P, exec, $reset $emacs --eval '(dired "~/Pictures")'
         # binde = , P, exec, $reset $emacs --eval '(progn (require "\"'projectile) (projectile-add-known-project "~/Documents/dotFiles/nix-darwin") (projectile-switch-project-by-name "~/Documents/dotFiles/nix-darwin"))'
         binde = , N, exec, $reset $emacs --eval '(find-file "~/Documents/zettelkasten/org-roam/20240828204250-knowlege_base.org")'
         binde = , B, exec, $reset $emacs --eval '(ibuffer)'
@@ -111,9 +112,9 @@
         #   new_is_master = true; # new window become the active window
         # };
         # https://wiki.hyprland.org/Configuring/Variables/#gestures
-        gestures = {
-          workspace_swipe = "off";
-        };
+        # gestures = {
+        #   workspace_swipe = "off";
+        # };
         # https://wiki.hyprland.org/Configuring/Keywords/
 
         ###################
@@ -204,8 +205,9 @@
         windowrulev2 = [
           # Workspace rules
           "workspace 1, class:^(Emacs)$"
-          "workspace 2, class:^(firefox|Brave-browser)$"
+          "workspace 2, class:^(firefox|brave-browser)$"
           "workspace 3, class:^(discord|Spotify|spotify|Proton Pass)$"
+          "workspace 7, class:^(Proton Pass)$"
           "workspace 4, class:^(?i)steam|heroic$" # Case-insensitive match
           "workspace 5, class:^(SuperSlicer|OrcaSlicer)$"
           "workspace 6, class:^(transmission-gtk)$"
