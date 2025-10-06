@@ -87,6 +87,7 @@
 
   # programs
   program = {
+    godot.enable = true;
     spicetify.enable = false;
     beekeeper.enable = true;
     codium.enable = true;

@@ -1,13 +1,15 @@
-{ lib, ... }:
+# ./ghostty.nix
+
+{ ... }:
 {
   imports = [
     ./alacritty.nix
     ./arc_browser.nix
     ./bat.nix
     ./beekeeper.nix
+    ./bottles.nix
     ./brave.nix
     ./btop.nix
-    ./bottles.nix
     ./cloud.nix
     ./codium.nix
     ./cowsay.nix
@@ -17,8 +19,8 @@
     ./flameshot.nix
     ./fuzzel.nix
     ./fzf.nix
-    # ./ghostty.nix
     ./git.nix
+    ./godot.nix
     ./k9s.nix
     ./keychain.nix
     ./kitty.nix
