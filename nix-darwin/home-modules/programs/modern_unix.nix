@@ -18,6 +18,7 @@
       hyperfine # how xz was discovered
       curlie # curl + httpie baby
       unzip
+      dysk
       silver-searcher # ag
       platinum-searcher # pt
     ];

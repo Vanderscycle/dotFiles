@@ -7,7 +7,7 @@
 }:
 
 let
-  trueNasFamilyUser = "smbcreds_fam"; # Define the service name as a variable
+  synologyUser = "synology";
 in
 {
   imports = [
@@ -33,14 +33,15 @@ in
       "yubico/u2f_keys" = {
       };
 
-      # TruNas SMB access
-      "home-server/rice/password" = {
+      # Synology SMB access
+      "home-server/synology/password" = {
         owner = "root";
       };
 
-      "home-server/rice/user" = {
+      "home-server/synology/user" = {
         owner = "root";
       };
+
     };
   };
 
@@ -60,10 +61,10 @@ in
 
   systemd.services."smbcreds_fam" = {
     script = ''
-      echo "user=$(cat ${config.sops.secrets."home-server/rice/user".path})" > /root/${trueNasFamilyUser}
+      echo "user=$(cat ${config.sops.secrets."home-server/synology/user".path})" > /root/${synologyUser}
       echo "password=$(cat ${
-        config.sops.secrets."home-server/rice/password".path
-      })" >> /root/${trueNasFamilyUser}
+        config.sops.secrets."home-server/synology/password".path
+      })" >> /root/${synologyUser}
     '';
     serviceConfig = {
       Type = "oneshot";

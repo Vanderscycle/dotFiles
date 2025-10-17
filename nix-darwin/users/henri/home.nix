@@ -42,8 +42,8 @@
         user = "medialab";
       };
       monolith = {
-        hostname = "192.168.4.129";
-        user = "henri";
+        hostname = "192.168.2.228";
+        user = "monolith";
       };
       macos = {
         hostname = "192.168.4.167";
@@ -77,7 +77,6 @@
     go.lsp.enable = true;
     python.lsp.enable = true;
     jsts = {
-      vue.enable = false;
       lsp.enable = true;
     };
     latex.lsp.enable = true;
@@ -87,7 +86,7 @@
 
   # programs
   program = {
-    godot.enable = true;
+    godot.enable = false;
     spicetify.enable = false;
     beekeeper.enable = true;
     codium.enable = true;
@@ -140,7 +139,9 @@
 
     file = { };
 
-    sessionVariables = { };
+    sessionVariables = {
+      PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
+    };
 
     sessionPath = [ ];
   };

@@ -10,6 +10,8 @@
       enable = true; # allow home-manager to configure hyprland
       # https://github.com/nix-community/home-manager/issues/6062
       extraConfig = ''
+        ecosystem:no_update_news = true
+
         env = HYPRCURSOR_THEME,rose-pine-hyprcursor
         env = XCURSOR_THEME,rose-pine-hyprcursor
         env = HYPRCURSOR_SIZE,32
@@ -144,7 +146,7 @@
             "$mainMod SHIFT, j, resizeactive, 0 120"
             # launch program menu
             "SHIFTSUPER, P, exec, $menu"
-            "SHIFTSUPER, O, exec, grim -g '$(slurp)' ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png" # idk, flameshot doesn't work wihtout this
+            # "SHIFTSUPER, O, exec, grim -g '$(slurp)' ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png" # idk, flameshot doesn't work wihtout this
 
             "SHIFTSUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
             "SHIFTSUPER, O, exec, flameshot gui --clipboard"

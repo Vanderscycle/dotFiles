@@ -13,8 +13,9 @@
     };
   };
   config = lib.mkIf config.program.godot.enable {
-    environment.systemPackages = [
-      pkgs.godot
+
+    home.packages = with pkgs; [
+      godot
     ];
   };
 }

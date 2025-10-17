@@ -12,9 +12,9 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
       mesa
-      amdvlk
+      # amdvlk replaced by RADV
     ];
-    extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+    extraPackages32 = [ ];
 
     ## radv: an open-source Vulkan driver from freedesktop
   };

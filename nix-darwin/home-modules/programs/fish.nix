@@ -20,7 +20,8 @@
       plugins = [ ];
       enable = true;
       shellInit = ''
-                 # set -x PATH $PATH $HOME/.npm-global/bin
+        fish_add_path $PNPM_HOME
+        # set -x PATH $PATH $HOME/.npm-global/bin
         set ENTERPRISE_REPO_PATH ~/knak
 
         if test -f $ENTERPRISE_REPO_PATH/scripts/mfa-token-loader.sh
@@ -59,9 +60,6 @@
         #   grim -g "$(slurp -o -r -c '#ff0000ff')" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png
         # '';
         # ssh
-        # v-minion-save = ''
-        #   rsync -avz pi@192.168.1.243:/home/pi/printer_data/config/custom pi@192.168.1.243:/home/pi/printer_data/config/printer.cfg /home/${username}/Documents/3D-models/printer_configs/v-minion/
-        # '';
         # network
         kill-port = "kill -9 $(lsof -t -i:$argv[1])";
         # cloud access
@@ -90,9 +88,6 @@
           sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
         '';
         # git
-        gSquash = ''
-          git reset (git merge-base "$argv" (git branch --show-current))
-        '';
         # bios
         bios = "systemctl reboot --firmware-setup";
       };

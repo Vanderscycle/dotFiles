@@ -71,12 +71,14 @@
         system = "x86_64-linux";
         username = "henri";
         hostname = "desktop";
+        synology-nas = "192.168.1.246";
       };
 
       mediaMeta = {
         system = "x86_64-linux";
         username = "medialab";
         hostname = "medialab";
+        synology-nas = "192.168.1.246";
       };
     in
     {
@@ -136,7 +138,7 @@
                   allowUnfree = true;
                   permittedInsecurePackages = [
                     "electron-35.7.1"
-                    "beekeeper-studio-5.2.12"
+                    "beekeeper-studio-5.3.4"
                   ];
                 };
               };
@@ -144,7 +146,7 @@
             ./users/henri/configuration.nix
             home-manager.nixosModules.home-manager
             {
-              #home-manager.useGlobalPkgs = true;
+              home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 inherit inputs;
