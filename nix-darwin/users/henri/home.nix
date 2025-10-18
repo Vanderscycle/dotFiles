@@ -75,6 +75,7 @@
   # languages
   languages = {
     go.lsp.enable = true;
+    lua.lsp.enable = true;
     python.lsp.enable = true;
     jsts = {
       lsp.enable = true;
