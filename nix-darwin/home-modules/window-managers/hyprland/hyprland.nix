@@ -12,6 +12,9 @@
       extraConfig = ''
         ecosystem:no_update_news = true
 
+        env = BROWSER,brave
+        env = DEFAULT_BROWSER,brave
+
         env = HYPRCURSOR_THEME,rose-pine-hyprcursor
         env = XCURSOR_THEME,rose-pine-hyprcursor
         env = HYPRCURSOR_SIZE,32
@@ -147,8 +150,7 @@
             # launch program menu
             "SHIFTSUPER, P, exec, $menu"
             # "SHIFTSUPER, O, exec, grim -g '$(slurp)' ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png" # idk, flameshot doesn't work wihtout this
-
-            "SHIFTSUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
+            # "SHIFTSUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
             "SHIFTSUPER, O, exec, flameshot gui --clipboard"
 
             # scripts
@@ -250,9 +252,9 @@
           "brave"
           "kitty"
           "flameshot"
+          "copyq --start-server"
           "fcitx5"
           "proton-pass"
-          "copyq --start-server"
           "wl-paste --watch cliphist store" # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/
           # "emacs" # TODO: make it spawn out of a shell
         ];

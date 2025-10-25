@@ -102,6 +102,9 @@
  ;; number is the project limit and the second the limit on the recent files
  ;; within a project.
  dotspacemacs-startup-lists '((recents . 5)
+                              (agenda . 8)
+                              (bookmarks . 6)
+                              (todos . 9)
                               (projects . 7))
 
  ;; True if the home buffer should respond to resize events. (default t)
@@ -116,7 +119,7 @@
  ;; If non-nil, show file icons for entries and headings on Spacemacs home buffer.
  ;; This has no effect in terminal or if "all-the-icons" package or the font
  ;; is not installed. (default nil)
- dotspacemacs-startup-buffer-show-icons nil
+ dotspacemacs-startup-buffer-show-icons t
 
  ;; Default major mode for a new empty buffer. Possible values are mode
  ;; names such as `text-mode'; and `nil' to use Fundamental mode.
@@ -324,7 +327,7 @@
 
  ;; Show the scroll bar while scrolling. The auto hide time can be configured
  ;; by setting this variable to a number. (default t)
- dotspacemacs-scroll-bar-while-scrolling t
+ dotspacemacs-scroll-bar-while-scrolling nil
 
  ;; Control line numbers activation.
  ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
@@ -387,7 +390,7 @@
  ;; List of search tool executable names. Spacemacs uses the first installed
  ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
  ;; (default '("rg" "ag" "pt" "ack" "grep"))
- dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+ dotspacemacs-search-tools '("ag" "rg" "ack" "grep") ;; pt
 
  ;; The backend used for undo/redo functionality. Possible values are
  ;; `undo-fu', `undo-redo' and `undo-tree' see also `evil-undo-system'.

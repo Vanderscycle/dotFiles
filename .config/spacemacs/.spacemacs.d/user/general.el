@@ -19,19 +19,6 @@
 (setq-default spacemacs-yank-indent-threshold 0) ;; disables auto indent on pasting
 (setq-default word-wrap t)
 ;; --- popper ---
-(spacemacs/set-leader-keys "opt" 'popper-toggle)
-(spacemacs/set-leader-keys "opc" 'popper-cycle)
-(spacemacs/set-leader-keys "opm" 'popper-toggle-type)
-(popper-mode +1)
-(popper-echo-mode +1)
-(setq popper-reference-buffers
-      (append popper-reference-buffers
-              '("^\\*eshell.*\\*$" eshell-mode ;eshell as a popup
-                "^\\*shell.*\\*$"  shell-mode  ;shell as a popup
-                "^\\*term.*\\*$"   term-mode   ;term as a popup
-                "^\\*vterm.*\\*$"  vterm-mode  ;vterm as a popup
-                )))
-(setq popper-window-height 0.33)
 ;; --- vue ---
 ;; --- maggit ---
 ;; smerge
@@ -85,12 +72,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
  web-mode-code-indent-offset 2
  web-mode-attr-indent-offset 2)
 ;; --- llm/ai ---
-;; (gptel-make-deepseek "DeepSeek"
-;;   :stream t
-;;   :key "your-api-key")
-(gptel-make-gh-copilot "Copilot")
-(setq gptel-model 'claude-3.7-sonnet
-      gptel-backend (gptel-make-gh-copilot "Copilot"))
 ;; --- projectile ---
 (setq projectile-project-search-path '("~/knak/packages/" "~/Documents/"))
 (spacemacs/set-leader-keys "ps" 'projectile-discover-projects-in-search-path)
@@ -108,53 +89,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   (add-to-list 'hl-todo-keyword-faces '("WARN" . "#FAB387"))  ;; Catppuccin Peach
   (add-to-list 'hl-todo-keyword-faces '("FIX" . "#F38BA8"))  ;; Catppuccin Red
   (add-to-list 'hl-todo-keyword-faces '("INFO" . "#89DCEB"))) ;; Catppuccin Sky
-;; --- org-general ---
-(setq user-mail-address "henri-vandersleyen@protonmail.com")
-(add-hook 'org-mode-hook
-          (lambda ()
-            (toggle-truncate-lines nil) ))
-
-(spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
-;; --- org-keybindings ---
-(defun my/org-add-checkbox-counter ()
-  "Append `[/]` at the end of the current TODO item."
-  (interactive)
-  (save-excursion
-    (org-back-to-heading t)
-    (end-of-line)
-    (insert " [/]")
-    ))
-;; keybinding will only be available in org mode
-(add-hook 'org-mode-hook
-          (lambda ()
-            (spacemacs/set-leader-keys-for-major-mode 'org-mode "T/" 'my/org-add-checkbox-counter)
-            (spacemacs/set-leader-keys-for-major-mode 'org-mode "iDc" 'org-download-clipboard)
-            ))
-;; --- org-modern ---
-(setq org-adapt-indentation t
-      org-hide-leading-stars t
-      org-hide-emphasis-markers t
-      org-pretty-entities t
-      org-ellipsis "  ·")
-(setq org-src-fontify-natively t
-      org-src-tab-acts-natively t
-      org-edit-src-content-indentation 0)
-;; --- org-journal ---
-(setq org-journal-dir "~/Documents/zettelkasten/org-roam/org/journal")
-(setq org-directory "~/Documents/zettelkasten/org-roam/org")
-(setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
-(setq find-file-visit-truename t)
-;; --- org-clock ---
-
-(setq org-clocktable-defaults '(:maxlevel 4 :lang "en" :scope file :block nil :wstart 1 :mstart 1 :tstart nil
-                                          :tend nil :step nil :stepskip0 nil :fileskip0 nil :tags nil :match
-                                          nil :emphasize nil :link nil :narrow 40! :indent t :filetitle nil
-                                          :hidefiles nil :formula nil :timestamp nil :level nil :tcolumns nil
-                                          :formatter nil))
-;; --- org-agenda ---
-(setq org-agenda-files '("~/Documents/zettelkasten/org-roam/"))
-(setq org-agenda-skip-deadline-if-done t)
-
 ;; --- lsp ---
 (add-hook 'python-mode-hook #'lsp)
 (add-hook 'typescript-mode-hook #'lsp)
@@ -168,16 +102,19 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
 ;; --- sops --
 ;; https://github.com/djgoku/sops
-(which-key-add-key-based-replacements "os" "+sops")
-(spacemacs/set-leader-keys "ose" 'sops-edit-file)
-(spacemacs/set-leader-keys "oss" 'sops-save-file)
-(spacemacs/set-leader-keys "osc" 'sops-cancel)
+(spacemacs/set-leader-keys "oSe" 'sops-edit-file)
+(spacemacs/set-leader-keys "oSs" 'sops-save-file)
+(spacemacs/set-leader-keys "oSc" 'sops-cancel)
 (global-sops-mode 1)
+
+;; --- else ---
+(spacemacs/set-leader-keys "oSc" 'sops-cancel)
 ;; --- which-key --
 (which-key-add-key-based-replacements
   "SPC o a" "git"
-  "SPC o s" "sops"
+  "SPC o S" "sops"
   "SPC o d" "dired"
+  "SPC o r" "replace"
   "SPC o l" "persp")
 ;; --- treemacs ---
 (custom-set-faces

@@ -26,7 +26,7 @@ in
       "emacs/forge/gh_api" = {
         owner = "henri";
       };
-      "emacs/llm/closedai" = {
+      "emacs/llm/deepseek" = {
         owner = "henri";
       };
       # INFO: for values to be available throughout the config your must declare them
@@ -48,7 +48,7 @@ in
   systemd.services."authinfo" = {
     script = ''
       echo "$(cat ${config.sops.secrets."emacs/forge/gh_api".path})" > /home/henri/.authinfo
-      echo "$(cat ${config.sops.secrets."emacs/llm/closedai".path})" >> /home/henri/.authinfo
+      echo "$(cat ${config.sops.secrets."emacs/llm/deepseek".path})" >> /home/henri/.authinfo
     '';
     serviceConfig = {
       Type = "oneshot";

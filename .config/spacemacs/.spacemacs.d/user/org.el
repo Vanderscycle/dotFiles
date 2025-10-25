@@ -1,3 +1,50 @@
+;; --- org-general ---
+(setq user-mail-address "henri-vandersleyen@protonmail.com")
+(add-hook 'org-mode-hook
+          (lambda ()
+            (toggle-truncate-lines nil) ))
+
+(spacemacs/set-leader-keys "olk" 'spacemacs/helm-persp-kill)
+;; --- org-keybindings ---
+(defun my/org-add-checkbox-counter ()
+  "Append `[/]` at the end of the current TODO item."
+  (interactive)
+  (save-excursion
+    (org-back-to-heading t)
+    (end-of-line)
+    (insert " [/]")
+    ))
+;; keybinding will only be available in org mode
+(add-hook 'org-mode-hook
+          (lambda ()
+            (spacemacs/set-leader-keys-for-major-mode 'org-mode "T/" 'my/org-add-checkbox-counter)
+            (spacemacs/set-leader-keys-for-major-mode 'org-mode "iDc" 'org-download-clipboard)
+            ))
+;; --- org-modern ---
+(setq org-adapt-indentation t
+      org-hide-leading-stars t
+      org-hide-emphasis-markers t
+      org-pretty-entities t
+      org-ellipsis "  ·")
+(setq org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      org-edit-src-content-indentation 0)
+;; --- org-journal ---
+(setq org-journal-dir "~/Documents/zettelkasten/org-roam/org/journal")
+(setq org-directory "~/Documents/zettelkasten/org-roam/org")
+(setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
+(setq find-file-visit-truename t)
+;; --- org-clock ---
+
+(setq org-clocktable-defaults '(:maxlevel 4 :lang "en" :scope file :block nil :wstart 1 :mstart 1 :tstart nil
+                                          :tend nil :step nil :stepskip0 nil :fileskip0 nil :tags nil :match
+                                          nil :emphasize nil :link nil :narrow 40! :indent t :filetitle nil
+                                          :hidefiles nil :formula nil :timestamp nil :level nil :tcolumns nil
+                                          :formatter nil))
+;; --- org-agenda ---
+(setq org-agenda-files '("~/Documents/zettelkasten/org-roam/"))
+(setq org-agenda-skip-deadline-if-done t)
+
 ;; --- org-todo ---
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
@@ -41,6 +88,8 @@
         ("@emergency" . ?e)
         (:endgroup . nil)
 
+        ;; descritpive
+        ("new" . ?q)
         ;; tasks TODOs
         (:startgroup . nil)
         ("homelab" . ?h)
@@ -110,6 +159,7 @@
         ))
 
 ;; --- org-roam ---
+(setq org-roam-db-autosync-mode nil)
 ;; don't forget to org-roam-db-sync
 (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
 (setq org-journal-dir "~/Documents/zettelkasten/org/journal")

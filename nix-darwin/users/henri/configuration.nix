@@ -25,6 +25,11 @@
 
   system.stateVersion = "25.05";
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    lua-language-server
+  ];
   # cron
   cron = {
     nasBackup.photos.enable = true;
@@ -121,35 +126,58 @@
     };
     xserver = {
       enable = true;
+      displayManager.sessionCommands = ''
+        export XDG_CURRENT_DESKTOP="Hyprland"
+        export XDG_SESSION_TYPE="wayland"
+      '';
     };
   };
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=3600
   '';
+  # TODO: opening a browser;
+  xdg = {
+    portal = {
+      enable = true;
+      # extraPortals = with pkgs; [
+      # ];
+      config.common.default = [
+        "hyprland"
+        "gtk"
+      ];
+    };
+    mime = {
+      enable = true;
+      # xdg-mime query default application/pdf
 
-  xdg.mime = {
-    # xdg-mime query default application/pdf
-    defaultApplications = {
-      "application/pdf" = [ "zathura.desktop" ];
-      "application/json" = [ "nvim.desktop" ]; # You'll need a .desktop file for Vim or your preferred editor
-      "text/plain" = [ "nvim.desktop" ];
-      # Video formats
-      "video/mp4" = [ "vlc.desktop" ];
-      "video/mpeg" = [ "vlc.desktop" ];
-      "video/x-matroska" = [ "vlc.desktop" ];
-      "video/quicktime" = [ "vlc.desktop" ];
-      "video/x-msvideo" = [ "vlc.desktop" ]; # AVI
-      "video/webm" = [ "vlc.desktop" ];
-      # Directories
-      "inode/directory" = [ "thunar.desktop" ];
-      # Images
-      "image/jpeg" = [ "feh.desktop" ];
-      "image/png" = [ "feh.desktop" ];
-      "image/gif" = [ "feh.desktop" ];
-      "image/webp" = [ "feh.desktop" ];
-      # audio
-      "audio/mpeg" = [ "vlc.desktop" ];
-      "audio/flac" = [ "vlc.desktop" ];
+      defaultApplications = {
+        # browser
+        "text/html" = "brave.desktop";
+        "x-scheme-handler/http" = "brave.desktop";
+        "x-scheme-handler/https" = "brave.desktop";
+        "x-scheme-handler/about" = "brave.desktop";
+
+        "application/pdf" = [ "zathura.desktop" ];
+        "application/json" = [ "nvim.desktop" ]; # You'll need a .desktop file for Vim or your preferred editor
+        "text/plain" = [ "nvim.desktop" ];
+        # Video formats
+        "video/mp4" = [ "vlc.desktop" ];
+        "video/mpeg" = [ "vlc.desktop" ];
+        "video/x-matroska" = [ "vlc.desktop" ];
+        "video/quicktime" = [ "vlc.desktop" ];
+        "video/x-msvideo" = [ "vlc.desktop" ]; # AVI
+        "video/webm" = [ "vlc.desktop" ];
+        # Directories
+        "inode/directory" = [ "thunar.desktop" ];
+        # Images
+        "image/jpeg" = [ "feh.desktop" ];
+        "image/png" = [ "feh.desktop" ];
+        "image/gif" = [ "feh.desktop" ];
+        "image/webp" = [ "feh.desktop" ];
+        # audio
+        "audio/mpeg" = [ "vlc.desktop" ];
+        "audio/flac" = [ "vlc.desktop" ];
+      };
     };
   };
 }

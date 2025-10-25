@@ -27,6 +27,7 @@
     ./kubernetes.nix
     ./lazygit.nix
     ./libreoffice.nix
+    ./loveGameEngine.nix
     ./microcontrollers.nix
     ./modern_unix.nix
     ./multimedia.nix

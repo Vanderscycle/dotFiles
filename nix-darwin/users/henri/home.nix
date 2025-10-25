@@ -26,48 +26,51 @@
 
   # TODO: move this to a vm called homelab monolith add factorio, nextcloud
   # services
-  dunst.enable = lib.mkForce false;
-  fcitx.enable = true; # chinese fonts are super pixels
-  gnome.enable = true;
-  ssh = {
-    enable = true;
-    hosts = {
-      gitea = {
-        hostname = "gitea.homecloud.lan";
-        user = "git";
-        identityFile = "/home/${meta.username}/.ssh/gitea";
-      };
-      medialab = {
-        hostname = "192.168.1.194";
-        user = "medialab";
-      };
-      monolith = {
-        hostname = "192.168.2.228";
-        user = "monolith";
-      };
-      macos = {
-        hostname = "192.168.4.167";
-        user = "mac";
-      };
-      factorio = {
-        hostname = "192.168.4.129";
-        user = "monolith";
-      };
-      knode1 = {
-        hostname = "192.168.2.10";
-        user = "proxmox";
-      };
-      knode2 = {
-        hostname = "192.168.2.11";
-        user = "proxmox";
-      };
-      knode3 = {
-        hostname = "192.168.2.12";
-        user = "proxmox";
-      };
-      livingRoomPi = {
-        hostname = "192.168.1.100";
-        user = "admin";
+  service = {
+    fcitx.enable = true; # chinese fonts are super pixels
+    sqlite.enable = true;
+    dunst.enable = lib.mkForce false;
+    gnome.enable = true;
+    ssh = {
+      enable = true;
+      hosts = {
+        gitea = {
+          hostname = "gitea.homecloud.lan";
+          user = "git";
+          identityFile = "/home/${meta.username}/.ssh/gitea";
+        };
+        medialab = {
+          hostname = "192.168.1.194";
+          user = "medialab";
+        };
+        monolith = {
+          hostname = "192.168.2.228";
+          user = "monolith";
+        };
+        macos = {
+          hostname = "192.168.4.167";
+          user = "mac";
+        };
+        factorio = {
+          hostname = "192.168.4.129";
+          user = "monolith";
+        };
+        knode1 = {
+          hostname = "192.168.2.10";
+          user = "proxmox";
+        };
+        knode2 = {
+          hostname = "192.168.2.11";
+          user = "proxmox";
+        };
+        knode3 = {
+          hostname = "192.168.2.12";
+          user = "proxmox";
+        };
+        livingRoomPi = {
+          hostname = "192.168.1.100";
+          user = "admin";
+        };
       };
     };
   };
@@ -88,6 +91,7 @@
   # programs
   program = {
     godot.enable = false;
+    loveGameEngine.enable = true;
     spicetify.enable = false;
     beekeeper.enable = true;
     codium.enable = true;
@@ -104,7 +108,7 @@
     zulip.enable = true;
     zathura.enable = true;
     nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin";
-    microcontrollers.enable = true;
+    microcontrollers.enable = false;
     office.enable = true;
     kubernetes = {
       enable = true;

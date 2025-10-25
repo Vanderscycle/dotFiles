@@ -14,8 +14,15 @@
   };
 
   config = lib.mkIf config.program.brave.enable {
-    home.packages = with pkgs; [
-      brave
-    ];
+    home = {
+      packages = with pkgs; [
+        brave
+      ];
+      sessionVariables = {
+        BROWSER = "brave";
+        DEFAULT_BROWSER = "brave";
+      };
+    };
+
   };
 }

@@ -7,19 +7,19 @@
 }:
 {
   options = {
-    ssh.enable = lib.mkOption {
+    service.ssh.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables keychain";
       default = false;
     };
 
-    ssh.authorizedSshKeys = lib.mkOption {
+    service.ssh.authorizedSshKeys = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
       description = "ssh key authorized to log with";
       default = null;
     };
 
-    ssh.hosts = lib.mkOption {
+    service.ssh.hosts = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
@@ -50,10 +50,11 @@
     };
   };
 
-  config = lib.mkIf config.ssh.enable {
+  config = lib.mkIf config.service.ssh.enable {
     programs.ssh = {
       enable = true;
-      matchBlocks = config.ssh.hosts;
+      matchBlocks = config.service.ssh.hosts;
+      addKeysToAgent = "yes";
     };
 
     home = {

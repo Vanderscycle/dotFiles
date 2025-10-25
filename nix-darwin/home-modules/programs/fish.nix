@@ -21,7 +21,7 @@
       enable = true;
       shellInit = ''
         fish_add_path $PNPM_HOME
-        # set -x PATH $PATH $HOME/.npm-global/bin
+        # knak
         set ENTERPRISE_REPO_PATH ~/knak
 
         if test -f $ENTERPRISE_REPO_PATH/scripts/mfa-token-loader.sh

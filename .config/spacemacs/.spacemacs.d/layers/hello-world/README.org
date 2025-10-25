@@ -1,0 +1,25 @@
+#+TITLE: hello-world layer
+
+[[file:img/hello-world.png]]
+
+* Table of Contents                     :TOC_5_gh:noexport:
+- [[#description][Description]]
+  - [[#features][Features:]]
+- [[#install][Install]]
+- [[#key-bindings][Key bindings]]
+
+* Description
+This is a custom hello-world layer for Spacemacs.
+
+** Features:
+- Simple greeting function
+- Leader key binding
+
+* Install
+To use this configuration layer, add it to your =~/.spacemacs=.
+
+* Key bindings
+
+| Key binding | Description                  |
+|-------------+------------------------------|
+| ~SPC m h~   | Show hello world message     |

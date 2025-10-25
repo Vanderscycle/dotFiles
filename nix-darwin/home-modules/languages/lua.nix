@@ -16,6 +16,8 @@
   config = lib.mkIf config.languages.lua.lsp.enable {
     home.packages = with pkgs; [
       lua
+      lua-language-server
+      luajitPackages.luarocks
     ];
   };
 }

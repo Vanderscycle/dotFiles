@@ -21,7 +21,7 @@
 
  ;; List of additional paths where to look for configuration layers.
  ;; Paths must have a trailing slash (i.e. "~/.mycontribs/")
- dotspacemacs-configuration-layer-path '()
+ dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
 
  ;; List of configuration layers to load.
  dotspacemacs-configuration-layers
@@ -70,6 +70,9 @@
                typescript-fmt-on-save t
                ) ;; js but like better?
    (php :variables php-backend 'lsp) ;; personal home programming says what?
+   (lua :variables
+        lua-backend 'lsp
+        lua-lsp-server 'lua-language-server) ;; the moon rocks
    (python :variables
            python-format-on-save t
            python-formatter 'black
@@ -92,10 +95,6 @@
           lsp-latex-build-on-save t
           latex-build-command "LaTeX") ;; oh baby its time to go even beyond
    pdf ;; refusing to pay adobe is morally right
-   svelte ;; frontend-for-hipsters
-   (vue :variables
-        vue-backend 'lsp
-        vue-lsp-client 'vls)
    (yaml :variables
          yaml-enable-lsp t) ;; evil clearly fomatted
    toml  ;; what if we tried yet another std
@@ -120,7 +119,15 @@
                llm-client-enable-gptel t) ;; ai client
    (unicode-fonts :variables
                   unicode-fonts-enable-ligatures t) ;; ascii is so o 1970
-   treemacs)
+   treemacs
+   ;;
+   ;; svelte ;; frontend-for-hipsters
+   ;; (vue :variables
+   ;;      vue-backend 'lsp) ;; vue
+
+   ;; other layers (personal)
+   ;;hello-world
+   )
 
 
  ;; List of additional packages that will be installed without being wrapped
@@ -132,8 +139,6 @@
  ;; `:location' property: '(your-package :location "~/path/to/your-package/")
  ;; Also include the dependencies as they will not be resolved automatically.
  dotspacemacs-additional-packages '(
-                                    (popper
-                                     :ensure t)
                                     ag
                                     rg
                                     ob-typescript ;; for org babel
