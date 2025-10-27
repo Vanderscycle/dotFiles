@@ -6,7 +6,7 @@
 }:
 {
   options = {
-    fcitx.enable = lib.mkOption {
+    service.fcitx.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables fcitx languages";
       default = false;
@@ -15,7 +15,7 @@
 
   # search under cn in fctix5-configtool
   # {slack/discord/steam} --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime
-  config = lib.mkIf config.fcitx.enable {
+  config = lib.mkIf config.service.fcitx.enable {
 
     catppuccin.fcitx5.apply = true; # Ensure the theme is applied
     i18n.inputMethod = {
