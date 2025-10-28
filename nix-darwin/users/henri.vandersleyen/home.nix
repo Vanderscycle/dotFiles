@@ -82,7 +82,7 @@
     nh.flakeLocation = "/Users/${meta.username}/Documents/dotFiles/nix-darwin";
     keychain = {
       enable = true;
-      # keys = [ "/home/${meta.username}/.ssh/knak" ];
+      keys = [ "/home/${meta.username}/.ssh/knak" ];
     };
     git = {
       # userEmail = config.sops.secrets."knak/email".path;
