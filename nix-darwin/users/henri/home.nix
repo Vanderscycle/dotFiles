@@ -47,26 +47,6 @@
           hostname = "192.168.2.228";
           user = "monolith";
         };
-        macos = {
-          hostname = "192.168.4.167";
-          user = "mac";
-        };
-        factorio = {
-          hostname = "192.168.4.129";
-          user = "monolith";
-        };
-        knode1 = {
-          hostname = "192.168.2.10";
-          user = "proxmox";
-        };
-        knode2 = {
-          hostname = "192.168.2.11";
-          user = "proxmox";
-        };
-        knode3 = {
-          hostname = "192.168.2.12";
-          user = "proxmox";
-        };
         livingRoomPi = {
           hostname = "192.168.1.100";
           user = "admin";
@@ -124,11 +104,16 @@
       userName = "vanderscycle";
       signingKey = "~/.ssh/endeavourGit.pub";
     };
+    # INFO: if you have this insane issue where keychain does not work you may have to kill the agent
+    # kill <pidfile> 2>/dev/null
+    # rm -f $SSH_AUTH_SOCK
     keychain = {
+      enableFishIntegration = true;
       enable = true;
       keys = [
         "/home/${meta.username}/.ssh/endeavourGit"
         "/home/${meta.username}/.ssh/gitea"
+        "/home/${meta.username}/.ssh/monolith"
       ];
     };
   };

@@ -62,10 +62,5 @@
         ssh-copy-id
       ];
     };
-
-    # Uncomment and adjust if you want to set authorized keys for OpenSSH
-    # openssh.authorizedKeys.keysFiles = lib.optionals (config.ssh.authorizedSshKeys != null) [
-    #   config.ssh.authorizedSshKeys
-    # ];
   };
 }
