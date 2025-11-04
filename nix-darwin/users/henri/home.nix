@@ -98,7 +98,8 @@
     };
     discord.enable = true;
     fish.enable = true;
-    fuzzel.enable = true;
+    fuzzel.enable = false;
+    wofi.enable = true;
     git = {
       userEmail = "henri-vandersleyen@protonmail.com";
       userName = "vanderscycle";

@@ -62,7 +62,8 @@
         "$mainMod" = "SUPER";
         "$terminal" = "kitty";
         "$filemanager" = "thunar";
-        "$menu" = "fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff";
+        #  "$menu" = "fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff";
+        "$menu" = "wofi --show drun";
         "$emacs" = "emacsclient -c -a 'emacs' "; # The space at the end is IMPORTANT!
         "$reset" = "hyprctl dispatch submap reset &&"; # use a variable to keep things more readable
 
