@@ -4,6 +4,8 @@
 
 ;; TODO:
 ;;lua works (required https://nix.dev/guides/faq#how-to-run-non-nix-executables)
+;; python works w/ black
+;; ts/js too
 
 (defun dotspacemacs/layers ()
   "Layer configuration:

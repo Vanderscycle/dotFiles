@@ -103,8 +103,6 @@
  ;; within a project.
  dotspacemacs-startup-lists '((recents . 5)
                               (agenda . 8)
-                              (bookmarks . 6)
-                              (todos . 9)
                               (projects . 7))
 
  ;; True if the home buffer should respond to resize events. (default t)

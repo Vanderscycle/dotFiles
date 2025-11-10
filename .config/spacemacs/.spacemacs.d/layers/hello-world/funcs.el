@@ -9,8 +9,4 @@
 ;;
 ;;; License: GPLv3
 
-;;; Code:
-
 ;; You can define helper functions here if needed
-
-;;; funcs.el ends here

@@ -1,6 +1,8 @@
 ;;INFO: in macos, you can increase the repeat rate of keys
 ;; M-x nerd-icons-install-fonts to fix doom-emacs status line
 (add-to-list 'exec-path "/etc/profiles/per-user/henri.vandersleyen/bin")
+(spacemacs/set-leader-keys "SPC" 'helm-M-x)
+
 ;; --- theme ---
 (setq catppuccin-flavor 'mocha)
 ;; --- elisp ---
@@ -56,7 +58,21 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 ;; --- pomm ---
 (setq pomm-audio-enabled t)
 (setq pomm-audio-player-executable "aplay")
-;; --- ai ---
+;; --- llm/ai ---
+(defun get-deepseek-api-key ()
+  "Retrieve DeepSeek API key from ~/.authinfo."
+  (let ((auth-info (auth-source-search :host "api.deepseek.com" :max 1)))
+    (when auth-info
+      (let ((secret (plist-get (car auth-info) :secret)))
+        (if (functionp secret)
+            (funcall secret)
+          secret)))))
+
+;; Usage
+(setq deepseek-api-key (get-deepseek-api-key))
+(gptel-make-deepseek "DeepSeek"       ;Any name you want
+  :stream t                           ;for streaming responses
+  :key "")
 ;; --- editorconfig ---
 (editorconfig-mode 1)
 ;; --- tailwindcss ---
@@ -71,7 +87,6 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
  web-mode-css-indent-offset 2
  web-mode-code-indent-offset 2
  web-mode-attr-indent-offset 2)
-;; --- llm/ai ---
 ;; --- projectile ---
 (setq projectile-project-search-path '("~/knak/packages/" "~/Documents/"))
 (spacemacs/set-leader-keys "ps" 'projectile-discover-projects-in-search-path)
