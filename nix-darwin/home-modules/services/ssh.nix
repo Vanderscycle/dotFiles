@@ -38,7 +38,7 @@
               default = null;
             };
             identityFile = lib.mkOption {
-              type = lib.types.nullOr lib.types.string;
+              type = lib.types.nullOr lib.types.str;
               description = "The path to the SSH private key file";
               default = null;
             };

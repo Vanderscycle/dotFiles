@@ -28,6 +28,7 @@
           p = "preview-tui";
           c = "fzcd";
           m = "mimelist";
+          i = "imgview";
         };
         bookmarks = {
           d = "~/Documents";
@@ -41,7 +42,10 @@
       };
     };
     home = {
-      packages = with pkgs; [ xdragon ];
+      packages = with pkgs; [
+        dragon-drop
+        sxiv
+      ];
       sessionVariables = {
         # NNN_PLUG = "f:finder;o:fzopen;p:preview-tui;t:preview-tabbed"; # tabbed is x only
         NNN_OPTS = "Hedac";
