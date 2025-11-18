@@ -10,12 +10,12 @@
     program.spotify.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables paid music";
-      default = true;
+      default = false;
     };
     program.spicetify.enable = lib.mkOption {
       type = lib.types.bool;
       description = "pretty";
-      default = true;
+      default = false;
     };
   };
 

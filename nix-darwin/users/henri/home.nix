@@ -70,9 +70,10 @@
 
   # programs
   program = {
+    spotify.enable = true;
+    spicetify.enable = false;
     godot.enable = false;
     loveGameEngine.enable = true;
-    spicetify.enable = false;
     beekeeper.enable = true;
     codium.enable = true;
     bottles.enable = false;

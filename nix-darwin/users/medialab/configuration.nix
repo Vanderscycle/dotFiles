@@ -49,12 +49,19 @@
     };
   };
 
-  networking.wireless = {
-    enable = true;
-    networks = {
-      "Linksys00356_24GHz" = {
-        psk = config.sops.secrets."home-server/wifi/password".path;
+  service = {
+    networking = {
+      enable = true;
+      networkmanager.enable = false;
+      wireless = {
+        enable = true;
+        networks = {
+          "homelab_wifi" = {
+            psk = config.sops.secrets."home-server/wifi/password".path;
+          };
+        };
       };
+
     };
   };
   users.users.${meta.username} = {
@@ -67,8 +74,10 @@
     ];
   };
 
-  # environment.systemPackages = with pkgs; [
-  # ];
+  environment.systemPackages = with pkgs; [
+    # networkmanagerapplet
+
+  ];
 
   home-manager.backupFileExtension = "backup";
 
