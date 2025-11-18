@@ -1,5 +1,4 @@
 {
-  inputs,
   meta,
   config,
   hosts,
@@ -16,6 +15,8 @@
     ../../nix-modules/services/internationalisation.nix
     ../../nix-modules/services/sound.nix
     ../../nix-modules/services/bluetooth.nix
+    ../../nix-modules/services/networking.nix
+
     # local
     ./sops.nix
     ./nix.nix
@@ -66,8 +67,8 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-  ];
+  # environment.systemPackages = with pkgs; [
+  # ];
 
   home-manager.backupFileExtension = "backup";
 
