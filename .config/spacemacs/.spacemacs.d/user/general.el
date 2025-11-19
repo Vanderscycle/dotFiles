@@ -2,7 +2,7 @@
 ;; M-x nerd-icons-install-fonts to fix doom-emacs status line
 (add-to-list 'exec-path "/etc/profiles/per-user/henri.vandersleyen/bin")
 (spacemacs/set-leader-keys "SPC" 'helm-M-x)
-
+(setq user-mail-address "henri-vandersleyen@protonmail.com")
 ;; --- theme ---
 (setq catppuccin-flavor 'mocha)
 ;; --- elisp ---
@@ -15,7 +15,13 @@
 (define-key lisp-interaction-mode-map (kbd "C-c C-c") #'mp-elisp-mode-eval-buffer)
 
 ;; --- shell ---
-(spacemacs/set-leader-keys "obs" 'vterm)
+(spacemacs/set-leader-keys "osp" 'shell-pop)
+;; --- bookmarks ---
+(spacemacs/set-leader-keys "obs" 'bookmark-set)
+(spacemacs/set-leader-keys "obj" 'bookmark-jump)
+(spacemacs/set-leader-keys "obj" 'bookmark-locate) ;; file path
+;; --- marks ---
+
 ;; --- misc problems ---
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1)) ;; disables auto indent on new lines
 (setq-default spacemacs-yank-indent-threshold 0) ;; disables auto indent on pasting
@@ -92,6 +98,8 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (spacemacs/set-leader-keys "ps" 'projectile-discover-projects-in-search-path)
 (spacemacs/set-leader-keys "p/" 'projectile-ag)
 (spacemacs/set-leader-keys "pk" 'projectile-remove-known-project)
+(setq projectile-enable-caching t)
+
 ;; --- babel ---
 (define-derived-mode ts-mode typescript-mode "ts"
   "Major mode for editing typescipt src blocks in org mode.")
@@ -121,15 +129,11 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
 (spacemacs/set-leader-keys "oSs" 'sops-save-file)
 (spacemacs/set-leader-keys "oSc" 'sops-cancel)
 (global-sops-mode 1)
-
-;; --- else ---
-(spacemacs/set-leader-keys "oSc" 'sops-cancel)
 ;; --- which-key --
 (which-key-add-key-based-replacements
-  "SPC o a" "git"
   "SPC o S" "sops"
-  "SPC o d" "dired"
-  "SPC o r" "replace"
+  "SPC o o" "org"
+  "SPC o o r" "org-roam"
   "SPC o l" "persp")
 ;; --- treemacs ---
 (custom-set-faces
@@ -144,5 +148,3 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
             (add-hook 'after-save-hook (lambda () (TeX-command-run-all nil)) nil t)))
 ;; --- dired ---
 (setq dired-kill-when-opening-new-dired-buffer t)
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.

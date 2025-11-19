@@ -61,11 +61,14 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (let ((user-config-dir "~/.spacemacs.d/user/"))
     (load-file (concat user-config-dir "general.el"))
-    (load-file (concat user-config-dir "org.el"))
+    (load-file (concat user-config-dir "org/org.el"))
+    (load-file (concat user-config-dir "org/style.el"))
     (load-file (concat user-config-dir "ssh.el"))
     )
   )
 
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use

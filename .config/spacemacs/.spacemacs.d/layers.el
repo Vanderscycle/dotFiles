@@ -34,6 +34,7 @@
    auto-completion
    better-defaults
    emacs-lisp
+   spacemacs-project
    git ;; maggit
    helm
    docker
