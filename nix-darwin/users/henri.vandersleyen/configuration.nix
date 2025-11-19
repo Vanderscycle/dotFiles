@@ -190,6 +190,7 @@
       "nvm"
       "dive"
       "aws-sam-cli"
+      "awscli"
     ];
   };
 }

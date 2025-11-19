@@ -72,10 +72,10 @@
 
   # programs
   program = {
-    awscli.enable = true;
-    arc-browser.enable = false; # INFO unmaintained (use brew)
+    awscli.enable = false; # brew
+    arc-browser.enable = false; # beew
     codium.enable = true;
-    fish.enable = true;
+    fish.enable = false;
     zsh.enable = true;
     nh.flakeLocation = "/Users/${meta.username}/Documents/dotFiles/nix-darwin";
     keychain = {
