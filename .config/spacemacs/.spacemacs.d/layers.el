@@ -122,8 +122,8 @@
    treemacs
    ;;
    ;; svelte ;; frontend-for-hipsters
-   ;; (vue :variables
-   ;;      vue-backend 'lsp) ;; vue
+   (vue :variables
+        vue-backend 'lsp) ;; vue
 
    ;; other layers (personal)
    ;;hello-world
@@ -139,6 +139,13 @@
  ;; `:location' property: '(your-package :location "~/path/to/your-package/")
  ;; Also include the dependencies as they will not be resolved automatically.
  dotspacemacs-additional-packages '(
+                                    (lsp-tailwindcss
+                                     :ensure (:host github :repo "merrickluo/lsp-tailwindcss")
+                                     :after lsp-mode
+                                     :init
+                                     (setq lsp-tailwindcss-add-on-mode t
+                                           lsp-tailwindcss-server-version "0.14.8"
+                                           lsp-tailwindcss-skip-config-check t))
                                     ag
                                     rg
                                     ob-typescript ;; for org babel

@@ -99,15 +99,6 @@
         ("workout" . ?w)
         ("linux" . ?l)
         (:endgroup . nil)
-
-        ;; chinese tags
-        (:startgroup . nil)
-        ("noun" . ?n)
-        ("verb" . ?v)
-        ("adjective" . ?a)
-        ("adverb" . ?z)
-        (:endgroup . nil)
-
         ))
 (setq org-tag-faces
       '(
@@ -120,42 +111,53 @@
         ("3d_printer"  . (:foreground "#a6e3a1" :weight bold))  ; Green
         ("maintenance" . (:foreground "#f9e2af" :weight bold))  ; Yellow
         ("planning"    . (:foreground "#f38ba8" :weight bold))  ; Red
-        ("noun"        . (:foreground "#fab387" :weight bold))  ; Peach
-        ("verb"        . (:foreground "#cba6f7" :weight bold))  ; Mauve
-        ("adjective"   . (:foreground "#94e2d5" :weight bold))  ; Teal
-        ("adverb"      . (:foreground "#f5c2e7" :weight bold))  ; Pink
         ))
 
 ;; --- org-templates ---
+(setq org-directory "~/Documents/zettelkasten/org")
 (setq org-capture-templates
-      '(
-        ("j" "Work Log Entry"
-         entry (file+datetree "~/Documents/zettelkasten/org/work/work-log.org")
-         "* %^{Task} \n:PROPERTIES:\n:END:\n"
+      `(
+        ("t" "task for a day" entry
+         (file+headline ,(concat org-directory "/home/tasks.org") "Task list")
+         "* TODO [#B] %?\nDEADLINE: %^t")
+        ("l" "link to a buffer file" entry
+         (file+headline ,(concat org-directory "/home/tasks.org") "Links to buffer/files")
+         "* TODO [#C] %?\n%a")
+        ("c" "Contact Information PLEASE ENCRYPT")
+        ("ca" "Acquitances and friends" entry
+         (file+headline ,(concat org-directory "/home/contacts.org") "Acquitances and Friends")
+         "* %^{Name SURNAME}\n :PROPERTIES:\n :PHONE: %^{+country number}\n :EMAIL:%^{}\n")
+        ("cf" "Family" entry
+         (file+headline ,(concat org-directory "/home/contacts.org") "Family Members")
+         "* %^{Name SURNAME}\n :PROPERTIES:\n :PHONE: %^{+country number}\n :EMAIL:%^{}\n")
+        ("w" "work PLEASE ENCRYPT")
+        ("wj" "Work Log Entry" entry
+         (file+datetree ,(concat org-directory "/work/work-log.org"))
+         "* %^{Task}\n:PROPERTIES:\n:END:\n"
          :empty-lines 0)
-        ("c" "Code To-Do"
-         entry (file+headline "~/Documents/zettelkasten/org/work/todo.org" "Code Related Tasks")
-         "* TODO [#C] %?\n:PROPERTIES:\n:Effort: $^{Effort}\n:Weight: $^{Weight}\n:END:\nDEADLINE: %^T\n:Created: %T\n%i\n%a\nShortcut Ticket: \nProposed Solution: \n"
-         :empty-lines 0)
-        ("g" "General To-Do"
-         entry (file+headline "~/Documents/zettelkasten/org/home/todo.org" "General TODOS")
-         "* TODO [#E] %?\n:Created: %T\n "
-         :empty-lines 0)
-        ("l" "Learning note"
-         entry (file+headline "~/Documents/zettelkasten/org/home/learning.org" "Learning Notes")
-         "* %^{Subject} \n:PROPERTIES:\n:END:\n** %?"
-         :empty-lines 0)
-        ("b" "Book note"
-         entry (file+headline "~/Documents/zettelkasten/org/home/books.org" "Book Notes")
-         "* %^{Subject}\n:PROPERTIES:\n:Title: %^{Title}\n:Author: %^{Author}\n:END:\n** Notes\n%?"
-         :empty-lines 0)
-        ("m" "Meeting"
-         entry (file+datetree "~/Documents/zettelkasten/org/work/meetings.org")
-         "* %^{meeting} :meeting:%^g\n:PROPERTIES:\n:Created: %T\n:END:\n** Attendees\n*** \n** Notes\n** Action Items\n*** TODO [#A] "
-         :tree-type week
-         :clock-in t
-         :clock-resume t
-         :empty-lines 0)
+        ;; ("c" "Code To-Do"
+        ;;  entry (file+headline "~/Documents/zettelkasten/org/work/todo.org" "Code Related Tasks")
+        ;;  "* TODO [#C] %?\n:PROPERTIES:\n:Effort: $^{Effort}\n:Weight: $^{Weight}\n:END:\nDEADLINE: %^T\n:Created: %T\n%i\n%a\nShortcut Ticket: \nProposed Solution: \n"
+        ;;  :empty-lines 0)
+        ;; ("g" "General To-Do"
+        ;;  entry (file+headline "~/Documents/zettelkasten/org/home/todo.org" "General TODOS")
+        ;;  "* TODO [#E] %?\n:Created: %T\n "
+        ;;  :empty-lines 0)
+        ;; ("l" "Learning note"
+        ;;  entry (file+headline "~/Documents/zettelkasten/org/home/learning.org" "Learning Notes")
+        ;;  "* %^{Subject} \n:PROPERTIES:\n:END:\n** %?"
+        ;;  :empty-lines 0)
+        ;; ("b" "Book note"
+        ;;  entry (file+headline "~/Documents/zettelkasten/org/home/books.org" "Book Notes")
+        ;;  "* %^{Subject}\n:PROPERTIES:\n:Title: %^{Title}\n:Author: %^{Author}\n:END:\n** Notes\n%?"
+        ;;  :empty-lines 0)
+        ;; ("m" "Meeting"
+        ;;  entry (file+datetree "~/Documents/zettelkasten/org/work/meetings.org")
+        ;;  "* %^{meeting} :meeting:%^g\n:PROPERTIES:\n:Created: %T\n:END:\n** Attendees\n*** \n** Notes\n** Action Items\n*** TODO [#A] "
+        ;;  :tree-type week
+        ;;  :clock-in t
+        ;;  :clock-resume t
+        ;;  :empty-lines 0)
         ))
 
 ;; --- org-roam ---
@@ -163,7 +165,6 @@
 ;; don't forget to org-roam-db-sync
 (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
 (setq org-journal-dir "~/Documents/zettelkasten/org/journal")
-(setq org-directory "~/Documents/zettelkasten/org")
 (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
 ;; https://systemcrafters.net/build-a-second-brain-in-emacs/capturing-notes-efficiently/
 (setq org-roam-capture-templates

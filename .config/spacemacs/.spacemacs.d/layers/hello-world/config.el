@@ -2,14 +2,12 @@
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
-;; Author: Your Name <your@email.com>
+;; Author: Your Name Henri-vandersleyen@protonmail.com
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
-
-;;; Code:
 
 ;; Define a simple hello-world command
 (defun hello-world/greet ()

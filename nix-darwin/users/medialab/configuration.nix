@@ -1,5 +1,4 @@
 {
-  inputs,
   meta,
   config,
   hosts,
@@ -16,6 +15,8 @@
     ../../nix-modules/services/internationalisation.nix
     ../../nix-modules/services/sound.nix
     ../../nix-modules/services/bluetooth.nix
+    ../../nix-modules/services/networking.nix
+
     # local
     ./sops.nix
     ./nix.nix
@@ -48,12 +49,19 @@
     };
   };
 
-  networking.wireless = {
-    enable = true;
-    networks = {
-      "Linksys00356_24GHz" = {
-        psk = config.sops.secrets."home-server/wifi/password".path;
+  service = {
+    networking = {
+      enable = true;
+      networkmanager.enable = false;
+      wireless = {
+        enable = true;
+        networks = {
+          "homelab_wifi" = {
+            psk = config.sops.secrets."home-server/wifi/password".path;
+          };
+        };
       };
+
     };
   };
   users.users.${meta.username} = {
@@ -67,6 +75,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    # networkmanagerapplet
+
   ];
 
   home-manager.backupFileExtension = "backup";

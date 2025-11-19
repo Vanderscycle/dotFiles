@@ -62,7 +62,9 @@
         "$mainMod" = "SUPER";
         "$terminal" = "kitty";
         "$filemanager" = "thunar";
+        # fuzzel/wofi do not pass env vars hence why emacs does not get $SSH_AUTH_SOCK. you must start from cli
         "$menu" = "fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff";
+        # "$menu" = "wofi --show drun";
         "$emacs" = "emacsclient -c -a 'emacs' "; # The space at the end is IMPORTANT!
         "$reset" = "hyprctl dispatch submap reset &&"; # use a variable to keep things more readable
 
@@ -71,6 +73,8 @@
           kb_options = "grp:caps_toggle";
           follow_mouse = 0; # focus change on cursor move
           accel_profile = "flat";
+          repeat_delay = 300;
+          repeat_rate = 70;
         };
 
         #####################
@@ -159,11 +163,11 @@
             "$mainMod SHIFT, minus, exec, amixer -q sset Master 5%-"
             "$mainMod CTRL, minus, exec, amixer -q sset Master 5%+"
             # buffer manipulation
-            "$mainMod SHIFT, F, fullscreen,"
+            "$mainMod CTRL, F, fullscreen,"
             "$mainMod, D, pseudo"
-            "$mainMod, -, togglesplit"
-            "$mainMod, C, killactive,"
-            "$mainMod, V, togglefloating,"
+            "$mainMod, CTRL S, togglesplit"
+            "$mainMod, Q, killactive,"
+            "$mainMod, F, togglefloating,"
             # Switch workspaces with mainMod + [0-9]
             "$mainMod, 1, workspace, 1"
             "$mainMod, 2, workspace, 2"

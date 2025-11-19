@@ -67,7 +67,9 @@
   };
 
   programs.fish.enable = true;
-
+  programs.ssh = {
+    startAgent = true;
+  };
   users.users.${meta.username} = {
     home = "/home/henri";
     shell = pkgs.fish;
@@ -75,6 +77,9 @@
     extraGroups = [
       "wheel"
       "input"
+    ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCpHZBybBTCsCyW6/Q4OZ07SvUpRUvclc10u25j0B+Q hvandersleyen@gmail.com"
     ];
   };
 

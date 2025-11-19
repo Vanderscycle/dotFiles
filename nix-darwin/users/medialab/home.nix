@@ -15,6 +15,8 @@
     ../../home-modules/services
   ];
   program = {
+    spotify.enable = false;
+    spicetify.enable = false;
     proton.enable = true;
     brave.enable = true;
     fish.enable = true;

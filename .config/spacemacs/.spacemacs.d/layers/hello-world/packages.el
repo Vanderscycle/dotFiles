@@ -20,5 +20,3 @@
   "Initialize my package"
   ;; initialization code here
   )
-
-;;; packages.el ends here

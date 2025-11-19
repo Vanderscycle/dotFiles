@@ -73,9 +73,7 @@
   # programs
   program = {
     awscli.enable = true;
-    spotify.enable = false; # issues using brew
-    spicetify.enable = false;
-    arc-browser.enable = false; # INFO unmaintained
+    arc-browser.enable = false; # INFO unmaintained (use brew)
     codium.enable = true;
     fish.enable = true;
     zsh.enable = true;
@@ -99,8 +97,8 @@
     stateVersion = "23.05"; # Please read the comment before changing.
 
     # Makes sense for user specific applications that shouldn't be available system-wide
-    packages = with pkgs; [
-    ];
+    # packages = with pkgs; [
+    # ];
 
     file = { };
 

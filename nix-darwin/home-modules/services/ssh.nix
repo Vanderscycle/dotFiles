@@ -38,7 +38,7 @@
               default = null;
             };
             identityFile = lib.mkOption {
-              type = lib.types.nullOr lib.types.string;
+              type = lib.types.nullOr lib.types.str;
               description = "The path to the SSH private key file";
               default = null;
             };
@@ -62,10 +62,5 @@
         ssh-copy-id
       ];
     };
-
-    # Uncomment and adjust if you want to set authorized keys for OpenSSH
-    # openssh.authorizedKeys.keysFiles = lib.optionals (config.ssh.authorizedSshKeys != null) [
-    #   config.ssh.authorizedSshKeys
-    # ];
   };
 }
