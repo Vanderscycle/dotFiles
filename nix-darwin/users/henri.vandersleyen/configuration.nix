@@ -7,6 +7,7 @@
 # https://daiderd.com/nix-darwin/manual/index.html
 {
   imports = [
+    inputs.nix-homebrew.darwinModules.nix-homebrew
     # ./modules/services/appleTouchId.nix
   ];
 
@@ -166,6 +167,12 @@
 
   # Homebrew needs to be installed on its own!
   system.primaryUser = meta.username;
+  nix-homebrew = {
+    enable = true;
+    enableRosetta = true; # Only for Apple Silicon (M1/M2)
+    user = meta.username;
+    autoMigrate = true;
+  };
   homebrew = {
     enable = true;
     casks = [
@@ -174,7 +181,7 @@
       "postman"
       "arc"
       "spotify"
-      "docker"
+      "docker-desktop"
       "fellow"
       "font-jetbrains-mono"
     ];
@@ -183,6 +190,7 @@
       "nvm"
       "dive"
       "aws-sam-cli"
+      "awscli"
     ];
   };
 }
