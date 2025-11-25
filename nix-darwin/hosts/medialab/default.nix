@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./fcstab.nix
+    # ./fcstab.nix
   ];
   # --- Host specific hardware ---
   hardware.cpu.intel.updateMicrocode = true;

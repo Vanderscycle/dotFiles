@@ -52,9 +52,9 @@
   service = {
     networking = {
       enable = true;
-      networkmanager.enable = false;
+      networkmanager.enable = true;
       wireless = {
-        enable = true;
+        enable = false;
         networks = {
           "homelab_wifi" = {
             psk = config.sops.secrets."home-server/wifi/password".path;

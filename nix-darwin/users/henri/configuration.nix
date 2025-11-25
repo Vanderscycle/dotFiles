@@ -92,9 +92,12 @@
 
   home-manager.backupFileExtension = "backup";
 
-  # fonts.enableFontDir = true;
   fonts.packages = with pkgs; [
     jetbrains-mono
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-color-emoji
     nerd-font-patcher
     recursive
   ];
