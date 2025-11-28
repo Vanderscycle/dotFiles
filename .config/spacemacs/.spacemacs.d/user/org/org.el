@@ -139,11 +139,11 @@
          :empty-lines 0)
         ("w" "Workout")
         ("wb" "Bike ride" entry
-         (file+dateline ,(concat org-directory "/org/workout.org"))
-         "* %^{How was the ride}\n :PROPERTIES:\n :DISTANCE:\n :END:\n\n %i\n%?"
+         (file+datetree ,(concat org-directory "/home/workout.org"))
+         "* %^{How was the ride}\n :PROPERTIES:\n :DISTANCE:%^{distance} km\n :END:\n %i\n%?"
          :empty-lines 0)
         ("wk" "Kettlebells" entry
-         (file+dateline ,(concat org-directory "/org/workout.org") "")
+         (file+datetree ,(concat org-directory "/home/workout.org"))
          "* %^{How was the workout}\n :PROPERTIES:\n :END:\n\n %i\n%?"
          :empty-lines 0)
         ))

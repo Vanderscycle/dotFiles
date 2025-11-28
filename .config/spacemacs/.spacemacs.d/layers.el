@@ -71,6 +71,11 @@
                typescript-fmt-on-save t
                ) ;; js but like better?
    (php :variables php-backend 'lsp) ;; personal home programming says what?
+   (go :variableso
+       go-format-before-save t
+       go-use-golangci-lint t
+       ;;go-tab-width nil ;; disabled because of .editorconfig
+       go-backend 'lsp) ;; Ken thompson <3
    (lua :variables
         lua-backend 'lsp
         lua-lsp-server 'lua-language-server) ;; the moon rocks

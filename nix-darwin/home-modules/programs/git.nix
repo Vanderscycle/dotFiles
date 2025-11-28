@@ -40,6 +40,7 @@
         userEmail = config.program.git.userEmail;
         userName = config.program.git.userName;
         extraConfig = {
+          # url."git@github.com:".insteadOf = "https://github.com/";
           user.signingkey = config.program.git.signingKey;
           gpg = {
             format = "ssh";

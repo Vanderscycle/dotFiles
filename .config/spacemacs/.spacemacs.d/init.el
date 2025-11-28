@@ -105,32 +105,34 @@ This function is called at the very end of Spacemacs initialization."
          evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode
          evil-visualstar exec-path-from-shell expand-region eyebrowse
          fancy-battery fcitx fic-mode find-by-pinyin-dired fish-mode flx-ido
-         flycheck-bashate flycheck-elsa flycheck-package flycheck-pos-tip
-         flyspell-correct flyspell-correct-helm flyspell-popup font-utils forge
-         gh-md ghub git-link git-messenger git-modes git-timemachine
-         gitignore-templates gntp gnuplot golden-ratio google-translate gptel
-         helm-ag helm-c-yasnippet helm-comint helm-company helm-descbinds
-         helm-git-grep helm-ls-git helm-lsp helm-make helm-mode-manager helm-mu
-         helm-nixos-options helm-org helm-org-rifle helm-projectile helm-purpose
-         helm-pydoc helm-spotify-plus helm-swoop helm-themes helm-xref hide-comnt
-         highlight-indentation highlight-numbers highlight-parentheses hl-todo
-         holy-mode htmlize hungry-delete hybrid-mode importmagic indent-guide
-         info+ insert-shebang inspector js-doc js2-mode js2-refactor json-mode
-         json-navigator json-reformat json-snatcher ligature link-hint
-         live-py-mode livid-mode llm load-env-vars log4e lorem-ipsum lsp-docker
-         lsp-latex lsp-mode lsp-origami lsp-pyright lsp-tailwindcss lsp-treemacs
-         lsp-ui lua-mode macrostep magit magit-section markdown-mode markdown-toc
-         math-symbol-lists multi multi-line multi-term multi-vterm
-         multiple-cursors nameless names nerd-icons nix-mode nix-ts-mode
-         nixos-options nodejs-repl npm-mode nyan-mode ob-typescript open-junk-file
-         org org-category-capture org-cliplink org-contrib org-download org-mime
-         org-pomodoro org-present org-project-capture org-projectile org-rich-yank
-         org-roam org-roam-ui org-superstar orgit orgit-forge origami overseer
-         pangu-spacing paradox password-generator pcache pcre2el persistent-soft
-         php-auto-yasnippets php-mode phpunit pinyinlib pip-requirements pipenv
-         pippel plz plz-event-source plz-media-type poetry pomm popper popwin
-         pos-tip prettier-js py-isort pydoc pyenv-mode pyim pyim-basedict pylookup
-         pytest pythonic pyvenv quickrun rainbow-delimiters rainbow-identifiers
+         flycheck-bashate flycheck-elsa flycheck-golangci-lint flycheck-package
+         flycheck-pos-tip flyspell-correct flyspell-correct-helm flyspell-popup
+         font-utils forge gh-md ghub git-link git-messenger git-modes
+         git-timemachine gitignore-templates gntp gnuplot go-eldoc go-fill-struct
+         go-gen-test go-guru go-impl go-mode go-rename go-tag godoctor
+         golden-ratio google-translate gptel helm-ag helm-c-yasnippet helm-comint
+         helm-company helm-descbinds helm-git-grep helm-ls-git helm-lsp helm-make
+         helm-mode-manager helm-mu helm-nixos-options helm-org helm-org-rifle
+         helm-projectile helm-purpose helm-pydoc helm-spotify-plus helm-swoop
+         helm-themes helm-xref hide-comnt highlight-indentation highlight-numbers
+         highlight-parentheses hl-todo holy-mode htmlize hungry-delete hybrid-mode
+         importmagic indent-guide info+ insert-shebang inspector js-doc js2-mode
+         js2-refactor json-mode json-navigator json-reformat json-snatcher
+         ligature link-hint live-py-mode livid-mode llm load-env-vars log4e
+         lorem-ipsum lsp-docker lsp-latex lsp-mode lsp-origami lsp-pyright
+         lsp-tailwindcss lsp-treemacs lsp-ui lua-mode macrostep magit
+         magit-section markdown-mode markdown-toc math-symbol-lists multi
+         multi-line multi-term multi-vterm multiple-cursors nameless names
+         nerd-icons nix-mode nix-ts-mode nixos-options nodejs-repl npm-mode
+         nyan-mode ob-typescript open-junk-file org org-category-capture
+         org-cliplink org-contrib org-download org-mime org-pomodoro org-present
+         org-project-capture org-projectile org-rich-yank org-roam org-roam-ui
+         org-superstar orgit orgit-forge origami overseer pangu-spacing paradox
+         password-generator pcache pcre2el persistent-soft php-auto-yasnippets
+         php-mode phpunit pinyinlib pip-requirements pipenv pippel plz
+         plz-event-source plz-media-type poetry pomm popper popwin pos-tip
+         prettier-js py-isort pydoc pyenv-mode pyim pyim-basedict pylookup pytest
+         pythonic pyvenv quickrun rainbow-delimiters rainbow-identifiers
          rainbow-mode reformatter request restart-emacs shell-pop shfmt
          shrink-path simple-httpd skewer-mode smeargle sops space-doc spaceline
          spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc spotify
