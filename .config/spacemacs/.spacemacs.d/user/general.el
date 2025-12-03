@@ -105,7 +105,7 @@ _p_rev       _u_pper              _=_: upper/lower       _r_esolve
   "Major mode for editing typescipt src blocks in org mode.")
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((typescript . t)))  ;; Enable TypeScript support
+ '((go . t)(typescript . t)))  ;; Enable TypeScript support
 
 ;; --- hl-todo ---
 (with-eval-after-load 'hl-todo

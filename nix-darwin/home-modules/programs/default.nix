@@ -13,6 +13,7 @@
     ./cloud.nix
     ./codium.nix
     ./cowsay.nix
+    ./direnv.nix
     ./devops.nix
     ./discord.nix
     ./fish.nix # TODO: add an option to pass to shellInit

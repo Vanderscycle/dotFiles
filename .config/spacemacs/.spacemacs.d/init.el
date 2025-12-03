@@ -124,7 +124,7 @@ This function is called at the very end of Spacemacs initialization."
          magit-section markdown-mode markdown-toc math-symbol-lists multi
          multi-line multi-term multi-vterm multiple-cursors nameless names
          nerd-icons nix-mode nix-ts-mode nixos-options nodejs-repl npm-mode
-         nyan-mode ob-typescript open-junk-file org org-category-capture
+         nyan-mode ob-go ob-typescript open-junk-file org org-category-capture
          org-cliplink org-contrib org-download org-mime org-pomodoro org-present
          org-project-capture org-projectile org-rich-yank org-roam org-roam-ui
          org-superstar orgit orgit-forge origami overseer pangu-spacing paradox

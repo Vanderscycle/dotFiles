@@ -154,6 +154,7 @@
                                            lsp-tailwindcss-skip-config-check t))
                                     ag
                                     rg
+                                    ob-go ;; babel go
                                     ob-typescript ;; for org babel
                                     (nix-ts-mode
                                      :mode "\\.nix\\'"
