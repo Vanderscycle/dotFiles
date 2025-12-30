@@ -37,9 +37,9 @@
       };
       git = {
         enable = true;
-        userEmail = config.program.git.userEmail;
-        userName = config.program.git.userName;
-        extraConfig = {
+        settings = {
+          user.email = config.program.git.userEmail;
+          user.name = config.program.git.userName;
           # url."git@github.com:".insteadOf = "https://github.com/";
           user.signingkey = config.program.git.signingKey;
           gpg = {

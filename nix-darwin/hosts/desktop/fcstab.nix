@@ -11,7 +11,7 @@
       "defaults"
       "noatime"
       "nofail"
-      "compress=zstd"
+      # "compress=zstd"
     ];
   };
   # nas

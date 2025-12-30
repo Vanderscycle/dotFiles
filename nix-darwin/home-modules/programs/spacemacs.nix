@@ -16,6 +16,10 @@
   # common issue on MacOs when getting ="Creating pipe" "too many open files"=
   # https://gist.github.com/tombigel/d503800a282fcadbee14b537735d202c
   config = lib.mkIf config.program.spacemacs.enable {
+    systemd.user.services.emacs.Service = {
+      Restart = lib.mkForce "always";
+      RestartSec = "3";
+    };
     home = {
       sessionVariables = {
         EDITOR = "emacs";
@@ -31,19 +35,14 @@
         libgccjit
         editorconfig-core-c
         ispell
-        proton-pass
-        protonmail-bridge # for email
         devcontainer
       ];
     };
 
     programs = {
-      # don't forget mu init --maildir ~/.maildir
-      mu.enable = true; # email
-      msmtp.enable = true; # email
-      mbsync.enable = true; # email
       emacs = {
         enable = true;
+        package = pkgs.emacs;
       };
     };
     services = {

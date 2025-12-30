@@ -70,6 +70,7 @@
 
   # programs
   program = {
+    nyxt.enable = true;
     spotify.enable = true;
     spicetify.enable = false;
     godot.enable = false;
@@ -90,9 +91,9 @@
     zathura.enable = true;
     nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin";
     microcontrollers.enable = false;
-    office.enable = true;
+    office.enable = false;
     kubernetes = {
-      enable = true;
+      enable = false;
       kubeconfig = {
         KUBECONFIG = "$HOME/.kube/homelab-kubeconfig.yaml";
       };
@@ -127,6 +128,7 @@
 
     packages = with pkgs; [
       sysz
+      wmctrl
     ];
 
     file = { };
