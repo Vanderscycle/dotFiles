@@ -16,7 +16,7 @@
   config = lib.mkIf config.languages.jsts.lsp.enable {
     home.packages = with pkgs; [
       nodejs_22
-      corepack # contains pnpm/yarn/npm
+      # corepack # contains pnpm/yarn/npm
       nodePackages.typescript-language-server
       nodePackages.typescript
       nodePackages.prettier # still have to install globally npm i -g prettier

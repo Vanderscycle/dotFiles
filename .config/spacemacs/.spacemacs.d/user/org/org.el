@@ -93,8 +93,8 @@
         ("cf" "Family" entry
          (file+headline ,(concat org-directory "/home/contacts.org") "Family Members")
          "* %^{Name Full}\n :PROPERTIES:\n :PHONE: %^{+country number}\n :RELATION: %^{Relation}\n :EMAIL: %^{email}\n :BIRTHDAY: %^t")
-        ("w" "Work PLEASE ENCRYPT")
-        ("wj" "Work Log Entry" entry
+        ("k" "Work PLEASE ENCRYPT")
+        ("kj" "Work Log Entry" entry
          (file+datetree ,(concat org-directory "/work/work-log.org"))
          "* %^{Task}\n:PROPERTIES:\n:END:\n%?"
          :empty-lines 0)

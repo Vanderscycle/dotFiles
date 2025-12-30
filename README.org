@@ -1,0 +1,11 @@
+* Dotfiles
+
+To stand on the shoulder of giants in the hopes to see a little farther.
+
+** Theme
+Catppuccin
+
+
+** TODO
+- Deeper emacs integrationg
+- cleanup + organization of home/config
