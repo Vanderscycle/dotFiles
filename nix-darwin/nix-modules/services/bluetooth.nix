@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    bluetooth.enable = lib.mkOption {
+    service.bluetooth.enable = lib.mkOption {
       type = lib.types.bool;
       description = "enables bluetooth support";
       default = false;
     };
   };
 
-  config = lib.mkIf config.bluetooth.enable {
+  config = lib.mkIf config.service.bluetooth.enable {
     environment.systemPackages = [
       pkgs.bluez
     ];

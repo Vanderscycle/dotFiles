@@ -134,6 +134,7 @@
           modules = [
             {
               nixpkgs = {
+                hostPlatform = linuxMeta.system;
                 config = {
                   allowUnfree = true;
                   permittedInsecurePackages = [
@@ -146,7 +147,7 @@
             ./users/henri/configuration.nix
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
+              home-manager.useGlobalPkgs = false;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = {
                 inherit inputs;

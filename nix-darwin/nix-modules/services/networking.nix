@@ -49,7 +49,7 @@
     networking = {
       networkmanager.enable = config.service.networking.networkmanager.enable;
       wireless = {
-        enable = config.service.networking.wireless.enable;
+        enable = lib.mkForce config.service.networking.wireless.enable;
         networks = config.service.networking.wireless.networks;
       };
       hostName = "${meta.hostname}"; # because we use nh os switch ensure the flakes +

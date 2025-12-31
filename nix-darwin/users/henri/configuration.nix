@@ -37,7 +37,13 @@
     downloadFolderOrganizer.enable = false;
   };
   # services
-  bluetooth.enable = true;
+  service = {
+    networking = {
+      enable = true;
+      wireless.enable = false;
+    };
+    bluetooth.enable = true;
+  };
   internationalisation.enable = true;
   services.docker.enable = true;
   transmission.enable = false; # home server

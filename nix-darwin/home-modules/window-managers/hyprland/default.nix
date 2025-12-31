@@ -18,6 +18,7 @@
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
       wl-clipboard
       hyprcursor
+      hyprpicker
       (pkgs.flameshot.overrideAttrs (oldAttrs: {
         cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [ "-DUSE_WAYLAND_GRIM=ON" ];
       }))

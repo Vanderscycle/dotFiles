@@ -16,23 +16,19 @@
         env = DEFAULT_BROWSER,brave
 
         env = HYPRCURSOR_THEME,rose-pine-hyprcursor
-        env = XCURSOR_THEME,rose-pine-hyprcursor
         env = HYPRCURSOR_SIZE,32
+        # old
+        env = XCURSOR_THEME,rose-pine-hyprcursor
+        env = XCURSOR_SIZE,32
 
         # Emacs programs launched using the key chord SUPER+e followed by 'key'
         bind = $mainMod, E, submap, emacs # will switch to a submap called 'emacs'
         submap = emacs # will start a submap called "emacs"
         # sets repeatable binds for resizing the active window
-        binde = , E, exec, $reset $emacs
-        binde = , D, exec, $reset $emacs --eval '(dired "~/Documents/dotFiles/nix-darwin")'
-        binde = , P, exec, $reset $emacs --eval '(dired "~/Pictures")'
-        # binde = , P, exec, $reset $emacs --eval '(progn (require "\"'projectile) (projectile-add-known-project "~/Documents/dotFiles/nix-darwin") (projectile-switch-project-by-name "~/Documents/dotFiles/nix-darwin"))'
-        binde = , N, exec, $reset $emacs --eval '(find-file "~/Documents/zettelkasten/org-roam/20240828204250-knowlege_base.org")'
-        binde = , B, exec, $reset $emacs --eval '(ibuffer)'
-        binde = , H, exec, $reset $emacs --eval '(dired nil)'
-        binde = , S, exec, $reset $emacs --eval '(eshell)'
-        binde = , V, exec, $reset $emacs --eval '(vterm)'
-        binde = , F4, exec, $reset killall emacs
+        binde = , E, exec, $reset emacsclient -c
+        binde = , V, exec, $reset emacsclient -r -e '(my/new-frame-with-vterm)'
+        binde = , K, exec, $reset emacsclient -r -e '(progn (select-frame-set-input-focus (selected-frame)) (+calendar/open-calendar))'
+        binde = , c, exec, $reset emacsclient -r -e '(progn (select-frame-set-input-focus (selected-frame)) (org-capture)))'
         # use reset to go back to the global submap
         bind = , escape, submap, reset
         # will reset the submap, which will return to the global submap
@@ -44,6 +40,7 @@
         # sets repeatable binds for resizing the active window
         binde = , T, exec, $reset $filemanager
         binde = , Q, exec, $reset $terminal
+        binde = , P, exec, $reset hyprpicker -a
         # use reset to go back to the global submap
         bind = , escape, submap, reset
         # will reset the submap, which will return to the global submap
@@ -65,7 +62,7 @@
         # fuzzel/wofi do not pass env vars hence why emacs does not get $SSH_AUTH_SOCK. you must start from cli
         "$menu" = "fuzzel --background-color=1e1e2eff --text-color=cdd6f4ff --border-color=cba6f7ff";
         # "$menu" = "wofi --show drun";
-        "$emacs" = "emacsclient -c -a 'emacs' "; # The space at the end is IMPORTANT!
+        "$emacs" = "emacsclient -n -e"; # The space at the end is IMPORTANT!
         "$reset" = "hyprctl dispatch submap reset &&"; # use a variable to keep things more readable
 
         input = {
@@ -87,28 +84,37 @@
 
         general = {
           gaps_in = 7;
-          gaps_out = 20;
+          gaps_out = 10;
           border_size = 2;
           layout = "dwindle";
         };
         # https://wiki.hyprland.org/Configuring/Variables/#decoration
         decoration = {
+          active_opacity = 1;
+          inactive_opacity = 0.85;
+
           blur = {
             enabled = true;
             size = 8;
             passes = 1;
             new_optimizations = true;
+            ignore_opacity = true;
           };
           rounding = 10;
         };
         animations = {
           enabled = "yes";
-          bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+          bezier = [
+            "myBezier, 0.05, 0.7, 0.1, 1.0"
+            "easeOutQuint, 0.22, 1, 0.36, 1"
+          ];
           animation = [
-            "border, 1, 2, default"
-            "fade, 1, 4, default"
-            "windows, 1, 3, default, popin 80%"
-            "workspaces, 1, 2, default, slide"
+            # Increased durations to make animations more noticeable
+            "windows, 0.7, 4, myBezier, popin"
+            "windowsOut, 0.6, 3, default, popin 80%"
+            "border, 0.4, 3, default"
+            "fade, 0.4, 3, default"
+            "workspaces, 0.8, 3, easeOutQuint, slide"
           ];
         };
         # https://wiki.hyprland.org/Configuring/Dwindle-Layout/
@@ -116,15 +122,6 @@
           pseudotile = "yes";
           preserve_split = "yes";
         };
-
-        # master = {
-        #   new_is_master = true; # new window become the active window
-        # };
-        # https://wiki.hyprland.org/Configuring/Variables/#gestures
-        # gestures = {
-        #   workspace_swipe = "off";
-        # };
-        # https://wiki.hyprland.org/Configuring/Keywords/
 
         ###################
         ### KEYBINDINGS ###
@@ -159,13 +156,16 @@
 
             # scripts
             # "$mainMod, f, exec, ${lib.getExe myScript}"
+            "$mainMod SHIFT, space, exec,emacsclient -n -e `(progn (load \"/home/henri/Documents/dotFiles/template.el\") (select-frame-set-input-focus (selected-frame)) (universal-launcher-popup))`"
             # volume control
+            # doesn't work
             "$mainMod SHIFT, minus, exec, amixer -q sset Master 5%-"
             "$mainMod CTRL, minus, exec, amixer -q sset Master 5%+"
             # buffer manipulation
             "$mainMod CTRL, F, fullscreen,"
-            "$mainMod, D, pseudo"
-            "$mainMod, CTRL S, togglesplit"
+            "$mainMod CTRL, D, pseudo" # dwindle
+            "$mainMod CTRL, S, togglesplit" # dwindle
+            "$mainMod CTRL, TAB, cyclenext"
             "$mainMod, Q, killactive,"
             "$mainMod, F, togglefloating,"
             # Switch workspaces with mainMod + [0-9]
@@ -246,21 +246,16 @@
         exec-once = [
           "sleep 1 && waybar"
           "hyprpaper"
-          "emacsclient"
+          "emacsclient -r"
           "blueman-applet"
-          # "/etc/profiles/per-user/henri/bin/emacs --daemon &"
           "swaync"
-          # "discord --enable-wayland-ime"
           "spotify"
-          # "brave --enable-wayland-ime"
           "brave"
-          "kitty"
           "flameshot"
           "copyq --start-server"
           "fcitx5"
           "proton-pass"
           "wl-paste --watch cliphist store" # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/
-          # "emacs" # TODO: make it spawn out of a shell
         ];
       };
     };
