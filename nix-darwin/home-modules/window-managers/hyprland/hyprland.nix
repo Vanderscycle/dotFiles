@@ -8,6 +8,7 @@
   wayland.windowManager = {
     hyprland = {
       enable = true; # allow home-manager to configure hyprland
+      xwayland.enable = true;
       # https://github.com/nix-community/home-manager/issues/6062
       extraConfig = ''
         ecosystem:no_update_news = true
