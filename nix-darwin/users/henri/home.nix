@@ -40,16 +40,12 @@
           identityFile = "/home/${meta.username}/.ssh/gitea";
         };
         medialab = {
-          hostname = "192.168.1.194";
+          hostname = "192.168.1.196";
           user = "medialab";
         };
         monolith = {
           hostname = "192.168.2.228";
           user = "monolith";
-        };
-        livingRoomPi = {
-          hostname = "192.168.1.100";
-          user = "admin";
         };
       };
     };

@@ -4,15 +4,10 @@
   (interactive)
   (dired "/ssh:monolith@192.168.2.228:/"))
 
-(defun connect-macos()
+(defun connect-medialab ()
   "Open a remote folder using TRAMP in Dired."
   (interactive)
-  (dired "/ssh:mac@192.168.4.167:/"))
-
-(defun connect-pi ()
-  "Open a remote folder using TRAMP in Dired."
-  (interactive)
-  (dired "/ssh:admin@192.168.1.100:/"))
+  (dired "/ssh:monolith@192.168.1.196:/"))
 
 (defhydra hydra/diredssh (:hint nil :color blue)
   "
@@ -24,7 +19,6 @@ _m_: Macos
 _q_: Cancel
 "
   ("f" connect-monolith :color yellow)
-  ("p" connect-pi :color yellow)
-  ("m" connect-macos :color yellow)
+  ("m" connect-medialab :color yellow)
   ("q" nil "cancel" :color blue))
 (spacemacs/set-leader-keys "ods" 'hydra/diredssh/body)

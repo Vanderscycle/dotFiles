@@ -1,7 +1,8 @@
 ;;; universal-launcher.el --- Optimized universal launcher
 
 ;;; Commentary:
-;; Simplified version that uses the existing Emacs frame
+;; taken from joshua blais blog post
+;; https://joshblais.com/blog/how-i-am-deeply-integrating-emacs/
 
 ;;; Code:
 
@@ -15,8 +16,6 @@
   '((:name "Context" :icon "flash" :types (contextual custom-action))
     (:name "Active" :icon "device-desktop" :types (buffer running))
     (:name "Tasks" :icon "checklist" :types (agenda-task))
-    (:name "Files & Apps" :icon "apps" :types (file app flatpak))
-    (:name "Web" :icon "globe" :types (bookmark firefox-action))
     (:name "System" :icon "terminal" :types (command ssh))
     (:name "Tools" :icon "wrench" :types (emoji calculator kill-ring-item)))
   "Category definitions for the launcher.")
@@ -63,8 +62,6 @@
     (puthash 'buffer (all-the-icons-octicon "file-code" :face '(:foreground "#3d424a" :height 0.9)) cache)
     (puthash 'running (all-the-icons-material "desktop_windows" :face '(:foreground "#8b919a" :height 0.9)) cache)
     (puthash 'app (all-the-icons-faicon "cube" :face '(:foreground "#e0dcd4" :height 0.9)) cache)
-    (puthash 'flatpak (all-the-icons-material "layers" :face '(:foreground "#56b6c2" :height 0.9)) cache)
-    (puthash 'firefox (all-the-icons-faicon "firefox" :face '(:foreground "#e06c75" :height 0.9)) cache)
     (puthash 'bookmark (all-the-icons-octicon "bookmark" :face '(:foreground "#b8c4b8" :height 0.9)) cache)
     (puthash 'file (all-the-icons-faicon "file" :face '(:foreground "#d4ccb4" :height 0.9)) cache)
     (puthash 'command (all-the-icons-octicon "terminal" :face '(:foreground "#98c379" :height 0.9)) cache)
@@ -174,16 +171,6 @@
                        (universal-launcher--get-applications)))
              category-handlers)
 
-    (puthash 'flatpak
-             (lambda ()
-               (mapcar (lambda (app)
-                         (cons (format "%s Flatpak: %s"
-                                       (universal-launcher--get-icon 'flatpak)
-                                       (car app))
-                               (list 'app (cdr app))))
-                       (universal-launcher--get-flatpak-applications)))
-             category-handlers)
-
     (puthash 'bookmark
              (lambda ()
                (mapcar (lambda (bookmark)
@@ -193,16 +180,6 @@
                                (list 'bookmark (cdr bookmark))))
                        (universal-launcher--parse-org-bookmarks
                         (expand-file-name "~/org/bookmarks.org"))))
-             category-handlers)
-
-    (puthash 'firefox-action
-             (lambda ()
-               (mapcar (lambda (action)
-                         (cons (format "%s Firefox: %s"
-                                       (universal-launcher--get-icon 'firefox)
-                                       (car action))
-                               (list 'firefox-action (cdr action))))
-                       (universal-launcher--get-firefox-actions)))
              category-handlers)
 
     (puthash 'command
@@ -303,8 +280,9 @@
         (dirs '("/usr/share/applications/"
                 "/usr/local/share/applications/"
                 "~/.local/share/applications/"
-                "/var/lib/flatpak/exports/share/applications/"
-                "~/.local/share/flatpak/exports/share/applications/")))
+                ;;"/var/lib/flatpak/exports/share/applications/"
+                ;;"~/.local/share/flatpak/exports/share/applications/"
+                )))
     (dolist (dir dirs)
       (when (file-directory-p (expand-file-name dir))
         (dolist (file (directory-files (expand-file-name dir) t "\\.desktop$"))
@@ -319,37 +297,6 @@
                   (push (cons name (replace-regexp-in-string "%[FfUu]" "" exec-line))
                         apps))))))))
     apps))
-
-(defun universal-launcher--get-flatpak-applications ()
-  "Get list of installed Flatpak applications."
-  (let ((apps '()))
-    (when (executable-find "flatpak")
-      (with-temp-buffer
-        ;; Try both user and system installations
-        (dolist (scope '("--user" "--system"))
-          (erase-buffer)
-          (when (= 0 (call-process "flatpak" nil t nil "list" "--app" scope "--columns=name,application"))
-            (goto-char (point-min))
-            ;; Skip the header line
-            (when (looking-at "Name.*Application ID")
-              (forward-line 1))
-            (while (not (eobp))
-              (let* ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
-                     ;; Split on multiple spaces (2 or more) to handle column alignment
-                     (parts (split-string line "[ \t]\\{2,\\}" t))
-                     (name (when (>= (length parts) 1) (string-trim (nth 0 parts))))
-                     (app-id (when (>= (length parts) 2) (string-trim (nth 1 parts)))))
-                (when (and name app-id
-                           (not (string-empty-p name))
-                           (not (string-empty-p app-id))
-                           ;; Ensure it looks like a proper app ID
-                           (string-match-p "^[a-zA-Z][a-zA-Z0-9._-]*\\.[a-zA-Z][a-zA-Z0-9._-]*" app-id))
-                  (push (cons (format "%s (Flatpak)" name)
-                              (concat "flatpak run " app-id))
-                        apps)))
-              (forward-line 1))))))
-    ;; Remove duplicates (in case app appears in both user and system)
-    (cl-remove-duplicates apps :test (lambda (a b) (string= (cdr a) (cdr b))))))
 
 ;; TODO Calculator Module
 ;; Calculator Module
@@ -436,21 +383,6 @@
             (push (file-name-nondirectory file) commands)))))
     (cl-remove-duplicates commands :test #'string=)))
 
-(defun universal-launcher--get-firefox-actions ()
-  "Get list of Firefox actions."
-  (let ((actions '()))
-    (when (= 0 (call-process "pgrep" nil nil nil "-x" "firefox"))
-      (push (cons "Focus Firefox window" '(focus-window)) actions)
-      (push (cons "Open new tab" '(new-tab)) actions)
-      (let ((common-sites '(("Google" . "https://www.google.com")
-                            ("GitHub" . "https://github.com")
-                            ("YouTube" . "https://www.youtube.com")
-                            ("Wikipedia" . "https://en.wikipedia.org"))))
-        (dolist (site common-sites)
-          (push (cons (concat "Open " (car site))
-                      (list 'open-url (cdr site)))
-                actions))))
-    actions))
 
 (defun universal-launcher--parse-org-bookmarks (file)
   "Parse bookmarks from an org FILE with support for various formats."
@@ -533,29 +465,6 @@
                       (call-process "wmctrl" nil nil nil "-a" command-name))
                     cmd)))
 
-(defun universal-launcher--handle-firefox-action (action)
-  "Handle firefox ACTION."
-  (pcase (car action)
-    ('focus-window
-     (call-process "wmctrl" nil nil nil "-a" "Firefox"))
-    ('new-tab
-     (call-process "firefox" nil nil nil "--new-tab" "about:newtab"))
-    ('org-task
-     (universal-launcher--jump-to-task item))
-    ('ssh
-     (universal-launcher--ssh-connect item))
-    ('kill-ring
-     (universal-launcher--yank-from-ring item))
-    ('custom-action
-     (universal-launcher--execute-custom-action item))
-    ('async-shell
-     (let ((default-directory (or (locate-dominating-file default-directory ".git")
-                                  default-directory)))
-       (async-shell-command item)))
-    ('open-url
-     (let ((url (cadr action)))
-       (call-process "firefox" nil nil nil "--new-tab" url)))))
-
 (defun universal-launcher--handle-bookmark (url)
   "Open URL in the default browser."
   (browse-url url))
@@ -606,12 +515,10 @@ Otherwise, prompt for a search engine."
             ("YouTube" . "https://www.youtube.com/results?search_query=")
             ("Perplexity" . "https://www.perplexity.ai/search/new?q=")
             ("Hacker News" . "https://hn.algolia.com/?q=")
-            ("Lobsters" . "https://lobste.rs/search?q=")
             ("arXiv" . "https://arxiv.org/search/?query=")
             ("Semantic Scholar" . "https://www.semanticscholar.org/search?q=")
             ("Google Scholar" . "https://scholar.google.com/scholar?q=")
             ("Go Issues" . "https://github.com/golang/go/issues?q=")
-            ("Crates.io" . "https://crates.io/search?q=")
             ("MELPA" . "https://melpa.org/#/?q=")
             ("Man Pages" . "https://man.archlinux.org/search?q=")
             ("Emacs Docs" . "https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html?search=")
@@ -752,23 +659,6 @@ Combines frequency (usage count) with recency (time decay)."
                          (list 'function #'gofmt))
                    actions)))
 
-          ;; Rust Mode
-          ('rust-mode
-           (let ((default-directory (or (locate-dominating-file default-directory "Cargo.toml")
-                                        default-directory)))
-             (push (cons (format "%s Rust: Build" icon)
-                         (list 'async-shell "cargo build"))
-                   actions)
-             (push (cons (format "%s Rust: Run tests" icon)
-                         (list 'async-shell "cargo test"))
-                   actions)
-             (push (cons (format "%s Rust: Run" icon)
-                         (list 'async-shell "cargo run"))
-                   actions)
-             (push (cons (format "%s Rust: Check" icon)
-                         (list 'async-shell "cargo check"))
-                   actions)))
-
           ;; Emacs Lisp Mode
           ('emacs-lisp-mode
            (push (cons (format "%s Elisp: Eval buffer" icon)
@@ -784,10 +674,10 @@ Combines frequency (usage count) with recency (time decay)."
           ;; Nix Mode
           ('nix-mode
            (push (cons (format "%s Nix: Rebuild switch" icon)
-                       (list 'async-shell "sudo nixos-rebuild switch"))
+                       (list 'async-shell "nh os switch -v"))
                  actions)
            (push (cons (format "%s Nix: Rebuild test" icon)
-                       (list 'async-shell "sudo nixos-rebuild test"))
+                       (list 'async-shell "nh os test -v"))
                  actions)
            (push (cons (format "%s Nix: Update flake" icon)
                        (list 'async-shell "nix flake update"))
@@ -1029,7 +919,6 @@ Examples:
           ('buffer (switch-to-buffer item))
           ('running (universal-launcher--focus-running-application item))
           ('app (universal-launcher--run-application item))
-          ('firefox-action (universal-launcher--handle-firefox-action item))
           ('bookmark (universal-launcher--handle-bookmark item))
           ('file (find-file item))
           ('command (universal-launcher--run-command item))

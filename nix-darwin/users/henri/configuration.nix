@@ -125,6 +125,19 @@
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   services = {
+    greetd = {
+      enable = true;
+      settings = {
+        initial_session = {
+          command = "Hyprland";
+          user = "henri";
+        };
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd Hyprland";
+          user = "greeter";
+        };
+      };
+    };
     openssh = {
       enable = true;
     };
@@ -134,7 +147,7 @@
         user = "${meta.username}";
       };
       gdm = {
-        enable = true;
+        enable = false;
         wayland = true;
       };
     };

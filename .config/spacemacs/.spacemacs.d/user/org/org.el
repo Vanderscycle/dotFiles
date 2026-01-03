@@ -1,3 +1,10 @@
+;; --- org-drill ---
+(defun my/org-drill-roam-chinese ()
+  "Automatically find and drill all org-roam files in the Chinese directory."
+  (interactive)
+  (let* ((chinese-folder "/home/henri/Documents/zettelkasten/org-roam/chinese/") ; Adjust to your actual path
+         (files (directory-files-recursively chinese-folder "\\.org$")))
+    (org-drill files)))
 ;; --- org-general ---
 (add-hook 'org-mode-hook
           (lambda ()
@@ -40,7 +47,8 @@
                                           :hidefiles nil :formula nil :timestamp nil :level nil :tcolumns nil
                                           :formatter nil))
 ;; --- org-agenda ---
-(setq org-agenda-files '("~/Documents/zettelkasten/org-roam/"))
+;;(setq org-agenda-files '("~/Documents/zettelkasten/org-roam/")) ;; INFO: it opens the files in the buffer
+(setq org-agenda-files '("~/Documents/zettelkasten/org/home/tasks.org"))
 (setq org-agenda-skip-deadline-if-done t)
 
 ;; --- org-todo ---
@@ -83,7 +91,7 @@
         ("t" "tasks w/ deadline" entry
          (file+headline ,(concat org-directory "/home/tasks.org") "Task list")
          "* TODO [#B] %?\nDEADLINE: %^t")
-        ("l" "link to a buffer file" entry
+        ("o" "link to a buffer file" entry
          (file+headline ,(concat org-directory "/home/tasks.org") "Links to buffer/files")
          "* TODO [#C] %?\n%a")
         ("c" "Contact Information PLEASE ENCRYPT")
@@ -155,28 +163,25 @@
 (setq org-roam-directory "~/Documents/zettelkasten/org-roam")
 (setq org-default-notes-file (concat org-directory )) ;; "/notes.org"
 (setq org-roam-capture-templates
-      '())
-;; '(
-;;   ("d" "default" plain "%?"
-;;    :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
-;;    :unnarrowed t)
-;;   ("c" "chinese" plain
-;;    "\n* ${title}\n** Words\n** Patterns\n** Radicals\n** Forgotten Words\n"
-;;    :target (file+head "notes/chinese/%<%Y%m%d>-${slug}.org"
-;;                       "#+title: ${title}\n#+filetags: :chinese:\n\n* ${title}\nRoot Parent: [[id:31c43342-c4dd-4fff-bef5-a4ee1cd04f42][chinese]]\n")
-;;    :unnarrowed t
-;;    :immediate-finish nil)
-;;   ("b" "book child" plain
-;;    "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
-;;    :target (file+head "notes/books/%<%Y%m%d>-${slug}.org"
-;;                       "#+title: ${title}\n#+filetags: :book:\n\n* ${title}\nRoot Parent: [[id:eb639da8-b533-46df-a0ab-3a7135e4349b][books]]\n")
-;;    :unnarrowed t
-;;    :immediate-finish nil)
-;;   ("l" "programming language" plain
-;;    "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
-;;    :if-new (file+head "programming/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-;;    :unnarrowed t)
-;;   ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-;;    :if-new (file+head "projects/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
-;;    :unnarrowed t)
-;;   ))
+      '(
+        ("c" "Chinese Lesson" plain
+         "%?"
+         :if-new (file+head "chinese/%<%Y%m%d%H%M%S>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :chinese:lesson:\n\n* Metadata\n- Source: %^{Source}\n- Date: %u\n\n* Vocabulary\n| Hanzi | Pinyin | Meaning | Status |\n|-------+--------+---------+--------|\n| %?    |        |         | New    |\n\n* Sentence Patterns\n\n* Grammar & Usage Notes\n\n* Practice / TODOs\n** TODO Review new words from this lesson :drill:\n")
+         :unnarrowed t)
+        ("d" "default" plain "%?"
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
+         :unnarrowed t)
+        ("z" "Zettelkasten")
+        ("zp" "Litterature Programming notes" plain "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n#+begin_src %^{Language}\n%?\n#+end_src"
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t)
+        ("zl" "Litterature notes" plain
+         "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t)
+        ("zf" "Fleeting notes" plain
+         "\n* Fleeting Note\n\n%?"
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t)
+        ))

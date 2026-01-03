@@ -157,7 +157,7 @@
 
             # scripts
             # "$mainMod, f, exec, ${lib.getExe myScript}"
-            "$mainMod SHIFT, space, exec,emacsclient -n -e `(progn (load \"/home/henri/Documents/dotFiles/template.el\") (select-frame-set-input-focus (selected-frame)) (universal-launcher-popup))`"
+            "$mainMod, space, exec, emacsclient -n -e '(progn (load \"/home/henri/Documents/dotFiles/template.el\") (select-frame-set-input-focus (selected-frame)) (universal-launcher-popup))'"
             # volume control
             # doesn't work
             "$mainMod SHIFT, minus, exec, amixer -q sset Master 5%-"

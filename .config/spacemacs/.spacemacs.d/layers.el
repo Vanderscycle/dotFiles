@@ -156,6 +156,7 @@
                                     rg
                                     ob-go ;; babel go
                                     ob-typescript ;; for org babel
+                                    org-drill
                                     (nix-ts-mode
                                      :mode "\\.nix\\'"
                                      :config
@@ -171,11 +172,9 @@
                                      :recipe (:type git :host github :repo "djgoku/sops"))
                                     catppuccin-theme
                                     sqlite3
-                                    (exec-path-from-shell
-                                     :ensure t
-                                     :config
-                                     (exec-path-from-shell-initialize))
                                     pomm ;; pommodero
+                                    calfw
+                                    calfw-org
                                     )
 
  ;; A list of packages that cannot be updated.

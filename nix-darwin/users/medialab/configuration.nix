@@ -24,7 +24,9 @@
 
   programs.fish.enable = true;
   # services
-  bluetooth.enable = true;
+  service = {
+    bluetooth.enable = true;
+  };
   internationalisation.enable = true;
   system.stateVersion = "25.05";
 
