@@ -7,5 +7,8 @@ Catppuccin
 
 
 ** TODO
-- Deeper emacs integrationg
+- Deeper emacs integrationg (joshua blais)
 - cleanup + organization of home/config
+
+** unhappy with
+home-modules services (not very clear what make a "program" a service or why they would need such distinction.

@@ -17,7 +17,7 @@
     (:name "Active" :icon "device-desktop" :types (buffer running))
     (:name "Tasks" :icon "checklist" :types (agenda-task))
     (:name "System" :icon "terminal" :types (command ssh))
-    (:name "Tools" :icon "wrench" :types (emoji calculator kill-ring-item)))
+    (:name "Tools" :icon "wrench" :types (emoji kill-ring-item)))
   "Category definitions for the launcher.")
 
 ;; Enhanced cache system
@@ -66,7 +66,6 @@
     (puthash 'file (all-the-icons-faicon "file" :face '(:foreground "#d4ccb4" :height 0.9)) cache)
     (puthash 'command (all-the-icons-octicon "terminal" :face '(:foreground "#98c379" :height 0.9)) cache)
     (puthash 'emoji (all-the-icons-material "insert_emoticon" :face '(:foreground "#e5c07b" :height 0.9)) cache)
-    (puthash 'calculator (all-the-icons-faicon "calculator" :face '(:foreground "#56b6c2" :height 0.9)) cache)
     ;; Category icons with matching style
     (puthash "Active" (all-the-icons-material "dashboard" :face '(:foreground "#61afef" :weight bold :height 1.0)) cache)
     (puthash "Files & Apps" (all-the-icons-material "apps" :face '(:foreground "#c678dd" :weight bold :height 1.0)) cache)
@@ -203,13 +202,6 @@
                        universal-launcher--common-emojis))
              category-handlers)
 
-    (puthash 'calculator
-             (lambda ()
-               (list (cons (format "%s Calculator: Enter math expression"
-                                   (universal-launcher--get-icon 'calculator))
-                           (list 'calculator 'ready))))
-             category-handlers)
-
     ;; NEW HANDLERS - Add these BEFORE processing categories
     (puthash 'contextual
              #'universal-launcher--get-contextual-actions
@@ -298,40 +290,6 @@
                         apps))))))))
     apps))
 
-;; TODO Calculator Module
-;; Calculator Module
-(defun universal-launcher--is-calculator-input (input)
-  "Check if INPUT is a math expression."
-  (and (not (string-empty-p input))
-       (not (string-match-p "^[[:space:]]*$" input))
-       ;; Allow more mathematical symbols and functions
-       (string-match-p "^[0-9+\\-*/().,^ %!sincotaqrexplog]+$" input)
-       ;; Must contain at least one operator or math function
-       (or (string-match-p "[+\\-*/^%]" input)
-           (string-match-p "\\(sin\\|cos\\|tan\\|sqrt\\|exp\\|log\\)" input))
-       ;; Must contain at least one number
-       (string-match-p "[0-9]" input)))
-
-(defun universal-launcher--calculate (expr)
-  "Calculate mathematical expression EXPR using calc."
-  (condition-case err
-      (let* ((clean-expr (string-trim expr))
-             ;; Replace common notations
-             (calc-expr (replace-regexp-in-string "\\^" "**" clean-expr))
-             (calc-expr (replace-regexp-in-string "×" "*" calc-expr))
-             (calc-expr (replace-regexp-in-string "÷" "/" calc-expr))
-             (result (calc-eval calc-expr)))
-        (if (and result
-                 (stringp result)
-                 (not (string= result ""))
-                 (not (string-match-p "\\(Error\\|Bad\\)" result))
-                 ;; Accept various number formats including scientific notation
-                 (or (string-match-p "^[-+]?[0-9]+\\.?[0-9]*\\(?:[eE][-+]?[0-9]+\\)?$" result)
-                     (string-match-p "^[-+]?[0-9]+/[0-9]+$" result))) ; fractions
-            result
-          nil))
-    (error nil)))
-
 (defun universal-launcher--copy-to-clipboard (text)
   "Copy TEXT to system clipboard, handling both X11 and Wayland."
   (cond
@@ -352,24 +310,6 @@
    (t
     (kill-new text)
     (message "Copied to Emacs kill ring (install wl-copy or xclip for system clipboard)"))))
-
-;; Enhanced calculator handler for the main popup function
-(defun universal-launcher--handle-calculator-input (input)
-  "Handle calculator INPUT with immediate calculation."
-  (let ((result (universal-launcher--calculate input)))
-    (if result
-        (progn
-          (universal-launcher--copy-to-clipboard result)
-          (message "📊 %s = %s (copied to clipboard)" input result)
-          ;; If in a buffer, optionally insert the result
-          (when (and universal-launcher--previous-frame
-                     (frame-live-p universal-launcher--previous-frame))
-            (with-selected-frame universal-launcher--previous-frame
-              (when (and (not (minibufferp))
-                         (not buffer-read-only)
-                         (y-or-n-p "Insert result at point? "))
-                (insert result)))))
-      (message "❌ Invalid expression: %s" input))))
 
 (defun universal-launcher--get-system-commands ()
   "Get system commands from PATH."
@@ -904,12 +844,8 @@ Examples:
      ;; Empty input - do nothing
      ((string-empty-p selection) nil)
 
-     ;; Calculator check - prioritize this before other matches
-     ((universal-launcher--is-calculator-input selection)
-      (universal-launcher--handle-calculator-input selection))
-
-     ;; Separator - do nothing
-     ((eq candidate 'separator) nil)
+     ;; ;; Separator - do nothing
+     ;; ((eq candidate 'separator) nil)
 
      ;; Handle matched candidates
      (candidate
@@ -924,7 +860,6 @@ Examples:
           ('command (universal-launcher--run-command item))
           ('emoji (universal-launcher--insert-emoji item))
           ('ssh (universal-launcher--ssh-connect item))
-          ('calculator (message "🧮 Type a math expression like: 2+2, sqrt(16), sin(45)"))
           ('org-task (universal-launcher--jump-to-task item))
           ('kill-ring (universal-launcher--yank-from-ring item))
           ('custom-action (universal-launcher--execute-custom-action item))
@@ -939,10 +874,8 @@ Examples:
              (shell-command item)))
           (_ (message "Unknown action type: %s" type)))))
 
-     ;; Web search fallback - only if not a calculator expression
      ((and (not candidate)
-           (not (string-empty-p selection))
-           (not (universal-launcher--is-calculator-input selection)))
+           (not (string-empty-p selection)))
       (universal-launcher--web-search selection)))
 
     ;; Return to previous frame

@@ -1,19 +1,25 @@
 {
-  username,
+  config,
   pkgs,
-  lib,
   inputs,
   ...
 }:
+let
+  mkOutOfStoreSymlink = path: config.lib.file.mkOutOfStoreSymlink path;
+  configDir = "${config.home.homeDirectory}/Documents/dotFiles";
+in
 {
 
   imports = [
     ./hyprland.nix
     ./hyprpaper.nix
-    # ./swaync.nix
   ];
 
   home = {
+    file = {
+      ".config/hypr/scripts".source =
+        mkOutOfStoreSymlink "${configDir}/nix-darwin/home-modules/window-managers/hyprland/scripts";
+    };
     packages = with pkgs; [
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
       wl-clipboard
@@ -24,9 +30,9 @@
       }))
       wf-recorder # video recorder for wayland
       waypaper
-      # screenshot since flameshot isn't working
-      cliphist
-      copyq
+      # screenshot when flameshot isn't working
+      # cliphist
+      # copyq
       grim
       slurp
     ];

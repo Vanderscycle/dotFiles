@@ -3,10 +3,8 @@
 
 {
   config,
-  inputs,
   meta,
   pkgs,
-  lib,
   ...
 }:
 
@@ -29,7 +27,7 @@
   service = {
     fcitx.enable = true; # chinese fonts are super pixels
     sqlite.enable = true;
-    dunst.enable = lib.mkForce false;
+    swaync.enable = true;
     gnome.enable = true;
     ssh = {
       enable = true;

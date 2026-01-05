@@ -175,6 +175,8 @@
                                     pomm ;; pommodero
                                     calfw
                                     calfw-org
+                                    ;;dirvish ;; dired but enhanced
+                                    dirvish ;; dired but enhanced
                                     )
 
  ;; A list of packages that cannot be updated.

@@ -3,6 +3,12 @@
 (add-to-list 'exec-path "/etc/profiles/per-user/henri.vandersleyen/bin")
 (spacemacs/set-leader-keys "SPC" 'helm-M-x)
 (setq user-mail-address "henri-vandersleyen@protonmail.com")
+
+;; dirvish
+(let ((cache-size 20000000))
+  (setq dirvish-preview-large-file-threshold cache-size)
+  (setq large-file-warning-threshold cache-size)
+  )
 ;; --- theme ---
 (setq catppuccin-flavor 'mocha)
 ;; --- elisp ---

@@ -14,6 +14,7 @@
   };
 
   config = lib.mkIf config.program.brave.enable {
+    catppuccin.brave.enable = true;
     home = {
       packages = with pkgs; [
         brave

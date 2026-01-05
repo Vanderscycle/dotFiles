@@ -27,9 +27,11 @@
         submap = emacs # will start a submap called "emacs"
         # sets repeatable binds for resizing the active window
         binde = , E, exec, $reset emacsclient -c
-        binde = , V, exec, $reset emacsclient -r -e '(my/new-frame-with-vterm)'
-        binde = , K, exec, $reset emacsclient -r -e '(progn (select-frame-set-input-focus (selected-frame)) (+calendar/open-calendar))'
-        binde = , c, exec, $reset emacsclient -r -e '(progn (select-frame-set-input-focus (selected-frame)) (org-capture)))'
+        binde = , V, exec, $reset emacsclient -n -e '(my/new-frame-with-vterm)'
+        binde = , K, exec, $reset ~/.config/hypr/scripts/emacs-launcher '(progn (select-frame-set-input-focus (selected-frame)) (calfw-org-open-calendar))'
+        binde = , c, exec, $reset ~/.config/hypr/scripts/emacs-launcher '(progn (select-frame-set-input-focus (selected-frame)) (org-capture))'
+        binde = , F, exec, $reset ~/.config/hypr/scripts/emacs-launcher '(progn (select-frame-set-input-focus (selected-frame)) (dirvish))'
+        binde = , space, exec, $reset ~/.config/hypr/scripts/emacs-launcher '(progn (select-frame-set-input-focus (selected-frame)) (universal-launcher-popup))'
         # use reset to go back to the global submap
         bind = , escape, submap, reset
         # will reset the submap, which will return to the global submap
@@ -157,7 +159,6 @@
 
             # scripts
             # "$mainMod, f, exec, ${lib.getExe myScript}"
-            "$mainMod, space, exec, emacsclient -n -e '(progn (load \"/home/henri/Documents/dotFiles/template.el\") (select-frame-set-input-focus (selected-frame)) (universal-launcher-popup))'"
             # volume control
             # doesn't work
             "$mainMod SHIFT, minus, exec, amixer -q sset Master 5%-"
@@ -217,7 +218,7 @@
           "workspace 2, class:^(firefox|brave-browser)$"
           "workspace 3, class:^(discord|Spotify|spotify|Proton Pass)$"
           "workspace 7, class:^(Proton Pass)$"
-          "workspace 4, class:^(?i)steam|heroic$" # Case-insensitive match
+          "workspace 4, class:^(steam|heroic)$" # Case-insensitive match
           "workspace 5, class:^(SuperSlicer|OrcaSlicer)$"
           "workspace 6, class:^(transmission-gtk)$"
           # Steam rules
@@ -245,18 +246,19 @@
         # Or execute your favorite apps at launch like this:
 
         exec-once = [
+          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SSH_AUTH_SOCK"
+          "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland"
           "sleep 1 && waybar"
           "hyprpaper"
-          "emacsclient -r"
           "blueman-applet"
           "swaync"
           "spotify"
           "brave"
           "flameshot"
-          "copyq --start-server"
+          # "copyq --start-server"
+          # "wl-paste --watch cliphist store" # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/
           "fcitx5"
-          "proton-pass"
-          "wl-paste --watch cliphist store" # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/
+          "emacsclient"
         ];
       };
     };

@@ -96,9 +96,9 @@ This function is called at the very end of Spacemacs initialization."
          company-anaconda company-auctex company-emoji company-math
          company-nixos-options company-reftex company-shell concurrent consult
          ctable cython-mode dap-mode deferred define-word devdocs diff-hl diminish
-         dired-quick-sort disable-mouse docker dockerfile-mode doom-modeline
-         doom-themes dotenv-mode drag-stuff drupal-mode dumb-jump eat editorconfig
-         elisp-def elisp-demos elisp-slime-nav ellama emacsql
+         dired-quick-sort dirvish disable-mouse docker dockerfile-mode
+         doom-modeline doom-themes dotenv-mode drag-stuff drupal-mode dumb-jump
+         eat editorconfig elisp-def elisp-demos elisp-slime-nav ellama emacsql
          emoji-cheat-sheet-plus emojify emr epc esh-help eshell-prompt-extras
          eshell-z eval-sexp-fu evil-anzu evil-args evil-cleverparens
          evil-collection evil-easymotion evil-escape evil-evilified-state
