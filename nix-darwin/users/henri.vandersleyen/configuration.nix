@@ -126,7 +126,7 @@
       persistent-apps = [
         "/System/Applications/Launchpad.app"
         "/Applications/Postman.app"
-        "/Applications/Slack.app"
+        # "/Applications/Slack.app"
         "/Applications/Spotify.app"
         "/Applications/1Password.app"
         "/Applications/Arc.app"
@@ -184,6 +184,7 @@
       "docker-desktop"
       "fellow"
       "font-jetbrains-mono"
+      "slack"
     ];
     brews = [
       "yarn"
