@@ -13,6 +13,7 @@
 
     # programs
     ../../home-modules/programs/arc_browser.nix
+    ../../home-modules/programs/direnv.nix
     ../../home-modules/programs/nnn.nix
     ../../home-modules/programs/kitty.nix
     ../../home-modules/programs/starship.nix
