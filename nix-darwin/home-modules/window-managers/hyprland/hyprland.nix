@@ -239,6 +239,7 @@
           "float, class:^(org\\.fcitx5\\..*)$"
           "pseudo, class:^(fcitx)$"
         ];
+
         #################
         ### AUTOSTART ###
         #################
