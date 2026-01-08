@@ -20,7 +20,7 @@
         # python311
         poetry
         pyright
-        (python312.withPackages (
+        (python313.withPackages (
           ps: with ps; [
             pip
             python-lsp-server

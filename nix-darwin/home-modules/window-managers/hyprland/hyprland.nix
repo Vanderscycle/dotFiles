@@ -153,6 +153,7 @@
             "$mainMod SHIFT, j, resizeactive, 0 120"
             # launch program menu
             "SHIFTSUPER, P, exec, $menu"
+            "$mainMod, space, exec, ~/.config/hypr/scripts/emacs-launcher '(progn (select-frame-set-input-focus (selected-frame)) (universal-launcher-popup))'"
             # "SHIFTSUPER, O, exec, grim -g '$(slurp)' ~/Pictures/screenshot-$(date +'%Y-%m-%d_%H-%M-%S').png" # idk, flameshot doesn't work wihtout this
             # "SHIFTSUPER, V, exec, cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"
             "SHIFTSUPER, O, exec, flameshot gui --clipboard"
@@ -247,7 +248,7 @@
         # Or execute your favorite apps at launch like this:
 
         exec-once = [
-          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SSH_AUTH_SOCK"
+          "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PATH SSH_AUTH_SOCK"
           "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=Hyprland"
           "sleep 1 && waybar"
           "hyprpaper"
@@ -259,7 +260,6 @@
           # "copyq --start-server"
           # "wl-paste --watch cliphist store" # https://wiki.hypr.land/Useful-Utilities/Clipboard-Managers/
           "fcitx5"
-          "emacsclient"
         ];
       };
     };

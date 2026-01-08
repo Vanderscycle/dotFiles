@@ -1,8 +1,7 @@
 ;;; universal-launcher.el --- Optimized universal launcher
 
 ;;; Commentary:
-;; taken from joshua blais blog post
-;; https://joshblais.com/blog/how-i-am-deeply-integrating-emacs/
+;; Simplified version that uses the existing Emacs frame
 
 ;;; Code:
 
@@ -16,8 +15,9 @@
   '((:name "Context" :icon "flash" :types (contextual custom-action))
     (:name "Active" :icon "device-desktop" :types (buffer running))
     (:name "Tasks" :icon "checklist" :types (agenda-task))
+    (:name "Files & Apps" :icon "apps" :types (file app flatpak))
     (:name "System" :icon "terminal" :types (command ssh))
-    (:name "Tools" :icon "wrench" :types (emoji kill-ring-item)))
+    (:name "Tools" :icon "wrench" :types (emoji calculator kill-ring-item)))
   "Category definitions for the launcher.")
 
 ;; Enhanced cache system
@@ -50,6 +50,7 @@
     ("Calendar" . "📅")
     ("Clock" . "⏰")
     ("Mail" . "📧")
+    ("Goat". "🐐")
     ("Lock" . "🔒")
     ("Magnifying Glass" . "🔍")
     ("Light Bulb" . "💡"))
@@ -62,10 +63,12 @@
     (puthash 'buffer (all-the-icons-octicon "file-code" :face '(:foreground "#3d424a" :height 0.9)) cache)
     (puthash 'running (all-the-icons-material "desktop_windows" :face '(:foreground "#8b919a" :height 0.9)) cache)
     (puthash 'app (all-the-icons-faicon "cube" :face '(:foreground "#e0dcd4" :height 0.9)) cache)
+    (puthash 'flatpak (all-the-icons-material "layers" :face '(:foreground "#56b6c2" :height 0.9)) cache)
     (puthash 'bookmark (all-the-icons-octicon "bookmark" :face '(:foreground "#b8c4b8" :height 0.9)) cache)
     (puthash 'file (all-the-icons-faicon "file" :face '(:foreground "#d4ccb4" :height 0.9)) cache)
     (puthash 'command (all-the-icons-octicon "terminal" :face '(:foreground "#98c379" :height 0.9)) cache)
     (puthash 'emoji (all-the-icons-material "insert_emoticon" :face '(:foreground "#e5c07b" :height 0.9)) cache)
+    (puthash 'calculator (all-the-icons-faicon "calculator" :face '(:foreground "#56b6c2" :height 0.9)) cache)
     ;; Category icons with matching style
     (puthash "Active" (all-the-icons-material "dashboard" :face '(:foreground "#61afef" :weight bold :height 1.0)) cache)
     (puthash "Files & Apps" (all-the-icons-material "apps" :face '(:foreground "#c678dd" :weight bold :height 1.0)) cache)
@@ -100,7 +103,6 @@
      ((string= ext "h") (all-the-icons-fileicon "h" :face 'font-lock-preprocessor-face))
      ((string= ext "go") (all-the-icons-alltheicon "go" :face 'font-lock-keyword-face))
      ((string= ext "svelte") (all-the-icons-fileicon "svelte" :face 'font-lock-type-face))
-     ((string= ext "rs") (all-the-icons-alltheicon "rust" :face 'font-lock-type-face))
      ((string= ext "php") (all-the-icons-fileicon "php" :face 'font-lock-function-name-face))
      ((string= ext "el") (all-the-icons-fileicon "elisp" :face 'font-lock-variable-name-face))
      ((string= ext "clj") (all-the-icons-fileicon "clojure" :face 'font-lock-function-name-face))
@@ -170,6 +172,16 @@
                        (universal-launcher--get-applications)))
              category-handlers)
 
+    (puthash 'flatpak
+             (lambda ()
+               (mapcar (lambda (app)
+                         (cons (format "%s Flatpak: %s"
+                                       (universal-launcher--get-icon 'flatpak)
+                                       (car app))
+                               (list 'app (cdr app))))
+                       (universal-launcher--get-flatpak-applications)))
+             category-handlers)
+
     (puthash 'bookmark
              (lambda ()
                (mapcar (lambda (bookmark)
@@ -200,6 +212,13 @@
                                        (cdr emoji))
                                (list 'emoji (cdr emoji))))
                        universal-launcher--common-emojis))
+             category-handlers)
+
+    (puthash 'calculator
+             (lambda ()
+               (list (cons (format "%s Calculator: Enter math expression"
+                                   (universal-launcher--get-icon 'calculator))
+                           (list 'calculator 'ready))))
              category-handlers)
 
     ;; NEW HANDLERS - Add these BEFORE processing categories
@@ -272,9 +291,8 @@
         (dirs '("/usr/share/applications/"
                 "/usr/local/share/applications/"
                 "~/.local/share/applications/"
-                ;;"/var/lib/flatpak/exports/share/applications/"
-                ;;"~/.local/share/flatpak/exports/share/applications/"
-                )))
+                "/var/lib/flatpak/exports/share/applications/"
+                "~/.local/share/flatpak/exports/share/applications/")))
     (dolist (dir dirs)
       (when (file-directory-p (expand-file-name dir))
         (dolist (file (directory-files (expand-file-name dir) t "\\.desktop$"))
@@ -289,6 +307,71 @@
                   (push (cons name (replace-regexp-in-string "%[FfUu]" "" exec-line))
                         apps))))))))
     apps))
+
+(defun universal-launcher--get-flatpak-applications ()
+  "Get list of installed Flatpak applications."
+  (let ((apps '()))
+    (when (executable-find "flatpak")
+      (with-temp-buffer
+        ;; Try both user and system installations
+        (dolist (scope '("--user" "--system"))
+          (erase-buffer)
+          (when (= 0 (call-process "flatpak" nil t nil "list" "--app" scope "--columns=name,application"))
+            (goto-char (point-min))
+            ;; Skip the header line
+            (when (looking-at "Name.*Application ID")
+              (forward-line 1))
+            (while (not (eobp))
+              (let* ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+                     ;; Split on multiple spaces (2 or more) to handle column alignment
+                     (parts (split-string line "[ \t]\\{2,\\}" t))
+                     (name (when (>= (length parts) 1) (string-trim (nth 0 parts))))
+                     (app-id (when (>= (length parts) 2) (string-trim (nth 1 parts)))))
+                (when (and name app-id
+                           (not (string-empty-p name))
+                           (not (string-empty-p app-id))
+                           ;; Ensure it looks like a proper app ID
+                           (string-match-p "^[a-zA-Z][a-zA-Z0-9._-]*\\.[a-zA-Z][a-zA-Z0-9._-]*" app-id))
+                  (push (cons (format "%s (Flatpak)" name)
+                              (concat "flatpak run " app-id))
+                        apps)))
+              (forward-line 1))))))
+    ;; Remove duplicates (in case app appears in both user and system)
+    (cl-remove-duplicates apps :test (lambda (a b) (string= (cdr a) (cdr b))))))
+
+;; TODO Calculator Module
+;; Calculator Module
+(defun universal-launcher--is-calculator-input (input)
+  "Check if INPUT is a math expression."
+  (and (not (string-empty-p input))
+       (not (string-match-p "^[[:space:]]*$" input))
+       ;; Allow more mathematical symbols and functions
+       (string-match-p "^[0-9+\\-*/().,^ %!sincotaqrexplog]+$" input)
+       ;; Must contain at least one operator or math function
+       (or (string-match-p "[+\\-*/^%]" input)
+           (string-match-p "\\(sin\\|cos\\|tan\\|sqrt\\|exp\\|log\\)" input))
+       ;; Must contain at least one number
+       (string-match-p "[0-9]" input)))
+
+(defun universal-launcher--calculate (expr)
+  "Calculate mathematical expression EXPR using calc."
+  (condition-case err
+      (let* ((clean-expr (string-trim expr))
+             ;; Replace common notations
+             (calc-expr (replace-regexp-in-string "\\^" "**" clean-expr))
+             (calc-expr (replace-regexp-in-string "×" "*" calc-expr))
+             (calc-expr (replace-regexp-in-string "÷" "/" calc-expr))
+             (result (calc-eval calc-expr)))
+        (if (and result
+                 (stringp result)
+                 (not (string= result ""))
+                 (not (string-match-p "\\(Error\\|Bad\\)" result))
+                 ;; Accept various number formats including scientific notation
+                 (or (string-match-p "^[-+]?[0-9]+\\.?[0-9]*\\(?:[eE][-+]?[0-9]+\\)?$" result)
+                     (string-match-p "^[-+]?[0-9]+/[0-9]+$" result))) ; fractions
+            result
+          nil))
+    (error nil)))
 
 (defun universal-launcher--copy-to-clipboard (text)
   "Copy TEXT to system clipboard, handling both X11 and Wayland."
@@ -310,6 +393,24 @@
    (t
     (kill-new text)
     (message "Copied to Emacs kill ring (install wl-copy or xclip for system clipboard)"))))
+
+;; Enhanced calculator handler for the main popup function
+(defun universal-launcher--handle-calculator-input (input)
+  "Handle calculator INPUT with immediate calculation."
+  (let ((result (universal-launcher--calculate input)))
+    (if result
+        (progn
+          (universal-launcher--copy-to-clipboard result)
+          (message "📊 %s = %s (copied to clipboard)" input result)
+          ;; If in a buffer, optionally insert the result
+          (when (and universal-launcher--previous-frame
+                     (frame-live-p universal-launcher--previous-frame))
+            (with-selected-frame universal-launcher--previous-frame
+              (when (and (not (minibufferp))
+                         (not buffer-read-only)
+                         (y-or-n-p "Insert result at point? "))
+                (insert result)))))
+      (message "❌ Invalid expression: %s" input))))
 
 (defun universal-launcher--get-system-commands ()
   "Get system commands from PATH."
@@ -438,8 +539,8 @@ Otherwise, prompt for a search engine."
             ("Wikipedia" . "https://en.wikipedia.org/w/index.php?search=")
             ("4get" . "https://4get.ca/web?s=")
             ("Goodreads" . "https://www.goodreads.com/search?q=")
-            ("Nix Packages" . "https://search.nixos.org/packages?channel=25.05&show=")
-            ("NixOS Options" . "https://search.nixos.org/options?channel=25.05&query=")
+            ("Nix Packages" . "https://search.nixos.org/packages?channel=25.11&show=")
+            ("NixOS Options" . "https://search.nixos.org/options?channel=25.11&query=")
             ("Home Manager Options" . "https://home-manager-options.extranix.com/?query=")
             ("DevDocs.io" . "https://devdocs.io/#q=")
             ("GitHub" . "https://github.com/search?q=")
@@ -455,6 +556,7 @@ Otherwise, prompt for a search engine."
             ("YouTube" . "https://www.youtube.com/results?search_query=")
             ("Perplexity" . "https://www.perplexity.ai/search/new?q=")
             ("Hacker News" . "https://hn.algolia.com/?q=")
+            ("Lobsters" . "https://lobste.rs/search?q=")
             ("arXiv" . "https://arxiv.org/search/?query=")
             ("Semantic Scholar" . "https://www.semanticscholar.org/search?q=")
             ("Google Scholar" . "https://scholar.google.com/scholar?q=")
@@ -599,6 +701,23 @@ Combines frequency (usage count) with recency (time decay)."
                          (list 'function #'gofmt))
                    actions)))
 
+          ;; Rust Mode
+          ;; ('rust-mode
+          ;;  (let ((default-directory (or (locate-dominating-file default-directory "Cargo.toml")
+          ;;                               default-directory)))
+          ;;    (push (cons (format "%s Rust: Build" icon)
+          ;;                (list 'async-shell "cargo build"))
+          ;;          actions)
+          ;;    (push (cons (format "%s Rust: Run tests" icon)
+          ;;                (list 'async-shell "cargo test"))
+          ;;          actions)
+          ;;    (push (cons (format "%s Rust: Run" icon)
+          ;;                (list 'async-shell "cargo run"))
+          ;;          actions)
+          ;;    (push (cons (format "%s Rust: Check" icon)
+          ;;                (list 'async-shell "cargo check"))
+          ;;          actions)))
+
           ;; Emacs Lisp Mode
           ('emacs-lisp-mode
            (push (cons (format "%s Elisp: Eval buffer" icon)
@@ -614,10 +733,10 @@ Combines frequency (usage count) with recency (time decay)."
           ;; Nix Mode
           ('nix-mode
            (push (cons (format "%s Nix: Rebuild switch" icon)
-                       (list 'async-shell "nh os switch -v"))
+                       (list 'async-shell "sudo nixos-rebuild switch"))
                  actions)
            (push (cons (format "%s Nix: Rebuild test" icon)
-                       (list 'async-shell "nh os test -v"))
+                       (list 'async-shell "sudo nixos-rebuild test"))
                  actions)
            (push (cons (format "%s Nix: Update flake" icon)
                        (list 'async-shell "nix flake update"))
@@ -844,8 +963,12 @@ Examples:
      ;; Empty input - do nothing
      ((string-empty-p selection) nil)
 
-     ;; ;; Separator - do nothing
-     ;; ((eq candidate 'separator) nil)
+     ;; Calculator check - prioritize this before other matches
+     ((universal-launcher--is-calculator-input selection)
+      (universal-launcher--handle-calculator-input selection))
+
+     ;; Separator - do nothing
+     ((eq candidate 'separator) nil)
 
      ;; Handle matched candidates
      (candidate
@@ -860,6 +983,7 @@ Examples:
           ('command (universal-launcher--run-command item))
           ('emoji (universal-launcher--insert-emoji item))
           ('ssh (universal-launcher--ssh-connect item))
+          ('calculator (message "🧮 Type a math expression like: 2+2, sqrt(16), sin(45)"))
           ('org-task (universal-launcher--jump-to-task item))
           ('kill-ring (universal-launcher--yank-from-ring item))
           ('custom-action (universal-launcher--execute-custom-action item))
@@ -874,8 +998,10 @@ Examples:
              (shell-command item)))
           (_ (message "Unknown action type: %s" type)))))
 
+     ;; Web search fallback - only if not a calculator expression
      ((and (not candidate)
-           (not (string-empty-p selection)))
+           (not (string-empty-p selection))
+           (not (universal-launcher--is-calculator-input selection)))
       (universal-launcher--web-search selection)))
 
     ;; Return to previous frame

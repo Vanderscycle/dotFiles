@@ -18,7 +18,6 @@
 
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hosts = {
