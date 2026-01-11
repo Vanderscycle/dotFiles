@@ -25,7 +25,7 @@
   # TODO: move this to a vm called homelab monolith add factorio, nextcloud
   # services
   service = {
-    fcitx.enable = true; # chinese fonts are super pixels
+    fcitx.enable = true;
     sqlite.enable = true;
     swaync.enable = true;
     gnome.enable = true;

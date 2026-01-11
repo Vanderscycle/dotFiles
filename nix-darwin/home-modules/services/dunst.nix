@@ -15,9 +15,9 @@
   # https://mynixos.com/home-manager/options/services.dunst
   # https://github.com/dunst-project/dunst/wiki/Guides#understanding-rules
   config = lib.mkIf config.service.dunst.enable {
+    catppuccin.dunst.enable = true;
     services.dunst = {
       enable = true;
-      catppuccin.enable = true;
       settings = {
         global = {
           geometry = "270x6-24+68";

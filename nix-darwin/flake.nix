@@ -180,7 +180,24 @@
           }
           // inputs;
           modules = [
+            # nixos
             ./users/medialab/configuration.nix
+            {
+              system.autoUpgrade = {
+                enable = true;
+                upgrade = false; # keep lockfile
+                allowReboot = false;
+                runGarbageCollection = true;
+                flake = "github:Vanderscycle/dotFiles?dir=nix-darwin#medialab";
+                flags = [
+                  "--impure"
+                  "--refresh"
+                ];
+                dates = "daily";
+                randomizedDelaySec = "45min";
+              };
+            }
+            # home-manager
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

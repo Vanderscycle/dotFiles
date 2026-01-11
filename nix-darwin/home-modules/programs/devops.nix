@@ -24,7 +24,7 @@
       # backend api calls
       insomnia # not supported on aarch64-darwin
       # dns
-      dogdns
+      doggo
       dive
       lsof
     ];
