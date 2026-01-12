@@ -188,7 +188,7 @@
                 upgrade = false; # keep lockfile
                 allowReboot = false;
                 runGarbageCollection = true;
-                flake = "github:Vanderscycle/dotFiles?dir=nix-darwin#medialab";
+                flake = "github:Vanderscycle/dotFiles?dir=nix-darwin#medialab"; # doesn't work on private repos
                 flags = [
                   "--impure"
                   "--refresh"

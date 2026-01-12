@@ -78,7 +78,7 @@
 
   environment.systemPackages = with pkgs; [
     # networkmanagerapplet
-
+    doggo
   ];
 
   home-manager.backupFileExtension = "backup";
