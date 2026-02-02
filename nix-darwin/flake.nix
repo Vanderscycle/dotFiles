@@ -86,6 +86,12 @@
         hostname = "medialab";
         synology-nas = "192.168.1.246";
       };
+
+      deckMeta = {
+        system = "x86_64-linux";
+        username = "deck";
+        hostname = "deck";
+      };
     in
     {
       darwinConfigurations = {
@@ -188,7 +194,7 @@
                 upgrade = false; # keep lockfile
                 allowReboot = false;
                 runGarbageCollection = true;
-                flake = "github:Vanderscycle/dotFiles?dir=nix-darwin#medialab"; # doesn't work on private repos
+                flake = "github:Vanderscycle/dotFiles?dir=nix-darwin#medialab"; # private repos use systemd to pull latest
                 flags = [
                   "--impure"
                   "--refresh"
@@ -217,5 +223,23 @@
           ];
         }; # medialab
       };
+
+      homeConfigurations."deck" =
+        let
+          system = "x86_64-linux";
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          inherit inputs;
+          extraSpecialArgs = {
+            inherit inputs;
+            meta = deckMeta;
+          };
+          modules = [
+            catppuccin.homeModules.catppuccin
+            ./users/deck/home.nix
+          ];
+        };
     };
 }

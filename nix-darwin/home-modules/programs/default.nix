@@ -36,6 +36,7 @@
     ./nnn.nix # TODO: add more options e.g. bookmarks
     ./nyxt.nix
     ./nushell.nix # TODO: add more options for shell init once you learn more about it
+    ./opencode.nix
     ./plastic_printer.nix
     ./proton.nix
     ./signal.nix

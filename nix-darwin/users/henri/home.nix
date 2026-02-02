@@ -45,6 +45,14 @@
           hostname = "192.168.2.228";
           user = "monolith";
         };
+        opencode = {
+          hostname = "192.168.2.153";
+          user = "opencode";
+        };
+        steamdeck = {
+          hostname = "192.168.1.146";
+          user = "deck";
+        };
       };
     };
   };
@@ -83,6 +91,7 @@
     signal.enable = true;
     zulip.enable = true;
     zathura.enable = true;
+    opencode.enable = true;
     nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin";
     microcontrollers.enable = false;
     office.enable = false;

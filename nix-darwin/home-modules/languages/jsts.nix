@@ -16,6 +16,7 @@
   config = lib.mkIf config.languages.jsts.lsp.enable {
     home.packages = with pkgs; [
       nodejs_22
+      bun
       # corepack # contains pnpm/yarn/npm
       nodePackages.typescript-language-server
       nodePackages.typescript
