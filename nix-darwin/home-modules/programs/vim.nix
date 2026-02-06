@@ -8,7 +8,7 @@
     program.vim.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables the backup editor";
-      default = true;
+      default = false;
     };
   };
 

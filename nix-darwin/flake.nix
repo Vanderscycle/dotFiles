@@ -231,12 +231,12 @@
         in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          inherit inputs;
           extraSpecialArgs = {
             inherit inputs;
             meta = deckMeta;
           };
           modules = [
+            nixvim.homeModules.nixvim
             catppuccin.homeModules.catppuccin
             ./users/deck/home.nix
           ];

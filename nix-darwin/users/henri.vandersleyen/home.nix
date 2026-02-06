@@ -73,6 +73,7 @@
 
   # programs
   program = {
+    vim.enable = true;
     direnv.enable = true;
     awscli.enable = false; # brew
     arc-browser.enable = false; # beew

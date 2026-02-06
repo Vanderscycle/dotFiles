@@ -18,7 +18,13 @@
   program = {
     brave.enable = true;
     nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin";
+    git = {
+      userEmail = "henri-vandersleyen@protonmail.com";
+      userName = "vanderscycle";
+      signingKey = "~/.ssh/endeavourGit.pub";
+    };
   };
+
   home = {
     username = meta.username;
     homeDirectory = "/home/${meta.username}";

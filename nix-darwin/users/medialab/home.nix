@@ -14,6 +14,7 @@
     ../../home-modules/services
   ];
   program = {
+    vim.enable = true;
     spotify.enable = false;
     spicetify.enable = false;
     proton.enable = true;
