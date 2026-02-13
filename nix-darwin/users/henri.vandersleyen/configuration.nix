@@ -185,6 +185,7 @@
       "fellow"
       "font-jetbrains-mono"
       "slack"
+      "visual-studio-code"
     ];
     brews = [
       "yarn"

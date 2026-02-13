@@ -47,21 +47,10 @@
 
     # services
     # ./home-modules/services/appleTouchId.nix
-    # Window-manager
-    ../../home-modules/window-managers/aerospace
-
-    # starus-bars
-    # ../../home-modules/status-bars/sketchybar
 
     # secrets (home-manager)
     ./sops.nix
   ];
-
-  # wm
-  wm.aerospace = {
-    enable = false;
-    configPath = Users/${meta.username}/Documents/dotfiles/.config/aerospace;
-  };
 
   # languages
   languages = {
@@ -76,8 +65,8 @@
     vim.enable = true;
     direnv.enable = true;
     awscli.enable = false; # brew
-    arc-browser.enable = false; # beew
-    codium.enable = true;
+    arc-browser.enable = false; # brew
+    codium.enable = false;
     fish.enable = false;
     zsh.enable = true;
     nh.flakeLocation = "/Users/${meta.username}/Documents/dotFiles/nix-darwin";
