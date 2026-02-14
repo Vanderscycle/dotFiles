@@ -32,7 +32,6 @@ in
       # INFO: for values to be available throughout the config your must declare them
       "yubico/u2f_keys" = {
       };
-
       # Synology SMB access
       "home-server/synology/password" = {
         owner = "root";

@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -11,25 +10,32 @@
       description = "Enables aws cli v2";
       default = false;
     };
-    program.linode.enable = lib.mkOption {
-      type = lib.types.bool;
-      description = "Enables linode cli";
-      default = false;
+
+    program.awscli.settings = lib.mkOption {
+      type = lib.types.attrs;
+      description = "Aws cli config";
+      default = { };
     };
+
+    program.awscli.credentials = lib.mkOption {
+      type = lib.types.attrs;
+      description = "Aws cli credentials (please use sops)";
+      default = { };
+    };
+    # program.linode.enable = lib.mkOption {
+    #   type = lib.types.bool;
+    #   description = "Enables linode cli";
+    #   default = false;
+    # };
   };
 
-  config = {
-    # Merge the packages conditionally
-    home.packages =
-      with pkgs;
-      (lib.optionals config.program.awscli.enable [
-        ssm-session-manager-plugin
-        awscli2
-        aws-sam-cli
-        rclone
-      ])
-      ++ (lib.optionals config.program.linode.enable [
-        linode-cli
-      ]);
+  config = lib.mkIf config.program.awscli.enable {
+    programs = {
+      awscli = {
+        enable = true;
+        settings = config.program.awscli.settings;
+        credentials = config.program.awscli.credentials;
+      };
+    };
   };
 }

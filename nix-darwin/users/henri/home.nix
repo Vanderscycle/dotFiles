@@ -5,11 +5,13 @@
   config,
   meta,
   pkgs,
+  inputs,
   ...
 }:
 
 {
   imports = [
+    inputs.sops-nix.homeManagerModules.sops
     # programs
     ../../home-modules/programs
     # languages
@@ -22,7 +24,20 @@
     ../../home-modules/status-bars/waybar
   ];
 
-  # TODO: move this to a vm called homelab monolith add factorio, nextcloud
+  sops = {
+    defaultSopsFile = ./secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+
+    age.keyFile = "/home/${meta.username}/.config/sops/age/keys.txt";
+    secrets = {
+      # Maggit Forge
+      "aws/access-key" = {
+      };
+      "aws/secret-access-key" = {
+      };
+    };
+  };
+
   # services
   service = {
     fcitx.enable = true;
@@ -72,6 +87,28 @@
 
   # programs
   program = {
+    gaming = {
+      heroic.enable = true;
+    };
+    awscli = {
+      enable = true;
+      credentials = {
+        "root" = {
+          aws_access_key_id = builtins.readFile config.sops.secrets."aws/access-key".path;
+          aws_secret_access_key = builtins.readFile config.sops.secrets."aws/secret-access-key".path;
+        };
+      };
+      settings = {
+        "AdministratorAccess-975050082671" = {
+          region = "us-east-1";
+          output = "json";
+        };
+        "default" = {
+          region = "us-east-1";
+          output = "json";
+        };
+      };
+    };
     vim.enable = true;
     nyxt.enable = true;
     spotify.enable = true;

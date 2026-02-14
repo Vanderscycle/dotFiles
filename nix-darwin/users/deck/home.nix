@@ -16,6 +16,10 @@
   ];
 
   program = {
+    spotify.enable = true;
+    gaming = {
+      heroic.enable = true;
+    };
     brave.enable = true;
     nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin";
     git = {
@@ -37,13 +41,22 @@
     file = { };
 
     sessionVariables = {
-      PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
     };
 
     sessionPath = [ ];
   };
 
   programs.home-manager.enable = true;
+  programs.bash = {
+    enable = true;
+    # This code runs whenever a bash shell starts
+    initExtra = ''
+      # If the shell is interactive (not a script) and fish exists, switch to it
+      if [[ $- == *i* && -x "$(command -v fish)" ]]; then
+        exec fish
+      fi
+    '';
+  };
   programs.fish.enable = true;
 
   # theme

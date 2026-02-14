@@ -189,6 +189,7 @@
             # nixos
             ./users/medialab/configuration.nix
             {
+              # journalctl -u nixos-upgrade.service -e
               system.autoUpgrade = {
                 enable = true;
                 upgrade = false; # keep lockfile

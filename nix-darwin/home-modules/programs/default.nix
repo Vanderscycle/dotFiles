@@ -13,8 +13,8 @@
     ./cloud.nix
     ./codium.nix
     ./cowsay.nix
-    ./direnv.nix
     ./devops.nix
+    ./direnv.nix
     ./discord.nix
     ./fish.nix # TODO: add an option to pass to shellInit
     ./flameshot.nix
@@ -22,6 +22,7 @@
     ./fzf.nix
     ./git.nix
     ./godot.nix
+    ./heroicGaming.nix
     ./k9s.nix
     ./keychain.nix
     ./kitty.nix
@@ -34,8 +35,8 @@
     ./multimedia.nix
     ./nh.nix
     ./nnn.nix # TODO: add more options e.g. bookmarks
-    ./nyxt.nix
     ./nushell.nix # TODO: add more options for shell init once you learn more about it
+    ./nyxt.nix
     ./opencode.nix
     ./plastic_printer.nix
     ./proton.nix
@@ -45,9 +46,9 @@
     ./starship.nix
     ./thunar.nix
     ./vim.nix
+    ./wofi.nix
     ./zathura.nix
     ./zsh.nix # TODO: add an option like shellinit
     ./zulip.nix
-    ./wofi.nix
   ];
 }

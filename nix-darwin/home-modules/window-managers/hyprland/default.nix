@@ -28,6 +28,7 @@ in
       (pkgs.flameshot.overrideAttrs (oldAttrs: {
         cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [ "-DUSE_WAYLAND_GRIM=ON" ];
       }))
+      playerctl
       wf-recorder # video recorder for wayland
       waypaper
       # screenshot when flameshot isn't working
