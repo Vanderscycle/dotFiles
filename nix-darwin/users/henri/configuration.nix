@@ -9,16 +9,18 @@
   imports = [
     hosts.nixosModule
     ../../hosts
-    # hardware related
+    # hardware related e.g. keyboards
     ../../nix-modules/hardware
+    # scripts
+    ../../nix-modules/writerScripts
+    # docker containers
+    ../../nix-modules/containers
     # programs
     ../../nix-modules/programs
     # services
     ../../nix-modules/services
     # systemd/cron
     ../../nix-modules/cron
-    # scripts
-    # ../../nix-modules/writerScripts
     # local
     ./sops.nix
   ];
@@ -30,6 +32,14 @@
   programs.nix-ld.libraries = with pkgs; [
     lua-language-server
   ];
+  # containers
+  container = {
+    lute.enable = true;
+  };
+  # scripts
+  script = {
+    emacs.enable = true;
+  };
   # cron
   cron = {
     nasBackup.photos.enable = true;
