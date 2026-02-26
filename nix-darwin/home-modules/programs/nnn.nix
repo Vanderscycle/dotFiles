@@ -61,6 +61,7 @@
       };
       fish = {
         shellAliases = {
+          # zoxide
           z = "j";
         };
         functions = {

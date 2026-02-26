@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -17,7 +18,18 @@
       sessionVariables = { };
     };
     programs.fish = {
-      plugins = [ ];
+      # you can use oh my fish
+      plugins = [
+        {
+          name = "fasd";
+          src = pkgs.fetchFromGitHub {
+            owner = "oh-my-fish";
+            repo = "plugin-aws";
+            rev = "e53a1de3f826916cb83f6ebd34a7356af8f754d1";
+            sha256 = "040dnh5gv8mp7szal5hz7d8kp3sj6c6hq2f96gc4hgkqlbyyyplp";
+          };
+        }
+      ];
       enable = true;
       shellInit = ''
         fish_add_path $PNPM_HOME
@@ -55,11 +67,10 @@
             echo "Exported key $item[1]"
           end
         '';
-        # there has to be a betteway (flameshot)
+        # flameshot working
         # screenshot = ''
         #   grim -g "$(slurp -o -r -c '#ff0000ff')" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png
         # '';
-        # ssh
         # network
         kill-port = "kill -9 $(lsof -t -i:$argv[1])";
         # cloud access
@@ -80,7 +91,6 @@
         '';
         # nix
         nix-clean = "nix-store --gc";
-        nix-update = "sudo nixos-rebuild switch";
         nix-purge = ''
           sudo nix-collect-garbage -d
           sudo nix-store --optimise
