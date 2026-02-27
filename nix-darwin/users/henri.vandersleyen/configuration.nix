@@ -126,7 +126,7 @@
       persistent-apps = [
         "/System/Applications/Launchpad.app"
         "/Applications/Postman.app"
-        # "/Applications/Slack.app"
+        "/Applications/Visual\ Studio\ Code.app"
         "/Applications/Spotify.app"
         "/Applications/1Password.app"
         "/Applications/Arc.app"

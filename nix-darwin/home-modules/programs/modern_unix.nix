@@ -21,6 +21,7 @@
       dysk
       silver-searcher # ag
       platinum-searcher # pt
+      nix-prefetch-git
     ];
     programs = {
       eza = {
