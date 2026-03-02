@@ -38,13 +38,14 @@
   };
   # scripts
   script = {
-    emacs.enable = true;
+    emacs = {
+      enable = true;
+      runAtStartup = true;
+    };
   };
   # cron
   cron = {
     nasBackup.photos.enable = true;
-    # TODO: update to send pdf to cloud for paperless-ngx
-    downloadFolderOrganizer.enable = false;
   };
   # services
   service = {
