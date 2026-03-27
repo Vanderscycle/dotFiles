@@ -26,17 +26,19 @@
       default = false;
     };
   };
-  services = {
-    displayManager = {
-      autoLogin = {
-        enable = lib.MkIf config.display-manager.autologin.enable;
-        user = "${meta.username}";
+  config = {
+    services = {
+      displayManager = {
+        autoLogin = {
+          enable = lib.MkIf config.display-manager.autologin.enable;
+          user = "${meta.username}";
+        };
       };
-    };
-    xserver = {
-      enable = true;
-      displayManager.lightdm.enable = lib.MkIf config.display-manager.lightdm.enable;
-      desktopManager.xfce.enable = lib.MkIf config.display-manager.xfce.enable;
+      xserver = {
+        enable = true;
+        displayManager.lightdm.enable = lib.MkIf config.display-manager.lightdm.enable;
+        desktopManager.xfce.enable = lib.MkIf config.display-manager.xfce.enable;
+      };
     };
   };
 }
