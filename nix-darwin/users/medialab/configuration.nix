@@ -12,7 +12,7 @@
     # programs
     ../../nix-modules/programs
     # display-mangers
-    ../../window-managers/xfce
+    ../../home-modules/window-managers/xfce
     # local
     ./sops.nix
     ./nix.nix
