@@ -7,14 +7,14 @@
 }:
 {
   options = {
-    service.gnome.enable = lib.mkOption {
+    program.gnome.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables gnome customization";
       default = false;
     };
   };
 
-  config = lib.mkIf config.service.gnome.enable {
+  config = lib.mkIf config.program.gnome.enable {
     xdg.dataFile."icons/rose-pine-hyprcursor".source = "${
       inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
     }/share/icons/rose-pine-hyprcursor";

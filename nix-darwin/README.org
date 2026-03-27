@@ -5,7 +5,6 @@ Video tutorial
 https://www.youtube.com/watch?v=k9yKm_k5cVA
 
 ** how to use
-
 First install nix from either of the options bellow. I recommend the following
 
 #+begin_src bash
@@ -18,7 +17,7 @@ https://github.com/LnL7/nix-darwin
 Then set the flake
 
 ** Configuring
-Home manager options 
+Home manager options
 https://home-manager-options.extranix.com/?query=fish&release=master
 Nix available packages + options
 https://search.nixos.org/packages
@@ -30,5 +29,37 @@ https://teu5us.github.io/nix-lib.html#builtins.fetchurl
 
 
 ** Uninstalling nix
-
 https://nix.dev/manual/nix/2.18/installation/uninstall
+
+* Refactor + std of dotFiles
+
+** programs/services home-modules/nix-modules confusion
+1. Merge programs/services into simply programs to make things simpler for both ~home-modules/nix-modules~
+2. cron and writeScripts can be a bit confusing as all you need to make one another is systemd. combine both in ~nix-modules~
+
+** Allow for centralized shell integrations
+e.g. the shell integration option should belong in the ~<program>.nix~ config and not in the fish/zsh file
+   #+begin_src nix
+      enableZshIntegration = lib.mkIf config.program.zsh.enable true;
+      enableFishIntegration = lib.mkIf config.program.zsh.enable true;
+   #+end_src
+** Refactor to take advantage of lib.mkMerge
+#+begin_src nix
+  config = lib.mkMerge [
+    # Install the script if either option is enabled
+    (lib.mkIf (config.script.emacs.enable || config.script.emacs.runAtStartup) {
+      environment.systemPackages = [ emacs-env ];
+    })
+
+    # Enable the systemd user service only if runAtStartup is true
+    (lib.mkIf config.script.emacs.runAtStartup {
+# ...
+})
+]
+#+end_src
+** Refactor monolith (not in this repo)
+Based on the lessons learned in this repo, make it mirror this repo
+*** move nix.nix in a more general path
+*** Complete new nas user https://github.com/josecriane/nixos-nas/blob/main/flake.nix
+*** Add 2x4gb harddrive in the same proxmox location as opencode.
+*** move opencode to the 1060ti proxmox and pass the gpu (if you can)

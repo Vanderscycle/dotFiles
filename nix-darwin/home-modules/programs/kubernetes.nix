@@ -31,7 +31,7 @@
         tilt
         ctlptl
         argocd
-        kubectx # easy contect changing
+        kubectx # easy context changing
       ];
       sessionVariables = config.program.kubernetes.kubeconfig;
     };

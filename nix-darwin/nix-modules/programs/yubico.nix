@@ -4,18 +4,14 @@
   config,
   ...
 }:
-let
-  name = "henri";
-  homeDirectory = if pkgs.stdenv.isLinux then "/home/${name}" else "/Users/${name}";
-in
 {
   options = {
-    yubico.enable = lib.mkOption {
+    program.yubico.enable = lib.mkOption {
       type = lib.types.bool;
       description = "enables yubico key 2mfa";
       default = false;
     };
-    yubico.keyID = lib.mkOption {
+    program.yubico.keyID = lib.mkOption {
       type = lib.types.str;
       description = "enables the key";
       default = false;
@@ -23,7 +19,7 @@ in
   };
 
   # https://nixos.wiki/wiki/Yubikey
-  config = lib.mkIf config.yubico.enable {
+  config = lib.mkIf config.program.yubico.enable {
     security = {
       pam = {
         sshAgentAuth.enable = true;
@@ -43,7 +39,7 @@ in
           enable = true;
           debug = true;
           # mode = "challenge-response";
-          id = config.yubico.keyID;
+          id = config.program.yubico.keyID;
         };
       };
     };

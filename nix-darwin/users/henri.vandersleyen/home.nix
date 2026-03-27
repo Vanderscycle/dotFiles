@@ -1,6 +1,3 @@
-# home.nix
-# home-manager switch
-
 {
   config,
   meta,
@@ -20,7 +17,6 @@
     ../../home-modules/programs/lazygit.nix
     ../../home-modules/programs/modern_unix.nix
     ../../home-modules/programs/fzf.nix
-    # ../../home-modules/programs/ghostty.nix # INFO:broken
     ../../home-modules/programs/btop.nix
     ../../home-modules/programs/cloud.nix
     ../../home-modules/programs/codium.nix
@@ -46,7 +42,7 @@
     ../../home-modules/languages/yaml.nix
 
     # services
-    # ./home-modules/services/appleTouchId.nix
+    # ../../mac-modules/appleTouchId.nix
 
     # secrets (home-manager)
     ./sops.nix

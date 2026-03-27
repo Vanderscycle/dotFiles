@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    internationalisation.enable = lib.mkOption {
+    program.internationalisation.enable = lib.mkOption {
       type = lib.types.bool;
       description = "enables multilanguage support";
       default = false;
     };
   };
 
-  config = lib.mkIf config.internationalisation.enable {
+  config = lib.mkIf config.program.internationalisation.enable {
     time.timeZone = "America/Vancouver";
 
     services.xserver.xkb = {

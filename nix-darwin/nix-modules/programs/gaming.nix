@@ -7,19 +7,19 @@
 {
 
   options = {
-    gaming.enable = lib.mkOption {
+    program.gaming.enable = lib.mkOption {
       type = lib.types.bool;
-      description = "Enables linux best gaming";
+      description = "Enables linux best program.gaming";
       default = false;
     };
 
-    gaming.mangohud.enable = lib.mkOption {
+    program.gaming.mangohud.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables mangohud";
       default = false;
     };
   };
-  config = lib.mkIf config.gaming.enable {
+  config = lib.mkIf config.program.gaming.enable {
     nixpkgs.config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
@@ -40,6 +40,6 @@
         augustus # caesar 3 mod
         innoextract # for caesar 3
       ]
-      ++ (if config.gaming.mangohud.enable then [ mangohud ] else [ ]);
+      ++ (if config.program.gaming.mangohud.enable then [ mangohud ] else [ ]);
   };
 }

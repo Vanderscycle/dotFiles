@@ -6,14 +6,14 @@
 }:
 {
   options = {
-    service.swaync.enable = lib.mkOption {
+    program.swaync.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables swaync message control";
       default = false;
     };
   };
 
-  config = lib.mkIf config.service.swaync.enable {
+  config = lib.mkIf config.program.swaync.enable {
     catppuccin.swaync.enable = true;
     services.swaync = {
       enable = true;

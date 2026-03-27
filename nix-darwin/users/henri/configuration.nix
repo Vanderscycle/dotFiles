@@ -17,8 +17,6 @@
     ../../nix-modules/containers
     # programs
     ../../nix-modules/programs
-    # services
-    ../../nix-modules/services
     # systemd/cron
     ../../nix-modules/cron
     # local
@@ -28,10 +26,28 @@
   system.stateVersion = "25.05";
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
 
+  # TODO: is this needed?
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     lua-language-server
   ];
+  # program
+  program = {
+    networking = {
+      enable = true;
+      wireless.enable = false;
+    };
+    bluetooth.enable = true;
+    gaming = {
+      enable = true;
+      mangohud.enable = true;
+    };
+    yubico = {
+      enable = true;
+      keyID = "24978052"; # TODO: add in nix-sops
+    };
+    internationalisation.enable = true;
+  };
   # containers
   container = {
     lute.enable = true;
@@ -47,26 +63,6 @@
   cron = {
     nasBackup.photos.enable = true;
   };
-  # services
-  service = {
-    networking = {
-      enable = true;
-      wireless.enable = false;
-    };
-    bluetooth.enable = true;
-  };
-  internationalisation.enable = true;
-  services.docker.enable = true;
-  transmission.enable = false; # home server
-
-  # programming
-  android.enable = true; # for adb
-  gaming = {
-    enable = true;
-    mangohud.enable = true;
-  };
-  yubico.enable = true;
-  yubico.keyID = "24978052"; # TODO: add in nix-sops
 
   nix = {
     optimise.automatic = true;
@@ -187,6 +183,7 @@
     mime = {
       enable = true;
       # xdg-mime query default application/pdf
+      # TODO: redo all of them
 
       defaultApplications = {
         # browser

@@ -7,6 +7,8 @@
 let
   emacs-env = pkgs.writeShellScriptBin "update-spacemacs-env" ''
     # Delete the last line of the file
+          echo -e "updating spacemacs.env"
+          echo -e "$SSH_AUTH_SOCK"
     sed -i '$ d' ~/.spacemacs.d/.spacemacs.env
     echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> ~/.spacemacs.d/.spacemacs.env
     ${pkgs.emacs}/bin/emacsclient -e "(dotspacemacs/call-user-env)" || true
@@ -40,13 +42,9 @@ in
           Type = "oneshot";
           RemainAfterExit = false;
           # Ensures the script has access to the user environment
-          PassEnvironment = [
-            "SSH_AUTH_SOCK"
-            "DISPLAY"
-            "XAUTHORITY"
-          ];
+          PassEnvironment = "SSH_AUTH_SOCK";
+          ExecStart = "${emacs-env}/bin/update-spacemacs-env";
         };
-        script = "${emacs-env}/bin/update-spacemacs-env";
         wantedBy = [ "default.target" ];
       };
     })

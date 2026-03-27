@@ -1,6 +1,3 @@
-# ./ghostty.nix
-
-{ ... }:
 {
   imports = [
     ./alacritty.nix
@@ -16,11 +13,14 @@
     ./devops.nix
     ./direnv.nix
     ./discord.nix
+    ./dunst.nix # notifications
+    ./fcitx.nix
     ./fish.nix # TODO: add an option to pass to shellInit
     ./flameshot.nix
     ./fuzzel.nix
     ./fzf.nix
     ./git.nix
+    ./gnome.nix
     ./godot.nix
     ./heroicGaming.nix
     ./k9s.nix
@@ -43,7 +43,12 @@
     ./signal.nix
     ./spacemacs.nix
     ./spotify.nix
+    ./sqlite.nix
+    ./ssh.nix
     ./starship.nix
+    ./swaync.nix # notifications
+    ./syncthing.nix
+    ./television.nix
     ./thunar.nix
     ./vim.nix
     ./wofi.nix

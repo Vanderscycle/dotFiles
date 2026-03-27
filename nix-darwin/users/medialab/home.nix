@@ -10,8 +10,6 @@
     ../../home-modules/programs
     # languages
     ../../home-modules/languages
-    # services
-    ../../home-modules/services
   ];
   program = {
     vim.enable = true;

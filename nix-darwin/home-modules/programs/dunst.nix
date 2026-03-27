@@ -5,16 +5,16 @@
 }:
 {
   options = {
-    service.dunst.enable = lib.mkOption {
+    program.dunst.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables dunst message control";
       default = false;
     };
   };
 
-  # https://mynixos.com/home-manager/options/services.dunst
+  # https://mynixos.com/home-manager/options/programs.dunst
   # https://github.com/dunst-project/dunst/wiki/Guides#understanding-rules
-  config = lib.mkIf config.service.dunst.enable {
+  config = lib.mkIf config.program.dunst.enable {
     catppuccin.dunst.enable = true;
     services.dunst = {
       enable = true;

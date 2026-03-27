@@ -16,8 +16,6 @@
     ../../home-modules/programs
     # languages
     ../../home-modules/languages
-    # services
-    ../../home-modules/services
     # wm
     ../../home-modules/window-managers/hyprland
     # bar
@@ -38,8 +36,21 @@
     };
   };
 
-  # services
-  service = {
+  # languages
+  languages = {
+    go.lsp.enable = true;
+    lua.lsp.enable = true;
+    python.lsp.enable = true;
+    jsts = {
+      lsp.enable = true;
+    };
+    latex.lsp.enable = true;
+    yaml.lsp.enable = true;
+    json.lsp.enable = true;
+  };
+
+  # programs
+  program = {
     fcitx.enable = true;
     sqlite.enable = true;
     swaync.enable = true;
@@ -64,29 +75,16 @@
           hostname = "192.168.2.153";
           user = "opencode";
         };
+        nas = {
+          hostname = "192.168.2.227";
+          user = "nas";
+        };
         steamdeck = {
           hostname = "192.168.1.146";
           user = "deck";
         };
       };
     };
-  };
-
-  # languages
-  languages = {
-    go.lsp.enable = true;
-    lua.lsp.enable = true;
-    python.lsp.enable = true;
-    jsts = {
-      lsp.enable = true;
-    };
-    latex.lsp.enable = true;
-    yaml.lsp.enable = true;
-    json.lsp.enable = true;
-  };
-
-  # programs
-  program = {
     gaming = {
       heroic.enable = true;
     };
@@ -109,6 +107,7 @@
         };
       };
     };
+    syncthing.enable = true;
     vim.enable = true;
     nyxt.enable = true;
     spotify.enable = true;
@@ -140,6 +139,7 @@
       };
     };
     discord.enable = true;
+    television.enable = true;
     fish.enable = true;
     fuzzel.enable = true;
     wofi.enable = true;
@@ -170,6 +170,7 @@
     packages = with pkgs; [
       sysz
       wmctrl
+      path-of-building
     ];
 
     file = { };

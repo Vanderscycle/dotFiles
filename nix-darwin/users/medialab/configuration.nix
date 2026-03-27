@@ -11,47 +11,24 @@
     ../../hosts/medialab
     # programs
     ../../nix-modules/programs
-    # services
-    ../../nix-modules/services/internationalisation.nix
-    ../../nix-modules/services/sound.nix
-    ../../nix-modules/services/bluetooth.nix
-    ../../nix-modules/services/networking.nix
-
+    # display-mangers
+    ../../window-managers/xfce
     # local
     ./sops.nix
     ./nix.nix
   ];
 
   programs.fish.enable = true;
+  # display manager
+  display-manager = {
+    xfce.enable = true;
+    lightdm.enable = true;
+    autologin.enable = true;
+  };
   # services
-  service = {
+  program = {
     bluetooth.enable = true;
-  };
-  internationalisation.enable = true;
-  system.stateVersion = "25.05";
-
-  security.sudo.extraConfig = ''
-    Defaults        timestamp_timeout=3600
-  '';
-
-  services = {
-    openssh = {
-      enable = true;
-    };
-    displayManager = {
-      autoLogin = {
-        enable = true;
-        user = "${meta.username}";
-      };
-    };
-    xserver = {
-      enable = true;
-      displayManager.lightdm.enable = true;
-      desktopManager.xfce.enable = true;
-    };
-  };
-
-  service = {
+    internationalisation.enable = true;
     networking = {
       enable = true;
       networkmanager.enable = true;
@@ -63,9 +40,20 @@
           };
         };
       };
-
     };
   };
+  system.stateVersion = "25.05";
+
+  security.sudo.extraConfig = ''
+    Defaults        timestamp_timeout=3600
+  '';
+
+  services = {
+    openssh = {
+      enable = true;
+    };
+  };
+
   users.users.${meta.username} = {
     home = "/home/${meta.username}";
     shell = pkgs.fish;
@@ -77,13 +65,10 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # networkmanagerapplet
-    doggo
   ];
 
   home-manager.backupFileExtension = "backup";
 
-  # fonts.enableFontDir = true;
   fonts.packages = with pkgs; [
     jetbrains-mono
     nerd-font-patcher
