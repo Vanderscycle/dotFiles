@@ -32,7 +32,7 @@
       ];
     };
     thunar.enable = true;
-    nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin#medialab";
+    nh.flakeLocation = "/home/${meta.username}/Documents/dotFiles/nix-darwin";
   };
 
   home = {
