@@ -1,4 +1,5 @@
 {
+  lib,
   config,
   ...
 }:
@@ -9,23 +10,25 @@ let
 in
 {
 
-  home = {
-    file = {
-      "Pictures/wallpapers".source = mkOutOfStoreSymlink "${configDir}/nix-darwin/wallpapers";
+  config = lib.mkIf config.display-manager.hyprland.enable {
+    home = {
+      file = {
+        "Pictures/wallpapers".source = mkOutOfStoreSymlink "${configDir}/nix-darwin/wallpapers";
+      };
     };
-  };
-  services = {
-    hyprpaper = {
-      enable = true;
-      settings = {
-        preload = [
-          "${config.home.homeDirectory}/Pictures/wallpapers/forest_mountain.jpg"
-        ];
-        wallpaper = [
-          ",${config.home.homeDirectory}/Pictures/wallpapers/forest_mountain.jpg"
-        ];
-        # Optional: Enable splash text over the wallpaper
-        splash = false;
+    services = {
+      hyprpaper = {
+        enable = true;
+        settings = {
+          preload = [
+            "${config.home.homeDirectory}/Pictures/wallpapers/forest_mountain.jpg"
+          ];
+          wallpaper = [
+            ",${config.home.homeDirectory}/Pictures/wallpapers/forest_mountain.jpg"
+          ];
+          # Optional: Enable splash text over the wallpaper
+          splash = false;
+        };
       };
     };
   };

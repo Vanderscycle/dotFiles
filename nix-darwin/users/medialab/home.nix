@@ -11,6 +11,8 @@
     # languages
     ../../home-modules/languages
   ];
+
+  # programs
   program = {
     vim.enable = true;
     spotify.enable = false;

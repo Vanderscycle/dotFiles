@@ -31,6 +31,7 @@
   programs.nix-ld.libraries = with pkgs; [
     lua-language-server
   ];
+
   # program
   program = {
     networking = {

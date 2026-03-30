@@ -12,19 +12,21 @@
     # programs
     ../../nix-modules/programs
     # display-mangers
-    ../../home-modules/window-managers/xfce
+    ../../nix-modules/window-managers/
     # local
     ./sops.nix
     ./nix.nix
   ];
 
   programs.fish.enable = true;
-  # display manager
+
+  # status bars + display managers
   display-manager = {
     xfce.enable = true;
     lightdm.enable = true;
     autologin.enable = true;
   };
+
   # services
   program = {
     bluetooth.enable = true;

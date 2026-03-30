@@ -17,9 +17,9 @@
     # languages
     ../../home-modules/languages
     # wm
-    ../../home-modules/window-managers/hyprland
-    # bar
-    ../../home-modules/status-bars/waybar
+    ../../home-modules/window-managers
+    # statusbar
+    ../../home-modules/status-bars
   ];
 
   sops = {
@@ -35,6 +35,9 @@
       };
     };
   };
+
+  # status bars + display managers
+  display-manager.hyprland.enable = true;
 
   # languages
   languages = {
