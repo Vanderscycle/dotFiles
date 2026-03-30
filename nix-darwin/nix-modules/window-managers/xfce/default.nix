@@ -30,14 +30,14 @@
     services = {
       displayManager = {
         autoLogin = {
-          enable = lib.mkIf config.display-manager.autologin.enable;
+          enable = config.display-manager.autologin.enable;
           user = "${meta.username}";
         };
       };
       xserver = {
         enable = true;
-        displayManager.lightdm.enable = lib.mkIf config.display-manager.lightdm.enable;
-        desktopManager.xfce.enable = lib.mkIf config.display-manager.xfce.enable;
+        displayManager.lightdm.enable = config.display-manager.lightdm.enable;
+        desktopManager.xfce.enable = config.display-manager.xfce.enable;
       };
     };
   };
