@@ -12,7 +12,7 @@
     # programs
     ../../nix-modules/programs
     # display-mangers
-    ../../nix-modules/window-managers/
+    ../../nix-modules/window-managers
     # local
     ./sops.nix
     ./nix.nix
