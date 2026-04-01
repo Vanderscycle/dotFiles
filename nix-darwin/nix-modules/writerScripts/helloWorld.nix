@@ -14,7 +14,7 @@ in
     script.hello-world.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Adds bash scripts showing a very simple hello world";
-      default = true;
+      default = false;
     };
   };
 

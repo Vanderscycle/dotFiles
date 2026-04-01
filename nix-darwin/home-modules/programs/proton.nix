@@ -9,7 +9,7 @@
     program.proton.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables the proton services";
-      default = true;
+      default = false;
     };
   };
 

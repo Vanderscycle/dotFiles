@@ -27,10 +27,17 @@
   boot.extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
 
   # TODO: is this needed?
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    lua-language-server
-  ];
+  # TODO: move to its own programs
+  # https://github.com/nix-community/nix-ld
+  # programs.nix-ld.enable = true;
+  # programs.nix-ld.libraries = with pkgs; [
+  #   lua-language-server
+  # ];
+
+  # hardware
+  hardware = {
+    moonlander.enable = true;
+  };
 
   # program
   program = {

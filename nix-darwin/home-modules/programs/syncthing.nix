@@ -8,7 +8,7 @@
     program.syncthing.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables the best cli";
-      default = true;
+      default = false;
     };
   };
 

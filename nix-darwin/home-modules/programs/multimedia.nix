@@ -9,7 +9,7 @@
     program.multimedia.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables multimedia";
-      default = true;
+      default = false;
     };
   };
 

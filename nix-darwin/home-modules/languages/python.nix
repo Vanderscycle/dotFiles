@@ -10,7 +10,7 @@
     languages.python.lsp.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables python lsp";
-      default = true;
+      default = false;
     };
   };
 

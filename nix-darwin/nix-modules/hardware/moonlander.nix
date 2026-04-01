@@ -6,13 +6,13 @@
 }:
 {
   options = {
-    moonlander.enable = lib.mkOption {
+    hardware.moonlander.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables moonlander wally program";
-      default = true;
+      default = false;
     };
   };
-  config = lib.mkIf config.moonlander.enable {
+  config = lib.mkIf config.hardware.moonlander.enable {
     environment.systemPackages = with pkgs; [
       wally-cli
       keymapp

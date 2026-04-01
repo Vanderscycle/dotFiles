@@ -15,8 +15,8 @@
   config = lib.mkIf config.program.starship.enable {
     programs.starship = {
       enable = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
+      enableFishIntegration = config.program.fish.enable;
+      enableZshIntegration = config.program.zsh.enable;
       enableNushellIntegration = true;
       # https://starship.rs/config/
       settings = {

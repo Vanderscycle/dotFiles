@@ -8,7 +8,7 @@
     program.nushell.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables nushell";
-      default = true;
+      default = false;
     };
   };
 

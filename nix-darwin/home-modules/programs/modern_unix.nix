@@ -26,8 +26,8 @@
     programs = {
       eza = {
         enable = true;
-        enableFishIntegration = true;
-        enableZshIntegration = true;
+        enableFishIntegration = config.program.fish.enable;
+        enableZshIntegration = config.program.zsh.enable;
       };
       jq.enable = true;
       fd.enable = true;

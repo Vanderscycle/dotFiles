@@ -15,9 +15,8 @@
   config = lib.mkIf config.program.television.enable {
     programs.television = {
       enable = true;
-      #INFO: cross reference for other config options
-      enableZshIntegration = lib.mkIf config.program.zsh.enable true;
-      enableFishIntegration = lib.mkIf config.program.zsh.enable true;
+      enableZshIntegration = config.program.zsh.enable;
+      enableFishIntegration = config.program.fish.enable;
     };
     catppuccin.television.enable = true;
   };

@@ -9,7 +9,7 @@
     program.spacemacs.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables the cooler vim";
-      default = true;
+      default = false;
     };
   };
 

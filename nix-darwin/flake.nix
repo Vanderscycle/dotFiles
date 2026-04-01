@@ -94,6 +94,12 @@
       };
     in
     {
+      # --- modules export (home/nix/mac)
+      homeModules.default = import ./home-modules;
+      nixModules.default = import ./nix-modules;
+      macModules.default = import ./mac-modules;
+
+      # --- machine configs ---
       darwinConfigurations = {
         #nix run nix-darwin -- switch --flake ./nix-darwin
         #nh darwin switch

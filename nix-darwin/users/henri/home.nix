@@ -50,10 +50,14 @@
     latex.lsp.enable = true;
     yaml.lsp.enable = true;
     json.lsp.enable = true;
+    toml.lsp.enable = true;
   };
 
   # programs
   program = {
+    spacemacs.enable = true;
+    kitty.enable = true;
+    multimedia.enable = true;
     fcitx.enable = true;
     sqlite.enable = true;
     swaync.enable = true;
@@ -141,6 +145,7 @@
         KUBECONFIG = "$HOME/.kube/homelab-kubeconfig.yaml";
       };
     };
+    proton.enable = true;
     discord.enable = true;
     television.enable = true;
     fish.enable = true;
@@ -155,7 +160,7 @@
     # kill <pidfile> 2>/dev/null
     # rm -f $SSH_AUTH_SOCK
     keychain = {
-      enableFishIntegration = true;
+      enableFishIntegration = config.program.fish.enable;
       enable = true;
       keys = [
         "/home/${meta.username}/.ssh/endeavourGit"
@@ -179,7 +184,6 @@
     file = { };
 
     sessionVariables = {
-      PNPM_HOME = "${config.home.homeDirectory}/.local/share/pnpm";
     };
 
     sessionPath = [ ];

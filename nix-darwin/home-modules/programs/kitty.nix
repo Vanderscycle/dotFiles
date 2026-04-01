@@ -9,7 +9,7 @@
     program.kitty.enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enables kitty shell";
-      default = true;
+      default = false;
     };
   };
 
@@ -28,8 +28,8 @@
           doInstallCheck = false;
         });
         enable = true;
-        shellIntegration.enableFishIntegration = true;
-        shellIntegration.enableZshIntegration = true;
+        shellIntegration.enableFishIntegration = config.program.fish.enable;
+        shellIntegration.enableZshIntegration = config.program.zsh.enable;
         settings = {
           allow_remote_control = "yes";
           listen_on = "unix:/tmp/kitty";

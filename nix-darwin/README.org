@@ -33,15 +33,17 @@ https://nix.dev/manual/nix/2.18/installation/uninstall
 
 * Refactor + std of dotFiles
 
-** programs/services home-modules/nix-modules confusion
+** ACTIVE programs/services home-modules/nix-modules confusion
 1. Merge programs/services into simply programs to make things simpler for both ~home-modules/nix-modules~
 2. cron and writeScripts can be a bit confusing as all you need to make one another is systemd. combine both in ~nix-modules~
 
-** Allow for centralized shell integrations
+** DONE Allow for centralized shell integrations
+   CLOSED: [2026-03-29 Sun 21:38]
+   - State "DONE"       from              [2026-03-29 Sun 21:38]
 e.g. the shell integration option should belong in the ~<program>.nix~ config and not in the fish/zsh file
    #+begin_src nix
-      enableZshIntegration = lib.mkIf config.program.zsh.enable true;
-      enableFishIntegration = lib.mkIf config.program.zsh.enable true;
+      enableZshIntegration = config.program.zsh.enable;
+      enableFishIntegration = config.program.fish.enable;
    #+end_src
 ** Refactor to take advantage of lib.mkMerge
 #+begin_src nix
@@ -63,3 +65,10 @@ Based on the lessons learned in this repo, make it mirror this repo
 *** Complete new nas user https://github.com/josecriane/nixos-nas/blob/main/flake.nix
 *** Add 2x4gb harddrive in the same proxmox location as opencode.
 *** move opencode to the 1060ti proxmox and pass the gpu (if you can)
+
+** Review (home-modules/nix-modules)
+
+because of the export, review these modules default and if wanted by default its contents. e.g. modern_unix and other another one like basic linux maintenance programs like parted.
+** Additions
+
+*** Televison [[https://www.youtube.com/watch?v=wwJA9mDqIVc][This Tool Replaced 7 CLIs (and killed my opensource) - YouTube]]

@@ -11,6 +11,12 @@
       description = "Enables fish shell";
       default = true;
     };
+
+    program.fish.shellInit = lib.mkOption {
+      type = lib.types.str;
+      description = "Enables fish shell";
+      default = "";
+    };
   };
 
   config = lib.mkIf config.program.fish.enable {
@@ -31,21 +37,7 @@
         }
       ];
       enable = true;
-      shellInit = ''
-        fish_add_path $PNPM_HOME
-        # knak
-        set ENTERPRISE_REPO_PATH ~/knak
-
-        if test -f $ENTERPRISE_REPO_PATH/scripts/mfa-token-loader.sh
-            source $ENTERPRISE_REPO_PATH/scripts/mfa-token-loader.sh
-        end
-
-        if test -f $ENTERPRISE_REPO_PATH/scripts/aliases
-            # source $ENTERPRISE_REPO_PATH/scripts/aliases
-            source $ENTERPRISE_REPO_PATH/scripts/aliases.sh
-        end
-
-      '';
+      shellInit = config.program.fish.shellInit;
       interactiveShellInit = '''';
       functions = {
         clear-trash = ''

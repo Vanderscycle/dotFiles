@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   meta,
@@ -18,9 +17,6 @@
     users.users.${meta.username} = {
       extraGroups = [ "audio" ];
     };
-
-    # Sound settings
-    # sound.enable = true;
     services.pulseaudio = {
       enable = false;
       support32Bit = true;
