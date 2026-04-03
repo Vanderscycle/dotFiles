@@ -12,6 +12,12 @@
       default = true;
     };
 
+    program.networking.stevenblack.enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enables StevenBlack hosts-based ad-blocking";
+      default = false;
+    };
+
     program.networking.networkmanager.enable = lib.mkOption {
       type = lib.types.bool;
       description = "enables network manager (doesn't work w/wireless)";
@@ -53,7 +59,7 @@
         networks = config.program.networking.wireless.networks;
       };
       hostName = "${meta.hostname}"; # because we use nh os switch ensure the flakes +
-      stevenblack = {
+      stevenblack = lib.mkIf config.program.networking.stevenblack.enable {
         enable = true;
         blockFakenews = true;
         blockGambling = true;
