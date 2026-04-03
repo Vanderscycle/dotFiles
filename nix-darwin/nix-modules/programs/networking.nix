@@ -59,7 +59,7 @@
         networks = config.program.networking.wireless.networks;
       };
       hostName = "${meta.hostname}"; # because we use nh os switch ensure the flakes +
-      stevenblack = lib.mkIf config.program.networking.stevenblack.enable {
+      stevenBlackHosts = lib.mkIf config.program.networking.stevenblack.enable {
         enable = true;
         blockFakenews = true;
         blockGambling = true;

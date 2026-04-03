@@ -44,7 +44,7 @@
     networking = {
       enable = true;
       wireless.enable = false;
-      stevenBlack.enable = true;
+      stevenblack.enable = true;
     };
     bluetooth.enable = true;
     gaming = {
