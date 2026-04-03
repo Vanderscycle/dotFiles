@@ -118,7 +118,6 @@
     vim.enable = true;
     nyxt.enable = true;
     spotify.enable = true;
-    spicetify.enable = false;
     godot.enable = false;
     loveGameEngine.enable = true;
     beekeeper.enable = true;

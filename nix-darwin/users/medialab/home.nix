@@ -16,7 +16,6 @@
   program = {
     vim.enable = true;
     spotify.enable = false;
-    spicetify.enable = false;
     proton.enable = true;
     brave.enable = true;
     fish.enable = true;
