@@ -14,19 +14,19 @@
     program.git.userEmail = lib.mkOption {
       type = lib.types.str;
       description = "The email address used for git configuration.";
-      default = null;
+      default = "";
     };
 
     program.git.userName = lib.mkOption {
       type = lib.types.str;
       description = "The name used for git configuration.";
-      default = null;
+      default = "";
     };
 
     program.git.signingKey = lib.mkOption {
       type = lib.types.str;
       description = "The ssh key you want to sign your commits with.";
-      default = null;
+      default = "";
     };
   };
 
