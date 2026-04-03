@@ -2,12 +2,10 @@
   pkgs,
   inputs,
   meta,
-  hosts,
   ...
 }:
 {
   imports = [
-    hosts.nixosModule
     ../../hosts
     # hardware related e.g. keyboards
     ../../nix-modules/hardware
