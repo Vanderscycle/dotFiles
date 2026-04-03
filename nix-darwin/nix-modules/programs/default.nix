@@ -3,6 +3,7 @@
     ./android.nix
     ./bluetooth.nix
     ./gaming.nix
+    ./hosts.nix
     ./internationalisation.nix
     ./networking.nix
     ./printer.nix

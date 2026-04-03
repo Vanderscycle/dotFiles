@@ -34,7 +34,7 @@
     networking = {
       enable = true;
       networkmanager.enable = true;
-      stevenBlack.enable = true;
+      stevenblack.enable = true;
       wireless = {
         enable = false;
         networks = {
