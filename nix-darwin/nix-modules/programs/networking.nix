@@ -53,7 +53,7 @@
         networks = config.program.networking.wireless.networks;
       };
       hostName = "${meta.hostname}"; # because we use nh os switch ensure the flakes +
-      stevenBlackHosts = {
+      stevenblack = {
         enable = true;
         blockFakenews = true;
         blockGambling = true;
