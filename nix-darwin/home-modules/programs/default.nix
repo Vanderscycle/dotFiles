@@ -50,7 +50,6 @@
     ./syncthing.nix
     ./television.nix
     ./thunar.nix
-    ./vim.nix
     ./wofi.nix
     ./zathura.nix
     ./zsh.nix # TODO: add an option like shellinit

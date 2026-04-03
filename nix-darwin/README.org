@@ -69,6 +69,11 @@ Based on the lessons learned in this repo, make it mirror this repo
 ** Review (home-modules/nix-modules)
 
 because of the export, review these modules default and if wanted by default its contents. e.g. modern_unix and other another one like basic linux maintenance programs like parted.
+
+** spicetify/nixvim (removal)
+
+
+
 ** Additions
 
 *** Televison [[https://www.youtube.com/watch?v=wwJA9mDqIVc][This Tool Replaced 7 CLIs (and killed my opensource) - YouTube]]

@@ -25,16 +25,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # spicetify-nix = {
-    #   url = "github:Gerg-L/spicetify-nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,7 +53,6 @@
       darwin,
       nix-homebrew,
       catppuccin,
-      nixvim,
       ...
     }:
     let
@@ -131,7 +120,6 @@
               };
               home-manager.users."henri.vandersleyen" = {
                 imports = [
-                  nixvim.homeModules.nixvim
                   catppuccin.homeModules.catppuccin
                   ./users/henri.vandersleyen/home.nix
                 ];
@@ -173,7 +161,6 @@
               };
               home-manager.users."henri" = {
                 imports = [
-                  nixvim.homeModules.nixvim
                   catppuccin.homeModules.catppuccin
                   ./users/henri/home.nix
                 ];
@@ -221,7 +208,6 @@
               };
               home-manager.users."medialab" = {
                 imports = [
-                  nixvim.homeModules.nixvim
                   catppuccin.homeModules.catppuccin
                   ./users/medialab/home.nix
                 ];
@@ -243,7 +229,6 @@
             meta = deckMeta;
           };
           modules = [
-            nixvim.homeModules.nixvim
             catppuccin.homeModules.catppuccin
             ./users/deck/home.nix
           ];
