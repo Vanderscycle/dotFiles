@@ -52,7 +52,6 @@
         package = pkgs.adwaita-qt;
         name = "adwaita-dark";
       };
-
     };
   };
 }

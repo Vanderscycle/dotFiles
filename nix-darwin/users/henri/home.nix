@@ -115,7 +115,6 @@
       };
     };
     syncthing.enable = true;
-    vim.enable = true;
     nyxt.enable = true;
     spotify.enable = true;
     godot.enable = false;

@@ -14,16 +14,10 @@
 
   # programs
   program = {
-    vim.enable = true;
     spotify.enable = false;
     proton.enable = true;
     brave.enable = true;
     fish.enable = true;
-    git = {
-      userEmail = "henri-vandersleyen@protonmail.com";
-      userName = "vanderscycle";
-      signingKey = "~/.ssh/endeavourGit.pub";
-    };
     keychain = {
       enable = true;
       keys = [

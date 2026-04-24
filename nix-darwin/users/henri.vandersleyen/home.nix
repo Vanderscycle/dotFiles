@@ -26,7 +26,6 @@
     ../../home-modules/programs/keychain.nix
     ../../home-modules/programs/spacemacs.nix
     ../../home-modules/programs/git.nix
-    ../../home-modules/programs/vim.nix
     ../../home-modules/programs/devops.nix
     ../../home-modules/programs/spotify.nix
     ../../home-modules/programs/nh.nix
@@ -60,7 +59,6 @@
   program = {
     spacemacs.enable = true;
     kitty.enable = true;
-    vim.enable = true;
     direnv.enable = true;
     awscli.enable = false; # brew
     arc-browser.enable = false; # brew

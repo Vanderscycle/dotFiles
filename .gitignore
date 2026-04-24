@@ -1,7 +1,7 @@
 .env
 *.log
 *.#
-
+*.qcow2
 # emacs
 **/.spacemacs.env
 /.stfolder/

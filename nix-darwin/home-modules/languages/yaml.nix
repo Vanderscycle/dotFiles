@@ -16,8 +16,7 @@
 
   config = lib.mkIf config.languages.yaml.lsp.enable {
     home.packages = with pkgs; [
-      #yaml
-      nodePackages.yaml-language-server # npm i -g yaml-language-server
+      yaml-language-server
     ];
   };
 }

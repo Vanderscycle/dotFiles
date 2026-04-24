@@ -29,8 +29,8 @@
         enableFishIntegration = config.program.fish.enable;
         enableZshIntegration = config.program.zsh.enable;
       };
-      jq.enable = true;
       fd.enable = true;
+      jq.enable = true;
       ripgrep.enable = true;
       broot.enable = true;
     };
