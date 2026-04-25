@@ -2,8 +2,12 @@
 {
   steppe.gtk = {
     homeManager =
-      { pkgs, ... }:
+      { inputs, pkgs, ... }:
       {
+
+        xdg.dataFile."icons/rose-pine-hyprcursor".source = "${
+          inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+        }/share/icons/rose-pine-hyprcursor";
         qt = {
           style = {
             package = pkgs.adwaita-qt;
