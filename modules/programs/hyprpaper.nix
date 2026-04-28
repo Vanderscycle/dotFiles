@@ -17,11 +17,12 @@
           hyprpaper = {
             enable = true;
             settings = {
+              ipc = "on";
               preload = [
                 "${config.home.homeDirectory}/Pictures/wallpapers/forest_mountain.jpg"
               ];
               wallpaper = [
-                "HDMI-A-1,${config.home.homeDirectory}/Pictures/wallpapers/forest_mountain.jpg"
+                ",${config.home.homeDirectory}/Pictures/wallpapers/forest_mountain.jpg"
               ];
               # Optional: Enable splash text over the wallpaper
               splash = false;

@@ -5,6 +5,7 @@
   ...
 }:
 {
+  # media
   den.aspects.subutai = {
     includes = [
       (den._.tty-autologin "ilkhan")

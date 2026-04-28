@@ -41,6 +41,10 @@
           ];
         };
         programs = {
+          tealdeer = {
+            enable = true;
+            enableAutoUpdates = true;
+          };
           jq = {
             enable = true;
           };

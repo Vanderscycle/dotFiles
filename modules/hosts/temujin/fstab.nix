@@ -2,9 +2,13 @@
 {
   den.aspects.temujin = {
     nixos = {
-
+      swapDevices = [
+        {
+          device = "/var/lib/swapfile";
+          size = 16 * 1024; # 16 GiB
+        }
+      ];
       fileSystems = {
-
         "/" = {
           device = "/dev/disk/by-uuid/d94e1efb-8e9d-40f3-9479-f3f94ec0c774";
           fsType = "ext4";
@@ -17,7 +21,6 @@
             "dmask=0022"
           ];
         };
-
         "/mnt/backup" = {
           device = "/dev/nvme1n1p1";
           fsType = "auto";

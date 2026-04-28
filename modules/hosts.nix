@@ -3,7 +3,7 @@
 {
   # temujin (root)
   den.hosts.x86_64-linux.temujin.users.khan = { };
-  # subutai ()
+  # subutai (medialab)
   den.hosts.x86_64-linux.subutai.users.ilkhan = { };
   # jebe (deck)
   den.homes.x86_64-linux.jebe.yurtchi = { };

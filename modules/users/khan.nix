@@ -61,7 +61,7 @@
         };
         services = {
           ssh-agent = {
-            enable = true;
+            enable = false; # INFO: false bcause we want to use keychain
           };
         };
         programs = {

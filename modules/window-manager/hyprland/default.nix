@@ -4,7 +4,7 @@
     includes = [
       <steppe/status-bar/waybar>
       <steppe/program/hyprpaper>
-      <steppe/program/hypridle>
+      # <steppe/program/hypridle>
       <steppe/program/swaync>
       <steppe/program/thunar>
       <steppe/program/fuzzel>
@@ -21,7 +21,6 @@
           enable = true;
           binfmt = true;
         };
-
         services = {
           displayManager = {
             enable = true;
@@ -30,11 +29,11 @@
             enable = true;
             settings = {
               initial_session = {
-                command = "start-hyprland";
+                command = "start-hyprland"; # "uwsm start hyprland.desktop";
                 user = "khan";
               };
               default_session = {
-                command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd /usr/bin/start-hyprland";
+                command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd 'start-hyprland'";
                 user = "greeter";
               };
             };
@@ -47,33 +46,54 @@
             hyprpicker
           ];
           sessionVariables = {
-            NIXOS_OZONE_WL = "1";
           };
         };
-        programs.hyprland = {
-          enable = true;
-          withUWSM = true;
-          package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-          portalPackage =
-            inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        programs = {
+          # uwsm = {
+          #   enable = true;
+          #   waylandCompositors = {
+          #     hyprland = {
+          #       prettyName = "Hyprland";
+          #       comment = "Hyprland compositor managed by UWSM";
+          #       binPath = "/run/current-system/sw/bin/Hyprland";
+          #     };
+          #   };
+          # };
+          hyprland = {
+            enable = true;
+            # withUWSM = true;
+            package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+            portalPackage =
+              inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+          };
         };
       };
     homeManager =
-      { pkgs, ... }:
+      { config, pkgs, ... }:
+      let
+        mkOutOfStoreSymlink = path: config.lib.file.mkOutOfStoreSymlink path;
+        configDir = "${config.home.homeDirectory}/Documents/dotFiles";
+      in
       {
 
-        home.packages = with pkgs; [
-          inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
-          playerctl
-          wf-recorder # video recorder for wayland
-        ];
+        home = {
+          file = {
+            ".config/hypr/scripts".source =
+              mkOutOfStoreSymlink "${configDir}/modules/window-manager/hyprland/scripts";
+          };
+          packages = with pkgs; [
+            inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
+            playerctl
+            wf-recorder # video recorder for wayland
+          ];
+        };
         wayland.windowManager = {
           hyprland = {
-            enable = true; # allow home-manager to configure hyprland
-            xwayland.enable = true;
-            systemd.enable = false;
-            package = null;
-            portalPackage = null;
+            enable = true;
+            # xwayland.enable = true;
+            systemd.enable = true; # uwsm
+            # package = null;
+            # portalPackage = null;
             # https://github.com/nix-community/home-manager/issues/6062
             extraConfig = ''
               ecosystem:no_update_news = true
@@ -116,14 +136,10 @@
 
             '';
             settings = {
-              ###################
-              ### MY PROGRAMS ###
-              ###################
-
-              # See https://wiki.hyprland.org/Configuring/Keywords/
-
-              # Set programs that you use
-
+              monitor = [
+                # Syntax: name, resolution@refresh, position, scale
+                "HDMI-A-1, 3440x1440@99, 0x0, 1"
+              ];
               "$mainMod" = "SUPER";
               "$terminal" = "kitty";
               "$filemanager" = "thunar";
@@ -141,22 +157,15 @@
                 repeat_delay = 300;
                 repeat_rate = 70;
               };
-
-              #####################
-              ### LOOK AND FEEL ###
-              #####################
-
-              # Refer to https://wiki.hyprland.org/Configuring/Variables/
-
-              # https://wiki.hyprland.org/Configuring/Variables/#general
-
+              cursor = {
+                no_hardware_cursors = true;
+              };
               general = {
                 gaps_in = 7;
                 gaps_out = 10;
                 border_size = 2;
                 layout = "dwindle";
               };
-              # https://wiki.hyprland.org/Configuring/Dwindle-Layout/
               dwindle = {
                 pseudotile = "yes";
                 preserve_split = "yes";
@@ -172,7 +181,6 @@
                 # Prevents apps from "stealing" focus when they open or request it
                 focus_on_activate = false;
               };
-              # https://wiki.hyprland.org/Configuring/Variables/#decoration
               decoration = {
                 active_opacity = 1;
                 inactive_opacity = 0.85;
@@ -222,6 +230,7 @@
                   "$mainMod SHIFT, l, resizeactive, 120 0"
                   "$mainMod SHIFT, k, resizeactive, 0 -120"
                   "$mainMod SHIFT, j, resizeactive, 0 120"
+                  "$mainMod SHIFT, R, exec, hyprctl reload"
                   # launch program menu
                   "SHIFTSUPER, P, exec, $menu"
                   "$mainMod, space, exec, ~/.config/hypr/scripts/emacs-launcher '(progn (select-frame-set-input-focus (selected-frame)) (universal-launcher-popup))'"
@@ -327,6 +336,7 @@
                 "swaync"
                 "flameshot"
                 "fcitx5"
+                "uwsm finalize"
               ];
             };
           };

@@ -27,7 +27,7 @@
         nixos-facter-modules.nixosModules.facter
       ];
       system.stateVersion = "25.11";
-      powerManagement.enable = true;
+      # powerManagement.enable = true; # issues w/kvm
       home-manager = {
         useUserPackages = true;
         useGlobalPkgs = true;
