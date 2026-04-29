@@ -23,6 +23,7 @@
         sops.secrets."home-server/wifi/password" = { };
         sops.secrets."home-server/wifi/name" = { };
         users.users."ilkhan" = {
+          initialPassword = "password123";
           openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILUce912jMG3OgdDNUBfzhqk/jOsx9ZGLKDMYvyDHuYk temujin@vandersleyen.xyz"
           ];
