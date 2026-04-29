@@ -5,7 +5,6 @@
   ...
 }:
 {
-  # media
   den.aspects.subutai = {
     includes = [
       (den._.tty-autologin "ilkhan")
@@ -20,12 +19,30 @@
           nixos-hardware.nixosModules.gmktec-nucbox-g3-plus
           nixos-hardware.nixosModules.common-pc-ssd
         ];
+        boot = {
+          initrd = {
+            availableKernelModules = [
+              "xhci_pci"
+              "ahci"
+              "nvme"
+              "usbhid"
+              "usb_storage"
+              "sd_mod"
+              "sdhci_pci"
+            ];
+            kernelModules = [ ];
+          };
+          kernelModules = [ "kvm-intel" ];
+          extraModulePackages = [ ];
+        };
         facter.reportPath = ./facter.json;
-        environment.systemPackages = [ ];
+        environment.systemPackages = with pkgs; [ catppuccin-gtk ];
         time.timeZone = "America/Vancouver";
 
         hardware = {
           bluetooth.enable = true;
+          cpu.intel.updateMicrocode = true;
+          enableRedistributableFirmware = true; # Helps with GPU firmware blobs
         };
 
         services = {

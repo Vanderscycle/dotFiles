@@ -64,7 +64,6 @@
           bluetooth.enable = true;
         };
         virtualisation.vmVariant = {
-          # These settings only apply when building the VM, not the host
           virtualisation = {
             memorySize = 8192;
             cores = 4;

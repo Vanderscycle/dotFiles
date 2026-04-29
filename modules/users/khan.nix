@@ -34,8 +34,6 @@
         initialPassword = "password123";
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILUce912jMG3OgdDNUBfzhqk/jOsx9ZGLKDMYvyDHuYk temujin@vandersleyen.xyz"
-          # TODO: rotate
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMCpHZBybBTCsCyW6/Q4OZ07SvUpRUvclc10u25j0B+Q hvandersleyen@gmail.com"
         ];
         extraGroups = [ "docker" ];
       };
@@ -59,15 +57,9 @@
         home = {
           packages = with pkgs; [ sysz ];
         };
-        services = {
-          ssh-agent = {
-            enable = false; # INFO: false bcause we want to use keychain
-          };
-        };
         programs = {
           awscli = {
             enable = true;
-
             settings = {
               "AdministratorAccess-975050082671" = {
                 region = "us-east-1";
@@ -78,7 +70,6 @@
                 output = "json";
               };
             };
-
             credentials = {
               "root" = {
                 aws_access_key_id = config.sops.secrets."aws/access-key".path;

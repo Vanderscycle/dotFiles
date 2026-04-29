@@ -7,6 +7,11 @@
     homeManager =
       { config, pkgs, ... }:
       {
+        services = {
+          ssh-agent = {
+            enable = false; # INFO: false bcause we want to use keychain
+          };
+        };
         programs = {
           keychain = {
             enable = true;

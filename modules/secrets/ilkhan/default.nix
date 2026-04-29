@@ -25,7 +25,6 @@ in
         sops = sops_config;
         home.sessionVariables = {
           "SOPS_AGE_KEY_FILE" = sops_config.age.keyFile;
-          # "SOPS_AGE_SSH_PRIVATE_KEY_FILE" = sops_config.ssh.privateKeyFile;
         };
         home.packages = [ pkgs.sops ];
       };
