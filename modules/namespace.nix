@@ -3,7 +3,7 @@
   # create an `eg` (example!) namespace. (flake exposed)
   imports = [
     (inputs.den.namespace "steppe" true)
-    # (inputs.den.namespace "monolith" true) # have it elsewhere
+    (inputs.den.namespace "stars" true) # have it elsewhere
   ];
 
   # you can have more than one namespace (false = not flake exposed)

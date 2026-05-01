@@ -5,6 +5,8 @@
   den.hosts.x86_64-linux.temujin.users.khan = { };
   # subutai (medialab)
   den.hosts.x86_64-linux.subutai.users.ilkhan = { };
+  # chagatai (monolith-service)
+  den.hosts.x86_64-linux.chagatai.users.ilkhan = { };
   # jebe (deck)
   den.homes.x86_64-linux.jebe.yurtchi = { };
 

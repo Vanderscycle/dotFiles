@@ -49,19 +49,19 @@
           };
         };
         programs = {
-          # uwsm = {
-          #   enable = true;
-          #   waylandCompositors = {
-          #     hyprland = {
-          #       prettyName = "Hyprland";
-          #       comment = "Hyprland compositor managed by UWSM";
-          #       binPath = "/run/current-system/sw/bin/Hyprland";
-          #     };
-          #   };
-          # };
+          uwsm = {
+            enable = true;
+            waylandCompositors = {
+              hyprland = {
+                prettyName = "Hyprland";
+                comment = "Hyprland compositor managed by UWSM";
+                binPath = "/run/current-system/sw/bin/Hyprland";
+              };
+            };
+          };
           hyprland = {
             enable = true;
-            # withUWSM = true;
+            withUWSM = true;
             package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
             portalPackage =
               inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
@@ -91,7 +91,7 @@
           hyprland = {
             enable = true;
             # xwayland.enable = true;
-            systemd.enable = true; # uwsm
+            # systemd.enable = true; # uwsm
             # package = null;
             # portalPackage = null;
             # https://github.com/nix-community/home-manager/issues/6062

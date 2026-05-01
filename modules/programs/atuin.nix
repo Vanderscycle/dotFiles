@@ -1,6 +1,7 @@
 { ... }:
 {
   steppe.program._.atuin = {
+    nixos = { };
     homeManager = {
       programs.atuin = {
         enable = true;

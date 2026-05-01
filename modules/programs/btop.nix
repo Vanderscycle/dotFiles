@@ -1,6 +1,7 @@
 { ... }:
 {
   steppe.program._.btop = {
+    nixos = { };
     homeManager =
       { pkgs, ... }:
       {
