@@ -29,5 +29,16 @@
             ${host.system.build.vm}/bin/run-${host.networking.hostName}-vm "$@"
           '';
       };
+      packages.chagataiVm = pkgs.writeShellApplication {
+        name = "chagataiVm";
+        text =
+          let
+            host = inputs.self.nixosConfigurations.chagatai.config;
+          in
+          ''
+            ${host.system.build.vm}/bin/run-${host.networking.hostName}-vm "$@"
+          '';
+      };
     };
+
 }

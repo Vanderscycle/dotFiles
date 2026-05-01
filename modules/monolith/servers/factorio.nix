@@ -2,36 +2,37 @@
 {
   stars.servers._.factorio = {
     nixos =
-      { pkgs, ... }:
+      { config, pkgs, ... }:
       {
         systemd.tmpfiles.rules = [
           # Copy/Link the save file (use either C or L)
           # "C /var/lib/factorio/saves/save1.zip - - - - ${builtins.path { path = ./save1.zip; }}"
         ];
-        systemd.timers."factorioSaves" = {
-          wantedBy = [ "timers.target" ];
-          timerConfig = {
-            OnCalendar = "daily";
-            Persistent = true;
-            Unit = "factorioSaves.service";
-          };
-        };
+        # systemd.timers."factorioSaves" = {
+        #   wantedBy = [ "timers.target" ];
+        #   timerConfig = {
+        #     OnCalendar = "daily";
+        #     Persistent = true;
+        #     Unit = "factorioSaves.service";
+        #   };
+        # };
 
-        systemd.services."factorioSaves" = {
-          script = ''
-            cd "/var/lib/factorio/saves/"
-            DATE=$(date +%F)
-            ${pkgs.rsync}/bin/rsync -avz save1.zip "/home/${meta.username}/Saves/save1-$DATE.zip"
-          '';
-          path = [
-            pkgs.rsync
-            pkgs.coreutils # for `date`
-          ];
-          serviceConfig = {
-            Type = "oneshot";
-            User = "root";
-          };
-        };
+        # systemd.services."factorioSaves" = {
+        #   script = ''
+        #     cd "/var/lib/factorio/saves/"
+        #     DATE=$(date +%F)
+        #     ${pkgs.rsync}/bin/rsync -avz save1.zip "/home/${meta.username}/Saves/save1-$DATE.zip"
+        #   '';
+        #   path = [
+        #     pkgs.rsync
+        #     pkgs.coreutils # for `date`
+        #   ];
+        #   serviceConfig = {
+        #     Type = "oneshot";
+        #     User = "root";
+        #   };
+        # };
+
         services.factorio = {
           bind = "0.0.0.0";
           package = pkgs.factorio-headless.override (oldAttrs: {
@@ -64,14 +65,6 @@
         };
       };
     homeManager = {
-      programs.atuin = {
-        enable = true;
-        flags = [ "--disable-up-arrow" ];
-        enableFishIntegration = true;
-        enableZshIntegration = true;
-        enableNushellIntegration = true;
-        enableBashIntegration = true;
-      };
     };
   };
 }
